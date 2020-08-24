@@ -10,11 +10,11 @@
 <div class="header__bottom">
 	<div id="sliderbox">
 		<ul id="slider">
-			<li><img src="/everyonesfarm/resources/img/farm1.jpg" /></li>
-			<li><img src="/everyonesfarm/resources/img/farm2.jpg" /></li>
-			<li><img src="/everyonesfarm/resources/img/farm3.jpg" /></li>
-			<li><img src="/everyonesfarm/resources/img/farm4.jpg" /></li>
-			<li><img src="/everyonesfarm/resources/img/farm5.jpg"/></li>
+			<li><img src="<%=request.getContextPath() %>/resources/img/farm1.jpg" /></li>
+			<li><img src="<%=request.getContextPath() %>/resources/img/farm2.jpg" /></li>
+			<li><img src="<%=request.getContextPath() %>/resources/img/farm3.jpg" /></li>
+			<li><img src="<%=request.getContextPath() %>/resources/img/farm4.jpg" /></li>
+			<li><img src="<%=request.getContextPath() %>/resources/img/farm5.jpg"/></li>
 		</ul>
 	</div>
 	
@@ -43,7 +43,7 @@
 				<c:forEach var="i" begin="1" end="3">
 					<div class="food__bottom-wrap">
 						<a href="#">
-							<img class="bottom-wrap__food-img" alt="food" src="/everyonesfarm/resources/img/main_cherry1.jpg" 
+							<img class="bottom-wrap__food-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_cherry1.jpg" 
 							width="300" height="250" /><div class="bottom-wrap__food-desc">먹거리 이름</div>
 						</a>
 					</div>
@@ -63,7 +63,7 @@
 				<c:forEach var="i" begin="1" end="3">
 					<div class="farm__bottom-wrap">
 						<a href="#">
-							<img class="bottom-wrap__farm-img" alt="food" src="/everyonesfarm/resources/img/main_farm.jpg" 
+							<img class="bottom-wrap__farm-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_farm.jpg" 
 							width="300" height="250" /><div class="bottom-wrap__farm-desc">체리농부의 농장</div>
 						</a>
 					</div>

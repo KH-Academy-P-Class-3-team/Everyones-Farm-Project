@@ -525,7 +525,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/everyonesfarm/resources/js/current-year.js"></script>
-<script type="text/javascript" src="/everyonesfarm/resources/js/main-modal.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/current-year.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/main-modal.js"></script>
 </body>
 </html>
