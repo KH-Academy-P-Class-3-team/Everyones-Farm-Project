@@ -25,8 +25,8 @@
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/everyonesfarm/resources/js/image-slider.js"></script>
-<script type="text/javascript" src="/everyonesfarm/resources/js/main-weather.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/image-slider.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/main-weather.js"></script>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
 		<div class="header__top-wrap">
 			<div class="top__weather js-weather"></div>
 			<div class="top__logo">
-				<a href="/everyonesfarm/"><img alt="logo" src="/everyonesfarm/resources/img/everyonesfarm_logo.png"
+				<a href="<%=request.getContextPath() %>/"><img alt="logo" src="<%=request.getContextPath() %>/resources/img/everyonesfarm_logo.png"
 					width="150"></a>
 			</div>
 			<div class="top__member-desc">

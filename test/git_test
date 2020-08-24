@@ -1,0 +1,6 @@
+1. 로컬 저장소에서 git bash 켜기
+	workspace 에서 켜기
+2. git clone <reopository address>
+3. Eclipse 에서 File - import - general - project from folder or archive
+	git에서 클론한 프로젝트를 eclipse로 불러온다
+4. clone이 잘 됐는지 확인
