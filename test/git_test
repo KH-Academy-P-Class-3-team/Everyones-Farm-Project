@@ -4,3 +4,28 @@
 3. Eclipse 에서 File - import - general - project from folder or archive
 	git에서 클론한 프로젝트를 eclipse로 불러온다
 4. clone이 잘 됐는지 확인
+	src/main/resources/mybatis 폴더에 db.properties 파일 생성
+	src/main/webapp/WEB-INF 폴더에 lib 폴더 생성 후 그 안에 필요한 jar 파일 넣기
+		ex. ojdbc6.jar, taglibs-standard-impl-1.2.5.jar 등
+	
+	프로젝트 우클릭 - Build Path - Configure Build Path - Add Library - Server Runtime - Tomcap v9.0 추가
+	프로젝트 우클릭 - Build Path - Configure Build Path - Add Jars... - clone 받은 프로젝트/src/main/webapp/WEB-INF/lib 폴더 안에 있는 jar 파일들 모두 클릭 후 ok 버튼 클릭
+		-> Apply and Close 클릭
+
+5. Server 에 Clone 받은 프로젝트 올리고 잘 실행되는지 확인
+6. Clone 받은 프로젝트에 지금까지 자기가 작성한 코드 복붙한 후 에러 확인한 후 원격저장소(github repository 에 commit 하기)
+	** 반드시 branch 만들어서 올리세요.
+	** master 건들면 git 사용에서 배제할 예정입니다.
+	git branch <branch name> : branch 생성 구문
+	git branch : 현재 만들어져 있는 branch 확인 구문
+	git checkout <branch name> : <branch name> 인 branch 로 변경한다는 구문
+	git status : 현재 변경된 파일 목록을 보여주는 구문
+	git add <file name> : 원격 저장소(github repository)에 업로드할 파일을 추가하는 구문
+	git push : 원격 저장소(github repository)에 올린다는 뜻의 구문
+	git push --set-upstream origin <branch name>: 이거는 제가 보내준 url에서 봤으리라 생각하고 설명 생략하겠습니다.
+	git commit -m 'commit 문구': git push 할 때 commit 문구를 작성하는 구문(반드시 작성하고 장난으로 작성하지 마세요 평생 남는 겁니다. 의미 있게 작성하세요.)
+	
+	이렇게 올리면 repository의 Pull Request 가 만들어집니다. 자신이 만든 Pull Request 는 작성해서 코드 리뷰 받으시면 됩니다.\
+	(작성 방법은 단톡방에 공유한 사이트를 천천히 읽어보면 됩니다.)
+	
+	** merge는 팀장만 할 예정입니다. 건들지 마세요.
