@@ -1,11 +1,16 @@
 package com.kh.farmapp.farmpersonalpage.farmdiary.model.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.farmpersonalpage.farmdiary.model.dao.FarmDiaryDao;
+
+import common.dto.FarmDiary;
+import common.util.Paging;
 
 @Service
 public class FarmDiaryServiceImpl implements FarmDiaryService{
@@ -15,17 +20,22 @@ public class FarmDiaryServiceImpl implements FarmDiaryService{
 
 	@Override
 	public Map<String, Object> selectFarmDiaryList(int currentPage, int cntPerPage) {
-		return null;
+		Map<String,Object> res = new HashMap<String, Object>();
+		Paging p = new Paging(farmdiaryDao.contentCnt(), currentPage, cntPerPage);
+		List<FarmDiary> fdlist = farmdiaryDao.selectFarmDiaryList(p);
+		res.put("paging",p);
+		res.put("fdlist",fdlist);
+		return res;
 	}
 
 	@Override
-	public Map<String, Object> selectFarmDiaryDetail() {
-		return null;
+	public FarmDiary selectFarmDiaryDetail(int farmDiaryNo) {
+		return farmdiaryDao.selectFarmDiaryDetail(farmDiaryNo);
 	}
 
 	@Override
-	public int writeFarmDiary() {
-		return 0;
+	public void writeFarmDiary(Map<String, Object> commandMap) {
+		farmdiaryDao.insertFarmDiary(commandMap);
 	}
 
 	@Override
