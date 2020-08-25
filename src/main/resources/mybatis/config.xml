@@ -11,5 +11,7 @@
 		<!-- mapper 파일 만들면 넣기 -->
 		<mapper resource="/mybatis/mapper/testMapper.xml" />
 		<mapper resource="mybatis/mapper/userMapper.xml" />
+		<mapper resource="/mybatis/mapper/dailyMapper.xml" />
+		<mapper resource="/mybatis/mapper/activityMapper.xml" />
 	</mappers>
 </configuration>
