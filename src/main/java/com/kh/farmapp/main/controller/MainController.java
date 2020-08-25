@@ -40,10 +40,15 @@ public class MainController {
 
 
 		// 이달의 농장 top 3 불러오기
-
 		
 		// 한 번더 제가 git push를 해볼게요
-
+		
+		for(int i = 2; i < 10; i++) {
+			for(int j = 1; j < 10; j++) {
+				System.out.print(i + " * " + j + " = " + (i * j));
+			}
+			System.out.println();
+		}
   
 		return "/main/index";
 	}
