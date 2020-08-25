@@ -9,6 +9,8 @@ public class MypageAppliController {
 
 	private MyPageService mypageService;
 
+	//김진규의 파트 
+	
 	//활동현황 신청보기 (체험농장)-ajax
 	public ModelAndView appliActList(@RequestParam(required=false, defaultValue="1") int cPage) {
 		return null;
