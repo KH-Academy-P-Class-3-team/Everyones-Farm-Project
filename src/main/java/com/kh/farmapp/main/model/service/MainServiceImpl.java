@@ -28,7 +28,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public List<Farm> selectTop3Farm() {
+	public List<Map<String, Object>> selectTop3Farm() {
 		return mainDao.selectTop3Farm();
 	}
 
