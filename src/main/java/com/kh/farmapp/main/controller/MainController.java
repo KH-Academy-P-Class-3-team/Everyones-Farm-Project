@@ -29,12 +29,8 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-	
-		// 조인 연산된 결과 콘솔에 찍기 -- test 용
-//		List<Map<String, Object>> testMap = mainService.selectTest();
-//		for(int i = 0; i < testMap.size(); i++) {
-//			System.out.println(testMap.get(i).toString());
-//		}
+
+		// 이달의 농장 top 3 불러오기
 		
 		return "/main/index";
 	}
