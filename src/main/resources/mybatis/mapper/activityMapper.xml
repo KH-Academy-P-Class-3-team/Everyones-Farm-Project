@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace = "ACTIVITY">
+	
+	
+	<!-- 활동내역 리스트 순차적으로 나오게하기  없어도 되는 쿼리문 -->
+	<!-- 사용하지 않는 쿼리문 -->
+	<select id="list" resultType="common.dto.FarmActivity">
+	select ACTIVITY_NO ,TITLE,CONTENT,
+		FROM Farm_Activity ORDER BY ACTIVITY_NO
+	</select>
+	
+	
+	<!-- 영농일지 리스트 페이지 -->
+<!-- 	<select id = "listPage" resultType="common.dto.FarmActivity" parameterType="common.dto.page.Criteria"> -->
+<!-- 		select ACTIVITY_NO -->
+<!-- 			   ,TITLE -->
+<!-- 			   ,CONTENT -->
+			   
+<!-- 		FROM ( -->
+<!--    		select  -->
+<!--        			ACTIVITY_NO -->
+<!-- 			   ,TITLE -->
+<!-- 			   ,CONTENT -->
+<!-- 				, row_number() over(order by ACTIVITY_NO desc) as rNum -->
+<!--     	from Farm_Activity ) mp -->
+<!--     		where rNum between #{rowStart} and #{rowEnd} -->
+<!--    				 order by ACTIVITY_NO desc -->
+<!-- 	</select> -->
+
+	<resultMap type="hashmap" id="testmap">
+		<id property="activityNo" column="ACTIVITY_NO" />
+		<result property="title" column="TITLE" />
+		<result property="applicantName" column="APPLICATANT_NAME" />
+		<result property="people" column="PEOPLE" />
+		<result property="activityDate" column="ACTIVITY_DATE" />
+		<result property="isApproval" column="IS_APPROVAL" />
+	</resultMap>
+	
+	<select id ="listPage" parameterType="common.dto.page.Criteria" resultMap="testmap">
+				 
+		select p.*
+		from (
+		SELECT ROWNUM RNUM, r.* 
+		FROM
+		(select a.APPLICATION_NO,a.APPLICANT_NAME ,a.PEOPLE,a.ACTIVITY_DATE,a.IS_APPROVAL,fa.TITLE
+		        from farm_activity fa
+             ,application a
+        where 1=1 and fa.activity_no = a.activity_no
+        )r
+        )p
+        where RNUM BETWEEN #{rowStart} and #{rowEnd} 
+		
+	</select>                  
+    
+    <!-- 활동내역 리스트 총 페이지 수 -->
+	<select id="listCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(ACTIVITY_NO)
+		  FROM Farm_Activity
+		 WHERE ACTIVITY_NO > 0
+	]]>
+	</select>
+	
+	
+	<!-- 업데이트 승인 미승인 -->
+	<update id="update" parameterType="common.dto.Application">
+		update application set is_approval = #{isApproval} 
+		where application_no = #{applicationNo}
+	</update>
+	
+	<!-- 하나의 테이블 컬럼 조회하기 위해서  승인 미승인 할 때 필요 -->
+	<select id="selectOne" resultType="common.dto.Application" parameterType="common.dto.Application">
+		select * from application where application_no = #{applicationNo}
+	</select>
+	
+</mapper>
