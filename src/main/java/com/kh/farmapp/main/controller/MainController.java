@@ -35,6 +35,7 @@ public class MainController {
 //		for(int i = 0; i < testMap.size(); i++) {
 //			System.out.println(testMap.get(i).toString());
 //		}
+		//testtesttesttest
 		
 		return "/main/index";
 	}
