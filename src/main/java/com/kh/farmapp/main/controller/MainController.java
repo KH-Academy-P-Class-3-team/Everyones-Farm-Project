@@ -35,20 +35,15 @@ public class MainController {
 //		for(int i = 0; i < testMap.size(); i++) {
 //			System.out.println(testMap.get(i).toString());
 //		}
-		//testtesttesttest
-
-
 
 		// 이달의 농장 top 3 불러오기
-		
-		// 한 번더 제가 git push를 해볼게요
-		
-		for(int i = 2; i < 10; i++) {
-			for(int j = 1; j < 10; j++) {
-				System.out.print(i + " * " + j + " = " + (i * j));
-			}
-			System.out.println();
+		// outer join 을 했는데 null 값인 아이들은 불러오지 조차 못한다. 어째서인지 질문!!!
+		List<Map<String, Object>> farmTop3 = mainService.selectTop3Farm();
+		for(Map<String, Object> m : farmTop3) {
+			System.out.println(m);
 		}
+		
+		model.addAttribute("farmlist", farmTop3);
   
 		return "/main/index";
 	}
