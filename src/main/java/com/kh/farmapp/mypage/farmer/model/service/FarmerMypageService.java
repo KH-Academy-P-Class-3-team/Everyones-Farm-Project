@@ -7,65 +7,62 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.dto.Application;
+import common.dto.FarmActivity;
+import common.dto.FarmDiary;
 import common.dto.FarmingDailylog;
-import common.dto.TBOrder;
-import common.dto.UserTB;
+import common.dto.page.Criteria;
 
 public interface FarmerMypageService {
 
-	/**
-	 * 회원 상세정보
-	 * 
-	 * @param id - 로그인 아이디
-	 */
-//	public Login info(String id);
-	
-	
-	public UserTB selectMember(Map<String, Object> commandMap);
+	//게시글 작성
+//	public void write(BoardVo boardVo);
 	
 	/**
-	 * 판매 현황 리스트 나타내기
-	 * @param currentPage - 현재 페이지
-	 * @param cntPerPage - 페이지당 노출할 게시글 수
+	 * 영농일지 작성
+	 * @param farmingDailylog - 영농일지 작성 정보를 저장하고 있는 FarmingDailylog 객체
 	 */
-	public List<Map<String,Object>> selectSellList(int currentPage, int cntPerPage);
-
+	public void writeDailylog(FarmingDailylog farmingDailylog);
+	/**
+	 * 영농일지 목록 조회
+	 * @return List<FarmingDailylog> - 조회 결과 반환
+	 */
+	public List<FarmingDailylog> dailyLoglist(Criteria cri);
+	
 
 	/**
-	 * 영농 일지 리스트 나타내기
-	 * @param cPage - 현재 페이지
-	 * @param cntPerPage - 페이지당 노출할 게시글 수
+	 * 영농일지 총 갯수
+	 * @param scri 페이지 수 
+	 * @return istCount(SearchCriteria scri) - 총 갯수
 	 */
-	public List<Map<String, Object>> selectdiaryList(int cPage, int cntPerPage);
-
-
-
-	/**
-	 * @param diary 영농일지 작성
-	 * @param files 파일 올리기
-	 * @param root 위치
-	 */
-	public int insertDiary(FarmingDailylog diary, List<MultipartFile> files, String root);
-
-
+	public int listCount();
 	
 	/**
-	 * @cPage - 현재 페이지
-	 * @param cntPerPage - 페이지당 노출할 게시글 수
+	 * 활동 신청내역 리스트 조회
+	 * @param cri
+	 * @return
 	 */
-	public List<Map<String, Object>> selectactivityList(int cPage, int cntPerPage);
-
-	/**
-	 *@param currentPage - 현재 페이지
-	 * @param cntPerPage - 페이지당 노출할 게시글 수
-	 * @return 활동내역 리스트
-	 */
-	public List<Map<String,Object>> applicationList(Application application);
+	public List<Map<String, Object>> activitylist(Criteria cri);
 	
 	/**
-	 * 
-	 * @param order
-	 * @return 주문 현황 리스트로 나타내기
+	 * 활동내역 총 갯수
+	 * @param scri 페이지 수 
+	 * @return istCount(SearchCriteria scri) - 총 갯수
 	 */
-	public List<Map<String, Object>> orderList(TBOrder order);
+	public int listCount2();
+	
+	/**
+    * service
+    * @param application
+    * @return
+    */
+   public int updateIsApproval(Application application);
+	
+   
+	//게시물 조회
+//	public BoardVo read(int bno);
+	
+	//게시글 삭제
+//	public void delete(int bno);
+	//게시글 수정
+//	public void update(BoardVo boardVo);
 }
