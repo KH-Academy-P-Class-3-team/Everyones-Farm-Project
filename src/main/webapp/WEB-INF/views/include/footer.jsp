@@ -10,7 +10,7 @@
 		<div>문의메일: everyonesFarm@gmail.com</div>
 	</div>
 	<div class="footer__terms">
-		<span id="termsOfUse">이용약관</span><span id="privacyPolicy">개인정보처리방침</span><span id="emailModalBtn">이메일 무단수집 거부</span><span><a href="#">공지사항&자주묻는질문</a></span>
+		<span id="termsOfUse">이용약관</span><span id="privacyPolicy">개인정보처리방침</span><span id="emailModalBtn">이메일 무단수집 거부</span><span><a href="<%=request.getContextPath() %>/notice/noticelist">공지사항&자주묻는질문</a></span>
 	</div>
 </footer>
 
