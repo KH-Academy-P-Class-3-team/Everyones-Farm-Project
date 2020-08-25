@@ -96,13 +96,16 @@ public class UserController {
 		@RequestParam Map<String,Object> commandMap
 		, HttpSession session
 		, Model model
+		, HttpServletRequest req
 			) {
 		
 		UserTB res = userService.selectUser(commandMap);
 		if(res!=null) {
 			session.setAttribute("userInfo", res);
 			model.addAttribute("alertMsg", "환영합니다");
-			model.addAttribute("url", "userlogin.do");
+			// 메인화면으로 이동
+			model.addAttribute("url", req.getContextPath());
+//			model.addAttribute("url", "userlogin.do");
 		} else {
 			model.addAttribute("alertMsg", "로그인에 실패하였습니다");
 			model.addAttribute("url", "userlogin.do");

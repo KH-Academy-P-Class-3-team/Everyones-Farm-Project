@@ -54,8 +54,12 @@ header {
 	padding: 0 5px;
 }
 
-.header__top-wrap .top__member-desc a:first-child{
-	border-right: 1px solid green;
+.header__top-wrap .top__member-desc a{
+	border-right: 1px solid #605759;
+}
+
+.header__top-wrap .top__member-desc a:last-child{
+	border-right: none;
 }
 
 /* 로고 옆 날씨 알려주는 부분 */
