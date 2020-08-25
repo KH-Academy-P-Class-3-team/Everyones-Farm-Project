@@ -10,5 +10,6 @@
 	<mappers>
 		<!-- mapper 파일 만들면 넣기 -->
 		<mapper resource="/mybatis/mapper/testMapper.xml" />
+		<mapper resource="mybatis/mapper/userMapper.xml" />
 	</mappers>
 </configuration>

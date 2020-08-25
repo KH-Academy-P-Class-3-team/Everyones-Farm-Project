@@ -41,7 +41,7 @@
 			</div>
 			<div class="top__member-desc">
 				<!-- 로그인 시 에는 추후에 추가 예정 -->
-				<a href="#">로그인</a><a href="#">회원가입</a>
+				<a href="<%=request.getContextPath() %>/user/login.do">로그인</a><a href="<%=request.getContextPath() %>/user/usertos.do">회원가입</a>
 			</div>
 		</div>
 	</div>
