@@ -1,15 +1,35 @@
 package com.kh.farmapp.mypage.user.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
+import common.dto.UserTB;
+
+@Controller
 public class MypageAppliController {
 
+	@Autowired
 	private MyPageService mypageService;
 
-	//김진규의 파트 
+	@RequestMapping("mypage/user/myActive")
+	public ModelAndView enterPage(HttpSession session) {
+		UserTB user = new UserTB();
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Map<String, Object> info = mypageService.modifyUser(user);
+		
+		return mav;
+	}
 	
 	//활동현황 신청보기 (체험농장)-ajax
 	public ModelAndView appliActList(@RequestParam(required=false, defaultValue="1") int cPage) {
