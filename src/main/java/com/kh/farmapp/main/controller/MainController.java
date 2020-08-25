@@ -36,7 +36,9 @@ public class MainController {
 //			System.out.println(testMap.get(i).toString());
 //		}
 		//testtesttesttest
-		
+
+		// 이달의 농장 top 3 불러오기
+  
 		return "/main/index";
 	}
 	
