@@ -41,7 +41,14 @@
 			</div>
 			<div class="top__member-desc">
 				<!-- 로그인 시 에는 추후에 추가 예정 -->
-				<a href="<%=request.getContextPath() %>/user/login.do">로그인</a><a href="<%=request.getContextPath() %>/user/usertos.do">회원가입</a>
+				<c:choose>
+					<c:when test="${not empty loginUser }">
+						<a href="#">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
+					</c:when>
+					<c:when test="${empty loginUser }">
+						<a href="<%=request.getContextPath() %>/user/login.do">로그인</a><a href="<%=request.getContextPath() %>/user/usertos.do">회원가입</a>
+					</c:when>
+				</c:choose>
 			</div>
 		</div>
 	</div>
