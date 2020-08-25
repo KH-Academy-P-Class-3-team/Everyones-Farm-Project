@@ -28,6 +28,22 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	// 임시 로그아웃 method
+	@RequestMapping(value = "/logout")
+	public String logoutProc(
+				HttpServletRequest req
+				, HttpSession session
+			) {
+		
+		// session 영역에 일반 사용자의 로그인 정보가 있을 때
+		if(session.getAttribute("userInfo") != null) {
+			// session 영역에 'userInfo' 정보를 삭제함으로써 로그아웃 함!
+			session.removeAttribute("userInfo");
+		}
+		
+		return "redirect:/";
+	}
+	
 	//로그인 메인 창 띄우기
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String login() {
