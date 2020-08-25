@@ -36,8 +36,7 @@ public class MainController {
 			) {
 	
 		// session 영역에 있는 로그인 했을 때 불러오기
-		System.out.println("MainController - main page login session:" + session.getAttribute("userInfo"));
-		
+//		System.out.println("MainController - main page login session:" + session.getAttribute("userInfo"));
 		// session 영역에서 login 한 User의 정보 받아오기
 		UserTB loginUser = (UserTB) session.getAttribute("userInfo");
 		
