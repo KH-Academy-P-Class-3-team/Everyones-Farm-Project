@@ -1,6 +1,11 @@
 package com.kh.farmapp.mypage.user.model.service;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
 
@@ -11,24 +16,39 @@ import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
 import common.dto.UserTB;
+import common.util.FileUtil;
 
+@Service
 public class MypageServiceImpl implements MyPageService{
 
-	
-	private MyPageDao mypageDto;
+	@Autowired
+	private MyPageDao mypageDao;
 	
 	@Override
-	public int modifyUser(UserTB user) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Map<String, Object> modifyUser(UserTB user) {
+		
+		Map<String, Object> userInfo = mypageDao.selectUser(user);
+		
+		
+		return userInfo;
 	}
 
+
+	
 	@Override
 	public int modifyprofile(UserTB user) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public void insertFile(UserTB user, File file, String root) {
+		
+		FileUtil fileUtil = new FileUtil();
+		
+//		List<Map<String, String>> filedata = fileUtil.fileUpload(file, root);
+		
+	}
+	
 	@Override
 	public int leave(String userId) {
 		// TODO Auto-generated method stub
@@ -36,9 +56,8 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public QuestionOneonone o3List() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QuestionOneonone> o3List() {
+		return mypageDao.o3List();
 	}
 
 	@Override
@@ -106,5 +125,7 @@ public class MypageServiceImpl implements MyPageService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

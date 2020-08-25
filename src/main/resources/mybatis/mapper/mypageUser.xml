@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Mypage">
+
+	<select id="selectUser" resultType="Map">
+		SELECT u.user_no,
+		u.user_id,
+		u.user_pw,
+		u.user_name,
+		u.email,
+		u.phone,
+		a.first_address
+		FROM user_tb u,
+		user_address a
+		WHERE u.user_no = a.user_no
+		AND u.user_no =#{userNo}
+	</select>
+
+	<select id="selectO3" resultType="O3">
+		SELECT
+			question_no,
+			title,
+			content,
+			user_no,
+			reg_date
+		FROM QUESTION_ONEONONE
+		ORDER BY question_no
+
+	</select>
+
+</mapper>
+    
+    

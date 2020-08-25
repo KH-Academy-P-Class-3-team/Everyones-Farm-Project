@@ -1,6 +1,12 @@
 package com.kh.farmapp.mypage.user.model.dao;
 
+import java.util.List;
 import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Repository;
 
 import common.dto.AnsweredOneonone;
 import common.dto.Application;
@@ -12,8 +18,19 @@ import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
 
+@Repository
 public class MyPageDaoImpl implements MyPageDao{
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	
+	@Override
+	public Map<String, Object> selectUser(UserTB user) {
+		return sqlSession.selectOne("Mypage.selectUser", user);
+	}
+
+	
 	@Override
 	public int modifyUser(UserTB user) {
 		// TODO Auto-generated method stub
@@ -36,9 +53,8 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
-	public QuestionOneonone o3List() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QuestionOneonone> o3List() {
+		return sqlSession.selectList("Mypage.selectO3");
 	}
 
 	@Override
@@ -123,5 +139,6 @@ public class MyPageDaoImpl implements MyPageDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
