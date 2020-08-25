@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+
+button{
+	
+	padding: 10px 40px;
+	background-color: #D1E9CA;
+	border-color: #D1E9CA;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+button:hover {
+	background-color: #789F6F;
+}
+
+/* img{ */
+/* 	height: 90px; */
+/*     margin-left: 20px; */
+/*     margin-right: 20px; */
+/* } */
+
+.login{
+	float:left;
+}
+
+.mfarmer{
+	float:left;
+}
+
+.wfarmer{
+	float:left;
+}
+
+.farmer{
+	margin: 300px auto 200px auto;
+	width: 550px;
+	height: 180px;
+	border: 10px solid #EAE891;
+	padding: 30px;
+	
+}
+
+.find{
+	width: 168px;
+}
+
+.social{
+	height: 90px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

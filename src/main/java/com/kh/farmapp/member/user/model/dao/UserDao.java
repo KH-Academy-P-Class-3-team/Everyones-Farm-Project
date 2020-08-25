@@ -33,5 +33,12 @@ public interface UserDao {
 	 * @return int
 	 */
 	public int updatePw(UserTB user);
+
+	/**
+	 * 중복 아이디 확인
+	 * @param userId
+	 * @return int
+	 */
+	public int selectIdCheck(String userId);
 	
 }

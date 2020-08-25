@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="USER">
+	<insert id="insertUser" parameterType="common.dto.UserTB">
+		insert into user_tb (user_no, user_id, user_pw, user_name, email, phone, is_leave, is_pause, zonecode, first_address, second_address)
+		values( user_seq.nextval, #{userId}, #{userPw}, #{userName}, #{email}, #{phone}, 0, 0, #{zoneCode}, #{firstAddress}, #{secondAddress} )
+	</insert>
+	
+	<select id="selectUser" resultType="common.dto.UserTB">
+		select user_id, user_pw, user_name, email, phone
+		from user_tb
+		where user_id = #{userId} and user_pw = #{userPw} and is_leave = 0 and is_pause = 0
+	</select>
+
+	<select id="selectIdCheck" resultType="int">
+		select count(*) from user_tb
+		where user_id = #{userId}
+	</select>
+</mapper>
