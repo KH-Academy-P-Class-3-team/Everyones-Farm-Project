@@ -1,7 +1,7 @@
 package common.dto;
 
 public class Farm {
-
+	
 	// member field
 	private int farmNo;
 	private String farmName;

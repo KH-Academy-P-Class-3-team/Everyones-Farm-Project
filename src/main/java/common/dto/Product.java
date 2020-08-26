@@ -4,7 +4,7 @@ package common.dto;
  * 먹거리 상품을 저장함
  * */
 public class Product {
-
+	
 	// member field
 	// 상품 번호
 	private int productNo;
