@@ -62,14 +62,6 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	
-	<!-- 스프링이 multipart 데이터 처리를 위해
-		제공 해주는 클래스  -->
-<!-- 	<bean id="multipartResolver" -->
-<!-- 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
- 		<!-- 업로드 가능한 최대 용량 -->
-<!-- 		<property name="maxUploadSize" value="100000000"/> -->
-<!-- 		<property name="maxInMemorySize" value="100000000"/>	 -->
-<!-- 	</bean> -->
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<!-- smtp 서버명 -->
@@ -90,6 +82,15 @@
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
+	</bean>
+	
+	<!-- 스프링이 multipart 데이터 처리를 위해
+		제공 해주는 클래스  -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 		<!-- 업로드 가능한 최대 용량 -->
+		<property name="maxUploadSize" value="100000000"/>
+		<property name="maxInMemorySize" value="100000000"/>	
 	</bean>
 		
 </beans>

@@ -2,79 +2,97 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<mapper namespace = "ACTIVITY">
-	
-	
-	<!-- 활동내역 리스트 순차적으로 나오게하기  없어도 되는 쿼리문 -->
-	<!-- 사용하지 않는 쿼리문 -->
-	<select id="list" resultType="common.dto.FarmActivity">
-	select ACTIVITY_NO ,TITLE,CONTENT,
-		FROM Farm_Activity ORDER BY ACTIVITY_NO
-	</select>
-	
-	
-	<!-- 영농일지 리스트 페이지 -->
-<!-- 	<select id = "listPage" resultType="common.dto.FarmActivity" parameterType="common.dto.page.Criteria"> -->
-<!-- 		select ACTIVITY_NO -->
-<!-- 			   ,TITLE -->
-<!-- 			   ,CONTENT -->
-			   
-<!-- 		FROM ( -->
-<!--    		select  -->
-<!--        			ACTIVITY_NO -->
-<!-- 			   ,TITLE -->
-<!-- 			   ,CONTENT -->
-<!-- 				, row_number() over(order by ACTIVITY_NO desc) as rNum -->
-<!--     	from Farm_Activity ) mp -->
-<!--     		where rNum between #{rowStart} and #{rowEnd} -->
-<!--    				 order by ACTIVITY_NO desc -->
-<!-- 	</select> -->
 
-	<resultMap type="hashmap" id="testmap">
-		<id property="activityNo" column="ACTIVITY_NO" />
-		<result property="title" column="TITLE" />
-		<result property="applicantName" column="APPLICATANT_NAME" />
-		<result property="people" column="PEOPLE" />
-		<result property="activityDate" column="ACTIVITY_DATE" />
-		<result property="isApproval" column="IS_APPROVAL" />
-	</resultMap>
+<mapper namespace="ACTIVITY">
 	
-	<select id ="listPage" parameterType="common.dto.page.Criteria" resultMap="testmap">
-				 
-		select p.*
-		from (
-		SELECT ROWNUM RNUM, r.* 
-		FROM
-		(select a.APPLICATION_NO,a.APPLICANT_NAME ,a.PEOPLE,a.ACTIVITY_DATE,a.IS_APPROVAL,fa.TITLE
-		        from farm_activity fa
-             ,application a
-        where 1=1 and fa.activity_no = a.activity_no
-        )r
-        )p
-        where RNUM BETWEEN #{rowStart} and #{rowEnd} 
-		
-	</select>                  
-    
-    <!-- 활동내역 리스트 총 페이지 수 -->
-	<select id="listCount" resultType="int">
-	<![CDATA[
-		SELECT COUNT(ACTIVITY_NO)
-		  FROM Farm_Activity
-		 WHERE ACTIVITY_NO > 0
-	]]>
+	<!-- 체험 활동 등록 -->
+	<insert id="insertActivity">
+		insert into farm_activity (activity_no, farm_no, title, content, avail_number, price, is_help)
+		values (farm_activity_seq.nextval, #{farmNo}, #{title}, #{content}, #{availNumber}, #{price}, #{isHelp})
+	</insert>
+	
+	<insert id="insertActivityFile">
+		insert into farm_activity_file (activity_file_no, activity_no, origin_name, file_rename, save_path, is_thumbnail)
+		values (farm_activity_file_seq.nextval, farm_activity_seq.currval, #{originName}, #{fileRename}, #{savePath}, #{isThumbnail})
+	</insert>
+	
+	<insert id="insertActivitySchedule" parameterType="common.dto.FarmActivitySchedule" >
+		insert into farm_activity_schedule (schedule_no, activity_no, time, content, etc)
+		values (activity_schedule_seq.nextval, farm_activity_seq.currval, #{time}, #{content}, #{etc})
+	</insert>
+
+
+	<!-- 농장 내 체험 활동 목록 조회 -->
+	<select id="selectActivityListByFarmNo" resultType="ACTIVITY">
+		select * from farm_activity
+		where farm_no = #{farmNo}
+		order by activity_no desc
+	</select>
+	
+	<select id="selectActivityFileThumbnail" resultType="ACTIVITY_FILE">
+		select * from farm_activity_file
+		where is_thumbnail = 1
 	</select>
 	
 	
-	<!-- 업데이트 승인 미승인 -->
-	<update id="update" parameterType="common.dto.Application">
-		update application set is_approval = #{isApproval} 
-		where application_no = #{applicationNo}
-	</update>
-	
-	<!-- 하나의 테이블 컬럼 조회하기 위해서  승인 미승인 할 때 필요 -->
-	<select id="selectOne" resultType="common.dto.Application" parameterType="common.dto.Application">
-		select * from application where application_no = #{applicationNo}
+	<!-- 체험 활동 상세 조회 -->
+	<select id="selectActivityByActivityNo" resultType="ACTIVITY">
+		select * from farm_activity
+		where activity_no = #{activityNo}
 	</select>
 	
+	<select id="selectActivityFileByActivityNo" resultType="ACTIVITY_FILE">
+		select * from farm_activity_file
+		where activity_no = #{activityNo}
+	</select>
+	
+	<select id="selectActivityScheduleByActivityNo" resultType="ACTIVITY_SCHEDULE">
+		select * from farm_activity_schedule
+		where activity_no = #{activityNo}
+	</select>
+
+
+	<!-- isHelp에 따른 체험 활동 목록 조회 -->
+	<select id="selectActivityList" parameterType="hashMap" resultType="ACTIVITY">
+		select activity_no, farm_no, title, avail_number, price from (
+			select rownum rnum, a1.*
+			from (
+				select * from farm_activity
+				<choose>
+					<when test="isHelp == 'experience'">
+						where is_help = 0
+					</when>
+					<when test="isHelp == 'help'">
+						where is_help = 1
+					</when>
+				</choose>
+				order by activity_no desc
+				
+			)a1
+		) where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectActivityCnt" resultType="int">
+		select count(*) from farm_activity
+	</select>
+
+
+	<select id="selectFarmByFarmerNo" parameterType="common.dto.Farmer" resultType="FARM">
+		select * from farm
+		where farmer_no = #{farmerNo}
+	</select>
+	
+	
+	<select id="selectFarmByFarmNo" resultType="FARM">
+		select * from farm
+		where farm_no = #{farmNo}
+	</select>
+	
+	
+	<!-- 전체 농장 목록 조회 -->
+	<select id="selectFarmList" resultType="FARM">
+		select * from farm
+	</select>
+	
+
 </mapper>
