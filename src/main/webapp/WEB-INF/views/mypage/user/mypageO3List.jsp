@@ -11,22 +11,31 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style type="text/css">
-.col-lg-5{
+.col-lg-5 {
 	margin-top: 100px;
 	margin-left: 100px;
-	width : 700px;
+	width: 700px;
 }
-.panel-default{
-	border : none;
+
+.panel-default {
+	border: none;
 }
+
 .panel-default>.panel-heading {
-    background-color: white;
-    border: none;
-    font-weight: bold;
-    font-size : 17px;
+	background-color: white;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
 }
 </style>
 
+<script type="text/javascript">
+		function selectUrl(url){
+			var root = '<%=request.getContextPath()%>';
+
+			document.querySelector('#form-data').action = root + url;
+		}
+	</script>
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <body class="pt-5">
 	<!-- Page Content -->
@@ -64,14 +73,14 @@
 							<th>작성일</th>
 							<th>답변상태</th>
 						</tr>
-						<c:forEach items="${O3List}" var="O3">
-						<tr>
-							<td>${O3.questionNo }</td>
-							<td>${O3.title }</td>
-							<td>${O3.content }</td>
-							<td>${O3.userNo }</td>
-							<td>${O3.regDate }</td>
-						</tr>
+						<c:forEach items="${O3List }" var="one">
+							<tr>
+								<td>${one.questionNo }</td>
+								<td>${one.title }</td>
+								<td>${one.content }</td>
+								<td>${one.userNo }</td>
+								<td>${one.regDate }</td>
+							</tr>
 						</c:forEach>
 					</table>
 				</div>
@@ -80,13 +89,6 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		function selectUrl(url){
-			var root = '<%=request.getContextPath()%>';
-
-			document.querySelector('#form-data').action = root + url;
-		}
-	</script>
 
 
 
