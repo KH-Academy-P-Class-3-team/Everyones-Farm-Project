@@ -3,6 +3,8 @@ package com.kh.farmapp.main.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.farmapp.main.model.service.MainService;
 
-import common.dto.Application;
+import common.dto.UserTB;
 
 @Controller
 public class MainController {
@@ -28,27 +30,32 @@ public class MainController {
 	 * '모두의 농장' 메인 홈페이지
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(
+			Model model
+			, HttpSession session
+			) {
 	
-		// 조인 연산된 결과 콘솔에 찍기 -- test 용
-//		List<Map<String, Object>> testMap = mainService.selectTest();
-//		for(int i = 0; i < testMap.size(); i++) {
-//			System.out.println(testMap.get(i).toString());
-//		}
-		//testtesttesttest
-
-
-
-		// 이달의 농장 top 3 불러오기
+		// session 영역에 있는 로그인 했을 때 불러오기
+//		System.out.println("MainController - main page login session:" + session.getAttribute("userInfo"));
+		// session 영역에서 login 한 User의 정보 받아오기
+		UserTB loginUser = (UserTB) session.getAttribute("userInfo");
 		
-		// 한 번더 제가 git push를 해볼게요
-		
-		for(int i = 2; i < 10; i++) {
-			for(int j = 1; j < 10; j++) {
-				System.out.print(i + " * " + j + " = " + (i * j));
-			}
-			System.out.println();
+		if(loginUser != null) {
+			model.addAttribute("loginUser", loginUser);
+		} else {
+			model.addAttribute("loginUser", null);
 		}
+		
+		
+		// 이달의 농장 top 3 불러오기
+		// outer join 을 했는데 null 값인 아이들은 불러오지 조차 못한다. 어째서인지 질문!!!
+		List<Map<String, Object>> farmTop3 = mainService.selectTop3Farm();
+		// farmTop3 test output
+//		for(Map<String, Object> m : farmTop3) {
+//			System.out.println(m);
+//		}
+		
+		model.addAttribute("farmlist", farmTop3);
   
 		return "/main/index";
 	}

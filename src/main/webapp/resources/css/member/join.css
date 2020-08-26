@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+
+button{
+	
+	padding: 10px 40px;
+	background-color: #D1E9CA;
+	border-color: #D1E9CA;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+button:hover {
+	background-color: #789F6F;
+}
+
+.btn_id-check{
+	border-radius: 5px;
+	background-color: #D1E9CA;
+	border-color: #D1E9CA;
+	width: 70px;
+    padding: 3px;
+}
+
+.farmer{
+	margin: 300px auto 200px auto;
+	width: 550px;
+	height: 930px;
+	border: 10px solid #EAE891;
+	padding: 30px;
+	
+}
+
+input{
+	height: 35px;
+    margin: 7px 7px 12px 7px;
+    width: 450px;
+    border: 1px solid #789F6F;
+}
+
+.login{
+	width: 150px;
+}
+
+.find{
+	width: 190px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+
+
+.member{
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.why input{
+	height: 15px;
+	width: 15px;
+	border: 1px solid #789F6F;
+}
+
+
+.farmer div {
+	width: 400px;
+/* 	margin-top : 7px; */
+}
+
+.btn {
+	text-align: center;
+	margin-left: 35px
+}
+
+.id-check-msg{
+	font-size: 0.8em;
+}

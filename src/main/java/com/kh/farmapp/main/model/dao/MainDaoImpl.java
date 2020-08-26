@@ -28,8 +28,8 @@ public class MainDaoImpl implements MainDao {
 	}
 
 	@Override
-	public List<Farm> selectTop3Farm() {
-		return null;
+	public List<Map<String, Object>> selectTop3Farm() {
+		return session.selectList("MAIN.selectFarmTop3");
 	}
 
 	@Override

@@ -70,5 +70,26 @@
 <!-- 		<property name="maxUploadSize" value="100000000"/> -->
 <!-- 		<property name="maxInMemorySize" value="100000000"/>	 -->
 <!-- 	</bean> -->
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- smtp 서버명 -->
+		<property name="host" value="smtp.naver.com" />
+		<!-- smtp port 번호 -->
+		<property name="port" value="465" />
+		<!-- 아이디 -->
+		<property name="username" value="everyonesfarm@naver.com" />
+		<!-- 비밀번호 -->
+		<property name="password" value="farm333###" />
+		<!-- 기타 메일 관련 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.ssl.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
 		
 </beans>

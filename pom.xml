@@ -179,6 +179,20 @@
 		    <version>2.10.2</version>
 		</dependency>
 		
+		<!-- Mail 메일 발송을 위한 라이브러리-->		
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		
+		<!-- 스프링에서 제공해주는 JavaMailSender를 활용하기 위한 Dependency 추가 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>5.2.6.RELEASE</version>
+		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>
