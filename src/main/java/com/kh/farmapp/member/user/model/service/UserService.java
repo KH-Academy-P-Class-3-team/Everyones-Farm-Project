@@ -63,5 +63,12 @@ public interface UserService {
 	 * @return true/false - 성공실패
 	 */
 	public boolean updatePw(UserTB user);
+
+	/**
+	 * 아이디 중복 체크
+	 * @param userId
+	 * @return int (0보다 크면 불가능함)
+	 */
+	public int selectIdCheck(String userId);
 	
 }

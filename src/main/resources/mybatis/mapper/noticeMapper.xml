@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NOTICE">
+
+	<select id="selectLatestNotice" resultType="common.dto.Notice">
+		select
+		    n.*
+		from (
+		    select
+		        rownum rnum
+		        , latest.*
+		    from (
+			    select
+			        *
+			    from
+			        notice
+			    where
+			        is_notice = 1
+			    order by
+			        notice_no desc
+		    ) latest
+		) n
+		where
+		    rnum = 1	
+	</select>
+
+</mapper>

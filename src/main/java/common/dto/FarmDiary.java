@@ -4,22 +4,26 @@ import java.util.Date;
 
 public class FarmDiary {
 
-	// member field
-	private int dailyNo;
+	private int farmDiaryNo;
 	private String title;
 	private int hit;
 	private Date enrollDate;
 	private String youtubeLink;
 	private String content;
-	private int farmNo;
-
-	// getter(), setter()
-	public int getDailyNo() {
-		return dailyNo;
+	private int farmerNo;
+	
+	@Override
+	public String toString() {
+		return "FarmDiary [farmDiaryNo=" + farmDiaryNo + ", title=" + title + ", hit=" + hit + ", enrollDate="
+				+ enrollDate + ", youtubeLink=" + youtubeLink + ", content=" + content + ", farmerNo=" + farmerNo + "]";
 	}
 
-	public void setDailyNo(int dailyNo) {
-		this.dailyNo = dailyNo;
+	public int getFarmDiaryNo() {
+		return farmDiaryNo;
+	}
+
+	public void setFarmDiaryNo(int farmDiaryNo) {
+		this.farmDiaryNo = farmDiaryNo;
 	}
 
 	public String getTitle() {
@@ -62,19 +66,14 @@ public class FarmDiary {
 		this.content = content;
 	}
 
-	public int getFarmNo() {
-		return farmNo;
+	public int getFarmerNo() {
+		return farmerNo;
 	}
 
-	public void setFarmNo(int farmNo) {
-		this.farmNo = farmNo;
+	public void setFarmerNo(int farmerNo) {
+		this.farmerNo = farmerNo;
 	}
-
-	// toString()
-	@Override
-	public String toString() {
-		return "FarmDiary [dailyNo=" + dailyNo + ", title=" + title + ", hit=" + hit + ", enrollDate=" + enrollDate
-				+ ", youtubeLink=" + youtubeLink + ", content=" + content + ", farmNo=" + farmNo + "]";
-	}
+	
+	
 
 }

@@ -24,7 +24,7 @@ public interface MainDao {
 	 * 메인 화면에 보여줄 이달의 농장 Top3를 조회한다.
 	 * @return List<Farm> - 조회 결과 반환
 	 */
-	public List<Farm> selectTop3Farm();
+	public List<Map<String, Object>> selectTop3Farm();
 
 	/**
 	 * 메인 화면에 보여줄 농업소식 게시판의 최신글 5개를 조회 한다.

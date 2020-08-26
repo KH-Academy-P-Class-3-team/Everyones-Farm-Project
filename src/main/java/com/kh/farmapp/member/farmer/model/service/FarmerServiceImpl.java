@@ -5,18 +5,19 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.member.farmer.model.dao.FarmerDao;
 
 import common.dto.Farmer;
 
-
+@Service
 public class FarmerServiceImpl implements FarmerService{
 
 
-	@Autowired
-	private FarmerDao farmerDao;
-	
+//	@Autowired
+//	private FarmerDao farmerDao;
+//	
 	
 	@Override
 	public int insertFarmer(Farmer farmer) {

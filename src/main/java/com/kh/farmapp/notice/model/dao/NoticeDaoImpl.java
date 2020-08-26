@@ -20,8 +20,7 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Override
 	public Notice selectOneNotice() {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("NOTICE.selectLatestNotice");
 	}
 
 	@Override

@@ -7,8 +7,27 @@
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
+	
+	<!-- typeAliases 추가 -->
+	<typeAliases>
+		<typeAlias type="common.dto.Farm" alias="FARM"/>
+		<typeAlias type="common.dto.FarmActivity" alias="ACTIVITY"/>
+		<typeAlias type="common.dto.FarmActivityFile" alias="ACTIVITY_FILE"/>
+		<typeAlias type="common.dto.FarmActivitySchedule" alias="ACTIVITY_SCHEDULE"/>
+	</typeAliases>
+	
 	<mappers>
+    
 		<!-- mapper 파일 만들면 넣기 -->
+		<mapper resource="/mybatis/mapper/mainMapper.xml" />
+		<mapper resource="/mybatis/mapper/noticeMapper.xml" />
 		<mapper resource="/mybatis/mapper/testMapper.xml" />
+		<mapper resource="/mybatis/mapper/userMapper.xml" />
+		<mapper resource="/mybatis/mapper/dailyMapper.xml" />
+		<mapper resource="/mybatis/mapper/activityMapper.xml" />
+		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml" />
+		<!-- ActivityController에서 사용하는 mapper -->
+		<mapper resource="/mybatis/mapper/activityMapper.xml" />
+    <!-- <mapper resource="/mybatis/mapper/mypageUser.xml" /> -->
 	</mappers>
 </configuration>
