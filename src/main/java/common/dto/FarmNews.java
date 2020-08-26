@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class FarmNews {
 
+	// member field
 	// 농업 소식 번호
 	private int farmNewsNo;
 	// 농업 소식 제목
@@ -15,6 +16,7 @@ public class FarmNews {
 	// 농업 소식 데이터 등록일(그 사이트에서 작성된 날짜)
 	private Date regDate;
 
+	// getter(), setter()
 	public int getFarmNewsNo() {
 		return farmNewsNo;
 	}
@@ -55,6 +57,7 @@ public class FarmNews {
 		this.regDate = regDate;
 	}
 
+	// toString()
 	@Override
 	public String toString() {
 		return "FarmNews [farmNewsNo=" + farmNewsNo + ", title=" + title + ", link=" + link + ", siteName=" + siteName

@@ -1,3 +1,8 @@
+-- 20200826 EveryonesFarm create table query 수정
+-- 수정 사항
+-- activity_schedule_seq -> farm_activity_schedule_seq 로 이름 수정
+
+
 -- EveryonesFarm 테이블 생성 쿼리문 n차 수정
 
 -- 이미 테이블이 생성되어 있는 사람들을 위한 테이블 삭제 명령문
@@ -43,7 +48,11 @@
  DROP SEQUENCE notice_seq;
  DROP TABLE NOTICE;
  
- DROP SEQUENCE ACTIVITY_SCHEDULE_SEQ;
+-- select FARM_ACTIVITY_SCHEDULE_SEQ.currval from dual;
+-- select ACTIVITY_SCHEDULE_SEQ.nextval from dual;
+ 
+ DROP SEQUENCE ACTIVITY_SCHEDULE_SEQ; -- 에러 날수도 있음
+ DROP SEQUENCE FARM_ACTIVITY_SCHEDULE_SEQ;
  DROP TABLE FARM_ACTIVITY_SCHEDULE;
 
  DROP SEQUENCE farm_activity_file_seq;
@@ -276,11 +285,11 @@ CREATE SEQUENCE farmer_seq;
 CREATE TABLE FARM                               -- 이름 FARM 으로 수정(대문자로 수정)
 (
     FARM_NO        NUMBER           NOT NULL,                   -- 농장 번호
-    FARM_NAME      VARCHAR2(100 char)      NOT NULL,            -- 농장 이름(사용자 이름도 100인데 100으로 설정할게요)
+    FARM_NAME      VARCHAR2(100 char) NOT NULL,                 -- 농장 이름(사용자 이름도 100인데 100으로 설정할게요)
     PHONE          VARCHAR2(14)      NOT NULL,                  -- 농장 대표 전화번호, 위에서 사용자 전화번호 컬럼과 같이 설정
-    ZONECODE        VARCHAR2(7)    NOT NULL,                    -- 우편번호(사용자 주소 테이블과 같은 이유로 7로 설정)
-    FIRST_ADDRESS        VARCHAR2(300 char)     NOT NULL,       -- 농장 첫번째 주소(API에서 받아온 값), 사용자 주소 테이블과 같은 컬럼 값으로 수정
-    SECOND_ADDRESS        VARCHAR2(300 char)     NOT NULL,      -- 상세주소, 사용자 주소 테이블과 같은 컬럼 값으로 수정
+    ZONECODE       VARCHAR2(7)       NOT NULL,                  -- 우편번호(사용자 주소 테이블과 같은 이유로 7로 설정)
+    FIRST_ADDRESS  VARCHAR2(300 char) NOT NULL,                 -- 농장 첫번째 주소(API에서 받아온 값), 사용자 주소 테이블과 같은 컬럼 값으로 수정
+    SECOND_ADDRESS VARCHAR2(300 char) NOT NULL,                 -- 상세주소, 사용자 주소 테이블과 같은 컬럼 값으로 수정
     INTRODUCE      VARCHAR2(2000)    NOT NULL,                  -- 농장 소개
     FARM_REASON    VARCHAR2(2000)    NOT NULL,                  -- 가입 이유
     FARM_MIND      VARCHAR2(1000)    NOT NULL,                  -- 농부로써 가장 중요하다고 생각하는 것, 길게 작성하지 않을 것 같아서 VARCHAR2(2000) -> VARCHAR2(1000)으로 수정할게요
@@ -483,11 +492,11 @@ CREATE TABLE FARM_DIARY
 (
     FARM_DIARY_NO    NUMBER                NOT NULL,        -- 농장 생활 일지 번호
     TITLE            VARCHAR2(200 char)    NOT NULL,        -- 농장 일기 제목 500자는 너무 길어서 200자로 수정 
-    HIT              NUMBER                NOT NULL,        -- 농장 일기 조회수 
+    HITS              NUMBER                NOT NULL,        -- 농장 일기 조회수 
     ENROLL_DATE      DATE                  NOT NULL,        -- 농장 일기 등록일 
     YOUTUBE_LINK     VARCHAR(300)          NULL,            -- 농장 일기 유튜브 링크 
     CONTENT          CLOB                  NOT NULL,        -- 농장 일기 내용
-    FARM_NO          NUMBER                NOT NULL,        -- 농장 번호(FK) 
+    FARMER_NO        NUMBER                NOT NULL,        -- 농장 번호(FK) 
     CONSTRAINT FARM_DIARY_PK PRIMARY KEY (FARM_DIARY_NO)    -- FARM_DIARY_NO 기본키 설정
 );
 
@@ -497,7 +506,7 @@ COMMENT ON COLUMN FARM_DIARY.FARM_DIARY_NO IS '게시물 번호';
 
 COMMENT ON COLUMN FARM_DIARY.TITLE IS '게시물 제목';
 
-COMMENT ON COLUMN FARM_DIARY.HIT IS '조회수';
+COMMENT ON COLUMN FARM_DIARY.HITS IS '조회수';
 
 COMMENT ON COLUMN FARM_DIARY.ENROLL_DATE IS '게시물 등록 날짜';
 
@@ -505,10 +514,10 @@ COMMENT ON COLUMN FARM_DIARY.YOUTUBE_LINK IS '유튜브 링크 주소';
 
 COMMENT ON COLUMN FARM_DIARY.CONTENT IS '게시물 내용';
 
-COMMENT ON COLUMN FARM_DIARY.FARM_NO IS '농부회원 번호';
+COMMENT ON COLUMN FARM_DIARY.FARMER_NO IS '농부회원 번호';
 
 ALTER TABLE FARM_DIARY
-    ADD CONSTRAINT FK_FARM_DIARY_FARM_NO_FARMER_F FOREIGN KEY (FARM_NO)
+    ADD CONSTRAINT FK_FARM_DIARY_FARMER_NO_FARMER FOREIGN KEY (FARMER_NO)
         REFERENCES FARMER (FARMER_NO) on delete cascade;
 
 --농장 생활에 대한 블로그 형식의 일지 테이블 시퀀스 생성
@@ -525,7 +534,7 @@ CREATE TABLE FARM_DIARY_FILE
     ORIGIN_NAME           VARCHAR2(300)    NOT NULL,                    -- 농장 일기 파일 원래 이름 
     FILE_RENAME           VARCHAR2(300)    NOT NULL,                    -- 농장 일기 파일 저장된 이름(새로운 이름) 
     SAVE_PATH             VARCHAR2(300)    NOT NULL,                    -- 농장 일기 파일 저장 경로 
-    FARM_DAILY_NO         NUMBER           NOT NULL,                    -- 농장 일기 번호(FK) 
+    FARM_DIARY_NO         NUMBER           NOT NULL,                    -- 농장 일기 번호(FK) 
     IS_THUMBNAIL          NUMBER    DEFAULT 0   NOT NULL,               -- 썸네일 여부(1= 썸네일이다) 
     CONSTRAINT FARM_DIARY_FILE_PK PRIMARY KEY (FARM_DIARY_FILE_NO)      -- 기본키 설정
 );
@@ -540,12 +549,12 @@ COMMENT ON COLUMN FARM_DIARY_FILE.FILE_RENAME IS '새로운 파일 명';
 
 COMMENT ON COLUMN FARM_DIARY_FILE.SAVE_PATH IS '경로';
 
-COMMENT ON COLUMN FARM_DIARY_FILE.FARM_DAILY_NO IS '게시물 번호';
+COMMENT ON COLUMN FARM_DIARY_FILE.FARM_DIARY_NO IS '게시물 번호';
 
 COMMENT ON COLUMN FARM_DIARY_FILE.IS_THUMBNAIL IS '썸네일 여부(0 = 썸네일이 아니다, 1= 썸네일이다)';
 
 ALTER TABLE FARM_DIARY_FILE
-    ADD CONSTRAINT FK_FARM_DIARY_FILE_FARM_DAILY_ FOREIGN KEY (FARM_DAILY_NO)
+    ADD CONSTRAINT FK_FARM_DIARY_FILE_FARM_DIARY_ FOREIGN KEY (FARM_DIARY_NO)
         REFERENCES FARM_DIARY (FARM_DIARY_NO) on delete cascade;
 
 --농장 생활에 대한 블로그 형식의 일에 들어가는 파일 테이블	시퀀스
@@ -640,7 +649,7 @@ COMMENT ON COLUMN FARM_ACTIVITY.IS_HELP IS '일손돕기 체험인지 여부(1=�
 
 ALTER TABLE FARM_ACTIVITY
     ADD CONSTRAINT FK_FARM_ACTIVITY_FARM_NO_Farm_ FOREIGN KEY (FARM_NO)
-        REFERENCES Farm (FARM_NO)on delete cascade;
+        REFERENCES FARM (FARM_NO)on delete cascade;
 
 -- 이상 없음
 
@@ -677,8 +686,8 @@ ALTER TABLE FARM_ACTIVITY_SCHEDULE                                          -- A
         REFERENCES FARM_ACTIVITY (ACTIVITY_NO);
 
 -- 체험 일정 시퀀스 생성
---DROP SEQUENCE ACTIVITY_SCHEDULE_SEQ;
-CREATE SEQUENCE ACTIVITY_SCHEDULE_SEQ;
+--DROP SEQUENCE FARM_ACTIVITY_SCHEDULE_SEQ;
+CREATE SEQUENCE FARM_ACTIVITY_SCHEDULE_SEQ;
 
 
 --13. 농장체험/일손돕기신청서(일반인 기준) 정보 테이블  ---FK(작성자,체험번호)		
@@ -1088,6 +1097,7 @@ CREATE TABLE TB_ORDER
     ZONECODE          VARCHAR2(7)           NOT NULL,               -- 배송지 우편 번호 
     FIRST_ADDRESS     VARCHAR2(300 char)    NOT NULL,               -- 배송지 주소(도로명 주소) 
     SECOND_ADDRESS    VARCHAR2(300 char)    NOT NULL,               -- 배송지 상세 주소(예를 들면, 아파트 동, 호수) 
+    ORDER_AMOUNT      NUMBER                NOT NULL,               -- 주문수량
     CONSTRAINT TB_ORDER_PK PRIMARY KEY (ORDER_NO)                   -- 기본키 설정
 );
 
@@ -1112,6 +1122,8 @@ COMMENT ON COLUMN TB_ORDER.ZONECODE IS '우편 번호';
 COMMENT ON COLUMN TB_ORDER.FIRST_ADDRESS IS '주소(도로명)';
 
 COMMENT ON COLUMN TB_ORDER.SECOND_ADDRESS IS '상세 주소';
+
+COMMENT ON COLUMN TB_ORDER.ORDER_AMOUNT IS '주문 수량';
 
 ALTER TABLE TB_ORDER                                                        -- 상품을 구매한 회원 번호 외래키 (USER_NO)
     ADD CONSTRAINT FK_TB_ORDER_USER_NO_USER_TB_US FOREIGN KEY (USER_NO)
@@ -1249,9 +1261,13 @@ COMMENT ON COLUMN SELL_ANSWER.SELL_QUESTION_NO IS '판매자 문의 번호';
 
 COMMENT ON COLUMN SELL_ANSWER.FARMER_NO IS '답변 작성자';
 
-ALTER TABLE SELL_ANSWER
+ALTER TABLE SELL_ANSWER                                                         -- 답변할 질문 번호 외래키
     ADD CONSTRAINT FK_SELL_ANSWER_SELL_QUESTION_N FOREIGN KEY (SELL_QUESTION_NO)
         REFERENCES SELL_QUESTION (SELL_QUESTION_NO)on delete cascade;
+    
+ALTER TABLE SELL_ANSWER                                                     -- 답변 작성자 (농업인 사용자 번호) 외래키
+    ADD CONSTRAINT FK_SELL_ANSWER_FARMER_NO_FARME FOREIGN KEY (FARMER_NO)
+        REFERENCES FARMER (FARMER_NO) on delete cascade;
 
 --판매자 문의에 대한 답변 댓글 정보를 저장하는 테이블 시퀀스 생성
 --DROP SEQUENCE sell_answer_seq;

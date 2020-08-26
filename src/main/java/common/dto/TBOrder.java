@@ -15,6 +15,7 @@ public class TBOrder {
 	private String zonecode;
 	private String firstAddress;
 	private String secondAddress;
+	private int orderAmount;
 	
 	// getter(), setter()
 	public int getOrderNo() {
@@ -77,6 +78,13 @@ public class TBOrder {
 	public void setSecondAddress(String secondAddress) {
 		this.secondAddress = secondAddress;
 	}
+	
+	public int getOrderAmount() {
+		return orderAmount;
+	}
+	public void setOrderAmount(int orderAmount) {
+		this.orderAmount = orderAmount;
+	}
 
 	// toString()
 	@Override
@@ -84,7 +92,7 @@ public class TBOrder {
 		return "TBOrder [orderNo=" + orderNo + ", optionNo=" + optionNo + ", userNo=" + userNo + ", farmerNo="
 				+ farmerNo + ", orderDate=" + orderDate + ", paymentStatus=" + paymentStatus + ", paymentPrice="
 				+ paymentPrice + ", zonecode=" + zonecode + ", firstAddress=" + firstAddress + ", secondAddress="
-				+ secondAddress + "]";
+				+ secondAddress + ", orderAmount=" + orderAmount + "]";
 	}
-	
+
 }

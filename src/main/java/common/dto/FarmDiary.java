@@ -2,22 +2,26 @@ package common.dto;
 
 import java.util.Date;
 
-public class FarmDiary {
 
+public class FarmDiary {
+	
+	// member field
 	private int farmDiaryNo;
 	private String title;
-	private int hit;
+	private int hits;
 	private Date enrollDate;
 	private String youtubeLink;
 	private String content;
 	private int farmerNo;
 	
+	// toString()
 	@Override
 	public String toString() {
-		return "FarmDiary [farmDiaryNo=" + farmDiaryNo + ", title=" + title + ", hit=" + hit + ", enrollDate="
+		return "FarmDiary [farmDiaryNo=" + farmDiaryNo + ", title=" + title + ", hits=" + hits + ", enrollDate="
 				+ enrollDate + ", youtubeLink=" + youtubeLink + ", content=" + content + ", farmerNo=" + farmerNo + "]";
 	}
 
+	// getter(), setter()
 	public int getFarmDiaryNo() {
 		return farmDiaryNo;
 	}
@@ -34,12 +38,12 @@ public class FarmDiary {
 		this.title = title;
 	}
 
-	public int getHit() {
-		return hit;
+	public int getHits() {
+		return hits;
 	}
 
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setHits(int hits) {
+		this.hits = hits;
 	}
 
 	public Date getEnrollDate() {
@@ -73,7 +77,5 @@ public class FarmDiary {
 	public void setFarmerNo(int farmerNo) {
 		this.farmerNo = farmerNo;
 	}
-	
-	
 
 }

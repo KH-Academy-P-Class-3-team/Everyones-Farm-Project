@@ -6,7 +6,7 @@ public class Basket {
 	private int basketNo;
 	private int userNo;
 	private int farmerNo;
-	private int productNo;
+	private int productNo; // 꼭 필요한 컬럼일까요?
 	private int optionNo;
 	
 	// getter(), setter()
