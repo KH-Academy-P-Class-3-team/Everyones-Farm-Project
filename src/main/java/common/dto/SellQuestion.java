@@ -6,7 +6,7 @@ import java.util.Date;
  * 판매 페이지에서 판매자와 구매자간의 문의 정보를 저장하는 DTO
  */
 public class SellQuestion {
-
+	
 	// member field
 	private int sellQuestionNo;
 	private int productNo;

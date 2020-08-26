@@ -5,6 +5,7 @@ package common.dto;
  */
 public class Notice {
 
+	// member field
 	// 공지사항 & 자주 묻는 질문 번호
 	private int noticeNo;
 	// 제목
@@ -14,12 +15,14 @@ public class Notice {
 	// 공지사항인지 여부를 판단해 주는 컬럼
 	private int isNotice;
 
+	// toString()
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", isNotice=" + isNotice
 				+ "]";
 	}
 
+	// getter(), setter()
 	public int getNoticeNo() {
 		return noticeNo;
 	}

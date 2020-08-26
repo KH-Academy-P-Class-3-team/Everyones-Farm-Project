@@ -6,9 +6,17 @@ public class UserProfile {
 	private int profileNo;
 	private int userNo;
 	private String originName;
-	private String renameFile;
+	private String fileRename;
 	private String savePath;
+	
+	// toString()
+	@Override
+	public String toString() {
+		return "UserProfile [profileNo=" + profileNo + ", userNo=" + userNo + ", originName=" + originName
+				+ ", fileRename=" + fileRename + ", savePath=" + savePath + "]";
+	}
 
+	// getter(), setter()
 	public int getProfileNo() {
 		return profileNo;
 	}
@@ -33,12 +41,12 @@ public class UserProfile {
 		this.originName = originName;
 	}
 
-	public String getRenameFile() {
-		return renameFile;
+	public String getFileRename() {
+		return fileRename;
 	}
 
-	public void setRenameFile(String renameFile) {
-		this.renameFile = renameFile;
+	public void setFileRename(String fileRename) {
+		this.fileRename = fileRename;
 	}
 
 	public String getSavePath() {
@@ -47,12 +55,6 @@ public class UserProfile {
 
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
-	}
-
-	@Override
-	public String toString() {
-		return "UserProfile [profileNo=" + profileNo + ", userNo=" + userNo + ", originName=" + originName
-				+ ", renameFile=" + renameFile + ", savePath=" + savePath + "]";
 	}
 
 }
