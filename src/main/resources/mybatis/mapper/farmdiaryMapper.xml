@@ -5,41 +5,59 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Diary">
-  
-  <insert id="insertFarmDiary">
-  	insert into farm_diary
-		(farm_diary_no, title, hit, enroll_date, youtube_link, content, farmer_no)
+
+	<insert id="insertFarmDiary">
+		insert into farm_diary
+		(farm_diary_no, title, hit, enroll_date, youtube_link,
+		content, farmer_no)
 		values
-		(farm_diary_seq.nextval, #{title}, 0, sysdate, #{youtubeLink}, #{content}, 1)
-  </insert>
-  
-  
-  
-  <select id="selectFarmDiaryList" resultType="common.dto.FarmDiary">
-  	select
-		 farm_diary_no, title, enroll_date, 
-		 youtube_link, content, farmer_no 
+		(farm_diary_seq.nextval, #{title}, 0,
+		sysdate, #{youtubeLink}, #{content}, 1)
+	</insert>
+
+
+
+	<select id="selectFarmDiaryList"
+		resultType="common.dto.FarmDiary">
+		select
+		farm_diary_no, title, enroll_date,
+		youtube_link, content, farmer_no
 		from(
-			select rownum rnum, n1.* 
-			from(
-				select * 
-				from farm_diary
-				order by farm_diary_no desc
-			)n1
-		)where rnum between #{start} and #{end}     
-  	
-  </select>
-  
-  <select id="selectContentCnt" resultType="int">
-		select count(*) from farm_diary
-  </select>
-  
-  <select id="selectFarmDiaryDetail" resultType="common.dto.FarmDiary">
-  		select farm_diary_no, title, hit, enroll_date, youtube_link, content, farmer_no
-  		from farm_diary
-  		where farm_diary_no = #{farmDiaryNo}
-  </select>
+		select rownum rnum, n1.*
+		from(
+		select *
+		from farm_diary
+		order by farm_diary_no desc
+		)n1
+		)where rnum between #{start} and #{end}
+
+	</select>
+
+	<select id="selectContentCnt" resultType="int">
+		select count(*) from
+		farm_diary
+	</select>
 	
 	
-  
+	<resultMap type="hashMap" id="test">
+		<id column="farmer_no" property="farmerNo" />
+		<result column="farm_diary_no" property="farmDiaryNo" />
+		<result column="title" property="title" />
+		<result column="hit" property="hit" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="youtube_link" property="youtubeLink" />
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<select id="selectFarmDiaryDetail" resultMap="test">
+		select fd.farm_diary_no, fd.title, fd.hit, fd.enroll_date, fd.youtube_link,
+		fd.content, fd.farmer_no, f.name
+		from farm_diary fd, farmer f
+		where fd.farmer_no = f.farmer_no
+		and fd.farm_diary_no = #{farmDiaryNo}
+	</select>
+
+
+
 </mapper>

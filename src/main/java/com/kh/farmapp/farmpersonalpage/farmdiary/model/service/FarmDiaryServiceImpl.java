@@ -27,9 +27,10 @@ public class FarmDiaryServiceImpl implements FarmDiaryService{
 		res.put("fdlist",fdlist);
 		return res;
 	}
-
+	
 	@Override
-	public FarmDiary selectFarmDiaryDetail(int farmDiaryNo) {
+	public Map<String, Object> selectFarmDiaryDetail(int farmDiaryNo) {
+		Map<String, Object> res = farmdiaryDao.selectFarmDiaryDetail(farmDiaryNo);
 		return farmdiaryDao.selectFarmDiaryDetail(farmDiaryNo);
 	}
 

@@ -21,7 +21,7 @@ public interface FarmDiaryDao {
 	public List<FarmDiary> selectFarmDiaryList(Paging paging);
 	
 	//게시글 상세 조회 메소드
-	public FarmDiary selectFarmDiaryDetail(int dailyNo);
+	public Map<String, Object> selectFarmDiaryDetail(int farmDiaryNo);
 	
 	//게시글 숫자
 	public int contentCnt();
@@ -31,6 +31,8 @@ public interface FarmDiaryDao {
 	
 	//게시글 수정 메소드
 	public int modifyFarmDiary();
+
+
 
 	
 }
