@@ -93,56 +93,56 @@ public class ActivityController {
 	 * @param session - servletContext 경로를 가지고있는 session 객체
 	 * @return ModelAndView - 등록 여부 메시지, View(result.jsp)
 	 */
-	@RequestMapping(value = "activity/activityForm.do", method = RequestMethod.POST)
-	public ModelAndView activityFormSubmit(
-			FarmActivity farmActivity
-			, @RequestParam List<MultipartFile> files
-			, @RequestParam("time") String[] timeArray
-			, @RequestParam("table-content") String[] contentArray
-			, @RequestParam("etc") String[] etcArray
-			, HttpSession session
-			) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		String root  = session.getServletContext().getRealPath("/");
-		
-		
-		List<FarmActivitySchedule> scheduleList = new ArrayList<FarmActivitySchedule>();
-		
-		for(int i=0; i<timeArray.length; i++) {
-			FarmActivitySchedule schedule = new FarmActivitySchedule();
-			schedule.setTime(timeArray[i]);
-			schedule.setContent(contentArray[i]);
-			schedule.setEtc(etcArray[i]);
-			scheduleList.add(schedule);
-		}
-		
-		
-//		Farmer farmer = (Farmer)session.getAttribute("FarmerInfo");
-		
-		//테스트용 Farm 객체
-		Farmer farmer = new Farmer();
-		farmer.setFarmerNo(1);
-
-		Farm farm = activityService.selectFarmByFarmerNo(farmer);
-		
-		farmActivity.setFarmNo(farm.getFarmNo());
-		
-		int res = activityService.insertActivity(farmActivity, files, root, scheduleList);
-		
-		if(res > 0) {
-			mav.addObject("msg", "체험 활동이 정상적으로 등록되었습니다.");
-		} else {
-			mav.addObject("msg", "체험 활동 등록에 실패하였습니다.");
-		}
-
-		mav.addObject("url", "activityList.do");
-		mav.setViewName("activity/result");
-		
-		return mav;
-		
-	}
+//	@RequestMapping(value = "activity/activityForm.do", method = RequestMethod.POST)
+//	public ModelAndView activityFormSubmit(
+//			FarmActivity farmActivity
+//			, @RequestParam List<MultipartFile> files
+//			, @RequestParam("time") String[] timeArray
+//			, @RequestParam("table-content") String[] contentArray
+//			, @RequestParam("etc") String[] etcArray
+//			, HttpSession session
+//			) {
+//		
+//		ModelAndView mav = new ModelAndView();
+//		
+//		String root  = session.getServletContext().getRealPath("/");
+//		
+//		
+//		List<FarmActivitySchedule> scheduleList = new ArrayList<FarmActivitySchedule>();
+//		
+//		for(int i=0; i<timeArray.length; i++) {
+//			FarmActivitySchedule schedule = new FarmActivitySchedule();
+//			schedule.setTime(timeArray[i]);
+//			schedule.setContent(contentArray[i]);
+//			schedule.setEtc(etcArray[i]);
+//			scheduleList.add(schedule);
+//		}
+//		
+//		
+////		Farmer farmer = (Farmer)session.getAttribute("FarmerInfo");
+//		
+//		//테스트용 Farm 객체
+//		Farmer farmer = new Farmer();
+//		farmer.setFarmerNo(1);
+//
+//		Farm farm = activityService.selectFarmByFarmerNo(farmer);
+//		
+//		farmActivity.setFarmNo(farm.getFarmNo());
+//		
+//		int res = activityService.insertActivity(farmActivity, files, root, scheduleList);
+//		
+//		if(res > 0) {
+//			mav.addObject("msg", "체험 활동이 정상적으로 등록되었습니다.");
+//		} else {
+//			mav.addObject("msg", "체험 활동 등록에 실패하였습니다.");
+//		}
+//
+//		mav.addObject("url", "activityList.do");
+//		mav.setViewName("activity/result");
+//		
+//		return mav;
+//		
+//	}
 	
 	
 	/**
@@ -150,29 +150,29 @@ public class ActivityController {
 	 * @param session - farmer 정보를 저장하고있는 session 객체
 	 * @return ModelAndView - commandMap(activity, activityFile), farmerInfo, View(activityList.jsp)
 	 */
-	@RequestMapping("activity/activityList.do")
-	public ModelAndView activityList(HttpSession session) {
-
-		ModelAndView mav = new ModelAndView();
-		
-//		Farmer farmer = (Farmer)session.getAttribute("FarmerInfo");
-
-		//테스트용 Farmer 객체
-		Farmer farmer = new Farmer();
-		farmer.setFarmerNo(1);
-		
-		Farm farm = activityService.selectFarmByFarmerNo(farmer);
-		
-		Map<String, Object> commandMap = activityService.selectActivityListByFarmNo(farm); 
-		
-//		mav.addObject("farmerInfo", farmer);
-		mav.addObject("farmerInfo", "suzzung");
-		mav.addObject("data", commandMap);
-		mav.setViewName("/activity/activityList");
-		
-		return mav;
-		
-	}
+//	@RequestMapping("activity/activityList.do")
+//	public ModelAndView activityList(HttpSession session) {
+//
+//		ModelAndView mav = new ModelAndView();
+//		
+////		Farmer farmer = (Farmer)session.getAttribute("FarmerInfo");
+//
+//		//테스트용 Farmer 객체
+//		Farmer farmer = new Farmer();
+//		farmer.setFarmerNo(1);
+//		
+//		Farm farm = activityService.selectFarmByFarmerNo(farmer);
+//		
+//		Map<String, Object> commandMap = activityService.selectActivityListByFarmNo(farm); 
+//		
+////		mav.addObject("farmerInfo", farmer);
+//		mav.addObject("farmerInfo", "suzzung");
+//		mav.addObject("data", commandMap);
+//		mav.setViewName("/activity/activityList");
+//		
+//		return mav;
+//		
+//	}
 
 	/**
 	 * 체험활동 등록 [POST]
