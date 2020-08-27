@@ -24,23 +24,36 @@ public class MypageO3Controller {
 	@RequestMapping("mypage/user/mypageO3List")
 		public ModelAndView o3List(@RequestParam(required=false, defaultValue="1") int cPage) {
 		
+		ModelAndView mav = new ModelAndView();
+		
 		List<QuestionOneonone> list = mypageService.o3List();
 		
 		for (QuestionOneonone q : list) {
 			System.out.println(q);
 		}
 		
-		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("O3List", list);
+		mav.addObject("list", list);
+		mav.setViewName("mypage/user/mypageO3List");
 		
 		return mav;
 		}
 		
 		//일대일 문의 디테일 보기
 	@RequestMapping("mypage/user/mypageO3Detail")
-		public void o3Detail(int qNo) {
-		mypageService.appliActList();
+		public ModelAndView o3Detail(int qNo) {
+		
+		qNo = 1;
+		
+		ModelAndView mav = new ModelAndView();
+		
+		QuestionOneonone o3 = mypageService.o3Detail(qNo);
+		
+		mav.addObject("one", o3);
+		mav.setViewName("mypage/user/mypageO3Detail");
+		
+		return mav;
+		
 		}
 		
 		//일대일 문의 작성하기

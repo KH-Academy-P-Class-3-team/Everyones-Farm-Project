@@ -15,13 +15,13 @@ import common.dto.UserTB;
 public  interface MyPageService {
 
 	//개인정보 수정 
-	public Map<String, Object> modifyUser(UserTB user);
+	public int modifyUser(Map<String, Object> map);
 	
 	//개인 사진 수정
 	public int modifyprofile(UserTB user);
 	
 	//회원 탈퇴
-	public int leave(String userId);
+	public int leave(UserTB user);
 	
 	//일대일 문의 전체 리스트 반환 
 	//리스트 안에서 페이징 호출
@@ -73,6 +73,12 @@ public  interface MyPageService {
 	 * @param root
 	 */
 	public void insertFile(UserTB user, File file, String root);
+
+	/*
+	 * 개인정보 불러오기
+	 * 
+	 */
+	public UserTB selectUser(UserTB user);
 	
 	
 	

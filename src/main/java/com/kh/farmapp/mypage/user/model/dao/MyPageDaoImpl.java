@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 import common.dto.AnsweredOneonone;
@@ -26,15 +25,14 @@ public class MyPageDaoImpl implements MyPageDao{
 	
 	
 	@Override
-	public Map<String, Object> selectUser(UserTB user) {
+	public UserTB selectUser(UserTB user) {
 		return sqlSession.selectOne("Mypage.selectUser", user);
 	}
 
 	
 	@Override
 	public int modifyUser(UserTB user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("Mypage.updateUser", user);
 	}
 
 	@Override
@@ -47,9 +45,8 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
-	public int leave(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int leave(UserTB user) {
+		return sqlSession.update("Mypage.deleteUser", user);
 	}
 
 	@Override
@@ -60,12 +57,7 @@ public class MyPageDaoImpl implements MyPageDao{
 	@Override
 	public QuestionOneonone o3Detail(int qNo) {
 		
-		// 클래스 다이어그램 용 DTO 객체 선언
-		QuestionOneonone q = new QuestionOneonone();
-		AnsweredOneonone a = new AnsweredOneonone();
-		UserTB u = new UserTB();
-		
-		return null;
+		return sqlSession.selectOne("Mypage.selectO3one", qNo);
 	}
 
 	@Override

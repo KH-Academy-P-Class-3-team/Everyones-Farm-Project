@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
@@ -25,12 +26,14 @@ public class MypageServiceImpl implements MyPageService{
 	private MyPageDao mypageDao;
 	
 	@Override
-	public Map<String, Object> modifyUser(UserTB user) {
+	public int modifyUser(Map<String, Object> map) {
 		
-		Map<String, Object> userInfo = mypageDao.selectUser(user);
+		UserTB user = new UserTB();
+		
+		int res = mypageDao.modifyUser(user);
 		
 		
-		return userInfo;
+		return res;
 	}
 
 
@@ -50,9 +53,8 @@ public class MypageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	public int leave(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int leave(UserTB user) {
+		return mypageDao.leave(user);
 	}
 
 	@Override
@@ -62,8 +64,7 @@ public class MypageServiceImpl implements MyPageService{
 
 	@Override
 	public QuestionOneonone o3Detail(int qNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return mypageDao.o3Detail(qNo);
 	}
 
 	@Override
@@ -124,6 +125,16 @@ public class MypageServiceImpl implements MyPageService{
 	public UserAddress getAddress(UserTB user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public UserTB selectUser(UserTB user) {
+		
+		UserTB utb = mypageDao.selectUser(user);
+		
+		return utb;
 	}
 
 

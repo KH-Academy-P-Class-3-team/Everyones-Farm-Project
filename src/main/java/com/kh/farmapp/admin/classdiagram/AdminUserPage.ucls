@@ -60,8 +60,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="common.dto.User" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/User.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="common.dto.UserTb" project="EveryonesFarm" 
+    file="/EveryonesFarm/src/main/java/common/dto/UserTb.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1512" y="241"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -83,8 +83,8 @@
     <end type="TARGET" refId="7"/>  
   </dependency>  
   <realization id="10">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
   </realization>  
   <association id="11">    
     <end type="SOURCE" refId="4" navigable="false">      
@@ -98,25 +98,25 @@
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="14">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <association id="15">    
+  <association id="14">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="16" name="adminUserDao">        
+      <attribute id="15" name="adminUserDao">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
+      <multiplicity id="16" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
   <realization id="18">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
   </realization>  
   <dependency id="19">    
     <end type="SOURCE" refId="2"/>    

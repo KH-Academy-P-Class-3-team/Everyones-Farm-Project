@@ -20,7 +20,7 @@ public interface MyPageDao {
 		public int modifyprofile(UserTB user);
 		
 		//회원 탈퇴
-		public int leave(String userId);
+		public int leave(UserTB user);
 		
 		//일대일 문의 전체 리스트 반환 
 		//리스트 안에서 페이징 호출
@@ -68,5 +68,5 @@ public interface MyPageDao {
 		 * @param user
 		 * @return
 		 */
-		public Map<String, Object> selectUser(UserTB user);
+		public UserTB selectUser(UserTB user);
 }

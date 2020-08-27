@@ -1,7 +1,5 @@
 package com.kh.farmapp.mypage.user.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class MypageAppliController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		Map<String, Object> info = mypageService.modifyUser(user);
+		UserTB info =  mypageService.selectUser(user);
 		
 		return mav;
 	}
