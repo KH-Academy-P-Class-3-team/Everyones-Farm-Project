@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<%@include file="../common/header.jsp" %>
+<%-- <%@include file="../common/header.jsp" %> --%>
 <%-- <jsp:include page="../common/header.jsp" /> --%>
 <%-- <jsp:include page="<%=request.getContextPath()%>/WEB-INF/views/common/header.jsp" /> --%>
 <%-- <%@include file="../views/common/header.jsp" %> --%>

@@ -28,18 +28,18 @@ public class SellController {
 	//판매 페이지
 	@RequestMapping("/sellfood/food")
 	public ModelAndView sellpage() {
-	ModelAndView mav = new ModelAndView();
-	mav.setViewName("/sellfood/food");
-	return mav;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/sellfood/food");
+		return mav;
 	}
 	
 	//판매 상세 페이지
 	@RequestMapping("sellfood/detail")
 	public ModelAndView sellpagelist() {
-	ModelAndView mav = new ModelAndView();
-	sellService.sellList(null);
-	mav.setViewName("sellfood/list");
-	return mav;
+		ModelAndView mav = new ModelAndView();
+		sellService.sellList(null);
+		mav.setViewName("sellfood/list");
+		return mav;
 	}
 	
 //	//장바구니
