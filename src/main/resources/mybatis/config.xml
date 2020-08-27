@@ -8,12 +8,13 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	
-	<!-- typeAliases 추가 -->
+	<!-- FarmActivity 관련 typeAliases -->
 	<typeAliases>
 		<typeAlias type="common.dto.Farm" alias="FARM"/>
 		<typeAlias type="common.dto.FarmActivity" alias="ACTIVITY"/>
 		<typeAlias type="common.dto.FarmActivityFile" alias="ACTIVITY_FILE"/>
 		<typeAlias type="common.dto.FarmActivitySchedule" alias="ACTIVITY_SCHEDULE"/>
+		<typeAlias type="common.dto.Farmer" alias="FARMER"/>
 	</typeAliases>
 	
 	<mappers>

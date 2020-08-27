@@ -44,20 +44,19 @@ public interface ActivityDao {
 	public List<Map<String, String>> selectFileWithActivity(int activityNo);
 	
 	
-	/**활동명으로 활동 검색
+	/**체험 활동 검색
 	 * 
-	 * @param map - 활동 구분, 검색어(활동명)를 담은 매개변수
+	 * @param map - 페이징 변수, 검색어(활동명)를 담은 매개변수
 	 * @return FarmActivity - 검색 결과(활동) 정보 반환
 	 */
-	public List<FarmActivity> selectActivitySearch(Map<String, String> map);
+	public List<FarmActivity> selectActivityByTitle(Map<String, Object> map);
 	
 	
-	/**활동명으로 활동 파일 검색
+	/**체험 활동 검색 결과 수 조회
 	 * 
-	 * @param map - 체험 구분, 검색어(활동명)를 담은 매개변수 map
-	 * @return List<Map<String, String>> - 검색 결과(활동 파일) 정보 반환
+	 * @return int - 검색 결과 개수
 	 */
-	public List<Map<String, String>> selectFileWithActivityTitle(Map<String, String> map);
+	public int selectActivityByTitleCnt(Map<String, Object> map);
 	
 	
 	/**입력한 신청서 저장
@@ -74,7 +73,6 @@ public interface ActivityDao {
 	 * @return int - 등록 결과
 	 */
 	public int insertActivity(FarmActivity farmActivity);
-
 	
 	/**농부 번호로 농장 정보 조회
 	 * 
@@ -110,7 +108,7 @@ public interface ActivityDao {
 	 * 
 	 * @return int - count 결과 값
 	 */
-	public int selectActivityCnt();
+	public int selectActivityCnt(int isHelp);
 
 
 	/**농장 전체 목록 조회
@@ -118,7 +116,24 @@ public interface ActivityDao {
 	 * @return List<Farm> - 조회된 농장 목록
 	 */
 	public List<Farm> selectFarmList();
-	
+
+
+	/**농장명으로 활동 검색
+	 * 
+	 * @param map - 페이징 객체, 검색어(농장명)를 담은 Map
+	 * @return List<FarmActivity> - 검색 결과 리스트
+	 */
+	public List<FarmActivity> selectActivityByFarmName(Map<String, Object> map);
+
+
+	/**농장명으로 검색한 활동 목록 수
+	 * 
+	 * @param map - 검색어
+	 * @return int - 검색 결과 개수
+	 */
+	public int selectActivityByFarmNameCnt(Map<String, Object> map);
+
+
 	
 	
 }
