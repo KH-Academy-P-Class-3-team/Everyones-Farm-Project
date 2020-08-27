@@ -173,6 +173,7 @@ li {
 								</tr>
 
 							</c:forEach>
+
 						</table>
 					<div id="psize">
 						<ul>

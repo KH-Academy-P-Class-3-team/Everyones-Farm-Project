@@ -6,7 +6,7 @@ import java.util.Date;
  * 1대1문의 - 질문 DTO
  */
 public class QuestionOneonone {
-
+	
 	// member field
 	private int questionNo;
 	private String title;

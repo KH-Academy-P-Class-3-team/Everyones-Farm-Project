@@ -6,17 +6,37 @@ package common.dto;
 public class UserTB {
 
 	// member field
+	// 일반 회원 번호
 	private int userNo;
+	// 일반 회원 아이디
 	private String userId;
+	// 일반 회원 비밀번호
 	private String userPw;
+	// 일반 회원 이름
 	private String userName;
+	// 일반 회원 이메일
 	private String email;
+	// 일반 회원 전화번호
 	private String phone;
+	// 일반 회원 탈퇴 여부
 	private int isLeave;
+	// 일반 회원 활동 정지 여부
 	private int isPause;
-	private String zonecode;
+	// 우편번호
+	private String zoneCode;
+	// 도로명 주소
 	private String firstAddress;
+	// 상세 주소
 	private String secondAddress;
+	
+	// toString()
+	@Override
+	public String toString() {
+		return "UserTB [userNo=" + userNo + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
+				+ ", email=" + email + ", phone=" + phone + ", isLeave=" + isLeave + ", isPause=" + isPause
+				+ ", zoneCode=" + zoneCode + ", firstAddress=" + firstAddress + ", secondAddress=" + secondAddress
+				+ "]";
+	}
 	
 	// getter(), setter()
 	public int getUserNo() {
@@ -67,11 +87,11 @@ public class UserTB {
 	public void setIsPause(int isPause) {
 		this.isPause = isPause;
 	}
-	public String getZonecode() {
-		return zonecode;
+	public String getZoneCode() {
+		return zoneCode;
 	}
-	public void setZonecode(String zonecode) {
-		this.zonecode = zonecode;
+	public void setZoneCode(String zoneCode) {
+		this.zoneCode = zoneCode;
 	}
 	public String getFirstAddress() {
 		return firstAddress;
@@ -86,12 +106,6 @@ public class UserTB {
 		this.secondAddress = secondAddress;
 	}
 
-	// toString()
-	@Override
-	public String toString() {
-		return "UserTB [userNo=" + userNo + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
-				+ ", email=" + email + ", phone=" + phone + ", isLeave=" + isLeave + ", isPause=" + isPause
-				+ ", zonecode=" + zonecode + ", firstAddress=" + firstAddress + ", secondAddress=" + secondAddress
-				+ "]";
-	}
+	
+
 }

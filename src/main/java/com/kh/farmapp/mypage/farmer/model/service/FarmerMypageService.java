@@ -77,7 +77,6 @@ public interface FarmerMypageService {
     */
    public int updatePayment(TBOrder order);
    
-   
 	
    
 	//게시물 조회

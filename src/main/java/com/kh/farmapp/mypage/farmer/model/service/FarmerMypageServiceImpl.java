@@ -19,7 +19,7 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 
 	@Autowired
 	private FarmerMypageDao farmerMypageDao;
-
+  
 	//영농일지 목록조회
 	@Override
 	public List<FarmingDailylog> dailyLoglist(Criteria cri) {

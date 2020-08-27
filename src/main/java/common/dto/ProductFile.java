@@ -1,14 +1,21 @@
 package common.dto;
 
 public class ProductFile {
-
+	
 	// member field
 	private int fileNo;
 	private int productNo;
 	private String originName;
 	private String fileRename;
-	private String path;
+	private String savePath;
 	private int isThumbnail;
+	
+	// toString()
+	@Override
+	public String toString() {
+		return "ProductFile [fileNo=" + fileNo + ", productNo=" + productNo + ", originName=" + originName
+				+ ", fileRename=" + fileRename + ", savePath=" + savePath + ", isThumbnail=" + isThumbnail + "]";
+	}
 
 	// getter(), setter()
 	public int getFileNo() {
@@ -43,12 +50,12 @@ public class ProductFile {
 		this.fileRename = fileRename;
 	}
 
-	public String getPath() {
-		return path;
+	public String getSavePath() {
+		return savePath;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 
 	public int getIsThumbnail() {
@@ -58,11 +65,5 @@ public class ProductFile {
 	public void setIsThumbnail(int isThumbnail) {
 		this.isThumbnail = isThumbnail;
 	}
-
-	// toString()
-	@Override
-	public String toString() {
-		return "ProductFile [fileNo=" + fileNo + ", productNo=" + productNo + ", originName=" + originName
-				+ ", fileRename=" + fileRename + ", path=" + path + ", isThumbnail=" + isThumbnail + "]";
-	}
+	
 }

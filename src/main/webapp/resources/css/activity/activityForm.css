@@ -1,0 +1,208 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: none;
+}
+
+.form-content {
+	width: 980px;
+	margin: 10px auto 50px;
+}
+
+.form-top {
+	margin: 50px 20px 80px;
+}
+
+p {
+	font-size: 1.2em;
+}
+
+.activity-form {
+	margin: 0px auto;
+    width: 540px;
+    padding: 60px 100px;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
+}
+
+.form-group {
+	margin-bottom: 45px;
+}
+
+.control-label {
+	margin-bottom: 20px;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.radio {
+	margin-right: 30px;
+}
+
+input[type=radio] {
+	margin: 0 10px;
+}
+
+input[type=text]{
+	border: none;
+	border-bottom: 2px solid #ccc;
+	width: 100%;
+	height: 30px;
+	font-size: 1.1em;
+}
+
+input[type=number] {
+	border: none;
+	border-bottom: 2px solid #ccc;
+	width: 92%;
+	height: 30px;
+	font-size: 1.1em;
+}
+
+input[type=text]:focus, input[type=number]:focus {
+	outline: none;
+	border-bottom: 2px solid #A4DE02;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+       -webkit-appearance: none;
+       cursor:pointer;
+       display:block;
+       width:8px;
+       color: #333;
+       text-align:center;
+       position:relative;
+}    
+
+input[type=number]:hover::-webkit-inner-spin-button { 
+       background: #eee url('http://i.stack.imgur.com/YYySO.png') no-repeat 50% 50%;  
+       width: 14px;
+       height: 14px;
+       padding: 4px;
+       position: relative;
+       right: 4px;
+       border-radius: 28px;
+}
+
+textarea {
+	width: 100%;
+	height: 100px;
+	border: 2px solid #ccc;
+	font-size: 1.1em;
+}
+
+textarea::placeholder {
+	color: #d2d2d2;
+}
+
+textarea:focus {
+	outline: none;
+	border: 2px solid #A4DE02;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+table, td, th {
+	border: 1px solid #9e9e9e;
+}
+
+th {
+	background-color: #e4e4e4;
+	color: #535353;
+	height: 30px;
+}
+
+.th1 {
+	width: 30%;
+}
+
+.th2 {
+	width: 45%;
+}
+
+.th3 {
+	width: 25%
+}
+
+.btnAdd {
+	position: relative;
+	left: 45%;
+}
+
+#add:hover {
+	cursor: pointer;
+}
+
+.btnSubmit {
+	position: relative;
+	left: 37%;
+	border: none;
+	background-color: #68bb59;
+	color: #ffffff;
+	font-weight: bold;
+	width: 130px;
+	height: 40px;
+	border-radius: 25px;
+	outline: none;
+	margin: 30px 0;
+}
+
+.btnSubmit:hover {
+	background-color: #9dd971;
+	cursor: pointer;
+}
+
+input::placeholder {
+	color: #d2d2d2;
+	font-size: 0.9em;
+}
+
+.files {
+	display: inline-block;
+	color: #ffffff;
+    font-size: 15px;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fec576;
+    cursor: pointer;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    margin: 3px 0;
+    height: 25px;
+    padding: 8px 10px 5px 10px;
+}
+
+input[type=file] {
+	position: absolute; 
+	margin: 8px 0 0 5px; 
+	z-index: -10; 
+	border: none; 
+	outline: none;
+    font-size: 15px;
+    cursor: pointer;
+	opacity: 0;
+}
+
+.file-name {
+	margin: 8px 0 0 8px;
+}
+
+.price-label {
+	display: inline-block;
+}
+
+.price-span {
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #789F6F;
+	margin-left: 10px;
+}
+
+/* .img-span { */
+/* 	color: #ccc; */
+/* 	font-size: 0.8em; */
+/* 	margin-left: 15px; */
+/* } */

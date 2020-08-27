@@ -6,7 +6,6 @@
 <title>게시판</title>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <script>
 	$(function() {
 		$('#searchBtn').click(
@@ -53,24 +52,23 @@ li {
 	text-align: center;
 }
 </style>
-
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row" style="width: 1200px">
 			<div class="col-lg-3">
 				<h3 class="my-4 text-center">농업인 마이페이지</h3>
 				<div class="list-group mb-4">
+
 					<a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">내 정보</a> 
 					<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold">판매 목록</a> 
 					<a href="/farmapp/mypage/dailyLoglist" class="list-group-item list-group-item-action text-center font-weight-bold"style= "background-color:#D1E9CA;">영농 일지</a> 
 					<a href="/farmapp/mypage/activitylist" class="list-group-item list-group-item-action text-center font-weight-bold">활동 내역</a>
+
 				</div>
 			</div>
 
@@ -79,6 +77,7 @@ li {
 				<div id="mypagesize">
 					아이디<input type="text" />
 				</div>
+
 				<a href="/farmapp/mypage/dailyLoglist" class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지 목록</a>
 					
 					<div id ="border">
@@ -91,6 +90,7 @@ li {
 									<th scope="col" class="text-center">작업량</th>
 									<th scope="col" class="text-center">작업 시간</th>
 									<th scope="col" class="text-center">작업 인원</th>
+
 									<th scope="col" class="text-center"></th>
 								</tr>
 							</thead>
@@ -130,6 +130,7 @@ li {
 							</c:if>
 						</ul>
 					</div>
+
 				<hr>
 			</form>
 				</div>

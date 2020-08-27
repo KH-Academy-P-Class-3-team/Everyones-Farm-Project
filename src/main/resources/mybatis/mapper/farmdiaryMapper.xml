@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Diary">
+  
+  <insert id="insertFarmDiary">
+  	insert into farm_diary
+		(farm_diary_no, title, hit, enroll_date, youtube_link, content, farmer_no)
+		values
+		(farm_diary_seq.nextval, #{title}, 0, sysdate, #{youtubeLink}, #{content}, 1)
+  </insert>
+  
+  
+  
+  <select id="selectFarmDiaryList" resultType="common.dto.FarmDiary">
+  	select
+		 farm_diary_no, title, enroll_date, 
+		 youtube_link, content, farmer_no 
+		from(
+			select rownum rnum, n1.* 
+			from(
+				select * 
+				from farm_diary
+				order by farm_diary_no desc
+			)n1
+		)where rnum between #{start} and #{end}     
+  	
+  </select>
+  
+  <select id="selectContentCnt" resultType="int">
+		select count(*) from farm_diary
+  </select>
+  
+  <select id="selectFarmDiaryDetail" resultType="common.dto.FarmDiary">
+  		select farm_diary_no, title, hit, enroll_date, youtube_link, content, farmer_no
+  		from farm_diary
+  		where farm_diary_no = #{farmDiaryNo}
+  </select>
+	
+	
+  
+</mapper>

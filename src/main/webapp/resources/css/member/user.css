@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+
+button{
+	
+	padding: 10px 40px;
+	background-color: #D1E9CA;
+	border-color: #D1E9CA;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+button:hover {
+	background-color: #789F6F;
+}
+
+
+.farmer{
+	margin: 300px auto 200px auto;
+	width: 440px;
+	height: 240px;
+	border: 10px solid #EAE891;
+	padding: 30px;
+	
+}
+
+input{
+	height: 30px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    width: 200px;
+}
+
+.login{
+	width: 150px;
+}
+
+.find{
+	float: right;
+}
+
+img{
+	height: 40px;
+}
+
+.member{
+	font-size: 1.3em;
+	font-weight: bold;
+}

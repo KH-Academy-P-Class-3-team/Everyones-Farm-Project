@@ -2,24 +2,32 @@ package common.dto;
 
 import java.util.Date;
 
-public class FarmDiary {
 
+public class FarmDiary {
+	
 	// member field
-	private int dailyNo;
+	private int farmDiaryNo;
 	private String title;
-	private int hit;
+	private int hits;
 	private Date enrollDate;
 	private String youtubeLink;
 	private String content;
-	private int farmNo;
-
-	// getter(), setter()
-	public int getDailyNo() {
-		return dailyNo;
+	private int farmerNo;
+	
+	// toString()
+	@Override
+	public String toString() {
+		return "FarmDiary [farmDiaryNo=" + farmDiaryNo + ", title=" + title + ", hits=" + hits + ", enrollDate="
+				+ enrollDate + ", youtubeLink=" + youtubeLink + ", content=" + content + ", farmerNo=" + farmerNo + "]";
 	}
 
-	public void setDailyNo(int dailyNo) {
-		this.dailyNo = dailyNo;
+	// getter(), setter()
+	public int getFarmDiaryNo() {
+		return farmDiaryNo;
+	}
+
+	public void setFarmDiaryNo(int farmDiaryNo) {
+		this.farmDiaryNo = farmDiaryNo;
 	}
 
 	public String getTitle() {
@@ -30,12 +38,12 @@ public class FarmDiary {
 		this.title = title;
 	}
 
-	public int getHit() {
-		return hit;
+	public int getHits() {
+		return hits;
 	}
 
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setHits(int hits) {
+		this.hits = hits;
 	}
 
 	public Date getEnrollDate() {
@@ -62,19 +70,12 @@ public class FarmDiary {
 		this.content = content;
 	}
 
-	public int getFarmNo() {
-		return farmNo;
+	public int getFarmerNo() {
+		return farmerNo;
 	}
 
-	public void setFarmNo(int farmNo) {
-		this.farmNo = farmNo;
-	}
-
-	// toString()
-	@Override
-	public String toString() {
-		return "FarmDiary [dailyNo=" + dailyNo + ", title=" + title + ", hit=" + hit + ", enrollDate=" + enrollDate
-				+ ", youtubeLink=" + youtubeLink + ", content=" + content + ", farmNo=" + farmNo + "]";
+	public void setFarmerNo(int farmerNo) {
+		this.farmerNo = farmerNo;
 	}
 
 }

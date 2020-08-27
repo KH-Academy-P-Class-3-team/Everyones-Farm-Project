@@ -3,7 +3,7 @@ package com.kh.farmapp.farmpersonalpage.farmdiary.model.service;
 
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
+import common.dto.FarmDiary;
 
 public interface FarmDiaryService  {
 	
@@ -14,10 +14,10 @@ public interface FarmDiaryService  {
 													int cntPerPage);
 
 	//게시물 상세 조회
-	public Map<String, Object> selectFarmDiaryDetail();
+	public FarmDiary selectFarmDiaryDetail(int dailyNo);
 	
 	//글쓰기
-	public int writeFarmDiary();
+	public void writeFarmDiary(Map<String, Object> commandMap);
 	
 	//삭제
 	public int deleteFarmDiary();

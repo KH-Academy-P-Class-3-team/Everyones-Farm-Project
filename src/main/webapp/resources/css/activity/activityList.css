@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: none;
+}
+
+.activity-content {
+	width: 980px;
+	margin: 10px auto 50px;
+}
+
+.activity-top {
+	background-color: #f0f0f0;
+	height: 250px;
+}
+
+.top-title {
+	font-size: 1.6em;
+	display: inline-block;
+	position: relative;
+	top: 100px;
+	left: 50px;
+}
+
+.title-img {
+	display: inline-block;
+	position: relative;
+	float: right;
+	bottom: -15px;
+	right: 80px;
+}
+
+.experience-title, .help-title {
+	margin-top: 70px;
+}
+
+.row {
+	padding: 7px;
+	width: 270px;
+	height: 360px;
+	display: inline-block;
+	margin: 40px 19px 40px;
+}
+
+.row:hover {
+	cursor: pointer;
+	box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
+}
+
+.activity-list {
+	margin-top: 50px;
+}
+
+.caption-title {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 12px 0 5px;
+}
+
+.caption-content {
+	color: #68bb59;
+}
+
+.load {
+	display: inline-block;
+	width: 980px;
+	text-align: center;
+	height: 43px;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	padding-top: 17px;
+	cursor: pointer;
+	margin-bottom: 30px;
+}
+
+.btnForm {
+    border: none;
+/*     background-color: #68BB59; */
+    background-color: #fec576;
+    width: 95px;
+    height: 40px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+	font-size: 14px;
+    cursor: pointer;
+    float: right;
+    margin: 30px 40px 70px 0;
+}
+
+.btnForm:hover {
+	background-color: #ffd399;
+}
+
+.btnForm: {
+	border: none;
+}
+
+
+

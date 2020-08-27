@@ -44,7 +44,7 @@ public interface FarmerMypageDao {
 	 */
 	public int listCount2();
 	
-	
+
 	/**
 	 * 승인 신청에 대한 판단 1 or 0 일때 처리
 	 * @param application 승인신청에대한 dto
@@ -83,7 +83,5 @@ public interface FarmerMypageDao {
 	 * @return 
 	 */
 	public int updatePayment(TBOrder order);
-
-	
 	
 }

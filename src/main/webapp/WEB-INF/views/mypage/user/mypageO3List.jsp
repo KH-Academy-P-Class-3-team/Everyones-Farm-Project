@@ -26,7 +26,7 @@
     font-size : 17px;
 }
 </style>
-
+  
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <body class="pt-5">
 	<!-- Page Content -->
@@ -79,7 +79,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script type="text/javascript">
 		function selectUrl(url){
 			var root = '<%=request.getContextPath()%>';
