@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Application {
 
+	// member field
 	private int applicationNo;
 	private int activityNo;
 	private int userNo;
@@ -15,6 +16,7 @@ public class Application {
 	private int isGroup;
 	private int isApproval;
 
+	// getter(), setter()
 	public int getApplicationNo() {
 		return applicationNo;
 	}
@@ -95,6 +97,7 @@ public class Application {
 		this.isApproval = isApproval;
 	}
 
+	// toString()
 	@Override
 	public String toString() {
 		return "Application [applicationNo=" + applicationNo + ", activityNo=" + activityNo + ", userNo=" + userNo

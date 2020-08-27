@@ -28,6 +28,8 @@ public class UserTB {
 	private String firstAddress;
 	// 상세 주소
 	private String secondAddress;
+	
+	// toString()
 	@Override
 	public String toString() {
 		return "UserTB [userNo=" + userNo + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
@@ -35,6 +37,8 @@ public class UserTB {
 				+ ", zoneCode=" + zoneCode + ", firstAddress=" + firstAddress + ", secondAddress=" + secondAddress
 				+ "]";
 	}
+	
+	// getter(), setter()
 	public int getUserNo() {
 		return userNo;
 	}

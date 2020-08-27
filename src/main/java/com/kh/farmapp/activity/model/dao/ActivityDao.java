@@ -73,7 +73,6 @@ public interface ActivityDao {
 	 * @return int - 등록 결과
 	 */
 	public int insertActivity(FarmActivity farmActivity);
-
 	
 	/**농부 번호로 농장 정보 조회
 	 * 

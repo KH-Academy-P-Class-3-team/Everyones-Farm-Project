@@ -48,6 +48,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<FarmActivity> selectActivityByTitle(Map<String, Object> map) {
 		return sqlSession.selectList("ACTIVITY.selectActivityByTitle", map);
+
 	}
 	
 	@Override
@@ -104,9 +105,6 @@ public class ActivityDaoImpl implements ActivityDao {
 	public int selectActivityByFarmNameCnt(Map<String, Object> map) {
 		return sqlSession.selectOne("ACTIVITY.selectActivityByFarmNameCnt", map);
 	}
-
-
-
 	
 	
 }

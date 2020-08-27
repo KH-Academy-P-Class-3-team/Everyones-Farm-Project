@@ -54,7 +54,7 @@
 	</div>
 	<nav class="header__menu">
 		<ul id="menu__main">
-			<li><a href="#">소개</a></li>
+			<li><a href="<%=request.getContextPath() %>/info">소개</a></li>
 			<li><a href="#">먹거리</a>
 				<ul class="menu__sub-food">
 					<li><a href="#">제철 먹거리</a></li>

@@ -4,7 +4,7 @@ package common.dto;
  * 관리자 정보 DTO
  */
 public class Admin {
-
+	
 	// member field
 	// 관리자 번호
 	private int adminNo;

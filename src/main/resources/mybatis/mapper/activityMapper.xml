@@ -34,7 +34,11 @@
 		where is_thumbnail = 1
 	</select>
 	
-	
+	<select id="selectActivityFileThumbnail" resultType="ACTIVITY_FILE">
+		select * from farm_activity_file
+		where is_thumbnail = 1
+	</select>
+
 	<!-- 체험 활동 상세 조회 -->
 	<select id="selectActivityByActivityNo" resultType="ACTIVITY">
 		select * from farm_activity
@@ -62,6 +66,12 @@
 				order by activity_no desc
 			)a1
 		) where rnum between #{start} and #{end}
+	</select>
+
+
+	<select id="selectFarmByFarmerNo" parameterType="common.dto.Farmer" resultType="FARM">
+		select * from farm
+		where farmer_no = #{farmerNo}
 	</select>
 	
 	<select id="selectActivityCnt" parameterType="int" resultType="int">
@@ -129,6 +139,5 @@
         where a.farm_no = f.farm_no
         	and is_help = #{isHelp}
 	</select>
-	
 
 </mapper>
