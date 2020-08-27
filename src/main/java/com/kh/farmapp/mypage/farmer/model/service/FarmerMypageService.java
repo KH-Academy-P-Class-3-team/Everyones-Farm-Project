@@ -10,7 +10,12 @@ import common.dto.Application;
 import common.dto.FarmActivity;
 import common.dto.FarmDiary;
 import common.dto.FarmingDailylog;
+import common.dto.Order;
+import common.dto.TBOrder;
+import common.dto.User;
 import common.dto.page.Criteria;
+import common.dto.test.BoardVo;
+import common.dto.test.SearchCriteria;
 
 public interface FarmerMypageService {
 
@@ -31,7 +36,7 @@ public interface FarmerMypageService {
 
 	/**
 	 * 영농일지 총 갯수
-	 * @param scri 페이지 수 
+	 * @param cri 페이지 수 
 	 * @return istCount(SearchCriteria scri) - 총 갯수
 	 */
 	public int listCount();
@@ -45,17 +50,34 @@ public interface FarmerMypageService {
 	
 	/**
 	 * 활동내역 총 갯수
-	 * @param scri 페이지 수 
+	 * @param cri 페이지 수 
 	 * @return istCount(SearchCriteria scri) - 총 갯수
 	 */
 	public int listCount2();
 	
 	/**
     * service
-    * @param application
-    * @return
+    * @param application 승인 신청 0 or 1 업데이트
+    * @return dto 반환
     */
    public int updateIsApproval(Application application);
+   
+   
+   /**
+    * 판매 내역 리스트 user테이블과 order테이블 엮기
+    * @param  cri 페이지 수
+    * @return 
+    */
+   public List<Map<String, Object>> selllist(Criteria cri);
+   
+   /**
+    * 결제 처리 
+    * @param order 결제 처리 0 or 1 업데이트
+    * @return
+    */
+   public int updatePayment(TBOrder order);
+   
+   
 	
    
 	//게시물 조회
