@@ -28,7 +28,7 @@
 		<mapper resource="/mybatis/mapper/activityMapper.xml" />
 		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml" />
 		<!-- ActivityController에서 사용하는 mapper -->
-		<mapper resource="/mybatis/mapper/activityMapper.xml" />
+<!-- 		<mapper resource="/mybatis/mapper/activityMapper.xml" /> -->
     <!-- <mapper resource="/mybatis/mapper/mypageUser.xml" /> -->
 	</mappers>
 </configuration>

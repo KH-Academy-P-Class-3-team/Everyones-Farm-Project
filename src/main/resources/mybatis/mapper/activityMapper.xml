@@ -33,11 +33,6 @@
 		select * from farm_activity_file
 		where is_thumbnail = 1
 	</select>
-	
-	<select id="selectActivityFileThumbnail" resultType="ACTIVITY_FILE">
-		select * from farm_activity_file
-		where is_thumbnail = 1
-	</select>
 
 	<!-- 체험 활동 상세 조회 -->
 	<select id="selectActivityByActivityNo" resultType="ACTIVITY">
@@ -68,12 +63,6 @@
 		) where rnum between #{start} and #{end}
 	</select>
 
-
-	<select id="selectFarmByFarmerNo" parameterType="common.dto.Farmer" resultType="FARM">
-		select * from farm
-		where farmer_no = #{farmerNo}
-	</select>
-	
 	<select id="selectActivityCnt" parameterType="int" resultType="int">
 		select count(*) from farm_activity
 		where is_help = #{isHelp}
@@ -96,8 +85,6 @@
 	<select id="selectFarmList" resultType="FARM">
 		select * from farm
 	</select>
-	
-	
 	
 	<select id="selectActivityByTitle" parameterType="hashMap" resultType="ACTIVITY">
 		select activity_no, farm_no, title, avail_number, price from (

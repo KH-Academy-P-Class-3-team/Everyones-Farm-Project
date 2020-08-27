@@ -25,7 +25,7 @@
 		<c:forEach items="${farm }" var="farm">
 			<c:if test="${farm.farmNo eq activity.farmNo}">
 				<div class="caption-content">농장명 : ${farm.farmName }</div>
-				<div class="caption-content">주소 : ${farm.zoneCode } ${farm.firstAddress } ${farm.secondAddress }</div>
+				<div class="caption-content">주소 : ${farm.zonecode } ${farm.firstAddress } ${farm.secondAddress }</div>
 			</c:if>
 		</c:forEach>
 
