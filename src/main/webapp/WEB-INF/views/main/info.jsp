@@ -147,7 +147,7 @@
 	<!-- 모두의 농장 주요 게시판 -->
 	<div class="info__main-board">
 		<!-- 제목 -->
-		<p class="main-board__title">모두의 농장의 주요 서비스</p>
+		<p class="main-board__title">모두의 농장 주요 서비스</p>
 		<!-- 설명 -->
 		<div class="main-board__desc">
 			<table class="desc__boxes">
