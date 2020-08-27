@@ -22,6 +22,11 @@
 * {
 	box-sizing: border-box;
 }
+
+::selection {
+   background: #68bb59;
+   color: #fff;
+}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
