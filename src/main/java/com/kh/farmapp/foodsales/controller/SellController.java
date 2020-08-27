@@ -7,36 +7,48 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.foodsales.model.service.SellService;
 
-import common.dto.Basket;
-import common.dto.Product;
-import common.dto.ProductOption;
-
 @Controller
 public class SellController {
 
 	@Autowired
 	private SellService sellService;
 	
-	//판매 목록 조회
-//	@RequestMapping("")
-//	public ModelAndView sellList(Product product, ProductOption productOption) {
-//	ModelAndView mav = new ModelAndView();
-//	return mav;
-//			
-//	}
+	@RequestMapping(value = "/sellfood/list")
+	public String testList() {
+		return "sellfood/list";
+	}
 	
-	//판매 상세페이지 이동
+//	//판매 목록 조회
 //	@RequestMapping("")
-//	public ModelAndView sellpage() {
+//	public ModelAndView sellList() {
 //	ModelAndView mav = new ModelAndView();
 //	return mav;
 //	}
 	
-	//장바구니
-//	@RequestMapping("")
-//	public ModelAndView sellBasket(Product product, Basket basket, ProductOption productOption) {
+	//판매 페이지
+	@RequestMapping("/sellfood/food")
+	public ModelAndView sellpage() {
+	ModelAndView mav = new ModelAndView();
+	mav.setViewName("/sellfood/food");
+	return mav;
+	}
+	
+	//판매 상세 페이지
+	@RequestMapping("sellfood/detail")
+	public ModelAndView sellpagelist() {
+	ModelAndView mav = new ModelAndView();
+	sellService.sellList(null);
+	mav.setViewName("sellfood/list");
+	return mav;
+	}
+	
+//	//장바구니
+//	@RequestMapping()
+//	public ModelAndView sellBasket() {
 //	ModelAndView mav = new ModelAndView();
 //	return mav;
 //	}
+	
+	
 	
 }
