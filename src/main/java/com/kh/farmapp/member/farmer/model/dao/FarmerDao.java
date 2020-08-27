@@ -2,6 +2,7 @@ package com.kh.farmapp.member.farmer.model.dao;
 
 import java.util.Map;
 
+import common.dto.Farm;
 import common.dto.Farmer;
 
 public interface FarmerDao {
@@ -12,6 +13,13 @@ public interface FarmerDao {
 	 * @return int
 	 */
 	public int insertFarmer(Farmer farmer);
+	
+	/**
+	 * 회원 가입
+	 * @param farm
+	 * @return int
+	 */
+	public int insertFarm(Farm farm);
 	
 	/**
 	 * 로그인(회원 선택)
@@ -33,4 +41,5 @@ public interface FarmerDao {
 	 * @return int
 	 */
 	public int updatePw(Farmer farmer);
+
 }

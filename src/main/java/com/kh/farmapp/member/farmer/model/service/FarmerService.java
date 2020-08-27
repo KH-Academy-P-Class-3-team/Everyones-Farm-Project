@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import common.dto.Farm;
 import common.dto.Farmer;
 
 public interface FarmerService {
@@ -14,6 +15,13 @@ public interface FarmerService {
 	 * @return int
 	 */
 	public int insertFarmer(Farmer farmer);
+	
+	/**
+	 * 회원 가입
+	 * @param farm
+	 * @return int
+	 */
+	public int insertFarm(Farm farm);
 	
 	/**
 	 * 회원 찾기
@@ -63,6 +71,8 @@ public interface FarmerService {
 	 * @return true/false - 성공실패
 	 */
 	public boolean updatePw(Farmer farmer);
+
+
 	
 	
 }

@@ -1,15 +1,21 @@
 package com.kh.farmapp.member.farmer.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.member.farmer.model.service.FarmerService;
+
+import common.dto.Farm;
+import common.dto.Farmer;
 
 @Controller
 @RequestMapping("/farmer")
@@ -46,9 +52,33 @@ public class FarmerController {
 	}
 	
 	//이용약관 창 띄우기
-	@RequestMapping(value="/usertos.do")
+	@RequestMapping(value="/farmertos.do")
 	public String tos() {
 		return "member/farmertos";
+	}
+	
+	//회원가입
+	@RequestMapping("/joinimpl.do")
+	public String joinImpl(
+			@ModelAttribute Farmer farmer
+			, @ModelAttribute Farm farm
+			, Model model
+			, HttpServletRequest req
+			) {
+		
+		String root = req.getContextPath();
+		int res = farmerService.insertFarmer(farmer);
+		int res2 = farmerService.insertFarm(farm);
+		if(res>0) {
+			model.addAttribute("alertMsg", "회원가입에 성공했습니다");
+			model.addAttribute("url", root+"/user/userlogin.do");
+		} else {
+			model.addAttribute("alertMsg", "회원가입에 실패했습니다");
+			model.addAttribute("url", root+"/user/userjoin.do");
+		}
+		
+		return "common/result";
+		
 	}
 	
 //	

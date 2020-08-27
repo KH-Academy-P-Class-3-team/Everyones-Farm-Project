@@ -28,22 +28,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	// 임시 로그아웃 method
-	@RequestMapping(value = "/logout")
-	public String logoutProc(
-				HttpServletRequest req
-				, HttpSession session
-			) {
-		
-		// session 영역에 일반 사용자의 로그인 정보가 있을 때
-		if(session.getAttribute("userInfo") != null) {
-			// session 영역에 'userInfo' 정보를 삭제함으로써 로그아웃 함!
-			session.removeAttribute("userInfo");
-		}
-		
-		return "redirect:/";
-	}
-	
 	//로그인 메인 창 띄우기
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String login() {
@@ -72,6 +56,12 @@ public class UserController {
 		return "member/findId";
 	}
 	
+	//비밀번호 찾기 창
+	@RequestMapping(value="/findpw.do")
+	public String findPw() {
+		return "member/findPw";
+	}
+	
 	//회원가입 창 띄우기
 	@RequestMapping(value="/userjoin.do")
 	public String join() {
@@ -95,7 +85,6 @@ public class UserController {
 		String root = req.getContextPath();
 		int res = userService.insertUser(user);
 		if(res>0) {
-			//addAttribute : ModelAndView의 addObject와 같다
 			model.addAttribute("alertMsg", "회원가입에 성공했습니다");
 			model.addAttribute("url", root+"/user/userlogin.do");
 		} else {
@@ -112,18 +101,15 @@ public class UserController {
 		@RequestParam Map<String,Object> commandMap
 		, HttpSession session
 		, Model model
-		, HttpServletRequest req
 			) {
 		
 		UserTB res = userService.selectUser(commandMap);
 		if(res!=null) {
 			session.setAttribute("userInfo", res);
-			model.addAttribute("alertMsg", "환영합니다");
-			// 메인화면으로 이동
-			model.addAttribute("url", req.getContextPath());
-//			model.addAttribute("url", "userlogin.do");
+			model.addAttribute("alertMsg", "로그인 성공");
+			model.addAttribute("url", "userlogin.do");
 		} else {
-			model.addAttribute("alertMsg", "로그인에 실패하였습니다");
+			model.addAttribute("alertMsg", "로그인 실패");
 			model.addAttribute("url", "userlogin.do");
 		}
 		
@@ -139,6 +125,32 @@ public class UserController {
 		
 		if(res>0) {
 			return userId;
+		} else {
+			return "";
+		}
+	}
+	
+	//이메일 중복 체크
+	@RequestMapping("emailcheck.do")
+	@ResponseBody
+	public String emailCheck(String email) {
+		int res = userService.selectEmailCheck(email);
+		
+		if(res>0) {
+			return email;
+		} else {
+			return "";
+		}
+	}
+	
+	//전화번호 중복 체크
+	@RequestMapping("phonecheck.do")
+	@ResponseBody
+	public String phoneCheck(String phone) {
+		int res = userService.selectPhoneCheck(phone);
+		
+		if(res>0) {
+			return phone;
 		} else {
 			return "";
 		}
@@ -162,14 +174,76 @@ public class UserController {
 		
 		return mav;
 	}
-//	
-//	//비밀번호 찾기 이메일 보내기
-//	@RequestMapping
-//	public ModelAndView findPwEmail() {
-//		ModelAndView mav = new ModelAndView();
-//		return mav;
-//	}
-//	
+	
+	//아이디 찾기
+	@RequestMapping("findinfo.do")
+	public String findinfo(
+			@RequestParam Map<String, Object> commandMap
+			, Model model
+			, HttpServletRequest req) {
+		UserTB res = userService.findId(commandMap);
+		if(res!=null) {
+			req.setAttribute("userInfo", res);
+			return "member/findIdResult";
+		} else {
+			return "member/findError";
+		}
+	}
+	
+	//비밀번호 찾기 이메일 보내기
+	@RequestMapping("pwchangemail.do")
+	public String findPwEmail(
+			UserTB user
+			, HttpServletRequest req
+			, @RequestParam Map<String, Object> commandMap) {
+		
+		UserTB res = userService.findPw(commandMap);
+		
+		String urlPath = req.getServerName() + ":" + req.getServerPort() + req.getContextPath();
+		
+		if(res!=null) {
+			userService.findPwMailSend(user, urlPath);
+			req.setAttribute("userInfo", res);
+			return "member/findPwResult";
+		} else {
+			return "member/findError";
+		}
+		
+	}
+	
+	//비밀번호 변경화면창
+	@RequestMapping("pwchangeform.do")
+	public String pwchangeform(
+			HttpServletRequest req
+			, @RequestParam Map<String, Object> commandMap
+			, UserTB user) {
+		UserTB res = userService.findPw(commandMap);
+		if(res!=null) {
+			req.setAttribute("userInfo", res);
+			return "member/changePw";
+		} else {
+			return "member/findError";
+		}
+	}
+	
+	//비밀번호 변경
+	@RequestMapping("pwchange.do")
+	public String pwchange(
+			UserTB user
+			, HttpServletRequest req
+			, @RequestParam Map<String, Object> commandMap) {
+		
+		UserTB res = userService.findPw(commandMap);
+		
+		int isupdate = userService.updatePw(user);
+		if(isupdate>0) {
+			return "member/login";
+		} else {
+			return "member/findmember";
+		}
+	}
+	
+	
 //	//로그아웃
 //	public void logout(HttpSession session, HttpServletResponse response) {
 //		

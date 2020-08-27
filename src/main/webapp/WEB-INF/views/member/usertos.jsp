@@ -12,10 +12,10 @@ $(document).ready(function(){
     
     $("#nextBtn").click(function(){    
         if($("#use").is(":checked") == false){
-            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+            alert("필수 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
             return;
         }else if($("#user").is(":checked") == false){
-            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다..");
+            alert("필수 약관에 동의 하셔야 다음 단계로 진행 가능합니다..");
             return;
         }else{
             $("#tos").submit();

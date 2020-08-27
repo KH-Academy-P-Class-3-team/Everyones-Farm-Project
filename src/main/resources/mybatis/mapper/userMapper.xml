@@ -19,4 +19,30 @@
 		select count(*) from user_tb
 		where user_id = #{userId}
 	</select>
+	
+	<select id="selectEmailCheck" resultType="int">
+		select count(*) from user_tb
+		where email = #{email}
+	</select>
+	
+	<select id="selectPhoneCheck" resultType="int">
+		select count(*) from user_tb
+		where phone = #{phone}
+	</select>
+	
+	<select id="selectId" resultType="common.dto.UserTB">
+		select user_id from user_tb
+		where user_name= #{userName} and phone = #{phone}
+	</select>
+	
+	<select id="selectPw" resultType="common.dto.UserTB">
+		select * from user_tb
+		where user_id= #{userId} and email = #{email}
+	</select>
+	
+	<update id="updatePw">
+		update user_tb
+		set user_pw = #{userPw} where user_id=#{userId}
+	</update>
+	
 </mapper>

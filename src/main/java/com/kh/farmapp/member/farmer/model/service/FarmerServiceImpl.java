@@ -9,20 +9,25 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.member.farmer.model.dao.FarmerDao;
 
+import common.dto.Farm;
 import common.dto.Farmer;
 
 @Service
 public class FarmerServiceImpl implements FarmerService{
 
 
-//	@Autowired
-//	private FarmerDao farmerDao;
-//	
+	@Autowired
+	private FarmerDao farmerDao;
+	
 	
 	@Override
 	public int insertFarmer(Farmer farmer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return farmerDao.insertFarmer(farmer);
+	}
+	
+	@Override
+	public int insertFarm(Farm farm) {
+		return farmerDao.insertFarm(farm);
 	}
 	
 	@Override

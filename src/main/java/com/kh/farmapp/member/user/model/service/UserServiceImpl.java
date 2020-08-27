@@ -85,38 +85,65 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserTB findId(UserTB user) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserTB findId(Map<String, Object> commandMap) {
+		return userDao.findUserId(commandMap); 
 	}
 	
 	@Override
-	public UserTB findPw(UserTB user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public UserTB findUserId(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserTB findPw(Map<String, Object> commandMap) {
+		return userDao.findUserPw(commandMap);
 	}
 	
 	@Override
 	public void findPwMailSend(UserTB user, String urlPath) {
-		// TODO Auto-generated method stub
+		
+		String setFrom="everyonesfarm@naver.com";
+		String tomail = user.getEmail();
+		String title = "[모두의농장]비밀번호를 변경해주세요!";
+		String htmlBody = 
+			"<form action='http://" + urlPath +"/user/pwchangeform.do'" 
+					+ "method='post'>"
+					+ "<h3>비밀번호를 변경해주세요</h3>"
+					+ "<input type='hidden' value='"
+					+ user.getUserId() + "' name='userId'>"
+					+ "<input type='hidden' value='"
+					+ user.getEmail() + "' name='email'>"
+					+ "<button type='submit' style='padding: 10px 0px;background-color: #D1E9CA;border-color: #D1E9CA;box-sizing: border-box;border-radius: 5px;width: 200px;margin-top: 5px;'>비밀번호 변경하러 가기</button></form>";
+		
+		try {
+			mailSender.send(new MimeMessagePreparator() {
+			   public void prepare(MimeMessage mimeMessage) throws MessagingException {
+			     MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			     message.setFrom(setFrom);
+			     message.setTo(tomail);
+			     message.setSubject(title);
+			     
+			     message.setText(htmlBody, true);
+			   }
+		});
+		} catch(Exception e) {
+		}
 		
 	}
 	
 	@Override
-	public boolean updatePw(UserTB user) {
-		// TODO Auto-generated method stub
-		return false;
+	public int updatePw(UserTB user) {
+		return userDao.updatePw(user);
 	}
 	
 	@Override
 	public int selectIdCheck(String userId) {
 		return userDao.selectIdCheck(userId);
+	}
+	
+	@Override
+	public int selectEmailCheck(String email) {
+		return userDao.selectEmailCheck(email);
+	}
+	
+	@Override
+	public int selectPhoneCheck(String phone) {
+		return userDao.selectPhoneCheck(phone);
 	}
 	
 }

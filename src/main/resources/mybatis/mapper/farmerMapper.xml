@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="FARMER">
+	<insert id="insertFarmer" parameterType="common.dto.Farmer">
+		insert into farmer (farmer_no, farmer_id, farmer_pw, name, email, phone, is_confirm, is_leave, is_pause, zonecode, first_address, second_address)
+		values( farmer_seq, #{farmerId}, #{farmerPw}, #{name}, #{email}, #{phone}, 0,0,0, #{zonecode}, #{firstAddress}, #{secondAddress} )
+	</insert>
+
+	<insert id="insertFarm" parameterType="common.dto.Farm">
+		insert into farm (farm_no, farm_name, phone, zonecode, first_address, second_address, introduce, farm_reason, farm_mind, farm_sell, visit, farmer_no)
+		values( farm_seq, #{farmName}, #{farmphone}, #{farmzonecode}, #{farmfirstAddress}, #{farmsecondAddress}, #{introduce}, #{farmReason}, #{farmMind}, #{farmSell}, 0, farmer_seq.curval )
+	</insert>
+</mapper>

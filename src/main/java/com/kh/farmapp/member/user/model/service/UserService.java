@@ -31,24 +31,18 @@ public interface UserService {
 	
 	/**
 	 * 아이디 찾기
-	 * @param user
+	 * @param commandMap
 	 * @return User
 	 */
-	public UserTB findId(UserTB user);
+	public UserTB findId(Map<String, Object> commandMap);
 	
 	/**
 	 * 비밀번호 찾기
-	 * @param user
+	 * @param commandMap
 	 * @return User
 	 */
-	public UserTB findPw(UserTB user);
+	public UserTB findPw(Map<String, Object> commandMap);
 	
-	/**
-	 * 아이디로 찾은 회원 
-	 * @param req
-	 * @return User
-	 */
-	public UserTB findUserId(HttpServletRequest req);
 	
 	/**
 	 * 비밀번호찾기 이메일 보내기
@@ -60,9 +54,9 @@ public interface UserService {
 	/**
 	 * 비밀번호 업데이트
 	 * @param user
-	 * @return true/false - 성공실패
+	 * @return int
 	 */
-	public boolean updatePw(UserTB user);
+	public int updatePw(UserTB user);
 
 	/**
 	 * 아이디 중복 체크
@@ -70,5 +64,19 @@ public interface UserService {
 	 * @return int (0보다 크면 불가능함)
 	 */
 	public int selectIdCheck(String userId);
+
+	/**
+	 * 이메일 중복 체크
+	 * @param email
+	 * @return int
+	 */
+	public int selectEmailCheck(String email);
+
+	/**
+	 * 전화번호 중복 체크
+	 * @param phone
+	 * @return int
+	 */
+	public int selectPhoneCheck(String phone);
 	
 }

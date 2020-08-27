@@ -2,15 +2,27 @@ package com.kh.farmapp.member.farmer.model.dao;
 
 import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import common.dto.Farm;
 import common.dto.Farmer;
 
+@Repository
 public class FarmerDaoImpl implements FarmerDao{
 
+	@Autowired
+	SqlSessionTemplate session;
+	
 	@Override
 	public int insertFarmer(Farmer farmer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert("FARMER.insertFarmer", farmer);
+	}
+	
+	@Override
+	public int insertFarm(Farm farm) {
+		return session.insert("FARMER.insertFarm", farm);
 	}
 	
 	@Override
