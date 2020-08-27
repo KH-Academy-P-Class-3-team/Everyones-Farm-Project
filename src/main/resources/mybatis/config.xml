@@ -14,6 +14,7 @@
 		<typeAlias type="common.dto.FarmActivity" alias="ACTIVITY"/>
 		<typeAlias type="common.dto.FarmActivityFile" alias="ACTIVITY_FILE"/>
 		<typeAlias type="common.dto.FarmActivitySchedule" alias="ACTIVITY_SCHEDULE"/>
+		<typeAlias type="common.dto.UserTB" alias="USER"/>
 	</typeAliases>
 	
 	<mappers>
