@@ -28,7 +28,29 @@ button:hover {
 	height: 930px;
 	border: 10px solid #EAE891;
 	padding: 30px;
-	
+}
+
+.joinfarmer{
+	margin: 300px auto 200px auto;
+	width: 1050px;
+	height: 1175px;
+	border: 10px solid #EAE891;
+	padding: 30px;
+}
+
+.all{
+	background-image:url('../../image/member/grass.png');
+	background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-bottom: 1px;
+}
+
+.userjoinfarmimage{
+	height: 60px;
+    position: absolute;
+    left: 916px;
+    bottom: 575px;
 }
 
 input{
@@ -74,4 +96,15 @@ input{
 
 .id-check-msg{
 	font-size: 0.8em;
+	color: #807F89;
+}
+
+.email-check-msg{
+	font-size: 0.8em;
+    color: #807F89;
+}
+
+.phone-check-msg{
+	font-size: 0.8em;
+	color: #807F89;
 }
