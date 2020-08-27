@@ -10,11 +10,8 @@ import common.dto.Application;
 import common.dto.FarmActivity;
 import common.dto.FarmDiary;
 import common.dto.FarmingDailylog;
-import common.dto.Order;
 import common.dto.TBOrder;
-import common.dto.User;
 import common.dto.page.Criteria;
-import common.dto.test.BoardVo;
 import common.dto.test.SearchCriteria;
 
 public interface FarmerMypageService {
