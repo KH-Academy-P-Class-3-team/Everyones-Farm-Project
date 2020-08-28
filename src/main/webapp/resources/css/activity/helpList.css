@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+.activity-top {
+	height: 300px;
+	background-image: url('../../image/activity/experience_top.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-attachment: fixed;
+	background-size: 100%;
+}
+
+.top-title {
+	font-size: 1.8em;
+	font-weight: bold;
+	color: #fff;
+	display: inline-block;
+	position: relative;
+	left: 100px;
+	top: 45%;
+}
+
+.top-sub {
+	display: inline-block;
+	position: relative;
+	font-size: 1.9em;
+	color: #c5c5c5;
+	font-style: italic;
+	left: 10px;
+    top: 36%;
+}
+
+.activity-content {
+	width: 980px;
+	margin: 10px auto 50px;
+}
+
+.row {
+	padding: 7px;
+	width: 270px;
+	height: 400px;
+	display: inline-block;
+	margin: 40px 19px 40px;
+}
+
+.row:hover {
+	cursor: pointer;
+	box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
+}
+
+.list-content {
+	text-align: center;
+}
+
+.activity-title {
+	display: inline-block;
+}
+
+.activity-search {
+/* 	display: inline-block; */
+/* 	float: right; */
+	text-align: right;
+	margin: 50px 23px 0;
+	vertical-align: middle;
+}
+
+.caption-title {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 12px 0 5px;
+/* 	color: #68bb59; */
+}
+
+.caption-content {
+	font-size: 0.9em;
+}
+
+.filter {
+    width:120px;
+    height:35px;
+    padding:0 15px;
+    font-size:14px;
+    border:1px solid #ccc;
+    background-image: url('../../image/activity/drop_down.png');/* background로 배경 깔아줌 */
+    background-position: 88% 50%; 
+    background-repeat: no-repeat;
+    background-size: 17px;
+    background-color:#fff;
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -o-appearance:none;
+    vertical-align: middle;
+}
+
+.filter:focus {
+	outline: none;
+	border: 1px solid #68bb59;
+}
+
+.title {
+	height: 31px;
+	border: 1px solid #ccc;
+    vertical-align: middle;
+}
+
+.title:focus {
+	outline: none;
+	border: 1px solid #68bb59;
+}
+
+.btnSearch {
+	background-color: #68bb59;
+	color: white;
+	border: none;
+	width: 50px;
+	height: 35px;
+    vertical-align: middle;
+}
+
+.btnSearch:focus {
+	outline: none;
+}
+
+.btnSearch:hover {
+	cursor: pointer;
+}
+
+.btnSearch:active {
+	background-color: #82c776;
+}
+
+.paging {
+	height:10%;
+	font-size:1.5vw;
+	width: 100%;
+	text-align: center;
+	margin: 30px 0;
+}
+
+.paging a {
+	display:inline-block;
+	float:left;
+	background-color:#fff;
+	width:28px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	font-size:13px;
+	color:#585858;
+	text-decoration:none;
+}
+
+.paging a:active {
+	background-color: #68bb59;
+	color:#fff;
+	border:1px solid #68bb59;
+}
+
+.paging nav {
+	border: 1px solid #ccc;
+}
+
+.paging .first {
+	background: #f8f8f8 url('../../image/activity/page_pprev.png') no-repeat center center;
+	margin-left: 0;
+}
+
+.paging .prev {
+	background: #f8f8f8 url('../../image/activity/page_prev.png') no-repeat center center;
+/* 	margin-right: 7px; */
+}
+
+.paging .next {
+	background: #f8f8f8 url('../../image/activity/page_next.png') no-repeat center center;
+/* 	margin-left: 7px; */
+}
+
+.paging .last {
+	background: #f8f8f8 url('../../image/activity/page_nnext.png') no-repeat center center;
+	margin-right: 0px;
+}
+
+.paging-in {
+	display: inline-block;
+	border:1px solid #e6e6e6;
+	width:28px;
+	height:28px;
+}
+
+.pre {
+	margin-right: 7px;
+}
+
+.nex {
+	margin-left: 7px;
+}
+
+
+

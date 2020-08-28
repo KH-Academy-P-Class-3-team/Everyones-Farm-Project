@@ -46,13 +46,14 @@ public class ActivityDaoImpl implements ActivityDao {
 	}
 
 	@Override
-	public List<FarmActivity> selectActivitySearch(Map<String, String> map) {
-		return null;
-	}
+	public List<FarmActivity> selectActivityByTitle(Map<String, Object> map) {
+		return sqlSession.selectList("ACTIVITY.selectActivityByTitle", map);
 
+	}
+	
 	@Override
-	public List<Map<String, String>> selectFileWithActivityTitle(Map<String, String> map) {
-		return null;
+	public int selectActivityByTitleCnt(Map<String, Object> map) {
+		return sqlSession.selectOne("ACTIVITY.selectActivityByTitleCnt", map);
 	}
 
 	@Override
@@ -86,8 +87,8 @@ public class ActivityDaoImpl implements ActivityDao {
 	}
 
 	@Override
-	public int selectActivityCnt() {
-		return sqlSession.selectOne("ACTIVITY.selectActivityCnt");
+	public int selectActivityCnt(int isHelp) {
+		return sqlSession.selectOne("ACTIVITY.selectActivityCnt", isHelp);
 	}
 
 	@Override
@@ -95,6 +96,15 @@ public class ActivityDaoImpl implements ActivityDao {
 		return sqlSession.selectList("ACTIVITY.selectFarmList");
 	}
 
+	@Override
+	public List<FarmActivity> selectActivityByFarmName(Map<String, Object> map) {
+		return sqlSession.selectList("ACTIVITY.selectActivityByFarmName", map);
+	}
+
+	@Override
+	public int selectActivityByFarmNameCnt(Map<String, Object> map) {
+		return sqlSession.selectOne("ACTIVITY.selectActivityByFarmNameCnt", map);
+	}
 	
 	
 }

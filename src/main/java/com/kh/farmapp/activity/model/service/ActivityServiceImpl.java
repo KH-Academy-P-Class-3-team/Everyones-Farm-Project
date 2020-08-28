@@ -26,11 +26,11 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityDao activityDao;
 
 	@Override
-	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, String isHelp) {
+	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, int isHelp) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Paging p = new Paging(activityDao.selectActivityCnt(), currentPage, cntPerPage);
+		Paging p = new Paging(activityDao.selectActivityCnt(isHelp), currentPage, cntPerPage);
 		
 		map.put("isHelp",isHelp);
 		map.put("start", p.getStart());
@@ -52,15 +52,38 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public Map<String, Object> selectActivitySearch(String isHelp, String title, String filter) {
-		Map<String, String> map = new HashMap<String, String>();
+	public Map<String, Object> selectActivitySearch(int currentPage, int cntPerPage, int isHelp, String title, String filter) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("isHelp", isHelp);
 		map.put("title", title);
-		map.put("filter", filter);
+
+		Paging p = null;
+		List<FarmActivity> activityList;
 		
-		List<FarmActivity> activityList = activityDao.selectActivitySearch(map);
+		if(filter.equals("activityTitle")) {
+			p = new Paging(activityDao.selectActivityByTitleCnt(map), currentPage, cntPerPage);
+			
+			map.put("start", p.getStart());
+			map.put("end", p.getEnd());
+
+			activityList = activityDao.selectActivityByTitle(map);
+		} else {
+			p = new Paging(activityDao.selectActivityByFarmNameCnt(map), currentPage, cntPerPage);
+			
+			map.put("start", p.getStart());
+			map.put("end", p.getEnd());
+
+			activityList = activityDao.selectActivityByFarmName(map);
+		} 
 		
-		return null;
+		List<FarmActivityFile> fileList = activityDao.selectActivityFileThumbnail();
+		
+		map.put("paging", p);
+		map.put("activityList", activityList);
+		map.put("fileList", fileList);
+		
+		return map;
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public interface ActivityService {
 	 * @param isHelp - 일손돕기인지 여부
 	 * @return Map<String, Object> - 조회한 목록, 파일, 페이징 객체를 담은 Map
 	 */
-	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, String isHelp);
+	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, int isHelp);
 	
 	/**
 	 * 활동 상세보기
@@ -35,7 +35,7 @@ public interface ActivityService {
 	 * @param title - 활동명
 	 * @return Map<String, Object> - 조회한 목록, 파일, 페이징 객체를 담은 Map
 	 */
-	public Map<String, Object> selectActivitySearch(String isHelp, String title, String filter);
+	public Map<String, Object> selectActivitySearch(int currentPage, int cntPerPage, int isHelp, String title, String filter);
 	
 	/**
 	 * 활동 신청 제출

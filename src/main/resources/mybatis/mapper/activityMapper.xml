@@ -16,7 +16,7 @@
 		values (farm_activity_file_seq.nextval, farm_activity_seq.currval, #{originName}, #{fileRename}, #{savePath}, #{isThumbnail})
 	</insert>
 	
-	<insert id="insertActivitySchedule" parameterType="common.dto.FarmActivitySchedule" >
+	<insert id="insertActivitySchedule">
 		insert into farm_activity_schedule (schedule_no, activity_no, time, content, etc)
 		values (activity_schedule_seq.nextval, farm_activity_seq.currval, #{time}, #{content}, #{etc})
 	</insert>
@@ -33,8 +33,7 @@
 		select * from farm_activity_file
 		where is_thumbnail = 1
 	</select>
-	
-	
+
 	<!-- 체험 활동 상세 조회 -->
 	<select id="selectActivityByActivityNo" resultType="ACTIVITY">
 		select * from farm_activity
@@ -58,26 +57,20 @@
 			select rownum rnum, a1.*
 			from (
 				select * from farm_activity
-				<choose>
-					<when test="isHelp == 'experience'">
-						where is_help = 0
-					</when>
-					<when test="isHelp == 'help'">
-						where is_help = 1
-					</when>
-				</choose>
+					where is_help = #{isHelp}
 				order by activity_no desc
-				
 			)a1
 		) where rnum between #{start} and #{end}
 	</select>
-	
-	<select id="selectActivityCnt" resultType="int">
+
+
+	<select id="selectActivityCnt" parameterType="int" resultType="int">
 		select count(*) from farm_activity
+		where is_help = #{isHelp}
 	</select>
 
 
-	<select id="selectFarmByFarmerNo" parameterType="common.dto.Farmer" resultType="FARM">
+	<select id="selectFarmByFarmerNo" parameterType="FARMER" resultType="FARM">
 		select * from farm
 		where farmer_no = #{farmerNo}
 	</select>
@@ -94,5 +87,45 @@
 		select * from farm
 	</select>
 	
+	<select id="selectActivityByTitle" parameterType="hashMap" resultType="ACTIVITY">
+		select activity_no, farm_no, title, avail_number, price from (
+			select rownum rnum, a1.*
+			from (
+				select * from farm_activity
+					where is_help = #{isHelp}
+					and title LIKE '%' || #{title} || '%'
+				order by activity_no desc
+			) a1
+		) where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectActivityByTitleCnt" parameterType="hashMap" resultType="int">
+		select count(*) from (
+			select * from farm_activity
+			where is_help = #{isHelp}
+			and title LIKE '%' || #{title} || '%'
+		)
+	</select>
+	
+	
+	<select id="selectActivityByFarmName" parameterType="hashMap" resultType="ACTIVITY">
+		select activity_no, farm_no, title, avail_number, price from (
+			select rownum rnum, a1.*
+			from (
+				select a.* from farm_activity a, 
+                        (select * from farm where farm_name LIKE '%' || #{title} || '%') f
+					where a.farm_no = f.farm_no
+                    and is_help = #{isHelp}
+				order by activity_no desc
+			) a1
+		) where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectActivityByFarmNameCnt" parameterType="hashMap" resultType="int">
+		select count(*) from farm_activity a, 
+        	(select * from farm where farm_name LIKE '%' ||  #{title} || '%') f
+        where a.farm_no = f.farm_no
+        	and is_help = #{isHelp}
+	</select>
 
 </mapper>
