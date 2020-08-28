@@ -1,0 +1,205 @@
+@charset "UTF-8";
+
+/* 소개 페이지 가장 처음 등장하는 img */
+.info__img-wrap {
+	position: relative;
+	width: 100%;
+	height: 500px;
+}
+/* img */
+.info__img-wrap .info__img-img {
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* img 를 덮는 div */
+.info__img-wrap .info__img-cover{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: black;
+    opacity: 0.5;
+}
+/* img 위에 글씨 */
+.info__img-wrap .info__img-desc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+	font-size: 30px;
+	font-weight: 700;
+	color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 모두의 농장 글씨 크기 키우기 */
+.info__img-desc .img-desc__size40{
+	font-size: 40px;
+}
+/* 소개 페이지 main 태그 */
+.info__main {
+/* 	margin-top: 200px; */
+}
+/* p 태그 초기화 */
+.info__main p {
+	margin: 0;
+}
+/* 사이트가 존재하는 이유에 대해 설명하는 공간 */
+.info__main .info__basic-introduction
+, .info__main .info__main-board
+, .info__main .info__farmer-induction
+, .info__main .info__contact-us {
+	margin-top: 50px;
+    padding-bottom: 50px;
+	border-bottom: 3px solid #789F6F;
+}
+.info__main .info__contact-us {
+	border-bottom: none;
+}
+/* 사이트 존재 이유 title */
+/* 모두의 농장 주요 서비스 title */
+.info__basic-introduction .basic-introduction__title
+, .info__main-board .main-board__title
+, .info__farmer-induction .farmer-induction__title
+, .info__contact-us .contact-us__title  {
+	font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+/* 사이트 존재 이유 desc */
+.info__basic-introduction .basic-introduction__desc {
+	padding: 0 10px;
+}
+/* 존재이유 p 태그들 */
+.basic-introduction__desc p {
+	margin-bottom: 15px;
+}
+.basic-introduction__desc p:last-child {
+	margin-bottom: 0;
+}
+/* 모두의 농장이 존재하는 이유 중요 표시 */
+.basic-introduction__desc .desc__deco-size20
+, .farmer-induction__desc .desc__deco-size20 {
+	font-size: 20px;
+    font-weight: 700;
+}
+.basic-introduction__desc .desc__deco-y-color
+, .farmer-induction__desc .desc__deco-y-color {
+	color: #E2CC6C;
+}
+.basic-introduction__desc .desc__deco-g-color
+,.farmer-induction__desc .desc__deco-g-color {
+	color: #789F6F;
+}
+/* 모두의 농장 농업인 회원을 위한 서비스 의 title style */
+.info__main-board .main-board__title-wrap {
+	margin-bottom: 30px;
+}
+.main-board__title-wrap .main-board__title-deco-mark{
+	font-size: 30px;
+    font-weight: 700;
+    color: #789F6F;
+}
+/* 모두의 농장 주요 기능을 소개하는 영역의 table */
+.main-board__desc .desc__boxes{
+	width: 100%;
+}
+.desc__boxes td {
+	width: 33.3%;
+}
+/* box 위에 이미지 */
+.desc__boxes .desc__box-img {
+	display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.desc__box-img img {
+	width: 90%;
+}
+/* 모두의 농장 주요 기능 소개하는 영역의 설명 box들 */
+.main-board__desc .desc__box {
+    position: relative;
+    margin: 0 auto;
+    padding: 10px;
+ 	width: 95%;
+    height: 200px;
+    background: #D1E9CA;
+    border-radius: 5px;
+}
+/* desc__box 안에 title */
+.desc__box .desc__box-title {
+	margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    opacity: 0.7;
+}
+/* desc__box 안에 더보기 버튼 */
+.desc__box .desc__box-btn {
+	position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
+}
+.desc__box .desc__box-btn span {
+	margin-right: 7px;
+}
+/* 모두의 농장 소개 - 농업인 회원 유도 */
+.info__farmer-induction .farmer-induction__desc {
+	padding: 0 10px;
+}
+.farmer-induction__desc p {
+	margin-bottom: 15px;
+}
+.farmer-induction__desc p:last-child {
+	margin-bottom: 0;
+}
+/* 모두의 농장 소개 - 농업인 유도 에서 회원가입 버튼 부분 */
+.info__farmer-induction .farmer-induction__img-wrap {
+	display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+/* farm house 사진 부분 */
+.farmer-induction__img-wrap img {
+	width: 200px;
+}
+/* 회원가입 버튼 */
+.info__farmer-induction .farmer-induction__join-btn {
+	width: 200px;
+    padding: 7px 14px;
+    background: #789F6F;
+    text-align: center;
+    border-radius: 7px;
+    color: white;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+}
+/* contact-us - 지도 부분 */
+.info__contact-us .contact-us__map {
+    margin: 0 auto;
+	width: 900px;
+    height: 500px;
+    z-index: -1;
+}
+/* contact-us - 회사 문의 */
+.info__contact-us .contact-us__desc {
+	width: 900px;
+	margin: 30px auto 0;
+}
+.contact-us__desc .desc__p-tag {
+	font-size: 20px;
+	margin-bottom: 15px;
+}
+.contact-us__desc .desc__p-tag:last-child {
+	margin-bottom: 0;
+}
+.contact-us__desc i {
+	margin-right: 7px;
+}
