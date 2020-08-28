@@ -39,6 +39,10 @@
     justify-content: center;
     align-items: center;
 }
+/* 모두의 농장 글씨 크기 키우기 */
+.info__img-desc .img-desc__size40{
+	font-size: 40px;
+}
 /* 소개 페이지 main 태그 */
 .info__main {
 /* 	margin-top: 200px; */
@@ -77,10 +81,26 @@
 .basic-introduction__desc p:last-child {
 	margin-bottom: 0;
 }
-/* 모두의 농장 주요 기능들을 소개하는 영역 */
-/* .info__main .info__main-board { */
-/* 	margin-top: 50px; */
-/* } */
+/* 모두의 농장이 존재하는 이유 중요 표시 */
+.basic-introduction__desc .desc__deco-size20{
+	font-size: 20px;
+    font-weight: 700;
+}
+.basic-introduction__desc .desc__deco-y-color {
+	color: #E2CC6C;
+}
+.basic-introduction__desc .desc__deco-g-color {
+	color: #789F6F;
+}
+/* 모두의 농장 농업인 회원을 위한 서비스 의 title style */
+.info__main-board .main-board__title-wrap {
+	margin-bottom: 30px;
+}
+.main-board__title-wrap .main-board__title-deco-mark{
+	font-size: 30px;
+    font-weight: 700;
+    color: #789F6F;
+}
 /* 모두의 농장 주요 기능을 소개하는 영역의 table */
 .main-board__desc .desc__boxes{
 	width: 100%;
@@ -94,7 +114,7 @@
     margin: 0 auto;
     padding: 10px;
  	width: 95%;
-    height: 300px;
+    height: 200px;
     background: #D1E9CA;
     border-radius: 5px;
 }
@@ -125,7 +145,9 @@
 <div class="info__img-wrap">
 	<img alt="소개이미지" src="<%=request.getContextPath() %>/resources/image/info/info1.jpg" class="info__img-img" />
 	<div class="info__img-cover"></div>
-	<div class="info__img-desc">모두의 농장 소개 문구 생각해주세요!</div>
+	<div class="info__img-desc">
+		<span class="img-desc__size40">"모두의 농장"</span><span>에 어서오세요!</span>
+	</div>
 </div>
 
 <div class="wrapper">
@@ -138,43 +160,49 @@
 		<p class="basic-introduction__title">모두의 농장이 존재하는 이유</p>
 		<!-- 설명 -->
 		<div class="basic-introduction__desc">
-			<p>농업인을 직업으로 택한 2040세대들을 위해 자신의 농장 및 농작물을 홍보할 수 있는 공간을 제공합니다.</p>
-			<p>농업인들은 자신의 농장에서 생산한 농작물을 판매할 수 있습니다.</p>
-			<p>농업인들은 자신의 농장에서 주최하는 체험활동 또는 일손돕기를 등록하여 신청 받을 수 있습니다.</p>
-			<p>사이트의 일반 회원들은 자신이 먹을 음식의 생산지를 알 수 있고 농장 체험도 해볼 수 있습니다. </p>
+			<p>농업을 직업으로 선택한 청년농, 창업농들이 가장 필요로 하는 지원은 무엇일까요?</p>
+			<p class="desc__deco-y-color desc__deco-size20">첫 번째, 정착 지원금 등 자본금 지원</p>
+			<p class="desc__deco-y-color desc__deco-size20">두 번째, 판로 개척 지원</p>
+			<p>위의 두 지원을 가장 필요로 한다고 합니다.</p>
+			<p class="desc__deco-g-color desc__deco-size20">모두의 농장에서는 두 번째, 판로 개척 지원을 제공하여 농업인 회원들에게 도움이 되고자 합니다.</p>
 		</div>
 	</div>
-	<!-- 모두의 농장 주요 게시판 -->
+	<!-- 농업인 회원을 위한 서비스 -->
 	<div class="info__main-board">
 		<!-- 제목 -->
-		<p class="main-board__title">모두의 농장의 주요 서비스</p>
+		<p class="main-board__title-wrap">
+		<span class="main-board__title">모두의 농장이</span><span class="main-board__title-deco-mark"> 농업인 회원</span><span class="main-board__title">을 위해</span>
+		<p>
 		<!-- 설명 -->
 		<div class="main-board__desc">
 			<table class="desc__boxes">
 				<tr>
 					<td>
+						<div class="desc__box-img">
+							<img alt="" src="">
+						</div>
 						<div class="desc__box">
-							<p class="desc__box-title">개인 농장 홍보</p>
+							<p class="desc__box-title">먹거리 판매</p>
 							<p class="desc__box-desc">
-							같이 무성할 어머니 오는 차 이름을 보고, 봅니다. 마리아 다 별이 잔디가 하나의 추억과 있습니다. 그리워 별 한 밤을 나의 보고, 하나 하나에 나의 거외다. 계절이 마디씩 그러나 언덕 있습니다. 그리고 아침이 하나 계절이 하나에 피어나듯이 무엇인지 잔디가 듯합니다. 아무 불러 너무나 오는 토끼, 강아지, 아직 거외다. 않은 지나고 하나에 별들을 벌레는 있습니다.
+							모두의 농장은 농업인 회원들이 재배한 먹거리 상품을 사이트에서 판매할 수 있는 공간을 제공합니다. 이 먹거리들은 모두 모두의 농장에서 심사를 거친 상품들입니다.
 							</p>
 							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
 						</div>
 					</td>
 					<td>
 						<div class="desc__box">
-							<p class="desc__box-title">제철 음식</p>
+							<p class="desc__box-title">농장 체험</p>
 							<p class="desc__box-desc">
-							같이 무성할 어머니 오는 차 이름을 보고, 봅니다. 마리아 다 별이 잔디가 하나의 추억과 있습니다. 그리워 별 한 밤을 나의 보고, 하나 하나에 나의 거외다. 계절이 마디씩 그러나 언덕 있습니다. 그리고 아침이 하나 계절이 하나에 피어나듯이 무엇인지 잔디가 듯합니다. 아무 불러 너무나 오는 토끼, 강아지, 아직 거외다. 않은 지나고 하나에 별들을 벌레는 있습니다.
+							모두의 농장은 농업인 회원의 농장에서 시행하는 체험 및 일손돕기를 사이트에 등록하여 관리할 수 있습니다.
 							</p>
 							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
 						</div>
 					</td>
 					<td>
 						<div class="desc__box">
-							<p class="desc__box-title">농장 체험 신청</p>
+							<p class="desc__box-title">영농일지</p>
 							<p class="desc__box-desc">
-							같이 무성할 어머니 오는 차 이름을 보고, 봅니다. 마리아 다 별이 잔디가 하나의 추억과 있습니다. 그리워 별 한 밤을 나의 보고, 하나 하나에 나의 거외다. 계절이 마디씩 그러나 언덕 있습니다. 그리고 아침이 하나 계절이 하나에 피어나듯이 무엇인지 잔디가 듯합니다. 아무 불러 너무나 오는 토끼, 강아지, 아직 거외다. 않은 지나고 하나에 별들을 벌레는 있습니다.
+							모두의 농장은 농업인 회원들의 영농작업 현황을 기록하는 문서인 영농일지 프로그램을 제공합니다.
 							</p>
 							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
 						</div>
@@ -183,6 +211,8 @@
 			</table>
 		</div>
 	</div>
+	<!-- 일반 회원을 위한 서비스 -->
+	
 	<!-- 모두의 농장 농업인 회원 신청 유도 부분 -->
 	<div class="info__farmer-induction">
 		<!-- 제목 -->
