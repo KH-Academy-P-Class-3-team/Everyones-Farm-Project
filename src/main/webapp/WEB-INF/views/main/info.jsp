@@ -112,6 +112,7 @@
 .desc__boxes .desc__box-img {
 	display: flex;
     justify-content: center;
+    margin-bottom: 15px;
 }
 .desc__box-img img {
 	width: 90%;
@@ -237,36 +238,36 @@
 				<tr>
 					<td>
 						<div class="desc__box-img">
-							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/fruit-row.jpg">
 						</div>
 						<div class="desc__box">
-							<p class="desc__box-title">먹거리 판매</p>
+							<p class="desc__box-title">먹거리 구매</p>
 							<p class="desc__box-desc">
-							모두의 농장은 농업인 회원들이 재배한 먹거리 상품을 사이트에서 판매할 수 있는 공간을 제공합니다. 이 먹거리들은 모두 모두의 농장에서 심사를 거친 상품들입니다.
+							모두의 농장은 심사를 거친 농업인 회원들이 재배한 농작물들을 판매하고 있습니다. 일반 회원 분들은 안심하고 신선하고 맛있는 먹거리를 구매할 수 있습니다.
 							</p>
 							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
 						</div>
 					</td>
 					<td>
 						<div class="desc__box-img">
-							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/fruit-row.jpg">
 						</div>
 						<div class="desc__box">
 							<p class="desc__box-title">농장 체험</p>
 							<p class="desc__box-desc">
-							모두의 농장은 농업인 회원의 농장에서 시행하는 체험 및 일손돕기를 사이트에 등록하여 관리할 수 있습니다.
+							모두의 농장은 농업인 회원이 등록한 농장 체험 목록을 제공합니다. 일반 회원들은 체험 목록을 보고 해당 농장에 문의하고 신청할 수 있습니다.
 							</p>
 							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
 						</div>
 					</td>
 					<td>
 						<div class="desc__box-img">
-							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/fruit-row.jpg">
 						</div>
 						<div class="desc__box">
-							<p class="desc__box-title">영농일지</p>
+							<p class="desc__box-title">일손 돕기</p>
 							<p class="desc__box-desc">
-							모두의 농장은 농업인 회원들의 영농작업 현황을 기록하는 문서인 영농일지 프로그램을 제공합니다.
+							모두의 농장은 농업인 회원이 등록한 일손 돕기 목록을 제공합니다. 일반 회원들은 농촌 봉사활동을 하고 싶을 시에 일손 돕기 목록을 보고 신청할 수 있습니다.
 							</p>
 							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
 						</div>
@@ -280,7 +281,10 @@
 	<div class="info__farmer-induction">
 		<!-- 제목 -->
 		<p class="farmer-induction__title">개인 농장 홍보 페이지를 만들고 싶으신가요?</p>
-		<p>채울 예정~</p>
+		<p>
+			<span>농업인 회원가입을 눌러 폼에 개인 정보 및 농장 정보를 입력하면 모두의 농장의 심사 기준에 따라 회원가입이 승인됩니다.</span>
+			<span></span>
+		</p>
 	</div>
 	<!-- 모두의 농장 회사 위치 소개 -->
 	<div class="info__contact-us">
