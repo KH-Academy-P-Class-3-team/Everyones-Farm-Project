@@ -60,6 +60,9 @@
     padding-bottom: 50px;
 	border-bottom: 3px solid #789F6F;
 }
+.info__main .info__contact-us {
+	border-bottom: none;
+}
 /* 사이트 존재 이유 title */
 /* 모두의 농장 주요 서비스 title */
 .info__basic-introduction .basic-introduction__title
@@ -82,14 +85,17 @@
 	margin-bottom: 0;
 }
 /* 모두의 농장이 존재하는 이유 중요 표시 */
-.basic-introduction__desc .desc__deco-size20{
+.basic-introduction__desc .desc__deco-size20
+, .farmer-induction__desc .desc__deco-size20 {
 	font-size: 20px;
     font-weight: 700;
 }
-.basic-introduction__desc .desc__deco-y-color {
+.basic-introduction__desc .desc__deco-y-color
+, .farmer-induction__desc .desc__deco-y-color {
 	color: #E2CC6C;
 }
-.basic-introduction__desc .desc__deco-g-color {
+.basic-introduction__desc .desc__deco-g-color
+,.farmer-induction__desc .desc__deco-g-color {
 	color: #789F6F;
 }
 /* 모두의 농장 농업인 회원을 위한 서비스 의 title style */
@@ -145,6 +151,39 @@
 }
 .desc__box .desc__box-btn span {
 	margin-right: 7px;
+}
+/* 모두의 농장 소개 - 농업인 회원 유도 */
+.info__farmer-induction .farmer-induction__desc {
+	padding: 0 10px;
+}
+.farmer-induction__desc p {
+	margin-bottom: 15px;
+}
+.farmer-induction__desc p:last-child {
+	margin-bottom: 0;
+}
+/* 모두의 농장 소개 - 농업인 유도 에서 회원가입 버튼 부분 */
+.info__farmer-induction .farmer-induction__img-wrap {
+	display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+/* farm house 사진 부분 */
+.farmer-induction__img-wrap img {
+	width: 200px;
+}
+/* 회원가입 버튼 */
+.info__farmer-induction .farmer-induction__join-btn {
+	width: 200px;
+    padding: 7px 14px;
+    background: #789F6F;
+    text-align: center;
+    border-radius: 7px;
+    color: white;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
 }
 </style>
 
@@ -281,10 +320,19 @@
 	<div class="info__farmer-induction">
 		<!-- 제목 -->
 		<p class="farmer-induction__title">개인 농장 홍보 페이지를 만들고 싶으신가요?</p>
-		<p>
-			<span>농업인 회원가입을 눌러 폼에 개인 정보 및 농장 정보를 입력하면 모두의 농장의 심사 기준에 따라 회원가입이 승인됩니다.</span>
-			<span></span>
-		</p>
+		<div class="farmer-induction__desc">
+			<p>농업인 회원가입을 눌러 폼에 개인 정보 및 농장 정보를 입력하면 모두의 농장의 심사 기준에 따라 회원가입이 승인됩니다.</p>
+			<p>농업인 회원이 되면 개인 농장 페이지를 받게 됩니다.</p>
+			<p>개인 농장 페이지에서는 다음과 같은 서비스를 제공합니다.</p>
+			<p class="desc__deco-y-color desc__deco-size20">첫 번째, 농장 및 농작물 소개</p>
+			<p class="desc__deco-y-color desc__deco-size20">두 번째, 농작물 판매 등록 및 관리</p>
+			<p class="desc__deco-y-color desc__deco-size20">세 번째, 농장 체험 및 일손 돕기 등록 및 관리</p>
+			<p>농업인들을 위한 사이트를 만들고자 하는 <span class="desc__deco-g-color desc__deco-size20">모두의 농장</span>은 <span class="desc__deco-g-color desc__deco-size20">함께할 농업인 회원분들을 기다리고 있습니다.</span></p>
+		</div>
+		<div class="farmer-induction__img-wrap">
+			<img alt="farmHouse" src="<%=request.getContextPath() %>/resources/image/info/farm_house.jpg" />
+			<div class="farmer-induction__join-btn">농업인 회원가입 하기</div>
+		</div>
 	</div>
 	<!-- 모두의 농장 회사 위치 소개 -->
 	<div class="info__contact-us">
