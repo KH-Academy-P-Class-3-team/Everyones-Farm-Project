@@ -108,6 +108,14 @@
 .desc__boxes td {
 	width: 33.3%;
 }
+/* box 위에 이미지 */
+.desc__boxes .desc__box-img {
+	display: flex;
+    justify-content: center;
+}
+.desc__box-img img {
+	width: 90%;
+}
 /* 모두의 농장 주요 기능 소개하는 영역의 설명 box들 */
 .main-board__desc .desc__box {
     position: relative;
@@ -179,7 +187,7 @@
 				<tr>
 					<td>
 						<div class="desc__box-img">
-							<img alt="" src="">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
 						</div>
 						<div class="desc__box">
 							<p class="desc__box-title">먹거리 판매</p>
@@ -190,6 +198,9 @@
 						</div>
 					</td>
 					<td>
+						<div class="desc__box-img">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+						</div>
 						<div class="desc__box">
 							<p class="desc__box-title">농장 체험</p>
 							<p class="desc__box-desc">
@@ -199,6 +210,9 @@
 						</div>
 					</td>
 					<td>
+						<div class="desc__box-img">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+						</div>
 						<div class="desc__box">
 							<p class="desc__box-title">영농일지</p>
 							<p class="desc__box-desc">
@@ -212,6 +226,55 @@
 		</div>
 	</div>
 	<!-- 일반 회원을 위한 서비스 -->
+	<div class="info__main-board">
+		<!-- 제목 -->
+		<p class="main-board__title-wrap">
+		<span class="main-board__title">모두의 농장이</span><span class="main-board__title-deco-mark"> 일반 회원</span><span class="main-board__title">을 위해</span>
+		<p>
+		<!-- 설명 -->
+		<div class="main-board__desc">
+			<table class="desc__boxes">
+				<tr>
+					<td>
+						<div class="desc__box-img">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+						</div>
+						<div class="desc__box">
+							<p class="desc__box-title">먹거리 판매</p>
+							<p class="desc__box-desc">
+							모두의 농장은 농업인 회원들이 재배한 먹거리 상품을 사이트에서 판매할 수 있는 공간을 제공합니다. 이 먹거리들은 모두 모두의 농장에서 심사를 거친 상품들입니다.
+							</p>
+							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
+						</div>
+					</td>
+					<td>
+						<div class="desc__box-img">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+						</div>
+						<div class="desc__box">
+							<p class="desc__box-title">농장 체험</p>
+							<p class="desc__box-desc">
+							모두의 농장은 농업인 회원의 농장에서 시행하는 체험 및 일손돕기를 사이트에 등록하여 관리할 수 있습니다.
+							</p>
+							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
+						</div>
+					</td>
+					<td>
+						<div class="desc__box-img">
+							<img alt="먹거리 판매" src="<%=request.getContextPath() %>/resources/image/info/carrot.jpg">
+						</div>
+						<div class="desc__box">
+							<p class="desc__box-title">영농일지</p>
+							<p class="desc__box-desc">
+							모두의 농장은 농업인 회원들의 영농작업 현황을 기록하는 문서인 영농일지 프로그램을 제공합니다.
+							</p>
+							<a href="#" class="desc__box-btn"><span>더보기</span><i class="far fa-caret-square-right"></i></a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	
 	<!-- 모두의 농장 농업인 회원 신청 유도 부분 -->
 	<div class="info__farmer-induction">
