@@ -12,33 +12,27 @@
 		<result column="farm_name" property="farmName" />
 		<result column="farmer_no" property="farmerNo" />
 		<result column="visit" property="visit" />
-		<result column="farm_file_no" property="farmFileNo" />
-		<result column="save_path" property="savePath" />
-		<result column="is_thumbnail" property="isThumbnail" />
+<!-- 		<result column="farm_file_no" property="farmFileNo" /> -->
+<!-- 		<result column="save_path" property="savePath" /> -->
+<!-- 		<result column="is_thumbnail" property="isThumbnail" /> -->
 	</resultMap>
 	<select id="selectFarmTop3" resultMap="farmmap">
 		select
-			*
+		    *
 		from (
-			select
-				rownum farm_rank
-				, all_farm.*
-			from (
-				select
-					f.farm_no
-					, f.farm_name
-					, f.farmer_no
-					, f.visit
-					, ff.farm_file_no
-					, ff.save_path
-					, ff.is_thumbnail
-				from
-					farm f
-					LEFT OUTER JOIN farm_file ff
-				ON
-					f.farm_no = ff.farm_no
-				order by f.visit desc, f.farm_name
-			) all_farm
+		    select
+		        rownum farm_rank
+		        , all_farm.*
+		    from (
+		        select
+		            f.farm_no
+		            , f.farm_name
+		            , f.farmer_no
+		            , f.visit
+		        from
+		            farm f
+		        order by f.visit desc, f.farm_name
+		    ) all_farm
 		) rank
 		where farm_rank between 1 and 3
 	</select>
