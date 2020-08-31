@@ -63,33 +63,27 @@
 			<c:forEach items="${farmlist }" var="farmitem" >
 					<div class="food__bottom-wrap">
 						<a href="#"><!-- 이 링크는 농장 페이지 링크 넣어야 함! -->
-							<c:choose>
-								<c:when test="${empty farmitem.farmFileNo }">
-									<img class="bottom-wrap__farm-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_farm.jpg"
-									width="300" height="250" />
-									
-								</c:when>
-								<c:when test="${not empty farmitem.farmFileNo }">
-									<!-- 여기는 추후에 생각해보기 아직 file data가 없음...! -->
-									<img class="bottom-wrap__farm-img" alt="food" src="<%=request.getContextPath() %>/resources/img/test-dog.jpg"
-									width="300" height="250" />
-								</c:when>
-							</c:choose>
-							
+							<img class="bottom-wrap__farm-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_farm.jpg"
+							width="300" height="250" />
 							<div class="bottom-wrap__farm-desc">${farmitem.farmName }</div>
 						</a>
 					</div>
 				</c:forEach>
-<%-- 				<c:forEach var="i" begin="1" end="3"> --%>
-<!-- 					<div class="farm__bottom-wrap"> -->
-<!-- 						<a href="#"> -->
-<%-- 							<img class="bottom-wrap__farm-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_farm.jpg"  --%>
-<!-- 							width="300" height="250" /><div class="bottom-wrap__farm-desc">체리농부의 농장</div> -->
-<!-- 						</a> -->
-<!-- 					</div> -->
-<%-- 				</c:forEach> --%>
 			</div>
 		</div>	
+		<!-- 이 부분은 파일이 있을 경우 생각했던 것! 다시 한 번 생각해보기 -->
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${empty farmitem.farmFileNo }"> --%>
+<%-- 				<img class="bottom-wrap__farm-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_farm.jpg" --%>
+<!-- 				width="300" height="250" /> -->
+				
+<%-- 			</c:when> --%>
+<%-- 			<c:when test="${not empty farmitem.farmFileNo }"> --%>
+<!-- 				여기는 추후에 생각해보기 아직 file data가 없음...! -->
+<%-- 				<img class="bottom-wrap__farm-img" alt="food" src="<%=request.getContextPath() %>/resources/img/test-dog.jpg" --%>
+<!-- 				width="300" height="250" /> -->
+<%-- 			</c:when> --%>
+<%-- 		</c:choose> --%>
 		
 		
 		<!-- 농업소식 -->
