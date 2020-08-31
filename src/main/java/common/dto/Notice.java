@@ -1,25 +1,25 @@
 package common.dto;
 
+import java.util.Date;
+
 /**
  * 공지사항 & 자주 묻는 질문 정보를 저장하는 테이블
  */
 public class Notice {
 
 	// member field
-	// 공지사항 & 자주 묻는 질문 번호
 	private int noticeNo;
-	// 제목
 	private String title;
-	// 내용
 	private String content;
-	// 공지사항인지 여부를 판단해 주는 컬럼
-	private int isNotice;
-
+	private int adminNo;
+	private Date regDate;
+	private int isShowed;
+	
 	// toString()
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", isNotice=" + isNotice
-				+ "]";
+		return "Notice [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", adminNo=" + adminNo
+				+ ", regDate=" + regDate + ", isShowed=" + isShowed + "]";
 	}
 
 	// getter(), setter()
@@ -47,12 +47,28 @@ public class Notice {
 		this.content = content;
 	}
 
-	public int getIsNotice() {
-		return isNotice;
+	public int getAdminNo() {
+		return adminNo;
 	}
 
-	public void setIsNotice(int isNotice) {
-		this.isNotice = isNotice;
+	public void setAdminNo(int adminNo) {
+		this.adminNo = adminNo;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public int getIsShowed() {
+		return isShowed;
+	}
+
+	public void setIsShowed(int isShowed) {
+		this.isShowed = isShowed;
 	}
 
 }
