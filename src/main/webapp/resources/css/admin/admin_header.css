@@ -1,0 +1,121 @@
+@charset "UTF-8";
+body {
+	margin: 0;
+}
+
+.wrapper {
+	width: 980px;
+	margin: 0 auto;
+}
+/* header */
+/* header top - 로고와 로그아웃 버튼 */
+.admin__header .header__top {
+	/* 	background: lightblue; */
+	
+}
+.header__top .header__top-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 30px;
+	position: relative;
+}
+.header__top-wrap .top__member-desc {
+	position: absolute;
+	right: 30px;
+	bottom: 20px;
+}
+/* header top - 멤버 이름 */
+.top__member-desc .member-desc__name{
+	padding-right: 5px;
+    border-right: 1px solid #605759;
+}
+.top__member-desc > a {
+	padding-left: 5px;
+    text-decoration: none;
+    color: black;
+}
+/* 메인메뉴 부분 */
+.admin__header .header__menu {
+	/* 	width: 980px; */
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	background: white;
+    border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+    z-index: 999;
+}
+/* ul, li 초기화 */
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+/* 메인메뉴 li */
+#amenu__main > li {
+	float: left;
+	position: relative;
+	width: 200px;
+	padding: 0 5px;
+}
+/* 메인메뉴 hover 시 */
+#amenu__main > li:hover > a {
+	color: #789F6F;
+	font-weight: bold;
+}
+/* 메인메뉴(ul)의 li 의 a */
+#amenu__main > li > a {
+	color: black;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	padding: 10px 0;
+}
+/* 서브 메뉴 */
+.menu__sub-member
+, .menu__sub-qna {
+	position: absolute;
+	/* 메인메뉴 바로 아래에 위치하도록 조정 */
+	right: 0;
+	top: 45px;
+	background: white;
+	/* 메인메뉴에 hover 시에만 보이게 하기 */
+	opacity: 0;
+	visibility: hidden;
+	/* 서서히 보이게 하는 효과 */
+	transition: all 0.2s ease-in;
+}
+.menu__sub-member > li
+, .menu__sub-qna > li {
+	width: 200px;
+	border: 1px solid #605759;
+	/* 텍스트 가운데 정렬 */
+	text-align: center;
+}
+.menu__sub-member > li:first-child
+, .menu__sub-member > li:nth-child(2)
+, .menu__sub-qna > li:first-child {
+	border-bottom: none;
+}
+.menu__sub-member > li > a
+, .menu__sub-qna > li > a {
+	display: block;
+	padding: 10px 0;
+	text-decoration: none;
+	color: black;
+}
+/* 서브메뉴 호버시 */
+.menu__sub-member > li:hover > a
+, .menu__sub-qna > li:hover > a {
+	color: #789F6F;
+	font-weight: bold;
+}
+/* 메인메뉴 hover 시 서브메뉴 보이게 하기 */
+#amenu__main > li:nth-child(2):hover .menu__sub-member
+, #amenu__main > li:nth-child(4):hover .menu__sub-qna {
+	opacity: 1;
+	visibility: visible;
+}
