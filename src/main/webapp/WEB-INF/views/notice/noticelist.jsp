@@ -20,12 +20,17 @@
 .notice__row .nrow__title-wrap
 , .frequently__row .frow__title-wrap {
      position: relative;
-     background: #E9F7AB;
+     background: #D1E9CA;
      padding: 14px 7px;
      border-bottom: 1px solid #605759;
      display: flex;
      align-items: center;
      cursor: pointer;
+}
+/* 제목에 hover 이벤트 발생 시 */
+.notice__row .nrow__title-wrap:hover
+, .frequently__row .frow__title-wrap:hover {
+	background: #E9F7AB;
 }
 .notice__row .nrow__title {
 	margin-left: 25px;
