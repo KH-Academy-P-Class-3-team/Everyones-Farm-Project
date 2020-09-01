@@ -13,7 +13,7 @@
 		</div>
 		<div class="main__login-form">
 			<!-- 로그인 폼 -->
-			<form action="<%=request.getContextPath() %>/admin/login" method="post" class="lform">
+			<form action="<%=request.getContextPath() %>/admin/login" method="post" class="lform" id="login-form">
 				<ul class="lform__list">
 					<li class="lform__list-item">
 					<label for="adminId">아이디</label>
@@ -24,7 +24,7 @@
 					<input type="password" name="adminPw" id="adminPw" placeholder="*****" />
 					</li>
 					<li class="lform__list-item">
-					<div class="list-item__login-btn">관리자 로그인</div>
+					<div id="login-btn" class="list-item__login-btn">관리자 로그인</div>
 					</li>
 				</ul>
 			</form>
@@ -32,4 +32,5 @@
 	</main>
 </div>
 
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/login/admin-login.js"></script>
 <%@include file="../include/admin_footer.jsp" %>

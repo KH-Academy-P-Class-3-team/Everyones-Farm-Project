@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.farmapp.admin.model.service.AdminMainService;
 
@@ -19,9 +20,12 @@ public class AdminMainController {
 	private AdminMainService adminMainService;
 	
 	// 관리자 페이지 메인
-	@RequestMapping(value = "/admin/main")
+	@RequestMapping(value = "/admin/main", method = RequestMethod.GET)
 	public String adminMain() {
-		return "";
+		
+		logger.info("/admin/main - [GET] 요청");
+		
+		return "admin/admin_main";
 	}
 	
 }

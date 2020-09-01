@@ -45,6 +45,7 @@ body {
 	background: white;
     border-top: 1px solid #605759;
     border-bottom: 1px solid #605759;
+    z-index: 999;
 }
 /* ul, li 초기화 */
 ul, li {
