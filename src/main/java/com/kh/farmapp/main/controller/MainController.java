@@ -40,17 +40,6 @@ public class MainController {
 		// logger 찍기
 		logger.info("MainController '/' [GET] 요청");
 		
-		// session 영역에 있는 로그인 했을 때 불러오기
-		// session 영역에서 login 한 User의 정보 받아오기
-		UserTB loginUser = (UserTB) session.getAttribute("userInfo");
-		
-		if(loginUser != null) {
-			model.addAttribute("loginUser", loginUser);
-		} else {
-			model.addAttribute("loginUser", null);
-		}
-		
-		
 		// 이달의 농장 top 3 불러오기
 		// outer join 을 했는데 null 값인 아이들은 불러오지 조차 못한다. 어째서인지 질문!!!
 		List<Map<String, Object>> farmTop3 = mainService.selectTop3Farm();

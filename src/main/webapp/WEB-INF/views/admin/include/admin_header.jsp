@@ -44,10 +44,9 @@
 			</div>
 			<div class="top__member-desc">
 					<!-- 관리자 아이디 들어갈 예정 -->
-					<span class="member-desc__name">누구누구님</span><a href="<%=request.getContextPath() %>/user/logout">로그아웃</a>
-<%-- 				<c:if test="${not empty adminLogin }"> --%>
-<%-- 					<span>누구누구님</span><a href="<%=request.getContextPath() %>/user/logout">로그아웃</a> --%>
-<%-- 				</c:if> --%>
+				<c:if test="${not empty adminInfo }">
+					<span class="member-desc__name">${adminInfo.adminId }님</span><a href="<%=request.getContextPath() %>/admin/logout">로그아웃</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

@@ -82,7 +82,22 @@ public class AdminLoginController {
 	
 	// 관리자 로그아웃 동작
 	@RequestMapping(value = "/admin/logout")
-	public String adminLogoutProc() {
-		return "";
+	public String adminLogoutProc(
+			HttpSession session
+			, Model model
+			) {
+		
+		if( session.getAttribute("adminInfo") != null) {
+			session.removeAttribute("adminInfo");
+			
+			model.addAttribute("alertMsg", "관리자 로그아웃이 성공하였습니다! 관리자 페이지는 로그인 상태에서만 들어갈 수 있기 때문에 관리자 로그인 페이지로 이동합니다.");
+			model.addAttribute("url", "login");
+		} else {
+			model.addAttribute("alertMsg", "어떤 이유로 인해 관리자 로그아웃에 실패하였습니다...");
+			model.addAttribute("url", "main");
+			
+		}
+		
+		return "common/result";
 	}
 }

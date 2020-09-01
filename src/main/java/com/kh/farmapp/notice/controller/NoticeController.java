@@ -32,17 +32,6 @@ public class NoticeController {
 		// logger 찍기
 		logger.info("NoticeController '/notice/noticelist' [GET] 요청");
 		
-//		System.out.println("Notice Controller /notice/noticelist - [GET] 요청");
-		
-		// session 영역에서 login 한 User의 정보 받아오기
-		UserTB loginUser = (UserTB) session.getAttribute("userInfo");
-		
-		if(loginUser != null) {
-			model.addAttribute("loginUser", loginUser);
-		} else {
-			model.addAttribute("loginUser", null);
-		}
-		
 		// 가장 최근 공지사항 불러오기
 		Notice latestNotice = noticeService.selectOneNotice();
 //		System.out.println("Notice Controller latestNotice: " + latestNotice);
