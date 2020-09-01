@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/* admin footer css */
+.admin__footer {
+	margin: 0 auto;
+	padding: 50px 0;
+	display: flex;
+	flex-direction: column;
+	background: #605759;
+}
+.admin__footer .footer__comp-info {
+	width: 500px;
+	margin: 0 auto;
+	color: white;
+}
+.admin__footer .footer__comp-info div {
+	margin-top: 10px;
+}
+.admin__footer .footer__comp-info div:first-child {
+	margin: 0;
+}

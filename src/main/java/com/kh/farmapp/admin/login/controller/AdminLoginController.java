@@ -21,6 +21,8 @@ public class AdminLoginController {
 	// 관리자 로그인 페이지
 	@RequestMapping(value = "/admin/login", method = RequestMethod.GET)
 	public String adminLogin() {
+		// 로그 찍기
+		logger.info("AdminLoginController : /admin/login [GET] 요청");
 		
 		return "admin/login/alogin";
 	}
@@ -28,6 +30,12 @@ public class AdminLoginController {
 	// 관리자 로그인 동작
 	@RequestMapping(value = "/admin/login", method = RequestMethod.POST)
 	public String adminLoginProc() {
+		return "";
+	}
+	
+	// 관리자 로그아웃 동작
+	@RequestMapping(value = "/admin/logout")
+	public String adminLogoutProc() {
 		return "";
 	}
 }
