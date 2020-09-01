@@ -14,18 +14,16 @@
 		        rownum rnum
 		        , latest.*
 		    from (
-			    select
-			        *
-			    from
-			        notice
-			    where
-			        is_notice = 1
-			    order by
-			        notice_no desc
+		        select
+		            *
+		        from
+		            notice
+		        order by
+		            notice_no desc
 		    ) latest
 		) n
 		where
-		    rnum = 1	
+		    rnum = 1
 	</select>
 
 </mapper>

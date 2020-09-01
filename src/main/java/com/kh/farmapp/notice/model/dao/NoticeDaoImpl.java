@@ -23,10 +23,4 @@ public class NoticeDaoImpl implements NoticeDao{
 		return session.selectOne("NOTICE.selectLatestNotice");
 	}
 
-	@Override
-	public List<Notice> selectAllQnaList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -24,11 +24,5 @@ public class NoticeServiceImpl implements NoticeService{
 	public Notice selectOneNotice() {
 		return noticeDao.selectOneNotice();
 	}
-
-	@Override
-	public List<Notice> selectAllQnaList() {
-		return noticeDao.selectAllQnaList();
-	}
-
 	
 }
