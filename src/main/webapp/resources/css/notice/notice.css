@@ -1,0 +1,85 @@
+@charset "UTF-8";
+.margin-top200 {
+	margin-top: 200px;
+}
+/* 공지사항, 자주묻는질문 페이지에 리스트를 감싸는 영역 */
+.notice__main .notice__rows {
+	width: 900px;
+    margin: 0 auto;
+}
+.notice__rows .notice__row {
+    border-top: 1px solid #605759;
+}
+.notice__row .nrow__title-wrap
+, .frequently__row .frow__title-wrap {
+     position: relative;
+     background: #D1E9CA;
+     padding: 14px 7px;
+     border-bottom: 1px solid #605759;
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+}
+/* 제목에 hover 이벤트 발생 시 */
+.notice__row .nrow__title-wrap:hover
+, .frequently__row .frow__title-wrap:hover {
+	background: #E9F7AB;
+}
+.notice__row .nrow__title {
+	margin-left: 25px;
+}
+.nrow__title-wrap .nrow__icon
+, .frow__title-wrap .frow__icon {
+	position: absolute;
+	right: 25px;
+}
+.notice__row .nrow__content
+, .frequently__row .frow__content {
+	padding: 20px 30px;
+	display: none;
+	border-bottom: 1px solid #605759;
+}
+/* 자주 묻는 질문  */
+.frequently__row .frow__title-wrap {
+	background: white;
+}
+/* 자주 묻는 질문 번호 */
+.frow__title-wrap .frow__no {
+	margin: 0 25px;
+}
+/* 자주 묻는 질문 내용 */
+.frow__content p {
+	margin: 0;
+}
+.frow__content .content__para {
+	margin-bottom: 15px;
+}
+.frow__content .content__para:last-child {
+	margin: 0;
+}
+/* 내용 꾸미기 */
+.content__para .content__g-emphasize {
+	font-size: 20px;
+	font-weight: 700;
+	color: #789F6F;
+}
+.content__para .content__r-emphasize {
+	font-size: 20px;
+	font-weight: 700;
+	color: #9E1C21;
+}
+/* 내용 꾸미기 - 소제목 */
+.content__para .content__s-g-title{
+    border-left: 3px solid #789F6F;
+    padding-left: 7px;
+    color: #789F6F;
+    font-weight: 700;
+    font-size: 20px;
+}
+.content__para .content__r-g-title{
+    border-left: 3px solid #9E1C21;
+    padding-left: 7px;
+    color: #9E1C21;
+    font-weight: 700;
+    font-size: 20px;
+}
