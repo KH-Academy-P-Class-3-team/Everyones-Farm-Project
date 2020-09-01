@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,7 @@ public class MainController {
 
 	// log 를 남기기 위한 Logger 객체
 	// log 는 추후에 추가하기
-//	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	// Service 객체
 	@Autowired
@@ -34,9 +36,11 @@ public class MainController {
 			Model model
 			, HttpSession session
 			) {
-	
+
+		// logger 찍기
+		logger.info("MainController '/' [GET] 요청");
+		
 		// session 영역에 있는 로그인 했을 때 불러오기
-//		System.out.println("MainController - main page login session:" + session.getAttribute("userInfo"));
 		// session 영역에서 login 한 User의 정보 받아오기
 		UserTB loginUser = (UserTB) session.getAttribute("userInfo");
 		
@@ -61,7 +65,23 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String info() {
+	public String info(
+			Model model
+			, HttpSession session
+			) {
+		
+		// logger 찍기
+		logger.info("MainController '/info' [GET] 요청");
+		
+		// session 영역에서 login 한 User의 정보 받아오기
+		UserTB loginUser = (UserTB) session.getAttribute("userInfo");
+		
+		if(loginUser != null) {
+			model.addAttribute("loginUser", loginUser);
+		} else {
+			model.addAttribute("loginUser", null);
+		}
+
 		return "main/info";
 	}
 	
