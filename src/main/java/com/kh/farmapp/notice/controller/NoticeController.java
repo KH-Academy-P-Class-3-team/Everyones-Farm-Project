@@ -26,16 +26,11 @@ public class NoticeController {
 				Model model
 			) {
 		
-		System.out.println("Notice Controller /notice/noticelist - [GET] 요청");
+//		System.out.println("Notice Controller /notice/noticelist - [GET] 요청");
 		
 		// 가장 최근 공지사항 불러오기
 		Notice latestNotice = noticeService.selectOneNotice();
 //		System.out.println("Notice Controller latestNotice: " + latestNotice);
-		
-		// 구현 예정
-		// 자주 묻는 질문 리스트 받아오기
-		
-		// 더보기 버튼 클릭 시 리스트 더 받아오기
 		
 		// Model 객체에 추가하여 view 파일에 전송
 		model.addAttribute("latestNotice", latestNotice);

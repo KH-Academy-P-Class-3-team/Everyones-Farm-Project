@@ -15,10 +15,4 @@ public interface NoticeDao {
 	 */
 	public Notice selectOneNotice();
 
-	/**
-	 * 자주 묻는 질문 리스트 조회 한다.
-	 * @return List<Notice> - 조회 결과 반환
-	 */
-	public List<Notice> selectAllQnaList();
-
 }
