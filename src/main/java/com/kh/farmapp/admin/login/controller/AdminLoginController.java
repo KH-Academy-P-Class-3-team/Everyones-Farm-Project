@@ -21,6 +21,7 @@ public class AdminLoginController {
 	// 관리자 로그인 페이지
 	@RequestMapping(value = "/admin/login", method = RequestMethod.GET)
 	public String adminLogin() {
+		
 		return "admin/login/alogin";
 	}
 	
