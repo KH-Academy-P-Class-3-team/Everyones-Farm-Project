@@ -25,11 +25,7 @@ public class AdminMainDaoImpl implements AdminMainDao{
 	@Override
 	public List<Map<String, Object>> selectLatestFarmerApplicationList() {
 		
-		// 클래스 다이어그램 용 DTO 객체
-		Farmer farmer = new Farmer();
-		Farm farm = new Farm();
-		
-		return null;
+		return session.selectList("ADMINMAIN.selectLatestFarmerApplicationList");
 	}
 
 	@Override

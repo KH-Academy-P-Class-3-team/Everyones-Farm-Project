@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ADMINMAIN">
+
+	<resultMap type="hashmap" id="farmerMap">
+		<id property="fno" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="farmerName" column="farmer_name" />
+		<result property="applicationDate" column="application_date" />
+		<result property="isConfirm" column="is_confirm" />
+		<result property="farmNo" column="farm_no" />
+		<result property="farmName" column="farm_name" />
+	</resultMap>
+	<select id="selectLatestFarmerApplicationList" resultMap="farmerMap">
+		select
+		    f.farmer_no
+		    , f.farmer_id
+		    , f.name AS farmer_name
+		    , f.application_date
+		    , f.is_confirm
+		    , farm.farm_no
+		    , farm.farm_name
+		from
+		    farmer f
+		    , farm
+		where
+		    f.farmer_no = farm.farmer_no
+		    and f.is_confirm = 0
+		order by
+		    f.application_date desc
+		    , f.farmer_no desc
+	</select>
+
+</mapper>
