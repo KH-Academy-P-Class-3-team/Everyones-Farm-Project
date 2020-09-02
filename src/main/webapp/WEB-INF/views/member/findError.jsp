@@ -20,5 +20,5 @@
 	</div>
 	</div>
 </div>
-
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/member/js-to-main.js"></script>
 <%@include file="../include/footer.jsp" %>
