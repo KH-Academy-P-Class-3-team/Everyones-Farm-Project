@@ -23,7 +23,7 @@ public class UserTB {
 	// 일반 회원 활동 정지 여부
 	private int isPause;
 	// 우편번호
-	private String zoneCode;
+	private String zonecode;
 	// 도로명 주소
 	private String firstAddress;
 	// 상세 주소
@@ -34,7 +34,7 @@ public class UserTB {
 	public String toString() {
 		return "UserTB [userNo=" + userNo + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
 				+ ", email=" + email + ", phone=" + phone + ", isLeave=" + isLeave + ", isPause=" + isPause
-				+ ", zoneCode=" + zoneCode + ", firstAddress=" + firstAddress + ", secondAddress=" + secondAddress
+				+ ", zoneCode=" + zonecode + ", firstAddress=" + firstAddress + ", secondAddress=" + secondAddress
 				+ "]";
 	}
 	
@@ -88,10 +88,10 @@ public class UserTB {
 		this.isPause = isPause;
 	}
 	public String getZoneCode() {
-		return zoneCode;
+		return zonecode;
 	}
 	public void setZoneCode(String zoneCode) {
-		this.zoneCode = zoneCode;
+		this.zonecode = zoneCode;
 	}
 	public String getFirstAddress() {
 		return firstAddress;
