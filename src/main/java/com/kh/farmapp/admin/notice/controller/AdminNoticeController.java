@@ -25,71 +25,32 @@ public class AdminNoticeController {
 	private AdminNoticeService adminNoticeService;
 	
 	// 공지사항 관리 목록 페이지
-	@RequestMapping(value = "/noticeadmin/noticelist", method = RequestMethod.GET)
+	@RequestMapping(value = "/adminnotice/list", method = RequestMethod.GET)
 	public String adminNoticeList() {
-		return "";
+		return "admin/notice/admin_notice_list";
 	}
 	
-	// 자주 묻는 질문 관리 목록 페이지
-	@RequestMapping(value = "/noticeadmin/qnalist", method = RequestMethod.GET)
-	public String adminQnaList() {
-		return "";
-	}
 	
 	// 공지사항 관리 공지사항 상세 페이지
-	@RequestMapping(value = "/noticeadmin/noticedetail", method = RequestMethod.GET)
+	@RequestMapping(value = "/adminnotice/noticedetail", method = RequestMethod.GET)
 	public String adminNoticeDetail(Notice noticeNo) {
 		return "";
 	}
 	
-	// 자주 묻는 질문 관리 자주 묻는 질문 상세 페이지
-	@RequestMapping(value = "/noticeadmin/qnadetail", method = RequestMethod.GET)
-	public String adminQnaDetail(Notice qnaNo) {
-		return "";
-	}
-	
 	// 공지사항 관리 공지사항 작성 폼 페이지
-	@RequestMapping(value = "/noticeadmin/writenotice", method = RequestMethod.GET)
+	@RequestMapping(value = "/adminnotice/writenotice", method = RequestMethod.GET)
 	public void adminNoticeWrite() {
 	}
 	
 	// 공지사항 관리 공지사항 작성
-	@RequestMapping(value = "/noticeadmin/writenotice", method = RequestMethod.POST)
+	@RequestMapping(value = "/adminnotice/writenotice", method = RequestMethod.POST)
 	public String adminNoticeWriteProc(Notice notice) {
 		return "";
 	}
 	
-	// 자주 묻는 질문 관리 자주 묻는 질문 작성 폼 페이지
-	@RequestMapping(value = "/noticeadmin/writeqna", method = RequestMethod.GET)
-	public void adminQnaWrite() {
-	}
-	
-	// 자주 묻는 질문 관리 자주 묻는 질문 작성
-	@RequestMapping(value = "/noticeadmin/writeqna", method = RequestMethod.POST)
-	public String adminQnaWriteProc(Notice notice) {
-		return "";
-	}
-	
-	// 자주 묻는 질문 관리 자주 묻는 질문 수정 폼 페이지
-	@RequestMapping(value = "/noticeadmin/modifyqna", method = RequestMethod.GET)
-	public void adminQnaModify() {
-	}
-	
-	// 자주 묻는 질문 관리 자주 묻는 질문 수정
-	@RequestMapping(value = "/noticeadmin/modifyqna", method = RequestMethod.POST)
-	public String adminQnaModifyProc(Notice notice) {
-		return "";
-	}
-	
 	// 공지사항 관리 공지사항 삭제
-	@RequestMapping(value = "/noticeadmin/deletenotice", method = RequestMethod.POST)
+	@RequestMapping(value = "/adminnotice/deletenotice", method = RequestMethod.POST)
 	public String deleteNotice(Notice notice) {
-		return "";
-	}
-	
-	// 자주 묻는 질문 관리 자주 묻는 질문 삭제
-	@RequestMapping(value = "/noticeadmin/deleteqna", method = RequestMethod.POST)
-	public String deleteQna(Notice notice) {
 		return "";
 	}
 	

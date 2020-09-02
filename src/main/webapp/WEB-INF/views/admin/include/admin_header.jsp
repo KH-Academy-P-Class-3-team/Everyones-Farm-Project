@@ -67,7 +67,7 @@
 					<li><a href="#">농업인 회원 문의</a></li>
 				</ul>
 			</li>
-			<li><a href="#">공지사항</a></li>
+			<li><a href="<%=request.getContextPath() %>/adminnotice/list">공지사항</a></li>
 		</ul>
 	</nav>
 </header>
