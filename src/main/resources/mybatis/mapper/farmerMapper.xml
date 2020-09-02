@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="FARMER">
+	<insert id="insertFarmer" parameterType="common.dto.Farmer">
+		insert into farmer (farmer_no, farmer_id, farmer_pw, name, email, phone, is_confirm, is_leave, is_pause, zonecode, first_address, second_address)
+		values( farmer_seq.nextval, #{farmerId}, #{farmerPw}, #{name}, #{email}, #{phone}, 0,0,0, #{zonecode}, #{firstAddress}, #{secondAddress} )
+	
+	</insert>
+
+	<insert id="insertFarm" parameterType="common.dto.Farm">
+		insert into farm (farm_no, farm_name, phone, zonecode, first_address, second_address, introduce, farm_reason, farm_mind, farm_sell, visit, farmer_no)
+		values( farm_seq.nextval, #{farmName}, #{phone}, #{zonecode}, #{firstAddress}, #{secondAddress}, #{introduce}, #{farmReason}, #{farmMind}, #{farmSell}, 0, farmer_seq.currval)
+	</insert>
+
+	<select id="selectFarmer" resultType="common.dto.Farmer">
+		select * from farmer
+		where farmer_id= #{farmerId} and is_confirm=1 and is_leave=0 and is_pause=0
+	</select>	
+	
+	<select id="selectIdCheck" resultType="int">
+		select count(*) from farmer
+		where farmer_id = #{farmerId}
+	</select>
+	
+	<select id="selectEmailCheck" resultType="int">
+		select count(*) from farmer
+		where email = #{email}
+	</select>
+	
+	<select id="selectPhoneCheck" resultType="int">
+		select count(*) from farmer
+		where phone = #{phone}
+	</select>
+	
+	<select id="selectfarmPhoneCheck" resultType="int">
+		select count(*) from farm
+		where phone = #{phone}
+	</select>
+	
+	<select id="selectId" resultType="common.dto.Farmer">
+		select farmer_id from farmer
+		where name=#{name} and phone = #{phone}
+	</select>
+	
+	<select id="selectPw" resultType="common.dto.Farmer">
+		select * from farmer
+		where farmer_id= #{farmerId} and email = #{email}
+	</select>
+	
+	<update id="updatePw">
+		update farmer
+		set farmer_pw = #{farmerPw} where farmer_id=#{farmerId}
+	</update>
+</mapper>

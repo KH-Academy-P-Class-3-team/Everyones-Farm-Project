@@ -14,6 +14,25 @@ button:hover {
 	background-color: #789F6F;
 }
 
+.all{
+	background-image:url('../../image/member/grass.png');
+	background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-bottom: 85px;
+}
+
+.farmimage{
+	height: 60px;
+    position: absolute;
+    left: 916px;
+    bottom: 526px;
+}
+
+.userloginfarmimage{
+	height: 60px;
+	float: right;
+}
 
 .farmer{
 	margin: 300px auto 200px auto;
@@ -24,11 +43,27 @@ button:hover {
 	
 }
 
-input{
-	height: 30px;
+input[type=text]{
+	height: 35px;
     margin-right: 10px;
     margin-bottom: 5px;
     width: 200px;
+}
+
+input[type=password]{
+	height: 35px;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    width: 200px;
+}
+
+input[type=button]{
+	
+	padding: 10px 40px;
+	background-color: #D1E9CA;
+	border-color: #D1E9CA;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .login{
@@ -39,8 +74,9 @@ input{
 	float: right;
 }
 
-img{
+.social{
 	height: 40px;
+	margin-top: 3px;
 }
 
 .member{

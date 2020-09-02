@@ -28,7 +28,27 @@ button:hover {
 	height: 930px;
 	border: 10px solid #EAE891;
 	padding: 30px;
-	
+}
+
+.joinfarmer{
+	margin: 300px auto 200px auto;
+	width: 1050px;
+	height: 1175px;
+	border: 10px solid #EAE891;
+	padding: 30px;
+}
+
+.all{
+	background-image:url('../../image/member/grass.png');
+	background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-bottom: 1px;
+}
+
+.userjoinfarmimage{
+	height: 60px;
+	float: right;
 }
 
 input{
@@ -55,7 +75,11 @@ input{
 	font-weight: bold;
 }
 
-.why input{
+.why{
+	margin-top: 10px;
+}
+
+.why input[type=checkbox]{
 	height: 15px;
 	width: 15px;
 	border: 1px solid #789F6F;
@@ -74,4 +98,15 @@ input{
 
 .id-check-msg{
 	font-size: 0.8em;
+	color: #807F89;
+}
+
+.email-check-msg{
+	font-size: 0.8em;
+    color: #807F89;
+}
+
+.phone-check-msg{
+	font-size: 0.8em;
+	color: #807F89;
 }

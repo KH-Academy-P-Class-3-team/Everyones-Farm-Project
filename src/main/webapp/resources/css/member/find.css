@@ -1,55 +1,141 @@
 @charset "UTF-8";
 
+.focus{
+	display: none;
+}
 
-button{
+.findall{
+	background-image:url('../../image/member/grass.png');
+	background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-bottom: 35px;
+    padding-top: 150px;
+}
+
+.selectuser{
+/* 	position: absolute; */
+    left: 533px;
+    bottom: 637px;
+    width: 380px;
+    margin: 0 auto;
+}
+
+.classify{
+	padding: 10px 0px;
+	background-color: #EAE891;
+	border: none;
+    box-sizing: border-box;
+    border-radius: 22px 22px 0 0;
+    width: 120px;
+    font-size: 1em;
+}
+
+.classify:hover {
+	background-color: #E2CC6C;
+}
+
+/* .classify:active { */
+/* 	background-color: #E2CC6C; */
+/* } */
+
+.findfarmimage{
+	height: 60px;
+/*     position: fixed; */
+    left: 832px;
+    bottom: 626px;
+    z-index: 999999;
+    float: right;
+}
+.find{
 	
-	padding: 10px 40px;
+	padding: 10px 0px;
 	background-color: #D1E9CA;
 	border-color: #D1E9CA;
     box-sizing: border-box;
     border-radius: 5px;
+    width: 145px;
+    margin-top: 5px;
 }
 
-button:hover {
+.find:hover {
 	background-color: #789F6F;
 }
 
+.change{
+	height: 35px;
+    margin: 7px 7px 12px 7px;
+    width: 450px;
+    border: 1px solid #789F6F;
+}
 
-.farmer{
-	position: absolute;
-	left: 40%;
+.ffff{
+
+	margin: 0 auto 200px auto;
+	width: 380px;
+	height: 255px;
+	border: 10px solid #EAE891;
+	padding: 30px;
+}
+
+
+.chpw{
 	
+	padding: 10px 0px;
+	background-color: #D1E9CA;
+	border-color: #D1E9CA;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 170px;
+    margin-top: 10px;
+    margin-left: 25px;
+}
+
+.chpw:hover {
+	background-color: #789F6F;
+}
+
+.pwchange{
+
+	margin: 300px auto 200px auto;
+	width: 540px;
+	height: 365px;
 	border: 10px solid #EAE891;
 	padding: 30px;
 	
 }
 
-input{
+.findinput{
 	height: 30px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 5px;
+/*     margin: 7px 7px 12px 7px; */
     width: 200px;
+    border: 1px solid #789F6F;
+    float: right;
 }
 
 .login{
 	width: 150px;
 }
 
-.find{
-	float: right;
-	margin-top: 5px;
-}
 
 .inp{
 	vertical
 }
 
-img{
-	height: 40px;
-}
-
 .member{
 	font-size: 1.3em;
 	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+
+.result{
+	font-size: 1.3em;
+    color: #4F7670;
+}
+
+.social{
+	height: 90px;
+    margin-left: 10px;
+    margin-right: 20px;
 }

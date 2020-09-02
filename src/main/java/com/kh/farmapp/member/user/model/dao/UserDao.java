@@ -1,5 +1,6 @@
 package com.kh.farmapp.member.user.model.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import common.dto.UserTB;
@@ -22,10 +23,10 @@ public interface UserDao {
 	
 	/**
 	 * 전화번호로 아이디 찾기
-	 * @param userPhone
-	 * @return int
+	 * @param commandMap
+	 * @return User
 	 */
-	public int findUserId(String userPhone);
+	public UserTB findUserId(Map<String, Object> commandMap);
 	
 	/**
 	 * 비밀번호 업데이트하기
@@ -40,5 +41,27 @@ public interface UserDao {
 	 * @return int
 	 */
 	public int selectIdCheck(String userId);
+
+	/**
+	 * 비밀번호 찾기
+	 * @param commandMap
+	 * @return User
+	 */
+	public UserTB findUserPw(Map<String, Object> commandMap);
+
+	/**
+	 * 중복 이메일 확인
+	 * @param email
+	 * @return int
+	 */
+	public int selectEmailCheck(String email);
+
+	/**
+	 * 중복 전화번호 확인
+	 * @param phone
+	 * @return int
+	 */
+	public int selectPhoneCheck(String phone);
+
 	
 }

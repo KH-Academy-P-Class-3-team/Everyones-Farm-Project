@@ -5,8 +5,23 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <%@include file="../include/header.jsp" %>
+
+<style type="text/css">
+.main__footer {
+    /* width: 980px; */
+    margin: 0 auto;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 50px; */
+    background: #605759;
+}
+</style>
+
 <div style="clear: both; margin-top: 200px;"></div>
+<div class="all">
 <div class="farmer">
+<img alt="farm" src="<%=request.getContextPath()%>/resources/image/member/farm.png" class="userjoinfarmimage"/>
 	<div class="member">일반 사용자 회원가입<br><br></div>
 	<form method="post" action="<%=request.getContextPath()%>/user/joinemailcheck.do" 
 		onsubmit="return validate();">
@@ -19,18 +34,18 @@
  	<input type="password" id="pwcheck" name="pwcheck" /><br>
  	<label>이름 * </label><br>
  	<input type="text" id="userName" name="userName" /><br>
- 	<label>이메일 </label><br>
+ 	<label>이메일 * </label><button type="button" class="btn_id-check" onclick="xmlEmailCheck()" style="width:93px;">이메일 확인</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="email-check-msg" class="email-check-msg"></span><br>
  	<input type="text" id="email" name="email" placeholder="  ex) example@naver.com" /><br>
- 	<label>전화번호 * </label><br>
+ 	<label>전화번호 * </label><button type="button" class="btn_id-check" onclick="xmlPhoneCheck()" style="width:110px;">전화번호 확인</button>&nbsp;&nbsp;&nbsp;<span id="phone-check-msg" class="phone-check-msg"></span><br>
  	<input type="text" id="phone" name="phone" placeholder="  ' - '를 제외하고 작성해주세요"/><br>
  	<label>주소 </label> <br>
  	<div class="addr_wrap1">
-	<input type="text" id="sample6_postcode" name="zoneCode" placeholder="  우편번호" style="width: 200px">
+	<input type="text" id="sample6_postcode" name="zonecode" placeholder="  우편번호" style="width: 200px">
 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 100px">
 	</div>
- 	<input type="text" id="sample6_address" placeholder="주소" name="firstAddress"><br>
-	<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="secondAddress"><br>
-	<input type="text" id="sample6_extraAddress" placeholder="참고항목"><br>
+ 	<input type="text" id="sample6_address" placeholder="  주소" name="firstAddress"><br>
+	<input type="text" id="sample6_detailAddress" placeholder="  상세주소" name="secondAddress"><br>
+	<input type="text" id="sample6_extraAddress" placeholder="  참고항목"><br>
 	<div id="err-addr"></div>
 	<div class="btn">
  	<button type="button" class="find" onclick="cancel();" id="cancel">취소</button>
@@ -38,6 +53,7 @@
 	</div>
 <!-- 	<input type="submit" value="회원 가입" class="find" /> -->
 	</form>
+</div>
 </div>
 
 <!-- 주소 api -->
@@ -52,6 +68,7 @@
         var name = document.getElementById('userName').value;
         var phone = document.getElementById('phone').value;
         var email = document.getElementById('email').value;
+        
         var regExpPw = /(?=.*\d)(?=.*[~`!@#$%\^&*()-+=])(?=.*[a-zA-Z]).{8,15}$/;
 
         function chk(re, e, msg) {
@@ -67,7 +84,7 @@
         }
 
         if(!ajaxFlag){
-           alert("아이디 중복검사를 해주세요");
+           alert("중복검사를 모두 해주세요!");
            return false;
         }
         
@@ -91,6 +108,11 @@
         
         if(email==""){
         	alert("이메일을 입력해주세요!")
+        	return false;
+        }
+
+        if(phone==""){
+        	alert("전화번호를 입력해주세요!")
         	return false;
         }
 
@@ -141,10 +163,114 @@
 			console.dir(data);
 			if(data == ''){  
 				ajaxFlag = true;
-				document.querySelector("#id-check-msg").textContent = '사용가능한 아이디 입니다';
+				document.querySelector("#id-check-msg").textContent = '사용가능한 아이디입니다';
 			} else{
 				ajaxFlag = false;
 				document.querySelector("#id-check-msg").textContent = data+ '는 이미 존재하는 아이디입니다';
+			}
+		})
+	}
+	
+	function xmlEmailCheck(){
+		//사용자가 입력한 id값을 가져온다
+		var email = document.querySelector('#email').value;
+		var emailc = document.getElementById('email');
+		var regExpEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+        function chk(re, e, msg) {
+            if(re.test(e.value)) {                 
+                return true;          
+          }else{
+                alert(msg);
+              e.value = "";
+              e.focus();
+              //기본 이벤트 취소
+              return false;
+            }
+        }
+		
+		if(email ==""){
+			alert("이메일을 입력해주세요!")
+			return false;
+		}
+		
+        //id 검사
+        if(!chk(regExpEmail, emailc, '이메일 형식이 아닙니다')){
+        	emailc.focus();
+        	return false;
+        }
+		
+		//XMLHttpRequest 객체 생성
+		var xhr = new XMLHttpRequest();
+		//http request message의 시작줄 작성
+		xhr.open('POST', '<%=request.getContextPath()%>/user/emailcheck.do');
+		//http request message의 header 작성
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		//body에 데이터 작성하고 전송
+		xhr.send('email=' +email);
+		//ajax통신이 끝나고 (load) 실행할 콜백함수 등록
+		xhr.addEventListener('load', function(){
+			//response body 있는 데이터를 받아옴
+			var data = xhr.response;
+			console.dir(data);
+			if(data == ''){  
+				ajaxFlag = true;
+				document.querySelector("#email-check-msg").textContent = '사용가능한 이메일입니다';
+			} else{
+				ajaxFlag = false;
+				document.querySelector("#email-check-msg").textContent = '이미 존재하는 이메일입니다';
+			}
+		})
+	}
+	
+	function xmlPhoneCheck(){
+		//사용자가 입력한 id값을 가져온다
+		var phone = document.querySelector('#phone').value;
+		var phonec = document.getElementById('phone');
+		var regExpPhone =  /^[0-9]*$/;
+
+        function chk(re, e, msg) {
+            if(re.test(e.value)) {                 
+                return true;          
+          }else{
+                alert(msg);
+              e.value = "";
+              e.focus();
+              //기본 이벤트 취소
+              return false;
+            }
+        }
+		
+		if(phone ==""){
+			alert("전화번호를 입력해주세요!")
+			return false;
+		}
+		
+        //id 검사
+        if(!chk(regExpPhone, phonec, '전화번호 형식이 아닙니다')){
+        	phonec.focus();
+        	return false;
+        }
+		
+		//XMLHttpRequest 객체 생성
+		var xhr = new XMLHttpRequest();
+		//http request message의 시작줄 작성
+		xhr.open('POST', '<%=request.getContextPath()%>/user/phonecheck.do');
+		//http request message의 header 작성
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		//body에 데이터 작성하고 전송
+		xhr.send('phone=' +phone);
+		//ajax통신이 끝나고 (load) 실행할 콜백함수 등록
+		xhr.addEventListener('load', function(){
+			//response body 있는 데이터를 받아옴
+			var data = xhr.response;
+			console.dir(data);
+			if(data == ''){  
+				ajaxFlag = true;
+				document.querySelector("#phone-check-msg").textContent = '사용가능한 전화번호입니다';
+			} else{
+				ajaxFlag = false;
+				document.querySelector("#phone-check-msg").textContent = '이미 존재하는 전화번호입니다';
 			}
 		})
 	}
