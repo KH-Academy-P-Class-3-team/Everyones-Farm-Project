@@ -53,16 +53,29 @@
 , .notice__n-table .n-table__td {
     padding: 14px 7px;
 }
-.n-table__tr .n-table__th:first-child {
+.n-table__tr-head .n-table__th:first-child {
 	width: 5%;
 }
-.n-table__tr .n-table__th:nth-child(3) {
+.n-table__tr-head .n-table__th:nth-child(3) {
 	width: 50%;
 }
-.n-table__tr .n-table__th:nth-child(2)
-, .n-table__tr .n-table__th:nth-child(4)
-, .n-table__tr .n-table__th:last-child {
+.n-table__tr-head .n-table__th:nth-child(2)
+, .n-table__tr-head .n-table__th:nth-child(4)
+, .n-table__tr-head .n-table__th:last-child {
 	width: 15%;
+}
+/* 제목, 관리자 아이디(작성자) 글자 수 제한 */
+.n-table__td .n-table__title-hidden
+, .n-table__td .n-table__id-hidden {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.n-table__td .n-table__title-hidden {
+    width: 435px;
+}
+.n-table__td .n-table__id-hidden {
+	width: 120px;
 }
 </style>
 
@@ -90,8 +103,8 @@
 					<tr class="n-table__tr-body">
 						<td class="n-table__td"><input type="checkbox" name="noticeNo" /></td>
 						<td class="n-table__td">${n.noticeNo }</td>
-						<td class="n-table__td">${n.title }</td>
-						<td class="n-table__td">${n.adminId }</td>
+						<td class="n-table__td"><div class="n-table__title-hidden">${n.title }</div></td>
+						<td class="n-table__td"><div class="n-table__id-hidden">${n.adminId }</div></td>
 						<td class="n-table__td">
 							<fmt:formatDate value="${n.regDate }" pattern="yyyy-MM-dd"/>
 						</td>
