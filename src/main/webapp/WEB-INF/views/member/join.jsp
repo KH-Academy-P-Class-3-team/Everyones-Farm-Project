@@ -25,8 +25,8 @@
 		<div class="mfarmer">
 		<img alt="farmer" src="<%=request.getContextPath()%>/resources/image/member/man.png" class="social"/></div>
 		<div class="login">
-		<button class="userlogin" onclick="location.href='<%=request.getContextPath() %>/user/userlogin.do'">일반 사용자 로그인</button><br>
-		<button class="userlogin" onclick="location.href='<%=request.getContextPath() %>/farmer/farmerlogin.do'">농부 사용자 로그인</button>
+		<button class="userlogin" onclick="location.href='<%=request.getContextPath() %>/user/usertos.do'">일반 사용자 회원가입</button><br>
+		<button class="userlogin" onclick="location.href='<%=request.getContextPath() %>/farmer/farmertos.do'">농부 사용자 회원가입</button>
 		</div>
 		<div class="wfarmer">
 		<img alt="farmer" src="<%=request.getContextPath()%>/resources/image/member/woman.png" class="social"/></div>

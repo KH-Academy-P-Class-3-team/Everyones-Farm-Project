@@ -1,5 +1,28 @@
 @charset "UTF-8";
 
+.all{
+	background-image:url('../../image/member/grass.png');
+	background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-bottom: 1px;
+}
+
+.alllogin{
+	background-image:url('../../image/member/grass.png');
+	background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-bottom: 80px;
+}
+.farmimage{
+	height: 60px;
+    position: absolute;
+    left: 916px;
+    bottom: 576px;
+}
+
+
 
 button{
 	
@@ -15,6 +38,18 @@ button:hover {
 	background-color: #789F6F;
 }
 
+input[type=button]{
+	padding: 10px 40px;
+	background-color: #D1E9CA;
+	border-color: #D1E9CA;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+input[type=button]:hover {
+	background-color: #789F6F;
+}
 /* img{ */
 /* 	height: 90px; */
 /*     margin-left: 20px; */
@@ -33,6 +68,9 @@ button:hover {
 	float:left;
 }
 
+.person{
+	height: 90px;
+}
 .farmer{
 	margin: 300px auto 200px auto;
 	width: 550px;
@@ -46,8 +84,16 @@ button:hover {
 	width: 168px;
 }
 
+.findm{
+	padding-left: 60px;
+}
+
 .social{
 	height: 90px;
-    margin-left: 20px;
+    margin-left: 16px;
     margin-right: 20px;
+}
+
+.inp{
+	margin-top: 3px;
 }

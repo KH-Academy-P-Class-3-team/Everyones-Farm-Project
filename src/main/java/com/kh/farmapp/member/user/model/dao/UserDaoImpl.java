@@ -1,5 +1,6 @@
 package com.kh.farmapp.member.user.model.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,21 +26,32 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	@Override
-	public int findUserId(String userPhone) {
-		// TODO Auto-generated method stub
-		return 0;
+	public UserTB findUserId(Map<String, Object> commandMap) {
+		return session.selectOne("USER.selectId", commandMap);
+	}
+	
+	@Override
+	public UserTB findUserPw(Map<String, Object> commandMap) {
+		return session.selectOne("USER.selectPw", commandMap);
 	}
 	
 	@Override
 	public int updatePw(UserTB user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.update("USER.updatePw", user);
 	}
 	
 	@Override
 	public int selectIdCheck(String userId) {
-		// TODO Auto-generated method stub
 		return session.selectOne("USER.selectIdCheck", userId);
 	}
 	
+	@Override
+	public int selectEmailCheck(String email) {
+		return session.selectOne("USER.selectEmailCheck", email);
+	}
+	
+	@Override
+	public int selectPhoneCheck(String phone) {
+		return session.selectOne("USER.selectPhoneCheck", phone);
+	}
 }
