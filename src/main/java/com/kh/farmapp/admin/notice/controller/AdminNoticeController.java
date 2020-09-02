@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.farmapp.admin.model.service.AdminNoticeService;
 
 import common.dto.Notice;
+import common.util.AdminPaging;
 
 /**
  * 공지사항 & 자주 묻는 질문 관리 페이지
@@ -32,21 +34,31 @@ public class AdminNoticeController {
 	@RequestMapping(value = "/adminnotice/list", method = RequestMethod.GET)
 	public String adminNoticeList(
 			Model model
+			, @RequestParam String curPage
 			) {
 		
 		// 로그 찍기
 		logger.info("/adminnotice/list - [GET] 요청");
 		
-		// notice 목록 불러오기
-		List<Map<String, Object>> nList = adminNoticeService.selectAllNoticeList();
-		//nList test output
-//		for(Map<String, Object> m : nList) {
+		// 페이징 설정
+		AdminPaging apaging = adminNoticeService.getPaging(curPage);
+//		logger.info("AdminPaging: " + apaging.toString());
+		
+		// apaging 정보로 notice 목록 불러오기
+		List<Map<String, Object>> pagingNList = adminNoticeService.selectNoticeByAPaging(apaging);
+		//pagingNList test output
+//		for(Map<String, Object> m : pagingNList) {
 //			logger.info("m: " + m.toString());
 //		}
 		
-		if( nList != null ) {
-			
-			model.addAttribute("nList", nList);
+		// model 값 넘겨주기
+		// 페이징 객체 넘기기
+		if( apaging != null ) {
+			model.addAttribute("apaging", apaging);
+		}
+		// 페이징 처리된 목록 넘기기
+		if( pagingNList != null ) {
+			model.addAttribute("pagingNList", pagingNList);
 		}
 		
 		return "admin/notice/admin_notice_list";

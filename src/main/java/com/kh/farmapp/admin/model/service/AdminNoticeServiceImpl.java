@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farmapp.admin.model.dao.AdminNoticeDao;
 
 import common.dto.Notice;
+import common.util.AdminPaging;
 
 
 /**
@@ -43,6 +44,31 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 	@Override
 	public int deleteNoticeByNoticeNo(Notice noticeNo) {
 		return adminNoticeDao.deleteNoticeByNoticeNo(noticeNo);
+	}
+	
+	// 페이징 설정
+	@Override
+	public AdminPaging getPaging(String curPage) {
+
+		// curPageNo 초기화, curPageNo 은 현재 페이지 번호를 뜻함!
+		int curPageNo = 0;
+		if( curPage != null && !"".equals(curPage) ) {
+			curPageNo = Integer.parseInt(curPage);
+		}
+		
+		// NOTICE 테이블의 총 게시글 수를 조회한다.
+		int totalCount = adminNoticeDao.selectCntAllNotice();
+		
+		// AdminPaging 객체 생성 - 현재 페이지(curPage), 총 게시글 수(totalCount) 활용
+		AdminPaging paging = new AdminPaging(totalCount, curPageNo);
+		
+		return paging;
+	}
+	
+	// 페이징 정보로 공지사항 목록 조회
+	@Override
+	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging) {
+		return adminNoticeDao.selectNoticeByAPaging(apaging);
 	}
 
 }

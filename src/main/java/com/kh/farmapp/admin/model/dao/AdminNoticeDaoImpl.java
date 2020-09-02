@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import common.dto.Notice;
+import common.util.AdminPaging;
 
 /**
  * AdminNoticeDao 를 상속 받는 클래스
@@ -44,4 +45,15 @@ public class AdminNoticeDaoImpl implements AdminNoticeDao{
 		return 0;
 	}
 
+	// NOTICE 테이블의 모든 행 count 조회
+	@Override
+	public int selectCntAllNotice() {
+		return session.selectOne("ADMINNOTICE.selectCntAllNotice");
+	}
+	
+	// 페이징 정보로 Notice 목록 조회
+	@Override
+	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging) {
+		return session.selectList("ADMINNOTICE.selectNoticeByAPaging", apaging);
+	}
 }

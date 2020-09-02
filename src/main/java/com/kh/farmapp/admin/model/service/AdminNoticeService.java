@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import common.dto.Notice;
+import common.util.AdminPaging;
 
 
 /**
@@ -39,5 +40,23 @@ public interface AdminNoticeService {
 	 * @return int - 삭제 결과
 	 */
 	public int deleteNoticeByNoticeNo(Notice noticeNo);
+
+
+	/**
+	 * 페이징 설정
+	 * 
+	 * @param curPage - 현재 페이지 번호(querystring 값)
+	 * @return AdminPaging - 조회 결과 반환 객체
+	 */
+	public AdminPaging getPaging(String curPage);
+
+
+	/**
+	 * 페이징 처리 된 공지사항 목록 불러오기
+	 * 
+	 * @param apaging - 페이징 정보를 가진 AdminPaging 객체
+	 * @return List<Map<String, Object>> - 조회된 결과 반환 객체
+	 */
+	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging);
 	
 }
