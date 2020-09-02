@@ -134,7 +134,7 @@ public class FarmerController {
 			model.addAttribute("alertMsg", "로그인 성공");
 			model.addAttribute("url", "login.do");
 		} else {
-			model.addAttribute("alertMsg", "로그인 실패");
+			model.addAttribute("alertMsg", "로그인 실패, 가입되지 않은 회원이거나 아직 관리자의 승인을 받지 않은 회원입니다.");
 			model.addAttribute("url", "farmerlogin.do");
 		}
 		

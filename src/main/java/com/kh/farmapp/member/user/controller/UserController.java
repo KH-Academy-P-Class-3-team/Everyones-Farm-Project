@@ -125,13 +125,17 @@ public class UserController {
 		@RequestParam Map<String,Object> commandMap
 		, HttpSession session
 		, Model model
+		, HttpServletRequest req
 			) {
 		
 		UserTB res = userService.selectUser(commandMap);
 		if(res!=null) {
 			session.setAttribute("userInfo", res);
 			model.addAttribute("alertMsg", "로그인 성공");
-			model.addAttribute("url", "login.do");
+
+			// main 페이지로 가게 만들어 놓을게요!
+//			model.addAttribute("url", "login.do");
+			model.addAttribute("url", req.getContextPath());
 		} else {
 			model.addAttribute("alertMsg", "로그인 실패");
 			model.addAttribute("url", "userlogin.do");

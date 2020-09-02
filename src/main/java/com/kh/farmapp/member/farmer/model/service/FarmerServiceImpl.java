@@ -50,7 +50,9 @@ public class FarmerServiceImpl implements FarmerService {
 		String password = (String)commandMap.get("farmerPw");
 		Farmer farmer = farmerDao.selectFarmer(commandMap);
 		
-		if(passwordEncoder.matches(password, farmer.getFarmerPw())) {
+		// farmer 가 null 일 때 예외 처리를 해주지 않아서 에러가 납니다.
+		// farmer != null 라는 조건을 추가해 주겠습니다.
+		if(farmer != null && passwordEncoder.matches(password, farmer.getFarmerPw())) {
 			farmer.setFarmerPw(password);
 			return farmer;
 		} else {
