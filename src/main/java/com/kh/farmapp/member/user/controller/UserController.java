@@ -284,7 +284,13 @@ public class UserController {
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout(HttpSession session, HttpServletResponse response) {
-		session.invalidate();
+
+		// session 에 저장하는 정보가 많을 경우 전부다 삭제 되므로 안전하게 removeAttribute 를 사용해서 로그아웃 기능을 구현하도록 하겠습니다.
+//		session.invalidate();
+		if( session.getAttribute("userInfo") != null) {
+			session.removeAttribute("userInfo");
+		}
+		
 		return "main/index"; 
 	}
 	

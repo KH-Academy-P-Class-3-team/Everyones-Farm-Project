@@ -125,14 +125,16 @@ public class FarmerController {
 	public String loginImpl(
 		@RequestParam Map<String,Object> commandMap
 		, HttpSession session
-		, Model model) {
+		, Model model
+		, HttpServletRequest req
+		) {
 		
 		Farmer res = farmerService.selectFarmer(commandMap);
 		
 		if(res!=null) {
 			session.setAttribute("farmerInfo", res);
 			model.addAttribute("alertMsg", "로그인 성공");
-			model.addAttribute("url", "login.do");
+			model.addAttribute("url", req.getContextPath());
 		} else {
 			model.addAttribute("alertMsg", "로그인 실패, 가입되지 않은 회원이거나 아직 관리자의 승인을 받지 않은 회원입니다.");
 			model.addAttribute("url", "farmerlogin.do");
@@ -270,7 +272,13 @@ public class FarmerController {
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout(HttpSession session, HttpServletResponse response) {
-		session.invalidate();
+
+		// session에 저장되어 있는 것들이 많을 수 있으니 안전하게 removeAttribute 를 사용합시다!
+//		session.invalidate();
+		if(session.getAttribute("farmerInfo") != null) {
+			session.removeAttribute("farmerInfo");
+		}
+		
 		return "main/index"; 
 	}
 }
