@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ADMINMAIN">
+
+	<resultMap type="hashmap" id="farmerMap">
+		<id property="fno" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="farmerName" column="farmer_name" />
+		<result property="applicationDate" column="application_date" />
+		<result property="isConfirm" column="is_confirm" />
+		<result property="farmNo" column="farm_no" />
+		<result property="farmName" column="farm_name" />
+	</resultMap>
+	<select id="selectLatestFarmerApplicationList" resultMap="farmerMap">
+		select
+		    f.farmer_no
+		    , f.farmer_id
+		    , f.name AS farmer_name
+		    , f.application_date
+		    , f.is_confirm
+		    , farm.farm_no
+		    , farm.farm_name
+		from
+		    farmer f
+		    , farm
+		where
+		    f.farmer_no = farm.farmer_no
+		    and f.is_confirm = 0
+		order by
+		    f.application_date desc
+		    , f.farmer_no desc
+	</select>
+	
+	<resultMap type="hashmap" id="aquesionMap">
+		<id property="rnum" column="rnum" />
+		<result property="questionNo" column="question_no" />
+		<result property="title" column="title" />
+		<result property="regDate" column="reg_date" />
+		<result property="isAnswered" column="is_answered" />
+		<result property="userNo" column="user_no" />
+		<result property="userName" column="user_name" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerName" column="farmer_name" />
+	</resultMap>
+	<select id="selectLatestQuestionList" resultMap="aquesionMap">
+		select
+		    qrank.*
+		from (
+		    select
+		        rownum rnum
+		        , qlist.*
+		    from (
+		        select
+		            qo.question_no
+		            , qo.title
+		            , qo.reg_date
+		            , qo.is_answered
+		            , qo.user_no
+		            , u.user_name
+		            , qo.farmer_no
+		            , f.name AS farmer_name
+		        from
+		            question_oneonone qo
+		            LEFT OUTER JOIN user_tb u
+		            ON qo.user_no = u.user_no
+		            LEFT OUTER JOIN farmer f
+		            ON qo.farmer_no = f.farmer_no
+		        order by
+		            qo.reg_date desc
+		            , qo.question_no desc
+		    )qlist
+		)qrank
+		where
+		    qrank.rnum between 1 and 10
+	</select>
+
+</mapper>

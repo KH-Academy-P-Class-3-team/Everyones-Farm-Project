@@ -33,5 +33,6 @@
     
     	<!-- admin login mapper 파일 -->
     	<mapper resource="/mybatis/mapper/adminLoginMapper.xml" />
+    	<mapper resource="/mybatis/mapper/adminMainMapper.xml" />
 	</mappers>
 </configuration>
