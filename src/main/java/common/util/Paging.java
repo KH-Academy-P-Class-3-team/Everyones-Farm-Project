@@ -79,6 +79,7 @@ public class Paging {
 		start = end - cntPerPage + 1;
 	}
 
+	// getter(), setter()
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -151,60 +152,12 @@ public class Paging {
 		this.end = end;
 	}
 
+	// toString
 	@Override
 	public String toString() {
 		return "Paging [currentPage=" + currentPage + ", total=" + total + ", cntPerPage=" + cntPerPage + ", blockCnt="
 				+ blockCnt + ", blockStart=" + blockStart + ", blockEnd=" + blockEnd + ", lastPage=" + lastPage
 				+ ", start=" + start + ", end=" + end + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
