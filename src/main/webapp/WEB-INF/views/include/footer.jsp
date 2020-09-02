@@ -7,7 +7,7 @@
 		<div>(주)FarmCompany &copy; Copyright <span class="currYear"></span></div>
 		<div>회사주소: 서울특별시 강남구 테헤란로 10길 9 그랑프리 빌딩 4F</div>
 		<div>대표전화: 010-0309-7005</div>
-		<div>문의메일: everyonesFarm@gmail.com</div>
+		<div>문의메일: everyonesfarm@naver.com</div>
 	</div>
 	<div class="footer__terms">
 		<span id="termsOfUse">이용약관</span><span id="privacyPolicy">개인정보처리방침</span><span id="emailModalBtn">이메일 무단수집 거부</span><span><a href="<%=request.getContextPath() %>/notice/noticelist">공지사항&자주묻는질문</a></span>
