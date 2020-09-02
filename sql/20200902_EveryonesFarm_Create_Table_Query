@@ -1,14 +1,7 @@
--- 2020.08.29 Everyones Farm Create Table
-
--- EveryonesFarm 테이블 생성 쿼리문 n차 수정(벌써 몇 번째 수정일까요...)
-
--- 2020.08.29(토) EveryonesFarm create table query 수정
--- 수정 사항
--- 테이블 생성 순서 변경
--- NOTICE 테이블 컬럼 변경 -> NOTICE_NO, TITLE, CONTENT, ADMIN_NO, REG_DATE, IS_SHOWED
-
-
--- EveryonesFarm 테이블 생성 쿼리문 n차 수정
+-- 2020.09.02 (수) 테이블 수정
+-- 테이블 수정 내용
+--  FARMER 테이블에 APPLICATION_DATE(신청날짜) 컬럼 추가
+--  관리자 페이지에서 신청 날짜를 보여주는 기능이 있어 추가
 
 -- 이미 테이블이 생성되어 있는 사람들을 위한 테이블 삭제 명령문
 
@@ -317,6 +310,19 @@ COMMENT ON COLUMN FARMER.ZONECODE IS '우편 번호';
 COMMENT ON COLUMN FARMER.FIRST_ADDRESS IS '주소(도로명)';
 
 COMMENT ON COLUMN FARMER.SECOND_ADDRESS IS '상세 주소';
+
+-- ***************************************************************************** --
+-- 추가된 부분
+ALTER TABLE
+    FARMER
+ADD
+    APPLICATION_DATE DATE DEFAULT sysdate NOT NULL;
+
+--select
+--    *
+--from
+--    farmer;
+-- ***************************************************************************** --
 
 --농부 회원 데이터 정보를 저장하는 테이블(IS_CONFIRM, IS_LEAVE, IS_PAUSE default 값은 'N')	시퀀스 생성
 --DROP SEQUENCE farmer_seq;
