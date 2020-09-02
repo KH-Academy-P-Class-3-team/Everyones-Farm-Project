@@ -1,9 +1,13 @@
 package com.kh.farmapp.admin.notice.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,7 +30,25 @@ public class AdminNoticeController {
 	
 	// 공지사항 관리 목록 페이지
 	@RequestMapping(value = "/adminnotice/list", method = RequestMethod.GET)
-	public String adminNoticeList() {
+	public String adminNoticeList(
+			Model model
+			) {
+		
+		// 로그 찍기
+		logger.info("/adminnotice/list - [GET] 요청");
+		
+		// notice 목록 불러오기
+		List<Map<String, Object>> nList = adminNoticeService.selectAllNoticeList();
+		//nList test output
+//		for(Map<String, Object> m : nList) {
+//			logger.info("m: " + m.toString());
+//		}
+		
+		if( nList != null ) {
+			
+			model.addAttribute("nList", nList);
+		}
+		
 		return "admin/notice/admin_notice_list";
 	}
 	

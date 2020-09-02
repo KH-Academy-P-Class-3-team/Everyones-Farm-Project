@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="ADMINNOTICE">
+
+	<resultMap type="hashmap" id="nlistMap">
+		<id property="noticeNo" column="notice_no" />
+		<result property="title" column="title" />
+		<result property="regDate" column="reg_date" />
+		<result property="adminNo" column="admin_no" />
+		<result property="adminId" column="admin_id" />
+	</resultMap>
+	<select id="selectAllNotice" resultMap="nlistMap">
+		select
+		    n.notice_no
+		    , n.title
+		    , n.reg_date
+		    , a.admin_no
+		    , a.admin_id
+		from
+		    notice n
+		    JOIN admin a
+		    ON n.admin_no = a.admin_no
+		order by n.notice_no desc, reg_date desc
+	</select>
+	
+</mapper>
