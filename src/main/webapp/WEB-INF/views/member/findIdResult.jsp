@@ -20,5 +20,9 @@
 	</div>
 	</div>
 </div>
-
+<script type="text/javascript">
+$("#tomain").on("click", function(){
+	$(location).attr("href", "<%=request.getContextPath() %>/")
+})
+</script>
 <%@include file="../include/footer.jsp" %>
