@@ -54,23 +54,31 @@ public class AdminMainController {
 		// is_confirm 이 0 이 있는 경우에 다 받아오고 최대 5개만 보여주기
 		// 만약에 없다면? 최근 입점 목록은 아얘 보여주지 말 것! 또는 최근 입점신청 목록이 없습니다를 보여줄 것
 		List<Map<String, Object>> fList = adminMainService.selectLatestFarmerApplicationList();
+		if ( fList.size() >= 5 ) { // fList 의 크기가 5보다 클 경우(5 이상)
+			fList = fList.subList(FLIST_FIRST_ROW, FLIST_LAST_ROW);
+			
+		}
+
 		// fList test output
 //		for(Map<String, Object> m : fList) {
 //			System.out.println(m);
 //		}
 		
-		if ( fList.size() >= 5 ) { // fList 의 크기가 5보다 클 경우(5 이상)
-			fList = fList.subList(FLIST_FIRST_ROW, FLIST_LAST_ROW);
-			// subList() 테스트 출력
-//			for(Map<String, Object> m : fList) {
-//				System.out.println(m);
-//			}
-			
-		}
 		// view 에 fList 넘겨주기
 		model.addAttribute("fList", fList);
 
 		// 최근 고객센터 문의 Top5
+		List<Map<String, Object>> qList = adminMainService.selectLatestQuestionList();
+		// qList test output
+//		for(Map<String, Object> m : qList) {
+//			System.out.println(m);
+//			logger.info(m.toString());
+//		}
+		
+		// qList 가 null 값이 아닐 때!
+		if(qList != null) {
+			model.addAttribute("qList", qList);
+		}
 		
 		return "admin/admin_main";
 	}

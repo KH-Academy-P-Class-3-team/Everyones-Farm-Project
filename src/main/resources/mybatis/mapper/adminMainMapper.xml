@@ -33,5 +33,48 @@
 		    f.application_date desc
 		    , f.farmer_no desc
 	</select>
+	
+	<resultMap type="hashmap" id="aquesionMap">
+		<id property="rnum" column="rnum" />
+		<result property="questionNo" column="question_no" />
+		<result property="title" column="title" />
+		<result property="regDate" column="reg_date" />
+		<result property="isAnswered" column="is_answered" />
+		<result property="userNo" column="user_no" />
+		<result property="userName" column="user_name" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerName" column="farmer_name" />
+	</resultMap>
+	<select id="selectLatestQuestionList" resultMap="aquesionMap">
+		select
+		    qrank.*
+		from (
+		    select
+		        rownum rnum
+		        , qlist.*
+		    from (
+		        select
+		            qo.question_no
+		            , qo.title
+		            , qo.reg_date
+		            , qo.is_answered
+		            , qo.user_no
+		            , u.user_name
+		            , qo.farmer_no
+		            , f.name AS farmer_name
+		        from
+		            question_oneonone qo
+		            LEFT OUTER JOIN user_tb u
+		            ON qo.user_no = u.user_no
+		            LEFT OUTER JOIN farmer f
+		            ON qo.farmer_no = f.farmer_no
+		        order by
+		            qo.reg_date desc
+		            , qo.question_no desc
+		    )qlist
+		)qrank
+		where
+		    qrank.rnum between 1 and 10
+	</select>
 
 </mapper>

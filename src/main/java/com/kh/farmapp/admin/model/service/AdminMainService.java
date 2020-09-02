@@ -15,14 +15,9 @@ public interface AdminMainService {
 	public List<Map<String, Object>> selectLatestFarmerApplicationList();
 	
 	/**
-	 * 최근 일반인 회원의 1대1 문의 목록 조회 요청
+	 * 최근 1대1문의 목록 조회 요청
+	 * 
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> selectLatestUserQuestionList();
-	
-	/**
-	 * 최근 농업인 회원의 1대1 문의 목록 조회 요청
-	 * @return List<Map<String, Object>> - 조회 결과 반환
-	 */
-	public List<Map<String, Object>> selectLatestFarmerQuestionList();
+	public List<Map<String, Object>> selectLatestQuestionList();
 }

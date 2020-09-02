@@ -22,15 +22,10 @@ public class AdminMainServiceImpl implements AdminMainService{
 	public List<Map<String, Object>> selectLatestFarmerApplicationList() {
 		return adminMainDao.selectLatestFarmerApplicationList();
 	}
-
+	
 	@Override
-	public List<Map<String, Object>> selectLatestUserQuestionList() {
-		return adminMainDao.selectLatestUserQuestionList();
-	}
-
-	@Override
-	public List<Map<String, Object>> selectLatestFarmerQuestionList() {
-		return adminMainDao.selectLatestFarmerQuestionList();
+	public List<Map<String, Object>> selectLatestQuestionList() {
+		return adminMainDao.selectLatestQuestionList();
 	}
 
 }

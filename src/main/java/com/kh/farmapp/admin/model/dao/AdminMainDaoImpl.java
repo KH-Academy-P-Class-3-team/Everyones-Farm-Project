@@ -29,22 +29,8 @@ public class AdminMainDaoImpl implements AdminMainDao{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectLatestUserQuestionList() {
-		
-		// 클래스 다이어그램 용 DTO 객체
-		QuestionOneonone question = new QuestionOneonone();
-		UserTB questioner = new UserTB();
-		
-		return null;
-	}
-
-	@Override
-	public List<Map<String, Object>> selectLatestFarmerQuestionList() {
-		
-		QuestionOneonone question = new QuestionOneonone();
-		Farmer questioner = new Farmer();
-		
-		return null;
+	public List<Map<String, Object>> selectLatestQuestionList() {
+		return session.selectList("ADMINMAIN.selectLatestQuestionList");
 	}
 
 }
