@@ -69,7 +69,7 @@
 				</ul>
 			</li>
 			<li><a href="#">농장구경</a></li>
-			<li><a href="#">체험</a>
+			<li><a href="<%=request.getContextPath() %>/activity/experienceList.do">체험</a>
 				<ul class="menu__sub-activity">
 					<li><a href="<%=request.getContextPath() %>/activity/experienceList.do">농장 체험</a></li>
 					<li><a href="<%=request.getContextPath() %>/activity/helpList.do">일손 돕기</a></li>
