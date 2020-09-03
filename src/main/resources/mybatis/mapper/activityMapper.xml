@@ -18,7 +18,7 @@
 	
 	<insert id="insertActivitySchedule">
 		insert into farm_activity_schedule (schedule_no, activity_no, time, content, etc)
-		values (activity_schedule_seq.nextval, farm_activity_seq.currval, #{time}, #{content}, #{etc})
+		values (FARM_ACTIVITY_SCHEDULE_SEQ.nextval, farm_activity_seq.currval, #{time}, #{content}, #{etc})
 	</insert>
 
 
