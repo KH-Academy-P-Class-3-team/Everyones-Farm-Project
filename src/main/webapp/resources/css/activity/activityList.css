@@ -11,7 +11,12 @@
 
 .activity-top {
 	background-color: #f0f0f0;
-	height: 250px;
+	height: 200px;
+}
+
+.title-content {
+	width: 980px;
+	margin: 0 auto;
 }
 
 .top-title {
@@ -19,15 +24,15 @@
 	display: inline-block;
 	position: relative;
 	top: 100px;
-	left: 50px;
+/* 	left: 50px; */
 }
 
 .title-img {
 	display: inline-block;
 	position: relative;
 	float: right;
-	bottom: -15px;
-	right: 80px;
+	bottom: 35px;
+/* 	right: 80px; */
 }
 
 .experience-title, .help-title {
@@ -36,7 +41,8 @@
 
 .row {
 	padding: 7px;
-	width: 270px;
+/* 	width: 270px; */
+	width: 284px;
 	height: 360px;
 	display: inline-block;
 	margin: 40px 19px 40px;
@@ -70,12 +76,16 @@
 	display: inline-block;
 	width: 980px;
 	text-align: center;
-	height: 43px;
+	height: 50px;
 	border: 1px solid #cccccc;
 	border-radius: 3px;
-	padding-top: 17px;
+	padding-top: 14px;
 	cursor: pointer;
-	margin-bottom: 30px;
+	margin-bottom: 40px;
+}
+
+.btn-div {
+	height: 60px;
 }
 
 .btnForm {
@@ -90,7 +100,8 @@
 	font-size: 14px;
     cursor: pointer;
     float: right;
-    margin: 30px 40px 70px 0;
+/*     margin: 30px 40px 70px 0; */
+	margin-right: 40px;
 }
 
 .btnForm:hover {
