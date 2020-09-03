@@ -38,7 +38,7 @@ $(document).ready(function() {
 	
 	
 	
-	for (var i=0; i<experience_view;i++ )	{
+	for (var i=0; i<experience_view;i++ ) {
 		$(".experience-list .row").eq(i).css('display', 'inline-block');
 	}
 
@@ -84,7 +84,7 @@ $(document).ready(function() {
 	/* 이미지 파일이 없는 체험 활동에 기본 이미지 출력 */
 	$(".thumb-image").each(function() {
 		if($(this).find("img").length == 0) {
-			$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/no-image.png' width='270' height='270'>"))
+			$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/activity/no-image.png' width='270' height='270'>"))
 		} 
 	})
 	
@@ -95,14 +95,14 @@ $(document).ready(function() {
 <body>
 
 <div class="activity-top">
-	<div class="top-title">${farmerInfo }님의 체험 목록</div>
-	<div class="title-img"><img src="<%=request.getContextPath() %>/resources/image/activity_title.png" width="550" alt="체험활동 타이틀" ></div>
+	<div class="top-title">${farmerInfo.farmerId }님의 체험 목록</div>
+	<div class="title-img"><img src="<%=request.getContextPath() %>/resources/image/activity/activity_title.png" width="550" alt="체험활동 타이틀" ></div>
 </div>
 
 <div class="activity-content">
 
 	<div class="experience-title">
-		<h3>체험 목록</h3>
+		<h3>농장 체험</h3>
 		<hr>
 	</div>
 		
@@ -111,12 +111,12 @@ $(document).ready(function() {
 	<c:forEach items="${data.activityList }" var="activity">
 	
 	<c:if test="${activity.isHelp eq 0 }">
-			<div class="row">
+			<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}'">
 			
 				<div class="thumb-image">
 				
 				<c:forEach items="${data.fileList }" var="file">
-					<c:if test="${file.activityNo eq activity.activityNo }">
+					<c:if test="${file.postNo eq activity.activityNo }">
 						<img src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }" alt="체험활동 이미지" width="270" height="270">
 					</c:if>
 				</c:forEach>
@@ -158,12 +158,12 @@ $(document).ready(function() {
 
 	<c:if test="${activity.isHelp eq 1 }">
 	
-			<div class="row">
+			<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}'">
 			
 				<div class="thumb-image">
 				
 				<c:forEach items="${data.fileList }" var="file">
-					<c:if test="${file.activityNo eq activity.activityNo }">
+					<c:if test="${file.postNo eq activity.activityNo }">
 						<img src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }" alt="체험활동 이미지" width="270" height="270">
 					</c:if>
 				</c:forEach>

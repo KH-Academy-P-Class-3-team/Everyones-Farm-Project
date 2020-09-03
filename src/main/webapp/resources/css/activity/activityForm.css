@@ -99,20 +99,31 @@ textarea:focus {
 	border: 2px solid #A4DE02;
 }
 
+.file-text {
+	font-size: 13px;
+	color: #969696;
+	margin-left: 6px;
+}
+
 table {
 	border-collapse: collapse;
 	width: 100%;
-	margin-bottom: 30px;
+	margin: 10px auto 30px;
 }
 
 table, td, th {
-	border: 1px solid #9e9e9e;
+	border: 1px solid #e7e7e7;
 }
 
 th {
-	background-color: #e4e4e4;
+	background-color: #8cd259;
+	color: #fff;
+	height: 35px;
+}
+
+td {
+	height: 35px;
 	color: #535353;
-	height: 30px;
 }
 
 .th1 {

@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import common.dto.Application;
+import common.dto.EveryonesFarmFile;
 import common.dto.Farm;
 import common.dto.FarmActivity;
-import common.dto.FarmActivityFile;
 import common.dto.FarmActivitySchedule;
 import common.dto.Farmer;
-import common.util.Paging;
 
 public interface ActivityDao {
 
@@ -23,9 +22,9 @@ public interface ActivityDao {
 	
 	/**전체 활동 파일 리스트 조회
 	 * 
-	 * @return List<FarmActivityFile> - 활동 파일 전체 리스트 
+	 * @return List<EveryonesFarmFile> - 활동 파일 전체 리스트 
 	 */
-	public List<FarmActivityFile> selectActivityFileThumbnail();
+	public List<EveryonesFarmFile> selectActivityFileThumbnail();
 	
 	
 	/**활동 상세 정보 조회
@@ -33,15 +32,15 @@ public interface ActivityDao {
 	 * @param activityNo - 조회할 활동 번호
 	 * @return FarmActivity - 조회한 활동 정보를 담은 객체
 	 */
-	public FarmActivity selectActivityDetail(int activityNo);
+	public Map<String, Object> selectActivityDetail(int activityNo);
 	
 	
 	/**활동 파일 정보 조회
 	 * 
 	 * @param activityNo - 조회할 파일의 활동 번호
-	 * @return List<Map<String, String>> - 조회한 파일 정보를 담은 객체
+	 * @return List<EveryonesFarmFile> - 조회한 파일 정보를 담은 객체
 	 */
-	public List<Map<String, String>> selectFileWithActivity(int activityNo);
+	public List<EveryonesFarmFile> selectActivityFileWithActivity(int activityNo);
 	
 	
 	/**체험 활동 검색
@@ -73,6 +72,7 @@ public interface ActivityDao {
 	 * @return int - 등록 결과
 	 */
 	public int insertActivity(FarmActivity farmActivity);
+
 	
 	/**농부 번호로 농장 정보 조회
 	 * 
@@ -94,7 +94,7 @@ public interface ActivityDao {
 	 * 
 	 * @param data - 파일 정보를 담은 Map
 	 */
-	public int insertFile(FarmActivityFile activityFile);
+	public int insertFile(EveryonesFarmFile activityFile);
 
 
 	/**체험 활동 일정 정보 등록
@@ -132,6 +132,38 @@ public interface ActivityDao {
 	 * @return int - 검색 결과 개수
 	 */
 	public int selectActivityByFarmNameCnt(Map<String, Object> map);
+
+
+	/**체험 번호로 일정 조회
+	 * 
+	 * @param activityNo - 조회할 체험 번호
+	 * @return List<FarmActivitySchedule> - 조회된 일정 목록
+	 */
+	public List<FarmActivitySchedule> selectScheduleByActivityNo(int activityNo);
+
+
+	/**활동 번호로 체험 활동 조회
+	 * 
+	 * @param activityNo
+	 * @return FarmActivity - 조회된 체험 활동 객체 
+	 */
+	public FarmActivity selectActivityByActivityNo(int activityNo);
+
+
+	/**체험 활동 삭제
+	 * 
+	 * @param activityNo - 삭제될 체험 번호
+	 * @return int - 삭제 결과
+	 */
+	public int deleteActivity(int activityNo);
+
+
+	/**체험 활동 이미지 삭제
+	 * 
+	 * @param activityNo - 삭제될 파일의 체험 번호
+	 * @return int - 삭제 결과
+	 */
+	public int deleteActivityFile(int activityNo);
 
 
 	

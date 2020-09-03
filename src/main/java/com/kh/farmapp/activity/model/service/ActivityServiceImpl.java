@@ -11,9 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.farmapp.activity.model.dao.ActivityDao;
 
 import common.dto.Application;
+import common.dto.EveryonesFarmFile;
 import common.dto.Farm;
 import common.dto.FarmActivity;
-import common.dto.FarmActivityFile;
 import common.dto.FarmActivitySchedule;
 import common.dto.Farmer;
 import common.util.ActivityFileUtil;
@@ -37,7 +37,7 @@ public class ActivityServiceImpl implements ActivityService {
 		map.put("end", p.getEnd());
 		
 		List<FarmActivity> activityList = activityDao.selectActivityList(map);
-		List<FarmActivityFile> fileList = activityDao.selectActivityFileThumbnail();
+		List<EveryonesFarmFile> fileList = activityDao.selectActivityFileThumbnail();
 		
 		map.put("paging", p);
 		map.put("activityList", activityList);
@@ -48,7 +48,15 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public Map<String, Object> selectActivityDetail(int activityNo) {
-		return null;
+		
+		Map<String, Object> map = activityDao.selectActivityDetail(activityNo);
+		List<EveryonesFarmFile> file = activityDao.selectActivityFileWithActivity(activityNo);
+		List<FarmActivitySchedule> schedule = activityDao.selectScheduleByActivityNo(activityNo);
+		
+		map.put("schedule", schedule);
+		map.put("fileList", file);
+		
+		return map;
 	}
 
 	@Override
@@ -77,7 +85,7 @@ public class ActivityServiceImpl implements ActivityService {
 			activityList = activityDao.selectActivityByFarmName(map);
 		} 
 		
-		List<FarmActivityFile> fileList = activityDao.selectActivityFileThumbnail();
+		List<EveryonesFarmFile> fileList = activityDao.selectActivityFileThumbnail();
 		
 		map.put("paging", p);
 		map.put("activityList", activityList);
@@ -102,13 +110,11 @@ public class ActivityServiceImpl implements ActivityService {
 		
 		ActivityFileUtil fileUtil = new ActivityFileUtil();
 		
-		List<FarmActivityFile> fileData = fileUtil.fileUpload(files, root);
+		List<EveryonesFarmFile> fileData = fileUtil.fileUpload(files, root);
 		
 		
-		if(files.size() > 1) {
-			
-			
-			for(FarmActivityFile data : fileData) {
+		if(files.size() > 0) {
+			for(EveryonesFarmFile data : fileData) {
 				activityDao.insertFile(data);
 			}
 		}
@@ -129,7 +135,7 @@ public class ActivityServiceImpl implements ActivityService {
 		Map<String, Object> commandMap = new HashMap<String, Object>();
 		
 		List<FarmActivity> activityList = activityDao.selectActivityListByFarmNo(farm); 
-		List<FarmActivityFile> fileList = activityDao.selectActivityFileThumbnail();
+		List<EveryonesFarmFile> fileList = activityDao.selectActivityFileThumbnail();
 		
 		commandMap.put("activityList", activityList);
 		commandMap.put("fileList", fileList);
@@ -140,6 +146,18 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public List<Farm> selectFarmList() {
 		return activityDao.selectFarmList();
+	}
+	
+	@Override
+	public FarmActivity selectActivityByActivityNo(int activityNo) {
+		return activityDao.selectActivityByActivityNo(activityNo);
+	}
+	
+	@Override
+	public int activityDelete(int activityNo) {
+		activityDao.deleteActivityFile(activityNo);
+				
+		return activityDao.deleteActivity(activityNo);
 	}
 	
 }

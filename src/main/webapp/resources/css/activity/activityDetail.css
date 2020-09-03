@@ -1,0 +1,323 @@
+@charset "UTF-8";
+
+/* 체험 제목 영역 */
+.top-title {
+	margin: 30px auto;
+	display: inline-block;
+	font-size: 1.8em;
+}
+
+
+/* 이미지 슬라이드 */
+* {
+	box-sizing: border-box
+}
+
+.slideshow {
+	display: none;
+	position: relative;
+}
+
+.slideshow:first-child {
+	display: block;
+}
+
+img {
+	vertical-align: middle;
+	width: 980px;
+	height: 600px;
+}
+
+.slide-container {
+  max-width:980px;
+  position: relative;
+  margin: auto;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+.prev {
+	left: 0;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.number-text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.slide-dot {
+	display: inline-block;
+}
+
+.dot-div1 {
+	margin-left: 470px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+/*   background-color: #68bb59; */
+  background-color: #9dd971;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@media only screen and (max-width: 300px) {
+  .prev, .next {font-size: 12px}
+}
+
+
+/* 체험 내용 영역 */
+.activity-content {
+	width: 980px;
+	margin: 10px auto 50px;
+}
+
+.caption {
+	margin: 20px 0;
+}
+
+.caption-title {
+	display: inline-block;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 20px 0 10px 15px;
+}
+
+.caption-content {
+	font-size: 18px;
+	margin: 0 0 20px 15px;
+}
+
+.price-span {
+	margin-left: 10px;
+	color: #68bb59;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+/* 일정 테이블 */
+.schedule-empty {
+	margin-left: 12px;
+	color: #969696;
+}
+
+table {
+	border-collapse: collapse;
+	width: 950px;
+	margin: 10px auto 30px;
+	text-align: center;
+}
+
+table, td, th {
+	border: 1px solid #fff;
+}
+
+th {
+	background-color: #93d562;
+	color: #fff;
+	height: 42px;
+}
+
+td {
+	height: 42px;
+	background-color: #f1f1f1;
+	color: #535353;
+}
+
+.th1 {
+	width: 30%;
+}
+
+.th2 {
+	width: 45%;
+}
+
+.th3 {
+	width: 25%
+}
+
+
+/* 지도 */
+#map {
+	width: 950px;
+	height: 550px;
+	margin: 0 auto;
+}
+
+/* 모달창 영역 */
+#modal {
+	display: none;
+	background-color: #FFFFFF;
+	position: absolute;
+	top: 300px;
+	left: 200px;
+	padding: 10px;
+	border: 2px solid #E2E2E2;
+	z-Index: 9999;
+	width: 320px;
+	height: 180px;
+}
+
+.modal-title {
+	font-size: 20px;
+    font-weight: bold;
+    margin: 7px 0 20px 3px;
+}
+
+#phone {
+	display: inline-block;
+	margin: 6px 0 0 15px;
+}
+
+.btnCopy {
+	border: none;
+	background-color: #68bb59;
+	color: #fff;
+	width: 60px;
+	height: 35px;
+	border-radius: 20px;
+	outline: none;
+	position: absolute;
+	right: 20px;
+	padding-bottom: 3px;
+}
+
+.btnCopy:hover {
+	cursor: pointer;
+}
+
+.confirm {
+	border: none;
+	display: block;
+	background-color: #dbdbdb;
+	width: 70px;
+	height: 37px;
+	outline: none;
+	bottom: 15px;
+	border-radius: 2px;
+    position: absolute;
+    left: 120px;
+}
+
+.confirm:active {
+	background-color: #e6e6e6;
+}
+
+/* 하단 버튼 영역 */
+.button-div {
+	margin: 50px 0 70px;
+	text-align: center;
+}
+
+#btnCall {
+	font-size: 14px;
+	border: none;
+	background-color: #73c065;
+	color: #fff;
+	width: 90px;
+	height: 40px;
+	border-radius: 5px;
+	outline: none;
+	margin-right: 10px;
+}
+
+#btnCall:hover, #btnForm:hover  {
+	cursor: pointer;
+	background-color: #93d562;
+}
+
+#btnForm {
+	border: none;
+	background-color: #73c065;
+	color: #fff;
+	width: 100px;
+	height: 40px;
+	border-radius: 5px;
+	outline: none;
+	font-size: 14px;
+}
+
+#btnBack {
+	border: none;
+	background-color: #fec576;
+	color: #fff;
+	width: 85px;
+	height: 40px;
+	border-radius: 5px;
+	outline: none;
+	font-size: 14px;
+	margin-left: 10px;
+}
+
+#btnBack:hover {
+	cursor: pointer;
+	background-color: #fed196;
+}
+
+#btnDelete {
+	border: none;
+	background-color: #ffa791;
+	color: #fff;
+	width: 85px;
+	height: 40px;
+	border-radius: 5px;
+	outline: none;
+	font-size: 14px;
+	margin-left: 10px;
+}
+
+#btnDelete:hover {
+	cursor: pointer;
+	background-color: #ffb9a8;
+}
+

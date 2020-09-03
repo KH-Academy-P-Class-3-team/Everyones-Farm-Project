@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import common.dto.Application;
+import common.dto.EveryonesFarmFile;
 import common.dto.Farm;
 import common.dto.FarmActivity;
-import common.dto.FarmActivityFile;
 import common.dto.FarmActivitySchedule;
 import common.dto.Farmer;
-import common.util.Paging;
 
 @Repository
 public class ActivityDaoImpl implements ActivityDao {
@@ -27,28 +26,23 @@ public class ActivityDaoImpl implements ActivityDao {
 	}
 
 	@Override
-	public List<FarmActivityFile> selectActivityFileThumbnail() {
+	public List<EveryonesFarmFile> selectActivityFileThumbnail() {
 		return sqlSession.selectList("ACTIVITY.selectActivityFileThumbnail");
 	}
 
 	@Override
-	public FarmActivity selectActivityDetail(int activityNo) {
-		
-		// 클래스 다이어그램 용 객체 선언
-		Farm farm = new Farm();
-		
-		return null;
+	public Map<String, Object> selectActivityDetail(int activityNo) {
+		return sqlSession.selectOne("ACTIVITY.selectActivityWithFarmByActivityNo", activityNo);
 	}
 
 	@Override
-	public List<Map<String, String>> selectFileWithActivity(int activityNo) {
-		return null;
+	public List<EveryonesFarmFile> selectActivityFileWithActivity(int activityNo) {
+		return sqlSession.selectList("ACTIVITY.selectActivityFileByActivityNo", activityNo);
 	}
 
 	@Override
 	public List<FarmActivity> selectActivityByTitle(Map<String, Object> map) {
 		return sqlSession.selectList("ACTIVITY.selectActivityByTitle", map);
-
 	}
 	
 	@Override
@@ -77,7 +71,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	}
 
 	@Override
-	public int insertFile(FarmActivityFile activityFile) {
+	public int insertFile(EveryonesFarmFile activityFile) {
 		return sqlSession.insert("ACTIVITY.insertActivityFile", activityFile);
 	}
 
@@ -105,6 +99,26 @@ public class ActivityDaoImpl implements ActivityDao {
 	public int selectActivityByFarmNameCnt(Map<String, Object> map) {
 		return sqlSession.selectOne("ACTIVITY.selectActivityByFarmNameCnt", map);
 	}
+
+	@Override
+	public List<FarmActivitySchedule> selectScheduleByActivityNo(int activityNo) {
+		return sqlSession.selectList("ACTIVITY.selectActivityScheduleByActivityNo", activityNo);
+		
+	}
+
+	@Override
+	public FarmActivity selectActivityByActivityNo(int activityNo) {
+		return sqlSession.selectOne("ACTIVITY.selectActivityByActivityNo", activityNo);
+	}
+
+	@Override
+	public int deleteActivity(int activityNo) {
+		return sqlSession.delete("ACTIVITY.deleteActivity", activityNo);
+	}
 	
+	@Override
+	public int deleteActivityFile(int activityNo) {
+		return sqlSession.delete("ACTIVITY.deleteActivityFile", activityNo);
+	}
 	
 }

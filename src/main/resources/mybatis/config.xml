@@ -13,7 +13,7 @@
 	<typeAliases>
 		<typeAlias type="common.dto.Farm" alias="FARM"/>
 		<typeAlias type="common.dto.FarmActivity" alias="ACTIVITY"/>
-		<typeAlias type="common.dto.FarmActivityFile" alias="ACTIVITY_FILE"/>
+		<typeAlias type="common.dto.EveryonesFarmFile" alias="FILE"/>
 		<typeAlias type="common.dto.FarmActivitySchedule" alias="ACTIVITY_SCHEDULE"/>
 		<typeAlias type="common.dto.Farmer" alias="FARMER"/>
 	</typeAliases>

@@ -58,6 +58,7 @@
 			<div class="control-label">이미지 업로드</div>
 			<input type="file" name="files" id="files" multiple>
 			<label class="files" for="files">사진 선택</label>
+			<span class="file-text">이미지 크기는 980 x 600 픽셀을 권장합니다</span>
 			<div class="file-name"></div>
 <!-- 			<div id="preview"></div> -->
 		</div>
@@ -79,7 +80,7 @@
 				</tbody>
 			</table>
 			
-			<div class="btnAdd"><img src="<%=request.getContextPath() %>/resources/image/plus.png" id="add" onclick="addRow()" alt="일정 추가" width="50" height="50"></div>
+			<div class="btnAdd"><img src="<%=request.getContextPath() %>/resources/image/activity/plus.png" id="add" onclick="addRow()" alt="일정 추가" width="50" height="50"></div>
 		</div>
 		
 		
