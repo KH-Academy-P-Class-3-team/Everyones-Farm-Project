@@ -43,17 +43,20 @@ label {
 	margin-top: 30px;
 	margin-right: 150px;
 }
-.media-object{
-	margin-left : 70px;
+
+.media-object {
+	margin-left: 70px;
 }
-.panel-default{
-	border : none;
+
+.panel-default {
+	border: none;
 }
+
 .panel-default>.panel-heading {
-    background-color: white;
-    border: none;
-    font-weight: bold;
-    font-size : 17px;
+	background-color: white;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
 }
 </style>
 
@@ -63,20 +66,41 @@ label {
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
-				<h3 class="my-4 text-left">회원 정보 수정</h3>
+				<h3 class="my-4 text-left">1대 1 문의</h3>
 				<hr>
 				<div class="panel panel-default">
-					<div class="panel-heading">회원</div>
-					<div class="panel-body">회원정보 수정</div>
-					<div class="panel-body">회원 탈퇴</div>
-					<div class="panel-body">1대 1 문의</div>
-					<div class="panel-body">활동 신청 현황</div>
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+							수정</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/deleteId">회원
+							탈퇴</a>
+					</div>
+					<div class="panel-body" style="font-weight: bold;">
+						<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+							1 문의</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+							신청 현황</a>
+					</div>
 				</div>
 
 				<div class="panel panel-default">
-					<div class="panel-heading">주문</div>
-					<div class="panel-body">구매 목록</div>
-					<div class="panel-body">장바구니</div>
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/orderList">주문</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+							목록</a>
+					</div>
 				</div>
 
 			</div>
