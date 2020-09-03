@@ -1,0 +1,52 @@
+@charset "UTF-8";/* pagination 감싸는 div 영역 */
+.pagination-wrap {
+	margin-top: 30px;
+}
+/* pagination ul css */
+.pagination-wrap .admin__pagination {
+	width: 500px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+/* pagination ul > li */
+.admin__pagination li {
+    border: 1px solid #789F6F;
+    border-radius: 3px;
+    margin-right: 7px;
+}
+.admin__pagination li:last-child {
+	margin: 0;
+}
+/* pagination ul > li > a */
+.admin__pagination li > a {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	text-decoration: none;
+	color: black;
+}
+/* 현재 선택된 page */
+.admin__pagination li.admin__p-active {
+	background: #789F6F;
+}
+li.admin__p-active > a {
+	color: white;
+}
+/* disabled 상태인 page */
+.admin__pagination li.admin__p-disabled {
+	border: 1px solid #ccc;
+	background: #ccc;
+}
+/* page hover 시 */
+.admin__pagination li:hover {
+	background: #D1E9CA;
+}
+.admin__pagination li.admin__p-active:hover {
+	background: #789F6F;
+}
+.admin__pagination li.admin__p-disabled:hover {
+	background: #ccc;
+}

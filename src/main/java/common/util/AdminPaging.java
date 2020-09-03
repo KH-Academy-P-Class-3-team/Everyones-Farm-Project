@@ -2,6 +2,9 @@ package common.util;
 
 public class AdminPaging {
 	
+	// 상수
+	private static final int PAGE_COUNT = 5;
+	
 	private int curPage;	//현재 페이지 번호
 	
 	private int totalCount;	//총 게시글 수
@@ -57,7 +60,7 @@ public class AdminPaging {
 		
 		//기본값 설정
 		if(curPage == 0)	setCurPage(1);	//첫 페이지로 기본값 세팅
-		if(pageCount == 0)	setPageCount(10);	//화면에 보여질 페이지 수 기본값 세팅
+		if(pageCount == 0)	setPageCount(PAGE_COUNT);	//화면에 보여질 페이지 수 기본값 세팅
 		if(listCount == 0)	setListCount(10);	//화면에 보여질 게시글 수 기본값 세팅
 		
 		//총 페이지 수 계산

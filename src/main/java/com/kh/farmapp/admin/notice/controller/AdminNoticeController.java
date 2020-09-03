@@ -34,7 +34,7 @@ public class AdminNoticeController {
 	@RequestMapping(value = "/adminnotice/list", method = RequestMethod.GET)
 	public String adminNoticeList(
 			Model model
-			, @RequestParam String curPage
+			, @RequestParam(defaultValue = "0") String curPage
 			) {
 		
 		// 로그 찍기
