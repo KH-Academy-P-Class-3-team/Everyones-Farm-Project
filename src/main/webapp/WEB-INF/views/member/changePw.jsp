@@ -9,15 +9,15 @@
 
 <div class="pwchange">
 	<form action="<%=request.getContextPath()%>/user/pwchange.do" method="post" onsubmit="return validate();">
-	<div class="member">${userInfo.userName }님, 비밀번호 변경하기<br></div><br>
+	<div class="member">${userPw.userName }님, 비밀번호 변경하기<br></div><br>
  	<div class="findmem">
  	<label>비밀번호 * </label><br>
  	<input type="password" class="change" id="userPw" name="userPw" placeholder="  8글자 이상 15글자 이하의 영어, 숫자, 특수문자로 작성해주세요"/><br>
  	<label>비밀번호 재확인 * </label><br>
  	<input type="password" class="change" id="pwcheck" name="pwcheck" /><br>
 	<div style="margin-left: 20px;"><input type="button" value="취소" class="chpw" id="cancel"/>
-	<input type="hidden" value=${userInfo.userId } name="userId"/>
-	<input type="hidden" value=${userInfo.email } name="email"/>
+	<input type="hidden" value=${userPw.userId } name="userId"/>
+	<input type="hidden" value=${userPw.email } name="email"/>
 	<input type="submit" value="비밀번호변경" class="chpw" id="findpw" />
  	</div>
  	</div>

@@ -34,7 +34,7 @@
 </div>
 
 <div class="user" id="user" style="display:none;">
-	<form action="<%=request.getContextPath()%>/user/findinfo.do" method="post">
+	<form action="<%=request.getContextPath()%>/user/findinfo.do" method="post" onsubmit="return validate()">
 	<div class="member">일반 아이디 찾기<br></div>
  	<div class="findmem">
  	<div class="none">이름 <input type="text" id="userName" name="userName" class="findinput"/></div><br>
@@ -46,11 +46,11 @@
 </div>
 
 <div class="farmer" id="farmer" style="display:none;">
-	<form action="<%=request.getContextPath()%>/farmer/findinfo.do" method="post">
+	<form action="<%=request.getContextPath()%>/farmer/findinfo.do" method="post" onsubmit="return fvalidate()">
 	<div class="member">농부 아이디 찾기<br></div>
  	<div class="findmem">
- 	<div class="none">이름 <input type="text" name="name" class="findinput"/></div><br>
-	<div class="none">전화번호 <input type="text" name="phone" placeholder="  ***-****-****" class="findinput"/> </div><br>
+ 	<div class="none">이름 <input type="text" id="fname" name="name" class="findinput"/></div><br>
+	<div class="none">전화번호 <input type="text" id="fphone" name="phone" placeholder="  ***-****-****" class="findinput"/> </div><br>
 	<input type="button" value="취소" class="find" id="cancel"/>
 	<input type="submit" value="아이디찾기" class="find" id="findid" />
  	</div>
@@ -93,6 +93,39 @@ $(document).ready(function(){
 	
 	
 })
+
+function validate(){
+	
+	var name = document.getElementById('userName').value;
+	var phone = document.getElementById('phone').value;
+	
+	if(name==""){
+		alert("이름을 입력해주세요")
+		return false;
+	}
+	if(phone==""){
+		alert("전화번호를 입력해주세요")
+		return false;
+	}
+
+	return true;
+}
+
+function fvalidate(){
+	
+	var fname = document.getElementById('fname').value;
+	var fphone = document.getElementById('fphone').value;
+	
+	if(fname==""){
+		alert("이름을 입력해주세요")
+		return false;
+	}
+	if(fphone==""){
+		alert("전화번호를 입력해주세요")
+		return false;
+	}
+	return true;
+}
 
 </script>
 

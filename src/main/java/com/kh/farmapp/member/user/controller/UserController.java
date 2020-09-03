@@ -211,7 +211,7 @@ public class UserController {
 			, HttpServletRequest req) {
 		UserTB res = userService.findId(commandMap);
 		if(res!=null) {
-			req.setAttribute("userInfo", res);
+			req.setAttribute("userId", res);
 			return "member/findIdResult";
 		} else {
 			return "member/findError";
@@ -231,7 +231,7 @@ public class UserController {
 		
 		if(res!=null) {
 			userService.findPwMailSend(user, urlPath);
-			req.setAttribute("userInfo", res);
+			req.setAttribute("userPw", res);
 			return "member/findPwResult";
 		} else {
 			return "member/findError";
@@ -247,7 +247,7 @@ public class UserController {
 			, UserTB user) {
 		UserTB res = userService.findPw(commandMap);
 		if(res!=null) {
-			req.setAttribute("userInfo", res);
+			req.setAttribute("userPw", res);
 			return "member/changePw";
 		} else {
 			return "member/findError";
@@ -291,13 +291,13 @@ public class UserController {
 			session.removeAttribute("userInfo");
 		}
 		
-		return "main/index"; 
+		return "redirect:/"; 
 	}
 	
 	//카카오 로그아웃
 	@RequestMapping("kakaologout")
 	public String kakaologout(HttpSession session) {
 		session.removeAttribute("accessToken");
-		return "member/login";
+		return "main/index";
 	}
 }
