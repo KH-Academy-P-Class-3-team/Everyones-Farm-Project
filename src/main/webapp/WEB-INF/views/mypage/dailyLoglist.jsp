@@ -190,7 +190,9 @@ margin-left:-90px;
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-
+<%@include file="../include/header.jsp" %>
+<!-- menu 의 float 속성 때문에 생성한 div -->
+<div style="clear: both; margin-top: 170px;"></div>
 <!-- Page Content -->
 <div class="container">
 	<div class="row" style="width: 1200px">
@@ -294,3 +296,4 @@ margin-left:-90px;
 	</div>
 
 </div>
+<%@include file="../include/footer.jsp" %>

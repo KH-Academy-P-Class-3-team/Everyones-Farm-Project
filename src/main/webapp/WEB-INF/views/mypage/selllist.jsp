@@ -46,9 +46,10 @@ li {
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<%@include file="../include/header.jsp" %>
+<!-- menu 의 float 속성 때문에 생성한 div -->
+<div style="clear: both; margin-top: 170px;"></div>
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-
-	
 		<div class="container">
 			<div class="row" style="width: 1200px">
 				<div class="col-lg-3">
@@ -131,7 +132,7 @@ li {
 			</div>
 			
 		</div>
-
+<%@include file="../include/footer.jsp" %>
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>

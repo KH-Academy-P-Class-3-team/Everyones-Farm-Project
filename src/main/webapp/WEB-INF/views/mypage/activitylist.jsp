@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%@include file="../include/header.jsp" %>
+
 
 <title>판매 목록</title>
 
@@ -48,6 +50,8 @@ li {
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+<!-- menu 의 float 속성 때문에 생성한 div -->
+<div style="clear: both; margin-top: 170px;"></div>
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <!-- Page Content -->
 <div class="container">
@@ -211,6 +215,7 @@ li {
 	</div>
 
 </div>
+<%@include file="../include/footer.jsp" %>
 
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 

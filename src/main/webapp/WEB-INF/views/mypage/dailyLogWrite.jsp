@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,9 +24,9 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-</head>
-<body>
-
+<%@include file="../include/header.jsp" %>
+<!-- menu 의 float 속성 때문에 생성한 div -->
+<div style="clear: both; margin-top: 170px;"></div>
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row" style="width: 1200px">
@@ -73,6 +70,5 @@
 			</form>
 		</div>
 	</div>
+	<%@include file="../include/footer.jsp" %>
 
-</body>
-</html>
