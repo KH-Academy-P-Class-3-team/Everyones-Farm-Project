@@ -11,7 +11,7 @@
 		<div class="list-image">
 		
 			<c:forEach items="${file }" var="file">
-				<c:if test="${file.activityNo eq activity.activityNo }">
+				<c:if test="${file.postNo eq activity.activityNo }">
 					<img src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }" alt="체험활동 이미지" width="270" height="270">	
 				</c:if>
 			</c:forEach>

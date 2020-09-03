@@ -71,5 +71,21 @@ public interface ActivityService {
 	 * @return List<Farm> - 조회된 농장 목록
 	 */
 	public List<Farm> selectFarmList();
+
+	
+	/**
+	 * 활동 번호로 체험 활동 조회
+	 * @param activityNo - 활동 번호
+	 * @return FarmActivity - 조회된 체험 활동 객체
+	 */
+	public FarmActivity selectActivityByActivityNo(int activityNo);
+
+	
+	/**
+	 * 농부 사용자가 체험 활동 삭제
+	 * @param activityNo - 삭제될 체험 번호
+	 * @return int - 삭제 결과
+	 */
+	public int activityDelete(int activityNo);
 	
 }

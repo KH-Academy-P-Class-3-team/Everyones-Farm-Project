@@ -51,6 +51,11 @@
 	text-align: center;
 }
 
+.list-image {
+	width: 270px;
+	height: 270px;
+}
+
 .activity-title {
 	display: inline-block;
 }

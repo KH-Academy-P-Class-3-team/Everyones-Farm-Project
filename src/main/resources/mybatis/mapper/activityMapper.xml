@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ACTIVITY">
+<mapper namespace="ACTIVITY">	
 	
 	<!-- 체험 활동 등록 -->
 	<insert id="insertActivity">
@@ -12,8 +12,8 @@
 	</insert>
 	
 	<insert id="insertActivityFile">
-		insert into farm_activity_file (activity_file_no, activity_no, origin_name, file_rename, save_path, is_thumbnail)
-		values (farm_activity_file_seq.nextval, farm_activity_seq.currval, #{originName}, #{fileRename}, #{savePath}, #{isThumbnail})
+		insert into everyones_farm_file (file_no, post_no, board_no, origin_name, file_rename, save_path, is_thumbnail)
+		values (ef_file_seq.nextval, farm_activity_seq.currval, 1, #{originName}, #{fileRename}, #{savePath}, #{isThumbnail})
 	</insert>
 	
 	<insert id="insertActivitySchedule">
@@ -29,20 +29,40 @@
 		order by activity_no desc
 	</select>
 	
-	<select id="selectActivityFileThumbnail" resultType="ACTIVITY_FILE">
-		select * from farm_activity_file
-		where is_thumbnail = 1
-	</select>
-
-	<!-- 체험 활동 상세 조회 -->
-	<select id="selectActivityByActivityNo" resultType="ACTIVITY">
-		select * from farm_activity
-		where activity_no = #{activityNo}
+	<select id="selectActivityFileThumbnail" resultType="FILE">
+		select * from everyones_farm_file
+		where board_no = 1
+			and is_thumbnail = 1 
 	</select>
 	
-	<select id="selectActivityFileByActivityNo" resultType="ACTIVITY_FILE">
-		select * from farm_activity_file
-		where activity_no = #{activityNo}
+	<!-- FarmActivity 와 Farm 조인 결과를 담는 resultMap -->
+	<resultMap type="hashMap" id="ActivityWithFarm">
+		<id column="activity_no" property="activityNo" />
+		<result column="farm_no" property="farmNo"/>
+		<result column="farmer_no" property="farmerNo"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result column="avail_number" property="availNumber"/>
+		<result column="price" property="price"/>
+		<result column="is_help" property="isHelp"/>
+		<result column="farm_name" property="farmName"/>
+		<result column="phone" property="phone"/>
+		<result column="zonecode" property="zonecode"/>
+		<result column="first_address" property="firstAddress"/>
+		<result column="second_address" property="secondAddress"/>
+	</resultMap>
+	
+	<!-- 체험 활동 상세 조회 -->
+	<select id="selectActivityWithFarmByActivityNo" resultMap="ActivityWithFarm">
+		select * from farm_activity a, farm f
+		where a.farm_no = f.farm_no
+			and activity_no = #{activityNo}
+	</select>
+	
+	<select id="selectActivityFileByActivityNo" resultType="FILE">
+		select * from everyones_farm_file
+		where board_no = 1
+			and post_no = #{activityNo}
 	</select>
 	
 	<select id="selectActivityScheduleByActivityNo" resultType="ACTIVITY_SCHEDULE">
@@ -62,20 +82,21 @@
 			)a1
 		) where rnum between #{start} and #{end}
 	</select>
-
-
+	
 	<select id="selectActivityCnt" parameterType="int" resultType="int">
 		select count(*) from farm_activity
 		where is_help = #{isHelp}
 	</select>
 
 
+	<!-- 농부 번호로 농장 정보 조회 -->
 	<select id="selectFarmByFarmerNo" parameterType="FARMER" resultType="FARM">
 		select * from farm
 		where farmer_no = #{farmerNo}
 	</select>
 	
 	
+	<!-- 농장 번호로 농장 정보 조회 -->
 	<select id="selectFarmByFarmNo" resultType="FARM">
 		select * from farm
 		where farm_no = #{farmNo}
@@ -87,6 +108,8 @@
 		select * from farm
 	</select>
 	
+	
+	<!-- 활동명으로 체험 활동 검색 및 페이징 -->
 	<select id="selectActivityByTitle" parameterType="hashMap" resultType="ACTIVITY">
 		select activity_no, farm_no, title, avail_number, price from (
 			select rownum rnum, a1.*
@@ -108,6 +131,7 @@
 	</select>
 	
 	
+	<!-- 농장명으로 체험 활동 검색 및 페이징 -->
 	<select id="selectActivityByFarmName" parameterType="hashMap" resultType="ACTIVITY">
 		select activity_no, farm_no, title, avail_number, price from (
 			select rownum rnum, a1.*
@@ -127,5 +151,24 @@
         where a.farm_no = f.farm_no
         	and is_help = #{isHelp}
 	</select>
+	
+	
+	<select id="selectActivityByActivityNo" parameterType="int" resultType="ACTIVITY">
+		select * from farm_activity
+		where activity_no = #{activityNo}
+	</select>
+	
+	
+	<!-- 체험 활동 삭제 -->
+	<delete id="deleteActivity" parameterType="int">
+		delete from farm_activity
+		where activity_no = #{activityNo}
+	</delete>
+
+	<delete id="deleteActivityFile" parameterType="int">
+		delete from everyones_farm_file
+		where board_no = 1
+			and post_no = #{activityNo}
+	</delete>
 
 </mapper>

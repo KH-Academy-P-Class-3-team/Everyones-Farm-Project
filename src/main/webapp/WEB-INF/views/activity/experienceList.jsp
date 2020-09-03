@@ -18,7 +18,7 @@ $(document).ready(function() {
 	/* 이미지 파일이 없는 체험 활동에 기본 이미지 출력 */
 	$(".list-image").each(function() {
 		if($(this).find("img").length == 0) {
-			$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/no-image.png' width='270' height='270'>"))
+			$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/activity/no-image.png' width='270' height='270'>"))
 		} 
 	})
 	
@@ -46,7 +46,7 @@ $(document).ready(function() {
 				/* 이미지 파일이 없는 체험 활동에 기본 이미지 출력 */
 				$(".list-image").each(function() {
 					if($(this).find("img").length == 0) {
-						$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/no-image.png' width='270' height='270'>"))
+						$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/activity/no-image.png' width='270' height='270'>"))
 					} 
 				})
 			}
@@ -80,12 +80,12 @@ $(document).ready(function() {
 	<div class="activity-list">
 		<c:forEach items="${activityList }" var="activity">
 	
-		<div class="row">
+		<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}'">
 		
 			<div class="list-image">
 			
 				<c:forEach items="${fileList }" var="file">
-					<c:if test="${file.activityNo eq activity.activityNo }">
+					<c:if test="${file.postNo eq activity.activityNo }">
 						<img src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }" alt="체험활동 이미지" width="270" height="270">	
 					</c:if>
 				</c:forEach>

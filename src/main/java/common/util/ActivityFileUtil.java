@@ -5,29 +5,27 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import common.dto.FarmActivityFile;
+import common.dto.EveryonesFarmFile;
 
 public class ActivityFileUtil {
 	
-	public List<FarmActivityFile> fileUpload(
+	public List<EveryonesFarmFile> fileUpload(
 				List<MultipartFile> files, String root
 			){
 		
 		int idx = 0;
-//		List<Map<String,String>> filedata 
-//				= new ArrayList<Map<String,String>>();
-		List<FarmActivityFile> filedata	= new ArrayList<FarmActivityFile>();
+		List<EveryonesFarmFile> filedata	= new ArrayList<EveryonesFarmFile>();
 		
-		if(files.size() > 1) {
+		if(files.size() > 0) {
 			
 			for(MultipartFile mf: files) {
-				FarmActivityFile aFile = new FarmActivityFile();
+				EveryonesFarmFile aFile = new EveryonesFarmFile();
+				
+				aFile.setBoardNo(1);
 				
 				//빈 파일을 생성할 경로
 				String savePath = root + "resources/upload";
@@ -56,15 +54,6 @@ public class ActivityFileUtil {
 
 				aFile.setSavePath(savePath);
 				
-				//파일에 대한 정보를 map에 저장
-//				HashMap<String,String> map = new HashMap<>();
-//				map.put("originName", originName);
-//				map.put("fileRename", fileRename);
-//				map.put("savePath", savePath);
-				
-				
-				//완성된 map을 list에 담음
-//				filedata.add(map);
 				filedata.add(aFile);
 				
 				//사용자가 등록한 파일의 이름으로 빈 파일을 생성

@@ -51,6 +51,11 @@
 	margin-top: 50px;
 }
 
+.thumb-image {
+	width: 270px;
+	height: 270px;
+}
+
 .caption-title {
 	font-weight: bold;
 	font-size: 1.2em;
