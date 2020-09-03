@@ -79,7 +79,8 @@ ul, li {
 }
 /* 서브 메뉴 */
 .menu__sub-member
-, .menu__sub-qna {
+, .menu__sub-qna
+, .menu__sub-home {
 	position: absolute;
 	/* 메인메뉴 바로 아래에 위치하도록 조정 */
 	right: 0;
@@ -91,7 +92,8 @@ ul, li {
 	/* 서서히 보이게 하는 효과 */
 	transition: all 0.2s ease-in;
 }
-.menu__sub-member > li
+.menu__sub-home > li
+, .menu__sub-member > li
 , .menu__sub-qna > li {
 	width: 200px;
 	border: 1px solid #605759;
@@ -100,10 +102,12 @@ ul, li {
 }
 .menu__sub-member > li:first-child
 , .menu__sub-member > li:nth-child(2)
-, .menu__sub-qna > li:first-child {
+, .menu__sub-qna > li:first-child
+, .menu__sub-home > li:first-child {
 	border-bottom: none;
 }
-.menu__sub-member > li > a
+.menu__sub-home > li > a
+, .menu__sub-member > li > a
 , .menu__sub-qna > li > a {
 	display: block;
 	padding: 10px 0;
@@ -111,13 +115,15 @@ ul, li {
 	color: black;
 }
 /* 서브메뉴 호버시 */
-.menu__sub-member > li:hover > a
+.menu__sub-home > li:hover > a
+, .menu__sub-member > li:hover > a
 , .menu__sub-qna > li:hover > a {
 	color: #789F6F;
 	font-weight: bold;
 }
 /* 메인메뉴 hover 시 서브메뉴 보이게 하기 */
-#amenu__main > li:nth-child(2):hover .menu__sub-member
+#amenu__main > li:first-child:hover .menu__sub-home
+, #amenu__main > li:nth-child(2):hover .menu__sub-member
 , #amenu__main > li:nth-child(4):hover .menu__sub-qna {
 	opacity: 1;
 	visibility: visible;

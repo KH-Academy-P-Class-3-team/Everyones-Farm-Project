@@ -41,7 +41,7 @@
 	<div class="header__top">
 		<div class="header__top-wrap">
 			<div class="top__logo">
-				<a href="<%=request.getContextPath() %>/"><img alt="logo" src="<%=request.getContextPath() %>/resources/img/everyonesfarm_logo.png"
+				<a href="<%=request.getContextPath() %>/admin/main"><img alt="logo" src="<%=request.getContextPath() %>/resources/img/everyonesfarm_logo.png"
 					width="120"></a>
 			</div>
 			<div class="top__member-desc">
@@ -54,7 +54,12 @@
 	</div>
 	<nav class="header__menu">
 		<ul id="amenu__main">
-			<li><a href="<%=request.getContextPath() %>/">Home</a></li>
+			<li><a href="<%=request.getContextPath() %>/">Home</a>
+				<ul class="menu__sub-home">
+					<li><a href="<%=request.getContextPath() %>/">모두의 농장으로</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/main">관리자 메인으로</a></li>
+				</ul>
+			</li>
 			<li><a href="#">회원관리</a>
 				<ul class="menu__sub-member">
 					<li><a href="#">일반 회원 관리</a></li>
