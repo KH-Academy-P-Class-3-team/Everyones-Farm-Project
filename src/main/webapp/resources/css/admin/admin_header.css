@@ -8,10 +8,12 @@ body {
 	margin: 0 auto;
 }
 /* header */
+.admin__header {
+	border-bottom: 1px solid #605759;
+}
 /* header top - 로고와 로그아웃 버튼 */
 .admin__header .header__top {
-	/* 	background: lightblue; */
-	
+    border-bottom: 1px solid #605759;
 }
 .header__top .header__top-wrap {
 	display: flex;
@@ -37,14 +39,14 @@ body {
 }
 /* 메인메뉴 부분 */
 .admin__header .header__menu {
-	/* 	width: 980px; */
+	width: 1050px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	position: relative;
 	background: white;
-    border-top: 1px solid #605759;
-    border-bottom: 1px solid #605759;
+/*     border-top: 1px solid #605759; */
+/*     border-bottom: 1px solid #605759; */
     z-index: 999;
 }
 /* ul, li 초기화 */
@@ -59,6 +61,7 @@ ul, li {
 	position: relative;
 	width: 200px;
 	padding: 0 5px;
+	margin: 0 3px;
 }
 /* 메인메뉴 hover 시 */
 #amenu__main > li:hover > a {

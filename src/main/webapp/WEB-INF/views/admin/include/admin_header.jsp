@@ -12,6 +12,8 @@
 <link rel="icon" type="image/png" href="<%=request.getContextPath() %>/resources/img/favicon.png" />
 <!-- fontawesome cdn 링크 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+<!-- jQuery CDN -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <style type="text/css">
 * {
@@ -67,7 +69,7 @@
 					<li><a href="#">농업인 회원 문의</a></li>
 				</ul>
 			</li>
-			<li><a href="#">공지사항</a></li>
+			<li><a href="<%=request.getContextPath() %>/adminnotice/list">공지사항</a></li>
 		</ul>
 	</nav>
 </header>

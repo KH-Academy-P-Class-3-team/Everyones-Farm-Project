@@ -1,8 +1,10 @@
 package com.kh.farmapp.admin.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import common.dto.Notice;
+import common.util.AdminPaging;
 
 
 /**
@@ -14,13 +16,8 @@ public interface AdminNoticeService {
 	 * 공지사항 목록 조회
 	 * @return List<Notice> - 조회 결과 반환
 	 */
-	public List<Notice> selectAllNoticeList();
+	public List<Map<String, Object>> selectAllNoticeList();
 	
-	/**
-	 * 자주 묻는 질문 목록 조회
-	 * @return List<Notice> - 조회 결과 반환
-	 */
-	public List<Notice> selectAllQnaList();
 	
 	/**
 	 * 공지사항 번호를 통해 특정 공지사항 조회
@@ -29,12 +26,6 @@ public interface AdminNoticeService {
 	 */
 	public Notice selectNoticeByNoticNo(Notice noticeNo);
 	
-	/**
-	 * 자주 묻는 질문 번호를 통해 특정 자주 묻는 질문 조회
-	 * @param qnaNo - 조회할 자주 묻는 질문 번호를 갖는 Notice 객체
-	 * @return Notice - 조회 결과 반환
-	 */
-	public Notice selectQnaByQnaNo(Notice qnaNo);
 	
 	/**
 	 * 공지사항 작성
@@ -44,31 +35,28 @@ public interface AdminNoticeService {
 	public int writeNotice(Notice notice);
 	
 	/**
-	 * 자주 묻는 질문 작성
-	 * @param qna - 자주 묻는 질문 작성 정보를 저장하고 있는 Notice 객체
-	 * @return int - 작성 결과(insert 결과)
-	 */
-	public int writeQna(Notice qna);
-	
-	/**
-	 * 자주 묻는 질문 수정
-	 * @param qna - 자주 묻는 질문의 수정 정보를 저장하고 있는 Notice 객체
-	 * @return int - 수정 결과(update 결과)
-	 */
-	public int modifyQna(Notice qna);
-	
-	/**
 	 * 공지사항 삭제
 	 * @param noticeNo - 공지사항 번호 정보를 갖는 Notice 객체
 	 * @return int - 삭제 결과
 	 */
 	public int deleteNoticeByNoticeNo(Notice noticeNo);
-	
+
+
 	/**
-	 * 자주 묻는 질문 삭제
-	 * @param qnaNo - 자주 묻는 질문 번호 정보를 갖는 Notice 객체
-	 * @return int - 삭제 결과
+	 * 페이징 설정
+	 * 
+	 * @param curPage - 현재 페이지 번호(querystring 값)
+	 * @return AdminPaging - 조회 결과 반환 객체
 	 */
-	public int deleteQnaByQnaNo(Notice qnaNo);
+	public AdminPaging getPaging(String curPage);
+
+
+	/**
+	 * 페이징 처리 된 공지사항 목록 불러오기
+	 * 
+	 * @param apaging - 페이징 정보를 가진 AdminPaging 객체
+	 * @return List<Map<String, Object>> - 조회된 결과 반환 객체
+	 */
+	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging);
 	
 }

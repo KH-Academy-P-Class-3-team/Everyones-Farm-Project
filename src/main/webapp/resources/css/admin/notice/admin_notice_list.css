@@ -1,0 +1,93 @@
+@charset "UTF-8";/* main tag */
+.notice__main {
+	margin: 70px auto;
+	width: 900px;
+}
+/* 공지사항 관리 제목 */
+.notice__main .notice__title {
+	margin-bottom: 20px;
+}
+.notice__title .notice__title-text {
+    font-size: 20px;
+    font-weight: 700;
+    opacity: 0.7;
+    padding-left: 7px;
+    border-left: 3px solid #789F6F;
+}
+/* 공지사항 목록 테이블 */
+.notice__table > .notice__n-table {
+	width: 100%;
+}
+.notice__table .notice__n-table {
+	border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+    border-collapse: collapse;
+    text-align: center;
+}
+/* 테이블 row 행 */
+.notice__n-table .n-table__tr-head
+, .notice__n-table .n-table__tr-body {
+	border-bottom: 1px solid #605759;
+}
+.notice__n-table .n-table__tr-head {
+	background: #789F6F;
+    color: white;
+}
+.notice__n-table .n-table__tr-body {
+	cursor: pointer;
+}
+.notice__n-table .n-table__tr-body:hover {
+	background: #D1E9CA;
+}
+/* 테이블 th, td */
+.notice__n-table .n-table__th
+, .notice__n-table .n-table__td {
+    padding: 14px 7px;
+}
+.n-table__tr-head .n-table__th:first-child {
+	width: 5%;
+}
+.n-table__tr-head .n-table__th:nth-child(3) {
+	width: 50%;
+}
+.n-table__tr-head .n-table__th:nth-child(2)
+, .n-table__tr-head .n-table__th:nth-child(4)
+, .n-table__tr-head .n-table__th:last-child {
+	width: 15%;
+}
+/* 제목, 관리자 아이디(작성자) 글자 수 제한 */
+.n-table__td .n-table__title-hidden
+, .n-table__td .n-table__id-hidden {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.n-table__td .n-table__title-hidden {
+    width: 435px;
+}
+.n-table__td .n-table__id-hidden {
+	width: 120px;
+}
+/* 작성, 삭제 버튼 css */
+.notice__main .notice__btns-wrap {
+	margin-top: 20px;
+	text-align: right;
+}
+.notice__btns-wrap span {
+	display: inline-block;
+	width: 125px;
+    text-align: center;
+    padding: 10px 5px;
+    border-radius: 3px;
+    font-weight: 700;
+    cursor: pointer;
+    color: white;
+}
+/* 삭제 버튼 css */
+.notice__btns-wrap .notice__btn-delete {
+	background: #B65656;
+}
+/* 작성버튼 css */
+.notice__btns-wrap .notice__btn-write {
+	background: #789F6F;
+}
