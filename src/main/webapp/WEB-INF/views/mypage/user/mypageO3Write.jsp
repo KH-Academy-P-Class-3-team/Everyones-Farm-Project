@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>마이 페이지</title>
+
+<%@include file="../../include/header.jsp" %>
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -88,7 +86,7 @@ a:hover {
 ﻿
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-<body class="pt-5">
+<div class="headSpace" style="margin-top:200px;"></div>
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
@@ -183,5 +181,4 @@ a:hover {
 
 
 
-</body>
-</html>
+<%@include file="../../include/footer.jsp" %>
