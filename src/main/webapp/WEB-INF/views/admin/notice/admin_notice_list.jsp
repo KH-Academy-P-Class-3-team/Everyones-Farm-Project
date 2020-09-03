@@ -80,6 +80,29 @@
 .n-table__td .n-table__id-hidden {
 	width: 120px;
 }
+/* 작성, 삭제 버튼 css */
+.notice__main .notice__btns-wrap {
+	margin-top: 20px;
+	text-align: right;
+}
+.notice__btns-wrap span {
+	display: inline-block;
+	width: 125px;
+    text-align: center;
+    padding: 10px 5px;
+    border-radius: 3px;
+    font-weight: 700;
+    cursor: pointer;
+    color: white;
+}
+/* 삭제 버튼 css */
+.notice__btns-wrap .notice__btn-delete {
+	background: #B65656;
+}
+/* 작성버튼 css */
+.notice__btns-wrap .notice__btn-write {
+	background: #789F6F;
+}
 </style>
 
 
@@ -120,7 +143,12 @@
 		</div>
 		
 		<!-- 작성, 삭제 버튼 -->
-		<div></div>
+		<div class="notice__btns-wrap">
+			<!-- 작성 버튼 -->
+			<span class="notice__btn-write">공지사항 작성</span>
+			<!-- 삭제 버튼 -->
+			<span class="notice__btn-delete">공지사항 삭제</span>
+		</div>
 		
 		<!-- header include -->
 		<%@include file="../include/admin_notice-pagination.jsp" %>
