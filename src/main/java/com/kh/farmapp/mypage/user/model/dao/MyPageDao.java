@@ -10,6 +10,7 @@ import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
 import common.dto.UserTB;
+import common.util.Paging;
 
 public interface MyPageDao {
 
@@ -20,11 +21,16 @@ public interface MyPageDao {
 		public int modifyprofile(UserTB user);
 		
 		//회원 탈퇴
-		public int leave(String userId);
+		public int leave(UserTB user);
 		
 		//일대일 문의 전체 리스트 반환 
 		//리스트 안에서 페이징 호출
-		public List<QuestionOneonone> o3List();
+		public List<Map<String, Object>> o3List(Paging page);
+		
+		/*
+		 * 페이지 부를떄 총 게시물의 개수를 구하는 메서드QuestionOneonone
+		 */
+		public int cntO3();
 		
 		//일대일 문의 상세보기
 		public QuestionOneonone o3Detail(int qNo);
@@ -40,7 +46,7 @@ public interface MyPageDao {
 		
 		//개인 등록 체험활동 리스트
 		//리스트 안에서 페이징 호출
-		public Application appliActList();
+		public List<Map<String, Object>> appliActList(UserTB user);
 		
 		//개인 등록 일손돕기 리스트
 		//리스트 안에서 페이징 호출
@@ -48,17 +54,17 @@ public interface MyPageDao {
 		
 		//장바구니 목록 리스트
 		//리스트 안에서 페이징 호출
-		public Basket basketList();
+		public List<Map<String, Object>> basketList(Map<String, Object> sub);
 
 		//체크된 상품들의 가격을 더해서 나타내주는 메서드
 		public int addProduct(Map<String , Object> map);
 		
 		//구매목록 리스트
 		//리스트 안에서 페이징 호출
-		public TBOrder orderList();
+		public List<Map<String, Object>> orderList(Map<String, Object> sub);
 		
 		//구매목록 상세 페이지
-		public Product orderDetail(int orderNo);
+		public Map<String, Object> orderDetail(int orderNo);
 		
 		//구매 상세 페이지 안에서 고객의 주소를 불러와준다.
 		public UserAddress getAddress(UserTB user);
@@ -68,5 +74,23 @@ public interface MyPageDao {
 		 * @param user
 		 * @return
 		 */
-		public Map<String, Object> selectUser(UserTB user);
+		public UserTB selectUser(UserTB user);
+
+		/*
+		 * 내 농촌활동 지원 개수
+		 */
+		public int cntApli(UserTB user);
+
+		/*
+		 * 내 주문내역 총 개수 조회
+		 */
+		public int cntOrder(int userNo);
+
+		/*
+		 * 내 장바구니 내역 확인
+		 */
+		public int cntBasket(int userNo);
+
+
+
 }

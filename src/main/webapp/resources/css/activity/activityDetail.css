@@ -7,10 +7,9 @@
 	font-size: 1.8em;
 }
 
-
 /* 이미지 슬라이드 */
 * {
-	box-sizing: border-box
+	box-sizing: border-box;
 }
 
 .slideshow {
@@ -22,7 +21,7 @@
 	display: block;
 }
 
-img {
+.image {
 	vertical-align: middle;
 	width: 980px;
 	height: 600px;
@@ -69,24 +68,24 @@ img {
   top: 0;
 }
 
-.slide-dot {
-	display: inline-block;
-}
+/* .slide-dot { */
+/* 	display: inline-block; */
+/* } */
 
-.dot-div1 {
-	margin-left: 470px;
-}
+/* .dot-div1 { */
+/* 	margin-left: 470px; */
+/* } */
 
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
+/* .dot { */
+/*   cursor: pointer; */
+/*   height: 15px; */
+/*   width: 15px; */
+/*   margin: 0 2px; */
+/*   background-color: #bbb; */
+/*   border-radius: 50%; */
+/*   display: inline-block; */
+/*   transition: background-color 0.6s ease; */
+/* } */
 
 .active, .dot:hover {
 /*   background-color: #68bb59; */
@@ -118,7 +117,7 @@ img {
 /* 체험 내용 영역 */
 .activity-content {
 	width: 980px;
-	margin: 10px auto 50px;
+	margin: 0 auto 50px;
 }
 
 .caption {
@@ -134,7 +133,7 @@ img {
 
 .caption-content {
 	font-size: 18px;
-	margin: 0 0 20px 15px;
+	margin: 0 0 30px 15px;
 }
 
 .price-span {
@@ -149,6 +148,7 @@ img {
 .schedule-empty {
 	margin-left: 12px;
 	color: #969696;
+	margin-bottom: 30px;
 }
 
 table {
@@ -192,6 +192,7 @@ td {
 	width: 950px;
 	height: 550px;
 	margin: 0 auto;
+	z-index: -1;
 }
 
 /* 모달창 영역 */

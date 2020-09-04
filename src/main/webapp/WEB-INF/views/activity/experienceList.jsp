@@ -3,11 +3,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>EveryonesFarm</title>
+<%@include file="../include/header.jsp" %>
+
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/activity/experienceList.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -22,6 +19,13 @@ $(document).ready(function() {
 		} 
 	})
 	
+	/* 엔터 누르면 검색 버튼 클릭 이벤트 발생 */
+	$(".title").keypress(function(event) {
+		if(event.which == 13) {
+			$(".btnSearch").click();
+			return false;
+		}
+	}) 
 	
 	/* 활동 검색 버튼 클릭 시 Ajax 함수 */
 	$(".btnSearch").click(function() {
@@ -56,12 +60,14 @@ $(document).ready(function() {
 })
 </script>
 
-</head>
-<body>
+<div style="margin-top:170px"></div>
+
 
 <div class="activity-top">
-	<div class="top-title">농장 체험</div>
-	<div class="top-sub">Farm Activity</div>
+	<div class="top-div">
+		<div class="top-title">농장 체험</div>
+		<div class="top-sub">Farm Activity</div>
+	</div>
 </div>
 
 <div class="activity-content">
@@ -91,7 +97,6 @@ $(document).ready(function() {
 				</c:forEach>
 				
 			</div>
-			
 			
 			
 			<div class="caption">
@@ -160,6 +165,4 @@ $(document).ready(function() {
 </div>
 
 
-
-</body>
-</html>
+<%@include file="../include/footer.jsp" %>
