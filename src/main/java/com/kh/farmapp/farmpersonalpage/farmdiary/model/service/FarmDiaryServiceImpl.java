@@ -40,7 +40,7 @@ public class FarmDiaryServiceImpl implements FarmDiaryService{
 	@Override
 	public Map<String, Object> selectFarmDiaryDetail(int farmDiaryNo) {
 		Map<String, Object> res = farmdiaryDao.selectFarmDiaryDetail(farmDiaryNo);
-		return farmdiaryDao.selectFarmDiaryDetail(farmDiaryNo);
+		return res;
 	}
 
 	//파일 업로드
