@@ -2,7 +2,10 @@ package com.kh.farmapp.farmpersonalpage.personalproduce.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.print.attribute.HashAttributeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,11 +53,6 @@ public class PersonalProduceController {
 		
 		personalproduceService.writeProduct(product);
 		personalproduceService.writeProductOption(productoption);
-		
-
-
-
-		출처: https://nota.tistory.com/50 [nota's story]
 		
 		return "redirect:/personalproduce/personalproducelist.do";
 	}
