@@ -32,7 +32,7 @@ public class MypageUserController {
 		
 		//테스트 데이터
 		UserTB user = new UserTB();
-		user.setUserNo(1);
+		user.setUserNo(2);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -71,7 +71,7 @@ public class MypageUserController {
 		
 		ModelAndView mav = new ModelAndView();
 		String root = session.getServletContext().getRealPath("farmapp/");
-		
+
 		mypageService.insertFile(user, file, root);
 		
 		return null;

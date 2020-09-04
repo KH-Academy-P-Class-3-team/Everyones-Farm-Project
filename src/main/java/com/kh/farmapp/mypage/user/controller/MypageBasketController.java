@@ -61,9 +61,9 @@ public class MypageBasketController {
 	public ModelAndView orderList(@RequestParam(required=false, defaultValue="1") int cPage, HttpSession session) {
 		UserTB user = (UserTB) session.getAttribute("userInfo");
 		
-		int userNo = user.getUserNo();
+//		int userNo = user.getUserNo();
 		int cntPerPage = 5;
-		Map<String, Object> order = mypageService.orderList(userNo, cPage, cntPerPage);
+		Map<String, Object> order = mypageService.orderList(2, cPage, cntPerPage);
 		
 		System.out.println(order);
 		ModelAndView mav = new ModelAndView();
