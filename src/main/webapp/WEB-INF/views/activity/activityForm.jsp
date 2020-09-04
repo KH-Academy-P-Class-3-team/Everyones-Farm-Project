@@ -1,19 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+<%@include file="../include/header.jsp" %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/activity/activityForm.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-</head>
-<body>
+
+<div style="margin-top:200px"></div>
 
 <div class="form-top">
-	<h1>체험 등록 신청</h1>
+	<div class="top-title">체험 등록 신청</div>
 	<p>농장에서 체험할 수 있는 다양한 활동을 다른 사람들과 나누어 보세요.</p>
 	<p>부족한 일손을 채우는 일이 누군가에게는 경험이 됩니다.</p>
 </div>
@@ -214,12 +211,7 @@ function addRow() {
 }
 
 
-
-
-
-
 </script>
 
 
-</body>
-</html>
+<%@include file="../include/footer.jsp" %>
