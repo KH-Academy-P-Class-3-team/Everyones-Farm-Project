@@ -50,7 +50,9 @@
 						<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
 					</c:when>
 					<c:when test="${not empty kakaoInfo }">
+            
 						<img src="${kakaoInfo.profile_image }" alt="프로필" style= "height: 40px; width: 40px; border-radius: 50%;"/>
+            
 						<a href="<%=request.getContextPath() %>/user/kakaologout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
 					</c:when>
 					<c:when test="${not empty farmerInfo }">
