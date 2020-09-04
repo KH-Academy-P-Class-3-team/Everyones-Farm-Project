@@ -47,7 +47,7 @@ $(document).ready(function(){
 	})
 	
 	$("#kakao").click(function(){
-		location.href="https://kauth.kakao.com/oauth/authorize?client_id=9e026a9e81698d2522ecd927296dfadd&redirect_uri=http://localhost:8099/farmapp/user/kakaologin.do&response_type=code"		
+		location.href="https://kauth.kakao.com/oauth/authorize?client_id=9e026a9e81698d2522ecd927296dfadd&redirect_uri=http://localhost:8012/farmapp/user/kakaologin.do&response_type=code"		
 	})
 	
 })
