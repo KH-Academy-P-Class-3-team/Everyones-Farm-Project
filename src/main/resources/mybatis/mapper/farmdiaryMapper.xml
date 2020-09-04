@@ -5,41 +5,112 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Diary">
-  
-  <insert id="insertFarmDiary">
-  	insert into farm_diary
-		(farm_diary_no, title, hit, enroll_date, youtube_link, content, farmer_no)
-		values
-		(farm_diary_seq.nextval, #{title}, 0, sysdate, #{youtubeLink}, #{content}, 1)
-  </insert>
-  
-  
-  
-  <select id="selectFarmDiaryList" resultType="common.dto.FarmDiary">
-  	select
-		 farm_diary_no, title, enroll_date, 
-		 youtube_link, content, farmer_no 
+
+	<insert id="insertFarmDiary">
+		INSERT INTO farm_diary
+		(farm_diary_no, title, enroll_date, youtube_link,
+		content, farmer_no, hits)
+		VALUES
+		(farm_diary_seq.nextval, #{title},
+		sysdate, #{youtubeLink}, #{content}, 1, 0)
+	</insert>
+	
+<!-- 	<insert id="insertFile"> -->
+<!-- 		insert into farm_diary_file -->
+<!-- 		(farm_diary_file_no, origin_name ,file_rename -->
+<!-- 		,save_path ,farm_diary_no, is_thumbnail) -->
+<!-- 		values( -->
+<!-- 			farm_diary_file_seq.nextval -->
+<!-- 			,#{originName}	 -->
+<!-- 			,#{fileRename} -->
+<!-- 			,#{savePath} -->
+<!-- 			,#{farmDiaryNo} -->
+<!-- 			,#{isThumbnail} -->
+<!-- 		) -->
+<!-- 	</insert> -->
+	
+	
+<!-- 	<insert id="insertFileWithSC_N"> -->
+<!-- 		insert into farm_diary_file  -->
+<!-- 		(farm_diary_file_no, origin_name ,file_rename -->
+<!-- 		,save_path ,farm_diary_no, is_thumbnail) -->
+<!-- 		values( -->
+<!-- 			farm_diary_file_seq.nextval -->
+<!-- 			,farm_diary_no.currval	 -->
+<!-- 			,#{originName} -->
+<!-- 			,#{fileRename} -->
+<!-- 			,#{savePath} -->
+<!-- 			,#{isThumbnail} -->
+<!-- 		) -->
+<!-- 	</insert> -->
+
+
+
+	<select id="selectFarmDiaryList" resultType="common.dto.FarmDiary">
+		select
+		farm_diary_no, title, hits, enroll_date,
+		youtube_link, content, farmer_no
 		from(
-			select rownum rnum, n1.* 
-			from(
-				select * 
-				from farm_diary
-				order by farm_diary_no desc
-			)n1
-		)where rnum between #{start} and #{end}     
-  	
-  </select>
-  
-  <select id="selectContentCnt" resultType="int">
-		select count(*) from farm_diary
-  </select>
-  
-  <select id="selectFarmDiaryDetail" resultType="common.dto.FarmDiary">
-  		select farm_diary_no, title, hit, enroll_date, youtube_link, content, farmer_no
-  		from farm_diary
-  		where farm_diary_no = #{farmDiaryNo}
-  </select>
+		select rownum rnum, n1.*
+		from(
+		select *
+		from farm_diary
+		order by farm_diary_no desc
+		)n1
+		)where rnum between #{start} and #{end}
+	</select>
+
+	<select id="selectContentCnt" resultType="int">
+		SELECT count(*) FROM
+		farm_diary
+	</select>
 	
 	
-  
+	<resultMap type="hashMap" id="detail">
+		<id column="farmer_no" property="farmerNo" />
+		<result column="farm_diary_no" property="farmDiaryNo" />
+		<result column="title" property="title" />
+		<result column="hits" property="hits" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="youtube_link" property="youtubeLink" />
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<select id="selectFarmDiaryDetail" resultMap="detail">
+		SELECT 
+			fd.farm_diary_no
+			, fd.title
+			, fd.hits
+			, fd.enroll_date
+			, fd.youtube_link
+			, fd.content
+			, fd.farmer_no
+			, f.name
+		FROM 
+			farm_diary fd
+			, farmer f
+		WHERE 
+			fd.farmer_no = f.farmer_no
+			AND fd.farm_diary_no = #{farmDiaryNo}
+	</select>
+	
+	<delete id="deleteFarmDiary" parameterType="int">
+		DELETE FROM farm_diary 
+		WHERE farm_diary_no = #{farmDiaryNo}
+	</delete>
+	
+	<update id="modifyFarmDiary" parameterType="hashMap">
+		    UPDATE
+                farm_diary
+            SET
+                title = #{title},
+                youtube_link = #{youtubeLink},
+                content = #{content}
+            WHERE
+                farm_diary_no = #{farmDiaryNo}
+	</update>
+
+
+
 </mapper>

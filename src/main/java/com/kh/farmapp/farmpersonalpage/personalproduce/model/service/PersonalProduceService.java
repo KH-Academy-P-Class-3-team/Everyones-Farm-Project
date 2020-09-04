@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import common.dto.Product;
+import common.dto.ProductOption;
+
 public interface PersonalProduceService {
 	
 	//게시글 목록
@@ -13,8 +16,11 @@ public interface PersonalProduceService {
 															//페이지당 노출할 게시굴 수
 															int cntPerPag); 
 	
-	//상품추가
-	public int addProduct();
+	//상품등록
+	public void writeProduct(Product product);
+	
+	//상품옵션 등록
+	public void writeProductOption(ProductOption productoption);
 	
 	//상품등록
 	public int registrationProduct();
