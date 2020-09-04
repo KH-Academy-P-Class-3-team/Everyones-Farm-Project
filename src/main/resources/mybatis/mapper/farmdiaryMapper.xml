@@ -78,11 +78,21 @@
 	</resultMap>
 
 	<select id="selectFarmDiaryDetail" resultMap="detail">
-		SELECT fd.farm_diary_no, fd.title, fd.hits, fd.enroll_date, fd.youtube_link,
-		fd.content, fd.farmer_no, f.name
-		FROM farm_diary fd, farmer f
-		WHERE fd.farmer_no = f.farmer_no
-		AND fd.farm_diary_no = #{farmDiaryNo}
+		SELECT 
+			fd.farm_diary_no
+			, fd.title
+			, fd.hits
+			, fd.enroll_date
+			, fd.youtube_link
+			, fd.content
+			, fd.farmer_no
+			, f.name
+		FROM 
+			farm_diary fd
+			, farmer f
+		WHERE 
+			fd.farmer_no = f.farmer_no
+			AND fd.farm_diary_no = #{farmDiaryNo}
 	</select>
 	
 	<delete id="deleteFarmDiary" parameterType="int">
