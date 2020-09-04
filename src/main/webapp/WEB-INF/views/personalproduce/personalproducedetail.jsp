@@ -27,9 +27,9 @@
 
 <%@include file="../include/farmdiaryheader.jsp" %>
 
-<form action="<%= request.getContextPath() %>/farmdiary/deletefarmdiary.do" method="post">
+<form action="<%= request.getContextPath() %>/personalproduce/personalproducedetail.do" method="post">
 <div id="d1">
-    <h3>농장일기</h3>
+    <h3>개인 농산물</h3>
     <hr>
  <table class="table">
         <colgroup>
@@ -41,21 +41,21 @@
     <tbody>
    	
     	<tr>
-      	  <th class="success">제목</th>
-      	  <td>${detail.title}</td>
-      	  <th class="success">조회수</th>
-      	  <td>${detail.hits}</td>
+      	  <th class="success">상품명</th>
+      	  <td>${detail.name}</td>
+      	  <th class="success">가격</th>
+      	  <td>${detail.price}</td>
       	</tr>
       	
       	<tr>
-      	  <th class="success">작성자</th>
-      	  <td>${detail.name}</td>
-      	  <th class="success">작성일</th>
-      	  <td><fmt:formatDate value="${detail.enrollDate}" pattern="yyyy-MM-dd"/></td>
+      	  <th class="success">품질</th>
+      	  <td>${detail.quality}</td>
+      	  <th class="success">유통기한</th>
+      	  <td><fmt:formatDate value="${detail.expirationDate}" pattern="yyyy-MM-dd"/></td>
       	</tr>
       	<tr>
-      	  <th class="success">유튜브 링크</th>
-      	  <td>${detail.youtubeLink}</td>
+<!--       	  <th class="success">유튜브 링크</th> -->
+<%--       	  <td>${detail.youtubeLink}</td> --%>
       	  <th></th>
       	  <td></td>
       	</tr>
@@ -70,11 +70,11 @@
 </table>
      	<div style="height: 300px;"> 	  
      	<hr>
- 		 ${detail.content}
+ 		 ${detail.explain}
  		 
  		 <hr>
- 		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarydelete.do?farmDiaryNo=${detail.farmDiaryNo}'">삭제</button>
-	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarymodify.do?farmDiaryNo=${detail.farmDiaryNo}'">수정</button>
+<%--  		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarydelete.do?farmDiaryNo=${detail.farmDiaryNo}'">삭제</button> --%>
+<%-- 	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarymodify.do?farmDiaryNo=${detail.farmDiaryNo}'">수정</button> --%>
       	</div>
 
 

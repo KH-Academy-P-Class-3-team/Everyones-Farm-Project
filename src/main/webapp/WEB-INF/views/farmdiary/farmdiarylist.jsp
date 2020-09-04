@@ -32,12 +32,9 @@
 <div id="container" style="width: 980px; margin: auto;" >
 
 <div id="aside" style="float: left; text-align: center;">    
-
-    <h4>~~님의 농장일기</h4>
+    <h3>~~님의 농장일기</h3>
     <hr>
-    
-
-
+   
 	<p>Welcome to my Farm</p>
 	
 	<br>
@@ -75,7 +72,7 @@
        </tbody>
        </table>
 
-<button class="btn btn-warning" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
+<button class="btn btn-success" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
 
 		
 <div style="display: flex;"><!-- section pagination -->

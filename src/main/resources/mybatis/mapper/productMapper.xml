@@ -21,11 +21,11 @@
 	insert into 
 	product_option(option_no, product_no, name, price, amount, quality, expiration_date) 
 	values
-	(product_option_seq.nextval, product_seq.currval, #{name}, #{price}, #{amount}, #{quality}, sysdate)
+	(product_option_seq.nextval, product_seq.currval, #{name}, #{price}, #{amount}, #{quality}, #{expirationDate})
 
 	</insert>
 	
-	<select id="selectProductList">
+	<select id="selectProductList" resultType="common.dto.Product">
 	
 		select
 		product_no, name, sysdate
@@ -40,5 +40,28 @@
         
 		
 	</select>
-
+	
+	<select id="selectContentCnt" resultType="int">
+	
+		SELECT count(*) FROM
+		product
+		
+	</select>
+	
+	<resultMap type="hashMap" id="detail">
+		<id column="product_no" property="productNo" />
+		<result column="name" property="name" />
+		<result column="explain" property="explain" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="price" property="price" />
+		<result column="quality" property="quality" />
+		<result column="expiration_date" property="expirationDate" />
+	</resultMap>
+	
+	<select id="selectProductDetail" resultMap="detail">
+		select p.product_no, p.name, p.explain, pp.price, pp.quality, pp.expiration_date
+		from product p, product_option pp
+		where p.product_no = pp.product_no
+		and pp.product_no = #{productNo}
+	</select>
+	
 </mapper>

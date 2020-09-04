@@ -1,17 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>개인농산물: 상품등록</title>
-</head>
-<body>
+<%@include file="../include/farmdiaryheader.jsp" %>
+
+<!-- <script src="//code.jquery.com/jquery-2.2.4.min.js"></script> -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+    
+</style>
 
 <form action="<%= request.getContextPath() %>/personalproduce/productwrite.do" method="post">
+
+<div style= "clear: both; margin-top: 200px;" ></div>
 
 <h2>상품 등록 신청</h2>
 <hr>
@@ -55,14 +62,13 @@
 		<option value="3">하</option>	
 	  </select><br>
 
-<!-- 유통기한 <input type="date" name="expirationDate"><br> -->
+유통기한 <input type="date" name="expirationDate"><br>
 
-<%-- <fmt:formatDate value="yyyy-MM-dd" value=""/> --%>
 
 상품사진 <input type="file"><br>
 
-<button class="btn btn-warning">등록</button>
+<button class="btn btn-success">등록</button>
 
 </form>
-</body>
-</html>
+
+<%@include file="../include/footer.jsp" %>
