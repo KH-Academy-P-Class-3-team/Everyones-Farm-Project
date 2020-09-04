@@ -311,6 +311,6 @@ public class UserController {
 			session.removeAttribute("accessToken");
 		}
     
-		return "main/index";
+		return "redirect:/";
 	}
 }
