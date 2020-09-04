@@ -21,6 +21,9 @@
 	<mappers>
     
 		<!-- mapper 파일 만들면 넣기 -->
+		<mapper resource="/mybatis/mapper/mypagedailyMapper.xml" />
+		<mapper resource="/mybatis/mapper/mypageactivityMapper.xml" />
+		<mapper resource="/mybatis/mapper/mypagesellMapper.xml" />
 		<mapper resource="/mybatis/mapper/mainMapper.xml" />
 		<mapper resource="/mybatis/mapper/noticeMapper.xml" />
 		<mapper resource="/mybatis/mapper/testMapper.xml" />

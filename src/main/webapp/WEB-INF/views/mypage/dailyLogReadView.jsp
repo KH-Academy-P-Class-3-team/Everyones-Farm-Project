@@ -136,6 +136,7 @@ table {
 				     }else if(border == 'block'){
 						$('#border').hide();				    	 
 				     }
+				     
 				});
 	});
 	
@@ -241,7 +242,7 @@ margin-left:-90px;
 				일지 작성하기</a>
 
 			<div id="border" style="display : none;">
-				<form role="form" method="get" action="/farmapp/mypage/dailyLoglist">
+				<form role="form" method="post" action="/farmapp/mypage/dailyLoglist">
 					<table class="table table-condensed">
 						<thead>
 							<tr class="success">
@@ -254,40 +255,21 @@ margin-left:-90px;
 							</tr>
 						</thead>
 
-						<c:forEach items="${list}" var="list">
 							<tr>
 								<td scope="col" class="text-center"><c:out
-										value="${list.dailylogNo}" /></td>
+										value="${read.dailyLogNo}" /></td>
 								<td scope="col" class="text-center">
-								<a href="/farmapp/mypage/dailyLogReadView?dailyLogNo=${list.dailylogNo}"><c:out
-										value="${list.content}" /></a></td>
+								<a href="/farmapp/mypage/dailyLogReadView?dailyLogNo=${read.dailylogNo}"><c:out
+										value="${read.content}" /></a></td>
 								<td scope="col" class="text-center"><c:out
-										value="${list.workingAmount}" /></td>
+										value="${read.workingAmount}" /></td>
 								<td scope="col" class="text-center"><c:out
-										value="${list.workingTime}" /></td>
+										value="${read.workingTime}" /></td>
 								<td scope="col" class="text-center"><fmt:formatDate
-								value="${list.writeDate}" pattern="yyyy-MM-dd" /></td>
+								value="${read.writeDate}" pattern="yyyy-MM-dd" /></td>
 							</tr>
-						</c:forEach>
 					</table>
-					<div id="psize">
-						<ul>
-							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="dailyLoglist${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage}"
-								end="${pageMaker.endPage}" var="idx">
-								<li><a href="dailyLoglist${pageMaker.makeQuery(idx)}">${idx}</a></li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="dailyLoglist${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-							</c:if>
-						</ul>
-					</div>
+					
 					<hr>
 				</form>
 			</div>
