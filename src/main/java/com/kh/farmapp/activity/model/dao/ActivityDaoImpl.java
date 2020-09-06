@@ -52,7 +52,7 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	@Override
 	public int insertApplication(Application application) {
-		return 0;
+		return sqlSession.insert("ACTIVITY.insertApplication", application);
 	}
 
 	@Override

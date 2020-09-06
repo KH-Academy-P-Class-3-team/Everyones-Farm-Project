@@ -18,7 +18,7 @@
 	
 	<insert id="insertActivitySchedule">
 		insert into farm_activity_schedule (schedule_no, activity_no, time, content, etc)
-		values (FARM_ACTIVITY_SCHEDULE_SEQ.nextval, farm_activity_seq.currval, #{time}, #{content}, #{etc})
+		values (farm_activity_schedule_seq.nextval, farm_activity_seq.currval, #{time}, #{content}, #{etc})
 	</insert>
 
 
@@ -153,6 +153,7 @@
 	</select>
 	
 	
+	<!-- 활동 번호로 활동 조회 -->
 	<select id="selectActivityByActivityNo" parameterType="int" resultType="ACTIVITY">
 		select * from farm_activity
 		where activity_no = #{activityNo}
@@ -170,5 +171,13 @@
 		where board_no = 1
 			and post_no = #{activityNo}
 	</delete>
+	
+	
+	<!-- 활동 신청서 등록 -->
+	<insert id="insertApplication">
+		insert into application (application_no, activity_no, user_no, applicant_name, applicant_phone, applicant_email, people, activity_date, is_approval)
+		values (application_seq.nextval, #{activityNo}, #{userNo}, #{applicantName}, #{applicantPhone}, #{applicantEmail}, #{people}, #{activityDate}, 0)
+	</insert>
+	
 
 </mapper>
