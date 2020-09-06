@@ -1,5 +1,6 @@
 package com.kh.farmapp.mypage.farmer.model.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public interface FarmerMypageDao {
 	/**
 	 * 영농일지 상세
 	 */
-	public FarmingDailylog read(int dailylogNo);
+	public FarmingDailylog read(int dailyLogNo);
 	
 	/**
 	 * 농장 체험 리스트
@@ -105,6 +106,8 @@ public interface FarmerMypageDao {
 	 * @return 
 	 */
 	public int updatePayment(TBOrder order);
+
+	public List<Map<String, Object>> datelist(String date);
 
 	
 

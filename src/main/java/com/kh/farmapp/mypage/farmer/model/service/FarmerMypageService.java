@@ -40,7 +40,7 @@ public interface FarmerMypageService {
 	
 	
 	//영농일지 상세페이지
-	public FarmingDailylog read(int dailylogNo);
+		public FarmingDailylog read(int diaryNo);
 	
 	/**
 	 * 농장 체험 신청내역 리스트 조회
@@ -92,6 +92,9 @@ public interface FarmerMypageService {
     * @return
     */
    public int updatePayment(TBOrder order);
+
+   // 영농일지 데이트눌렀을때 리스트
+   public List<Map<String, Object>> datelist(String date);
 
    
    

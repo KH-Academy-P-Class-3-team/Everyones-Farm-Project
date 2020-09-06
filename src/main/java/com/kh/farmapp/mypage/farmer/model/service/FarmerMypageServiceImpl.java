@@ -1,5 +1,8 @@
 package com.kh.farmapp.mypage.farmer.model.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -40,9 +43,9 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	}
 
 	@Override
-	public FarmingDailylog read(int dailylogNo) {
-		System.out.println(dailylogNo+"서비스");
-		return farmerMypageDao.read(dailylogNo);
+	public FarmingDailylog read(int dailyLogNo) {
+		System.out.println(dailyLogNo+"서비스");
+		return farmerMypageDao.read(dailyLogNo);
 	}
 	
 	//농장 체험 활동내역 리스트
@@ -116,7 +119,17 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	}
 
 	
-
+	@Override
+	public List<Map<String, Object>> datelist(String date) {
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+		Date to = null;
+		try {
+			to = transFormat.parse(date);		
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return farmerMypageDao.datelist(date);
+	}
 	
 
 	

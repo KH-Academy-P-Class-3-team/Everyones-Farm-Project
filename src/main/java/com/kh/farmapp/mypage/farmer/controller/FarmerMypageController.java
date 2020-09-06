@@ -1,5 +1,7 @@
 package com.kh.farmapp.mypage.farmer.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.farmapp.mypage.farmer.model.service.FarmerMypageService;
@@ -157,10 +158,12 @@ public class FarmerMypageController {
 
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/mypage/cal", method = RequestMethod.GET)
-	public String cal() {
-		System.out.println("접속");
-		return "mypage/cal";
+	public List<Map<String, Object>> cal(String date) {
+		List<Map<String, Object>> res = farmerMypageService.datelist(date);
+		System.out.println(res);
+		return res;
 	}
 	@RequestMapping(value = "/mypage/cal23", method = RequestMethod.GET)
 	public String cal2() {

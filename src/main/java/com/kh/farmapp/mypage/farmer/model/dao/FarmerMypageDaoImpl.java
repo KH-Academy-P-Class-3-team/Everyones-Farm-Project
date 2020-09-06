@@ -1,5 +1,6 @@
 package com.kh.farmapp.mypage.farmer.model.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -76,9 +77,9 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	
 	//영농일지 상세
 	@Override
-	public FarmingDailylog read(int dailylogNo) {
-		System.out.println(dailylogNo+"다오");
-		return session.selectOne("MYPAGEDAILY.read",dailylogNo);
+	public FarmingDailylog read(int dailyLogNo) {
+		System.out.println(dailyLogNo+"다오");
+		return session.selectOne("MYPAGEDAILY.read",dailyLogNo);
 	}
 	
 	// 판매 내역 리스트 조회하기
@@ -99,5 +100,13 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 		return session.update("MYPAGESELL.update",order);
 	}
 	
-
+	@Override
+	public List<Map<String, Object>> datelist(String date) {
+		return session.selectList("MYPAGEDAILY.list",date);
+	}
+//	@Override
+//	public List<Map<String, Object>> datelist(Date to) {
+//		System.out.println(to);
+//		return session.selectList("MYPAGEDAILY.list",to);
+//	}
 }

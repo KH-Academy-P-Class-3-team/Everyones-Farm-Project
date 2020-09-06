@@ -105,40 +105,82 @@ table {
 
 
 <script>
-
-	$(function() {
-		$('#searchBtn').click(
-				function() {
-					self.location = "list" + '${pageMaker.makeQuery(1)}'
-							+ "&searchType="
-							+ $("select option:selected").val() + "&keyword="
-							+ encodeURIComponent($('#keywordInput').val());
-				});
-	});
-	
 	// 달력 날짜 버튼 ㅠㅠ
-
 	function testfunction(i){
 		console.log(i);
 		
 	}
 	
+	//달력 날짜눌렀을때 스크립트
 	$(function() {
 		$('.day').click(
 				function() {
 					 console.log($(this));
 				     console.dir($(this));
-				     var d = $(this).eq(0).text();
-				     console.log(d);
-				     var border = $('#border').css("display");
-				     if(border == 'none'){
-						$('#border').show();				    	 
-				     }else if(border == 'block'){
-						$('#border').hide();				    	 
+				     var yearmonth = document.getElementById('yearmonth').innerHTML;
+				     var res = yearmonth.split("년 ")
+				     res[1] = parseInt(res[1].slice(0,-1));
+				     if(res[1]<10){
+				    	 res[1] = '0' + res[1];
 				     }
-				});
+				     
+				     var d = parseInt($(this).eq(0).text());
+				     
+				     if( d<10){
+				    	 d = '0'+d 
+				     }
+				     
+				     var date = res[0]+res[1]+d
+				     console.log(date)
+				     var border = $('#border').css("display");
+				     
+				     
+				     $.ajax({
+			             type: "get",
+			             url: "/farmapp/mypage/cal?date="+date,
+			             dataType : "json",
+			             async: false,     //값을 리턴시 해당코드를 추가하여 동기로 변경
+			             success: function (data) {
+			            	 console.log(data);
+			           		 var inner ="";
+			           		 if(data.length <= 0){
+			           			$('#writeday').html(" ");
+			           		 $( '#resview > tbody').empty();
+			           		 }
+			           		 else{
+			           		$('#writeday').html(" ");
+			           		$('#writeday').html(getFormatDate(data[0].WRITE_DATE));
+			            	 for (i=0; i<data.length; i++){			            		
+			            		 	inner+="<tr><td scope='col' class='text-center'>"+data[i].dailyLogNo+"</td>";
+									inner+="<td scope='col' class='text-center'><a href='/farmapp/mypage/dailyLogReadView?dailyLogNo="+data[i].dailyLogNo+"'>"+data[i].content + "</a></td>";
+									inner+="<td scope='col' class='text-center'>"+ data[i].workingAmount + "</td>";
+									inner+="<td scope='col' class='text-center'>"+data[i].workingTime+"</td>";
+									inner+="<td scope='col' class='text-center'>"+ getFormatDate(data[i].WRITE_DATE)+"</td></tr>";
+									
+									
+			            	 }			            	 
+			            		 $( '#resview > tbody').empty();
+			            		 $('#resview').append(inner);
+			           		 }	
+			             }, error:function(request,status,error){
+			                 console.log(error);
+			             }
+			             
+				     
+		         });	
+			});
 	});
 	
+	//날짜를 가져오기 위한 함수ㅠㅠ
+	function getFormatDate(dt) {
+		var date = new Date(dt);
+		var month = (1 + date.getMonth()); //M
+		month = month >= 10 ? month : '0' + month; //month 두자리로 저장
+		var day = date.getDate(); //d
+		day = day >= 10 ? day : '0' + day; //day 두자리로 저장
+		var year = date.getFullYear(); //yyyy
+		return year + '년' + month + '월' + day+'일'; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+	}
 </script>
 
 <style type="text/css">
@@ -190,9 +232,7 @@ margin-left:-90px;
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-<%@include file="../include/header.jsp" %>
-<!-- menu 의 float 속성 때문에 생성한 div -->
-<div style="clear: both; margin-top: 170px;"></div>
+
 <!-- Page Content -->
 <div class="container">
 	<div class="row" style="width: 1200px">
@@ -207,8 +247,7 @@ margin-left:-90px;
 					class="list-group-item list-group-item-action text-center font-weight-bold"
 					style="background-color: #D1E9CA;">영농 일지</a> <a
 					href="/farmapp/mypage/activitylist"
-					class="list-group-item list-group-item-action text-center font-weight-bold">활동
-					내역</a>
+					class="list-group-item list-group-item-action text-center font-weight-bold">체험 신청내역</a>
 			</div>
 		</div>
 
@@ -237,12 +276,11 @@ margin-left:-90px;
 				</body>
 			</div>
 			<a href="/farmapp/mypage/dailyLogWrite"
-				class="list-group-item list-group-item-action text-center font-weight-bold">영농
-				일지 작성하기</a>
-
-			<div id="border" style="display : none;">
+				class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지 작성하기</a>
+			<div id = "writeday"></div>
+			<div id="border">
 				<form role="form" method="get" action="/farmapp/mypage/dailyLoglist">
-					<table class="table table-condensed">
+					<table id="resview" class="table table-condensed">
 						<thead>
 							<tr class="success">
 								<th scope="col" class="text-center">글 갯수</th>
@@ -254,21 +292,12 @@ margin-left:-90px;
 							</tr>
 						</thead>
 
-						<c:forEach items="${list}" var="list">
-							<tr>
-								<td scope="col" class="text-center"><c:out
-										value="${list.dailylogNo}" /></td>
-								<td scope="col" class="text-center">
-								<a href="/farmapp/mypage/dailyLogReadView?dailyLogNo=${list.dailylogNo}"><c:out
-										value="${list.content}" /></a></td>
-								<td scope="col" class="text-center"><c:out
-										value="${list.workingAmount}" /></td>
-								<td scope="col" class="text-center"><c:out
-										value="${list.workingTime}" /></td>
-								<td scope="col" class="text-center"><fmt:formatDate
-								value="${list.writeDate}" pattern="yyyy-MM-dd" /></td>
+						
+							<tr id = result_set>
+								
 							</tr>
-						</c:forEach>
+						
+						
 					</table>
 					<div id="psize">
 						<ul>
@@ -296,4 +325,3 @@ margin-left:-90px;
 	</div>
 
 </div>
-<%@include file="../include/footer.jsp" %>
