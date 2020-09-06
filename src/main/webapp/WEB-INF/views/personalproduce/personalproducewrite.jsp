@@ -16,58 +16,124 @@
     
 </style>
 
+<!-- ckeditor 사용을 위해 js 파일 연결 -->
+<script src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
+
+
 <form action="<%= request.getContextPath() %>/personalproduce/productwrite.do" method="post">
 
 <div style= "clear: both; margin-top: 200px;" ></div>
 
-<h2>상품 등록 신청</h2>
+<h3 style="text-align: center;">상품 등록 신청</h3>
 <hr>
 
-상품 이름 <input type="text" name="name"><br>
+<table class="table">
+       <colgroup>
+            <col width="5%">
+            <col width="5%">
+            <col width="5%">
+            <col width="5%">   
+            <col width="5%">
+            <col width="5%">
+            <col width="5%">   
+        </colgroup>
+        
+   <tbody>
+		<tr>
+			<th class="success">상품이름</th> 
+			<td><input class="form-control" style="width: 200px;" type="text" name="name"></td>
+			<th class="success">상품종류</th> 
+			<td><input class="form-control" style="width: 200px;" type="text" name="kind"></td>
+			<th class="success">상품가격</th> 
+			<td><input class="form-control" style="width: 200px;" type="text" name="price"></td>	
+		</tr>
+		
+		<tr>
+			<th class="success">상품효능</th>
+			<td><input class="form-control" style="width: 200px;" type="text" name="effect"></td>
+			<th class="success">판매량</th> 
+			<td><input class="form-control" style="width: 200px;" type="text" name="sales"></td>
+			<th class="success">재고량</th>
+			<td><input class="form-control" style="width: 200px;" type="text" name="amount"></td>		
+		</tr>
+		
+		<tr>
+			<th class="success">추천요리</th>
+		    <td><input class="form-control" style="width: 200px;" type="text" name="food"></td>
+			<th class="success">원산지</th>
+		    <td><input class="form-control" style="width: 200px;" type="text" name="productCountry"></td>
+			<th class="success">배송방법</th> 
+			<td><input class="form-control" style="width: 200px;" type="text" name="delivery"></td>
+			
+		</tr>
+		
+		<tr>
+			<th class="success">상품판매</th>
+			<td><select name="productSas">
+						<option value="1">승인</option>
+						<option value="0">보류</option>
+		      	</select></td>
+		    
+			<th class="success">제철음식</th> 
+			<td><select name="isSeasonalFood">
+						<option value="0">일반 음식</option>
+						<option value="1">제철 음식</option>
+		     </select></td>
+		     
+			<th class="success">상품품질</th>
+			 <td><select name="quality">
+					<option value="1">상</option>	
+					<option value="2">중</option>	
+					<option value="3">하</option>	
+			 </select></td>
+			 
+		</tr>
+		
+		<tr>
+			<th class="success">유통기한</th> 
+			<td><input type="date" name="expirationDate"></td>
+		    <th></th>
+      	    <td></td>
+      	  	<th></th>
+      	    <td></td>
+		</tr>
+		
+		<tr>
+			<th class="success">상품사진</th> 
+			<td><input type="file"></td>
+		    <th></th>
+      	    <td></td>
+      	  	<th></th>
+      	    <td></td>
+		</tr>
+		
+		<tr>
+		  <th></th>
+      	  <td></td>
+      	  <th></th>
+      	  <td></td>
+      	  <th></th>
+      	  <td></td>
+		</tr>
+		
+   </tbody>	
+</table>
 
-상품 가격 <input type="text" name="price"><br>
-
-상품판매 승인여부 <select name="productSas">
-			<option value="1">승인</option>
-			<option value="0">보류</option>
-		 </select><br>
-
-판매량 <input type="text" name="sales"><br>
-
-재고량<input type="text" name="amount"><br>
-
-상세내용<br>
-<textarea rows="10" cols="30" name="explain">
-
-</textarea><br>
-
-상품 효능 <input type="text" name="effect"><br>
-
-추천 요리 <input type="text" name="food"><br>
-
-상품 종류 <input type="text" name="kind"><br>
-
-원산지 <input type="text" name="productCountry"><br>
-
-배송 방법 <input type="text" name="delivery"><br>
-
-제철음식 여부 <select name="isSeasonalFood">
-			<option value="0">일반 음식</option>
-			<option value="1">제철 음식</option>
-		 </select>
-
-상품 품질 <select name="quality">
-		<option value="1">상</option>	
-		<option value="2">중</option>	
-		<option value="3">하</option>	
-	  </select><br>
-
-유통기한 <input type="date" name="expirationDate"><br>
-
-
-상품사진 <input type="file"><br>
-
+<!-- 제목<br> -->
+<!-- <input class="form-control" style="width: 200px;" type="text" id="title" name="title"/><br> -->
+ <textarea name="content" id="content" rows="10" cols="50">
+ </textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor 4
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+              //  CKEDITOR.instances.content.getData();
+            </script><br>
+<hr>
+ 
+<div style="text-align: center;">
 <button class="btn btn-success">등록</button>
+</div>
 
 </form>
 

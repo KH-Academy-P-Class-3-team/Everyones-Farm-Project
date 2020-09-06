@@ -1,8 +1,11 @@
 package com.kh.farmapp.farmpersonalpage.farmQnA.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,26 +17,56 @@ public class FarmQnAController {
 	@Autowired
 	private FarmQnAService farmqnaService;
 	
-//	@RequestMapping("farmqna/farmqnalist.do")
-//	public ModelAndView farmqnaList(
-//			@RequestParam(required=false, defaultValue="1") int cPage) {
-//		
-//		ModelAndView mav = new ModelAndView();
-//		
-//		return mav;
-//	}
+	//QnA 작성 화면
+	@RequestMapping(value = "/farmQnA/farmQnAwrite.do", method = RequestMethod.GET)
+	public void farmdiaryqnaWrite() {
+		System.out.println("wrtie 페이지 접속 완료");
+
+	}
+
+	//QnA 일기 작성
+	@RequestMapping(value = "/QnA/QnAwrite.do", method = RequestMethod.POST)
+	public String diaryqnaWrite(
+			@RequestParam Map<String, Object> commandMap) {
+
+		farmqnaService.writeFarmQnA(commandMap);
+		
+		System.out.println(commandMap);
+		
+		return "redirect:/farmQnA/farmQnAlist.do";
+	}
 	
-//	@RequestMapping("farmqna/farmqnadetail.do")
-//	public ModelAndView farmqnaDetail(int nIdx) {
-//		
-//		ModelAndView mav = new ModelAndView(); 
-//		
-//		return mav;
-//	}
+	//QnA 리스트 화면
+	@RequestMapping(value = "/farmQnA/farmQnAlist.do", method = RequestMethod.GET)
+	public ModelAndView farmdiaryList(@RequestParam(required = false, defaultValue = "1") int cPage) {
+
+		ModelAndView mav = new ModelAndView();
+
+		int cntPerPage = 10;
+
+		Map<String,Object> res = farmqnaService.selectFarmQnAList(cPage, cntPerPage);
+		mav.addObject("paging", res.get("paging"));
+		mav.addObject("list", res);
+		mav.setViewName("farmQnA/farmQnAlist");
+
+
+//		System.out.println(res);
+
+		return mav;
+	}
 	
-//	@RequestMapping("farmqna/farmqnawrite.do")
-//	public String farmqnaWrite() {
-//		return null;
-//		
-//	}
+	//상세조회 화면
+	@RequestMapping(value = "/farmQnA/farmQnAdetail.do", method = RequestMethod.GET)
+	public ModelAndView farmdiaryDetail(int farmQnaQuestionNo) {
+
+		ModelAndView mav = new ModelAndView();
+
+		Map<String, Object> res = farmqnaService.selectQnADetail(farmQnaQuestionNo);
+		mav.addObject("detail", res);
+		mav.setViewName("farmQnA/farmQnAdetail");
+
+		return mav;
+
+	}
+	
 }
