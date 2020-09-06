@@ -1,6 +1,10 @@
 package com.kh.farmapp.mypage.user.controller;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
+
+import common.dto.TBOrder;
+import common.dto.UserTB;
 
 @Controller
 public class MypageBasketController {
@@ -19,10 +26,61 @@ public class MypageBasketController {
 
 	//장바구니 폐이지
 	@RequestMapping("mypage/user/basket")
-	public void baskePage(@RequestParam(required=false, defaultValue="1") int cPage) {
+	public ModelAndView baskePage(@RequestParam(required=false, defaultValue="1") int cPage, HttpSession session ) {
 		
-		mypageService.appliActList();
+		UserTB user = (UserTB) session.getAttribute("userInfo");
+		int userNo = user.getUserNo();
+		int cntPerPage = 5;
+		Map<String, Object> basket = mypageService.basketList(userNo, cPage, cntPerPage);
 		
+		System.out.println(basket);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("page", basket.get("page"));
+		mav.addObject("basket", basket);
+		mav.setViewName("mypage/user/basket");
+		
+		return mav;
+		
+	}
+	
+	
+	@RequestMapping("/basket/delete")
+	public ModelAndView deleteBasket(HttpServletRequest request) {
+		
+		String basketNo = request.getParameter("names");
+		
+		String[] array = basketNo.split(",");
+		int[] arr = new int[array.length];
+		
+		for(int i=0;i<array.length;i++) {
+		arr[i] = Integer.parseInt(array[i]);
+		System.out.println(arr[i]);
+		}
+		
+		int res = mypageService.deleteBasket(arr);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(res >0 ) {
+			
+			mav.addObject("alertMsg", "삭제되었습니다");
+			mav.addObject("url", "../mypage/user/basket");
+			mav.setViewName("common/result");
+			
+		}else {
+			mav.addObject("alertMsg", "삭제가 실패했습니다");
+			mav.addObject("url", "../mypage/user/basket");
+			mav.setViewName("common/result");
+			
+		}
+		
+		
+		System.out.println(basketNo);
+		
+		
+		
+		return mav;
 	}
 
 	//장바구니 리스트 -ajax
@@ -32,20 +90,50 @@ public class MypageBasketController {
 
 
 	//선택된 제품들의 가격의 합을 구하는 메서드
+	@RequestMapping("mypage/user/addProduct")
 	public String addProduct(Map<String , Object> map) {
+		
 		return null;
 	}
 
 	//구매 목록 리스트
 	@RequestMapping("mypage/user/orderList")
-	public void orderList(@RequestParam(required=false, defaultValue="1") int cPage) {
-		mypageService.appliActList();
+	public ModelAndView orderList(@RequestParam(required=false, defaultValue="1") int cPage, HttpSession session) {
+		UserTB user = (UserTB) session.getAttribute("userInfo");
+		
+		int userNo = user.getUserNo();
+		int cntPerPage = 5;
+		Map<String, Object> order = mypageService.orderList(userNo, cPage, cntPerPage);
+		
+		System.out.println(order);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("page", order.get("page"));
+		mav.addObject("order", order);
+		mav.setViewName("mypage/user/orderList");
+		
+		return mav;
+		
 	}
 
 	//구매 목록 리스트 상세 정보
 	@RequestMapping("mypage/user/OrderDetail")
-	public void orderDetail() {
-		mypageService.appliActList();
+	public ModelAndView orderDetail(int orderNo) {
+		
+		System.out.println("orderno:"+orderNo);
+		
+		Map<String, Object> orderDetail = mypageService.orderDetail(orderNo);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(orderDetail);
+		
+		mav.addObject("orderDetail", orderDetail);
+		mav.setViewName("mypage/user/OrderDetail");
+		
+		return mav;
+		
 	}
+	
+	
 
 }
