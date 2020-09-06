@@ -61,6 +61,10 @@
 	</main>
 </div>
 
+<!-- 삭제 버튼에 대한 javascript -->
+<script type="text/javascript">
+
+</script>
 <!-- checkbox 에 대한 javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/common/checkbox-event.js"></script>
 <!-- footer include -->
