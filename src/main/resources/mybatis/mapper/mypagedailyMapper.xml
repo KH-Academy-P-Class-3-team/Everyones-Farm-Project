@@ -37,7 +37,7 @@
 	</insert>
 	
 	<resultMap type="hashmap" id="date">
-		<id property="dailyLogNo" column="dailyLog_no" />
+		<id property="dailylogNo" column="dailyLog_no" />
 		<result property="content" column="CONTENT" />
 		<result property="workingAmount" column="WORKING_AMOUNT" />
 		<result property="workingTime" column="WORKING_TIME" />
@@ -85,7 +85,7 @@
 		   ,WORKING_TIME
 		   ,WORKING_MEMBER
 		   from FARMING_DAILYLOG
-		   where dailyLog_no = #{dailyLogNo}
+		   where dailyLog_no = #{dailylogNo}
 	
 	</select>
 	

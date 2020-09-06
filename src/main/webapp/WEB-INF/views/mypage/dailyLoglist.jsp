@@ -151,8 +151,8 @@ table {
 			           		$('#writeday').html(" ");
 			           		$('#writeday').html(getFormatDate(data[0].WRITE_DATE));
 			            	 for (i=0; i<data.length; i++){			            		
-			            		 	inner+="<tr><td scope='col' class='text-center'>"+data[i].dailyLogNo+"</td>";
-									inner+="<td scope='col' class='text-center'><a href='/farmapp/mypage/dailyLogReadView?dailyLogNo="+data[i].dailyLogNo+"'>"+data[i].content + "</a></td>";
+			            		 	inner+="<tr><td scope='col' class='text-center'>"+data[i].dailylogNo+"</td>";
+									inner+="<td scope='col' class='text-center'><a href='/farmapp/mypage/dailyLogReadView?dailylogNo="+data[i].dailylogNo+"'>"+data[i].content + "</a></td>";
 									inner+="<td scope='col' class='text-center'>"+ data[i].workingAmount + "</td>";
 									inner+="<td scope='col' class='text-center'>"+data[i].workingTime+"</td>";
 									inner+="<td scope='col' class='text-center'>"+ getFormatDate(data[i].WRITE_DATE)+"</td></tr>";
