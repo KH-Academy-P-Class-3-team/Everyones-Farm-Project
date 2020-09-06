@@ -18,9 +18,9 @@
 		</div>
 		<!-- 공지사항 목록 -->
 		<div class="notice__table">
-		<table class="notice__n-table">
+		<table class="notice__n-table checkbox_group">
 			<tr class="n-table__tr-head">
-				<th class="n-table__th"><input type="checkbox" name="noticeNo" /></th>
+				<th class="n-table__th"><input type="checkbox" name="check-master" id="check_all" /></th>
 				<th class="n-table__th">공지 번호</th>
 				<th class="n-table__th">제목</th>
 				<th class="n-table__th">작성자</th>
@@ -33,7 +33,7 @@
 				<c:when test="${not empty pagingNList }">
 					<c:forEach items="${pagingNList }" var="n">
 					<tr class="n-table__tr-body">
-						<td class="n-table__td"><input type="checkbox" name="noticeNo" /></td>
+						<td class="n-table__td"><input type="checkbox" name="noticeNo" class="checkbox_normal" /></td>
 						<td class="n-table__td">${n.noticeNo }</td>
 						<td class="n-table__td"><div class="n-table__title-hidden">${n.title }</div></td>
 						<td class="n-table__td"><div class="n-table__id-hidden">${n.adminId }</div></td>
@@ -61,5 +61,7 @@
 	</main>
 </div>
 
+<!-- checkbox 에 대한 javascript -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/common/checkbox-event.js"></script>
 <!-- footer include -->
 <%@include file="../include/admin_footer.jsp" %>
