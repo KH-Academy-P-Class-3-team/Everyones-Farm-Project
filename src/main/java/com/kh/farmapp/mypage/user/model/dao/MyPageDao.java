@@ -97,5 +97,4 @@ public interface MyPageDao {
 		public int deleteBasket(int[] arr);
 
 
-
 }

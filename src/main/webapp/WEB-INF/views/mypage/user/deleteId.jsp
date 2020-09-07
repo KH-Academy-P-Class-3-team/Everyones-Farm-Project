@@ -63,6 +63,7 @@ a:hover {
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top:200px"></div>
 	<!-- Page Content -->
+	<div class="headSpace" style="margin-top:200px;"></div>
 	<div class="container">
 		<div class="row">
 						<div class="col-lg-3">

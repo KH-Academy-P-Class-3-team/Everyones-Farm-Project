@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.farmpersonalpage.personalproduce.model.dao.PersonalProduceDao;
 
+import common.dto.Product;
+import common.dto.ProductOption;
+
 @Service
 public class PersonalProduceServiceImpl implements PersonalProduceService {
-	
+
 	@Autowired
 	private PersonalProduceDao personalproduceDao;
 
@@ -23,12 +26,19 @@ public class PersonalProduceServiceImpl implements PersonalProduceService {
 	}
 
 	@Override
-	public int addProduct() {
-		return 0;
+	public void writeProduct(Product product) {
+		personalproduceDao.insertProduct(product);
+	}
+	
+	@Override
+	public void writeProductOption(ProductOption productoption) {
+		personalproduceDao.insertProductOption(productoption);
 	}
 
 	@Override
 	public int registrationProduct() {
 		return 0;
 	}
+
+
 }

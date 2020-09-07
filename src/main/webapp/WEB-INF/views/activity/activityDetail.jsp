@@ -5,14 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<%@include file="../include/header.jsp" %>
+
 <% pageContext.setAttribute("replaceChar", "\n"); %>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>EveryonesFarm</title>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/activity/activityDetail.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -33,12 +29,22 @@ $(document).ready(function() {
 	var myModal = new Example.Modal({
 	    id: "modal" // 모달창 아이디 지정
 	});
+	
+	
+	// 모달창 바깥을 누르면 창 닫기
+	$(document).mouseup(function (e) {
+		var container = $("#modal");
+
+		if (!container.is(e.target) && container.has(e.target).length === 0){
+			myModal.hide();
+		}	
+
+	});
+
 	  
 	// 전화 예약 모달창 열기
 	$("#btnCall").click(function() {
 	    myModal.show(); // 모달창 보여주기
-	    
-	    console.log("btnCall clicked")
 	});
 	  
 	// 모달 창 안에 있는 확인 버튼 클릭 이벤트
@@ -59,6 +65,8 @@ $(document).ready(function() {
 	})
 
 })
+
+
 
 /* 모달창 전화번호 복사 */
 function copyText(e) {
@@ -119,8 +127,8 @@ function openModal(modalname){
 }
 </script>
 
-</head>
-<body>
+
+<div style="margin-top:200px"></div>
 
 <div class="activity-content">
 
@@ -146,7 +154,7 @@ function openModal(modalname){
 			</c:if>
 
 			<!-- 출력 이미지 -->
-			<img src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }">	
+			<img class="image" src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }">	
 	
 		</div>
 
@@ -230,6 +238,7 @@ function openModal(modalname){
 		<button class="btnCopy" onclick="copyText('#phone')">복사</button>
 		
 		<button class="confirm">확인</button>
+		
 	</div>
 
 	<c:if test="${farmerInfo.farmerNo ne data.farmerNo }">
@@ -295,5 +304,4 @@ geocoder.addressSearch(ad, function(result, status) {
 </script>
 
 
-</body>
-</html>
+<%@include file="../include/footer.jsp" %>

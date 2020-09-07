@@ -96,8 +96,6 @@ public  interface MyPageService {
 	 * Basket 지우기
 	 */
 	public int deleteBasket(int[] arr);
-
-
 	
 	
 	

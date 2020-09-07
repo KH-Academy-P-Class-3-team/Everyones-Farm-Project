@@ -4,8 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="../../include/header.jsp" %>
-
-
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -85,6 +83,7 @@ CKEDITOR.replace('ckeditor'); // 에디터로 생성
 <div style="margin-top:200px"></div>
 
 	<!-- Page Content -->
+<div class="headSpace" style="margin-top:200px;"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
@@ -183,8 +182,6 @@ CKEDITOR.replace('ckeditor'); // 에디터로 생성
 			</div>
 		</div>
 	</div>
-
-
 
 
 

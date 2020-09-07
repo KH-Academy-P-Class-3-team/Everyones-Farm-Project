@@ -32,12 +32,10 @@ public class MypageUserController {
 		
 		//테스트 데이터
 		UserTB user = new UserTB();
-		user.setUserNo(1);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		user = mypageService.selectUser(user);
-		user.setUserName("아무개");
 		System.out.println(user);
 		mav.addObject("userData", user);
 		mav.setViewName("mypage/user/modify");
@@ -58,7 +56,6 @@ public class MypageUserController {
 		
 		System.out.println(user);
 		mypageService.modifyUser(user);
-		System.out.println("4");
 			
 		return "redirect:/mypage/user/modify";
 			
@@ -71,7 +68,7 @@ public class MypageUserController {
 		
 		ModelAndView mav = new ModelAndView();
 		String root = session.getServletContext().getRealPath("farmapp/");
-		
+
 		mypageService.insertFile(user, file, root);
 		
 		return null;

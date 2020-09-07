@@ -19,8 +19,6 @@ $(document).ready(function(){
 	$("#btnChecking").click(function(){
 	var $checkboxes = $("input:checkbox[name='checkRow']:checked");
 	
-
-	
 	var num=0; 
 	var map = $checkboxes.map(function(){
 		return num += Number($(this).val());
@@ -74,7 +72,6 @@ $(document).ready(function(){
 		     
 // 			});
 // 		});
-	
 	
 })
 	function checkAll() {
@@ -168,6 +165,21 @@ a:hover {
 	font-weight: bold;
 	color: white;
 }
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+.col-lg-1 {
+    margin-top: 100px;
+    margin-left: 100px;
+    width: 700px;
+}
+	
 </style>
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
@@ -327,5 +339,5 @@ a:hover {
 
 
 
+<%@include file="../../include/footer.jsp" %>
 
-<%@include file="../../include/footer.jsp"%>
