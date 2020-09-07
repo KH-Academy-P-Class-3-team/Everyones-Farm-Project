@@ -33,9 +33,11 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 
 	// 공지사항 번호를 통해 특정 공지사항 조회
 	@Override
-	public Notice selectNoticeByNoticNo(Notice noticeNo) {
+	public Map<String, Object> selectNoticeByNoticNo(Notice noticeNo) {
 		return adminNoticeDao.selectNoticeByNoticeNo(noticeNo);
 	}
+	
+	
 
 	// 공지사항 작성
 	@Override

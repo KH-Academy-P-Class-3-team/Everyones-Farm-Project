@@ -22,10 +22,10 @@ public interface AdminNoticeService {
 	
 	/**
 	 * 공지사항 번호를 통해 특정 공지사항 조회
-	 * @param noticeNo - 조회할 공지사항 번호를 갖는 Notice 객체
+	 * @param noticeNo - 조회할 공지사항 번호를 갖는 Map
 	 * @return Notice - 조회 결과 반환
 	 */
-	public Notice selectNoticeByNoticNo(Notice noticeNo);
+	public Map<String, Object> selectNoticeByNoticNo(Notice noticeNo);
 	
 	
 	/**

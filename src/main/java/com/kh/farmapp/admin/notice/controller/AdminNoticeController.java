@@ -117,7 +117,7 @@ public class AdminNoticeController {
 		logger.debug("noticeNo: " + noticeNo);
 		
 		// noticeNo 로 해당 Notice 조회하기
-		Notice noticeDetail = adminNoticeService.selectNoticeByNoticNo(noticeNo);
+		Map<String, Object> noticeDetail = adminNoticeService.selectNoticeByNoticNo(noticeNo); 
 		logger.debug("noticeDetail: " + noticeDetail.toString());
 		
 		// 조회된 결과가 null 값이 아닐 때 view 에 넘겨주기
@@ -276,7 +276,6 @@ public class AdminNoticeController {
 	public int deleteNotice(
 			// 삭제할 번호들
 			@RequestParam Map<String, Object> deleteNums
-			, HttpSession session 
 			) {
 		
 		// 현재 어떤 url 이 실행되고 있는지
