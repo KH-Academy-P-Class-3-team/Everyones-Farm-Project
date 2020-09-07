@@ -30,8 +30,7 @@ public class AdminNoticeDaoImpl implements AdminNoticeDao{
 	// 공지사항 번호를 통해 특정 공지사항 조회
 	@Override
 	public Notice selectNoticeByNoticeNo(Notice noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("ADMINNOTICE.selectNoticeByNoticeNo", noticeNo);
 	}
 
 	// 공지사항 insert

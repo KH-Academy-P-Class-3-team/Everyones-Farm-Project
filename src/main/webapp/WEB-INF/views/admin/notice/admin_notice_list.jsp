@@ -34,8 +34,8 @@
 					<c:forEach items="${pagingNList }" var="n">
 					<tr class="n-table__tr-body">
 						<td class="n-table__td"><input type="checkbox" value="${n.noticeNo }" name="checkNormal" class="checkbox_normal" /></td>
-						<td class="n-table__td">${n.noticeNo }</td>
-						<td class="n-table__td"><div class="n-table__title-hidden">${n.title }</div></td>
+						<td class="n-table__td toNDetail" data-noticeno="${n.noticeNo }">${n.noticeNo }</td>
+						<td class="n-table__td toNDetail" data-noticeno="${n.noticeNo }"><div class="n-table__title-hidden">${n.title }</div></td>
 						<td class="n-table__td"><div class="n-table__id-hidden">${n.adminId }</div></td>
 						<td class="n-table__td">
 							<fmt:formatDate value="${n.regDate }" pattern="yyyy-MM-dd"/>
@@ -60,6 +60,13 @@
 		
 	</main>
 </div>
+<!-- 공지번호, 제목 클릭시 상세조회 페이지로 넘어가기 -->
+<script type="text/javascript">
+$(".toNDetail").on("click", function(){
+	const noticeNo = $(this).data("noticeno")
+	$(location).attr("href", "/farmapp/adminnotice/detail?noticeNo=" + noticeNo)
+})
+</script>
 <!-- 작성 버트에 대한 javascript -->
 <script type="text/javascript">
 $("#notice-write-btn").on("click", function(){

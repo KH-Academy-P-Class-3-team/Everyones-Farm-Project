@@ -25,6 +25,7 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 	@Autowired
 	private AdminNoticeDao adminNoticeDao;
 
+	// 공지사항 목록 조회
 	@Override
 	public List<Map<String, Object>> selectAllNoticeList() {
 		return adminNoticeDao.selectAllNoticeList();

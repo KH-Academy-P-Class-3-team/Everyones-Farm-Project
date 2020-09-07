@@ -97,9 +97,35 @@ public class AdminNoticeController {
 	
 	
 	// 공지사항 관리 공지사항 상세 페이지
-	@RequestMapping(value = "/adminnotice/noticedetail", method = RequestMethod.GET)
-	public String adminNoticeDetail(Notice noticeNo) {
-		return "";
+	@RequestMapping(value = "/adminnotice/detail", method = RequestMethod.GET)
+	public String adminNoticeDetail(
+				Notice noticeNo
+				, HttpSession session
+				, Model model
+			) {
+		
+		// admin login 안되어 있을 시 로그인 페이지로 이동
+//		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
+//		if( loginAdmin == null) {
+//			
+//			return "redirect:/admin/login";
+//			
+//		}
+		
+		logger.info("/adminnotice/detail - [GET] 요청");
+		
+		logger.debug("noticeNo: " + noticeNo);
+		
+		// noticeNo 로 해당 Notice 조회하기
+		Notice noticeDetail = adminNoticeService.selectNoticeByNoticNo(noticeNo);
+		logger.debug("noticeDetail: " + noticeDetail.toString());
+		
+		// 조회된 결과가 null 값이 아닐 때 view 에 넘겨주기
+		if(noticeDetail != null) {
+			model.addAttribute("noticeDetail", noticeDetail);
+		}
+		
+		return "admin/notice/admin_notice_detail";
 	}
 	
 	// 공지사항 관리 공지사항 작성 폼 페이지
@@ -252,14 +278,6 @@ public class AdminNoticeController {
 			@RequestParam Map<String, Object> deleteNums
 			, HttpSession session 
 			) {
-		// 로그인이 안되어 있을 경우, 바로 로그인 페이지로 이동
-		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
-		if( loginAdmin == null) {
-			
-			toAdminLogin("/admin/login");
-//			return "redirect:/admin/login";
-			
-		}
 		
 		// 현재 어떤 url 이 실행되고 있는지
 		logger.info("/adminnotice/delete [POST] 요청");
@@ -289,11 +307,6 @@ public class AdminNoticeController {
 			
 		}
 		
-	}
-	
-	// admin/login 으로 redirect
-	public String toAdminLogin(String location) {
-		return "redirect:" + location;
 	}
 	
 }

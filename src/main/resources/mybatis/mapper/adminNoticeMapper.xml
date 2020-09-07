@@ -90,4 +90,19 @@
 		    (notice_seq.nextval, #{title}, #{content}, #{adminNo})
 	</insert>
 	
+	<!-- 공지사항 상세 조회 -->
+	<select id="selectNoticeByNoticeNo" parameterType="common.dto.Notice" resultType="common.dto.Notice">
+		select
+		    n.*
+		    , a.admin_id
+		from
+		    notice n
+		    JOIN
+		        admin a
+		    ON
+		        n.admin_no = a.admin_no
+		where
+		    notice_no = #{noticeNo}
+	</select>
+	
 </mapper>
