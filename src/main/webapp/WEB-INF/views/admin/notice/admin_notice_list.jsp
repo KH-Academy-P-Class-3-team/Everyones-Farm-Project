@@ -50,7 +50,7 @@
 		<!-- 작성, 삭제 버튼 -->
 		<div class="notice__btns-wrap">
 			<!-- 작성 버튼 -->
-			<span class="notice__btn-write">공지사항 작성</span>
+			<span class="notice__btn-write" id="notice-write-btn">공지사항 작성</span>
 			<!-- 삭제 버튼 -->
 			<span class="notice__btn-delete" id="notice-del-btn">공지사항 삭제</span>
 		</div>
@@ -60,7 +60,14 @@
 		
 	</main>
 </div>
-
+<!-- 작성 버트에 대한 javascript -->
+<script type="text/javascript">
+$("#notice-write-btn").on("click", function(){
+	
+	$(location).attr("href", "/farmapp/adminnotice/write")
+	
+})
+</script>
 <!-- 삭제 버튼에 대한 javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_delete.js"></script>
 <!-- checkbox 에 대한 javascript -->

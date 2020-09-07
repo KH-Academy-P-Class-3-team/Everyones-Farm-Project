@@ -80,12 +80,13 @@ public class AdminNoticeController {
 	}
 	
 	// 공지사항 관리 공지사항 작성 폼 페이지
-	@RequestMapping(value = "/adminnotice/writenotice", method = RequestMethod.GET)
-	public void adminNoticeWrite() {
+	@RequestMapping(value = "/adminnotice/write", method = RequestMethod.GET)
+	public String adminNoticeWrite() {
+		return "admin/notice/admin_notice_write";
 	}
 	
 	// 공지사항 관리 공지사항 작성
-	@RequestMapping(value = "/adminnotice/writenotice", method = RequestMethod.POST)
+	@RequestMapping(value = "/adminnotice/write", method = RequestMethod.POST)
 	public String adminNoticeWriteProc(Notice notice) {
 		return "";
 	}
