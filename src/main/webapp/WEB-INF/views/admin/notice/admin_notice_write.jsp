@@ -89,7 +89,7 @@ input[type="text"] {
 		<!-- 공지사항 작성 폼 -->
 		<div class="notice-write__form-wrap">
 			<form action="<%=request.getContextPath() %>/adminnotice/write" method="post"
-			class="form-wrap__form" enctype="multipart/form-data">
+			class="form-wrap__form" id="notice-form">
 				<ul class="form-wrap__list">
 					<li>
 						<input type="text" placeholder="제목" name="title" class="list__input-title" />
@@ -101,21 +101,25 @@ input[type="text"] {
 											, { filebrowserUploadUrl: '/farmapp/adminnotice/fileupload'
 								});
 						</script>
-						<script type="text/javascript">
-							windows.parent.CKEDITOR.tools.callFunction(callback + "," + fileUrl + "','이미지를 업로드하였습니다.")
-						</script>
 					</li>
 				</ul>
 			</form>
 		</div>
 		<!-- 공지사항 작성, 취소 버튼 -->
 		<div class="notice-write__btn-wrap">
-			<span class="btn write-btn">작성</span><span class="btn cancel-btn" id="cancel">취소</span>
+			<span class="btn write-btn" id="notice-write">작성</span><span class="btn cancel-btn" id="cancel">취소</span>
 		</div>
 	</main>
 
 </div>
 
+<!-- 작성 버튼 클릭시 이벤트 -->
+<script type="text/javascript">
+$("#notice-write").on("click", function(){
+	/* form submit 이벤트 동작 */
+	$("#notice-form").submit()
+})
+</script>
 <!-- 취소 버튼 클릭시 목록으로 돌아가기 -->
 <script type="text/javascript">
 $("#cancel").on("click", function(){

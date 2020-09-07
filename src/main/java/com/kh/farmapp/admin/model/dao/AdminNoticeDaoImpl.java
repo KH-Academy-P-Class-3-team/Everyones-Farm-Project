@@ -34,10 +34,10 @@ public class AdminNoticeDaoImpl implements AdminNoticeDao{
 		return null;
 	}
 
+	// 공지사항 insert
 	@Override
 	public int insertNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert("ADMINNOTICE.insertNotice", notice);
 	}
 
 	// 공지사항 삭제

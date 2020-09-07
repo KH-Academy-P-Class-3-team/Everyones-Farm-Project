@@ -82,4 +82,12 @@
 		</foreach>    
 	</delete>
 	
+	<!-- 공지사항 파일 없이 작성 -->
+	<insert id="insertNotice" parameterType="common.dto.Notice">
+		INSERT INTO 
+		    notice (notice_no, title, content, admin_no)
+		VALUES 
+		    (notice_seq.nextval, #{title}, #{content}, #{adminNo})
+	</insert>
+	
 </mapper>

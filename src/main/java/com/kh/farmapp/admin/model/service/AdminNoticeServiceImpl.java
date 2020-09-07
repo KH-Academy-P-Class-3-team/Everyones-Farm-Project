@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.admin.model.dao.AdminNoticeDao;
 
+import common.dto.Admin;
 import common.dto.Notice;
 import common.util.AdminPaging;
 
