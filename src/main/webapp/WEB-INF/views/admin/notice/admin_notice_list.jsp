@@ -33,7 +33,7 @@
 				<c:when test="${not empty pagingNList }">
 					<c:forEach items="${pagingNList }" var="n">
 					<tr class="n-table__tr-body">
-						<td class="n-table__td"><input type="checkbox" name="noticeNo" class="checkbox_normal" /></td>
+						<td class="n-table__td"><input type="checkbox" value="${n.noticeNo }" name="checkNormal" class="checkbox_normal" /></td>
 						<td class="n-table__td">${n.noticeNo }</td>
 						<td class="n-table__td"><div class="n-table__title-hidden">${n.title }</div></td>
 						<td class="n-table__td"><div class="n-table__id-hidden">${n.adminId }</div></td>
@@ -52,7 +52,7 @@
 			<!-- 작성 버튼 -->
 			<span class="notice__btn-write">공지사항 작성</span>
 			<!-- 삭제 버튼 -->
-			<span class="notice__btn-delete">공지사항 삭제</span>
+			<span class="notice__btn-delete" id="notice-del-btn">공지사항 삭제</span>
 		</div>
 		
 		<!-- include pagination -->
@@ -62,9 +62,7 @@
 </div>
 
 <!-- 삭제 버튼에 대한 javascript -->
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_delete.js"></script>
 <!-- checkbox 에 대한 javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/common/checkbox-event.js"></script>
 <!-- footer include -->

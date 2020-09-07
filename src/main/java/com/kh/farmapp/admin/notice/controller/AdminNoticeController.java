@@ -1,5 +1,9 @@
 package com.kh.farmapp.admin.notice.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import com.kh.farmapp.admin.model.service.AdminNoticeService;
 
 import common.dto.Notice;
@@ -83,9 +91,41 @@ public class AdminNoticeController {
 	}
 	
 	// 공지사항 관리 공지사항 삭제
-	@RequestMapping(value = "/adminnotice/deletenotice", method = RequestMethod.POST)
-	public String deleteNotice(Notice notice) {
-		return "";
+	@RequestMapping(value = "/adminnotice/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteNotice(
+			// 삭제할 번호들
+			@RequestParam Map<String, Object> deleteNums
+			) {
+		
+		// 현재 어떤 url 이 실행되고 있는지
+		logger.info("/adminnotice/delete [POST] 요청");
+
+		// ajax 반환 값
+		int result = 1;
+		
+		// noticeNo -> ArrayList 로 변환
+		String[] nums = deleteNums.get("noticeNo").toString().split(",");
+		List<Object> noticeNoList =  new ArrayList<>(Arrays.asList(nums));
+//		logger.info("noticeNoList: " + noticeNoList.toString());
+//		logger.info("noticeNoList: " + noticeNoList.getClass().getName());
+		
+		// 삭제 처리
+		int delRes = adminNoticeService.deleteNoticeByNoticeNo(noticeNoList);
+		
+		if(delRes >= 1) { // 삭제 결과 성공
+			
+			logger.info("삭제 성공~");
+			return result;
+			
+		} else { // 삭제 결과 실패
+			
+			logger.info("삭제 실패~");
+			result = 0;
+			return result;
+			
+		}
+		
 	}
 	
 }
