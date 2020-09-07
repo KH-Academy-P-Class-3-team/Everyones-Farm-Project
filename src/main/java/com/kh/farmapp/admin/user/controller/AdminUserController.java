@@ -32,7 +32,7 @@ public class AdminUserController {
 	// 일반 회원 관리 페이지
 	@RequestMapping(value = "/useradmin/userlist", method = RequestMethod.GET)
 	public String adminUserList() {
-		return "";
+		return "admin/member/admin_user_list";
 	}
 	
 	// 농업인 회원 신청 관리 페이지

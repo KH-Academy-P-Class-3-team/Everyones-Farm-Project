@@ -60,9 +60,9 @@
 					<li><a href="<%=request.getContextPath() %>/admin/main">관리자 메인으로</a></li>
 				</ul>
 			</li>
-			<li><a href="#">회원관리</a>
+			<li><a href="<%=request.getContextPath() %>/useradmin/userlist">회원관리</a>
 				<ul class="menu__sub-member">
-					<li><a href="#">일반 회원 관리</a></li>
+					<li><a href="<%=request.getContextPath() %>/useradmin/userlist">일반 회원 관리</a></li>
 					<li><a href="#">농업인 회원 관리</a></li>
 					<li><a href="#">농업인 회원 신청 관리</a></li>
 				</ul>
