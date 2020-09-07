@@ -60,21 +60,8 @@
 		
 	</main>
 </div>
-<!-- 공지번호, 제목 클릭시 상세조회 페이지로 넘어가기 -->
-<script type="text/javascript">
-$(".toNDetail").on("click", function(){
-	const noticeNo = $(this).data("noticeno")
-	$(location).attr("href", "/farmapp/adminnotice/detail?noticeNo=" + noticeNo)
-})
-</script>
-<!-- 작성 버트에 대한 javascript -->
-<script type="text/javascript">
-$("#notice-write-btn").on("click", function(){
-	
-	$(location).attr("href", "/farmapp/adminnotice/write")
-	
-})
-</script>
+<!-- 버튼 이벤트 javascript -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_list_btn_event.js"></script>
 <!-- 삭제 버튼에 대한 javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_delete.js"></script>
 <!-- checkbox 에 대한 javascript -->

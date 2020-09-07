@@ -1,9 +1,6 @@
 package com.kh.farmapp.admin.notice.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -105,12 +101,12 @@ public class AdminNoticeController {
 			) {
 		
 		// admin login 안되어 있을 시 로그인 페이지로 이동
-//		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
-//		if( loginAdmin == null) {
-//			
-//			return "redirect:/admin/login";
-//			
-//		}
+		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
+		if( loginAdmin == null) {
+			
+			return "redirect:/admin/login";
+			
+		}
 		
 		logger.info("/adminnotice/detail - [GET] 요청");
 		
