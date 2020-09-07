@@ -1,7 +1,8 @@
--- 2020.09.02 (수) 테이블 수정
+-- 2020.09.07 (월) 테이블 수정
 -- 테이블 수정 내용
 --  FARMER 테이블에 APPLICATION_DATE(신청날짜) 컬럼 추가
 --  관리자 페이지에서 신청 날짜를 보여주는 기능이 있어 추가
+--  notice 테이블의 content 컬럼 수정 VARCHAR2(2000 char) 로 변경 
 
 -- 이미 테이블이 생성되어 있는 사람들을 위한 테이블 삭제 명령문
 
@@ -722,6 +723,9 @@ COMMENT ON COLUMN NOTICE.IS_SHOWED IS '공지사항 페이지에 보이게 하�
 ALTER TABLE NOTICE                                                          -- 공지사항 작성자 ADMIN_NO 외래키 제약 조건
     ADD CONSTRAINT FK_NOTICE_ADMIN_NO_ADMIN_ADMIN FOREIGN KEY (ADMIN_NO)
         REFERENCES ADMIN (ADMIN_NO) ON DELETE SET NULL;
+        
+-- notice 컬럼 데이터 타입 변경
+ALTER TABLE notice MODIFY content VARCHAR2(2000 char);
 
 -- 공지사항과 자주 묻는 질문 정보 테이블 시퀀스 생성
 --DROP SEQUENCE notice_seq;

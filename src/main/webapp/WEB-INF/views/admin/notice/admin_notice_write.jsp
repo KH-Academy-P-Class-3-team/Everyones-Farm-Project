@@ -45,12 +45,7 @@
 </div>
 
 <!-- 작성 버튼 클릭시 이벤트 -->
-<script type="text/javascript">
-$("#notice-write").on("click", function(){
-	/* form submit 이벤트 동작 */
-	$("#notice-form").submit()
-})
-</script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_write_event.js" ></script>
 <!-- 취소 버튼 클릭시 목록으로 돌아가기 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_list_btn_event.js"></script>
 <!-- footer include -->
