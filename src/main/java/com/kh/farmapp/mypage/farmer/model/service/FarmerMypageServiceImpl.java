@@ -3,6 +3,7 @@ package com.kh.farmapp.mypage.farmer.model.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.kh.farmapp.mypage.farmer.model.dao.FarmerMypageDao;
 import common.dto.Application;
 import common.dto.FarmActivity;
 import common.dto.FarmDiary;
+import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
 import common.dto.page.Criteria;
@@ -50,18 +52,29 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	
 	//농장 체험 활동내역 리스트
 	@Override
-	public List<Map<String, Object>> activitylist(Criteria cri) {
-		List<Map<String, Object>> res = farmerMypageDao.activitylist(cri);
+	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("farmerNo", farmer.getFarmerNo());
+		data.put("cri", cri);
+		
+		List<Map<String, Object>> res = farmerMypageDao.activitylist(data);
 		System.out.println(res);
-		return farmerMypageDao.activitylist(cri);
+		return res;
 		
 	}
 	// 일손 체험 활동내역 리스트
 	@Override
-	public List<Map<String, Object>> activitylist3(Criteria cri) {
-		List<Map<String,Object>> res = farmerMypageDao.activitylist3(cri);
+	public List<Map<String, Object>> activitylist3(Criteria cri ,Farmer farmer) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("farmerNo", farmer.getFarmerNo());
+		data.put("cri", cri);
+		
+		List<Map<String,Object>> res = farmerMypageDao.activitylist3(data);
 		System.out.println(res);
-		return farmerMypageDao.activitylist3(cri);
+		return res;
 	}
 	
 	//농장체험 페이지 총 갯수

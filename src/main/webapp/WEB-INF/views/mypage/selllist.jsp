@@ -5,10 +5,15 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <title>판매 페이지</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style type="text/css">
+
 .pagenate {margin-left :100px;
-	
 }
 /* 마이페이지  */
 .col-lg-3{
@@ -30,6 +35,7 @@ li {
 	margin-left: 223px;
 }
 
+
 /* 내정보 나타내기 */
 #mypagesize {
 	height: 200px; webkit-fill-available;
@@ -39,13 +45,62 @@ li {
 .search {
 	text-align: center;
 }
+
+.sumarry {
+   width: 500px;
+   height: 150px;
+   background-color: white;
+   text-align: center;
+   margin-left: 100px;
+}
+.userInform {
+   border: 2px solid black;
+   width: 100%;
+   height: 100%;
+}
+.userName {
+   border-right: 1px solid #ccc;
+}
+
+.sessionName {
+   color: green;
+   font-size: large;
+   font-weight: bold;
+}
+
+
+.selfIcon {
+   text-align: left;
+   border: 1px solid white;
+   border-radius: 7px;
+   color: white;
+   background-color: lime;
+   padding: 3px;
+   margin-right: 100px;
+   margin-bottom: 10px;
+}
+.panel-default {
+   border: none;
+}
+
+.panel-default>.panel-heading {
+   background-color: #D1E9CA;
+   border: none;
+   font-weight: bold;
+   font-size: 17px;
+}
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+a:hover {
+   text-decoration: none;
+}
 </style>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 <%@include file="../include/header.jsp" %>
 <!-- menu 의 float 속성 때문에 생성한 div -->
 <div style="clear: both; margin-top: 170px;"></div>
@@ -53,18 +108,82 @@ li {
 		<div class="container">
 			<div class="row" style="width: 1200px">
 				<div class="col-lg-3">
-					<h3 class="my-4 text-center">농업인 마이페이지</h3>
-					<div class="list-group mb-4">
-						<a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">내 정보</a> 
-						<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold"style= "background-color:#D1E9CA;">판매 목록</a> 
-						<a href="/farmapp/mypage/dailyLoglist" class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지</a> 
-						<a href="/farmapp/mypage/activitylist" class="list-group-item list-group-item-action text-center font-weight-bold">활동 내역</a>
-					</div>
+			<h3 class="my-4 text-left">판매 목록</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
 				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+				</div>
+			</div>
+
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+					</a>
+				</div>
+				<div class="panel-body">
+					<a href="#">내 정보</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/selllist">판매 목록</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						신청내역</a>
+				</div>
+
+			</div>
+		</div>
+		
 				<div id="root" style="width: 800px">
-				<div id="mypagesize">
-					아이디<input type="text" />
-				</div>
+				<div class="sumarry">
+				<table class="userInform">
+					<tr>
+						<td class="userImg">사진</td>
+						<td class="userName">
+							<!-- 농부세션 확인해서 c:if 추가 -->
+							<div>
+								<span class="selfIcon">농업인</span>
+							</div> <span class="sessionName">${farmerInfo.name } </span> 님 안녕하세요
+						</td>
+						<td class="userActive"><h5>주문현황</h5> <br> ${res }</td>
+					</tr>
+				</table>
+
+			</div>
 				<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold">판매 현황</a>
 					
 					<div id ="border">

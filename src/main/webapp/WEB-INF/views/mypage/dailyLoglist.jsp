@@ -5,6 +5,14 @@
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>게시판</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
+
 <style>
 table {
 	border: 1px solid #BDBDBD;
@@ -212,45 +220,162 @@ li {
 	margin-left: 223px;
 }
 
-/* 내정보 나타내기 */
-#mypagesize {
-	height: webkit-fill-available;
-	border: groove;
+.input-group {
+	margin-top: 30px;
 }
 
-.search {
-	text-align: center;
+.col-lg-1 {
+	text-align: left;
+	width: 50%;
+	margin-left: 150px;
 }
-.row{
-margin-left:-90px;
+
+span {
+	padding: 0;
 }
+
+.input-group {
+	width: 400px;
+}
+
+label {
+	padding-left: 0;
+	text-align: left;
+}
+
+.btn-warning {
+	width: 90px;
+	height: 50px;
+	margin-top: 30px;
+	margin-right: 150px;
+}
+
+.emptyArea {
+	height: 200px;
+}
+
+.glyphicon-alert {
+	color: red;
+}
+
+.panel-default {
+	border: none;
+}
+
+.panel-default>.panel-heading {
+	background-color: #D1E9CA;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+.sumarry {
+   width: 500px;
+   height: 150px;
+   background-color: white;
+   text-align: center;
+   margin-left: 100px;
+}
+.userInform {
+   border: 2px solid black;
+   width: 100%;
+   height: 100%;
+}
+.userName {
+   border-right: 1px solid #ccc;
+}
+
+.sessionName {
+   color: green;
+   font-size: large;
+   font-weight: bold;
+}
+
+.selfIcon {
+   text-align: left;
+   border: 1px solid white;
+   border-radius: 7px;
+   color: white;
+   background-color: lime;
+   padding: 3px;
+   margin-right: 100px;
+   margin-bottom: 10px;
+}
+
 </style>
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-
+<%@include file="../include/header.jsp" %>
 <!-- Page Content -->
-<div class="container">
-	<div class="row" style="width: 1200px">
+<div style="clear: both; margin-top: 170px;"></div>
+<div class="container" style="width :1200px;">
+	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-center">농업인 마이페이지</h3>
-			<div class="list-group mb-4">
-				<a href="#"
-					class="list-group-item list-group-item-action text-center font-weight-bold">내
-					정보</a> <a href="/farmapp/mypage/selllist"
-					class="list-group-item list-group-item-action text-center font-weight-bold">판매
-					목록</a> <a href="/farmapp/mypage/dailyLoglist"
-					class="list-group-item list-group-item-action text-center font-weight-bold"
-					style="background-color: #D1E9CA;">영농 일지</a> <a
-					href="/farmapp/mypage/activitylist"
-					class="list-group-item list-group-item-action text-center font-weight-bold">체험 신청내역</a>
+			<h3 class="my-4 text-left">영농 일지</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+				</div>
+			</div>
+
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+					</a>
+				</div>
+				<div class="panel-body">
+					<a href="#">내 정보</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/selllist">판매 목록</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						신청내역</a>
+				</div>
+
 			</div>
 		</div>
-
 
 		<div id="root" style="width: 800px">
 			<div id="mypagesize">
@@ -325,3 +450,4 @@ margin-left:-90px;
 	</div>
 
 </div>
+<%@include file="../include/footer.jsp" %>

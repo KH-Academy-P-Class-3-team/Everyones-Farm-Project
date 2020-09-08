@@ -41,7 +41,7 @@ public interface FarmerMypageDao {
 	 * @param list(Criteria cri)+ 페이징 처리 
 	 * @return List<FarmActivity> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> activitylist(Criteria cri);
+	public List<Map<String, Object>> activitylist(Map<String,Object> map);
 	
 	/**
 	 * 농장체험 활동내역 목록 페이징
@@ -55,7 +55,7 @@ public interface FarmerMypageDao {
 	 * @param list(Criteria cri) + 페이징 처리
 	 * @return List<FarmActivity> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> activitylist3(Criteria cri);
+	public List<Map<String, Object>> activitylist3(Map<String, Object> map);
 	
 
 	/**
@@ -108,6 +108,8 @@ public interface FarmerMypageDao {
 	public int updatePayment(TBOrder order);
 
 	public List<Map<String, Object>> datelist(String date);
+
+
 
 	
 

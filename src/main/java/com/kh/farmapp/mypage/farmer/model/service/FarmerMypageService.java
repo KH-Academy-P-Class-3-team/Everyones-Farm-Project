@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.dto.Application;
 import common.dto.FarmActivity;
 import common.dto.FarmDiary;
+import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
 import common.dto.page.Criteria;
@@ -45,16 +46,18 @@ public interface FarmerMypageService {
 	/**
 	 * 농장 체험 신청내역 리스트 조회
 	 * @param cri
+	 * @param farmer 
 	 * @return
 	 */
-	public List<Map<String, Object>> activitylist(Criteria cri);
+	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer);
 
 	/**
 	 * 일손 체험 신청내역 리스트 조회
 	 * @param cri
+	 * @param farmer 
 	 * @return 
 	 */
-	public List<Map<String, Object>> activitylist3(Criteria cri);
+	public List<Map<String, Object>> activitylist3(Criteria cri, Farmer farmer);
 	
 	/**
 	 * 농장체험내역 총 갯수

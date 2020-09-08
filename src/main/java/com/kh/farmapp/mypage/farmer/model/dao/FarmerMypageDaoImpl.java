@@ -22,9 +22,9 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	
 	// 농장 체험  리스트
 	@Override
-	public List<Map<String, Object>> activitylist(Criteria cri) {
+	public List<Map<String, Object>> activitylist(Map<String, Object> map) {
 //			System.out.println(session.selectList("ACTIVITY.listPage",cri));
-		return session.selectList("MYPAGEACTIVITY.listPage",cri);
+		return session.selectList("MYPAGEACTIVITY.listPage",map);
 	}
 	// 농장체험 총 갯수
 	@Override
@@ -47,8 +47,8 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	
 	//일손 체험 리스트
 	@Override
-	public List<Map<String, Object>> activitylist3(Criteria cri) {
-		return session.selectList("MYPAGEACTIVITY.listPage2",cri);
+	public List<Map<String, Object>> activitylist3(Map<String, Object> map) {
+		return session.selectList("MYPAGEACTIVITY.listPage2",map);
 	}
 	//일손 체험 페이징
 	@Override
