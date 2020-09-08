@@ -33,8 +33,14 @@ public class AdminUserController {
 	
 	// 농업인 회원 관리 페이지
 	@RequestMapping(value = "/adminmember/farmerlist", method = RequestMethod.GET)
-	public String adminFarmerList() {
-		return "";
+	public String adminFarmerList(
+			Model model
+			// 페이징 처리시 필요한 변수
+			, @RequestParam(defaultValue = "0") String curPage
+			// 검색 처리시 필요한 변수
+			, @RequestParam(defaultValue = "") String search
+			) {
+		return "admin/member/admin_farmer_list";
 	}
 	
 	// 일반 회원 관리 페이지
