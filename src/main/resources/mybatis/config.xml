@@ -21,6 +21,7 @@
 		<typeAlias type="common.dto.UserTB" alias="USERTB"/>
 		<typeAlias type="common.dto.QuestionOneonone" alias="O3"/>
 		<typeAlias type="common.dto.TBOrder" alias="TBORDER"/>
+		<typeAlias type="common.dto.UserProfile" alias="USERFILE"/>
 		
 	</typeAliases>
 	
