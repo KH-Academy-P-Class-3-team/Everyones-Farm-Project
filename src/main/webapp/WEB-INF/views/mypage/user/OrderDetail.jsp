@@ -5,6 +5,7 @@
 
 <%@include file="../../include/header.jsp" %>
 
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -85,6 +86,13 @@ a:hover {
 	text-align: center;
 	height : 120px;
 }
+.productInfo td{
+	border-right :1px solid black;
+	border-bottom: 1px solid black;
+	padding : 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
 .tableInfo td{
 	border-right :1px solid black;
 	border-bottom: 1px solid black;
@@ -92,6 +100,7 @@ a:hover {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
 .short{
 	width : 200px;
 	background-color: #ccc;
