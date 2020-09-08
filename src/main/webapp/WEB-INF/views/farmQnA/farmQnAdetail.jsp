@@ -27,7 +27,7 @@
 
 <%@include file="../include/farmdiaryheader.jsp" %>
 
-<form action="<%= request.getContextPath() %>/farmdiary/deletefarmdiary.do" method="post">
+<form action="<%= request.getContextPath() %>/farmQnA/farmQnAdelete.do" method="post">
 <div id="d1">
     <h3>QnA</h3>
     <hr>
@@ -73,8 +73,8 @@
  		 ${detail.content}
  		 
  		 <hr>
-<%--  		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarydelete.do?farmDiaryNo=${detail.farmDiaryNo}'">삭제</button> --%>
-<%-- 	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarymodify.do?farmDiaryNo=${detail.farmDiaryNo}'">수정</button> --%>
+ 		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmQnAdelete.do?farmQnaQuestionNo=${detail.farmQnaQuestionNo}'">삭제</button>
+	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarymodify.do?farmDiaryNo=${detail.farmDiaryNo}'">수정</button>
       	</div>
 
 

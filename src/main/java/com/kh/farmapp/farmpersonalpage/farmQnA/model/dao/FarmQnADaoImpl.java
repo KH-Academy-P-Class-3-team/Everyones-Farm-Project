@@ -42,8 +42,8 @@ public class FarmQnADaoImpl implements FarmQnADao {
 	}
 	
 	@Override
-	public int deleteFarmQnA() {
-		return 0;
+	public int deleteQnA(int farmQnaQuestionNo) {
+		return sqlSession.delete("QnA.deleteQnA", farmQnaQuestionNo);
 	}
 
 

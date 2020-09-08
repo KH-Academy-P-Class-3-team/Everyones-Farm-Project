@@ -44,8 +44,9 @@ public class FarmQnAServiceImpl implements FarmQnAService {
 	}
 
 	@Override
-	public int deleteFarmQnA() {
-		return 0;
+	public int deleteQnA(int farmQnaQuestionNo) {
+		return farmqnaDao.deleteQnA(farmQnaQuestionNo);
+
 	}
 
 }

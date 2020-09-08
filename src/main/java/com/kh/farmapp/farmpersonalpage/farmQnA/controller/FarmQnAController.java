@@ -13,10 +13,10 @@ import com.kh.farmapp.farmpersonalpage.farmQnA.model.service.FarmQnAService;
 
 @Controller
 public class FarmQnAController {
-	
+
 	@Autowired
 	private FarmQnAService farmqnaService;
-	
+
 	//QnA 작성 화면
 	@RequestMapping(value = "/farmQnA/farmQnAwrite.do", method = RequestMethod.GET)
 	public void farmdiaryqnaWrite() {
@@ -30,12 +30,12 @@ public class FarmQnAController {
 			@RequestParam Map<String, Object> commandMap) {
 
 		farmqnaService.writeFarmQnA(commandMap);
-		
+
 		System.out.println(commandMap);
-		
+
 		return "redirect:/farmQnA/farmQnAlist.do";
 	}
-	
+
 	//QnA 리스트 화면
 	@RequestMapping(value = "/farmQnA/farmQnAlist.do", method = RequestMethod.GET)
 	public ModelAndView farmdiaryList(@RequestParam(required = false, defaultValue = "1") int cPage) {
@@ -50,11 +50,11 @@ public class FarmQnAController {
 		mav.setViewName("farmQnA/farmQnAlist");
 
 
-//		System.out.println(res);
+		//		System.out.println(res);
 
 		return mav;
 	}
-	
+
 	//상세조회 화면
 	@RequestMapping(value = "/farmQnA/farmQnAdetail.do", method = RequestMethod.GET)
 	public ModelAndView farmdiaryDetail(int farmQnaQuestionNo) {
@@ -68,5 +68,39 @@ public class FarmQnAController {
 		return mav;
 
 	}
-	
+
+	//게시글 삭제
+	@RequestMapping(value = "/farmQnA/farmQnAdelete.do", method = RequestMethod.GET )
+	public String deleteQnA(@RequestParam(value="farmQnaQuestionNo") int farmQnaQuestionNo) {
+
+		farmqnaService.deleteQnA(farmQnaQuestionNo);
+
+		return "redirect:/farmQnA/farmQnAlist.do";
+	}
+
+//	//게시글 수정 화면
+//	@RequestMapping(value = "/farmdiary/farmdiarymodify.do", method = RequestMethod.GET)
+//	public ModelAndView farmdiaryModify(int farmDiaryNo) {
+//		System.out.println("수정 페이지 접속 완료");
+//
+//		ModelAndView mav = new ModelAndView();
+//
+//		Map<String, Object> res = farmdiaryService.selectFarmDiaryDetail(farmDiaryNo);
+//		mav.addObject("detail", res);	
+//
+//		return mav;
+//	}
+//	//게시글 수정
+//	@RequestMapping(value = "/diary/diarymodify.do", method = RequestMethod.POST)
+//	public ModelAndView diarymodify(@RequestParam Map<String, Object> commandMap) {
+//
+//		ModelAndView mav = new ModelAndView();
+//
+//		farmdiaryService.modifyFarmDiary(commandMap);
+//
+//		mav.setViewName("redirect:/farmdiary/farmdiarylist.do");
+//
+//		return mav;
+//	}
+
 }
