@@ -21,16 +21,10 @@ public class AdminUserServiceImpl implements AdminUserService{
 	@Autowired
 	private AdminUserDao adminUserDao;
 	
-	@Override
-	public List<Map<String, Object>> selectAllFarmerList() {
-		return adminUserDao.selectAllFarmerList();
-	}
-
-	@Override
-	public List<Map<String, Object>> selectAllUserList() {
-		return adminUserDao.selectAllUserList();
-	}
-
+	// pagingConfig 상수
+	private static final int USER_CODE = 0;
+	private static final int FARMER_CODE = 1;
+	
 	@Override
 	public List<Map<String, Object>> selectAllFarmerApplicationList() {
 		return adminUserDao.selectAllFarmerApplicationList();
@@ -51,24 +45,14 @@ public class AdminUserServiceImpl implements AdminUserService{
 		return adminUserDao.updateIsConfirmToNo(farmer);
 	}
 
-	@Override
-	public int updatePause(UserTB user) {
-		return adminUserDao.updatePause(user);
-	}
-
-	@Override
-	public int updatePause(Farmer farmer) {
-		return adminUserDao.updatePause(farmer);
-	}
-
-	@Override
-	public int deleteFarmer(Farmer farmer) {
-		return adminUserDao.deleteFarmer(farmer);
-	}
-	
 	// 회원 페이징 처리
 	@Override
-	public AdminPaging getPaging(String curPage, String search) {
+	public AdminPaging getPaging(Map<String, Object> pagingConfig) {
+		
+		String curPage = (String) pagingConfig.get("curPage");
+		String search = (String) pagingConfig.get("search");
+		int listCode = (int) pagingConfig.get("listCode");
+		
 		// curPageNo 초기화, curPageNo 은 현재 페이지 번호를 뜻함!
 		int curPageNo = 0;
 		if( curPage != null && !"".equals(curPage) ) {
@@ -78,13 +62,27 @@ public class AdminUserServiceImpl implements AdminUserService{
 		// NOTICE 테이블의 총 게시글 수를 조회한다.
 		int totalCount = 0;
 		// 검색어가 없을 경우, null일 경우
-		if( search == null && "".equals(search) ) {
+		if( search == null || "".equals(search) ) {
 			
-			totalCount = adminUserDao.selectCntAllUserList(); 
+			switch (listCode) {
+			case USER_CODE:
+				totalCount = adminUserDao.selectCntAllUserList();
+				break;
+			case FARMER_CODE:
+				totalCount = adminUserDao.selectCntAllFarmerList();
+				break;
+			}
 			
 		} else { // 검색어가 있을 경우
 			
-			totalCount = adminUserDao.selectCntUserBySearch(search);
+			switch (listCode) {
+			case USER_CODE:
+				totalCount = adminUserDao.selectCntUserBySearch(search);
+				break;
+			case FARMER_CODE:
+				totalCount = adminUserDao.selectCntFarmerBySearch(search);
+				break;
+			}
 			
 		}
 		
@@ -113,5 +111,11 @@ public class AdminUserServiceImpl implements AdminUserService{
 	public int delCancelUserByUserNo(List<String> userNoList) {
 		return adminUserDao.delCancelUserByUserNo(userNoList);
 	}
-
+	
+	// 페이징 처리된 farmer 회원 목록
+	@Override
+	public List<Map<String, Object>> selectFarmerByPaging(AdminPaging apaging) {
+		return adminUserDao.selectFarmerByPaging(apaging);
+	}
+	
 }

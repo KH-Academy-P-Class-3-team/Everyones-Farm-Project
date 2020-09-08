@@ -13,20 +13,6 @@ import common.util.AdminPaging;
 public interface AdminUserService {
 	
 	/**
-	 * 관리자 페이지의 농업인 회원 관리 페이지에 사용된다
-	 * 사이트의 모든 농업인 회원 목록을 조회 요청한다.
-	 * @return List<Map<String, Object>> - 조회 결과 반환
-	 */
-	public List<Map<String, Object>> selectAllFarmerList();
-
-	/**
-	 * 관리자 페이지의 일반 회원 관리 페이지에 사용된다
-	 * 사이트의 모든 일반 회원 목록을 조회 요청한다.
-	 * @return List<Map<String, Object>> - 조회 결과 반환
-	 */
-	public List<Map<String, Object>> selectAllUserList();
-	
-	/**
 	 * 관리자 페이지의 농업인 회원 신청 관리 페이지에 사용된다.
 	 * 농업인 회원가입을 신청한 회원들의 목록을 조회 요청한다.
 	 * @return List<Map<String, Object>> - 조회 결과 반환
@@ -58,34 +44,12 @@ public interface AdminUserService {
 	public int putFarmerApplicationOnHold(Farmer farmer);
 	
 	/**
-	 * 회원 활동 정지, pause 컬럼 업데이트
-	 * @param user - 활동 정지 시킬 User 객체
-	 * @return int - 업데이트 결과
-	 */
-	public int updatePause(UserTB user);
-	
-	/**
-	 * 농업인 회원 활동 정지, pause 컬럼 업데이트
-	 * @param farmer - 활동 정지 시킬 Farmer 객체
-	 * @return int - 업데이트 결과
-	 */
-	public int updatePause(Farmer farmer);
-	
-	/**
-	 * 농업인 회원 탈퇴, is_leave 컬럼 업데이트
-	 * @param farmer - 탈퇴 시킬 Farmer 객체
-	 * @return int - 업데이트 결과
-	 */
-	public int deleteFarmer(Farmer farmer);
-
-	/**
-	 * 일반 회원 목록 페이징 처리를 위한 페이징 설정
+	 * 회원 목록 페이징 처리를 위한 페이징 설정
 	 * 
-	 * @param curPage - 현재 페이지를 나타내는 querystring
-	 * @param search - 검색어
-	 * @return AdminPaging - userlist 페이징 객체
+	 * @param pagingConfig - paging 설정에 대한 값들을 가지고 있는 Map
+	 * @return AdminPaging - list 페이징 객체
 	 */
-	public AdminPaging getPaging(String curPage, String search);
+	public AdminPaging getPaging(Map<String, Object> pagingConfig);
 
 	/**
 	 * 일반 회원 페이징 처리한 목록 조회
@@ -109,5 +73,13 @@ public interface AdminUserService {
 	 * @return int - 회원 탈퇴 취소 결과 반환
 	 */
 	public int delCancelUserByUserNo(List<String> userNoList);
+
+	/**
+	 * 농업인 회원 페이징 처리한 목록 조회
+	 * 
+	 * @param apaging
+	 * @return
+	 */
+	public List<Map<String, Object>> selectFarmerByPaging(AdminPaging apaging);
 
 }

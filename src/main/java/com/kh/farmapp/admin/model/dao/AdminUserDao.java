@@ -12,19 +12,6 @@ import common.util.AdminPaging;
  */
 public interface AdminUserDao {
 
-	/**
-	 * 관리자 페이지의 농업인 회원 관리 페이지에 사용된다
-	 * 사이트의 모든 농업인 회원 목록을 조회
-	 * @return List<Map<String, Object>> - 조회 결과 반환
-	 */
-	public List<Map<String, Object>> selectAllFarmerList();
-
-	/**
-	 * 관리자 페이지의 일반 회원 관리 페이지에 사용된다
-	 * 사이트의 모든 일반 회원 목록을 조회
-	 * @return List<Map<String, Object>> - 조회 결과 반환
-	 */
-	public List<Map<String, Object>> selectAllUserList();
 
 	/**
 	 * 관리자 페이지의 농업인 회원 신청 관리 페이지에 사용된다.
@@ -49,25 +36,11 @@ public interface AdminUserDao {
 	public int updateIsConfirm(Farmer farmer);
 
 	/**
-	 * 농업인 회원의 is_confirm 컬럼의 값을 'n'로 업데이트 한다.(사실 아직 정해진 게 없다... 다시 생각해봐야 한다)
+	 * 농업인 회원의 is_confirm 컬럼의 값을 'n'로 업데이트 한다.
 	 * @param farmer - 보류할 농업인 회원 객체
 	 * @return int - is_confirm 컬럼 업데이트 결과 반환
 	 */
 	public int updateIsConfirmToNo(Farmer farmer);
-
-	/**
-	 * 회원 활동 정지, pause 컬럼 업데이트
-	 * @param user - 활동 정지 시킬 User 객체
-	 * @return int - 업데이트 결과
-	 */
-	public int updatePause(UserTB user);
-
-	/**
-	 * 농업인 회원 활동 정지, pause 컬럼 업데이트
-	 * @param farmer - 활동 정지 시킬 Farmer 객체
-	 * @return int - 업데이트 결과
-	 */
-	public int updatePause(Farmer farmer);
 
 	/**
 	 * 농업인 회원 탈퇴, is_leave 컬럼 업데이트
@@ -114,5 +87,28 @@ public interface AdminUserDao {
 	 * @return int - 회원 탈퇴 취소 결과 반환
 	 */
 	public int delCancelUserByUserNo(List<String> userNoList);
+
+	/**
+	 * 페이징 처리를 위한 총 farmer count 조회
+	 * 
+	 * @return int - 조회된 결과 반환
+	 */
+	public int selectCntAllFarmerList();
+
+	/**
+	 * 검색된 결과 갯수
+	 * 
+	 * @param search - 검색어
+	 * @return int - 조회 결과
+	 */
+	public int selectCntFarmerBySearch(String search);
+
+	/**
+	 * 페이징 처리된 농업인 회원 목록 조회하기
+	 * 
+	 * @param apaging - 페이징 정보를 갖는 AdminPaging 객체
+	 * @return List<Map<String, Object>> - 조회 반환 결과
+	 */
+	public List<Map<String, Object>> selectFarmerByPaging(AdminPaging apaging);
 
 }

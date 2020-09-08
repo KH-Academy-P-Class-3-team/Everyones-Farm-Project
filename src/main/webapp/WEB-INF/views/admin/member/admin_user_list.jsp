@@ -42,7 +42,7 @@
 					<%-- userList null 일 때 --%>
 					<c:when test="${empty userList }">
 						<tr>
-							<td colspan="5">조회된 회원이 없습니다.</td>
+							<td colspan="6">조회된 회원이 없습니다.</td>
 						</tr>
 					</c:when>
 					<%-- userList null이 아닐 때 --%>

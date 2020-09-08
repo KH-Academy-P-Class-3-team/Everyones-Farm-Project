@@ -2,6 +2,7 @@ package com.kh.farmapp.admin.user.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,11 @@ public class AdminUserController {
 	@Autowired
 	private AdminUserService adminUserService;
 	
+	// pagingConfig 상수
+	private static final int USER_CODE = 0;
+	private static final int FARMER_CODE = 1;
+	
+	
 	// 농업인 회원 관리 페이지
 	@RequestMapping(value = "/adminmember/farmerlist", method = RequestMethod.GET)
 	public String adminFarmerList(
@@ -40,6 +46,43 @@ public class AdminUserController {
 			// 검색 처리시 필요한 변수
 			, @RequestParam(defaultValue = "") String search
 			) {
+		
+		// logger 찍기 - 어떤 url
+		logger.info("/adminmember/farmerlist - [GET] 요청");
+		
+		// 페이징 설정에 대한 정보를 갖는 Map 객체
+		Map<String, Object> pagingConfig = new HashMap<>();
+		pagingConfig.put("curPage", curPage);
+		pagingConfig.put("search", search);
+		pagingConfig.put("listCode", FARMER_CODE);
+		
+		logger.debug("pagingConfig: " + pagingConfig.toString());
+		
+		// 페이징 설정
+		AdminPaging apaging = adminUserService.getPaging(pagingConfig);
+		logger.debug("apaging: " + apaging.toString());
+		
+		// select 조회 연산 수행
+		List<Map<String, Object>> farmerList = adminUserService.selectFarmerByPaging(apaging);
+		for(Map<String, Object> f : farmerList) {
+			logger.debug("f: " + f.toString());
+		}
+		
+		// model 값 넘겨주기
+		// 페이징 객체 넘기기
+		if( apaging != null ) {
+			
+			model.addAttribute("apaging", apaging);
+			
+		}
+		
+		// 페이징 처리된 목록 넘기기
+		if( farmerList != null ) {
+			
+			model.addAttribute("farmerList", farmerList);
+			
+		}
+		
 		return "admin/member/admin_farmer_list";
 	}
 	
@@ -56,18 +99,23 @@ public class AdminUserController {
 		// logger 찍기 - 해당 url에 들어왔다는 표시
 		logger.info("/adminmember/userlist [GET] 요청");
 		
-		logger.debug("search: " + search);
+		// 페이징 설정에 대한 정보를 갖는 Map 객체
+		Map<String, Object> pagingConfig = new HashMap<>();
+		pagingConfig.put("curPage", curPage);
+		pagingConfig.put("search", search);
+		pagingConfig.put("listCode", USER_CODE);
+		
+		logger.debug("pagingConfig: " + pagingConfig.toString());
 		
 		// 페이징 설정
-		// 페이징 설정
-		AdminPaging apaging = adminUserService.getPaging(curPage, search);
+		AdminPaging apaging = adminUserService.getPaging(pagingConfig);
 		logger.debug("apaging: " + apaging.toString());
 		
 		// select 조회 연산 수행
 		List<Map<String, Object>> userList = adminUserService.selectAllUserByPaging(apaging);
-		for(Map< String, Object> m : userList) {
-			logger.debug("m: " + m.toString());
-		}
+//		for(Map< String, Object> m : userList) {
+//			logger.debug("m: " + m.toString());
+//		}
 		
 		// model 값 넘겨주기
 		// 페이징 객체 넘기기

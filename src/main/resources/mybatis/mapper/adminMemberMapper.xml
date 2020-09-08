@@ -92,4 +92,77 @@
 	</foreach>
 	</update>
 	
+	<select id="selectCntAllFarmerList" resultType="int">
+	select
+    	count(*)
+	from
+	    farmer f
+    JOIN
+        farm
+    ON
+        f.farmer_no = farm.farmer_no
+	</select>
+	
+	<!-- 검색된 농업인 회원 COUNT -->
+	<select id="selectCntFarmerBySearch" parameterType="java.lang.String" resultType="int">
+		select
+		    count(*)
+		from
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+		where
+		    farmer_id LIKE  '%' || #{search} || '%'
+		    or name LIKE '%' || #{search} || '%'
+	</select>
+	
+	<resultMap type="hashmap" id="flistmap">
+		<result property="fOrder" column="f_order" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<result property="isLeave" column="is_leave" />
+		<result property="farmNo" column="farm_no" />
+	</resultMap>
+	<!-- 검색된 농업인 회원 목록 -->
+	<select id="selectFarmerByPaging" parameterType="common.util.AdminPaging" resultMap="flistmap">
+		select
+		    flist.*
+		from (
+		    select
+		       rownum f_order
+		       , fs.* 
+		    from (
+		        select
+		            f.farmer_no
+		            , f.farmer_id
+		            , f.name
+		            , f.phone
+		            , f.email
+		            , f.is_leave
+		            , farm.farm_no
+		        from
+		            farmer f
+		            JOIN
+		                farm
+		            ON
+		                f.farmer_no = farm.farmer_no
+		        order by
+		            f.farmer_no desc
+		    )fs
+		)flist
+		where
+		    flist.f_order between #{startNo} and #{endNo}
+		    <if test="search != null and search != ''">
+		    and (
+		    	farmer_id LIKE  '%' || #{search} || '%'
+		    	or name LIKE '%' || #{search} || '%'
+		    )
+		    </if>
+	</select>
+	
 </mapper>
