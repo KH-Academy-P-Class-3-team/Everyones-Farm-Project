@@ -103,4 +103,10 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		return session.selectList("ADMINMEMBER.selectAllUserByPaging", apaging);
 	}
 
+	// 검색된 회원 총 갯수
+	@Override
+	public int selectCntUserBySearch(String search) {
+		return session.selectOne("ADMINMEMBER.selectCntUserBySearch", search);
+	}
+	
 }

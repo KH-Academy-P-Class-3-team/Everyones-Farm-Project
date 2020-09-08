@@ -98,4 +98,12 @@ public interface AdminUserDao {
 	 */
 	public List<Map<String, Object>> selectAllUserByPaging(AdminPaging apaging);
 
+	/**
+	 * 검색된 결과 갯수
+	 * 
+	 * @param search - 검색어
+	 * @return int - 조회 결과
+	 */
+	public int selectCntUserBySearch(String search);
+
 }

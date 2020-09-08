@@ -43,5 +43,22 @@
 		) users 
 		where
 		    user_order between #{startNo} and #{endNo}
+		    <if test="search != null and search != ''">
+	    	and (
+		    	user_id LIKE  '%' || #{search} || '%'
+    			or user_name LIKE '%' || #{search} || '%'
+	    	)
+		    </if>
+	</select>
+	
+	<!-- 검색된 회원 갯수 -->
+	<select id="selectCntUserBySearch" parameterType="java.lang.String" resultType="int">
+		select
+		    count(*)
+		from
+		    user_tb
+		where
+		    user_id LIKE  '%' || #{search} || '%'
+		    or user_name LIKE '%' || #{search} || '%'
 	</select>
 </mapper>

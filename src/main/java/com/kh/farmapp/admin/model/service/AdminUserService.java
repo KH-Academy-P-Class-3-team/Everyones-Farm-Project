@@ -89,9 +89,10 @@ public interface AdminUserService {
 	 * 일반 회원 목록 페이징 처리를 위한 페이징 설정
 	 * 
 	 * @param curPage - 현재 페이지를 나타내는 querystring
+	 * @param search - 검색어
 	 * @return AdminPaging - userlist 페이징 객체
 	 */
-	public AdminPaging getPaging(String curPage);
+	public AdminPaging getPaging(String curPage, String search);
 
 	/**
 	 * 일반 회원 페이징 처리한 목록 조회

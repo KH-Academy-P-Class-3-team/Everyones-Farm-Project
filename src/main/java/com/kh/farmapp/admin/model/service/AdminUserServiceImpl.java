@@ -72,7 +72,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 	}
 	
 	@Override
-	public AdminPaging getPaging(String curPage) {
+	public AdminPaging getPaging(String curPage, String search) {
 		// curPageNo 초기화, curPageNo 은 현재 페이지 번호를 뜻함!
 		int curPageNo = 0;
 		if( curPage != null && !"".equals(curPage) ) {
@@ -80,10 +80,22 @@ public class AdminUserServiceImpl implements AdminUserService{
 		}
 		
 		// NOTICE 테이블의 총 게시글 수를 조회한다.
-		int totalCount = adminUserDao.selectCntAllUserList();
+		int totalCount = 0;
+		// 검색어가 없을 경우, null일 경우
+		if( search == null && "".equals(search) ) {
+			
+			totalCount = adminUserDao.selectCntAllUserList(); 
+			
+		} else { // 검색어가 있을 경우
+			
+			totalCount = adminUserDao.selectCntUserBySearch(search);
+			
+		}
 		
 		// AdminPaging 객체 생성 - 현재 페이지(curPage), 총 게시글 수(totalCount) 활용
 		AdminPaging paging = new AdminPaging(totalCount, curPageNo);
+		// 검색어 AdminPaging 객체에 넣어주기
+		paging.setSearch(search);
 		
 		return paging;
 	}

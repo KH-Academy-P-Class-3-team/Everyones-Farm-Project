@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/* main 태그 css */
+.member-list__main {
+	margin: 70px auto;
+}
+/* 서브메뉴 제목 div */
+.member-list__main .member-list__title {
+	margin-bottom: 30px;
+}
+/* 서브메뉴 제목 text */
+.member-list__title .member-list__title-text {
+	font-size: 20px;
+    font-weight: 700;
+    padding-left: 7px;
+    border-left: 3px solid #789F6F;
+    opacity: 0.7;
+}
+/* 테이블 css */
+.member__table .member__m-table {
+    width: 100%;
+    border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+    padding: 0;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+/* 테이블 tr */
+.member__m-table .m-table__tr-head
+, .member__m-table .m-table__tr-body {
+	border-top: 1px solid #605759;
+	border-bottom: 1px solid #605759;
+}
+.member__m-table .m-table__tr-head {
+	background: #D1E9CA;
+}
+.member__m-table .m-table__tr-body:hover {
+	background: #E9F7AB;
+	cursor: pointer;
+}
+/* 테이블 th, td */
+.member__m-table .m-table__th
+, .member__m-table .m-table__td {
+    padding: 14px 7px;
+    text-align: center;
+}
+/* 체크박스 크기 */
+.member__m-table .member-chk {
+	margin: 0;
+	width: 20px;
+	height: 20px;
+}
+/* 버튼 div */
+.member-list__main .member-list__btns-wrap {
+	margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+/* 탈퇴 버튼 */
+.member-list__btns-wrap .member-list__btn-delete {
+	background: #B65656;
+    padding: 12px 8px;
+    border-radius: 3px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}

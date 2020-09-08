@@ -47,16 +47,18 @@ public class AdminUserController {
 		// logger 찍기 - 해당 url에 들어왔다는 표시
 		logger.info("/adminmember/userlist [GET] 요청");
 		
+		logger.debug("search: " + search);
+		
 		// 페이징 설정
 		// 페이징 설정
-		AdminPaging apaging = adminUserService.getPaging(curPage);
-//		logger.debug("apaging: " + apaging.toString());
+		AdminPaging apaging = adminUserService.getPaging(curPage, search);
+		logger.debug("apaging: " + apaging.toString());
 		
 		// select 조회 연산 수행
 		List<Map<String, Object>> userList = adminUserService.selectAllUserByPaging(apaging);
-//		for(Map< String, Object> m : userList) {
-//			logger.debug("m: " + m.toString());
-//		}
+		for(Map< String, Object> m : userList) {
+			logger.debug("m: " + m.toString());
+		}
 		
 		// model 값 넘겨주기
 		// 페이징 객체 넘기기
