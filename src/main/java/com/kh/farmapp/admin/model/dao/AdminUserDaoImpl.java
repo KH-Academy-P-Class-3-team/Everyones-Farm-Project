@@ -32,11 +32,8 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	}
 
 	@Override
-	public List<UserTB> selectAllUserList() {
-		
-		// 클래스 다이어그램 용 객체
-		UserTB user = new UserTB();
-		
+	public List<Map<String, Object>> selectAllUserList() {
+		// 여기서부터 작성하기
 		return null;
 	}
 

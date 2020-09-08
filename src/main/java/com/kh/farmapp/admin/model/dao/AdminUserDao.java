@@ -21,9 +21,9 @@ public interface AdminUserDao {
 	/**
 	 * 관리자 페이지의 일반 회원 관리 페이지에 사용된다
 	 * 사이트의 모든 일반 회원 목록을 조회
-	 * @return List<User> - 조회 결과 반환
+	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public List<UserTB> selectAllUserList();
+	public List<Map<String, Object>> selectAllUserList();
 
 	/**
 	 * 관리자 페이지의 농업인 회원 신청 관리 페이지에 사용된다.

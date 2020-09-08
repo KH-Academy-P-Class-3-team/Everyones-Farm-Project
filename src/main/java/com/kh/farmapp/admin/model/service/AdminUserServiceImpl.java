@@ -26,7 +26,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 	}
 
 	@Override
-	public List<UserTB> selectAllUserList() {
+	public List<Map<String, Object>> selectAllUserList() {
 		return adminUserDao.selectAllUserList();
 	}
 

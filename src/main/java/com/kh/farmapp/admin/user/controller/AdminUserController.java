@@ -1,10 +1,13 @@
 package com.kh.farmapp.admin.user.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -31,7 +34,16 @@ public class AdminUserController {
 	
 	// 일반 회원 관리 페이지
 	@RequestMapping(value = "/adminmember/userlist", method = RequestMethod.GET)
-	public String adminUserList() {
+	public String adminUserList(
+				Model model
+			) {
+		
+		// logger 찍기 - 해당 url에 들어왔다는 표시
+		logger.info("/adminmember/userlist [GET] 요청");
+		
+		// select 조회 연산 수행
+		List<Map<String, Object>> userList = adminUserService.selectAllUserList();
+		
 		return "admin/member/admin_user_list";
 	}
 	
