@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>마이 페이지</title>
+
+<%@include file="../../include/header.jsp" %>
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -43,147 +41,144 @@ label {
 	margin-top: 30px;
 	margin-right: 150px;
 }
-.media-object{
-	margin-left : 70px;
+
+.media-object {
+	margin-left: 70px;
 }
-.panel-default{
-	border : none;
+
+.panel-default {
+	border: none;
 }
+
 .panel-default>.panel-heading {
-    background-color: white;
-    border: none;
-    font-weight: bold;
-    font-size : 17px;
+	background-color: #D1E9CA;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.ckck {
+	width: 800px;
+	height: 400px;
+}
+
+#p_content {
+	width: 100%;
+	height: 100%;
 }
 </style>
 
+<!-- ckeditor 4 -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/resources/ckeditor/contents.css">
+<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+<script type="text/javascript"
+	src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
+﻿
+
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-<body class="pt-5">
+<div class="headSpace" style="margin-top:200px;"></div>
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
-				<h3 class="my-4 text-left">회원 정보 수정</h3>
+				<h3 class="my-4 text-left">1대 1 문의</h3>
 				<hr>
 				<div class="panel panel-default">
-					<div class="panel-heading">회원</div>
-					<div class="panel-body">회원정보 수정</div>
-					<div class="panel-body">회원 탈퇴</div>
-					<div class="panel-body">1대 1 문의</div>
-					<div class="panel-body">활동 신청 현황</div>
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+							수정</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/deleteId">회원
+							탈퇴</a>
+					</div>
+					<div class="panel-body" style="font-weight: bold;">
+						<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+							1 문의</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+							신청 현황</a>
+					</div>
 				</div>
 
 				<div class="panel panel-default">
-					<div class="panel-heading">주문</div>
-					<div class="panel-body">구매 목록</div>
-					<div class="panel-body">장바구니</div>
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/orderList">주문</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+					</div>
+					<div class="panel-body">
+						<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+							목록</a>
+					</div>
 				</div>
 
 			</div>
 			<div class="col-lg-1">
-				<form action="modfy/userImg" method="post">
-					<div class="media">
-						<div class="media-left media-middle">
-							<a href="#"> <img class="media-object"
-								src="<%=request.getContextPath()%>/resources/img/basic.jpg"
-								alt="...">
-							</a>
+
+
+				<!-- 에디터 포함 작성  -->
+				<div class="container">
+					<div class="content" style="width: 70%">
+
+						<div class="row justify-content-md-center">
+							<div class="col-sm-9">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<label class="input-group-text">제목</label>
+									</div>
+									<input type="text" class="form-control">
+								</div>
+							</div>
 						</div>
-						<button type="submit" class="btn btn-warning"
-							onclick="selectUrl('/modify/confirm')">사진 등록</button>
+
+						<hr>
+
+						<div class="row justify-content-md-center">
+							<div class="col_c" style="margin-bottom: 30px">
+								<div class="input-group ckck">
+									<textarea class="form-control" id="p_content"></textarea>
+									<script>
+									CKEDITOR.replace('p_content',{
+										filebrowserUploadUrl:'<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js'
+									}); // 에디터로 생성
+									</script>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row justify-content-md-center">
+							<button type="submit" class="btn btn-outline-secondary"
+								style="width: 20%; font-weight: bold">등 록</button>
+						</div>
 					</div>
-				</form>
-				<div class="ModifyUserInfo">
-
-					<form action="modify/userInfo" method="post">
-						<!-- 			아이디 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">아이디</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-user"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="아이디"
-									aria-describedby="sizing-addon1" value="${userData.USER_ID}"}>
-							</div>
-						</div>
-						<!-- 			비밀번호 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-lock"
-									id="sizing-addon1"></span> <input type="password"
-									class="form-control" placeholder="비밀번호"
-									aria-describedby="sizing-addon1" value="${userData.USER_PW} }">
-							</div>
-						</div>
-						<!-- 			이름 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">이름</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-user"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="이름"
-									aria-describedby="sizing-addon1" value="${userData.USER_NAME}"
-									readonly>
-							</div>
-						</div>
-
-						<!-- 			이메일 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">E-Mail</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-envelope"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="E-Mail"
-									aria-describedby="sizing-addon1" value="${userData.EMAIL}">
-							</div>
-						</div>
-						<!-- 			전화번호 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">전화번호</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-earphone"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="전화번호"
-									aria-describedby="sizing-addon1" value="${userData.PHONE}">
-							</div>
-						</div>
-						<!-- 			주소 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">주소</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-home"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="주소"
-									aria-describedby="sizing-addon1"
-									value="${userData.FIRST_ADDRESS}">
-							</div>
-						</div>
-
-
-
-						<button type="submit" class="btn btn-warning"
-							onclick="selectUrl('/modify/confirm')">등록</button>
-
-					</form>
 				</div>
+
+
 			</div>
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		function selectUrl(url){
-			var root = '<%=request.getContextPath()%>';
-			
-			document.querySelector('#form-data').action = root + url;
-		}
-	</script>
 
 
 
 
 
 
-
-</body>
-</html>
+<%@include file="../../include/footer.jsp" %>

@@ -16,7 +16,6 @@ import common.dto.page.Criteria;
 
 @Repository
 public class FarmerMypageDaoImpl implements FarmerMypageDao {
-
 	@Autowired
 	SqlSessionTemplate session;
 	
@@ -45,6 +44,7 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 		return session.selectOne("MYPAGEACTIVITY.selectOne",application);
 	}
 	
+
 	//일손 체험 리스트
 	@Override
 	public List<Map<String, Object>> activitylist3(Map<String, Object> map) {
@@ -55,6 +55,7 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	public int listCount3() {
 		return session.selectOne("MYPAGEACTIVITY.listCount2");
 	}
+	
 	
 	
 	// 영농일지 작성
@@ -104,9 +105,5 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	public List<Map<String, Object>> datelist(String date) {
 		return session.selectList("MYPAGEDAILY.list",date);
 	}
-//	@Override
-//	public List<Map<String, Object>> datelist(Date to) {
-//		System.out.println(to);
-//		return session.selectList("MYPAGEDAILY.list",to);
-//	}
+
 }

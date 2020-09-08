@@ -4,10 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace = "MYPAGEACTIVITY">
-
-	
 	<!-- application과 activity 테이블 조인위한 맵 -->
-	<resultMap type="hashmap" id="testmap">
+	<resultMap type="hashmap" id="testmap" >
+
 		<id property="farmerNo" column="FARMER_NO" />
 		<result property="farmNo" column="FARM_NO" />
 		<result property="activityNo" column="ACTIVITY_NO" />
@@ -19,6 +18,7 @@
 		<result property="isApproval" column="IS_APPROVAL" />
 	</resultMap>
 	
+
 										<!-- 농장체험 -->
 	
 	<!-- 농장체험 리스트 1부터 10까지 페이징 -->
@@ -51,7 +51,6 @@
         )p
         where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO
 	</select>   
-
 	
 	<!-- 농장체험 내역 리스트 총 페이지 수 -->
 	<select id="listCount" resultType="int">
@@ -76,9 +75,6 @@
 	
 	
 									<!-- 일손체험 -->
-									
-									
-									<!-- 농장체험 리스트 1부터 10까지 페이징 -->
 	<select id ="listPage2" resultMap="testmap">
 	select p.*
 		from (
@@ -107,8 +103,7 @@
         )r
         )p
         where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO
-		
-	</select>   
+		</select>
 	
 	<!-- 농장체험 내역 리스트 총 페이지 수 -->
 	<select id="listCount2" resultType="int">

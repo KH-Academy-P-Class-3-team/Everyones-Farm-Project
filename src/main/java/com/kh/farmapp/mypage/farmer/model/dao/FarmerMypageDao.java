@@ -33,7 +33,10 @@ public interface FarmerMypageDao {
 	/**
 	 * 영농일지 상세
 	 */
+
 	public FarmingDailylog read(int dailyLogNo);
+
+
 	
 	/**
 	 * 농장 체험 리스트
@@ -55,8 +58,9 @@ public interface FarmerMypageDao {
 	 * @param list(Criteria cri) + 페이징 처리
 	 * @return List<FarmActivity> - 조회 결과 반환
 	 */
+
 	public List<Map<String, Object>> activitylist3(Map<String, Object> map);
-	
+
 
 	/**
 	 * 일손체험 활동내역 목록 페이징
@@ -66,8 +70,7 @@ public interface FarmerMypageDao {
 	
 	
 	
-	
-	
+
 	/**
 	 * 승인 신청에 대한 판단 1 or 0 일때 처리
 	 * @param application 승인신청에대한 dto
@@ -107,11 +110,11 @@ public interface FarmerMypageDao {
 	 */
 	public int updatePayment(TBOrder order);
 
+
 	public List<Map<String, Object>> datelist(String date);
 
 
 
-	
 
 
 	

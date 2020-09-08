@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,7 +61,9 @@ public class FarmerMypageController {
 
 	// 영농일지 리스트 목록 조회
 	@RequestMapping(value = "/mypage/dailyLoglist", method = RequestMethod.GET)
+
 	public ModelAndView dailyLoglist(Model model, Criteria cri,HttpServletRequest request,HttpSession session) {
+
 		model.addAttribute("list", farmerMypageService.dailyLoglist(cri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -68,6 +71,7 @@ public class FarmerMypageController {
 		pageMaker.setTotalCount(farmerMypageService.listCount());
 
 		model.addAttribute("pageMaker", pageMaker);
+
 
 		
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
@@ -96,7 +100,7 @@ public class FarmerMypageController {
 
 	// 농장 체험 리스트 목록 조회
 	@RequestMapping(value = "/mypage/activitylist", method = RequestMethod.GET)
-	public String activitylist(Model model, Criteria cri, HttpSession session) {
+	public String activitylist(Model model, Criteria cri,HttpSession session) {
 
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -108,10 +112,6 @@ public class FarmerMypageController {
 		//일손체험
 		List<Map<String, Object>> testMap3 = farmerMypageService.activitylist3(cri,farmer);
 
-//		for (int i = 0; i < testMap.size(); i++) {
-//			System.out.println(testMap.get(i).toString());
-//		}
-
 		//농장체험
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -122,9 +122,12 @@ public class FarmerMypageController {
 		pageMaker3.setCri(cri);
 		pageMaker3.setTotalCount(farmerMypageService.listCount3());
 		
+
 		//농부 객체
 		model.addAttribute("farmerInfo",farmer);
 		
+
+
 		//농장체험
 		model.addAttribute("list", testMap);
 		model.addAttribute("pageMaker", pageMaker);
@@ -156,7 +159,9 @@ public class FarmerMypageController {
 	
 	// 판매 페이지 리스트
 	@RequestMapping(value = "/mypage/selllist", method = RequestMethod.GET)
+
 	public ModelAndView selllist(Model model, Criteria cri, HttpSession session, HttpServletRequest request) {
+
 	System.out.println("판매 페이지 접속완료");
 	
 	List<Map<String, Object>> testMap = farmerMypageService.selllist(cri);
@@ -171,6 +176,7 @@ public class FarmerMypageController {
 	
 	model.addAttribute("list", testMap);
 	model.addAttribute("pageMaker", pageMaker);
+
 	
 	Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 	ModelAndView mav = new ModelAndView();
@@ -183,6 +189,15 @@ public class FarmerMypageController {
 		mav.setViewName("/mypage/selllist");
 	}
 	return mav;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/mypage/cal", method = RequestMethod.GET)
+	public List<Map<String, Object>> cal(String date) {
+		List<Map<String, Object>> res = farmerMypageService.datelist(date);
+		System.out.println(res);
+		return res;
 	}
 	
 	/**
@@ -202,13 +217,6 @@ public class FarmerMypageController {
 
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/mypage/cal", method = RequestMethod.GET)
-	public List<Map<String, Object>> cal(String date) {
-		List<Map<String, Object>> res = farmerMypageService.datelist(date);
-		System.out.println(res);
-		return res;
-	}
 	@RequestMapping(value = "/mypage/cal23", method = RequestMethod.GET)
 	public String cal2() {
 		System.out.println("접속");

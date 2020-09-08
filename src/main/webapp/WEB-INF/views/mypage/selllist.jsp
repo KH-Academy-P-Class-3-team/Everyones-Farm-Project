@@ -10,10 +10,13 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style type="text/css">
-
 .pagenate {margin-left :100px;
+	
 }
 /* 마이페이지  */
 .col-lg-3{
@@ -35,7 +38,6 @@ li {
 	margin-left: 350px;
 }
 
-
 /* 내정보 나타내기 */
 #mypagesize {
 	height: 200px; webkit-fill-available;
@@ -45,7 +47,6 @@ li {
 .search {
 	text-align: center;
 }
-
 .sumarry {
    width: 500px;
    height: 150px;
@@ -99,7 +100,6 @@ a:hover {
    text-decoration: none;
 }
 </style>
-
 
 <%@include file="../include/header.jsp" %>
 <!-- menu 의 float 속성 때문에 생성한 div -->
@@ -184,6 +184,8 @@ a:hover {
 				</table>
 
 			</div>
+				</div>
+				<div id="root" style="width: 800px">
 				<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold">판매 현황</a>
 					
 					<div id ="border">

@@ -2,76 +2,53 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<%@include file="../include/header.jsp"%>
+<title>판매 목록</title>
 
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-</head>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	
 <style type="text/css">
+.pagenate {margin-left :100px;
+	
+}
+/* 마이페이지  */
+.col-lg-3{
+	margin-top : 80px;
+}
+/*경계선*/
+#border{
+ border : groove;
+}
+/* 페이지 1~10 까지의 수 */
 li {
 	list-style: none;
 	float: left;
 	padding: 6px;
 }
 
-.input-group {
-	margin-top: 30px;
+/* 페이지 사이즈 */
+#psize {
+	margin-left: 350px;
 }
 
-.col-lg-1 {
-	text-align: left;
-	width: 50%;
-	margin-left: 150px;
+/* 내정보 나타내기 */
+#mypagesize {
+	height: 200px; webkit-fill-available;
+	border: groove;
 }
 
-span {
-	padding: 0;
-}
-
-.input-group {
-	width: 400px;
-}
-
-label {
-	padding-left: 0;
-	text-align: left;
-}
-
-.btn-warning {
-	width: 90px;
-	height: 50px;
-	margin-top: 30px;
-	margin-right: 150px;
-}
-
-.emptyArea {
-	height: 200px;
-}
-
-.glyphicon-alert {
-	color: red;
-}
-
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
+.search {
+	text-align: center;
 }
 .sumarry {
    width: 500px;
@@ -95,6 +72,7 @@ a:hover {
    font-weight: bold;
 }
 
+
 .selfIcon {
    text-align: left;
    border: 1px solid white;
@@ -105,15 +83,36 @@ a:hover {
    margin-right: 100px;
    margin-bottom: 10px;
 }
+.panel-default {
+   border: none;
+}
+
+.panel-default>.panel-heading {
+   background-color: #D1E9CA;
+   border: none;
+   font-weight: bold;
+   font-size: 17px;
+}
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+a:hover {
+   text-decoration: none;
+}
 </style>
 
+	
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-<div style="margin-top: 200px"></div>
 <!-- Page Content -->
+<%@include file="../include/header.jsp" %>
+<div style="clear: both; margin-top: 170px;"></div>
 <div class="container">
-	<div class="row">
+	<div class="row" style="width: 1200px">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">체험 신청 내역</h3>
+			<h3 class="my-4 text-left">체험 신청내역</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -166,14 +165,15 @@ a:hover {
 					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+					<a href="/farmapp/mypage/activitylist"   style="font-weight: bold;">체험
 						신청내역</a>
 				</div>
 
 			</div>
 		</div>
-		<div class="col-lg-1" style="margin-left:56px;">
-			<div class="sumarry">
+		
+			<div id="root" style="width: 800px; margin-left:55px;">
+				<div class="sumarry">
 				<table class="userInform">
 					<tr>
 						<td class="userImg">사진</td>
@@ -188,17 +188,20 @@ a:hover {
 				</table>
 
 			</div>
-			<div id="color" style="width:700px;" >
+			<div id="color" >
 				<a id="showActive"
 					class="list-group-item list-group-item-action text-center font-weight-bold" style="background-color : yellow;">농장
 					체험 신청 목록</a>
 			</div>
-			<div id="color2" style="width:700px;">
-				<a id="showActive2"
+			<div id="color2">
+				<button id="showActive2"
 					class="list-group-item list-group-item-action text-center font-weight-bold">일손
-					체험 신청 목록</a>
+					체험 신청 목록</button>
 			</div>
-			<div id="border" style="width:700px;">
+			
+			
+			<!-- 농장 체험 -->
+			<div id="border" style="display:">
 				<form role="form" method="get" action="/farmapp/mypage/activitylist">
 					<table class="table table-condensed">
 						<thead>
@@ -226,8 +229,8 @@ a:hover {
 										value="${list.activityDate}" /></td>
 								<td scope="col" class="text-center"><c:if
 										test="${list.isApproval eq 1 }">
-										<button type="button" onclick="bts(this)"
-											class="btn btn-success" id="Approval" style="width:69px;"
+										<button style="width:70px;" type="button" onclick="bts(this)"
+											class="btn btn-success" id="Approval"
 											value="${list.APPLICATION_NO}">승인</button>
 									</c:if> <c:if test="${list.isApproval eq 0 }">
 										<button type="button" onclick="bts(this)"
@@ -238,7 +241,7 @@ a:hover {
 
 						</c:forEach>
 					</table>
-					<div id="psize" style = "margin-left: 300px;">
+					<div id="psize">
 						<ul>
 							<c:if test="${pageMaker.prev}">
 								<li><a
@@ -262,12 +265,12 @@ a:hover {
 
 
 
-			<!-- 리스트 -->
-			<div id="border2" style="width:700px; display:none;">
+			<!-- 일손 체험 리스트 -->
+			<div id="border2" style="display: none;">
 				<form role="form" method="get" action="/farmapp/mypage/activitylist">
 					<table class="table table-condensed">
 						<thead>
-
+							
 							<tr class="success">
 								<th scope="col" class="text-center">신청 번호</th>
 								<th scope="col" class="text-center">체험 명</th>
@@ -292,8 +295,8 @@ a:hover {
 										value="${list3.activityDate}" /></td>
 								<td scope="col" class="text-center"><c:if
 										test="${list3.isApproval eq 1 }">
-										<button type="button" onclick="bts(this)"
-											class="btn btn-success" id="Approval" style="width:69px;"
+										<button style="width:70px;" type="button" onclick="bts(this)"
+											class="btn btn-success" id="Approval"
 											value="${list3.APPLICATION_NO}">승인</button>
 									</c:if> <c:if test="${list3.isApproval eq 0 }">
 										<button type="button" onclick="bts(this)"
@@ -325,11 +328,10 @@ a:hover {
 				</form>
 				<hr>
 			</div>
-
 		</div>
-	</div>
 </div>
-
+</div>
+<%@include file="../include/footer.jsp" %>
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
@@ -499,4 +501,3 @@ a:hover {
 
 		
 </script>
-<%@include file="../include/footer.jsp"%>

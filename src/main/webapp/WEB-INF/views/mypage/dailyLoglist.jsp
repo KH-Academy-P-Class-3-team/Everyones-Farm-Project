@@ -4,14 +4,112 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>게시판</title>
-
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<title>게시판</title>
+<style>
+table {
+	border: 1px solid #BDBDBD;
+	text-align: center;
+	width: 70%;
+}
+#calendar{
+	height : 350px;
+}
+
+</style>
+
+<script type="text/javascript">
+    var today = new Date(); // 오늘 날짜
+    var date = new Date();
+ 
+    function beforem() //이전 달을 today에 값을 저장
+    { 
+        today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+        build(); //만들기
+    }
+    
+    function nextm()  //다음 달을 today에 저장
+    {
+        today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+        build();
+    }
+    
+    function build()
+    {
+        var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
+        var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
+        var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
+        var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
+        
+        yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
+        
+        if(today.getMonth()+1==12) //  눌렀을 때 월이 넘어가는 곳
+        {
+            before.innerHTML=(today.getMonth())+"월";
+            next.innerHTML="1월";
+            
+        }
+        else if(today.getMonth()+1==1) //  1월 일 때
+        {
+        before.innerHTML="12월";
+        next.innerHTML=(today.getMonth()+2)+"월";
+        }
+        else //   12월 일 때
+        {
+            before.innerHTML=(today.getMonth())+"월";
+            next.innerHTML=(today.getMonth()+2)+"월";
+        }
+       
+        // 남은 테이블 줄 삭제
+        while (tbcal.rows.length > 2) 
+        {
+            tbcal.deleteRow(tbcal.rows.length - 1);
+        }
+        var row = null;
+        row = tbcal.insertRow();
+        var cnt = 0;
+ 
+        // 1일 시작칸 찾기
+        for (i = 0; i < nMonth.getDay(); i++) 
+        {
+        	
+            cell = row.insertCell();
+            cnt = cnt + 1;
+        }
+ 
+        // 달력 출력
+        for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
+        { 
+        	
+            cell = row.insertCell();
+            cell.innerHTML = 
+            	'<div id="s" class="day">' + i+'<button id ="bu" type="button" onclick="javascript:testfunction('+i+')">일</button>'        	 + '</div> '
+            
+            cnt = cnt + 1;
+            if (cnt % 7 == 1) {//일요일 계산
+                cell.innerHTML = "<font color=#FF9090>" + '<div id="s" class="day">' + i+'<button id ="bu" type="button" onclick="javascript:testfunction('+i+')">일</button>'        	 + '</div> '//일요일에 색
+            }
+            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
+                cell.innerHTML = "<font color=#7ED5E4>" + '<div id="s" class="day">' + i+'<button id ="bu" type="button" onclick="javascript:testfunction('+i+')">일</button>'        	 + '</div> '//토요일에 색
+                row = calendar.insertRow();// 줄 추가
+            }
+            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
+            {
+                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
+            }
+        }
+ 
+    }
+   
+</script>
+
 
 <style>
 table {
@@ -178,7 +276,6 @@ table {
 		         });	
 			});
 	});
-	
 	//날짜를 가져오기 위한 함수ㅠㅠ
 	function getFormatDate(dt) {
 		var date = new Date(dt);
@@ -189,6 +286,29 @@ table {
 		var year = date.getFullYear(); //yyyy
 		return year + '년' + month + '월' + day+'일'; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 	}
+	// 달력 날짜 버튼 ㅠㅠ
+
+	function testfunction(i){
+		console.log(i);
+		
+	}
+	
+	$(function() {
+		$('.day').click(
+				function() {
+					 console.log($(this));
+				     console.dir($(this));
+				     var d = $(this).eq(0).text();
+				     console.log(d);
+				     var border = $('#border').css("display");
+				     if(border == 'none'){
+						$('#border').show();				    	 
+				     }else if(border == 'block'){
+						$('#border').hide();				    	 
+				     }
+				});
+	});
+	
 </script>
 
 <style type="text/css">
@@ -222,6 +342,11 @@ li {
 
 .input-group {
 	margin-top: 30px;
+	}
+/* 내정보 나타내기 */
+#mypagesize {
+	height: webkit-fill-available;
+	border: groove;
 }
 
 .col-lg-1 {
@@ -310,13 +435,17 @@ a:hover {
    margin-bottom: 10px;
 }
 
+
+.row{
+margin-left:-90px;
+}
 </style>
 <%@include file="../include/header.jsp" %>
 <!-- Page Content -->
 <div style="clear: both; margin-top: 170px;"></div>
 <div class="container" style="width :1200px;">
 	<div class="row">
-		<div class="col-lg-3">
+		<div class="col-lg-3" style="margin-left:56px;">
 			<h3 class="my-4 text-left">영농 일지</h3>
 			<hr>
 			<div class="panel panel-default">
@@ -364,7 +493,7 @@ a:hover {
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist">판매 목록</a>
+					<a href="/farmapp/mypage/selllist" >판매 목록</a>
 				</div>
 				<div class="panel-body">
 					<a href="/farmapp/mypage/dailyLoglist"  style="font-weight: bold;">영농 일지</a>
@@ -378,6 +507,8 @@ a:hover {
 		</div>
 
 		<div id="root" style="width: 800px; margin-left:55px;" >
+
+		<div id="root" style="width: 800px">
 			<div id="mypagesize">
 				<body onload="build();">
 					<table align="center" id="calendar">
@@ -401,11 +532,12 @@ a:hover {
 				</body>
 			</div>
 			<a href="/farmapp/mypage/dailyLogWrite"
+
 				class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지 작성하기</a>
 			<div id = "writeday"></div>
-			<div id="border">
 				<form role="form" method="get" action="/farmapp/mypage/dailyLoglist">
-					<table id="resview" class="table table-condensed">
+					<table class="table table-condensed">
+
 						<thead>
 							<tr class="success">
 								<th scope="col" class="text-center">글 갯수</th>
@@ -417,12 +549,29 @@ a:hover {
 							</tr>
 						</thead>
 
+
 						
 							<tr id = result_set>
 								
 							</tr>
 						
 						
+						<c:forEach items="${list}" var="list">
+							<tr>
+								<td scope="col" class="text-center"><c:out
+										value="${list.dailylogNo}" /></td>
+								<td scope="col" class="text-center">
+								<a href="/farmapp/mypage/dailyLogReadView?dailyLogNo=${list.dailylogNo}"><c:out
+										value="${list.content}" /></a></td>
+								<td scope="col" class="text-center"><c:out
+										value="${list.workingAmount}" /></td>
+								<td scope="col" class="text-center"><c:out
+										value="${list.workingTime}" /></td>
+								<td scope="col" class="text-center"><fmt:formatDate
+								value="${list.writeDate}" pattern="yyyy-MM-dd" /></td>
+							</tr>
+						</c:forEach>
+
 					</table>
 					<div id="psize">
 						<ul>

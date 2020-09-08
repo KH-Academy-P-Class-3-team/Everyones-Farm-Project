@@ -44,12 +44,6 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		farmerMypageDao.writeDailylog(farmingDailylog);
 	}
 
-	@Override
-	public FarmingDailylog read(int dailyLogNo) {
-		System.out.println(dailyLogNo+"서비스");
-		return farmerMypageDao.read(dailyLogNo);
-	}
-	
 	//농장 체험 활동내역 리스트
 	@Override
 	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer) {
@@ -77,6 +71,12 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		return res;
 	}
 	
+	@Override
+	public FarmingDailylog read(int dailylogNo) {
+		System.out.println(dailylogNo+"서비스");
+		return farmerMypageDao.read(dailylogNo);
+	}
+
 	//농장체험 페이지 총 갯수
 	@Override
 	public int listCount2() {
@@ -106,6 +106,7 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		}else if(res.getIsApproval()==0){
 			res.setIsApproval(1);
 			System.out.println(res);
+
 		}
 		return farmerMypageDao.updateIsApproval(res);
 	}
@@ -131,7 +132,6 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	
 	}
 
-	
 	@Override
 	public List<Map<String, Object>> datelist(String date) {
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
@@ -143,7 +143,5 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		}
 		return farmerMypageDao.datelist(date);
 	}
-	
 
-	
 }
