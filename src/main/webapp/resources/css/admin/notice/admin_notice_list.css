@@ -91,3 +91,8 @@
 .notice__btns-wrap .notice__btn-write {
 	background: #789F6F;
 }
+/* checkbox size */
+.notice__n-table input[type="checkbox"]{
+	width: 20px;
+	height: 20px;
+}

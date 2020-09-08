@@ -3,9 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<<<<<<< HEAD
 <%@include file="../../include/header.jsp"%>
 
 
+=======
+<%@include file="../../include/header.jsp" %>
+>>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -70,6 +74,7 @@ a:hover {
 ﻿
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
+<<<<<<< HEAD
 <div style="margin-top: 200px"></div>
 
 <!-- Page Content -->
@@ -115,6 +120,17 @@ a:hover {
 
 
 			<c:if test="${farmerInfo.name eq null} ">
+=======
+<div style="margin-top:200px"></div>
+
+	<!-- Page Content -->
+<div class="headSpace" style="margin-top:200px;"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3">
+				<h3 class="my-4 text-left">1대 1 문의</h3>
+				<hr>
+>>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
@@ -208,5 +224,9 @@ a:hover {
 
 
 
+<<<<<<< HEAD
 
 <%@include file="../../include/footer.jsp"%>
+=======
+<%@include file="../../include/footer.jsp" %>
+>>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885

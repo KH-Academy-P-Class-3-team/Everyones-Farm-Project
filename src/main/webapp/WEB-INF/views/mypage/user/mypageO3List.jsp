@@ -5,7 +5,6 @@
 
 <%@include file="../../include/header.jsp" %>
 
-
 <!-- 합쳐지고 최소화된 최px;SS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -200,7 +199,6 @@ a:hover {
 									</c:otherwise>
 								</c:choose>
 
-							</ul>
 						</nav>
 					</div>
 					
@@ -210,8 +208,6 @@ a:hover {
 			</div>
 		</div>
 	</div>
-
-
 
 <%@include file="../../include/footer.jsp" %>
 
