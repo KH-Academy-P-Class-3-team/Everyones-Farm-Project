@@ -111,88 +111,88 @@ public class MypageO3Controller {
 	}
 	
 	//일대일 작성 이미지 업로드
-	@RequestMapping("/user/oneonone/fileupload")
-	@ResponseBody
-	public String adminNoticeImgUpload(
-			HttpServletRequest req
-			, HttpServletResponse resp
-			, MultipartHttpServletRequest multiFile
-			){
-		
-		JsonObject json = new JsonObject();
-		PrintWriter pw = null;
-		OutputStream out = null;
-		MultipartFile file = multiFile.getFile("upload");
-		
-		if( file != null ) {
-			
-			if( file.getSize() > 0 && StringUtil.isNotBlank(file.getName()) ) {
-				
-				if( file.getContentType().toLowerCase().startsWith("image/") ) {
-					
-					try {
-						
-						String fileName = file.getName();
-						byte[] bytes = file.getBytes();
-						String uploadPath = req.getServletContext().getRealPath("/resources") + "/ckimg";
-//						logger.debug(uploadPath);
-						File uploadFile = new File(uploadPath);
-						
-						if(!uploadFile.exists()) {
-							
-							uploadFile.mkdirs();
-							
-						}
-						
-						fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-						uploadPath = uploadPath + "/" + fileName;
-//						logger.debug(uploadPath);
-						out = new FileOutputStream(new File(uploadPath));
-						out.write(bytes);
-						out.flush();
-						
-						pw = resp.getWriter();
-						resp.setContentType("text/html");
-						String fileUrl = req.getContextPath() + "/resources/ckimg/" + fileName;
-//						logger.debug(fileUrl);
-						
-						//json 데이터로 등록
-						json.addProperty("uploaded", 1);
-						json.addProperty("fileName", fileName);
-						json.addProperty("url", fileUrl);
-						
-						pw.println(json);
-						pw.flush();
-						
-					} catch (IOException e) {
-					
-						e.printStackTrace();
-						
-					} finally {
-						
-						try {
-							if(out != null) {
-								out.close();
-							}
-							if(pw != null) {
-								pw.close();
-							}
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-					}
-					
-					
-				}
-				
-			}
-			
-		}
-		
-		return null;
-	}
+//	@RequestMapping("/user/oneonone/fileupload")
+//	@ResponseBody
+//	public String adminNoticeImgUpload(
+//			HttpServletRequest req
+//			, HttpServletResponse resp
+//			, MultipartHttpServletRequest multiFile
+//			){
+//		
+//		JsonObject json = new JsonObject();
+//		PrintWriter pw = null;
+//		OutputStream out = null;
+//		MultipartFile file = multiFile.getFile("upload");
+//		
+//		if( file != null ) {
+//			
+//			if( file.getSize() > 0 && StringUtil.isNotBlank(file.getName()) ) {
+//				
+//				if( file.getContentType().toLowerCase().startsWith("image/") ) {
+//					
+//					try {
+//						
+//						String fileName = file.getName();
+//						byte[] bytes = file.getBytes();
+//						String uploadPath = req.getServletContext().getRealPath("/resources") + "/ckimg";
+////						logger.debug(uploadPath);
+//						File uploadFile = new File(uploadPath);
+//						
+//						if(!uploadFile.exists()) {
+//							
+//							uploadFile.mkdirs();
+//							
+//						}
+//						
+//						fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+//						uploadPath = uploadPath + "/" + fileName;
+////						logger.debug(uploadPath);
+//						out = new FileOutputStream(new File(uploadPath));
+//						out.write(bytes);
+//						out.flush();
+//						
+//						pw = resp.getWriter();
+//						resp.setContentType("text/html");
+//						String fileUrl = req.getContextPath() + "/resources/ckimg/" + fileName;
+////						logger.debug(fileUrl);
+//						
+//						//json 데이터로 등록
+//						json.addProperty("uploaded", 1);
+//						json.addProperty("fileName", fileName);
+//						json.addProperty("url", fileUrl);
+//						
+//						pw.println(json);
+//						pw.flush();
+//						
+//					} catch (IOException e) {
+//					
+//						e.printStackTrace();
+//						
+//					} finally {
+//						
+//						try {
+//							if(out != null) {
+//								out.close();
+//							}
+//							if(pw != null) {
+//								pw.close();
+//							}
+//						} catch (IOException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						
+//					}
+//					
+//					
+//				}
+//				
+//			}
+//			
+//		}
+//		
+//		return null;
+//	}
 	//일대일 문의 수정
 	public String o3Modify(int qNo , String userId
 			, HttpSession session) {

@@ -104,7 +104,6 @@ public  interface MyPageService {
 	 * Basket 지우기
 	 */
 	public int deleteBasket(int[] arr);
-<<<<<<< HEAD
 	
 	/**
 	 * 최대최소값 구해 계산 하기
@@ -115,8 +114,6 @@ public  interface MyPageService {
 
 
 
-=======
->>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885
 	
 	
 	

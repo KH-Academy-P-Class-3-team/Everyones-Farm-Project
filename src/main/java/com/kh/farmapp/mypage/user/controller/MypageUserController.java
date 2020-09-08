@@ -32,24 +32,15 @@ public class MypageUserController {
 	@RequestMapping("mypage/user/modify")
 	public ModelAndView mypage(HttpSession session) {
 		
-<<<<<<< HEAD
 		UserTB user = (UserTB) session.getAttribute("userInfo");
 		UserProfile profile = new UserProfile();
-=======
-		//테스트 데이터
-		UserTB user = new UserTB();
->>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885
 		
 		ModelAndView mav = new ModelAndView();
 		
 		user = mypageService.selectUser(user);
-<<<<<<< HEAD
 		
 		profile = mypageService.selectUserProfile(user);
 		
-=======
-		System.out.println(user);
->>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885
 		mav.addObject("userData", user);
 		mav.addObject("profile", profile);
 		mav.setViewName("mypage/user/modify");
@@ -70,18 +61,12 @@ public class MypageUserController {
 		System.out.println(upload);
 		user.setUserNo(userno);
 		System.out.println(user);
-<<<<<<< HEAD
 		mypageService.modifyUser(user, root, upload);
-		System.out.println("4");
-=======
-		mypageService.modifyUser(user);
->>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885
 			
 		return "redirect:/mypage/user/modify";
 			
 		
 	}
-<<<<<<< HEAD
 //	//회원 사진을 수정한다.
 //	@RequestMapping("mypage/user/modifyImg")
 //	public ModelAndView modifyprofile(MultipartFile upload, HttpSession session) {
@@ -97,20 +82,6 @@ public class MypageUserController {
 //		
 //		return mav;
 //	}
-=======
-	//회원 사진을를 수정한다
-	@RequestMapping("modify/userImg")
-	public ModelAndView modifyImg(UserTB user, HttpSession session, @RequestParam File file){
-		
-		
-		ModelAndView mav = new ModelAndView();
-		String root = session.getServletContext().getRealPath("farmapp/");
-
-		mypageService.insertFile(user, file, root);
-		
-		return null;
-	}
->>>>>>> 330c6dd836429e7dfb9ffce706f337f6b5cdf885
 
 	
 	@RequestMapping("mypage/user/deleteId")

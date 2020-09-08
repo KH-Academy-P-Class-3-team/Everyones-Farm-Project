@@ -198,7 +198,7 @@ a:hover {
 										</a></li>
 									</c:otherwise>
 								</c:choose>
-
+							</ul>
 						</nav>
 					</div>
 					
