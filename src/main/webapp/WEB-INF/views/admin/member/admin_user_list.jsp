@@ -7,6 +7,9 @@
 <!-- header include -->
 <%@include file="../include/admin_header.jsp" %>
 
+<!-- admin pagination css -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin/admin_pagination.css" />
+
 <div class="wrapper">
 	<main class="member-list__main">
 		<div class="member-list__title">
@@ -21,26 +24,39 @@
 					<th class="m-table__th">이름</th>
 					<th class="m-table__th">전화번호</th>
 					<th class="m-table__th">이메일</th>
-					<th class="m-table__th">가입날짜</th>
 				</tr>
 				<c:choose>
 					<%-- userList null 일 때 --%>
 					<c:when test="${empty userList }">
 						<tr>
-							<td colspan="6">가입된 회원이 없습니다.</td>
+							<td colspan="5">가입된 회원이 없습니다.</td>
 						</tr>
 					</c:when>
 					<%-- userList null이 아닐 때 --%>
-					<c:when test="">
-					
+					<c:when test="${not empty userList }">
+						<c:forEach items="${userList }" var="u" >
+						<tr class="m-table__tr-body">
+							<td class="m-table__td"><input type="checkbox" value="${u.userNo }" name="checkNormal" class="checkbox_normal" /></td>
+							<td class="m-table__td">${u.userId }</td>
+							<td class="m-table__td">${u.userName }</td>
+							<td class="m-table__td">${u.phone }</td>
+							<td class="m-table__td">${u.email }</td>
+						</tr>
+						</c:forEach>
 					</c:when>
 				</c:choose>
-				<tr>
-				<td>${apaging }</td>
-				<td>${userList }</td>
-				</tr>
 			</table>
 		</div>
+		
+		<!-- 회원 활동 탈퇴 버튼 -->
+		<div class="member-list__btns-wrap">
+			<!-- 삭제 버튼 -->
+			<span class="member-list__btn-delete" id="member-del-btn">회원 탈퇴</span>
+		</div>
+		
+		<!-- include pagination -->
+		<%@include file="./admin_user_list_pagination.jsp" %>
+		
 	</main>
 </div>
 
