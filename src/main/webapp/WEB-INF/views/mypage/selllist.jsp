@@ -155,20 +155,20 @@ a:hover {
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist">판매 목록</a>
+					<a href="/farmapp/mypage/selllist"  style="font-weight: bold;">판매 목록</a>
 				</div>
 				<div class="panel-body">
 					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+					<a href="/farmapp/mypage/activitylist">체험
 						신청내역</a>
 				</div>
 
 			</div>
 		</div>
-		
-				<div id="root" style="width: 800px">
+		<div class="col-lg-1">
+				<div id="root" style="width: 800px; margin-left:55px;">
 				<div class="sumarry">
 				<table class="userInform">
 					<tr>
@@ -243,14 +243,12 @@ a:hover {
 						</ul>
 					</div>
 				<hr>
+			</form>
 				</div>
 			</div>
-			</form>
 		</div>
-				
-			</div>
-			
-		</div>
+	</div>				
+</div>
 <%@include file="../include/footer.jsp" %>
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 

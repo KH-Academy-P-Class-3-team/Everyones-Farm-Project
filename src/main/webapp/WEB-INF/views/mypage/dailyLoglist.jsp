@@ -367,17 +367,17 @@ a:hover {
 					<a href="/farmapp/mypage/selllist">판매 목록</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					<a href="/farmapp/mypage/dailyLoglist"  style="font-weight: bold;">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+					<a href="/farmapp/mypage/activitylist">체험
 						신청내역</a>
 				</div>
 
 			</div>
 		</div>
 
-		<div id="root" style="width: 800px">
+		<div id="root" style="width: 800px; margin-left:55px;" >
 			<div id="mypagesize">
 				<body onload="build();">
 					<table align="center" id="calendar">

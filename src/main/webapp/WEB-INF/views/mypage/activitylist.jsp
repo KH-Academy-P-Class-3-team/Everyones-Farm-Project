@@ -172,7 +172,7 @@ a:hover {
 
 			</div>
 		</div>
-		<div class="col-lg-1">
+		<div class="col-lg-1" style="margin-left:56px;">
 			<div class="sumarry">
 				<table class="userInform">
 					<tr>
