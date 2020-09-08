@@ -55,7 +55,8 @@
 		FROM farm_qna_question fq, farmer f
 		WHERE
 		fq.farmer_no = f.farmer_no
-		AND fq.farm_qna_question_no = #{farmQnaQuestionNo}
+		AND fq.farm_qna_question_no =
+		#{farmQnaQuestionNo}
 	</select>
 
 	<delete id="deleteQnA" parameterType="int">

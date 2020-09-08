@@ -8,11 +8,11 @@
 
 	<insert id="insertFarmDiary">
 		INSERT INTO farm_diary
-		(farm_diary_no, title, enroll_date, youtube_link,
-		content, farmer_no, hits)
+		(farm_diary_no, title, hits, enroll_date, youtube_link,
+		content, farmer_no)
 		VALUES
-		(farm_diary_seq.nextval, #{title},
-		sysdate, #{youtubeLink}, #{content}, 1, 0)
+		(farm_diary_seq.nextval, #{title}, 1,
+		sysdate, #{youtubeLink}, #{content}, 1)
 	</insert>
 	
 <!-- 	<insert id="insertFile"> -->
@@ -78,21 +78,11 @@
 	</resultMap>
 
 	<select id="selectFarmDiaryDetail" resultMap="detail">
-		SELECT 
-			fd.farm_diary_no
-			, fd.title
-			, fd.hits
-			, fd.enroll_date
-			, fd.youtube_link
-			, fd.content
-			, fd.farmer_no
-			, f.name
-		FROM 
-			farm_diary fd
-			, farmer f
-		WHERE 
-			fd.farmer_no = f.farmer_no
-			AND fd.farm_diary_no = #{farmDiaryNo}
+		SELECT fd.farm_diary_no, fd.title, fd.hits, fd.enroll_date, fd.youtube_link,
+		fd.content, fd.farmer_no, f.name
+		FROM farm_diary fd, farmer f
+		WHERE fd.farmer_no = f.farmer_no
+		AND fd.farm_diary_no = #{farmDiaryNo}
 	</select>
 	
 	<delete id="deleteFarmDiary" parameterType="int">

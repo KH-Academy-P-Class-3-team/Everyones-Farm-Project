@@ -31,55 +31,84 @@
 <!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> -->
 <script type="text/javascript">
 
-var sel_file;
+// var sel_file;
 
-$(document).ready(function() {
-    $("#input_img").on("change", handleImgFileSelect);
-}); 
+// $(document).ready(function() {
+//     $("#input_img").on("change", handleImgFileSelect);
+// }); 
 
-function handleImgFileSelect(e) {
-    var files = e.target.files;
-    var filesArr = Array.prototype.slice.call(files);
+// function handleImgFileSelect(e) {
+//     var files = e.target.files;
+//     var filesArr = Array.prototype.slice.call(files);
 
-    filesArr.forEach(function(f) {
-        if(!f.type.match("image.*")) {
-            alert("확장자는 이미지 확장자만 가능합니다.");
-            return;
-        }
+//     filesArr.forEach(function(f) {
+//         if(!f.type.match("image.*")) {
+//             alert("확장자는 이미지 확장자만 가능합니다.");
+//             return;
+//         }
 
-        sel_file = f;
+//         sel_file = f;
 
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $("#img").attr("src", e.target.result);
-        }
-        reader.readAsDataURL(f);
-    });
-}
+//         var reader = new FileReader();
+//         reader.onload = function(e) {
+//             $("#img").attr("src", e.target.result);
+//         }
+//         reader.readAsDataURL(f);
+//     });
+// }
 	
 </script>
 
 <form action="<%= request.getContextPath() %>/diary/diarywrite.do" method="post" enctype="multipart/form-data">
-<h3>농장 일기 작성</h3>
+
+<div style= "clear: both; margin-top: 200px;" ></div>
+
+<h3 style="text-align: center;">농장 일기 작성</h3>
 <hr>
-<div style="padding: 50px;">
-    <div>
-        <div class="img_wrap">
-            <img id="img" />
-        </div>
-    </div>
-    
-	<div>
-        <p class="title"></p>
-        <input type="file" name="files" id="input_img" multiple />
-    </div>
+
+<table class="table">
+        <colgroup>
+            <col width="5%">
+            <col width="15%">
+            <col width="5%">
+            <col width="15%">
+        </colgroup>
+    <tbody>
+   	
+    	<tr>
+      	  <th class="success">제목</th>
+      	  <td><input class="form-control" style="width: 200px;" type="text" id="title" name="title"/></td>
+      	  <th class="success">유튜브 링크</th>
+      	  <td><input class="form-control" style="width: 200px;" type="text" id="title" name="title"/></td>      	  
+      	</tr>
+      	
+      	<tr>
+<!--       	 <div> -->
+<!--         <div class="img_wrap"> -->
+<!--             <img id="img" /> -->
+<!--         </div> -->
+<!--    	 </div> -->
+		  <th class="success">파일</th>
+      	  <td><input type="file" name="files" id="input_img" multiple /></td>
+      	  <th></th>
+      	  <td></td>
+      	</tr>   
+      	
+      	<tr>
+      	  <th></th>
+      	  <td></td>
+      	  <th></th>
+      	  <td></td>
+      	</tr>
+   
+    </tbody>
+</table>
+        
+
 <br>    
-
-제목<br>
-<input class="form-control" style="width: 200px;" type="text" id="title" name="title"/><br>
-<hr>
+<!-- 제목<br> -->
+<!-- <input class="form-control" style="width: 200px;" type="text" id="title" name="title"/><br> -->
  <textarea name="content" id="content" rows="100" cols="50">
-
  </textarea>
             <script>
                 // Replace the <textarea id="editor1"> with a CKEditor 4
@@ -88,20 +117,16 @@ function handleImgFileSelect(e) {
               //  CKEDITOR.instances.content.getData();
             </script><br>
 <hr>
-유튜브 링크 <br>
-<input class="form-control" style="width: 250px;" type="text" id="youtubeLink" name="youtubeLink"/><br>
+<!-- 유튜브 링크 <br> -->
+<!-- <input class="form-control" style="width: 250px;" type="text" id="youtubeLink" name="youtubeLink"/><br> -->
 
-
-<iframe width="980" height="500" src="https://youtu.be/sOKTJ4RHjUo" frameborder="0" allow="autoplay; encrtpted-media"></iframe><br><br>
+<!-- <iframe width="980" height="500" src="https://youtu.be/sOKTJ4RHjUo" frameborder="0" allow="autoplay; encrtpted-media"></iframe><br><br> -->
 
 <div style="text-align: center;">
-<button class="btn btn-warning">등록</button>
+<button class="btn btn-success">등록</button>
 </div>
-
-</div>
-
 </form>
-<hr>
+
 
 
 <%@include file="../include/footer.jsp" %>
