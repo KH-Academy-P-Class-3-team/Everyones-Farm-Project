@@ -7,7 +7,29 @@
 	
 	<!-- 일반회원목록 -->
 	<select id="selectAllUserList">
-	
+		select
+		    users.*
+		from (
+		    select
+		        rownum user_order
+		        , ulist.*
+		    from (
+		        select
+		            u.user_no
+		            , u.user_id
+		            , u.user_name
+		            , u.phone
+		            , u.email
+		        from
+		            user_tb u
+		        order by
+		           u.user_no desc
+		    ) ulist
+		) users 
+		where
+		    user_order between 1 and 10
+<!-- 		    and (user_id LIKE  '%' || 'soo' || '%' -->
+<!-- 		    or user_name LIKE '%' || '수수' || '%') -->
 	</select>
 
 </mapper>

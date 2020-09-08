@@ -43,6 +43,9 @@ public class AdminUserController {
 		
 		// select 조회 연산 수행
 		List<Map<String, Object>> userList = adminUserService.selectAllUserList();
+		for(Map< String, Object> m : userList) {
+			logger.debug("m: " + m.toString());
+		}
 		
 		return "admin/member/admin_user_list";
 	}
