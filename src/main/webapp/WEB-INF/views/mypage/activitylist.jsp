@@ -238,7 +238,7 @@ a:hover {
 
 						</c:forEach>
 					</table>
-					<div id="psize">
+					<div id="psize" style = "margin-left: 300px;">
 						<ul>
 							<c:if test="${pageMaker.prev}">
 								<li><a

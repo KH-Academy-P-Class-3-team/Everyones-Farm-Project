@@ -217,7 +217,7 @@ li {
 
 /* 페이지 사이즈 */
 #psize {
-	margin-left: 223px;
+	margin-left: 350px;
 }
 
 .input-group {
