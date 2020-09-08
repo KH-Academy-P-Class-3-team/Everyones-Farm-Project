@@ -19,6 +19,7 @@
 		<result property="userName" column="user_name" />
 		<result property="phone" column="phone" />
 		<result property="email" column="email" />
+		<result property="isLeave" column="is_leave" />
 	</resultMap>
 	<!-- 일반회원목록 -->
 	<select id="selectAllUserByPaging" parameterType="common.util.AdminPaging" resultMap="userlistmap">
@@ -35,6 +36,7 @@
 		            , u.user_name
 		            , u.phone
 		            , u.email
+                    , u.is_leave
 		        from
 		            user_tb u
 		        order by
@@ -47,6 +49,7 @@
 	    	and (
 		    	user_id LIKE  '%' || #{search} || '%'
     			or user_name LIKE '%' || #{search} || '%'
+    			or phone LIKE '%' || #{search} || '%'
 	    	)
 		    </if>
 	</select>
@@ -61,4 +64,32 @@
 		    user_id LIKE  '%' || #{search} || '%'
 		    or user_name LIKE '%' || #{search} || '%'
 	</select>
+	
+	<!-- 선택된 회원 탈퇴 -->
+	<update id="deleteUserByUserNo" parameterType="list">
+	update
+	    user_tb
+	set
+		is_leave = 1
+	where
+	    user_no in
+	<foreach collection="list" 
+		item="nums" index="index" separator="," open="(" close=")" >
+		#{nums}
+	</foreach>
+	</update>
+	
+	<update id="delCancelUserByUserNo">
+	update
+	    user_tb
+	set
+		is_leave = 0
+	where
+	    user_no in
+	<foreach collection="list" 
+		item="nums" index="index" separator="," open="(" close=")" >
+		#{nums}
+	</foreach>
+	</update>
+	
 </mapper>

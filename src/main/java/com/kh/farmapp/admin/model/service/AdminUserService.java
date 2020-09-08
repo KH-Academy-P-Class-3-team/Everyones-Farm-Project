@@ -65,13 +65,6 @@ public interface AdminUserService {
 	public int updatePause(UserTB user);
 	
 	/**
-	 * 회원 탈퇴, is_leave 컬럼 업데이트
-	 * @param user - 탈퇴 시킬 User 객체
-	 * @return int - 업데이트 결과
-	 */
-	public int deleteUser(UserTB user);
-	
-	/**
 	 * 농업인 회원 활동 정지, pause 컬럼 업데이트
 	 * @param farmer - 활동 정지 시킬 Farmer 객체
 	 * @return int - 업데이트 결과
@@ -101,5 +94,20 @@ public interface AdminUserService {
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
 	public List<Map<String, Object>> selectAllUserByPaging(AdminPaging apaging);
+
+	/**
+	 * is_leave 컬럼 업데이트 (회원 탈퇴) 
+	 * @param userNoList - 탈퇴할 회원 번호가 저장된 List<String>
+	 * @return int - 회원 탈퇴 결과 반환
+	 */
+	public int deleteUserByUserNo(List<String> userNoList);
+
+	/**
+	 * is_leave 컬럼 업데이트 (회원 탈퇴 취소)
+	 * 
+	 * @param userNoList - 탈퇴 취소할 회원 번호가 저장된 List
+	 * @return int - 회원 탈퇴 취소 결과 반환
+	 */
+	public int delCancelUserByUserNo(List<String> userNoList);
 
 }

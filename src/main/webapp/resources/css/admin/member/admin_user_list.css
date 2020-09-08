@@ -55,12 +55,20 @@
     display: flex;
     justify-content: flex-end;
 }
-/* 탈퇴 버튼 */
-.member-list__btns-wrap .member-list__btn-delete {
-	background: #B65656;
+/* button css */
+.member-list__btns-wrap .btn {
     padding: 12px 8px;
     border-radius: 3px;
     font-weight: 700;
-    color: white;
     cursor: pointer;
+}
+/* 취소 버튼 */
+.member-list__btns-wrap .member-list__btn-del-cancel {
+	background: #E2CC6C;
+    margin-right: 15px;
+}
+/* 탈퇴 버튼 */
+.member-list__btns-wrap .member-list__btn-delete {
+	background: #B65656;
+    color: white;
 }

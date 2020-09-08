@@ -74,12 +74,6 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	}
 
 	@Override
-	public int deleteUser(UserTB user) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int updatePause(Farmer farmer) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -107,6 +101,18 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	@Override
 	public int selectCntUserBySearch(String search) {
 		return session.selectOne("ADMINMEMBER.selectCntUserBySearch", search);
+	}
+	
+	// 회원 탈퇴
+	@Override
+	public int deleteUserByUserNo(List<String> userNoList) {
+		return session.update("ADMINMEMBER.deleteUserByUserNo", userNoList);
+	}
+	
+	// 회원 탈퇴 취소
+	@Override
+	public int delCancelUserByUserNo(List<String> userNoList) {
+		return session.update("ADMINMEMBER.delCancelUserByUserNo", userNoList);
 	}
 	
 }

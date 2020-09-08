@@ -22,12 +22,21 @@
 		<!-- 일반 회원 목록 -->
 		<div class="member__table">
 			<table class="member__m-table checkbox_group">
+				<colgroup>
+					<col width="10%"/>
+					<col width="18%"/>
+					<col width="18%"/>
+					<col width="18%"/>
+					<col width="18%"/>
+					<col width="18%"/>
+				</colgroup>
 				<tr class="m-table__tr-head">
 					<th class="m-table__th"><input type="checkbox" name="check-master" id="check_all" class="member-chk" /></th>
 					<th class="m-table__th">아이디</th>
 					<th class="m-table__th">이름</th>
 					<th class="m-table__th">전화번호</th>
 					<th class="m-table__th">이메일</th>
+					<th class="m-table__th">탈퇴여부</th>
 				</tr>
 				<c:choose>
 					<%-- userList null 일 때 --%>
@@ -45,6 +54,16 @@
 							<td class="m-table__td">${u.userName }</td>
 							<td class="m-table__td">${u.phone }</td>
 							<td class="m-table__td">${u.email }</td>
+							<td class="m-table__td">
+								<c:choose>
+									<c:when test="${u.isLeave eq 0 }">
+									<c:out value="활동중"></c:out>
+									</c:when>
+									<c:when test="${u.isLeave eq 1 }">
+									<c:out value="탈퇴"></c:out>
+									</c:when>
+								</c:choose>
+							</td>
 						</tr>
 						</c:forEach>
 					</c:when>
@@ -54,8 +73,10 @@
 		
 		<!-- 버튼 div -->
 		<div class="member-list__btns-wrap">
+			<!-- 회원 탈퇴 취소 버튼 -->
+			<span class="member-list__btn-del-cancel btn" id="member-del-cancel">회원 탈퇴 취소</span>
 			<!-- 삭제 버튼 -->
-			<span class="member-list__btn-delete" id="member-del-btn">회원 탈퇴</span>
+			<span class="member-list__btn-delete btn" id="member-del-btn">회원 탈퇴</span>
 		</div>
 		
 		<!-- 검색창 -->
@@ -68,7 +89,8 @@
 		
 	</main>
 </div>
-
+<!-- 회원탈퇴 이벤트 javascript -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/member/admin_user_delete_event.js" ></script>
 <!-- 검색 이벤트 javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/member/admin_user_search_event.js"></script>
 <!-- checkbox 에 대한 javascript -->

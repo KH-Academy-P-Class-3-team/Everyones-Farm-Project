@@ -57,11 +57,6 @@ public class AdminUserServiceImpl implements AdminUserService{
 	}
 
 	@Override
-	public int deleteUser(UserTB user) {
-		return adminUserDao.deleteUser(user);
-	}
-
-	@Override
 	public int updatePause(Farmer farmer) {
 		return adminUserDao.updatePause(farmer);
 	}
@@ -71,6 +66,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 		return adminUserDao.deleteFarmer(farmer);
 	}
 	
+	// 회원 페이징 처리
 	@Override
 	public AdminPaging getPaging(String curPage, String search) {
 		// curPageNo 초기화, curPageNo 은 현재 페이지 번호를 뜻함!
@@ -100,9 +96,22 @@ public class AdminUserServiceImpl implements AdminUserService{
 		return paging;
 	}
 	
+	// 페이징에 의한 회원 조회
 	@Override
 	public List<Map<String, Object>> selectAllUserByPaging(AdminPaging apaging) {
 		return adminUserDao.selectAllUserByPaging(apaging);
+	}
+	
+	// 선택된 회원들 탈퇴시키기
+	@Override
+	public int deleteUserByUserNo(List<String> userNoList) {
+		return adminUserDao.deleteUserByUserNo(userNoList);
+	}
+	
+	// 선택된 회원 탈퇴 취소
+	@Override
+	public int delCancelUserByUserNo(List<String> userNoList) {
+		return adminUserDao.delCancelUserByUserNo(userNoList);
 	}
 
 }
