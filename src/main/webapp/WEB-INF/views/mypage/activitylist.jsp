@@ -5,22 +5,29 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<%@include file="../include/header.jsp" %>
-
 
 <title>판매 목록</title>
 
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	
 <style type="text/css">
-.pagenate {
-	margin-left: 100px;
+.pagenate {margin-left :100px;
+	
 }
 /* 마이페이지  */
-.col-lg-3 {
-	margin-top: 80px;
+.col-lg-3{
+	margin-top : 80px;
 }
 /*경계선*/
-#border {
-	border: groove;
+#border{
+ border : groove;
 }
 /* 페이지 1~10 까지의 수 */
 li {
@@ -31,7 +38,7 @@ li {
 
 /* 페이지 사이즈 */
 #psize {
-	margin-left: 223px;
+	margin-left: 350px;
 }
 
 /* 내정보 나타내기 */
@@ -43,36 +50,143 @@ li {
 .search {
 	text-align: center;
 }
-</style>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+.sumarry {
+   width: 500px;
+   height: 150px;
+   background-color: white;
+   text-align: center;
+   margin-left: 100px;
+}
+.userInform {
+   border: 2px solid black;
+   width: 100%;
+   height: 100%;
+}
+.userName {
+   border-right: 1px solid #ccc;
+}
 
-<!-- menu 의 float 속성 때문에 생성한 div -->
-<div style="clear: both; margin-top: 170px;"></div>
+.sessionName {
+   color: green;
+   font-size: large;
+   font-weight: bold;
+}
+
+
+.selfIcon {
+   text-align: left;
+   border: 1px solid white;
+   border-radius: 7px;
+   color: white;
+   background-color: lime;
+   padding: 3px;
+   margin-right: 100px;
+   margin-bottom: 10px;
+}
+.panel-default {
+   border: none;
+}
+
+.panel-default>.panel-heading {
+   background-color: #D1E9CA;
+   border: none;
+   font-weight: bold;
+   font-size: 17px;
+}
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+a:hover {
+   text-decoration: none;
+}
+</style>
+
+	
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <!-- Page Content -->
+<%@include file="../include/header.jsp" %>
+<div style="clear: both; margin-top: 170px;"></div>
 <div class="container">
 	<div class="row" style="width: 1200px">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-center">농업인 마이페이지</h3>
-			<div class="list-group mb-4">
-				<a href="#"
-					class="list-group-item list-group-item-action text-center font-weight-bold">내
-					정보</a> <a href="/farmapp/mypage/selllist"
-					class="list-group-item list-group-item-action text-center font-weight-bold">판매
-					목록</a> <a href="/farmapp/mypage/dailyLoglist"
-					class="list-group-item list-group-item-action text-center font-weight-bold">영농
-					일지</a> <a href="/farmapp/mypage/activitylist"
-					class="list-group-item list-group-item-action text-center font-weight-bold"
-					style="background-color: #D1E9CA;">활동 내역</a>
+			<h3 class="my-4 text-left">체험 신청내역</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+				</div>
+			</div>
+
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+					</a>
+				</div>
+				<div class="panel-body">
+					<a href="#">내 정보</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/selllist">판매 목록</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/activitylist"   style="font-weight: bold;">체험
+						신청내역</a>
+				</div>
+
 			</div>
 		</div>
-		<div id="root" style="width: 800px">
-			<div id="mypagesize">
-				아이디<input type="text" />
+		
+			<div id="root" style="width: 800px; margin-left:55px;">
+				<div class="sumarry">
+				<table class="userInform">
+					<tr>
+						<td class="userImg">사진</td>
+						<td class="userName">
+							<!-- 농부세션 확인해서 c:if 추가 -->
+							<div>
+								<span class="selfIcon">농업인</span>
+							</div> <span class="sessionName">${farmerInfo.name } </span> 님 안녕하세요
+						</td>
+						<td class="userActive"><h5>주문현황</h5> <br> ${res }</td>
+					</tr>
+				</table>
+
 			</div>
 			<div id="color" >
 				<a id="showActive"
@@ -84,6 +198,9 @@ li {
 					class="list-group-item list-group-item-action text-center font-weight-bold">일손
 					체험 신청 목록</button>
 			</div>
+			
+			
+			<!-- 농장 체험 -->
 			<div id="border" style="display:">
 				<form role="form" method="get" action="/farmapp/mypage/activitylist">
 					<table class="table table-condensed">
@@ -112,7 +229,7 @@ li {
 										value="${list.activityDate}" /></td>
 								<td scope="col" class="text-center"><c:if
 										test="${list.isApproval eq 1 }">
-										<button type="button" onclick="bts(this)"
+										<button style="width:70px;" type="button" onclick="bts(this)"
 											class="btn btn-success" id="Approval"
 											value="${list.APPLICATION_NO}">승인</button>
 									</c:if> <c:if test="${list.isApproval eq 0 }">
@@ -148,7 +265,7 @@ li {
 
 
 
-			<!-- 리스트 -->
+			<!-- 일손 체험 리스트 -->
 			<div id="border2" style="display: none;">
 				<form role="form" method="get" action="/farmapp/mypage/activitylist">
 					<table class="table table-condensed">
@@ -178,7 +295,7 @@ li {
 										value="${list3.activityDate}" /></td>
 								<td scope="col" class="text-center"><c:if
 										test="${list3.isApproval eq 1 }">
-										<button type="button" onclick="bts(this)"
+										<button style="width:70px;" type="button" onclick="bts(this)"
 											class="btn btn-success" id="Approval"
 											value="${list3.APPLICATION_NO}">승인</button>
 									</c:if> <c:if test="${list3.isApproval eq 0 }">
@@ -192,19 +309,19 @@ li {
 					</table>
 					<div id="psize">
 						<ul>
-							<c:if test="${pageMaker.prev}">
+							<c:if test="${pageMaker3.prev}">
 								<li><a
-									href="activitylist${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+									href="activitylist${pageMaker3.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 							</c:if>
 
-							<c:forEach begin="${pageMaker.startPage}"
-								end="${pageMaker.endPage}" var="idx">
-								<li><a href="activitylist${pageMaker.makeQuery(idx)}">${idx}</a></li>
+							<c:forEach begin="${pageMaker3.startPage}"
+								end="${pageMaker3.endPage}" var="idx">
+								<li><a href="activitylist${pageMaker3.makeQuery(idx)}">${idx}</a></li>
 							</c:forEach>
 
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<c:if test="${pageMaker3.next && pageMaker3.endPage > 0}">
 								<li><a
-									href="activitylist${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+									href="activitylist${pageMaker3.makeQuery(pageMaker3.endPage + 1)}">다음</a></li>
 							</c:if>
 						</ul>
 					</div>
@@ -212,11 +329,9 @@ li {
 				<hr>
 			</div>
 		</div>
-	</div>
-
+</div>
 </div>
 <%@include file="../include/footer.jsp" %>
-
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
@@ -245,12 +360,14 @@ li {
                 	 alert("미승인 처리 되었습니다.");
                 	 id.innerHTML = "미승인"
                		 id.style.backgroundColor= 'rgb(255,0,0)';
+                	 
 
 //                 	 $('#border.show()').load(location.href+'#border.show()');
                  }else if(id.innerHTML == '미승인'){
                 	 alert("승인 처리 되었습니다.");
                 	 id.innerHTML = "승인"
                		 id.style.backgroundColor= 'rgb(0,255,0)';
+                	 id.style.width = '70px';
 //                 	 $('#border.show()').load(location.href+'#border.show()');
 //                 	 $('#showActive').load(location.href+'#showActive');
 //                 		 $('#border').show(700);
@@ -285,14 +402,14 @@ li {
 		
 			// 농장 체험 버튼을 눌렀을 때
 			if(showActive=="block"){
-				$('#border').show(700);
+				$('#border').show(200);
 				$("#showActive").css("background-color", "yellow");
-				$('#showActive2').hide(700);
+				$('#showActive2').hide(200);
 			}
 			if(border == "block"){
 				$('#border').hide(700);
 				$("#showActive").css("background-color", "");
-				$('#showActive2').show(700);
+				$('#showActive2').show(200);
 			}
 		});
 	})
@@ -315,15 +432,15 @@ li {
 			console.log(showActive2);
 		
 			if(showActive2=="block"){
-				$('#border2').show(700);
+				$('#border2').show(200);
 				$("#showActive2").css("background-color", "yellow");
-				$('#showActive').hide(700);
-				$('#border').hide(700);
+				$('#showActive').hide(200);
+				$('#border').hide(200);
 			}
 			if(border2 == "block"){
-				$('#border2').hide(700);
+				$('#border2').hide(200);
 				$("#showActive2").css("background-color", "");
-				$('#showActive').show(700);
+				$('#showActive').show(200);
 				$("#showActive").css("background-color","");
 			}
 		});

@@ -1,5 +1,9 @@
 package com.kh.farmapp.mypage.farmer.model.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +14,7 @@ import com.kh.farmapp.mypage.farmer.model.dao.FarmerMypageDao;
 import common.dto.Application;
 import common.dto.FarmActivity;
 import common.dto.FarmDiary;
+import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
 import common.dto.page.Criteria;
@@ -39,28 +44,39 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		farmerMypageDao.writeDailylog(farmingDailylog);
 	}
 
+	//농장 체험 활동내역 리스트
+	@Override
+	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("farmerNo", farmer.getFarmerNo());
+		data.put("cri", cri);
+		
+		List<Map<String, Object>> res = farmerMypageDao.activitylist(data);
+		System.out.println(res);
+		return res;
+		
+	}
+	// 일손 체험 활동내역 리스트
+	@Override
+	public List<Map<String, Object>> activitylist3(Criteria cri ,Farmer farmer) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("farmerNo", farmer.getFarmerNo());
+		data.put("cri", cri);
+		
+		List<Map<String,Object>> res = farmerMypageDao.activitylist3(data);
+		System.out.println(res);
+		return res;
+	}
+	
 	@Override
 	public FarmingDailylog read(int dailylogNo) {
 		System.out.println(dailylogNo+"서비스");
 		return farmerMypageDao.read(dailylogNo);
 	}
-	
-	//농장 체험 활동내역 리스트
-	@Override
-	public List<Map<String, Object>> activitylist(Criteria cri) {
-		List<Map<String, Object>> res = farmerMypageDao.activitylist(cri);
-		System.out.println(res);
-		return farmerMypageDao.activitylist(cri);
-		
-	}
-	// 일손 체험 활동내역 리스트
-	@Override
-	public List<Map<String, Object>> activitylist3(Criteria cri) {
-		List<Map<String,Object>> res = farmerMypageDao.activitylist3(cri);
-		System.out.println(res);
-		return farmerMypageDao.activitylist3(cri);
-	}
-	
+
 	//농장체험 페이지 총 갯수
 	@Override
 	public int listCount2() {
@@ -90,6 +106,7 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		}else if(res.getIsApproval()==0){
 			res.setIsApproval(1);
 			System.out.println(res);
+
 		}
 		return farmerMypageDao.updateIsApproval(res);
 	}
@@ -115,9 +132,16 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	
 	}
 
-	
+	@Override
+	public List<Map<String, Object>> datelist(String date) {
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+		Date to = null;
+		try {
+			to = transFormat.parse(date);		
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return farmerMypageDao.datelist(date);
+	}
 
-	
-
-	
 }

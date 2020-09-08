@@ -3,17 +3,23 @@ package com.kh.farmapp.mypage.farmer.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.farmer.model.service.FarmerMypageService;
 
 import common.dto.Application;
+import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
 import common.dto.page.Criteria;
@@ -26,8 +32,20 @@ public class FarmerMypageController {
 
 	// 영농일지 작성 폼 화면
 	@RequestMapping(value = "/mypage/dailyLogWrite", method = RequestMethod.GET)
-	public void dailyLog() {
-		System.out.println("접속완료");
+	public ModelAndView dailyLog(HttpSession session, HttpServletRequest request) {
+		
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		ModelAndView mav = new ModelAndView();
+		 
+		if(farmer == null) {
+			mav.addObject("alertMsg", "로그인 후 이용 가능합니다");
+			mav.addObject("url", request.getContextPath() + "/farmer/login.do");
+			mav.setViewName("common/result");
+		} else {
+			mav.setViewName("/mypage/dailyLogWrite");
+		}
+		
+		return mav;
 	}
 
 	// 영농일지 글 작성 삽입
@@ -43,7 +61,9 @@ public class FarmerMypageController {
 
 	// 영농일지 리스트 목록 조회
 	@RequestMapping(value = "/mypage/dailyLoglist", method = RequestMethod.GET)
-	public String dailyLoglist(Model model, Criteria cri) {
+
+	public ModelAndView dailyLoglist(Model model, Criteria cri,HttpServletRequest request,HttpSession session) {
+
 		model.addAttribute("list", farmerMypageService.dailyLoglist(cri));
 
 		PageMaker pageMaker = new PageMaker();
@@ -52,7 +72,21 @@ public class FarmerMypageController {
 
 		model.addAttribute("pageMaker", pageMaker);
 
-		return "mypage/dailyLoglist";
+
+		
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		ModelAndView mav = new ModelAndView();
+		 
+		if(farmer == null) {
+			mav.addObject("alertMsg", "로그인 후 이용 가능합니다");
+			mav.addObject("url", request.getContextPath() + "/farmer/login.do");
+			mav.setViewName("common/result");
+		} else {
+			mav.setViewName("/mypage/dailyLoglist");
+		}
+		
+		
+		return mav;
 	}
 	
 	
@@ -66,19 +100,17 @@ public class FarmerMypageController {
 
 	// 농장 체험 리스트 목록 조회
 	@RequestMapping(value = "/mypage/activitylist", method = RequestMethod.GET)
-	public String activitylist(Model model, Criteria cri) {
+	public String activitylist(Model model, Criteria cri,HttpSession session) {
 
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		
 //		List <Map<String,Object>> testMap = (List<Map<String, Object>>)model.addAttribute("list", farmerMypageService.activitylist(cri));
 
 		// 농장체험 리스트
-		List<Map<String, Object>> testMap = farmerMypageService.activitylist(cri);
+		List<Map<String, Object>> testMap = farmerMypageService.activitylist(cri, farmer);
 		
 		//일손체험
-		List<Map<String, Object>> testMap3 = farmerMypageService.activitylist3(cri);
-
-//		for (int i = 0; i < testMap.size(); i++) {
-//			System.out.println(testMap.get(i).toString());
-//		}
+		List<Map<String, Object>> testMap3 = farmerMypageService.activitylist3(cri,farmer);
 
 		//농장체험
 		PageMaker pageMaker = new PageMaker();
@@ -90,6 +122,12 @@ public class FarmerMypageController {
 		pageMaker3.setCri(cri);
 		pageMaker3.setTotalCount(farmerMypageService.listCount3());
 		
+
+		//농부 객체
+		model.addAttribute("farmerInfo",farmer);
+		
+
+
 		//농장체험
 		model.addAttribute("list", testMap);
 		model.addAttribute("pageMaker", pageMaker);
@@ -121,7 +159,9 @@ public class FarmerMypageController {
 	
 	// 판매 페이지 리스트
 	@RequestMapping(value = "/mypage/selllist", method = RequestMethod.GET)
-	public String selllist(Model model, Criteria cri) {
+
+	public ModelAndView selllist(Model model, Criteria cri, HttpSession session, HttpServletRequest request) {
+
 	System.out.println("판매 페이지 접속완료");
 	
 	List<Map<String, Object>> testMap = farmerMypageService.selllist(cri);
@@ -136,8 +176,28 @@ public class FarmerMypageController {
 	
 	model.addAttribute("list", testMap);
 	model.addAttribute("pageMaker", pageMaker);
+
 	
-	return "mypage/selllist";
+	Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+	ModelAndView mav = new ModelAndView();
+	 
+	if(farmer == null) {
+		mav.addObject("alertMsg", "로그인 후 이용 가능합니다");
+		mav.addObject("url", request.getContextPath() + "/farmer/login.do");
+		mav.setViewName("common/result");
+	} else {
+		mav.setViewName("/mypage/selllist");
+	}
+	return mav;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/mypage/cal", method = RequestMethod.GET)
+	public List<Map<String, Object>> cal(String date) {
+		List<Map<String, Object>> res = farmerMypageService.datelist(date);
+		System.out.println(res);
+		return res;
 	}
 	
 	/**
@@ -157,11 +217,6 @@ public class FarmerMypageController {
 
 	}
 	
-	@RequestMapping(value = "/mypage/cal", method = RequestMethod.GET)
-	public String cal() {
-		System.out.println("접속");
-		return "mypage/cal";
-	}
 	@RequestMapping(value = "/mypage/cal23", method = RequestMethod.GET)
 	public String cal2() {
 		System.out.println("접속");
