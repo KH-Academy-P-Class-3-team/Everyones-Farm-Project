@@ -23,7 +23,22 @@
 					<th class="m-table__th">이메일</th>
 					<th class="m-table__th">가입날짜</th>
 				</tr>
-				
+				<c:choose>
+					<%-- userList null 일 때 --%>
+					<c:when test="${empty userList }">
+						<tr>
+							<td colspan="6">가입된 회원이 없습니다.</td>
+						</tr>
+					</c:when>
+					<%-- userList null이 아닐 때 --%>
+					<c:when test="">
+					
+					</c:when>
+				</c:choose>
+				<tr>
+				<td>${apaging }</td>
+				<td>${userList }</td>
+				</tr>
 			</table>
 		</div>
 	</main>

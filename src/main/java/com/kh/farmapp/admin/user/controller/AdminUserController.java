@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.farmapp.admin.model.service.AdminUserService;
 
 import common.dto.Farmer;
 import common.dto.UserTB;
+import common.util.AdminPaging;
 
 @Controller
 public class AdminUserController {
@@ -36,15 +38,34 @@ public class AdminUserController {
 	@RequestMapping(value = "/adminmember/userlist", method = RequestMethod.GET)
 	public String adminUserList(
 				Model model
+				// 페이징 처리시 필요한 변수
+				, @RequestParam(defaultValue = "0") String curPage
+				// 검색 처리시 필요한 변수
+				, @RequestParam(defaultValue = "") String search
 			) {
 		
 		// logger 찍기 - 해당 url에 들어왔다는 표시
 		logger.info("/adminmember/userlist [GET] 요청");
 		
+		// 페이징 설정
+		// 페이징 설정
+		AdminPaging apaging = adminUserService.getPaging(curPage);
+//		logger.debug("apaging: " + apaging.toString());
+		
 		// select 조회 연산 수행
-		List<Map<String, Object>> userList = adminUserService.selectAllUserList();
-		for(Map< String, Object> m : userList) {
-			logger.debug("m: " + m.toString());
+		List<Map<String, Object>> userList = adminUserService.selectAllUserByPaging(apaging);
+//		for(Map< String, Object> m : userList) {
+//			logger.debug("m: " + m.toString());
+//		}
+		
+		// model 값 넘겨주기
+		// 페이징 객체 넘기기
+		if( apaging != null) {
+			model.addAttribute("apaging", apaging);
+		}
+		// 페이징 처리된 목록 넘기기
+		if( userList != null ) {
+			model.addAttribute("userList", userList);
 		}
 		
 		return "admin/member/admin_user_list";

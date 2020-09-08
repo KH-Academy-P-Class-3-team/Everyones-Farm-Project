@@ -10,6 +10,7 @@ import com.kh.farmapp.admin.model.dao.AdminUserDao;
 
 import common.dto.Farmer;
 import common.dto.UserTB;
+import common.util.AdminPaging;
 /**
  * AdminUserSerivce 를 상속 받는 클래스
  * AdminUserService 구현 클래스
@@ -68,6 +69,28 @@ public class AdminUserServiceImpl implements AdminUserService{
 	@Override
 	public int deleteFarmer(Farmer farmer) {
 		return adminUserDao.deleteFarmer(farmer);
+	}
+	
+	@Override
+	public AdminPaging getPaging(String curPage) {
+		// curPageNo 초기화, curPageNo 은 현재 페이지 번호를 뜻함!
+		int curPageNo = 0;
+		if( curPage != null && !"".equals(curPage) ) {
+			curPageNo = Integer.parseInt(curPage);
+		}
+		
+		// NOTICE 테이블의 총 게시글 수를 조회한다.
+		int totalCount = adminUserDao.selectCntAllUserList();
+		
+		// AdminPaging 객체 생성 - 현재 페이지(curPage), 총 게시글 수(totalCount) 활용
+		AdminPaging paging = new AdminPaging(totalCount, curPageNo);
+		
+		return paging;
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectAllUserByPaging(AdminPaging apaging) {
+		return adminUserDao.selectAllUserByPaging(apaging);
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import common.dto.Farm;
 import common.dto.Farmer;
 import common.dto.UserTB;
+import common.util.AdminPaging;
 
 /**
  * AdminUserDao 를 상속 받는 클래스
@@ -88,6 +89,18 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public int deleteFarmer(Farmer farmer) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	// 일반 회원 총 갯수
+	@Override
+	public int selectCntAllUserList() {
+		return session.selectOne("ADMINMEMBER.selectCntAllUserList");
+	}
+	
+	// 페이징 처리가 된 목록 조회
+	@Override
+	public List<Map<String, Object>> selectAllUserByPaging(AdminPaging apaging) {
+		return session.selectList("ADMINMEMBER.selectAllUserByPaging", apaging);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import common.dto.Farmer;
 import common.dto.UserTB;
+import common.util.AdminPaging;
 
 /**
  * 관리자 페이지 중 회원 관리 페이지의 Service interface
@@ -83,4 +84,21 @@ public interface AdminUserService {
 	 * @return int - 업데이트 결과
 	 */
 	public int deleteFarmer(Farmer farmer);
+
+	/**
+	 * 일반 회원 목록 페이징 처리를 위한 페이징 설정
+	 * 
+	 * @param curPage - 현재 페이지를 나타내는 querystring
+	 * @return AdminPaging - userlist 페이징 객체
+	 */
+	public AdminPaging getPaging(String curPage);
+
+	/**
+	 * 일반 회원 페이징 처리한 목록 조회
+	 * 
+	 * @param apaging - 페이징 정보를 가진 AdminPaging 객체
+	 * @return List<Map<String, Object>> - 조회 결과 반환
+	 */
+	public List<Map<String, Object>> selectAllUserByPaging(AdminPaging apaging);
+
 }

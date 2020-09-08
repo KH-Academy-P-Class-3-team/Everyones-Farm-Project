@@ -5,8 +5,23 @@
 
 <mapper namespace="ADMINMEMBER">
 	
+	<select id="selectCntAllUserList" resultType="int">
+		select
+		    count(*)
+		from
+		    user_tb
+	</select>
+	
+	<resultMap type="hashmap" id="userlistmap">
+		<result property="userOrder" column="user_order" />
+		<result property="userNo" column="user_no" />
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+	</resultMap>
 	<!-- 일반회원목록 -->
-	<select id="selectAllUserList">
+	<select id="selectAllUserByPaging" parameterType="common.util.AdminPaging" resultMap="userlistmap">
 		select
 		    users.*
 		from (
@@ -27,9 +42,6 @@
 		    ) ulist
 		) users 
 		where
-		    user_order between 1 and 10
-<!-- 		    and (user_id LIKE  '%' || 'soo' || '%' -->
-<!-- 		    or user_name LIKE '%' || '수수' || '%') -->
+		    user_order between #{startNo} and #{endNo}
 	</select>
-
 </mapper>
