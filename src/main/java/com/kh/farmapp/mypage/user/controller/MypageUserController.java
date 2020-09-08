@@ -32,12 +32,10 @@ public class MypageUserController {
 		
 		//테스트 데이터
 		UserTB user = new UserTB();
-		user.setUserNo(2);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		user = mypageService.selectUser(user);
-		user.setUserName("아무개");
 		System.out.println(user);
 		mav.addObject("userData", user);
 		mav.setViewName("mypage/user/modify");
