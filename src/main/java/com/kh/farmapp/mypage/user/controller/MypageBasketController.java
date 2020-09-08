@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
+import common.dto.Farmer;
 import common.dto.TBOrder;
 import common.dto.UserTB;
 
@@ -35,6 +36,7 @@ public class MypageBasketController {
 		
 		System.out.println(basket);
 		ModelAndView mav = new ModelAndView();
+		
 		
 		mav.addObject("page", basket.get("page"));
 		mav.addObject("basket", basket);
@@ -104,9 +106,11 @@ public class MypageBasketController {
 		int userNo = user.getUserNo();
 		int cntPerPage = 5;
 		Map<String, Object> order = mypageService.orderList(userNo, cPage, cntPerPage);
+
+		ModelAndView mav = new ModelAndView();
+		
 		
 		System.out.println(order);
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("page", order.get("page"));
 		mav.addObject("order", order);
 		mav.setViewName("mypage/user/orderList");

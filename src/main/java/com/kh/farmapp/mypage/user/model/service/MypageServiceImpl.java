@@ -5,19 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
 
 import common.dto.Application;
 import common.dto.Basket;
+import common.dto.EveryonesFarmFile;
 import common.dto.Product;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
+import common.dto.UserProfile;
 import common.dto.UserTB;
+import common.util.ActivityFileUtil;
 import common.util.FileUtil;
 import common.util.Paging;
 
@@ -28,20 +33,63 @@ public class MypageServiceImpl implements MyPageService{
 	private MyPageDao mypageDao;
 	
 	@Override
-	public int modifyUser(UserTB user) {
+	public int modifyUser(UserTB user, String root, MultipartFile upload) {
 		
-		System.out.println("1");
 		int res = mypageDao.modifyUser(user);
 		System.out.println(res);
 		
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		UserProfile check = new UserProfile();
+		
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		
+		UserProfile fileData = fileUtil.fileUpload(upload, root);
+		
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", fileData);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println(result);
+		
 		return res;
+	}
+
+	
+	@Override
+	public UserProfile selectUserProfile(UserTB user) {
+		return mypageDao.selectUserProfile(user.getUserNo());
 	}
 
 
 	
 	@Override
-	public int modifyprofile(UserTB user) {
-		return 0;
+	public int modifyprofile(UserTB user, MultipartFile file, String root) {
+		
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		UserProfile check = new UserProfile();
+		
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		
+		UserProfile fileData = fileUtil.fileUpload(file, root);
+		
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", fileData);
+		int res=0;
+		if(check == null) {
+			res = mypageDao.insertprofile(fileMap);
+		}else {
+			res = mypageDao.modifyprofile(fileMap);
+		}
+		
+		return res;
 	}
 
 	@Override
@@ -94,8 +142,7 @@ public class MypageServiceImpl implements MyPageService{
 
 	@Override
 	public int o3Delete(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mypageDao.o3Delete(qNo);
 	}
 
 	@Override
@@ -151,6 +198,7 @@ public class MypageServiceImpl implements MyPageService{
 		sub.put("userNo", userNo);
 		
 		List<Map<String, Object>> orders = mypageDao.orderList(sub);
+		System.out.println(orders);
 		orderList.put("orders", orders);
 		orderList.put("page", page);
 		
@@ -199,6 +247,15 @@ public class MypageServiceImpl implements MyPageService{
 		return  mypageDao.deleteBasket(arr);
 		
 	}
+
+
+	@Override
+	public Map<String, Object> getTotal(UserTB user) {
+		return mypageDao.getTotla(user);
+	}
+
+
+
 
 
 

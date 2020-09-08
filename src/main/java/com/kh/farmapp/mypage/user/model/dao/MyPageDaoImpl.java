@@ -38,14 +38,21 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
-	public int modifyprofile(UserTB user) {
-		
-		// 클래스 다이어그램 용 DTO 객체 선언
-		UserProfile up = new UserProfile();
-		
-		return 0;
+	public UserProfile selectUserProfile(int userNo) {
+		return sqlSession.selectOne("Mypage.selectProfile", userNo);
 	}
 
+	@Override
+	public int modifyprofile(Map<String, Object> fileMap) {
+		
+		return sqlSession.update("Mypage.modifyprofile", fileMap);
+	}
+	
+	@Override
+	public int insertprofile(Map<String, Object> fileMap) {
+		return sqlSession.insert("Mypage.insertprofile", fileMap);
+	}
+	
 	@Override
 	public int leave(UserTB user) {
 		return sqlSession.update("Mypage.deleteUser", user);
@@ -81,8 +88,7 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 	public int o3Delete(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("Mypage.deleteOneonone", qNo);
 	}
 
 	@Override
@@ -149,6 +155,14 @@ public class MyPageDaoImpl implements MyPageDao{
 	public int deleteBasket(int[] arr) {
 		return sqlSession.delete("Mypage.deleteBasket", arr);
 	}
+
+
+	@Override
+	public Map<String, Object> getTotla(UserTB user) {
+		return sqlSession.selectOne("Mypage.minmax",user);
+	}
+
+
 
 
 

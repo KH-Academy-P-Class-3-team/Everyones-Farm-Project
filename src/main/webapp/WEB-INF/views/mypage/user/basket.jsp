@@ -177,7 +177,7 @@ a:hover {
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">장바구니</h3>
+			<h3 class="my-4 text-left">영농 일지</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -196,26 +196,48 @@ a:hover {
 						신청 현황</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/deleteId" style="color : #ccc;">회원
-						탈퇴</a>
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
 				</div>
 			</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a href="<%=request.getContextPath()%>/mypage/user/orderList">주문</a>
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
 				</div>
-				<div class="panel-body" style="font-weight: bold;">
+				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
 				</div>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
 						목록</a>
 				</div>
-				
 			</div>
 
+			<c:if test="${farmerInfo.name eq null} ">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+						</a>
+					</div>
+					<div class="panel-body">
+						<a href="#">내 정보</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/selllist">판매 목록</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+							신청내역</a>
+					</div>
+
+				</div>
+			</c:if>
 		</div>
+
 		<div id="practice"></div>
 		<div class="col-lg-1">
 			<!-- 리스트 시작-->
@@ -259,9 +281,9 @@ a:hover {
 						<c:choose>
 							<c:when test="${page.blockStart > 1 }">
 								<li><a
-<%-- 									href="<%= request.getContextPath() %>/mypage/user/basket?cPage=${page.blockStart-1}" --%>
-									aria-label="Previous" class="naviBtn"> <span
-										aria-hidden="true">&laquo;</span>
+									<%-- 									href="<%= request.getContextPath() %>/mypage/user/basket?cPage=${page.blockStart-1}" --%>
+									aria-label="Previous"
+									class="naviBtn"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
 							</c:when>
 							<c:otherwise>

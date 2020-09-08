@@ -49,20 +49,25 @@ a:hover {
 	background-color: white;
 	text-align: center;
 	margin-left: 100px;
+	margin-bottom : 50px;
 }
 
 .appliActList {
-	margin-top: 50px;
+	margin-bottom: 50px;
 	width: 100%;
-	height: 300px;
+	height: 350px;
 	background-color: white;
+	overflow: scroll;
+	overflow-x : hidden;
 }
 
+
 .appliHelpList {
-	margin-top: 50px;
 	width: 100%;
-	height: 300px;
+	height: 350px;
 	background-color: white;
+	overflow: scroll;
+	overflow-x : hidden;
 }
 
 .userInform {
@@ -109,45 +114,67 @@ a:hover {
 	<div class="container">
 		<div class="row">
 			<!-- 사이드 네비게이션 -->
-			<div class="col-lg-3">
-				<h3 class="my-4 text-left">활동 신청 현황</h3>
-				<hr>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
-							수정</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
-							1 문의</a>
-					</div>
-					<div class="panel-body" style="font-weight: bold;">
-						<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
-							신청 현황</a>
-					</div>
-					<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/deleteId" style="color : #ccc;">회원
-						탈퇴</a>
+		<div class="col-lg-3">
+			<h3 class="my-4 text-left">영농 일지</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
 				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
 				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="<%=request.getContextPath()%>/mypage/user/orderList">주문</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
-							목록</a>
-					</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
 				</div>
-
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
 			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+				</div>
+			</div>
+
+			<c:if test="${farmerInfo.name eq null} ">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+						</a>
+					</div>
+					<div class="panel-body">
+						<a href="#">내 정보</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/selllist">판매 목록</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+							신청내역</a>
+					</div>
+
+				</div>
+			</c:if>
+		</div>
 
 			<div class="col-lg-1">
 
@@ -169,8 +196,8 @@ a:hover {
 				</div>
 
 				<!-- 페이지 첫 AJAX 체험 농장 리스트 -->
-				<div class="appliActList">
 					<span class="worrd">체험 농장</span> 신청 현황
+				<div class="appliActList">
 					<table class="table bux table-hover">
 						<tr class="active">
 							<td>체험명</td>
@@ -178,6 +205,7 @@ a:hover {
 							<td>인원</td>
 							<td>문의</td>
 							<td>현황</td>
+							<td>체험일자</td>
 						</tr>
 						<c:forEach items="${activeList1 }" var="list1">
 							<c:if test="${list1.IS_HELP eq 0 }">
@@ -186,11 +214,15 @@ a:hover {
 									<td>${list1.USER_NAME}(${list1.USER_ID })</td>
 									<td>${list1.PEOPLE }</td>
 									<td>${list1.PHONE }</td>
-									<td><c:if test="${list1.IS_APPROVAL eq 0 }">
+									<td>
+						<c:if test="${list1.IS_APPROVAL eq 0 }">
 						미승인
-						</c:if> <c:if test="${list1.IS_APPROVAL eq 1 }">
+						</c:if>
+						 <c:if test="${list1.IS_APPROVAL eq 1 }">
 						승인
-						</c:if></td>
+						</c:if>
+						</td>
+						<td>${list1.ACTIVITY_DATE }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -199,8 +231,8 @@ a:hover {
 				</div>
 
 				<!-- 페이지 두번째 AJAX 일손돕기 리스트 -->
+				<span class="worrd">일손돕기</span>신청 현황
 				<div class="appliHelpList">
-					<span class="worrd">일손돕기</span>신청 현황
 					<table class="table bux">
 						<tr class="active">
 							<td>체험명</td>
@@ -234,6 +266,8 @@ a:hover {
 
 		</div>
 	</div>
+	<div style="margin-bottom:200px"></div>
+
 
 
 

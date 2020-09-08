@@ -73,17 +73,38 @@ a:hover {
 .name{
 	font-size: 18px;
 }
+.tableInfo{
+	border : 1px solid black;
+	margin : 30px;
+	width : 100%;
+	text-align: center;
+}
+.productInfo{
+	border : 1px solid black;
+	margin : 30px;
+	width : 100%;
+	text-align: center;
+	height : 120px;
+}
+.tableInfo td{
+	border-right :1px solid black;
+	border-bottom: 1px solid black;
+	padding : 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.short{
+	width : 200px;
+	background-color: #ccc;
+}
+.thick{
+	width : 200px;
+	background-color: #ccc;
+}
 </style>
 
 <!-- jquery -->﻿
 <script type="text/javascript" src="jquery-3.4.1.min.js" ></script>
-<!-- ckeditor 4 -->
-<link rel="stylesheet" href="/ckeditor/contents.css">
-<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
-<script type="text/javascript" src="/ckeditor/ckeditor.js" ></script>﻿
-<script >
-CKEDITOR.replace('ckeditor'); // 에디터로 생성
-</script >
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top:200px"></div>
@@ -96,55 +117,60 @@ CKEDITOR.replace('ckeditor'); // 에디터로 생성
 			
 			<hr>
 			
-			<div> 주문 상품 정보</div>
-			
-			<table>
-			<tr>
-			<td>상품정보</td>
+			<div> 
+			<span>주문 상품 정보</span>
+			<table class="productInfo">
+			<tr >
+			<td class="thick">상품정보</td>
 			<td>${orderDetail.PRODUCT_NAME} /${orderDetail.OPTION_NAME } } </td>
 			</tr>
 			</table>
+			</div>
 				
-			<div> 결제 정보</div>
-			
-			<table>
+			<div> 
+			<span>결제 정보</span>
+			<table class="tableInfo">
 			<tr>
-			<td>상품정보</td>
+			<td class="short">상품정보</td>
 			<td>${orderDetail.OPTION_NAME}</td>
 			</tr>
 			<tr>
-			<td>결제 수량</td>
+			<td class="short">결제 수량</td>
 			<td>${orderDetail.ORDER_AMOUNT} 개 </td>
 			</tr>
 			<tr>
-			<td>주문일자</td>
+			<td class="short">주문일자</td>
 			<td>${orderDetail.ORDER_DATE} </td>
 			</tr>
 			<tr>
-			<td>결제 금액</td>
+			<td class="short">결제 금액</td>
 			<td>${orderDetail.PAYMENT_PRICE}</td>
 			</tr>
 			<tr>
-			<td>결제 상태</td>
+			<td class="short">결제 상태</td>
 			<c:if test="${orderDetail.PAYMENT_STATUS eq 1}">
-			<td>결제 완료</td>
+			<td >결제 완료</td>
 			</c:if>
 			<c:if test="${orderDetail.PAYMENT_STATUS eq 0}">
 			<td>결제 미완료</td>
 			</c:if>
 			</tr>
 			</table>
+			</div>
 			
-			<table>
+			<div>
+			<span>배송정보</span>
+			<table class="productInfo">
 			<tr>
-			<td>우편번호</td>
+			<td class="short">우편번호</td>
 			<td>${orderDetail.ZONECODE}</td>
 			</tr>
 			<tr>
-			<td>상세주소</td>
+			<td class="short">상세주소</td>
 			<td>${orderDetail.FIRST_ADDRESS}${orderDetail.SECOND_ADDRESS}</td>
 			</tr>
 			</table>
+			</div>
 				<div class="nearcontent">
 					<table class="table">
 

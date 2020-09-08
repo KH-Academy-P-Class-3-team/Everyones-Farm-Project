@@ -5,10 +5,12 @@ import java.util.Map;
 
 import common.dto.Application;
 import common.dto.Basket;
+import common.dto.EveryonesFarmFile;
 import common.dto.Product;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
+import common.dto.UserProfile;
 import common.dto.UserTB;
 import common.util.Paging;
 
@@ -18,7 +20,19 @@ public interface MyPageDao {
 		public int modifyUser(UserTB user);
 		
 		//개인 사진 수정
-		public int modifyprofile(UserTB user);
+		public int modifyprofile(Map<String, Object> fileMap);
+		/**
+		 * 사진이 존재하는지 조회하기 
+		 * @param userNo
+		 * @return
+		 */
+		public UserProfile selectUserProfile(int userNo);
+		/**
+		 * 사진이 없을 시 사진 삽입
+		 * @param fileMap
+		 * @return
+		 */
+		public int insertprofile(Map<String, Object> fileMap);
 		
 		//회원 탈퇴
 		public int leave(UserTB user);
@@ -95,6 +109,13 @@ public interface MyPageDao {
 		 * 장바구니 지우기
 		 */
 		public int deleteBasket(int[] arr);
+		/**
+		 * 최대최소값 구해 계산 하기
+		 * @param user
+		 * @return
+		 */
+		public Map<String, Object> getTotla(UserTB user);
+
 
 
 

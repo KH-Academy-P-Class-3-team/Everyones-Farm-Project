@@ -4,21 +4,29 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import common.dto.Application;
 import common.dto.Basket;
 import common.dto.Product;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
+import common.dto.UserProfile;
 import common.dto.UserTB;
 
 public  interface MyPageService {
 
 	//개인정보 수정 
-	public int modifyUser(UserTB user);
-	
+	public int modifyUser(UserTB user, String root, MultipartFile upload);
+	/**
+	 * 수정페이지에 개인사진 불러오기
+	 * @param user
+	 * @return
+	 */
+	public UserProfile selectUserProfile(UserTB user);
 	//개인 사진 수정
-	public int modifyprofile(UserTB user);
+	public int modifyprofile(UserTB user, MultipartFile file, String root);
 	
 	//회원 탈퇴
 	public int leave(UserTB user);
@@ -96,6 +104,14 @@ public  interface MyPageService {
 	 * Basket 지우기
 	 */
 	public int deleteBasket(int[] arr);
+	
+	/**
+	 * 최대최소값 구해 계산 하기
+	 * @param user
+	 * @return
+	 */
+	public Map<String, Object> getTotal(UserTB user);
+
 
 
 	
