@@ -204,7 +204,7 @@ public class FarmerController {
 			, HttpServletRequest req) {
 		Farmer res = farmerService.findId(commandMap);
 		if(res!=null) {
-			req.setAttribute("farmerInfo", res);
+			req.setAttribute("farmerId", res);
 			return "member/findIdResult";
 		} else {
 			return "member/findError";
@@ -224,7 +224,7 @@ public class FarmerController {
 		
 		if(res!=null) {
 			farmerService.findPwMailSend(farmer, urlPath);
-			req.setAttribute("farmerInfo", res);
+			req.setAttribute("farmerPw", res);
 			return "member/findPwResult";
 		} else {
 			return "member/findError";
@@ -240,7 +240,7 @@ public class FarmerController {
 			, Farmer farmer) {
 		Farmer res = farmerService.findPw(commandMap);
 		if(res!=null) {
-			req.setAttribute("farmerInfo", res);
+			req.setAttribute("farmerPw", res);
 			return "member/changePwfarmer";
 		} else {
 			return "member/findError";
@@ -279,6 +279,6 @@ public class FarmerController {
 			session.removeAttribute("farmerInfo");
 		}
 		
-		return "main/index"; 
+		return "redirect:/"; 
 	}
 }

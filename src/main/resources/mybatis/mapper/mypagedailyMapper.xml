@@ -35,6 +35,7 @@
 			 	,sysdate
 			  )
 	</insert>
+
 	
 	<resultMap type="hashmap" id="date">
 		<id property="dailylogNo" column="dailyLog_no" />
@@ -51,6 +52,12 @@
 	
 		FROM FARMING_DAILYLOG where to_char(write_date,'yyyymmdd') = #{date} ORDER BY dailyLog_no
 		
+
+	<!-- 영농일지 리스트 순차적으로 나오게하기 -->
+	<select id="list" resultType="common.dto.FarmingDailylog">
+	
+	select dailyLog_no ,CONTENT,WORKING_AMOUNT,WORKING_TIME,WORKING_MEMBER
+		FROM FARMING_DAILYLOG ORDER BY dailyLog_no
 
 	</select>
 	
@@ -85,7 +92,11 @@
 		   ,WORKING_TIME
 		   ,WORKING_MEMBER
 		   from FARMING_DAILYLOG
+
 		   where dailyLog_no = #{dailylogNo}
+
+		   where dailyLog_no = #{dailyLogNo}
+
 	
 	</select>
 	

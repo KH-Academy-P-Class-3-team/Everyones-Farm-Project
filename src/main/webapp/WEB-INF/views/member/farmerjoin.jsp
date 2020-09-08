@@ -69,13 +69,13 @@
 		<div id="err-addr"></div>
 	 	'모두의 농장' 가입 이유 * (하나 이상 선택해주세요)<br>
 	 	<div class="why" >
-	 	<input type="checkbox" id="adver" name="farmReason" value="농장 홍보" /> 
+	 	<input type="checkbox" id="adver" name="farmReason" value="농장 홍보" class="check"/> 
 	 	<label for="adver">농장 홍보</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 	<input type="checkbox" id="sell" name="farmReason" value="농작물 판매" /> 
+	 	<input type="checkbox" id="sell" name="farmReason" value="농작물 판매" class="check" /> 
 	 	<label for="sell">농작물 판매</label><br>
-	 	<input type="checkbox" id="exp" name="farmReason" value="농장 체험 홍보" /> 
+	 	<input type="checkbox" id="exp" name="farmReason" value="농장 체험 홍보" class="check" /> 
 	 	<label for="exp">농장 체험 홍보</label>&nbsp;&nbsp;&nbsp;
-	 	<input type="checkbox" value="직접 입력" id=write/>
+	 	<input type="checkbox" value="직접 입력" id=write class="check"/>
 	 	<label for="write">직접 입력(입력해주세요!)</label><br>
 	 	<input type="text" name="farmReason" /><br>
 	 	</div>
@@ -104,17 +104,6 @@
 	var ajaxFlag = false;
 	
 	function validate() {
-//         var pass = document.getElementById('farmerPw');
-//         var passc = document.getElementById('farmerPw').value;
-//         var passch = document.getElementById('pwcheck').value;
-//         var name = document.getElementById('name').value;
-//         var email = document.getElementById('email').value;
-//         var phone = document.getElementById('phone').value;
-//         var farmname = document.getElementById('farmName').value;
-//         var farmreason = document.getElementById('farmReason').value;
-//         var farmsell = document.getElementById('farmSell').value;
-//         var farmmind = document.getElementById('farmReason').value;
-//         var farmaddress = document.getElementById('sample7_address').value;
 
 		var pass = document.querySelector('#farmerPw');
 		var passc = document.querySelector('#farmerPw').value;
@@ -124,10 +113,16 @@
 		var phone = document.querySelector('#phone').value;
 		var farmname = document.querySelector('#farmName').value;
 		var farmphone = document.querySelector('#farmphone').value;
-// 		var farmreason = document.querySelector('#farmreason').value;
+// 		var farmreason = document.querySelector('#farmReason').length;
+// 		var farmreason = document.getElementsByName("farmReason");
+		var farmreason = document.getElementsByClassName("check");
+		var farmreason_len = farmreason.length;
+		var checked = 0;
 		var farmsell = document.querySelector('#farmSell').value;
 		var farmmind = document.querySelector('#farmMind').value;
-		var farmaddress = document.querySelector('#sample7_postcode').value;
+		var farmzonecode = document.querySelector('#sample7_postcode').value;
+		var farmaddress = document.querySelector('#sample7_address').value;
+		var farmsecondaddress = document.querySelector('#sample7_detailAddress').value;
 		var introduce = document.querySelector('#introduce').value;
         
         var regExpPw = /(?=.*\d)(?=.*[~`!@#$%\^&*()-+=])(?=.*[a-zA-Z]).{8,15}$/;
@@ -187,27 +182,44 @@
         	return false;
         }
         
-        if(farmaddress=""){
+        if(farmzonecode==""){
         	alert("농장 주소를 입력해주세요!")
         	return false;
         }
-        
-        if(farmreason=""){
-        	alert("가입 이유를 작성해주세요")
+        if(farmaddress==""){
+        	alert("농장 주소를 입력해주세요!")
         	return false;
         }
-        if(farmsell=""){
+        if(farmsecondaddress==""){
+        	alert("농장 상세 주소를 입력해주세요!")
+        	return false;
+        }
+        
+
+		for(i=0;i<farmreason_len;i++){
+			if(farmreason[i].checked == true){
+				checked +=1;
+			} 
+		}
+		if(checked <1 ){
+			alert("가입 이유를 작성해주세요")
+			return false;
+		}
+		
+		
+        if(farmsell==""){
         	alert("농작물(생산품)과 규모를 작성해주세요")
         	return false;
         }
-        if(farmmind=""){
+        
+        if(farmmind==""){
         	alert("마음가짐을 작성해주세요")
         	return false;
         }
-        if(fintroduce=""){
-        	alert("농장 소개를 작성해주세요")
-        	return false;
-        }
+	     if(introduce==""){
+	    	alert("농장 소개를 작성해주세요")
+	    	return false;
+	    }
         
 
         return true;

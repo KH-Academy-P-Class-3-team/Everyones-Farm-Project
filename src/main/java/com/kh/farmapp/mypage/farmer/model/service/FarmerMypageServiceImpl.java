@@ -44,6 +44,7 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		farmerMypageDao.writeDailylog(farmingDailylog);
 	}
 
+
 	@Override
 	public FarmingDailylog read(int dailyLogNo) {
 		System.out.println(dailyLogNo+"서비스");
@@ -77,6 +78,30 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		return res;
 	}
 	
+=======
+	@Override
+	public FarmingDailylog read(int dailylogNo) {
+		System.out.println(dailylogNo+"서비스");
+		return farmerMypageDao.read(dailylogNo);
+	}
+	
+	//농장 체험 활동내역 리스트
+	@Override
+	public List<Map<String, Object>> activitylist(Criteria cri) {
+		List<Map<String, Object>> res = farmerMypageDao.activitylist(cri);
+		System.out.println(res);
+		return farmerMypageDao.activitylist(cri);
+		
+	}
+	// 일손 체험 활동내역 리스트
+	@Override
+	public List<Map<String, Object>> activitylist3(Criteria cri) {
+		List<Map<String,Object>> res = farmerMypageDao.activitylist3(cri);
+		System.out.println(res);
+		return farmerMypageDao.activitylist3(cri);
+	}
+	
+
 	//농장체험 페이지 총 갯수
 	@Override
 	public int listCount2() {
@@ -106,6 +131,7 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		}else if(res.getIsApproval()==0){
 			res.setIsApproval(1);
 			System.out.println(res);
+
 		}
 		return farmerMypageDao.updateIsApproval(res);
 	}
@@ -143,6 +169,33 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		}
 		return farmerMypageDao.datelist(date);
 	}
+	
+
+		}
+		return farmerMypageDao.updateIsApproval(res);
+	}
+	
+
+	// 판매 리스트 
+	@Override
+	public List<Map<String, Object>> selllist(Criteria cri) {
+		return farmerMypageDao.selllist(cri); 
+	}
+	
+	
+	// 결제 처리 업데이트
+	@Override
+	public int updatePayment(TBOrder order) {
+		TBOrder res = farmerMypageDao.selectOne(order);
+		if( res.getPaymentStatus()==1) {
+			res.setPaymentStatus(0);
+		}else if(res.getPaymentStatus()==0) {
+			res.setPaymentStatus(1);
+		}
+		return farmerMypageDao.updatePayment(res);
+	
+	}
+
 	
 
 	

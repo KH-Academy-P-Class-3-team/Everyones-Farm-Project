@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+.application-form {
+	width: 980px;
+	margin: 50px auto;
+}
+
+.form-top {
+	width: 450px;
+	margin: 0 auto 55px;
+}
+
+.top-sub {
+	color: #68bb59;
+}
+
+.top-title {
+	font-size: 1.8em;
+}
+
+.form-content {
+	width: 450px;
+	margin: 35px auto 80px;
+}
+
+.form-group {
+	margin: 30px 0;
+}
+
+input[type=radio] {
+	margin-left: 15px;
+}
+
+.group-text1 {
+	margin-top: 20px;
+	font-size: 13px;
+	color: #ff7915;
+}
+
+.group-text2 {
+	margin-top: 10px;
+	font-size: 13px;
+	color: #ff7915;
+}
+
+.control-label {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+input[type=text], input[type=number], input[type=date] {
+	width: 450px;
+	height: 45px;
+	outline: none;
+	border: 2px solid #ccc;
+}
+
+input[type=text]:focus, input[type=number]:focus, input[type=date]:focus {
+	border: 2px solid #9dd971;
+}
+
+input[type=text]::placeholder, input[type=number]::placeholder, input[type=date]::placeholder{
+	color: #cecece;
+}
+
+.people-text {
+	color: #7dcc44;
+	font-size: 0.9em;
+}
+
+.red {
+	color: #ff5615;
+}
+
+.price-sub {
+	font-size: 0.8em;
+}
+
+.price {
+	margin: 40px 0 10px;
+}
+
+.total-price {
+	margin: 10px auto 30px;
+	font-size: 1.3em;
+	background-color: #efefef;
+	height: 100px;
+	padding: 32px 20px;
+}
+
+.total {
+	color: #68bb59;
+	font-size: 1.3em;
+}
+
+.button-div {
+	vertical-align: middle;
+	position: relative;
+	height: 70px;
+}
+
+#btnSubmit {
+	position: absolute;
+	right: 0;
+	border: none;
+	background-color: #8cd259;
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: bold;
+	width: 370px;
+	height: 60px;
+	border-radius: 2px;
+	outline: none;
+}
+
+#btnSubmit:hover {
+	cursor: pointer;
+}
+
+#btnBack {
+	position: absolute;
+	left: 0;
+	background-color: #fff;
+	color: #898989;
+	font-size: 1.6em;
+	font-weight: bold;
+	width: 75px;
+	height: 60px;
+	border: 1px solid #898989;
+	border-radius: 2px;
+	outline: none;
+}
+
+#btnBack:hover {
+	cursor: pointer;
+}
+
+

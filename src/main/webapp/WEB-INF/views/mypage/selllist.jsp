@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <title>판매 페이지</title>
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -14,6 +15,11 @@
 <style type="text/css">
 
 .pagenate {margin-left :100px;
+=======
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style type="text/css">
+.pagenate {margin-left :100px;
+	
 }
 /* 마이페이지  */
 .col-lg-3{
@@ -35,6 +41,10 @@ li {
 	margin-left: 350px;
 }
 
+
+=======
+	margin-left: 223px;
+}
 
 /* 내정보 나타내기 */
 #mypagesize {
@@ -100,6 +110,15 @@ a:hover {
 }
 </style>
 
+
+=======
+</style>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <%@include file="../include/header.jsp" %>
 <!-- menu 의 float 속성 때문에 생성한 div -->
@@ -184,6 +203,19 @@ a:hover {
 				</table>
 
 			</div>
+=======
+					<h3 class="my-4 text-center">농업인 마이페이지</h3>
+					<div class="list-group mb-4">
+						<a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">내 정보</a> 
+						<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold"style= "background-color:#D1E9CA;">판매 목록</a> 
+						<a href="/farmapp/mypage/dailyLoglist" class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지</a> 
+						<a href="/farmapp/mypage/activitylist" class="list-group-item list-group-item-action text-center font-weight-bold">활동 내역</a>
+					</div>
+				</div>
+				<div id="root" style="width: 800px">
+				<div id="mypagesize">
+					아이디<input type="text" />
+				</div>
 				<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold">판매 현황</a>
 					
 					<div id ="border">

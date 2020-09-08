@@ -1,10 +1,12 @@
 package com.kh.farmapp.mypage.user.model.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
@@ -17,6 +19,7 @@ import common.dto.TBOrder;
 import common.dto.UserAddress;
 import common.dto.UserTB;
 import common.util.FileUtil;
+import common.util.Paging;
 
 @Service
 public class MypageServiceImpl implements MyPageService{
@@ -25,12 +28,13 @@ public class MypageServiceImpl implements MyPageService{
 	private MyPageDao mypageDao;
 	
 	@Override
-	public Map<String, Object> modifyUser(UserTB user) {
+	public int modifyUser(UserTB user) {
 		
-		Map<String, Object> userInfo = mypageDao.selectUser(user);
+		System.out.println("1");
+		int res = mypageDao.modifyUser(user);
+		System.out.println(res);
 		
-		
-		return userInfo;
+		return res;
 	}
 
 
@@ -50,20 +54,27 @@ public class MypageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	public int leave(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int leave(UserTB user) {
+		return mypageDao.leave(user);
 	}
 
 	@Override
-	public List<QuestionOneonone> o3List() {
-		return mypageDao.o3List();
+	public Map<String, Object> o3List(int cPage, int cntPerPage) {
+		
+		Map<String, Object> o3List = new HashMap<String, Object>();
+		
+		Paging page = new Paging(mypageDao.cntO3(), cPage, cntPerPage);
+
+		List<Map<String, Object>> one = mypageDao.o3List(page);
+		o3List.put("o3List", one);
+		o3List.put("page", page);
+		
+		return o3List;
 	}
 
 	@Override
 	public QuestionOneonone o3Detail(int qNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return mypageDao.o3Detail(qNo);
 	}
 
 	@Override
@@ -85,9 +96,8 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public Application appliActList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String, Object>> appliActList(UserTB user) {
+		return mypageDao.appliActList(user);
 	}
 
 	@Override
@@ -97,9 +107,24 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public Basket basketList() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> basketList(int userNo, int cPage, int cntPerPage) {
+		
+		int total= mypageDao.cntBasket(userNo);
+		Paging page = new Paging(total, cPage, cntPerPage);
+
+		System.out.println("전체 게시물 수 :" + total);
+		Map<String, Object> sub = new HashMap<String, Object>();
+		
+		sub.put("page", page);
+		sub.put("userNo", userNo);
+		List<Map<String, Object>> baskets = mypageDao.basketList(sub);
+		
+		Map<String, Object> basketList = new HashMap<String, Object>();
+		
+		basketList.put("baskets", baskets);
+		basketList.put("page", page);
+		
+		return basketList;
 	}
 
 	@Override
@@ -109,15 +134,30 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public TBOrder orderList() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> orderList(int userNo, int cPage, int cntPerPage) {
+		
+		Map<String, Object> orderList = new HashMap<String, Object>();
+		
+		int total= mypageDao.cntOrder(userNo);
+		Paging page = new Paging(total, cPage, cntPerPage);
+
+		System.out.println("전체 게시물 수 :" + total);
+		Map<String, Object> sub = new HashMap<String, Object>();
+		
+		sub.put("page", page);
+		sub.put("userNo", userNo);
+		
+		List<Map<String, Object>> orders = mypageDao.orderList(sub);
+		orderList.put("orders", orders);
+		orderList.put("page", page);
+		
+		return orderList;
+		
 	}
 
 	@Override
-	public Product orderDetail(int orderNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> orderDetail(int orderNo) {
+		return mypageDao.orderDetail(orderNo);
 	}
 
 	@Override
@@ -125,6 +165,31 @@ public class MypageServiceImpl implements MyPageService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public UserTB selectUser(UserTB user) {
+		
+		return mypageDao.selectUser(user);
+	}
+
+
+
+	@Override
+	public int getCount() {
+		return mypageDao.cntO3();
+	}
+
+
+
+	@Override
+	public int cntApli(UserTB user) {
+		return mypageDao.cntApli(user);
+	}
+
+
+
 
 
 

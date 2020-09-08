@@ -41,7 +41,10 @@ public interface FarmerMypageService {
 	
 	
 	//영농일지 상세페이지
-		public FarmingDailylog read(int diaryNo);
+	public FarmingDailylog read(int diaryNo);
+
+	public FarmingDailylog read(int dailylogNo);
+
 	
 	/**
 	 * 농장 체험 신청내역 리스트 조회
@@ -49,15 +52,25 @@ public interface FarmerMypageService {
 	 * @param farmer 
 	 * @return
 	 */
+
 	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer);
+
+	public List<Map<String, Object>> activitylist(Criteria cri);
+
 
 	/**
 	 * 일손 체험 신청내역 리스트 조회
 	 * @param cri
+
 	 * @param farmer 
 	 * @return 
 	 */
 	public List<Map<String, Object>> activitylist3(Criteria cri, Farmer farmer);
+
+	 * @return 
+	 */
+	public List<Map<String, Object>> activitylist3(Criteria cri);
+
 	
 	/**
 	 * 농장체험내역 총 갯수
@@ -96,10 +109,10 @@ public interface FarmerMypageService {
     */
    public int updatePayment(TBOrder order);
 
+
    // 영농일지 데이트눌렀을때 리스트
    public List<Map<String, Object>> datelist(String date);
 
-   
    
    
    
