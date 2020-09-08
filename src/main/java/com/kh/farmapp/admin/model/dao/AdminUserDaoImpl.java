@@ -33,8 +33,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 
 	@Override
 	public List<Map<String, Object>> selectAllUserList() {
-		// 여기서부터 작성하기
-		return null;
+		return session.selectList("ADMINMEMBER.selectAllUserList");
 	}
 
 	@Override
