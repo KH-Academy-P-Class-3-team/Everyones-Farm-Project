@@ -93,7 +93,7 @@
 	<resultMap type="hashmap" id="noticeDetailMap">
 		<result property="noticeNo" column="notice_no" />
 		<result property="title" column="title" />
-		<result property="content" column="content" />
+		<result property="content" column="content" javaType="java.lang.String" jdbcType="CLOB" />
 		<result property="adminNo" column="admin_no" />
 		<result property="regDate" column="reg_date" />
 		<result property="isShowed" column="is_showed" />
