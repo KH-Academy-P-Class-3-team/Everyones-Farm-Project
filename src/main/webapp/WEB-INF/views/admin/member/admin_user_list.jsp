@@ -70,22 +70,7 @@
 </div>
 
 <!-- 검색 이벤트 javascript -->
-<script type="text/javascript">
-$("#search-btn").on("click", function(){
-	
-	const word = $("#member-search").val() 
-	/* 검색어가 입력되어 있지 않을 경우에는 이벤트 적용 안되게 */
-	if(word == ''){
-		
-		alert("검색어를 입력해주세요.")
-		$("#member-search").focus()
-		
-	} else {
-		$(location).attr("href", "/farmapp/adminmember/userlist?search=" + word)
-	}
-	
-})
-</script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/member/admin_user_search_event.js"></script>
 <!-- checkbox 에 대한 javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/common/checkbox-event.js"></script>
 <!-- footer include -->
