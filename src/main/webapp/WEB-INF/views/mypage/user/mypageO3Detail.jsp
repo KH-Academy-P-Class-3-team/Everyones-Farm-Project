@@ -213,6 +213,8 @@ a:hover {
 			<div>
 				<button class="btn btn-warning pull-right" type="button"
 				 onclick="javascript:location.href='deleteO3?QUESTION_NO=${one.questionNo}'">삭제</button>
+				<button class="btn pull-right" type="button"
+				 onclick="javascript:location.href='mypageO3List'">뒤로가기</button>
 					
 			</div>
 		</div>

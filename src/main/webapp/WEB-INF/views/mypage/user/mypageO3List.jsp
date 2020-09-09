@@ -135,7 +135,7 @@ a:hover {
 						<c:forEach items="${list.o3List}" var="O3">
 							<tr>
 								<td><a
-									href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}&&row=${O3.RNUM}">${O3.QUESTION_NO }</a></td>
+									href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}">${O3.QUESTION_NO }</a></td>
 								<td><a
 									href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}">${O3.TITLE }</a></td>
 								<td><a

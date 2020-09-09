@@ -116,6 +116,13 @@ public interface MyPageDao {
 		 */
 		public Map<String, Object> getTotla(UserTB user);
 
+		/**
+		 * 최대최소값 구해 계산 하기
+		 * @param user
+		 * @return
+		 */
+		public Map<String, Object> getOrderTotal(int orderNo);
+
 
 
 }

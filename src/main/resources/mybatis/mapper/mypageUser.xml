@@ -202,7 +202,7 @@
 		om.ORDER_DATE desc) n1
 		) WHERE rnum between #{page.start} and
 		#{page.end}
-		ORDER BY ORDER_NO
+		ORDER BY ORDER_NO desc
 	</select>
 
 	<select id="cntOrder" resultType="int">
@@ -210,8 +210,14 @@
 		where user_no=#{userNo}
 	</select>
 	
+	<select id="orderminMax" resultType="map">
+     select MIN(order_no) MIN, MAX(order_no) MAX
+     from tb_order
+     WHERE user_no = #{userNo}
+	</select>
+
 	<select id="minmax" resultType="map">
-	select Min(question_no) MIN, MAX(question_no) MAX
+	 select Min(question_no) MIN, MAX(question_no) MAX
      from question_oneonone
      WHERE user_no = #{userNo}
 	</select>

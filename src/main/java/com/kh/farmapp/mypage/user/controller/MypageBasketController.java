@@ -1,5 +1,6 @@
 package com.kh.farmapp.mypage.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
 import common.dto.Farmer;
+import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserTB;
 
@@ -121,8 +123,9 @@ public class MypageBasketController {
 
 	//구매 목록 리스트 상세 정보
 	@RequestMapping("mypage/user/OrderDetail")
-	public ModelAndView orderDetail(int orderNo) {
+	public ModelAndView orderDetail(int orderNo, HttpSession session) {
 		
+		UserTB user = (UserTB) session.getAttribute("userInfo");
 		System.out.println("orderno:"+orderNo);
 		
 		Map<String, Object> orderDetail = mypageService.orderDetail(orderNo);
@@ -131,9 +134,40 @@ public class MypageBasketController {
 		
 		System.out.println(orderDetail);
 		
+
+		
+		Map<String, Object> total = mypageService.getOrderTotal(user.getUserNo());
+
+		int max = Integer.parseInt(String.valueOf(total.get("MAX")));
+		int min = Integer.parseInt(String.valueOf(total.get("MIN")));
+		//위아래 페이지로 넘어가기
+		Map<String, Object> down = new HashMap<String, Object>();
+		int forDown = orderNo;
+		while( min <= forDown) {
+			--forDown;
+			down = mypageService.orderDetail(forDown);
+			
+			if(down != null)
+			break;
+		}
+
+		Map<String, Object> up = new HashMap<String, Object>();
+		int forUp = orderNo;
+		while( max >= forUp) {
+			++forUp;
+			up = mypageService.orderDetail(forUp);
+			
+			if(up != null)
+			break;
+		}
+		System.out.println("up :"+up);
+		System.out.println("down : "+down);
+		mav.addObject("up", up);
+		mav.addObject("down", down);
+		mav.addObject("total", total);
 		mav.addObject("orderDetail", orderDetail);
 		mav.setViewName("mypage/user/OrderDetail");
-		
+
 		return mav;
 		
 	}

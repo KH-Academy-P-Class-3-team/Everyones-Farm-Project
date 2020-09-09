@@ -163,6 +163,12 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 
+	@Override
+	public Map<String, Object> getOrderTotal(int orderNo) {
+		return sqlSession.selectOne("Mypage.orderminMax", orderNo);
+	}
+
+
 
 
 

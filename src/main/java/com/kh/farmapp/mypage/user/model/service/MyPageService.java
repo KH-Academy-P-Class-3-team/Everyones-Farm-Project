@@ -106,11 +106,18 @@ public  interface MyPageService {
 	public int deleteBasket(int[] arr);
 	
 	/**
-	 * 최대최소값 구해 계산 하기
+	 * 일대일 문의 최대최소값 구해 계산 하기
 	 * @param user
 	 * @return
 	 */
 	public Map<String, Object> getTotal(UserTB user);
+	
+	/**
+	 *  주문 내역 최대 최소값 구하기
+	 * @param orderNo
+	 * @return
+	 */
+	public Map<String, Object> getOrderTotal(int orderNo);
 
 
 

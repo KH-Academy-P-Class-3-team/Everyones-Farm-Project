@@ -255,6 +255,12 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 
+	@Override
+	public Map<String, Object> getOrderTotal(int orderNo) {
+		return mypageDao.getOrderTotal(orderNo);
+	}
+
+
 
 
 
