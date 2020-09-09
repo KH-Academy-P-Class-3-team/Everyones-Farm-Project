@@ -29,14 +29,6 @@ public interface AdminUserService {
 	
 	/**
 	 * 관리자 페이지의 농업인 회원 신청 상세 페이지에서 사용된다.
-	 * 관리자는 신청서를 보고 승인을 한다.
-	 * @param farmer - 승인할 농업인 회원 객체
-	 * @return int - is_confirm 컬럼 업데이트 결과 반환
-	 */
-	public int approveFarmerApplication(Farmer farmer);
-	
-	/**
-	 * 관리자 페이지의 농업인 회원 신청 상세 페이지에서 사용된다.
 	 * 관리자는 신청서를 보고 보류한다.
 	 * @param farmer - 보류할 농업인 회원 객체
 	 * @return int - is_confirm 컬럼 업데이트 결과 반환
@@ -105,5 +97,29 @@ public interface AdminUserService {
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
 	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging);
+
+	/**
+	 * 농장 입점 신청 승인 요청
+	 * 
+	 * @param farmerNoList - farmerNo 정보를 갖는 List
+	 * @return int - 승인 요청 결과
+	 */
+	public int approveFarmerApplication(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 신청 목록에서 선택된 회원들의 메일 조회 요청
+	 * 
+	 * @param farmerNoList - farmerNo 정보를 갖는 List
+	 * @return List<Farmer> - 조회 결과
+	 */
+	public List<Farmer> selectFarmerMailByFarmerNo(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 신청 승인 메일 보내기
+	 * 
+	 * @param mailRecipient - 메일 받는 사람
+	 * @param urlPath - 홈페이지 서버
+	 */
+	public void approveMailSend(Farmer mailRecipient, String urlPath);
 
 }

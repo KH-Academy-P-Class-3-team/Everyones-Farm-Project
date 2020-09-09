@@ -3,7 +3,13 @@ package com.kh.farmapp.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.admin.model.dao.AdminUserDao;
@@ -21,6 +27,9 @@ public class AdminUserServiceImpl implements AdminUserService{
 	@Autowired
 	private AdminUserDao adminUserDao;
 	
+	@Autowired
+	JavaMailSender mailSender;
+	
 	// pagingConfig 상수
 	private static final int USER_CODE = 0;
 	private static final int FARMER_CODE = 1;
@@ -36,11 +45,6 @@ public class AdminUserServiceImpl implements AdminUserService{
 		return adminUserDao.selectFarmerApplicationByFarmerNo(farmerNo);
 	}
 
-	@Override
-	public int approveFarmerApplication(Farmer farmer) {
-		return adminUserDao.updateIsConfirm(farmer);
-	}
-	
 	@Override
 	public int putFarmerApplicationOnHold(Farmer farmer) {
 		return adminUserDao.updateIsConfirmToNo(farmer);
@@ -141,5 +145,51 @@ public class AdminUserServiceImpl implements AdminUserService{
 	@Override
 	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging) {
 		return adminUserDao.selectFarmApplicationByPaging(apaging);
+	}
+	
+	// 농장 입점 신청 승인 요청
+	@Override
+	public int approveFarmerApplication(List<String> farmerNoList) {
+		return adminUserDao.approveFarmerApplication(farmerNoList);
+	}
+	
+	// 농장 입점 신청 목록에서 선택된 회원들의 메일 조회
+	@Override
+	public List<Farmer> selectFarmerMailByFarmerNo(List<String> farmerNoList) {
+		return adminUserDao.selectFarmerMailByFarmerNo(farmerNoList);
+	}
+	
+	// 농장 입점 신청 메일 발송
+	@Override
+	public void approveMailSend(Farmer mailRecipient, String urlPath) {
+		
+		// 메일 보내는 사람
+		String setFrom="everyonesfarm@naver.com";
+		// 메일 받는 사람
+		String tomail = mailRecipient.getEmail();
+		// 메일 제목
+		String title = mailRecipient.getFarmerId() + "님, [모두의 농장] 회원이 되신걸 축하드립니다!";
+		// 메일 내용
+		String htmlBody = 
+			"<h2>" +mailRecipient.getFarmerId() + "님!!! [모두의 농장] 회원 승인이 완료됐습니다!</h2>"
+			+ "<h3>모두의 농장에 접속하여 농장, 농작물 홍보 및 판매 상품을 등록해보세요!</h3>"
+			+ "<a href='http://"+ urlPath + "'>모두의 농장 바로가기</a>";
+		
+		try {
+			mailSender.send(new MimeMessagePreparator() {
+			   public void prepare(MimeMessage mimeMessage) throws MessagingException {
+			     MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			     message.setFrom(setFrom);
+			     message.setTo(tomail);
+			     message.setSubject(title);
+			     
+			     message.setText(htmlBody, true);
+			   }
+			});
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

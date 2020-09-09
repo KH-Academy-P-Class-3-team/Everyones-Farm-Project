@@ -213,8 +213,8 @@
 		        farm
 		    ON
 		        f.farmer_no = farm.farmer_no
-		where 
-		    is_confirm = 0	
+<!-- 		where  -->
+<!-- 		    is_confirm = 0	 -->
 	</select>
 	
 	<!-- 검색된 농장 입점 갯수 조회 -->
@@ -228,7 +228,8 @@
 		    ON
 		        f.farmer_no = farm.farmer_no
 		where 
-		    is_confirm = 0
+<!-- 		    is_confirm = 0 -->
+			1=1
 		    and (
 		        farm.farm_name LIKE '%' || #{search} || '%'
 		        or f.farmer_id LIKE '%' || #{search} || '%'
@@ -242,6 +243,7 @@
 		<result property="farmerId" column="farmer_id" />
 		<result property="name" column="name" />
 		<result property="applicationDate" column="application_date" />
+		<result property="isConfirm" column="is_confirm" />
 		<result property="farmNo" column="farm_no" />
 		<result property="farmName" column="farm_name" />
 	</resultMap>
@@ -259,6 +261,7 @@
 		            , f.farmer_id
 		            , f.name
 		            , f.application_date
+		            , f.is_confirm
 		            , farm.farm_no
 		            , farm.farm_name
 		        from 
@@ -268,7 +271,8 @@
 		            ON
 		                f.farmer_no = farm.farmer_no
 		        where 
-		            is_confirm = 0 
+<!-- 		            is_confirm = 0  -->
+					1=1
 		            <if test="search != null and search != ''">
 		            and (
 		                farm.farm_name LIKE '%' || #{search} || '%'
@@ -277,12 +281,43 @@
 		            )
 		            </if>
 		        order by
-		            f.application_date
+		        	f.is_confirm
+		            , f.application_date
 		            , f.farmer_no
 		    )fa
 		)falist
 		where
 		    farm_order between #{startNo} and #{endNo}
+	</select>
+
+	<update id="approveFarmerApplication" parameterType="list">
+		update
+		    farmer
+		set 
+		    is_confirm = 1
+		where
+		    farmer_no in
+		    <foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+				#{nums}
+			</foreach>
+	</update>	
+	
+	<!-- 입점 승인, 입점 보류의 메일을 보내기 위한 회원들의 이메일 조회 -->
+	<select id="selectFarmerMailByFarmerNo" parameterType="list" resultType="common.dto.Farmer">
+		select
+		    f.farmer_no
+		    , f.farmer_id
+		    , f.name
+		    , f.email
+		from
+		    farmer f
+		where
+		    f.farmer_no in 
+		    <foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+				#{nums}
+			</foreach>
 	</select>
 	
 </mapper>

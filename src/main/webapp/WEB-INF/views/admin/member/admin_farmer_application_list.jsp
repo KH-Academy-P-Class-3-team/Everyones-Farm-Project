@@ -28,12 +28,13 @@
 					<th class="m-table__th">농장명</th>
 					<th class="m-table__th">신청자 이름(아이디)</th>
 					<th class="m-table__th">신청 날짜</th>
+					<th class="m-table__th">승인 상태</th>
 				</tr>
 				<c:choose>
 					<%-- userList null 일 때 --%>
 					<c:when test="${empty farmApplicationList }">
 						<tr>
-							<td colspan="4">최근 입점 신청을 한 농장이 없습니다.</td>
+							<td colspan="5">최근 입점 신청을 한 농장이 없습니다.</td>
 						</tr>
 					</c:when>
 					<%-- userList null이 아닐 때 --%>
@@ -46,6 +47,16 @@
 							<td class="m-table__td">
 								<fmt:formatDate value="${fa.applicationDate }" pattern="yyyy-MM-dd"/>
 							</td>
+							<td class="m-table__td">
+								<c:choose>
+									<c:when test="${fa.isConfirm eq 1 }">
+										입점 승인
+									</c:when>
+									<c:when test="${fa.isConfirm ne 1 }">
+										입점 보류
+									</c:when>
+								</c:choose>
+							</td>
 						</tr>
 						</c:forEach>
 					</c:when>
@@ -55,9 +66,9 @@
 		
 		<!-- 버튼 div -->
 		<div class="member-list__btns-wrap">
-			<!-- 회원 탈퇴 취소 버튼 -->
+			<!-- 농장 입점 보류 버튼 -->
 			<span class="member-list__btn-hold btn" id="hold-farm">입점 보류</span>
-			<!-- 삭제 버튼 -->
+			<!-- 농장 입점 수락 버튼 -->
 			<span class="member-list__btn-accept btn" id="accept-farm">입점 수락</span>
 		</div>
 		
@@ -73,7 +84,90 @@
 </div>
 <!-- 버튼 이벤트 -->
 <script type="text/javascript">
-
+//입점 보류 버튼 클릭 이벤트
+$("#hold-farm").on("click", function(){
+	
+// 	const checkCnt = $("input[name='checkNormal']:checked").length
+// 	const chkArr = new Array();
+// 	$("input[name='checkNormal']:checked").each(function() {
+// 		/* 체크박스가 체크된 행의 value 값 */
+// 		chkArr.push($(this).val())
+// 	})
+	
+// 	/* 체크된 체크박스가 없을 때! */
+// 	if( checkCnt == 0 ){
+// 		alert("선택된 회원이 없습니다.")
+// 	} else { /* 체크된 체크박스가 있을 때! */
+		
+// 		/* AJAX 통신 */
+// 		$.ajax({
+// 			type: "POST" /* method type */
+// 			, url: "/farmapp/adminmember/deletefarmer" /* ajax url */
+// 			, data: "farmerNo=" + chkArr + "&checkCnt=" + checkCnt /* ajax 통신 데이터 */
+// 			, dataType: "json" /* 통신하는 데이터 type */
+// // 			, contentType:"application/json;charset=UTF-8"
+// 			, success: function( res ){ /* ajax 통신 성공시 */
+// 				/* res 값이 1이 아닐 때 */
+// 				if(res != 1){
+				
+// 					alert("회원 탈퇴가 오류로 인해 진행되지 않았습니다.")
+					
+// 				} else { /* res 값이 1일 때 */
+					
+// 					alert("회원 탈퇴가 정상적으로 진행됐습니다.")
+// 					// redirect 진행
+// // 					$(location).attr("href", "/farmapp/adminmember/farmerlist")
+// 					// reload
+// 					location.reload()
+// 				}
+// 			}
+// 			, error: function(){
+// 				alert("서버통신 오류입니다.")
+// 			}
+// 		})
+// 	}
+})
+// 입점 수락 버튼 클릭 이벤트
+$("#accept-farm").on("click", function(){
+	
+	const checkCnt = $("input[name='checkNormal']:checked").length
+	const chkArr = new Array();
+	$("input[name='checkNormal']:checked").each(function() {
+		/* 체크박스가 체크된 행의 value 값 */
+		chkArr.push($(this).val())
+	})
+	
+	/* 체크된 체크박스가 없을 때! */
+	if( checkCnt == 0 ){
+		alert("선택된 회원이 없습니다.")
+	} else { /* 체크된 체크박스가 있을 때! */
+		
+		/* AJAX 통신 */
+		$.ajax({
+			type: "POST" /* method type */
+			, url: "/farmapp/adminmember/approvefapplication" /* ajax url */
+			, data: "farmerNo=" + chkArr + "&checkCnt=" + checkCnt /* ajax 통신 데이터 */
+			, dataType: "json" /* 통신하는 데이터 type */
+// 			, contentType:"application/json;charset=UTF-8"
+			, success: function( res ){ /* ajax 통신 성공시 */
+				/* res 값이 1이 아닐 때 */
+				if(res != 1){
+				
+					alert("입점 수락이 오류로 인해 진행되지 않았습니다.")
+					
+				} else { /* res 값이 1일 때 */
+					
+					alert("입점 수락이 정상적으로 진행됐습니다.")
+					// redirect 진행
+					$(location).attr("href", "/farmapp/adminmember/fapplicationlist")
+				}
+			}
+			, error: function(){
+				alert("서버통신 오류입니다.")
+			}
+		})
+	}
+})
 </script>
 <!-- 신청서 검색 이벤트 js -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/member/admin_farmer_application_search_event.js"></script>

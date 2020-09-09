@@ -43,11 +43,6 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	}
 
 	@Override
-	public int updateIsConfirm(Farmer farmer) {
-		return 0;
-	}
-
-	@Override
 	public int updateIsConfirmToNo(Farmer farmer) {
 		return 0;
 	}
@@ -128,5 +123,17 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	@Override
 	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging) {
 		return session.selectList("ADMINMEMBER.selectFarmApplicationByPaging", apaging);
+	}
+	
+	// 농장 입점 승인 처리
+	@Override
+	public int approveFarmerApplication(List<String> farmerNoList) {
+		return session.update("ADMINMEMBER.approveFarmerApplication", farmerNoList);
+	}
+	
+	// 농장 입점 신청 목록에서 선택된 회원들의 메일 조회
+	@Override
+	public List<Farmer> selectFarmerMailByFarmerNo(List<String> farmerNoList) {
+		return session.selectList("ADMINMEMBER.selectFarmerMailByFarmerNo", farmerNoList);
 	}
 }

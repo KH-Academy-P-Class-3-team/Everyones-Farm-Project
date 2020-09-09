@@ -29,13 +29,6 @@ public interface AdminUserDao {
 	public List<Map<String, Object>> selectFarmerApplicationByFarmerNo(Farmer farmerNo);
 
 	/**
-	 * 농업인 회원의 is_confirm 컬럼의 값을 'y'로 업데이트 한다.
-	 * @param farmer - 승인할 농업인 회원 객체
-	 * @return int - is_confirm 컬럼 업데이트 결과 반환
-	 */
-	public int updateIsConfirm(Farmer farmer);
-
-	/**
 	 * 농업인 회원의 is_confirm 컬럼의 값을 'n'로 업데이트 한다.
 	 * @param farmer - 보류할 농업인 회원 객체
 	 * @return int - is_confirm 컬럼 업데이트 결과 반환
@@ -142,5 +135,21 @@ public interface AdminUserDao {
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
 	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging);
+
+	/**
+	 * 농장 입점 승인 처리
+	 * 
+	 * @param farmerNoList - farmerNo 정보를 갖는 List
+	 * @return int - 승인 처리 결과
+	 */
+	public int approveFarmerApplication(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 신청 목록에서 선택된 회원들의 메일 조회
+	 * 
+	 * @param farmerNoList - farmerNo 정보를 갖는 List
+	 * @return List<Farmer> - 조회 결과
+	 */
+	public List<Farmer> selectFarmerMailByFarmerNo(List<String> farmerNoList);
 
 }

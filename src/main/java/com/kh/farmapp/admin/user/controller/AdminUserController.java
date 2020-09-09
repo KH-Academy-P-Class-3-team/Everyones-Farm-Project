@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.executor.ReuseExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,7 +189,59 @@ public class AdminUserController {
 	
 	// 농업인 회원 신청 승인
 	@RequestMapping(value = "/adminmember/approvefapplication", method = RequestMethod.POST)
-	public void approveFarmerApplication(Farmer farmer) {
+	@ResponseBody
+	public int approveFarmerApplication(
+				// 입점 수락할 번호들
+				@RequestParam Map<String, Object> approveNums
+				// 서버 url 을 알기 위한 request 객체
+				, HttpServletRequest req
+			) {
+		
+		// logger 찍기
+		logger.info("/adminmember/approvefapplication - [POST] 요청");
+		
+		// 반환값
+		int result = 0;
+		
+//		logger.debug("approveNums: " + approveNums);
+		
+		// approveNums -> ArrayList 로 변환
+		String[] farmerNums = approveNums.get("farmerNo").toString().split(",");
+		List<String> farmerNoList = new ArrayList<>(Arrays.asList(farmerNums));
+		logger.debug("farmerNoList: " + farmerNoList.toString());
+		
+		// 입점 수락
+		int approveRes = adminUserService.approveFarmerApplication(farmerNoList);
+		logger.debug("approveRes: " + approveRes);
+		
+		// 서버 url
+		String urlPath = req.getServerName() + ":" + req.getServerPort() + req.getContextPath();
+		logger.debug("urlPath: " + urlPath);
+		
+		// 선택된 회원들의 메일 조회
+		List<Farmer> farmerMailList = adminUserService.selectFarmerMailByFarmerNo(farmerNoList);
+		logger.debug("farmerMailList: " + farmerMailList.toString());
+		
+		// 입점 수락 성공/실패 시
+		// 입점 수락 성공 -> 메일 발송해주기
+		if(approveRes >= 1) {
+			
+			logger.info("입점 승인 성공~");
+			result = 1;
+
+			// 메일 발송 - 선택된 회원들의 수 만큼 메일 발송 foreach 사용
+			for(Farmer mailRecipient : farmerMailList) {
+				adminUserService.approveMailSend(mailRecipient, urlPath);
+			}
+			
+			return result;
+		} else { // 입점 수락 실패... -> 메일 발송 x
+			
+			logger.info("입점 승인 실패...");
+			return result;
+			
+		}
+//		return result;
 	}
 	
 	// 농업인 회원 신청 보류
