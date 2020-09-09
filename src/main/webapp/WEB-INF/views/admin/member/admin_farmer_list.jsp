@@ -19,7 +19,7 @@
 		<div class="member-list__title">
 			<span class="member-list__title-text">농업인 회원 관리</span>
 		</div>
-		<!-- 일반 회원 목록 -->
+		<!-- 농업인 회원 목록 -->
 		<div class="member__table">
 			<table class="member__m-table checkbox_group">
 				<tr class="m-table__tr-head">

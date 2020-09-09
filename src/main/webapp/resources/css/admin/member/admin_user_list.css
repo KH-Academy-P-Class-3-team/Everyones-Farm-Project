@@ -72,3 +72,13 @@
 	background: #B65656;
     color: white;
 }
+/* 입점 보류 버튼 */
+.member-list__btns-wrap .member-list__btn-hold {
+	background: #E2CC6C;
+	margin-right: 15px;
+}
+/* 입점 수락 버튼 */
+.member-list__btns-wrap .member-list__btn-accept {
+	background: #789F6F;
+	color: white;
+}

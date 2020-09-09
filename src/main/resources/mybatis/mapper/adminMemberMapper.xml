@@ -102,6 +102,8 @@
         farm
     ON
         f.farmer_no = farm.farmer_no
+    where
+    	f.is_confirm = 1
 	</select>
 	
 	<!-- 검색된 농업인 회원 COUNT -->
@@ -115,8 +117,11 @@
 		    ON
 		        f.farmer_no = farm.farmer_no
 		where
-		    farmer_id LIKE  '%' || #{search} || '%'
-		    or name LIKE '%' || #{search} || '%'
+    		f.is_confirm = 1
+		    and (
+		    	farmer_id LIKE  '%' || #{search} || '%'
+		    	or name LIKE '%' || #{search} || '%'
+		    )
 	</select>
 	
 	<resultMap type="hashmap" id="flistmap">
@@ -152,6 +157,8 @@
 		                farm
 		            ON
 		                f.farmer_no = farm.farmer_no
+		        where
+            		f.is_confirm = 1
 		        order by
 		            f.farmer_no desc
 		    )fs

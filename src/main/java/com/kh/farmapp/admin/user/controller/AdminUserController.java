@@ -133,6 +133,12 @@ public class AdminUserController {
 	// 농업인 회원 신청 관리 페이지
 	@RequestMapping(value = "/adminmember/fapplicationlist", method = RequestMethod.GET)
 	public String adminFarmerApplicationList() {
+		
+		// logger 찍기
+		logger.info("/adminmember/fapplicationlist - [GET] 요청");
+		
+		
+		
 		return "admin/member/admin_farmer_application_list";
 	}
 	
