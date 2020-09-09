@@ -56,17 +56,17 @@ public class AdminUserController {
 		pagingConfig.put("search", search);
 		pagingConfig.put("listCode", FARMER_CODE);
 		
-		logger.debug("pagingConfig: " + pagingConfig.toString());
+//		logger.debug("pagingConfig: " + pagingConfig.toString());
 		
 		// 페이징 설정
 		AdminPaging apaging = adminUserService.getPaging(pagingConfig);
-		logger.debug("apaging: " + apaging.toString());
+//		logger.debug("apaging: " + apaging.toString());
 		
 		// select 조회 연산 수행
 		List<Map<String, Object>> farmerList = adminUserService.selectFarmerByPaging(apaging);
-		for(Map<String, Object> f : farmerList) {
-			logger.debug("f: " + f.toString());
-		}
+//		for(Map<String, Object> f : farmerList) {
+//			logger.debug("f: " + f.toString());
+//		}
 		
 		// model 값 넘겨주기
 		// 페이징 객체 넘기기
@@ -176,17 +176,17 @@ public class AdminUserController {
 		List<String> userNoList = new ArrayList<>(Arrays.asList(userNums));
 		logger.debug("userNoList: " + userNoList.toString());
 		
-		// 삭제 처리
+		// 탈퇴 처리
 		int delRes = adminUserService.deleteUserByUserNo(userNoList);
 		
-		// 삭제 성공
+		// 탈퇴 성공
 		if( delRes >= 1 ) {
 			
 			logger.info("탈퇴 성공~");
 			result = 1;
 			return result;
 			
-		} else { // 삭제 결과 실패
+		} else { // 탈퇴 결과 실패
 			
 			logger.info("탈퇴 실패...");
 			return result;
@@ -194,10 +194,10 @@ public class AdminUserController {
 		}
 	}
 	// 일반 회원 탈퇴 취소
-	@RequestMapping(value = "/adminmember/delcanceluser")
+	@RequestMapping(value = "/adminmember/delcanceluser", method = RequestMethod.POST)
 	@ResponseBody
 	public int deleteCancelUser(
-			// 삭제할 번호들
+			// 탈퇴 취소할 번호들
 			@RequestParam Map<String, Object> cancelNums
 			) {
 		
@@ -211,6 +211,7 @@ public class AdminUserController {
 		List<String> userNoList = new ArrayList<>(Arrays.asList(userNums));
 		logger.debug("userNoList: " + userNoList.toString());
 		
+		// 탈퇴 처리
 		int cancelRes = adminUserService.delCancelUserByUserNo(userNoList);
 		logger.debug("cancelRes: " + cancelRes);
 		
@@ -233,7 +234,82 @@ public class AdminUserController {
 	
 	// 농업인 회원 탈퇴
 	@RequestMapping(value = "/adminmember/deletefarmer", method = RequestMethod.POST)
-	public void deleteFarmer(Farmer farmer) {
+	@ResponseBody
+	public int deleteFarmer(
+				// 탈퇴할 번호들
+				@RequestParam Map<String, Object> deleteNums
+			) {
+		
+		// logger 어떤 url 요청했는지
+		logger.info("/adminmember/deletefarmer - [POST] 요청");
+		
+		// 반환할 값
+		int result = 0;
+		
+		// deleteNums test print
+		logger.debug("deleteNums: " + deleteNums.toString());
+		
+		// farmerNo -> ArrayList 로 변환
+		String[] farmerNums = deleteNums.get("farmerNo").toString().split(",");
+		List<String> farmerNoList = new ArrayList<>(Arrays.asList(farmerNums));
+		logger.debug("farmerNoList: " + farmerNoList);
+		
+		// 탈퇴 처리
+		int delRes = adminUserService.deleteFarmerByFaremrNo(farmerNoList);
+//		logger.debug("delRes: " + delRes);
+		
+		// 탈퇴 성공
+		if( delRes >= 1 ) {
+			
+			logger.info("탈퇴 성공");
+			result = 1;
+			return result;
+			
+		} else { // 탈퇴 실패
+			
+			logger.info("탈퇴 실패...");
+			return result;
+			
+		}
+	}
+	
+	// 농업인 회원 탈퇴 취소
+	@RequestMapping(value = "/adminmember/delcancelfarmer", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteCancelFarmer(
+			// 탈퇴 취소 번호들
+			@RequestParam Map<String, Object> cancelNums
+			) {
+
+		// logger 찍기
+		logger.info("/adminmember/delcancelfarmer - [POST] 요청");
+		
+		int result = 0;
+		
+		// cancelNums test pring
+		logger.debug("cancelNums: " + cancelNums.toString());
+		
+		// farmerNo -> ArrayList로 변환
+		String[] farmerNums = cancelNums.get("farmerNo").toString().split(",");
+		List<String> farmerNoList = new ArrayList<>(Arrays.asList(farmerNums));
+		logger.debug("farmerNoList: " + farmerNoList.toString());
+		
+		// 탈퇴 취소 처리
+		int cancelRes = adminUserService.delCancelFarmerByFarmerNo(farmerNoList);
+		logger.debug("cancelRes: " + cancelRes);
+		
+		// 탈퇴 처리 성공
+		if(cancelRes >= 1) {
+			
+			logger.info("탈퇴 처리 성공");
+			result = 1;
+			return result;
+			
+		} else { // 탈퇴 처리 실패...
+			
+			logger.info("탈퇴 처리 실패...");
+			return result;
+		}
 	}
 	
 }

@@ -82,4 +82,20 @@ public interface AdminUserService {
 	 */
 	public List<Map<String, Object>> selectFarmerByPaging(AdminPaging apaging);
 
+	/**
+	 * 농업인 회원 탈퇴 처리 요청
+	 * 
+	 * @param farmerNoList - 농업인 회원 번호를 갖는 List
+	 * @return int - 탈퇴 처리 결과
+	 */
+	public int deleteFarmerByFaremrNo(List<String> farmerNoList);
+
+	/**
+	 * 농업인 회원 탈퇴 취소 처리 요청
+	 * 
+	 * @param farmerNoList - farmerNo 갖는 List
+	 * @return int - 탈퇴 취소 처리 결과
+	 */
+	public int delCancelFarmerByFarmerNo(List<String> farmerNoList);
+
 }

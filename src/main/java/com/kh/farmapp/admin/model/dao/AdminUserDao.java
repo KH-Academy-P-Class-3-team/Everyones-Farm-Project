@@ -43,13 +43,6 @@ public interface AdminUserDao {
 	public int updateIsConfirmToNo(Farmer farmer);
 
 	/**
-	 * 농업인 회원 탈퇴, is_leave 컬럼 업데이트
-	 * @param farmer - 탈퇴 시킬 Farmer 객체
-	 * @return int - 업데이트 결과
-	 */
-	public int deleteFarmer(Farmer farmer);
-
-	/**
 	 * 페이징 처리를 위한 총 user count 조회
 	 * 
 	 * @return int - 조회된 결과
@@ -110,5 +103,21 @@ public interface AdminUserDao {
 	 * @return List<Map<String, Object>> - 조회 반환 결과
 	 */
 	public List<Map<String, Object>> selectFarmerByPaging(AdminPaging apaging);
+
+	/**
+	 * 농업인 회원 탈퇴 처리
+	 * 
+	 * @param farmerNoList - 농업인 회원 번호를 갖는 List
+	 * @return int - 탈퇴 처리 결과
+	 */
+	public int deleteFarmerByFarmerNo(List<String> farmerNoList);
+
+	/**
+	 * 농업인 회원 탈퇴 처리 취소
+	 * 
+	 * @param farmerNoList - farmerNo 정보를 갖는 List
+	 * @return int - 탈퇴 취소 처리 결과
+	 */
+	public int delCancelFarmerByFarmerNo(List<String> farmerNoList);
 
 }

@@ -5,6 +5,7 @@
 
 <mapper namespace="ADMINMEMBER">
 	
+	<!-- 총 회원 수 -->
 	<select id="selectCntAllUserList" resultType="int">
 		select
 		    count(*)
@@ -164,5 +165,33 @@
 		    )
 		    </if>
 	</select>
+	
+	<!-- 농업인 회원 탈퇴 처리 -->
+	<update id="deleteFarmerByFarmerNo" parameterType="list">
+		update
+			farmer
+		set
+			is_leave = 1
+		where
+			farmer_no in
+		<foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+			#{nums}
+		</foreach>
+	</update>
+	
+	<!-- 농업인 회원 탈퇴 취소 처리 -->
+	<update id="delCancelFarmerByFarmerNo" parameterType="list">
+		update
+			farmer
+		set
+			is_leave = 0
+		where
+			farmer_no in
+		<foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+			#{nums}
+		</foreach>
+	</update>
 	
 </mapper>

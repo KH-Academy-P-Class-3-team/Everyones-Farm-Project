@@ -118,4 +118,15 @@ public class AdminUserServiceImpl implements AdminUserService{
 		return adminUserDao.selectFarmerByPaging(apaging);
 	}
 	
+	// 농업인 회원 탈퇴 처리
+	@Override
+	public int deleteFarmerByFaremrNo(List<String> farmerNoList) {
+		return adminUserDao.deleteFarmerByFarmerNo(farmerNoList);
+	}
+	
+	// 농업인 회원 탈퇴 취소 처리
+	@Override
+	public int delCancelFarmerByFarmerNo(List<String> farmerNoList) {
+		return adminUserDao.delCancelFarmerByFarmerNo(farmerNoList);
+	}
 }

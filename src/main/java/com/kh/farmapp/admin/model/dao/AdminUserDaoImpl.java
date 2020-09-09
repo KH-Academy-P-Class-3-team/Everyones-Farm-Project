@@ -52,12 +52,6 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		return 0;
 	}
 
-	@Override
-	public int deleteFarmer(Farmer farmer) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 	// 일반 회원 총 갯수
 	@Override
 	public int selectCntAllUserList() {
@@ -105,5 +99,16 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public List<Map<String, Object>> selectFarmerByPaging(AdminPaging apaging) {
 		return session.selectList("ADMINMEMBER.selectFarmerByPaging", apaging);
 	}
+
+	// 농업인 회원 탈퇴 처리
+	@Override
+	public int deleteFarmerByFarmerNo(List<String> farmerNoList) {
+		return session.update("ADMINMEMBER.deleteFarmerByFarmerNo", farmerNoList);
+	}
 	
+	// 농업인 회원 탈퇴 취소 처리
+	@Override
+	public int delCancelFarmerByFarmerNo(List<String> farmerNoList) {
+		return session.update("ADMINMEMBER.delCancelFarmerByFarmerNo", farmerNoList);
+	}
 }

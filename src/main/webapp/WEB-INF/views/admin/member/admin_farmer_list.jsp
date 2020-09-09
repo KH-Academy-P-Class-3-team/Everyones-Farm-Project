@@ -84,9 +84,7 @@
 	</main>
 </div>
 <!-- 회원 탈퇴 관련 이벤트 -->
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/member/admin_farmer_delete_event.js"></script>
 <!-- 검색 이벤트 javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/member/admin_farmer_search_event.js" ></script>
 <!-- checkbox 에 대한 javascript -->
