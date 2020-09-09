@@ -160,4 +160,12 @@ public interface AdminUserDao {
 	 */
 	public int holdFarmerApplication(List<String> farmerNoList);
 
+	/**
+	 * 농장 입점 신청서 조회
+	 * 
+	 * @param farmerNo - 입점 신청서를 조회할 번호
+	 * @return Map<String, Object> - 조회 결과
+	 */
+	public Map<String, Object> selectFarmerApplicationDetailByFarmerNo(int farmerNo);
+
 }

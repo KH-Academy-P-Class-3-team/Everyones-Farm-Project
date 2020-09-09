@@ -335,4 +335,49 @@
 			</foreach>
 	</update>
 	
+	<resultMap type="hashmap" id="fApplicationMap">
+		<id property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="farmerName" column="name" />
+		<result property="farmerEmail" column="email" />
+		<result property="farmerPhone" column="phone" />
+		<result property="farmNo" column="farm_no" />
+		<result property="farmName" column="farm_name" />
+		<result property="farmPhone" column="phone" />
+		<result property="farmZoneCode" column="zonecode" />
+		<result property="farmFirstAddress" column="first_address" />
+		<result property="farmSecondAddress" column="second_address" />
+		<result property="farmReason" column="farm_reason" />
+		<result property="farmSell" column="farm_sell" />
+		<result property="farmMind" column="farm_mind" />
+		<result property="farmIntroduce" column="introduce" />
+	</resultMap>
+	<!-- 농장 입점 신청서 조회 -->
+	<select id="selectFarmerApplicationDetailByFarmerNo" parameterType="int" resultMap="fApplicationMap">
+		select
+		    f.farmer_no
+		    , f.farmer_id
+		    , f.name
+		    , f.email
+		    , f.phone
+		    , farm.farm_no
+		    , farm.farm_name
+		    , farm.phone
+		    , farm.zonecode
+		    , farm.first_address
+		    , farm.second_address
+		    , farm.farm_reason      <!-- 가입 이유 -->
+		    , farm.farm_sell        <!-- 농작물과 규모 -->
+		    , farm.farm_mind        <!-- 농업에 대한 마음 가짐 -->
+		    , farm.introduce        <!-- 농장 소개 -->
+		from
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+		where
+		    f.farmer_no = #{farmerNo}
+	</select>
+	
 </mapper>

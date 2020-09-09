@@ -35,13 +35,18 @@
 }
 .member__m-table .m-table__tr-body:hover {
 	background: #E9F7AB;
-	cursor: pointer;
+/* 	cursor: pointer; */
 }
 /* 테이블 th, td */
 .member__m-table .m-table__th
 , .member__m-table .m-table__td {
     padding: 14px 7px;
     text-align: center;
+}
+/* 테이블 td 의 자식 a태그 */
+.m-table__td > a {
+	color: black;
+	text-decoration: none;
 }
 /* 체크박스 크기 */
 .member__m-table .member-chk {

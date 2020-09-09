@@ -232,5 +232,11 @@ public class AdminUserServiceImpl implements AdminUserService{
 		
 	}
 	
+	// 농장 입점 신청서 조회
+	@Override
+	public Map<String, Object> selectFarmerApplicationDetailByFarmerNo(int farmerNo) {
+		return adminUserDao.selectFarmerApplicationDetailByFarmerNo(farmerNo);
+	}
+	
 	
 }

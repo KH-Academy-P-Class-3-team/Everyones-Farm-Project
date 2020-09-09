@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/* main tag css */
+.member-detail__main {
+	margin: 70px auto;
+}
+/* 농장 입점 신청서 css */
+.member-detail__main .member-detail__title-wrap {
+	margin-bottom: 30px;
+}
+.member-detail__title-wrap .member-detail__text {
+	font-size: 20px;
+    border-left: 3px solid #789F6F;
+    padding-left: 7px;
+    font-weight: 700;
+    opacity: 0.7;
+}
+/* 농업인 정보 테이블 css */
+.member-detail__main .member-detail__farmer-info {
+	margin-bottom: 30px;
+}
+.member-detail__farmer-info .farmer-info__table {
+	width: 100%;
+    border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+    padding:0;
+    border-spacing:0px;
+    border-collapse:collapse;
+}
+/* table tr css */
+.farmer-info__table .farmer-info__tr{
+    border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+}
+/* table td css */
+.farmer-info__table .farmer-info__td {
+	padding: 14px 8px;
+}
+.farmer-info__table .th-style {
+    background: #D1E9CA;
+    font-weight: 700;
+    text-align: center;
+}
+.farmer-info__table .td-content-style {
+	height: 100px;
+}
+/* table 제목 */
+.member-detail__farmer-info .farmer-info__title-wrap {
+	margin-bottom: 30px;
+}
+.farmer-info__title-wrap .farmer-info__title {
+    font-size: 18px;
+    font-weight: 700;
+    border-left: 3px solid #E2CC6C;
+    padding-left: 7px;
+    opacity: 0.9;
+}
+/* 버튼 div */
+.member-detail__main .member-detail__btn-wrap {
+	display: flex;
+	justify-content: center;
+}
+.member-detail__btn-wrap .btn {
+    border-radius: 3px;
+    padding: 14px 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+/* 입점 승인 버튼 */
+.member-detail__btn-wrap .approve-btn {
+    background: #789F6F;
+    color: white;
+    margin-right: 15px;
+}
+/* 입점 보류 버튼 */
+.member-detail__btn-wrap .hold-btn {
+	background: #E2CC6C;
+}

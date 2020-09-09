@@ -42,8 +42,8 @@
 						<c:forEach items="${farmApplicationList }" var="fa" >
 						<tr class="m-table__tr-body">
 							<td class="m-table__td"><input type="checkbox" value="${fa.farmerNo }" name="checkNormal" class="checkbox_normal member-chk" /></td>
-							<td class="m-table__td">${fa.farmName }</td>
-							<td class="m-table__td">${fa.name }(${fa.farmerId })</td>
+							<td class="m-table__td"><a href="<%=request.getContextPath() %>/adminmember/fapplicationdetail?farmerNo=${fa.farmerNo }">${fa.farmName }</a></td>
+							<td class="m-table__td"><a href="<%=request.getContextPath() %>/adminmember/fapplicationdetail?farmerNo=${fa.farmerNo }">${fa.name }(${fa.farmerId })</a></td>
 							<td class="m-table__td">
 								<fmt:formatDate value="${fa.applicationDate }" pattern="yyyy-MM-dd"/>
 							</td>

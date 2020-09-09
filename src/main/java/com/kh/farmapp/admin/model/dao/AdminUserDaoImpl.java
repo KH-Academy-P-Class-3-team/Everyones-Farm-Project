@@ -142,4 +142,10 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public int holdFarmerApplication(List<String> farmerNoList) {
 		return session.update("ADMINMEMBER.holdFarmerApplication", farmerNoList);
 	}
+
+	// 농장 입점 신청서 조회
+	@Override
+	public Map<String, Object> selectFarmerApplicationDetailByFarmerNo(int farmerNo) {
+		return session.selectOne("ADMINMEMBER.selectFarmerApplicationDetailByFarmerNo", farmerNo);
+	}
 }

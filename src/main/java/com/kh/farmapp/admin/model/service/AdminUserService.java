@@ -138,4 +138,12 @@ public interface AdminUserService {
 	 */
 	public void holdMailSend(Farmer mailRecipient, String urlPath);
 
+	/**
+	 * farmerNo 로 농장 입점 신청서(회원가입시 입력한 정보) 조회하기
+	 * 
+	 * @param farmerNo - 조회할 농장의 주인 번호
+	 * @return Map<String, Object> - 조회 결과 반환
+	 */
+	public Map<String, Object> selectFarmerApplicationDetailByFarmerNo(int farmerNo);
+
 }

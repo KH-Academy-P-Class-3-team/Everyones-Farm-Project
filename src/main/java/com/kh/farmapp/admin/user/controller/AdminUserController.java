@@ -191,8 +191,27 @@ public class AdminUserController {
 	
 	// 농업인 회원 신청 관리 상세 페이지
 	@RequestMapping(value = "/adminmember/fapplicationdetail", method = RequestMethod.GET)
-	public String adminFarmerApplicationDetail() {
-		return "";
+	public String adminFarmerApplicationDetail(
+				@RequestParam(defaultValue = "0")int farmerNo
+				, Model model
+			) {
+		
+		// logger 찍기
+		logger.info("/adminmember/fapplicationdetail - [GET] 요청");
+		
+		// farmerNo 찍기
+		logger.debug("farmerNo: " + farmerNo);
+		
+		// farmerNo로 신청서 조회하기
+		Map<String, Object> fApplication = adminUserService.selectFarmerApplicationDetailByFarmerNo(farmerNo);
+		logger.debug("fapplication: " + fApplication.toString());
+		
+		// Model 값 넘겨주기
+		if(fApplication != null) {
+			model.addAttribute("fApplication", fApplication);
+		}
+		
+		return "admin/member/admin_farmer_application_detail";
 	}
 	
 	// 농업인 회원 신청 승인
