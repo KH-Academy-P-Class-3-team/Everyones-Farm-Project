@@ -27,11 +27,11 @@ $("#hold-farm").on("click", function(){
 				/* res 값이 1이 아닐 때 */
 				if(res != 1){
 				
-					alert("입점 수락이 오류로 인해 진행되지 않았습니다.")
+					alert("입점 보류가 오류로 인해 진행되지 않았습니다.")
 					
 				} else { /* res 값이 1일 때 */
 					
-					alert("입점 수락이 정상적으로 진행됐습니다.")
+					alert("입점 보류가 정상적으로 진행됐습니다.")
 					// redirect 진행
 // 					$(location).attr("href", "/farmapp/adminmember/fapplicationlist")
 					//reoload

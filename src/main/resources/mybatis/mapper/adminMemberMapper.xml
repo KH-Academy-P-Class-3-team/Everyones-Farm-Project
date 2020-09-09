@@ -341,6 +341,7 @@
 		<result property="farmerName" column="name" />
 		<result property="farmerEmail" column="email" />
 		<result property="farmerPhone" column="phone" />
+		<result property="farmerIsConfirm" column="is_confirm" />
 		<result property="farmNo" column="farm_no" />
 		<result property="farmName" column="farm_name" />
 		<result property="farmPhone" column="phone" />
@@ -360,6 +361,7 @@
 		    , f.name
 		    , f.email
 		    , f.phone
+		    , f.is_confirm
 		    , farm.farm_no
 		    , farm.farm_name
 		    , farm.phone

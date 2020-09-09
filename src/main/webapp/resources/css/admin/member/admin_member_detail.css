@@ -64,14 +64,22 @@
     padding: 14px 12px;
     font-weight: 700;
     cursor: pointer;
+    margin-right: 15px;
+}
+.member-detail__btn-wrap .btn:last-child{
+	margin: 0;
 }
 /* 입점 승인 버튼 */
 .member-detail__btn-wrap .approve-btn {
     background: #789F6F;
     color: white;
-    margin-right: 15px;
 }
 /* 입점 보류 버튼 */
 .member-detail__btn-wrap .hold-btn {
 	background: #E2CC6C;
+}
+/* 목록으로 가기 버튼 css */
+.member-detail__btn-wrap .list-btn {
+	background: #605759;
+    color: white;
 }

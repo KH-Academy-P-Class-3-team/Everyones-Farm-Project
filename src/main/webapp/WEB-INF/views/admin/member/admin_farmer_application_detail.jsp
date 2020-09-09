@@ -41,6 +41,15 @@
 				<td class="farmer-info__td th-style">농업인 PHONE</td>
 				<td class="farmer-info__td">${fApplication.farmerPhone }</td>
 			</tr>
+			<tr class="farmer-info__tr">
+				<td class="farmer-info__td th-style">농업인 승인상태</td>
+				<td class="farmer-info__td">
+					<c:choose>
+						<c:when test="${fApplication.farmerIsConfirm eq 1 }">입점 승인</c:when>
+						<c:when test="${fApplication.farmerIsConfirm ne 1 }">입점 보류</c:when>
+					</c:choose>
+				</td>
+			</tr>
 			</table>
 		</div>
 		<!-- 농장 정보 -->
@@ -97,14 +106,19 @@
 		</div>
 		<!-- 농장 입점 신청 승인, 보류 버튼 -->
 		<div class="member-detail__btn-wrap">
-			<span class="btn approve-btn" data-farmerNo="${fApplication.farmerNo }">입점 승인</span><span class="btn hold-btn" data-farmerNo="${fApplication.farmerNo }">입점 보류</span>		
+			<c:choose>
+				<c:when test="${fApplication.farmerIsConfirm eq 1 }">
+					<span class="btn hold-btn" id="hold-farm" data-farmerNo="${fApplication.farmerNo }">입점 보류</span><span class="btn list-btn" id="toList">목록으로</span>		
+				</c:when>
+				<c:when test="${fApplication.farmerIsConfirm ne 1 }">
+					<span class="btn approve-btn" id="approve-farm" data-farmerNo="${fApplication.farmerNo }">입점 승인</span><span class="btn list-btn" id="toList">목록으로</span>		
+				</c:when>
+			</c:choose>
 		</div>
 	</main>
 </div>
 
 <!-- 버튼 이벤트 -->
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/member/admin_farmer_application_approve_event.js"></script>
 <!-- footer include -->
 <%@include file="../include/admin_footer.jsp" %>
