@@ -45,11 +45,12 @@
 		<!-- ActivityController에서 사용하는 mapper -->
 <!-- 		<mapper resource="/mybatis/mapper/activityMapper.xml" /> -->
     <!-- <mapper resource="/mybatis/mapper/mypageUser.xml" /> -->
+    	<mapper resource="/mybatis/mapper/mypageUser.xml" />
     
     	<!-- admin login mapper 파일 -->
     	<mapper resource="/mybatis/mapper/adminLoginMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminMainMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminNoticeMapper.xml" />
-    	<mapper resource="/mybatis/mapper/mypageUser.xml" />
+    	<mapper resource="/mybatis/mapper/adminMemberMapper.xml" />
 	</mappers>
 </configuration>
