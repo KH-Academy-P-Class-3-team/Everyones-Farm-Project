@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.executor.ReuseExecutor;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.farmapp.admin.model.service.AdminUserService;
 
+import common.dto.Admin;
 import common.dto.Farmer;
 import common.dto.UserTB;
 import common.util.AdminPaging;
@@ -56,7 +58,14 @@ public class AdminUserController {
 			, @RequestParam(defaultValue = "0") String curPage
 			// 검색 처리시 필요한 변수
 			, @RequestParam(defaultValue = "") String search
+			, HttpSession session
 			) {
+		
+		// admin login이 안되어 있을 때
+		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
+		if(loginAdmin != null) {
+			return "redirect:/admin/login";
+		}
 		
 		// logger 찍기 - 어떤 url
 		logger.info("/adminmember/farmerlist - [GET] 요청");
@@ -105,7 +114,14 @@ public class AdminUserController {
 				, @RequestParam(defaultValue = "0") String curPage
 				// 검색 처리시 필요한 변수
 				, @RequestParam(defaultValue = "") String search
+				, HttpSession session
 			) {
+		
+		// admin login이 안되어 있을 때
+		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
+		if(loginAdmin != null) {
+			return "redirect:/admin/login";
+		}
 		
 		// logger 찍기 - 해당 url에 들어왔다는 표시
 		logger.info("/adminmember/userlist [GET] 요청");
@@ -149,7 +165,14 @@ public class AdminUserController {
 				, @RequestParam(defaultValue = "0") String curPage
 				// 검색 처리시 필요한 변수
 				, @RequestParam(defaultValue = "") String search
+				, HttpSession session
 			) {
+		
+		// admin login이 안되어 있을 때
+		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
+		if(loginAdmin != null) {
+			return "redirect:/admin/login";
+		}
 		
 		// logger 찍기
 		logger.info("/adminmember/fapplicationlist - [GET] 요청");
@@ -194,7 +217,14 @@ public class AdminUserController {
 	public String adminFarmerApplicationDetail(
 				@RequestParam(defaultValue = "0")int farmerNo
 				, Model model
+				, HttpSession session
 			) {
+		
+		// admin login이 안되어 있을 때
+		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
+		if(loginAdmin != null) {
+			return "redirect:/admin/login";
+		}
 		
 		// logger 찍기
 		logger.info("/adminmember/fapplicationdetail - [GET] 요청");
