@@ -152,4 +152,12 @@ public interface AdminUserDao {
 	 */
 	public List<Farmer> selectFarmerMailByFarmerNo(List<String> farmerNoList);
 
+	/**
+	 * 농장 입점 신청 보류
+	 * 
+	 * @param farmerNoList - 보류할 farmerNo 정보를 갖는 List
+	 * @return int - 보류 결과
+	 */
+	public int holdFarmerApplication(List<String> farmerNoList);
+
 }

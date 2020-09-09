@@ -136,4 +136,10 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public List<Farmer> selectFarmerMailByFarmerNo(List<String> farmerNoList) {
 		return session.selectList("ADMINMEMBER.selectFarmerMailByFarmerNo", farmerNoList);
 	}
+	
+	// 농장 입점 신청 보류
+	@Override
+	public int holdFarmerApplication(List<String> farmerNoList) {
+		return session.update("ADMINMEMBER.holdFarmerApplication", farmerNoList);
+	}
 }

@@ -190,6 +190,47 @@ public class AdminUserServiceImpl implements AdminUserService{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 농장 입점 신청 보류
+	@Override
+	public int holdFarmerApplication(List<String> farmerNoList) {
+		return adminUserDao.holdFarmerApplication(farmerNoList);
+	}
+	
+	// 농장 입점 신청 보류 메일 발송
+	@Override
+	public void holdMailSend(Farmer mailRecipient, String urlPath) {
+		
+		// 메일 보내는 사람
+		String setFrom="everyonesfarm@naver.com";
+		// 메일 받는 사람
+		String tomail = mailRecipient.getEmail();
+		// 메일 제목
+		String title = mailRecipient.getFarmerId() + "님, 안타깝게도 [모두의 농장] 입점 신청 심사에서 보류대상이 됐습니다.";
+		// 메일 내용
+		String htmlBody = 
+			"<h2>" +mailRecipient.getFarmerId() + "님, [모두의 농장] 회원 신청이 보류됐습니다.</h2>"
+			+ "<h3>모두의 농장에서 좀 더 많은 농업인 분들을 입점시키고 싶지만 아직은 많이 크지 않아 "+ mailRecipient.getFarmerId() +"님은 입점 신청 심사에 보류됐습니다. </h3>"
+			+ "<h3>모두의 농장에서 귀하의 입점을 승인할 수 있는 큰 회사가 되도록 노력하겠습니다.";
+		
+		try {
+			mailSender.send(new MimeMessagePreparator() {
+			   public void prepare(MimeMessage mimeMessage) throws MessagingException {
+			     MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			     message.setFrom(setFrom);
+			     message.setTo(tomail);
+			     message.setSubject(title);
+			     
+			     message.setText(htmlBody, true);
+			   }
+			});
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
+	
+	
 }

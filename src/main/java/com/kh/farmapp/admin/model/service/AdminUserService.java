@@ -122,4 +122,20 @@ public interface AdminUserService {
 	 */
 	public void approveMailSend(Farmer mailRecipient, String urlPath);
 
+	/**
+	 * 농장 입점 신청 보류 요청
+	 * 
+	 * @param farmerNoList - 보류할 farmerNo 정보를 갖는 List 
+	 * @return int - 보류 결과
+	 */
+	public int holdFarmerApplication(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 보류 메일 보내기
+	 * 
+	 * @param mailRecipient - 메일 정보를 갖는 Farmer 객체
+	 * @param urlPath - 서버 주소
+	 */
+	public void holdMailSend(Farmer mailRecipient, String urlPath);
+
 }

@@ -40,6 +40,14 @@ public class AdminUserController {
 	private static final int FARMER_CODE = 1;
 	private static final int FARM_APPLICATION_CODE = 2;
 	
+	// 서버 url 알려주는 method
+	private String getServerPath(
+			HttpServletRequest req
+			) {
+		
+		return req.getServerName() + ":" + req.getServerPort() + req.getContextPath();
+	}
+	
 	// 농업인 회원 관리 페이지
 	@RequestMapping(value = "/adminmember/farmerlist", method = RequestMethod.GET)
 	public String adminFarmerList(
@@ -215,7 +223,7 @@ public class AdminUserController {
 		logger.debug("approveRes: " + approveRes);
 		
 		// 서버 url
-		String urlPath = req.getServerName() + ":" + req.getServerPort() + req.getContextPath();
+		String urlPath = getServerPath(req);
 		logger.debug("urlPath: " + urlPath);
 		
 		// 선택된 회원들의 메일 조회
@@ -246,7 +254,63 @@ public class AdminUserController {
 	
 	// 농업인 회원 신청 보류
 	@RequestMapping(value = "/adminmember/putfapplicationonhold", method = RequestMethod.POST)
-	public void putFarmerApplicationOnHold(Farmer farmer) {
+	@ResponseBody
+	public int putFarmerApplicationOnHold(
+			// 입점 수락할 번호들
+			@RequestParam Map<String, Object> approveCancelNums
+			// 서버 url 을 알기 위한 request 객체
+			, HttpServletRequest req
+			) {
+		
+		// logger 찍기
+		logger.info("/adminmember/putfapplicationonhold - [POST] 요청");
+		
+		// ajax 반환 값
+		int result = 0;
+		
+		// approveCancelNums print
+		logger.debug("approveCancelNums: " + approveCancelNums);
+		
+		// approveCancelNums -> ArrayList 로 변환
+		String[] farmerNums = approveCancelNums.get("farmerNo").toString().split(",");
+		List<String> farmerNoList = new ArrayList<>(Arrays.asList(farmerNums));
+		logger.debug("farmerNoList: " + farmerNoList.toString());
+		
+		// 입점 신청 보류
+		int holdRes = adminUserService.holdFarmerApplication(farmerNoList);
+		logger.debug("holdRes: " + holdRes);
+		
+		// 서버 url
+		String urlPath = getServerPath(req);
+		logger.debug("urlPath: " + urlPath);
+		
+		// 선택된 회원들의 메일 조회
+		List<Farmer> farmerMailList = adminUserService.selectFarmerMailByFarmerNo(farmerNoList);
+		logger.debug("farmerMailList: " + farmerMailList);
+		
+		// 입점 보류 성공/ 실패
+		// 임점 수락 성공 -> 메일 발송해주기
+		if(holdRes >= 1) {
+			
+			logger.info("입점 보류 성공~");
+			result = 1;
+			
+			// 메일 발송 - 선택된 회원들의 수 만큼 메일 발송 foreach 사용
+			for(Farmer mailRecipient : farmerMailList) {
+				adminUserService.holdMailSend(mailRecipient, urlPath);
+			}
+			return result;
+			
+		} else { // 입점 수락 실패... -> 메일 발송 x
+			
+			logger.info("입점 보류 실패...");
+			return result;
+			
+		}
+		
+		
+//		return result;
+		
 	}
 	
 	// 일반 회원 정지
