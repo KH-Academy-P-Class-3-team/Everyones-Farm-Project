@@ -98,4 +98,12 @@ public interface AdminUserService {
 	 */
 	public int delCancelFarmerByFarmerNo(List<String> farmerNoList);
 
+	/**
+	 * 농장 입점 신청 목록 조회
+	 * 
+	 * @param apaging - 페이징 정보를 갖는 AdminPaging 객체
+	 * @return List<Map<String, Object>> - 조회 결과 반환
+	 */
+	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging);
+
 }

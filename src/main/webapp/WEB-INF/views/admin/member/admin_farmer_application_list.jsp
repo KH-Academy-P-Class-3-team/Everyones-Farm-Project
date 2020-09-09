@@ -43,8 +43,9 @@
 							<td class="m-table__td"><input type="checkbox" value="${fa.farmerNo }" name="checkNormal" class="checkbox_normal member-chk" /></td>
 							<td class="m-table__td">${fa.farmName }</td>
 							<td class="m-table__td">${fa.name }(${fa.farmerId })</td>
-<%-- 							<td class="m-table__td">${fa.date }</td> --%>
-							<td class="m-table__td">신청 날짜 띄워주기</td>
+							<td class="m-table__td">
+								<fmt:formatDate value="${fa.applicationDate }" pattern="yyyy-MM-dd"/>
+							</td>
 						</tr>
 						</c:forEach>
 					</c:when>

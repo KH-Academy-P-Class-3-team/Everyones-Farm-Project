@@ -24,6 +24,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 	// pagingConfig 상수
 	private static final int USER_CODE = 0;
 	private static final int FARMER_CODE = 1;
+	private static final int FARM_APPLICATION_CODE = 2;
 	
 	@Override
 	public List<Map<String, Object>> selectAllFarmerApplicationList() {
@@ -71,6 +72,9 @@ public class AdminUserServiceImpl implements AdminUserService{
 			case FARMER_CODE:
 				totalCount = adminUserDao.selectCntAllFarmerList();
 				break;
+			case FARM_APPLICATION_CODE:
+				totalCount = adminUserDao.selectCntAllFarmApplicationList();
+				break;
 			}
 			
 		} else { // 검색어가 있을 경우
@@ -81,6 +85,9 @@ public class AdminUserServiceImpl implements AdminUserService{
 				break;
 			case FARMER_CODE:
 				totalCount = adminUserDao.selectCntFarmerBySearch(search);
+				break;
+			case FARM_APPLICATION_CODE:
+				totalCount = adminUserDao.selectCntFarmApplicationBySearch(search);
 				break;
 			}
 			
@@ -128,5 +135,11 @@ public class AdminUserServiceImpl implements AdminUserService{
 	@Override
 	public int delCancelFarmerByFarmerNo(List<String> farmerNoList) {
 		return adminUserDao.delCancelFarmerByFarmerNo(farmerNoList);
+	}
+
+	// 농장 입점 신청 목록 조회
+	@Override
+	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging) {
+		return adminUserDao.selectFarmApplicationByPaging(apaging);
 	}
 }

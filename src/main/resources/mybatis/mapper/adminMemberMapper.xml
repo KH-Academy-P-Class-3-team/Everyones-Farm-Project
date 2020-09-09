@@ -40,19 +40,21 @@
                     , u.is_leave
 		        from
 		            user_tb u
+		        where
+		        	1=1
+				    <if test="search != null and search != ''">
+			    	and (
+				    	user_id LIKE  '%' || #{search} || '%'
+		    			or user_name LIKE '%' || #{search} || '%'
+		    			or phone LIKE '%' || #{search} || '%'
+			    	)
+				    </if>
 		        order by
 		           u.user_no desc
 		    ) ulist
 		) users 
 		where
 		    user_order between #{startNo} and #{endNo}
-		    <if test="search != null and search != ''">
-	    	and (
-		    	user_id LIKE  '%' || #{search} || '%'
-    			or user_name LIKE '%' || #{search} || '%'
-    			or phone LIKE '%' || #{search} || '%'
-	    	)
-		    </if>
 	</select>
 	
 	<!-- 검색된 회원 갯수 -->
@@ -159,18 +161,18 @@
 		                f.farmer_no = farm.farmer_no
 		        where
             		f.is_confirm = 1
+				    <if test="search != null and search != ''">
+				    and (
+				    	f.farmer_id LIKE  '%' || #{search} || '%'
+				    	or f.name LIKE '%' || #{search} || '%'
+				    )
+				    </if>
 		        order by
 		            f.farmer_no desc
 		    )fs
 		)flist
 		where
 		    flist.f_order between #{startNo} and #{endNo}
-		    <if test="search != null and search != ''">
-		    and (
-		    	farmer_id LIKE  '%' || #{search} || '%'
-		    	or name LIKE '%' || #{search} || '%'
-		    )
-		    </if>
 	</select>
 	
 	<!-- 농업인 회원 탈퇴 처리 -->
@@ -200,5 +202,87 @@
 			#{nums}
 		</foreach>
 	</update>
+	
+	<!-- 농장 입점 신청 갯수 조회 -->
+	<select id="selectCntAllFarmApplicationList" resultType="int">
+		select 
+		    count(*)
+		from 
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+		where 
+		    is_confirm = 0	
+	</select>
+	
+	<!-- 검색된 농장 입점 갯수 조회 -->
+	<select id="selectCntFarmApplicationBySearch" resultType="int" parameterType="java.lang.String">
+		select 
+		    count(*)
+		from 
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+		where 
+		    is_confirm = 0
+		    and (
+		        farm.farm_name LIKE '%' || #{search} || '%'
+		        or f.farmer_id LIKE '%' || #{search} || '%'
+		        or f.name LIKE '%' || #{search} || '%'
+		    )
+	</select>
+	
+	<resultMap type="hashmap" id="farmApplicationMap">
+		<result property="farmOrder" column="farm_order" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="name" column="name" />
+		<result property="applicationDate" column="application_date" />
+		<result property="farmNo" column="farm_no" />
+		<result property="farmName" column="farm_name" />
+	</resultMap>
+	<!-- 검색된 농자 입점 신청 목록 조회 -->
+	<select id="selectFarmApplicationByPaging" resultMap="farmApplicationMap" parameterType="common.util.AdminPaging">
+		select
+		    falist.*
+		from(
+		    select
+		        rownum farm_order
+		        , fa.*
+		    from (
+		        select 
+		            f.farmer_no
+		            , f.farmer_id
+		            , f.name
+		            , f.application_date
+		            , farm.farm_no
+		            , farm.farm_name
+		        from 
+		            farmer f
+		            JOIN
+		                farm
+		            ON
+		                f.farmer_no = farm.farmer_no
+		        where 
+		            is_confirm = 0 
+		            <if test="search != null and search != ''">
+		            and (
+		                farm.farm_name LIKE '%' || #{search} || '%'
+		                or f.farmer_id LIKE '%' || #{search} || '%'
+		                or f.name LIKE '%' || #{search} || '%'
+		            )
+		            </if>
+		        order by
+		            f.application_date
+		            , f.farmer_no
+		    )fa
+		)falist
+		where
+		    farm_order between #{startNo} and #{endNo}
+	</select>
 	
 </mapper>

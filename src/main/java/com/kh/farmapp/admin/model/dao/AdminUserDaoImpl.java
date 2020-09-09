@@ -111,4 +111,22 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	public int delCancelFarmerByFarmerNo(List<String> farmerNoList) {
 		return session.update("ADMINMEMBER.delCancelFarmerByFarmerNo", farmerNoList);
 	}
+	
+	// 농장 입점 신청 갯수 조회
+	@Override
+	public int selectCntAllFarmApplicationList() {
+		return session.selectOne("ADMINMEMBER.selectCntAllFarmApplicationList");
+	}
+	
+	// 검색된 농장 입점 신청 갯수 조회
+	@Override
+	public int selectCntFarmApplicationBySearch(String search) {
+		return session.selectOne("ADMINMEMBER.selectCntFarmApplicationBySearch", search);
+	}
+	
+	// 농장 입점 신청 목록 조회
+	@Override
+	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging) {
+		return session.selectList("ADMINMEMBER.selectFarmApplicationByPaging", apaging);
+	}
 }

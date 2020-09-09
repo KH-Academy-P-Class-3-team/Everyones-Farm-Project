@@ -35,7 +35,7 @@ public class AdminUserController {
 	// pagingConfig 상수
 	private static final int USER_CODE = 0;
 	private static final int FARMER_CODE = 1;
-	
+	private static final int FARM_APPLICATION_CODE = 2;
 	
 	// 농업인 회원 관리 페이지
 	@RequestMapping(value = "/adminmember/farmerlist", method = RequestMethod.GET)
@@ -132,12 +132,48 @@ public class AdminUserController {
 	
 	// 농업인 회원 신청 관리 페이지
 	@RequestMapping(value = "/adminmember/fapplicationlist", method = RequestMethod.GET)
-	public String adminFarmerApplicationList() {
+	public String adminFarmerApplicationList(
+				Model model
+				// 페이징 처리시 필요한 변수
+				, @RequestParam(defaultValue = "0") String curPage
+				// 검색 처리시 필요한 변수
+				, @RequestParam(defaultValue = "") String search
+			) {
 		
 		// logger 찍기
 		logger.info("/adminmember/fapplicationlist - [GET] 요청");
 		
+		// 페이징 설정에 대한 정보를 갖는 Map 객체
+		Map<String, Object> pagingConfig = new HashMap<>();
+		pagingConfig.put("curPage", curPage);
+		pagingConfig.put("search", search);
+		pagingConfig.put("listCode", FARM_APPLICATION_CODE);
+//		logger.debug("pagingConfig: " + pagingConfig.toString());
 		
+		// 페이징 설정
+		AdminPaging apaging = adminUserService.getPaging(pagingConfig);
+		logger.debug("apaging: " + apaging.toString());
+		
+		// select 조회 연산 수행
+		List<Map<String, Object>> farmApplicationList = adminUserService.selectFarmApplicationByPaging(apaging);
+		for(Map<String, Object> fa : farmApplicationList) {
+			logger.debug("fa: " + fa.toString());
+		}
+		
+		// model 값 넘겨주기
+		// 페이징 객체 넘기기
+		if(apaging != null) {
+			
+			model.addAttribute("apaging", apaging);
+			
+		}
+		
+		// 페이징 처리된 목록 넘기기
+		if( farmApplicationList != null ) {
+			
+			model.addAttribute("farmApplicationList", farmApplicationList);
+			
+		}
 		
 		return "admin/member/admin_farmer_application_list";
 	}
