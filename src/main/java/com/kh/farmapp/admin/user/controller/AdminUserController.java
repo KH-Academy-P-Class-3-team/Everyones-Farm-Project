@@ -63,7 +63,7 @@ public class AdminUserController {
 		
 		// admin login이 안되어 있을 때
 		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
-		if(loginAdmin != null) {
+		if(loginAdmin == null) {
 			return "redirect:/admin/login";
 		}
 		
@@ -119,7 +119,7 @@ public class AdminUserController {
 		
 		// admin login이 안되어 있을 때
 		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
-		if(loginAdmin != null) {
+		if(loginAdmin == null) {
 			return "redirect:/admin/login";
 		}
 		
@@ -170,7 +170,7 @@ public class AdminUserController {
 		
 		// admin login이 안되어 있을 때
 		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
-		if(loginAdmin != null) {
+		if(loginAdmin == null) {
 			return "redirect:/admin/login";
 		}
 		
@@ -222,7 +222,7 @@ public class AdminUserController {
 		
 		// admin login이 안되어 있을 때
 		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
-		if(loginAdmin != null) {
+		if(loginAdmin == null) {
 			return "redirect:/admin/login";
 		}
 		
