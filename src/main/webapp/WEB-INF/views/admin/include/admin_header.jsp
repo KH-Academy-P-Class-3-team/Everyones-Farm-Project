@@ -64,7 +64,7 @@
 				<ul class="menu__sub-member">
 					<li><a href="<%=request.getContextPath() %>/adminmember/userlist">일반 회원 관리</a></li>
 					<li><a href="<%=request.getContextPath() %>/adminmember/farmerlist">농업인 회원 관리</a></li>
-					<li><a href="#">농업인 회원 신청 관리</a></li>
+					<li><a href="<%=request.getContextPath() %>/adminmember/fapplicationlist">농업인 회원 신청 관리</a></li>
 				</ul>
 			</li>
 			<li><a href="#">상품관리</a></li>

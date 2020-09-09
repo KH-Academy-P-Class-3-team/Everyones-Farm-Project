@@ -133,7 +133,7 @@ public class AdminUserController {
 	// 농업인 회원 신청 관리 페이지
 	@RequestMapping(value = "/adminmember/fapplicationlist", method = RequestMethod.GET)
 	public String adminFarmerApplicationList() {
-		return "";
+		return "admin/member/admin_farmer_application_list";
 	}
 	
 	// 농업인 회원 신청 관리 상세 페이지
