@@ -11,6 +11,7 @@ import common.dto.AnsweredOneonone;
 import common.dto.Farmer;
 import common.dto.QuestionOneonone;
 import common.dto.UserTB;
+import common.util.AdminPaging;
 
 /**
  * AdminOneOnOneDao 를 상속 받는 클래스
@@ -22,14 +23,10 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	@Autowired
 	SqlSessionTemplate session;
 	
+	// 일반 회원 일대일 문의 목록 조회
 	@Override
-	public List<Map<String, Object>> selectAllUserOneOnOneList() {
-		
-		// 클래스 다이어그램 용 객체
-		QuestionOneonone q = new QuestionOneonone();
-		UserTB user = new UserTB();
-		
-		return null;
+	public List<Map<String, Object>> selectAllUserOneOnOneList(AdminPaging apaging) {
+		return session.selectList("ADMINONEONONE.selectAllUserOneOnOneList", apaging);
 	}
 
 	@Override
@@ -94,6 +91,12 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	@Override
 	public int deleteAnswerToFarmerByNo(AnsweredOneonone aNo) {
 		return 0;
+	}
+	
+	// 일반 회원 문의 글 총 갯수 조회
+	@Override
+	public int selectCntAllUserOneOnOne(String search) {
+		return session.selectOne("ADMINONEONONE.selectCntAllUserOneOnOne", search);
 	}
 	
 }

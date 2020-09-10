@@ -36,6 +36,10 @@
 	<logger name="com.kh.farmapp.admin.user.controller">
 		<level value="debug" />
 	</logger>
+	<!-- setting AdminUserController debug level log -->
+	<logger name="com.kh.farmapp.admin.oneonone.controller">
+		<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

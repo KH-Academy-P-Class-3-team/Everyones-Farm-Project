@@ -5,6 +5,7 @@ import java.util.Map;
 
 import common.dto.AnsweredOneonone;
 import common.dto.QuestionOneonone;
+import common.util.AdminPaging;
 
 /**
  * 1대1문의 관리 페이지의 Dao interface
@@ -13,9 +14,10 @@ public interface AdminOneOnOneDao {
 
 	/**
 	 * 일반 회원 1대1 문의 목록 조회
+	 * @param apaging - paging 정보를 갖는 AdminPaging 객체
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> selectAllUserOneOnOneList();
+	public List<Map<String, Object>> selectAllUserOneOnOneList(AdminPaging apaging);
 
 	/**
 	 * 농업인 회원 1대1 문의 목록 조회
@@ -78,5 +80,12 @@ public interface AdminOneOnOneDao {
 	 * @return int - 삭제 결과(delete 결과)
 	 */
 	public int deleteAnswerToFarmerByNo(AnsweredOneonone aNo);
+
+	/**
+	 * 일반 회원의 문의 목록 총 갯수 조회
+	 * @param search - 검색어
+	 * @return int - 조회 결과 반환
+	 */
+	public int selectCntAllUserOneOnOne(String search);
 
 }

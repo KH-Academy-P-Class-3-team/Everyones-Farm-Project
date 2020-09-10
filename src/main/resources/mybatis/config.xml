@@ -52,5 +52,6 @@
     	<mapper resource="/mybatis/mapper/adminMainMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminNoticeMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminMemberMapper.xml" />
+    	<mapper resource="/mybatis/mapper/adminOneOnOneMapper.xml" />
 	</mappers>
 </configuration>

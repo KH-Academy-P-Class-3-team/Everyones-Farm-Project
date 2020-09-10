@@ -5,6 +5,7 @@ import java.util.Map;
 
 import common.dto.AnsweredOneonone;
 import common.dto.QuestionOneonone;
+import common.util.AdminPaging;
 
 
 /**
@@ -14,9 +15,10 @@ public interface AdminOneOnOneService {
 	
 	/**
 	 * 일반 회원 1대1 문의 목록 조회
+	 * @param apaging - 페이징 정보를 갖는 AdminPaging 객체
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> selectAllUserOneOnOneList();
+	public List<Map<String, Object>> selectAllUserOneOnOneList(AdminPaging apaging);
 	
 	/**
 	 * 농업인 회원 1대1 문의 목록 조회
@@ -79,5 +81,13 @@ public interface AdminOneOnOneService {
 	 * @return int - 삭제 결과(delete 결과)
 	 */
 	public int deleteAnswerToFarmerByNo(AnsweredOneonone aNo);
+
+	/**
+	 * 문의 목록 조회시 페이징 처리를 위한 페이징 객체 설정
+	 * 
+	 * @param pagingConfig - 페이징 설정 정보를 갖는 Map
+	 * @return AdminPaging - 설정된 페이징 객체 반환
+	 */
+	public AdminPaging getPaging(Map<String, Object> pagingConfig);
 	
 }

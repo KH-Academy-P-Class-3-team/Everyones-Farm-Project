@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/* main tag css  */
+.main__oneonone {
+	margin: 70px auto;
+}
+/* 1대1문의 제목 */
+.main__oneonone .oneonone__title-wrap {
+	margin-bottom: 30px;
+}
+.oneonone__title-wrap .oneonone__title-text {
+	font-size: 20px;
+    font-weight: 700;
+    padding-left: 7px;
+    border-left: 3px solid #789F6F;
+    opacity: 0.9;
+}
+/* 테이블 */
+.oneonone__table-wrap .oneonone__table {
+	width: 100%;
+    padding: 0;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+}
+/* tr */
+.oneonone__table tr {
+	border-top: 1px solid #605759;
+	border-bottom: 1px solid #605759;
+}
+.oneonone__table .oneonone__tr-head {
+	background: #D1E9CA;
+}
+.oneonone__table .oneonone__tr-data:hover {
+	background: #E2CC6C;
+}
+/* th, td */
+.oneonone__table th
+, .oneonone__table td {
+    padding: 16px 8px;
+    text-align: center;
+}
+/* 제목 컬럼 글자수 넘어가면 ... 보이게 처리 */
+.oneonone__table .oneonone__td-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 430px;
+}
+/* 아이디 컬럼 글자수 넘어가면 ... 보이게 처리 */
+.oneonone__table .oneonone__td-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+	width: 130px;
+}

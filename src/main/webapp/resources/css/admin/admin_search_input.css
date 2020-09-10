@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* 검색창 css */
-.member-list__main .member-list__search-wrap {
+.member-list__search-wrap {
 	display: flex;
     justify-content: center;
     margin-top: 30px;

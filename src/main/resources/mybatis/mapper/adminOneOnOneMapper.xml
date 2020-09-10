@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ADMINONEONONE">
+
+	<!-- 일반 회원의 문의 글 총 갯수 -->
+	<select id="selectCntAllUserOneOnOne" resultType="int" parameterType="java.lang.String">
+		select
+			count(*)
+		from
+		    question_oneonone q
+		    JOIN
+		        user_tb u
+		    ON
+		        q.user_no = u.user_no
+		where
+		    q.user_no is not null
+		<if test="value != null and value != ''">
+		    and (
+		        q.title like '%' || #{value} || '%'
+		        or u.user_name like '%' || #{value} || '%'
+		    )
+		</if>
+	</select>
+	
+	
+	<!-- 일반 회원 목록 조회 -->
+	<resultMap type="hashmap" id="userOneOnOneMap">
+		<result property="qOrder" column="q_order" />
+		<result property="questionNo" column="question_no" />
+		<result property="title" column="title" />
+		<result property="userNo" column="user_no" />
+		<result property="regDate" column="reg_date" />
+		<result property="isAnswered" column="is_answered" />
+		<result property="userName" column="user_name" />
+	</resultMap>
+	<select id="selectAllUserOneOnOneList" parameterType="common.util.AdminPaging" resultMap="userOneOnOneMap">
+		select
+		    q_paging.*
+		from (
+		    select
+		        rownum q_order
+		        , qlist.*
+		    from (
+		        select
+		            q.question_no
+		            , q.title
+		            , q.user_no
+		            , q.reg_date
+		            , q.is_answered
+		            , u.user_name
+		        from
+		            question_oneonone q
+		            JOIN
+		                user_tb u
+		            ON
+		                q.user_no = u.user_no
+		        where
+		            q.user_no is not null
+		            <if test="search != null and search != ''">
+		            and (
+		                q.title like '%' || #{search} || '%'
+		                or u.user_name like '%' || #{search} || '%'
+		            )
+		            </if>
+		        order by
+		            q.question_no desc
+		    ) qlist
+		)q_paging
+		where
+		    q_order between #{startNo} and #{endNo}
+	</select>
+
+</mapper>
