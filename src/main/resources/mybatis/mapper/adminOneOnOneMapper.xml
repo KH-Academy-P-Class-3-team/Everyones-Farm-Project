@@ -73,4 +73,49 @@
 		    q_order between #{startNo} and #{endNo}
 	</select>
 
+	<!-- 일반회원 문의글 상세 조회 -->
+	<resultMap type="hashmap" id="userOneononeDetailMap">
+		<result column="question_no" property="questionNo"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="is_answered" property="isAnswered"/>
+		<result column="user_no" property="userNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="profile_no" property="profileNo"/>
+		<result column="origin_name" property="originName"/>
+		<result column="file_rename" property="fileRename"/>
+		<result column="save_path" property="savePath"/>
+	</resultMap>
+	<select id="selectUserOneOnOneByNo" parameterType="common.dto.QuestionOneonone" resultMap="userOneononeDetailMap">
+		select
+		    q_detail.*
+		    , up.profile_no
+		    , up.origin_name
+		    , up.file_rename
+		    , up.save_path
+		from (
+		    select
+		        q.question_no
+		        , q.title
+		        , q.content
+		        , q.reg_date
+		        , q.is_answered
+		        , u.user_no
+		        , u.user_id
+		    from
+		        question_oneonone q
+		        JOIN
+		            user_tb u
+		        ON
+		            q.user_no = u.user_no
+		    where
+		        q.question_no = #{questionNo}
+		) q_detail
+		    LEFT OUTER JOIN
+		        user_profile up
+		    ON
+		        q_detail.user_no = up.user_no
+	</select>
+
 </mapper>

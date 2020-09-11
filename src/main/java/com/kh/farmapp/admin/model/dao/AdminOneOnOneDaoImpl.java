@@ -40,14 +40,8 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectUserOneOnOneByNo(QuestionOneonone qNo) {
-		
-		// 클래스 다이어그램 용 객체
-		QuestionOneonone q = new QuestionOneonone();
-		AnsweredOneonone a = new AnsweredOneonone();
-		UserTB user = new UserTB();
-		
-		return null;
+	public Map<String, Object> selectUserOneOnOneByNo(QuestionOneonone qNo) {
+		return session.selectOne("ADMINONEONONE.selectUserOneOnOneByNo", qNo);
 	}
 
 	@Override

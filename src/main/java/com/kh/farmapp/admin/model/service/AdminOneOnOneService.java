@@ -29,9 +29,9 @@ public interface AdminOneOnOneService {
 	/**
 	 * 일반 회원 1대1 문의 상세 조회
 	 * @param qNo - 상세 조회될 질문에 대한 정보를 갖는 QuestionOneonone 객체
-	 * @return List<Map<String, Object>> - 조회 결과 반환
+	 * @return Map<String, Object> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> selectUserOneOnOneByNo(QuestionOneonone qNo);
+	public Map<String, Object> selectUserOneOnOneByNo(QuestionOneonone qNo);
 	
 	/**
 	 * 농업인 회원 1대1 문의 상세 조회

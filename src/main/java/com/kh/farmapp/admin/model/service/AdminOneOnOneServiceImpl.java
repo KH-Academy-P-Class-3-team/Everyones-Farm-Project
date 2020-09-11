@@ -36,7 +36,7 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectUserOneOnOneByNo(QuestionOneonone qNo) {
+	public Map<String, Object> selectUserOneOnOneByNo(QuestionOneonone qNo) {
 		return adminOneOnOneDao.selectUserOneOnOneByNo(qNo);
 	}
 

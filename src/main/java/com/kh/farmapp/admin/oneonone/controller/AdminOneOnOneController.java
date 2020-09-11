@@ -91,11 +91,24 @@ public class AdminOneOnOneController {
 	public String adminUserOneOnOneDetail(
 			// question_no 값을 갖는 QuestionOneOnOne
 			QuestionOneonone q
+			, Model model
 			) {
 		
+		// 현재 url 찍기
 		logger.info("/admin/oneonone/user/detail - [GET] 요청");
 		
+		// questionNo 찍어보기
 		logger.debug("questionNo: " + q.getQuestionNo());
+		
+		// questionNo 로 해당 답글 조회
+		Map<String, Object> question = adminOneOnOneService.selectUserOneOnOneByNo(q);
+		logger.debug("question: " + question.toString());
+		
+		// 조회된 문의글이 null 값이 아닐 때
+		if( question != null ) {
+			// model 값 넘겨주기
+			model.addAttribute("question", question);
+		}
 		
 		return "admin/oneonone/user_detail";
 	}
