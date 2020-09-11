@@ -20,86 +20,86 @@ public class ProductDaoImpl implements ProductDao{
 	
 	@Override
 	public List<Map<String, Object>> selectSeasonTop() {
-		return session.selectList("PRODUCT.selectSeasonTop");
+		return session.selectList("sellPRODUCT.selectSeasonTop");
 	}
 	
 	@Override
 	public List<Map<String, Object>> selectGeneralTop() {
-		return session.selectList("PRODUCT.selectGeneralTop");
+		return session.selectList("sellPRODUCT.selectGeneralTop");
 	}
 	
 	@Override
 	public int selectSeasonCnt() {
-		return session.selectOne("PRODUCT.selectSeasonCnt");
+		return session.selectOne("sellPRODUCT.selectSeasonCnt");
 	}
 	
 	@Override
 	public List<Product> selectSeasonList(Paging p) {
-		return session.selectList("PRODUCT.selectSeasonList", p);
+		return session.selectList("sellPRODUCT.selectSeasonList", p);
 	}
 	
 	@Override
 	public List<EveryonesFarmFile> selectSeasonFileThumbnail() {
-		return session.selectList("PRODUCT.selectSeasonFileThumbnail");
+		return session.selectList("sellPRODUCT.selectSeasonFileThumbnail");
 	}
 	
 	@Override
 	public int selectGeneralCnt() {
-		return session.selectOne("PRODUCT.selectGeneralCnt");
+		return session.selectOne("sellPRODUCT.selectGeneralCnt");
 	}
 	
 	@Override
 	public List<Product> selectGeneralList(Paging p) {
-		return session.selectList("PRODUCT.selectGeneralList", p);
+		return session.selectList("sellPRODUCT.selectGeneralList", p);
 	}
 	
 	@Override
 	public List<EveryonesFarmFile> selectGeneralFileThumbnail() {
-		return session.selectList("PRODUCT.selectGeneralFileThumbnail");
+		return session.selectList("sellPRODUCT.selectGeneralFileThumbnail");
 	}
 	
 	@Override
 	public int selectSeasonByTitleCnt(Map<String, Object> map) {
-		return session.selectOne("PRODUCT.selectSeasonByTitleCnt", map);
+		return session.selectOne("sellPRODUCT.selectSeasonByTitleCnt", map);
 	}
 	
 	@Override
 	public List<Product> selectSeasonSearchByTitle(Map<String, Object> map) {
-		return session.selectList("PRODUCT.selectSeasonSearchByTitle", map);
+		return session.selectList("sellPRODUCT.selectSeasonSearchByTitle", map);
 	}
 	
 	@Override
 	public int selectSeasonByKindCnt(Map<String, Object> map) {
-		return session.selectOne("PRODUCT.selectSeasonByKindCnt", map);
+		return session.selectOne("sellPRODUCT.selectSeasonByKindCnt", map);
 	}
 	
 	@Override
 	public List<Product> selectSeasonSearchByKind(Map<String, Object> map) {
-		return session.selectList("PRODUCT.selectSeasonSearchByKind", map);
+		return session.selectList("sellPRODUCT.selectSeasonSearchByKind", map);
 	}
 	
 	@Override
 	public Map<String, Object> selectGeneralDetail(int productNo) {
-		return session.selectOne("PRODUCT.selectGeneralByProductNo", productNo);
+		return session.selectOne("sellPRODUCT.selectGeneralByProductNo", productNo);
 	}
 	
 	@Override
 	public List<EveryonesFarmFile> selectProductFileWithGeneral(int productNo) {
-		return session.selectList("PRODUCT.selectProductFileWithGeneral", productNo);
+		return session.selectList("sellPRODUCT.selectProductFileWithGeneral", productNo);
 	}
 	
 	@Override
 	public Map<String, Object> selectProductDetail(int productNo) {
-		return session.selectOne("PRODUCT.selectProductByProductNo", productNo);
+		return session.selectOne("sellPRODUCT.selectProductByProductNo", productNo);
 	}
 	@Override
 	public List<EveryonesFarmFile> selectProductFile(int productNo) {
-		return session.selectList("PRODUCT.selectProductFile", productNo);
+		return session.selectList("sellPRODUCT.selectProductFile", productNo);
 	}
 	
 	@Override
 	public int insertBasket(Map<String, Object> commandMap) {
-		return session.insert("PRODUCT.insertBasket", commandMap);
+		return session.insert("sellPRODUCT.insertBasket", commandMap);
 	}
 	
 	
