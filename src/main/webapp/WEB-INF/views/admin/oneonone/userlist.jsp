@@ -48,8 +48,8 @@
 					<c:when test="${not empty userOneOnOneList }">
 						<c:forEach items="${userOneOnOneList }" var="u">
 						<tr class="oneonone__tr-data">
-							<td>${u.questionNo }</td>
-							<td><div class="oneonone__td-title">${u.title }</div></td>
+							<td><a href="<%=request.getContextPath() %>/admin/oneonone/user/detail?questionNo=${u.questionNo }">${u.questionNo }</a></td>
+							<td><div class="oneonone__td-title"><a href="<%=request.getContextPath() %>/admin/oneonone/user/detail?questionNo=${u.questionNo }">${u.title }</a></div></td>
 							<td><div class="oneonone__td-name">${u.userName }</div></td>
 							<td>
 							<fmt:formatDate value="${u.regDate }" pattern="yyyy-MM-dd"/>

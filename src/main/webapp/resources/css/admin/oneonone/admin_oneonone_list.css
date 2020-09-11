@@ -54,3 +54,8 @@
     white-space: nowrap;
 	width: 130px;
 }
+/* td 안에 a 태그 */
+.oneonone__tr-data a {
+	text-decoration: none;
+	color: black;
+}
