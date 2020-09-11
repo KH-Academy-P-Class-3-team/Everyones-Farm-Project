@@ -155,13 +155,13 @@ a:hover {
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist"  style="font-weight: bold;">판매 목록</a>
+					<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}"  style="font-weight: bold;">판매 목록</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist">체험
+					<a href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}">체험
 						신청내역</a>
 				</div>
 
@@ -169,7 +169,7 @@ a:hover {
 		</div>
 		<div class="col-lg-1">
 				<div id="root" style="width: 800px; margin-left:55px;">
-				<div class="sumarry">
+				<div class="sumarry" style="width : 800px; margin-left:-55px;">
 				<table class="userInform">
 					<tr>
 						<td class="userImg">사진</td>
@@ -188,7 +188,7 @@ a:hover {
 				<div id="root" style="width: 800px">
 				<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold">판매 현황</a>
 					
-					<div id ="border">
+					<div id ="border" style =" border : 2px solid black; height:305px;">
 					<form role="form" method="get"	action="/farmapp/mypage/selllist">
 						<table class="table table-condensed" style="font-size : medium;">
 							<thead>
@@ -203,6 +203,7 @@ a:hover {
 							</thead>
 
 							<c:forEach items="${list}" var="list">
+							<c:if  test="${farmerInfo.farmerNo eq list.farmerNo }">
 								<tr>
 									<td scope="col" class="text-center"><c:out
 											value="${list.orderNo}" /></td>
@@ -210,8 +211,7 @@ a:hover {
 											value="${list.name}" /></td>
 									<td scope="col" class="text-center"><c:out
 											value="${list.orderAmount}" /></td>
-									<td scope="col" class="text-center"><c:out
-											value="${list.orderDate}" /></td>
+									<td scope="col" class="text-center"><fmt:formatDate value="${list.orderDate}" pattern="yyyy년 MM월dd일 HH시mm분ss초" /></td>
 									<td scope="col" class="text-center"><c:out
 											value="${list.userName}" /></td>
 									<td scope="col" class="text-center">
@@ -219,27 +219,28 @@ a:hover {
 									<button type="button" onclick="bts(this)"    class="btn btn-success" id="Approval" value="${list.orderNo}" >결제 완료</button>
 									</c:if>
 									<c:if test="${list.paymentStatus eq 0 }">
-									<button type="button" onclick="bts(this)" class="btn btn-danger" id="Approval" value="${list.orderNo}" >미입금</button>
+									<button type="button" onclick="bts(this)"  style="width:87px;"  class="btn btn-danger" id="Approval" value="${list.orderNo}">미입금</button>
  									</c:if>
 									</td>
 								</tr>
+								</c:if>
 							</c:forEach>
 							
 						</table>
 					<div id="psize">
 						<ul>
 							<c:if test="${pageMaker.prev}">
-								<li><a
+								<li><a class="page-link"
 									href="selllist${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 							</c:if>
 
 							<c:forEach begin="${pageMaker.startPage}"
 								end="${pageMaker.endPage}" var="idx">
-								<li><a href="selllist${pageMaker.makeQuery(idx)}">${idx}</a></li>
+								<li><a class="page-link" href="selllist${pageMaker.makeQuery(idx)}">${idx}</a></li>
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
+								<li><a class="page-link"
 									href="selllist${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 							</c:if>
 						</ul>

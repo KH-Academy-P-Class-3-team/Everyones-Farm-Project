@@ -186,59 +186,105 @@ a:hover {
 
 			</div>
 			<div id="color" >
-				<a id="showActive" href="/farmapp/mypage/activityone?farmerno=${farmerInfo.farmerNo}"
-					class="list-group-item list-group-item-action text-center font-weight-bold" style="background-color : yellow;">농장
-					체험 신청 목록 이동 하기</a>
+				<a id="showActive" href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}"
+					class="list-group-item list-group-item-action text-center font-weight-bold" style="background-color : yellow;">목록으로 돌아가기</a>
 			</div>
-			<div id="color2">
-				<a id="showActive2" href="/farmapp/mypage/activitytwo?farmerno=${farmerInfo.farmerNo}" class="list-group-item list-group-item-action text-center font-weight-bold">일손 체험 신청 목록 이동 하기</a>
-			</div>
-
 			
+			<!-- 일손 체험 리스트 -->
+			<div id="border2" style =" border : 2px solid black; height:305px;">
+				<form role="form" method="get" action="/farmapp/mypage/activitytwo">
+					<table class="table table-condensed">
+						<thead>
+							
+							<tr class="success">
+								<th scope="col" class="text-center">신청 번호</th>
+								<th scope="col" class="text-center">체험 명</th>
+								<th scope="col" class="text-center">신청자</th>
+								<th scope="col" class="text-center">인원</th>
+								<th scope="col" class="text-center">체험 날짜</th>
+								<th scope="col" class="text-center">승인</th>
+							</tr>
+						</thead>
+
+						<c:forEach items="${list3}" var="list3">
+						<c:if  test="${farmerInfo.farmerNo eq list3.farmerNo }">
+							<tr>
+								<td scope="col" class="text-center"><c:out
+										value="${list3.APPLICATION_NO}" /></td>
+								<td scope="col" class="text-center"><c:out
+										value="${list3.title}" /></td>
+								<td scope="col" class="text-center"><c:out
+										value="${list3.applicantName}" /></td>
+								<td scope="col" class="text-center"><c:out
+										value="${list3.people}" /></td>
+								<td scope="col" class="text-center"><fmt:formatDate value="${list3.activityDate}" pattern="yyyy.MM.dd" />
+								</td>
+								<td scope="col" class="text-center"><c:if
+										test="${list3.isApproval eq 1 }">
+										<button style="width:70px;" type="button" onclick="bts(this)"
+											class="btn btn-success" id="Approval"
+											value="${list3.APPLICATION_NO}">승인</button>
+									</c:if> <c:if test="${list3.isApproval eq 0 }">
+										<button type="button" onclick="bts(this)"
+											class="btn btn-danger" id="noApproval"
+											value="${list3.APPLICATION_NO}">미승인</button>
+									</c:if></td>
+							</tr>
+						</c:if>
+						</c:forEach>
+					</table>
+					<div id="psize">
+						<ul>
+							<c:if test="${pageMaker3.prev}">
+								<li><a class="page-link"
+									href="activitytwo${pageMaker3.makeQuery(pageMaker3.startPage - 1)}">이전</a></li>
+							</c:if>
+
+							<c:forEach begin="${pageMaker3.startPage}"
+								end="${pageMaker3.endPage}" var="idx">
+								<li><a class="page-link" href="activitytwo${pageMaker3.makeQuery(idx)}">${idx}</a></li>
+							</c:forEach>
+
+							<c:if test="${pageMaker3.next && pageMaker3.endPage > 0}">
+								<li><a class="page-link"
+									href="activitytwo${pageMaker3.makeQuery(pageMaker3.endPage + 1)}">다음</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</form>
 				<hr>
 			</div>
 		</div>
+</div>
 </div>
 <%@include file="../include/footer.jsp" %>
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
-	function bts(id){
-		var aj =  id.value;
-		console.log(aj);
-		$.ajax({
-             type: "get",
-             url: "/farmapp/mypage/activitylist2?applicationNo="+aj,
-             async: false,     //값을 리턴시 해당코드를 추가하여 동기로 변경
-             success: function (data) {
-                 result = data;
-                 if(result == 1){
-//                	 location.reload();
-                 if(id.innerHTML == '승인'){
-//                 	 location.reload();
-//                 	 $('#border').show()
-                	 alert("미승인 처리 되었습니다.");
-                	 id.innerHTML = "미승인"
-               		 id.style.backgroundColor= 'rgb(255,0,0)';
-                	 
-
-//                 	 $('#border.show()').load(location.href+'#border.show()');
-                 }else if(id.innerHTML == '미승인'){
-                	 alert("승인 처리 되었습니다.");
-                	 id.innerHTML = "승인"
-               		 id.style.backgroundColor= 'rgb(0,255,0)';
-                	 id.style.width = '70px';
-//                 	 $('#border.show()').load(location.href+'#border.show()');
-//                 	 $('#showActive').load(location.href+'#showActive');
-//                 		 $('#border').show(700);
-                 }
-                 }
+function bts(id){
+	var aj =  id.value;
+	console.log(aj);
+	$.ajax({
+         type: "get",
+         url: "/farmapp/mypage/activitylist2?applicationNo="+aj,
+         async: false,     //값을 리턴시 해당코드를 추가하여 동기로 변경
+         success: function (data) {
+             result = data; 
+             if(result == 1){
+             if(id.innerHTML == '승인'){
+            	 alert("미승인 처리 되었습니다.");
+            	 location.reload();
+            	 id.innerHTML = "미승인"
+             }else if(id.innerHTML == '미승인'){
+            	 alert("승인 처리 되었습니다.");
+            	 location.reload();
+            	 id.innerHTML = "승인"
              }
-         });	
-	}
+             }
+         }
+     });	
+ }
 	
        
 </script>
 
-
-	

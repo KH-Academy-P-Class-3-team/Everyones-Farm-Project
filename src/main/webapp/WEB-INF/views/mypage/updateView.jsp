@@ -19,6 +19,17 @@ table {
 </style>
 
 <script type="text/javascript">
+		$(document).ready(function(){
+			
+			$(".cancel_btn").on("click", function(){
+				event.preventDefault();
+				location.href = "/farmapp/myapge/dailyLoglist";
+			})
+		})
+	
+	</script>
+
+<script type="text/javascript">
     var today = new Date(); // 오늘 날짜
     var date = new Date();
  
@@ -233,18 +244,20 @@ margin-left:-90px;
 				일지 리스트 돌아가기</a>
 
 			<div id="border" >
-				<form role="form" name="readForm" method="post" action="/farmapp/mypage/dailyLoglist">
+				<form role="form" name="readForm" method="post" action="/farmapp/mypage/update">
 				<div id="root">
 					<div>
-						<label for="content">내용</label><textarea id="content" name="content"><c:out value="${read.content}"/></textarea><br> 
-						<label for="title">작업량</label> <input type="text" id="workingAmount" name="workingAmount" value="${read.workingAmount}"/><br>
-						<label	for="title">작업 시간</label> <input type="text" id="workingTime" name="workingTime" value="${read.workingTime}"/><br> 
-						<label for="title">작업 인원</label><input type="text" id="workingMember" name="workingMember" value="${read.workingMember}"/><br>
-						<label for="title">작업 날짜</label> <input type="text" 	id="workingDate" name="workingDate" value="${read.workingDate}"/><br>
-						<label for="title">날씨</label> <input type="text" id="weather" name="weather" value="${read.weather}"/><br> 
+						<label for="content">내용</label><textarea id="content" name="content"><c:out value="${update.content}"/></textarea><br> 
+						<label for="title">작업량</label> <input type="text" id="workingAmount" name="workingAmount" value="${update.workingAmount}"/><br>
+						<label	for="title">작업 시간</label> <input type="text" id="workingTime" name="workingTime" value="${update.workingTime}"/><br> 
+						<label for="title">작업 인원</label><input type="text" id="workingMember" name="workingMember" value="${update.workingMember}"/><br>
+						<label for="title">작업 날짜</label> <input type="text" 	id="workingDate" name="workingDate" value="${update.workingDate}"/><br>
+						<label for="title">날씨</label> <input type="text" id="weather" name="weather" value="${update.weather}"/><br> 
 						<label for="title">강수량</label><input type="text" id="rain" name="rain" value="${read.rain}"/><br> 
-						<label for="title">최고 온도</label> <input type="text" id="maxTemp" name="maxTemp" value="${read.maxTemp}"/><br> 
-						<label for="title">최저 온도</label> <input type="text" id="minTemp" name="minTemp" value="${read.minTemp}"/><br>
+						<label for="title">최고 온도</label> <input type="text" id="maxTemp" name="maxTemp" value="${update.maxTemp}"/><br> 
+						<label for="title">최저 온도</label> <input type="text" id="minTemp" name="minTemp" value="${update.minTemp}"/><br>
+						<button type="submit" class="update_btn">저장</button>
+						<button type="submit" class="cancel_btn">취소</button>
 					</div>
 				</div>
 					

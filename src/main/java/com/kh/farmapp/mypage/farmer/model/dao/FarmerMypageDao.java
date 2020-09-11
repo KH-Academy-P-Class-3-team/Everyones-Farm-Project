@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import common.dto.Application;
+import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
 import common.dto.page.Criteria;
@@ -16,7 +17,7 @@ public interface FarmerMypageDao {
 	 * list(Criteria cri)+ 페이징 처리 
 	 * @return List<FarmingDailylog> - 조회 결과 반환
 	 */
-	public List<FarmingDailylog> dailyLoglist(Criteria cri);
+	public List<Map<String, Object>> dailyLoglist(Map<String, Object> map);
 	
 	/**
 	 * 영농일지 목록 페이징
@@ -50,7 +51,7 @@ public interface FarmerMypageDao {
 	 * 농장체험 활동내역 목록 페이징
 	 * @return 페이지 총 갯 수
 	 */
-	public int listCount2();
+	public int listCount2(Farmer farmer);
 	
 	/**
 	 * 일손 체험 리스트
@@ -64,9 +65,10 @@ public interface FarmerMypageDao {
 
 	/**
 	 * 일손체험 활동내역 목록 페이징
+	 * @param farmer 
 	 * @return 페이지 총 갯 수
 	 */
-	public int listCount3();
+	public int listCount3(Farmer farmer);
 	
 	
 	
@@ -89,11 +91,12 @@ public interface FarmerMypageDao {
 	
 	/**
 	 * 판매 목록 페이징 user와 order테이블
-	 * @param cri 페이징 처리
+	 * @param map 페이징 처리
 	 * @return
 	 */
-	public List<Map<String, Object>> selllist(Criteria cri);
-
+	public List<Map<String, Object>> selllist(Map<String, Object> map);
+	
+	public int listCount4(Farmer farmer);
 	
 	/**
 	 * 테이블 컬럼 한줄을 출력하기위한  order_no에 대한 한줄 select 조회

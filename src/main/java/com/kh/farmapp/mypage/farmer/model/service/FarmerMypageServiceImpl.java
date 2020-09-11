@@ -9,11 +9,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.kh.farmapp.mypage.farmer.model.dao.FarmerMypageDao;
 
 import common.dto.Application;
-import common.dto.FarmActivity;
-import common.dto.FarmDiary;
 import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
@@ -27,9 +26,16 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 
 	//영농일지 목록조회
 	@Override
-	public List<FarmingDailylog> dailyLoglist(Criteria cri) {
+	public List<Map<String, Object>> dailyLoglist(Criteria cri,Farmer farmer) {
+
+		Map<String, Object> data = new HashMap<String, Object>();
 		
-		return farmerMypageDao.dailyLoglist(cri);
+		data.put("farmerNo", farmer.getFarmerNo());
+		data.put("cri", cri);
+		
+		List<Map<String, Object>> res = farmerMypageDao.dailyLoglist(data);
+		
+		return res;
 	}
 
 	//영농일지 페이지 총 갯수
@@ -44,6 +50,7 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		farmerMypageDao.writeDailylog(farmingDailylog);
 	}
 
+	
 	//농장 체험 활동내역 리스트
 	@Override
 	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer) {
@@ -58,6 +65,12 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		return res;
 		
 	}
+	//농장체험 페이지 총 갯수
+	@Override
+	public int listCount2(Farmer farmer) {
+		return farmerMypageDao.listCount2(farmer);
+	}
+	
 	// 일손 체험 활동내역 리스트
 	@Override
 	public List<Map<String, Object>> activitylist3(Criteria cri ,Farmer farmer) {
@@ -65,10 +78,15 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("farmerNo", farmer.getFarmerNo());
 		data.put("cri", cri);
-		
+		System.out.println();
 		List<Map<String,Object>> res = farmerMypageDao.activitylist3(data);
 		System.out.println(res);
 		return res;
+	}
+	//일손체험 페이지 총 갯수
+	@Override
+	public int listCount3(Farmer farmer) {
+		return farmerMypageDao.listCount3(farmer);
 	}
 	
 	@Override
@@ -77,17 +95,6 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		return farmerMypageDao.read(dailylogNo);
 	}
 
-	//농장체험 페이지 총 갯수
-	@Override
-	public int listCount2() {
-		return farmerMypageDao.listCount2();
-	}
-	
-	//일손체험 페이지 총 갯수
-	@Override
-	public int listCount3() {
-		return farmerMypageDao.listCount3();
-	}
 	
 	
 	
@@ -114,10 +121,20 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 
 	// 판매 리스트 
 	@Override
-	public List<Map<String, Object>> selllist(Criteria cri) {
-		return farmerMypageDao.selllist(cri); 
+	public List<Map<String, Object>> selllist(Criteria cri ,Farmer farmer) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("farmerNo", farmer.getFarmerNo());
+		data.put("cri", cri);
+		
+		List<Map<String,Object>> res = farmerMypageDao.selllist(data);
+		System.out.println("서비스"+res);
+		return res;
 	}
-	
+	//판매내역 총 갯수
+	@Override
+	public int listCount4(Farmer farmer) {
+		return farmerMypageDao.listCount4(farmer);
+	}
 	
 	// 결제 처리 업데이트
 	@Override

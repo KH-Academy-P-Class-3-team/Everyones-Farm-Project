@@ -61,32 +61,20 @@ public class FarmerMypageController {
 
 	// 영농일지 리스트 목록 조회
 	@RequestMapping(value = "/mypage/dailyLoglist", method = RequestMethod.GET)
-
-	public ModelAndView dailyLoglist(Model model, Criteria cri,HttpServletRequest request,HttpSession session) {
-
-		model.addAttribute("list", farmerMypageService.dailyLoglist(cri));
-
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(farmerMypageService.listCount());
-
-		model.addAttribute("pageMaker", pageMaker);
-
+	public String dailyLoglist(Model model, Criteria cri,HttpServletRequest request,HttpSession session) {
 
 		
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-		ModelAndView mav = new ModelAndView();
-		 
-		if(farmer == null) {
-			mav.addObject("alertMsg", "로그인 후 이용 가능합니다");
-			mav.addObject("url", request.getContextPath() + "/farmer/login.do");
-			mav.setViewName("common/result");
-		} else {
-			mav.setViewName("/mypage/dailyLoglist");
-		}
+		List<Map<String, Object>> dailyList = farmerMypageService.dailyLoglist(cri, farmer);
 		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(farmerMypageService.listCount());
 		
-		return mav;
+		model.addAttribute("list", dailyList);
+		model.addAttribute("pageMaker", pageMaker);
+
+		return "/mypage/dailyLoglist";
 	}
 	
 	
@@ -97,46 +85,69 @@ public class FarmerMypageController {
 		return "mypage/dailyLogReadView";
 	}
 	
+	
+	@RequestMapping(value = "/mypage/activityone", method = RequestMethod.GET)
+	public String activityone(Model model, Criteria cri , HttpSession session) {
+		System.out.println("농장체험 접속완료");
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		
+		// 농장체험 리스트
+		List<Map<String, Object>> farmActive = farmerMypageService.activitylist(cri, farmer);
+		
+		//농장체험
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(farmerMypageService.listCount2(farmer));
 
+		//농부 객체
+		model.addAttribute("farmerInfo",farmer);
+	
+		//농장체험
+		model.addAttribute("list", farmActive);
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "mypage/activityone";
+	}
+	@RequestMapping(value = "/mypage/activitytwo", method = RequestMethod.GET)
+	public String activitytwo(Model model, Criteria cri , HttpSession session) {
+		System.out.println("일손체험 접속완료");
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		//일손체험
+		List<Map<String, Object>> workActive = farmerMypageService.activitylist3(cri,farmer);
+		
+		//일손체험
+		PageMaker pageMaker3 = new PageMaker();
+		pageMaker3.setCri(cri);
+		pageMaker3.setTotalCount(farmerMypageService.listCount3(farmer));
+		//농부 객체
+		model.addAttribute("farmerInfo",farmer);
+		
+		//일손체험
+		model.addAttribute("list3",workActive);
+		model.addAttribute("pageMaker3",pageMaker3);
+		return "mypage/activitytwo";
+	}
+	
 	// 농장 체험 리스트 목록 조회
 	@RequestMapping(value = "/mypage/activitylist", method = RequestMethod.GET)
-	public String activitylist(Model model, Criteria cri,HttpSession session) {
+	public ModelAndView activitylist(Model model, Criteria cri,HttpSession session,HttpServletRequest request) {
 
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
 //		List <Map<String,Object>> testMap = (List<Map<String, Object>>)model.addAttribute("list", farmerMypageService.activitylist(cri));
 
-		// 농장체험 리스트
-		List<Map<String, Object>> testMap = farmerMypageService.activitylist(cri, farmer);
+		ModelAndView mav = new ModelAndView();
+		 
+		if(farmer == null) {
+			mav.addObject("alertMsg", "로그인 후 이용 가능합니다");
+			mav.addObject("url", request.getContextPath() + "/farmer/login.do");
+			mav.setViewName("common/result");
+		} else {
+			mav.setViewName("/mypage/activitylist");
+		}
+		return mav;
+
 		
-		//일손체험
-		List<Map<String, Object>> testMap3 = farmerMypageService.activitylist3(cri,farmer);
-
-		//농장체험
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(farmerMypageService.listCount2());
-
-		//일손체험
-		PageMaker pageMaker3 = new PageMaker();
-		pageMaker3.setCri(cri);
-		pageMaker3.setTotalCount(farmerMypageService.listCount3());
-		
-
-		//농부 객체
-		model.addAttribute("farmerInfo",farmer);
-		
-
-
-		//농장체험
-		model.addAttribute("list", testMap);
-		model.addAttribute("pageMaker", pageMaker);
-
-		//일손체험
-		model.addAttribute("list3",testMap3);
-		model.addAttribute("pageMaker3",pageMaker3);
-		
-		return "mypage/activitylist";
 	}
 	
 
@@ -159,42 +170,34 @@ public class FarmerMypageController {
 	
 	// 판매 페이지 리스트
 	@RequestMapping(value = "/mypage/selllist", method = RequestMethod.GET)
-
-	public ModelAndView selllist(Model model, Criteria cri, HttpSession session, HttpServletRequest request) {
-
+	public String selllist(Model model, Criteria cri, HttpSession session, HttpServletRequest request) {
+	Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 	System.out.println("판매 페이지 접속완료");
-	
-	List<Map<String, Object>> testMap = farmerMypageService.selllist(cri);
-	
-	for (int i = 0; i < testMap.size(); i++) {
-		System.out.println(testMap.get(i).toString());
+	List<Map<String, Object>> sellMap = farmerMypageService.selllist(cri,farmer);
+	System.out.println(sellMap);
+//	잘 나오는지 테스트하기
+	for (int i = 0; i < sellMap.size(); i++) {
+		System.out.println("컨트롤러"+sellMap.get(i).toString());
 	}
 	
 	PageMaker pageMaker = new PageMaker();
 	pageMaker.setCri(cri);
-	pageMaker.setTotalCount(farmerMypageService.listCount2());
+	pageMaker.setTotalCount(farmerMypageService.listCount4(farmer));
 	
-	model.addAttribute("list", testMap);
+	//농부 객체
+	model.addAttribute("farmerInfo",farmer);
+			
+	model.addAttribute("list", sellMap);
 	model.addAttribute("pageMaker", pageMaker);
-
 	
-	Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-	ModelAndView mav = new ModelAndView();
-	 
-	if(farmer == null) {
-		mav.addObject("alertMsg", "로그인 후 이용 가능합니다");
-		mav.addObject("url", request.getContextPath() + "/farmer/login.do");
-		mav.setViewName("common/result");
-	} else {
-		mav.setViewName("/mypage/selllist");
-	}
-	return mav;
+	return "/mypage/selllist";
 	}
 	
 	
 	@ResponseBody
 	@RequestMapping(value = "/mypage/cal", method = RequestMethod.GET)
-	public List<Map<String, Object>> cal(String date) {
+	public List<Map<String, Object>> cal(String date,HttpSession session) {
+		
 		List<Map<String, Object>> res = farmerMypageService.datelist(date);
 		System.out.println(res);
 		return res;

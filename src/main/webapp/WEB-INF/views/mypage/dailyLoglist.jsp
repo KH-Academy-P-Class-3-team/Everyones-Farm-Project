@@ -9,6 +9,7 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<%@page import = "common.dto.Farmer"%>
 <style>
 table {
 	border: 1px solid #BDBDBD;
@@ -82,7 +83,6 @@ table {
         // 달력 출력
         for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
         { 
-        	
             cell = row.insertCell();
             cell.innerHTML = 
             	'<div id="s" class="day">' + i+'<button id ="bu" type="button" onclick="javascript:testfunction('+i+')">일</button>'        	 + '</div> '
@@ -135,9 +135,6 @@ table {
 				     
 				     var date = res[0]+res[1]+d
 				     console.log(date)
-				     var border = $('#border').css("display");
-				     
-				     
 				     $.ajax({
 			             type: "get",
 			             url: "/farmapp/mypage/cal?date="+date,
@@ -152,14 +149,19 @@ table {
 			           		 }
 			           		 else{
 			           		$('#writeday').html(" ");
-			           		$('#writeday').html(getFormatDate(data[0].WRITE_DATE));
-			            	 for (i=0; i<data.length; i++){			            		
+			           		$('#writeday').html(getFormatDate(data[0].writeDate));
+			           		
+			            	 for (i=0; i<data.length; i++){
+			            		 console.log(data[i].farmerNo)
+				           		 console.log("bbb"+${farmerInfo.farmerNo})
+			            		 if(data[i].farmerNo == ${farmerInfo.farmerNo}){
 			            		 	inner+="<tr><td scope='col' class='text-center'>"+data[i].dailylogNo+"</td>";
 									inner+="<td scope='col' class='text-center'><a href='/farmapp/mypage/dailyLogReadView?dailylogNo="+data[i].dailylogNo+"'>"+data[i].content + "</a></td>";
 									inner+="<td scope='col' class='text-center'>"+ data[i].workingAmount + "</td>";
 									inner+="<td scope='col' class='text-center'>"+data[i].workingTime+"</td>";
-									inner+="<td scope='col' class='text-center'>"+ getFormatDate(data[i].WRITE_DATE)+"</td></tr>";
-			            	 }			            	 
+									inner+="<td scope='col' class='text-center'>"+data[i].workingMember+"</td></tr>";
+			            		 }
+			           		}
 			            		 $( '#resview > tbody').empty();
 			            		 $('#resview').append(inner);
 			           		 }	
@@ -194,9 +196,6 @@ padding: 0;
 border: none;
 background: none;
 }
-.pagenate {
-	margin-left: 100px;
-}
 /* 마이페이지  */
 .col-lg-3 {
 	margin-top: 80px;
@@ -204,17 +203,6 @@ background: none;
 /*경계선*/
 #border {
 	border: groove;
-}
-/* 페이지 1~10 까지의 수 */
-li {
-	list-style: none;
-	float: left;
-	padding: 6px;
-}
-
-/* 페이지 사이즈 */
-#psize {
-	margin-left: 223px;
 }
 
 /* 내정보 나타내기 */
@@ -230,6 +218,7 @@ li {
 margin-left:-90px;
 }
 </style>
+
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <%@include file="../include/header.jsp" %>
 <div style="clear: both; margin-top: 170px;"></div>
@@ -284,13 +273,13 @@ margin-left:-90px;
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist" >판매 목록</a>
+					<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}" >판매 목록</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/dailyLoglist"  style="font-weight: bold;">영농 일지</a>
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}"  style="font-weight: bold;">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist">체험
+					<a href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}">체험
 						신청내역</a>
 				</div>
 
@@ -320,7 +309,7 @@ margin-left:-90px;
 
 				</body>
 			</div>
-			<a href="/farmapp/mypage/dailyLogWrite"
+			<a href="/farmapp/mypage/dailyLogWrite?farmerno=${farmerInfo.farmerNo}"
 				class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지 작성하기</a>
 			<div id = "writeday"></div>
 			<div id="border">
@@ -328,7 +317,7 @@ margin-left:-90px;
 					<table id="resview" class="table table-condensed">
 						<thead>
 							<tr class="success">
-								<th scope="col" class="text-center">글 갯수</th>
+								<th scope="col" class="text-center">글 번호</th>
 								<th scope="col" class="text-center">작업 내용</th>
 								<th scope="col" class="text-center">작업량</th>
 								<th scope="col" class="text-center">작업 시간</th>
@@ -339,29 +328,9 @@ margin-left:-90px;
 
 						
 							<tr id = result_set>
-								
 							</tr>
-						
-						
 					</table>
-					<div id="psize">
-						<ul>
-							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="dailyLoglist${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage}"
-								end="${pageMaker.endPage}" var="idx">
-								<li><a href="dailyLoglist${pageMaker.makeQuery(idx)}">${idx}</a></li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="dailyLoglist${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-							</c:if>
-						</ul>
-					</div>
+					
 					<hr>
 				</form>
 			</div>
@@ -370,4 +339,5 @@ margin-left:-90px;
 	</div>
 
 </div>
+
 <%@include file="../include/footer.jsp" %>
