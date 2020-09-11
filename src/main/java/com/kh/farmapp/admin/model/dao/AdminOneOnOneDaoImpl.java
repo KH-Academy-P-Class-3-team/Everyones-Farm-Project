@@ -57,8 +57,7 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 
 	@Override
 	public int insertAnswerToUser(AnsweredOneonone a) {
-		
-		return 0;
+		return session.insert("ADMINONEONONE.insertAnswerToUser", a);
 	}
 
 	@Override
@@ -67,9 +66,10 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 		return 0;
 	}
 
+	// 답변 수정
 	@Override
-	public int updateAnswertToUser(AnsweredOneonone a) {
-		return 0;
+	public int updateAnswer(AnsweredOneonone a) {
+		return session.update("ADMINONEONONE.updateAnswertToUser", a);
 	}
 
 	@Override
@@ -91,6 +91,12 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	@Override
 	public int selectCntAllUserOneOnOne(String search) {
 		return session.selectOne("ADMINONEONONE.selectCntAllUserOneOnOne", search);
+	}
+	
+	// 답변 조회
+	@Override
+	public Map<String, Object> selectAnswerOneOnOneByQuestionNo(QuestionOneonone q) {
+		return session.selectOne("ADMINONEONONE.selectAnswerOneOnOneByQuestionNo", q);
 	}
 	
 }

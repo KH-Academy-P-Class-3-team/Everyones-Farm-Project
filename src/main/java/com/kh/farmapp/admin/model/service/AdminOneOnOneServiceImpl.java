@@ -55,9 +55,10 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 		return adminOneOnOneDao.insertAnswerToFarmer(a);
 	}
 
+	// 답변 수정
 	@Override
-	public int updateAnswerToUser(AnsweredOneonone a) {
-		return adminOneOnOneDao.updateAnswertToUser(a);
+	public int updateAnswer(AnsweredOneonone a) {
+		return adminOneOnOneDao.updateAnswer(a);
 	}
 
 	@Override
@@ -106,6 +107,12 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 		paging.setSearch(search);
 		
 		return paging;
+	}
+
+	// 답변 조회
+	@Override
+	public Map<String, Object> selectAnswerOneOnOneByQuestionNo(QuestionOneonone q) {
+		return adminOneOnOneDao.selectAnswerOneOnOneByQuestionNo(q);
 	}
 
 }

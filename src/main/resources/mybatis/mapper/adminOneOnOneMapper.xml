@@ -118,4 +118,47 @@
 		        q_detail.user_no = up.user_no
 	</select>
 
+	<!-- 일반 회원 문의 답변  insert -->
+	<insert id="insertAnswerToUser" parameterType="common.dto.AnsweredOneonone" >
+		insert into
+		    answered_oneonone (answered_no, title, content, admin_no, reg_date, question_no)
+		values
+		    (answer_oneonone_seq.nextval, #{title}, #{content}, #{adminNo}, sysdate, #{questionNo})
+	</insert>
+	
+	<!-- 답변 조회 -->
+	<resultMap type="hashmap" id="answerMap">
+		<result property="answeredNo" column="answered_no" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="adminNo" column="admin_no" />
+		<result property="regDate" column="reg_date" />
+		<result property="questionNo" column="question_no" />
+		<result property="adminId" column="admin_id" />
+	</resultMap>
+	<select id="selectAnswerOneOnOneByQuestionNo" parameterType="common.dto.QuestionOneonone" resultMap="answerMap">
+		select
+		    answer.*
+		    , a.admin_id
+		from
+		    answered_oneonone answer
+		    JOIN
+		        admin a
+		    ON
+		        answer.admin_no = a.admin_no
+		where
+		    question_no = #{questionNo}
+	</select>
+	
+	<!-- 답변 수정 -->
+	<update id="updateAnswertToUser" parameterType="common.dto.AnsweredOneonone" >
+		update
+		    answered_oneonone
+		set
+		    title = #{title}
+		    , content = #{content}
+		where
+		    answered_no = #{answeredNo}
+	</update>
+
 </mapper>

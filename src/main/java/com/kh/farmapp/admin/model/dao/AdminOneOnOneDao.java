@@ -58,7 +58,7 @@ public interface AdminOneOnOneDao {
 	 * @param a - 수정한 답변에 대한 정보를 갖는 AnsweredOneOnOne 객체
 	 * @return int - 수정 결과(update 결과)
 	 */
-	public int updateAnswertToUser(AnsweredOneonone a);
+	public int updateAnswer(AnsweredOneonone a);
 
 	/**
 	 * 농업인 회원의문의에 작성한 답변 수정하기
@@ -87,5 +87,13 @@ public interface AdminOneOnOneDao {
 	 * @return int - 조회 결과 반환
 	 */
 	public int selectCntAllUserOneOnOne(String search);
+
+	/**
+	 * 답변 조회
+	 * 
+	 * @param q - questionNo 정보를 갖는 QuestionOneonone 객체
+	 * @return Map<String, Object> - 조회 결과 반환
+	 */
+	public Map<String, Object> selectAnswerOneOnOneByQuestionNo(QuestionOneonone q);
 
 }
