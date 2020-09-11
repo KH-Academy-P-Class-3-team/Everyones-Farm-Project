@@ -11,7 +11,7 @@ import common.dto.ProductOption;
 public interface PersonalProduceService {
 	
 	//게시글 목록
-	public Map<String, Object> selectProductList(int currentPage, int cntPerPage); 
+	public Map<String, Object> selectProductList(int currentPage, int cntPerPage, String farmerNo); 
 	
 	//상품등록
 	public void writeProduct(Map<String, Object> commandMap);

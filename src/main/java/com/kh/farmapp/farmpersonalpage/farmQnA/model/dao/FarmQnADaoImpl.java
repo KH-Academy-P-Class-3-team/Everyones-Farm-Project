@@ -26,8 +26,8 @@ public class FarmQnADaoImpl implements FarmQnADao {
 	}
 
 	@Override
-	public List<FarmDiary> selectFarmQnAList(Paging paging) {
-		return sqlSession.selectList("QnA.selectFarmQnAList", paging);
+	public List<FarmQnAQuestion> selectFarmQnAList(Map<String, Object> map) {
+		return sqlSession.selectList("QnA.selectFarmQnAList", map);
 	}
 	
 	@Override
@@ -44,6 +44,21 @@ public class FarmQnADaoImpl implements FarmQnADao {
 	@Override
 	public int deleteQnA(int farmQnaQuestionNo) {
 		return sqlSession.delete("QnA.deleteQnA", farmQnaQuestionNo);
+	}
+	
+	@Override
+	public int modifyQnA(Map<String, Object> commandMap) {
+		return sqlSession.update("QnA.modifyQnA", commandMap);
+	}
+
+	@Override
+	public int insertFarmQnAanswer(Map<String, Object> commandMap) {
+		return sqlSession.insert("QnA.insertFarmQnAanswer", commandMap);
+	}
+
+	@Override
+	public int selectFarmNoByFarmerNo(String farmerNo) {
+		return sqlSession.selectOne("QnA.selectFarmNoByFarmerNo", farmerNo);
 	}
 
 

@@ -16,7 +16,7 @@ public interface PersonalProduceDao {
 	public int insertProductOption(Map<String, Object> commandMap);
 	
 	//게시글 목록
-	public List<Product> selectProductList(Paging paging);
+	public List<Product> selectProductList(Map<String, Object> map);
 	
 	//게시글 숫자
 	public int contentCnt();

@@ -29,8 +29,8 @@ public class PersonalProduceDaoImpl implements PersonalProduceDao {
 	}
 
 	@Override
-	public List<Product> selectProductList(Paging paging) {		
-		return sqlSession.selectList("Product.selectProductList", paging);
+	public List<Product> selectProductList(Map<String, Object> map) {		
+		return sqlSession.selectList("Product.selectProductList", map);
 	}
 
 	@Override

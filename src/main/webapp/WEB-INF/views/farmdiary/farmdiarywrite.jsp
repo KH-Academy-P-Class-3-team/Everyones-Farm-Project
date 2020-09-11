@@ -2,120 +2,68 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@include file="../include/farmdiaryheader.jsp" %>
 
 <!-- <script src="//code.jquery.com/jquery-2.2.4.min.js"></script> -->
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<style type="text/css">
-        .img_wrap {
-            width: 300px;
-            margin-top: 50px;
-        }
-        .img_wrap img {
-            max-width: 100%;
-        }
- 
-</style>
 
 <!-- ckeditor 사용을 위해 js 파일 연결 -->
-<script src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/farmapp/resources/js/ckeditor/ckeditor.js"></script>
 
 
 
-
-<!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<html>
+<head>
 <script type="text/javascript">
+$(document).ready(function() {
 
-// var sel_file;
+	$("#btnWrite").on("click", function() {
 
-// $(document).ready(function() {
-//     $("#input_img").on("change", handleImgFileSelect);
-// }); 
+		const thetitle = $("#title").val()
 
-// function handleImgFileSelect(e) {
-//     var files = e.target.files;
-//     var filesArr = Array.prototype.slice.call(files);
+		if (thetitle == "") {
+			alert("제목을 작성해 주세요.");
+		} else {
+			$("#form1").submit();   
+		
+		}
 
-//     filesArr.forEach(function(f) {
-//         if(!f.type.match("image.*")) {
-//             alert("확장자는 이미지 확장자만 가능합니다.");
-//             return;
-//         }
+	})
 
-//         sel_file = f;
+})
+</script><body>
+<form id="form1" action="<%= request.getContextPath() %>/diary/diarywrite.do" method="post" enctype="multipart/form-data">
 
-//         var reader = new FileReader();
-//         reader.onload = function(e) {
-//             $("#img").attr("src", e.target.result);
-//         }
-//         reader.readAsDataURL(f);
-//     });
-// }
-	
-</script>
-
-<form action="<%= request.getContextPath() %>/diary/diarywrite.do" method="post" enctype="multipart/form-data">
+<%@include file="../include/farmdiaryheader.jsp" %>
 
 <div style= "clear: both; margin-top: 200px;" ></div>
+
+<div id="container" style="width: 980px; margin: auto;" >
 
 <h3 style="text-align: center;">농장 일기 작성</h3>
 <hr>
 
-<table class="table">
-        <colgroup>
-            <col width="5%">
-            <col width="15%">
-            <col width="5%">
-            <col width="15%">
-        </colgroup>
-    <tbody>
-   	
-    	<tr>
-      	  <th class="success">제목</th>
-      	  <td><input class="form-control" style="width: 200px;" type="text" id="title" name="title"/></td>
-      	  <th class="success">유튜브 링크</th>
-      	  <td><input class="form-control" style="width: 200px;" type="text" id="title" name="title"/></td>      	  
-      	</tr>
-      	
-      	<tr>
-<!--       	 <div> -->
-<!--         <div class="img_wrap"> -->
-<!--             <img id="img" /> -->
-<!--         </div> -->
-<!--    	 </div> -->
-		  <th class="success">파일</th>
-      	  <td><input type="file" name="files" id="input_img" multiple /></td>
-      	  <th></th>
-      	  <td></td>
-      	</tr>   
-      	
-      	<tr>
-      	  <th></th>
-      	  <td></td>
-      	  <th></th>
-      	  <td></td>
-      	</tr>
-   
-    </tbody>
-</table>
-        
+<input type="hidden" name="farmerNo" value="${farmerInfo.farmerNo }"/>
 
-<br>    
-<!-- 제목<br> -->
-<!-- <input class="form-control" style="width: 200px;" type="text" id="title" name="title"/><br> -->
- <textarea name="content" id="content" rows="100" cols="50">
+<input class="form-control" style="width: 980px;" type="text" id="title" name="title" placeholder="제목을  입력해 주세요."/><br>
+ 
+<hr>
+
+ <textarea name="content" id="content">
+ 글 작성시 지우고 작성해주세요. (유튜브 링크 및 이미지 첨부는 툴바에 있습니다.)
  </textarea>
-            <script>
-                // Replace the <textarea id="editor1"> with a CKEditor 4
-                // instance, using default configuration.
-                CKEDITOR.replace( 'content' );
-              //  CKEDITOR.instances.content.getData();
-            </script><br>
+						<script type="text/javascript">
+							CKEDITOR.replace( 'content'
+											, { filebrowserUploadUrl: '/farmapp/farmdiary/fileupload'
+								});
+						</script><br>
 <hr>
 <!-- 유튜브 링크 <br> -->
 <!-- <input class="form-control" style="width: 250px;" type="text" id="youtubeLink" name="youtubeLink"/><br> -->
@@ -123,10 +71,14 @@
 <!-- <iframe width="980" height="500" src="https://youtu.be/sOKTJ4RHjUo" frameborder="0" allow="autoplay; encrtpted-media"></iframe><br><br> -->
 
 <div style="text-align: center;">
-<button class="btn btn-success">등록</button>
+<button id="btnWrite" type="button" class="btn btn-success">작성</button>
+<button id="btnCancel" type="button" class="btn btn-success">목록</button>
 </div>
+</div>
+
 </form>
-
-
+</body>
+</head>
+</html>
 
 <%@include file="../include/footer.jsp" %>

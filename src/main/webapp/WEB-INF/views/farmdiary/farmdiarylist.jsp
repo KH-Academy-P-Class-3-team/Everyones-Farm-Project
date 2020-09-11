@@ -14,9 +14,60 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+
 <style type="text/css">
 
-
+.pagination-wrap {
+	margin-top: 30px;
+}
+/* pagination ul css */
+.pagination-wrap .admin__pagination {
+	width: 500px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+/* pagination ul > li */
+.admin__pagination li {
+    border: 1px solid #789F6F;
+    border-radius: 3px;
+    margin-right: 7px;
+}
+.admin__pagination li:last-child {
+	margin: 0;
+}
+/* pagination ul > li > a */
+.admin__pagination li > a {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	text-decoration: none;
+	color: black;
+}
+/* 현재 선택된 page */
+.admin__pagination li.admin__p-active {
+	background: #789F6F;
+}
+li.admin__p-active > a {
+	color: white;
+}
+/* disabled 상태인 page */
+.admin__pagination li.admin__p-disabled {
+	border: 1px solid #ccc;
+	background: #ccc;
+}
+/* page hover 시 */
+.admin__pagination li:hover {
+	background: #D1E9CA;
+}
+.admin__pagination li.admin__p-active:hover {
+	background: #789F6F;
+}
+.admin__pagination li.admin__p-disabled:hover {
+	background: #ccc;
+}
 
 </style>
 
@@ -33,6 +84,7 @@
 
 <div id="aside" style="float: left; text-align: center;">   
 
+
     <h3>${farmerInfo.farmerId }님의 농장일기</h3>
 
     <hr>
@@ -42,11 +94,11 @@
 	<br>
 	
 
-	<a href="/farmapp/farmintroduce/farmintroduceForm.do">농장 소개</a><br><br>
-	<a href="/farmapp/farmdiary/farmdiarylist.do" >농장 일기</a><br><br>
+	<a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a><br><br>
+	<a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}" >농장 일기</a><br><br>
 	<a href="#">농장 체험</a><br><br>
-	<a href="/farmapp/farmQnA/farmQnAlist.do">QnA</a><br><br>
-	<a href="/farmapp/personalproduce/personalproducelist.do">개인 농산물</a>
+	<a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a><br><br>
+	<a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a>
 
 
 <hr>
@@ -63,10 +115,10 @@
            </tr>
        </thead>
        <tbody>
-       	<c:forEach items="${list.fdlist}" var="list">
+       	<c:forEach items="${list}" var="list">
            <tr> 
                <td>${list.farmDiaryNo}</td>
-               <td><a href="<%= request.getContextPath() %>/farmdiary/farmdiarydetail.do?farmDiaryNo=${list.farmDiaryNo}">${list.title}</a></td>
+               <td><a href="<%= request.getContextPath() %>/farmdiary/farmdiarydetail.do?farmDiaryNo=${list.farmDiaryNo}&farmNo=${farmNo}">${list.title}</a></td>
                <td><fmt:formatDate value="${list.enrollDate}" pattern="yyyy-MM-dd"/></td>
                <td>${list.hits}</td>
            </tr>
@@ -77,38 +129,40 @@
 <button class="btn btn-success" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
 
 		
-<div style="display: flex;"><!-- section pagination -->
-
-         <a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do" class="nav first"><i class="fas fa-angle-double-left"></i></a>
+<div class="pagination-wrap"><!--section pagination -->
+<ul class="admin__pagination">
+    
+         <li><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?&farmerNo=${farmerInfo.farmerNo}" class="nav first"><i class="fas fa-angle-double-left"></i></a></li>
+         
         <c:choose>
         	<c:when test="${paging.blockStart > 1 }">
-         		<a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockStart-1}" class="nav prev"><i class="fas fa-angle-left"></i></a>
+         		<li><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockStart-1}&farmerNo=${farmerInfo.farmerNo}" class="nav prev"></a></li>
         	</c:when>
         	<c:otherwise>
-        		<a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockStart}" class="nav prev"><i class="fas fa-angle-left"></i></a>
+        		<li><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockStart}&farmerNo=${farmerInfo.farmerNo}" class="nav prev"><i class="fas fa-angle-left"></i></a></li>
         	</c:otherwise>
         </c:choose>
         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-         <a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${page}" class="num active"><span>${page}</span></a>
+         <li><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${page}&farmerNo=${farmerInfo.farmerNo}" class="admin__p-disabled"><span>${page}</span></a></li>
         </c:forEach> 
         
         <c:choose>
         	<c:when test="${paging.blockEnd+1 > paging.lastPage }">
-         		<a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockEnd}" class="nav next"><i class="fas fa-angle-right"></i></a>
+         		<li><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockEnd}&farmerNo=${farmerInfo.farmerNo}" class="nav next"><i class="fas fa-angle-right"></i></a></li>
         	</c:when>
         	<c:otherwise>
-         		<a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockEnd+1}" class="nav next"><i class="fas fa-angle-right"></i></a>
+         		<li><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.blockEnd+1}&farmerNo=${farmerInfo.farmerNo}" class="nav next"><i class="fas fa-angle-right"></i></a></li>
         	</c:otherwise>
    	   	</c:choose>
- 	   	 
- 	   	 <a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.lastPage}" class="nav last" ><i class="fas fa-angle-double-right"></i></a>
- 
-</div><!-- // section pagination -->
-  	   
+ 	 
+ 	   	<li><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.lastPage}&farmerNo=${farmerInfo.farmerNo}" class="nav last" ><i class="fas fa-angle-double-right"></i></a></li>
+ 	   	
+</ul> 	  
+</div><!-- section pagination -->
+
 </div> 
 </div>
 </div>
-
 
 
 <%@include file="../include/footer.jsp" %>

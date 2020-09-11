@@ -27,10 +27,15 @@
 
 <%@include file="../include/farmdiaryheader.jsp" %>
 
-<form action="<%= request.getContextPath() %>/farmdiary/deletefarmdiary.do" method="post">
+<form action="<%= request.getContextPath() %>/farmdiary/farmdiarydelete.do" method="post">
+
+
 <div id="d1">
     <h3>농장일기</h3>
     <hr>
+    
+<input type="hidden" name="farmDiaryNo" value="${detail.farmDiaryNo}" />
+    
  <table class="table">
         <colgroup>
             <col width="10%">
@@ -67,12 +72,12 @@
       	</tr>
    
     </tbody>
-</table>
-     	<div style="height: 300px;"> 	  
+</table>  
      	<hr>
  		 ${detail.content}
  		 
  		 <hr>
+ 		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarylist.do?farmerNo=${detail.farmerNo}'">목록</button>
  		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarydelete.do?farmDiaryNo=${detail.farmDiaryNo}'">삭제</button>
 	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarymodify.do?farmDiaryNo=${detail.farmDiaryNo}'">수정</button>
       	</div>
@@ -81,7 +86,7 @@
 <br>
 	  
       
-</div>   
+
 </form>
       
 
