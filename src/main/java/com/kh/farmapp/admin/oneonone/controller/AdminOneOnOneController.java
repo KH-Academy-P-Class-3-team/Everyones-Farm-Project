@@ -88,8 +88,16 @@ public class AdminOneOnOneController {
 	
 	// 일반 회원 1대1 문의 상세 페이지
 	@RequestMapping(value = "/admin/oneonone/user/detail", method = RequestMethod.GET)
-	public String adminUserOneOnOneDetail(QuestionOneonone q) {
-		return "";
+	public String adminUserOneOnOneDetail(
+			// question_no 값을 갖는 QuestionOneOnOne
+			QuestionOneonone q
+			) {
+		
+		logger.info("/admin/oneonone/user/detail - [GET] 요청");
+		
+		logger.debug("questionNo: " + q.getQuestionNo());
+		
+		return "admin/oneonone/user_detail";
 	}
 	
 	// 농업인 회원 1대1 문의 상세 페이지

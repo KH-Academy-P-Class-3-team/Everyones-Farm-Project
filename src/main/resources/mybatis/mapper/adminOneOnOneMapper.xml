@@ -34,7 +34,7 @@
 		<result property="userNo" column="user_no" />
 		<result property="regDate" column="reg_date" />
 		<result property="isAnswered" column="is_answered" />
-		<result property="userName" column="user_name" />
+		<result property="userId" column="user_id" />
 	</resultMap>
 	<select id="selectAllUserOneOnOneList" parameterType="common.util.AdminPaging" resultMap="userOneOnOneMap">
 		select
@@ -50,7 +50,7 @@
 		            , q.user_no
 		            , q.reg_date
 		            , q.is_answered
-		            , u.user_name
+		            , u.user_id
 		        from
 		            question_oneonone q
 		            JOIN

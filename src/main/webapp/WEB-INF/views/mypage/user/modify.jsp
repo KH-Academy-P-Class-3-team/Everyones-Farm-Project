@@ -253,7 +253,7 @@ a:hover {
 						</c:if>
 						<c:if  test="${profile.userNo eq userInfo.userNo }">
 							<img
-								src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }"
+								src="<%=request.getContextPath() %>/resources/image/mypage/${profile.fileRename }"
 								class="img-circle" id="oldone">
 						</c:if>
 					</div>

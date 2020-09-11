@@ -50,7 +50,7 @@
 						<tr class="oneonone__tr-data">
 							<td><a href="<%=request.getContextPath() %>/admin/oneonone/user/detail?questionNo=${u.questionNo }">${u.questionNo }</a></td>
 							<td><div class="oneonone__td-title"><a href="<%=request.getContextPath() %>/admin/oneonone/user/detail?questionNo=${u.questionNo }">${u.title }</a></div></td>
-							<td><div class="oneonone__td-name">${u.userName }</div></td>
+							<td><div class="oneonone__td-name">${u.userId }</div></td>
 							<td>
 							<fmt:formatDate value="${u.regDate }" pattern="yyyy-MM-dd"/>
 							</td>
