@@ -1,5 +1,7 @@
 package com.kh.farmapp.mypage.user.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
+import common.dto.Farmer;
 import common.dto.UserTB;
 
 @Controller
@@ -22,11 +25,22 @@ public class MypageAppliController {
 
 	@RequestMapping("mypage/user/myActive")
 	public ModelAndView enterPage(HttpSession session) {
-		UserTB user = new UserTB();
 		
+		UserTB user = (UserTB) session.getAttribute("userInfo");
 		ModelAndView mav = new ModelAndView();
 		
-		Map<String, Object> info = mypageService.modifyUser(user);
+		List<Map<String, Object>> activeList = mypageService.appliActList(user);
+		
+		int res = mypageService.cntApli(user);
+		
+		for(Map<String, Object> p : activeList) {
+			System.out.println(p);
+		}
+		
+		
+		mav.addObject("activeList1", activeList);
+		mav.addObject("res", res);
+		mav.setViewName("mypage/user/myActive");
 		
 		return mav;
 	}

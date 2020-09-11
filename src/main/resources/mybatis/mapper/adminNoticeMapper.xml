@@ -67,4 +67,51 @@
 		    nrnum between #{startNo} and #{endNo}
 	</select>
 	
+	<delete id="deleteNoticeByNoticeNo" parameterType="java.util.List">
+		delete from
+		    notice
+		where
+		    notice_no in
+		<foreach collection="list" 
+			item="nums" 
+			index="index" 
+			separator="," 
+			open="(" 
+			close=")" >
+			#{nums}
+		</foreach>    
+	</delete>
+	
+	<!-- 공지사항 파일 없이 작성 -->
+	<insert id="insertNotice" parameterType="common.dto.Notice">
+		INSERT INTO 
+		    notice (notice_no, title, content, admin_no)
+		VALUES 
+		    (notice_seq.nextval, #{title}, #{content}, #{adminNo})
+	</insert>
+	
+	<resultMap type="hashmap" id="noticeDetailMap">
+		<result property="noticeNo" column="notice_no" />
+		<result property="title" column="title" />
+		<result property="content" column="content" javaType="java.lang.String" jdbcType="CLOB" />
+		<result property="adminNo" column="admin_no" />
+		<result property="regDate" column="reg_date" />
+		<result property="isShowed" column="is_showed" />
+		<result property="adminId" column="admin_id" />
+	</resultMap>
+	<!-- 공지사항 상세 조회 -->
+	<select id="selectNoticeByNoticeNo" parameterType="common.dto.Notice" resultMap="noticeDetailMap">
+		select
+		    n.*
+		    , a.admin_id
+		from
+		    notice n
+		    JOIN
+		        admin a
+		    ON
+		        n.admin_no = a.admin_no
+		where
+		    notice_no = #{noticeNo}
+	</select>
+	
 </mapper>

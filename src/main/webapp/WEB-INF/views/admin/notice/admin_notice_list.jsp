@@ -18,9 +18,9 @@
 		</div>
 		<!-- 공지사항 목록 -->
 		<div class="notice__table">
-		<table class="notice__n-table">
+		<table class="notice__n-table checkbox_group">
 			<tr class="n-table__tr-head">
-				<th class="n-table__th"><input type="checkbox" name="noticeNo" /></th>
+				<th class="n-table__th"><input type="checkbox" name="check-master" id="check_all" /></th>
 				<th class="n-table__th">공지 번호</th>
 				<th class="n-table__th">제목</th>
 				<th class="n-table__th">작성자</th>
@@ -28,14 +28,18 @@
 			</tr>
 			<c:choose>
 				<%-- nList null 일 때 --%>
-				<c:when test="${empty pagingNList }"></c:when>
+				<c:when test="${empty pagingNList }">
+					<tr>
+						<td colspan="5">등록된 공지사항이 없습니다...</td>
+					</tr>
+				</c:when>
 				<%-- nList null 이 아닐 때 --%>
 				<c:when test="${not empty pagingNList }">
 					<c:forEach items="${pagingNList }" var="n">
 					<tr class="n-table__tr-body">
-						<td class="n-table__td"><input type="checkbox" name="noticeNo" /></td>
-						<td class="n-table__td">${n.noticeNo }</td>
-						<td class="n-table__td"><div class="n-table__title-hidden">${n.title }</div></td>
+						<td class="n-table__td"><input type="checkbox" value="${n.noticeNo }" name="checkNormal" class="checkbox_normal" /></td>
+						<td class="n-table__td toNDetail" data-noticeno="${n.noticeNo }">${n.noticeNo }</td>
+						<td class="n-table__td toNDetail" data-noticeno="${n.noticeNo }"><div class="n-table__title-hidden">${n.title }</div></td>
 						<td class="n-table__td"><div class="n-table__id-hidden">${n.adminId }</div></td>
 						<td class="n-table__td">
 							<fmt:formatDate value="${n.regDate }" pattern="yyyy-MM-dd"/>
@@ -50,9 +54,9 @@
 		<!-- 작성, 삭제 버튼 -->
 		<div class="notice__btns-wrap">
 			<!-- 작성 버튼 -->
-			<span class="notice__btn-write">공지사항 작성</span>
+			<span class="notice__btn-write" id="notice-write-btn">공지사항 작성</span>
 			<!-- 삭제 버튼 -->
-			<span class="notice__btn-delete">공지사항 삭제</span>
+			<span class="notice__btn-delete" id="notice-del-btn">공지사항 삭제</span>
 		</div>
 		
 		<!-- include pagination -->
@@ -60,6 +64,11 @@
 		
 	</main>
 </div>
-
+<!-- 버튼 이벤트 javascript -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_list_btn_event.js"></script>
+<!-- 삭제 버튼에 대한 javascript -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/notice/admin_notice_delete.js"></script>
+<!-- checkbox 에 대한 javascript -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/common/checkbox-event.js"></script>
 <!-- footer include -->
 <%@include file="../include/admin_footer.jsp" %>
