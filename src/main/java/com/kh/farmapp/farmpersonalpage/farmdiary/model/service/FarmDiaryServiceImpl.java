@@ -14,38 +14,60 @@ import common.util.Paging;
 
 @Service
 public class FarmDiaryServiceImpl implements FarmDiaryService{
-	
+
 	@Autowired
 	private FarmDiaryDao farmdiaryDao;
-
-	@Override
-	public Map<String, Object> selectFarmDiaryList(int currentPage, int cntPerPage) {
-		Map<String,Object> res = new HashMap<String, Object>();
-		Paging p = new Paging(farmdiaryDao.contentCnt(), currentPage, cntPerPage);
-		List<FarmDiary> fdlist = farmdiaryDao.selectFarmDiaryList(p);
-		res.put("paging",p);
-		res.put("fdlist",fdlist);
-		return res;
-	}
-
-	@Override
-	public FarmDiary selectFarmDiaryDetail(int farmDiaryNo) {
-		return farmdiaryDao.selectFarmDiaryDetail(farmDiaryNo);
-	}
-
+	
 	@Override
 	public void writeFarmDiary(Map<String, Object> commandMap) {
 		farmdiaryDao.insertFarmDiary(commandMap);
 	}
 
 	@Override
-	public int deleteFarmDiary() {
-		return 0;
+	public Map<String, Object> selectFarmDiaryList(int currentPage, int cntPerPage) {
+		Map<String,Object> res = new HashMap<String, Object>();
+		Paging p = new Paging(farmdiaryDao.contentCnt(), currentPage, cntPerPage);
+		List<FarmDiary> fdlist = farmdiaryDao.selectFarmDiaryList(p);
+
+		res.put("paging",p);
+		res.put("fdlist",fdlist);
+
+		//		System.out.println(fdlist.size());
+
+		return res;
 	}
 
 	@Override
-	public int modifyFarmDiary() {
-		return 0;
+	public Map<String, Object> selectFarmDiaryDetail(int farmDiaryNo) {
+		Map<String, Object> res = farmdiaryDao.selectFarmDiaryDetail(farmDiaryNo);
+		return res;
+	}
+
+	//파일 업로드
+	//	@Override
+	//	public int insertFarmdiaryFile(FarmDiary farmdiary, List<MultipartFile> files, String root) throws Exception{
+	//		int result = farmdiaryDao.insertFarmDiary(farmdiary);
+	//		if(!(files.size() == 1 && files.get(0).getOriginalFilename().equals(""))) {
+	//			List<Map<String,String>> filedata 
+	//				= new FileUtil().fileUpload(files, root);
+	//			
+	//			for(Map<String,String> fileInfo : filedata) {
+	//				farmdiaryDao.insertFileWithSC(fileInfo);
+	//			}
+	//		}
+	//		return result;
+	//	}
+
+
+	@Override
+	public int deleteFarmDiary(int farmDiaryNo) {
+		return farmdiaryDao.deleteFarmDiary(farmDiaryNo);
+
+	}
+
+	@Override
+	public int modifyFarmDiary(Map<String, Object> commandMap) {
+		return farmdiaryDao.modifyFarmDiary(commandMap);
 	}
 
 }

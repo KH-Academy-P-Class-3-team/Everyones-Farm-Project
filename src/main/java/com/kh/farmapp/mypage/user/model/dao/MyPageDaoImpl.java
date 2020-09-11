@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 import common.dto.AnsweredOneonone;
@@ -17,6 +16,7 @@ import common.dto.TBOrder;
 import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
+import common.util.Paging;
 
 @Repository
 public class MyPageDaoImpl implements MyPageDao{
@@ -26,46 +26,52 @@ public class MyPageDaoImpl implements MyPageDao{
 	
 	
 	@Override
-	public Map<String, Object> selectUser(UserTB user) {
+	public UserTB selectUser(UserTB user) {
 		return sqlSession.selectOne("Mypage.selectUser", user);
 	}
 
 	
 	@Override
 	public int modifyUser(UserTB user) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("2");
+		return sqlSession.update("Mypage.updateUser", user);
 	}
 
 	@Override
-	public int modifyprofile(UserTB user) {
+	public UserProfile selectUserProfile(int userNo) {
+		return sqlSession.selectOne("Mypage.selectProfile", userNo);
+	}
+
+	@Override
+	public int modifyprofile(Map<String, Object> fileMap) {
 		
-		// 클래스 다이어그램 용 DTO 객체 선언
-		UserProfile up = new UserProfile();
-		
-		return 0;
+		return sqlSession.update("Mypage.modifyprofile", fileMap);
+	}
+	
+	@Override
+	public int insertprofile(Map<String, Object> fileMap) {
+		return sqlSession.insert("Mypage.insertprofile", fileMap);
+	}
+	
+	@Override
+	public int leave(UserTB user) {
+		return sqlSession.update("Mypage.deleteUser", user);
 	}
 
 	@Override
-	public int leave(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Map<String, Object>> o3List(Map<String, Object> forOne) {
+		return sqlSession.selectList("Mypage.selectO3", forOne);
 	}
-
+	
 	@Override
-	public List<QuestionOneonone> o3List() {
-		return sqlSession.selectList("Mypage.selectO3");
+	public int cntO3(UserTB user) {
+		return sqlSession.selectOne("Mypage.cntO3", user);
 	}
+	
 
 	@Override
 	public QuestionOneonone o3Detail(int qNo) {
-		
-		// 클래스 다이어그램 용 DTO 객체 선언
-		QuestionOneonone q = new QuestionOneonone();
-		AnsweredOneonone a = new AnsweredOneonone();
-		UserTB u = new UserTB();
-		
-		return null;
+		return sqlSession.selectOne("Mypage.selectO3one", qNo);
 	}
 
 	@Override
@@ -82,17 +88,13 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 	public int o3Delete(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("Mypage.deleteOneonone", qNo);
 	}
 
 	@Override
-	public Application appliActList() {
+	public List<Map<String, Object>> appliActList(UserTB user) {
 		
-		// 클래스 다이어그램 용 Dto 객체 선언
-		Application application = new Application();
-		
-		return null;
+		return sqlSession.selectList("Mypage.selectActList", user);
 	}
 
 	@Override
@@ -102,12 +104,8 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
-	public Basket basketList() {
-		
-		// 클래스 다이어그램 용 DTO 객체 선언
-		Basket basket = new Basket();
-		
-		return null;
+	public List<Map<String, Object>> basketList(Map<String, Object> sub) {
+		return sqlSession.selectList("Mypage.selectBasketList", sub);
 	}
 
 	@Override
@@ -117,21 +115,15 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
-	public TBOrder orderList() {
+	public List<Map<String, Object>> orderList(Map<String, Object> sub) {
 		
 		// 클래스다이어그램 용 DTO 객체 선언
-		TBOrder order = new TBOrder();
-		Product p = new Product();
-		UserTB user = new UserTB();
-		UserAddress ua = new UserAddress();
-		
-		return null;
+		return sqlSession.selectList("Mypage.selectOrderList", sub);
 	}
 
 	@Override
-	public Product orderDetail(int orderNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> orderDetail(int orderNo) {
+		return sqlSession.selectOne("Mypage.selectOrderDetail", orderNo);
 	}
 
 	@Override
@@ -139,6 +131,43 @@ public class MyPageDaoImpl implements MyPageDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public int cntApli(UserTB user) {
+		return sqlSession.selectOne("Mypage.cntApli", user);
+	}
+
+
+	@Override
+	public int cntOrder(int userNo) {
+		return sqlSession.selectOne("Mypage.cntOrder", userNo);
+	}
+
+
+	@Override
+	public int cntBasket(int userNo) {
+		return sqlSession.selectOne("Mypage.cntBasket", userNo);
+	}
+
+
+	@Override
+	public int deleteBasket(int[] arr) {
+		return sqlSession.delete("Mypage.deleteBasket", arr);
+	}
+
+
+	@Override
+	public Map<String, Object> getTotla(UserTB user) {
+		return sqlSession.selectOne("Mypage.minmax",user);
+	}
+
+
+
+
+
+
+
 
 
 }

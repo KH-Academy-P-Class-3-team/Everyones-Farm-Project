@@ -3,11 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@include file="../include/header.jsp" %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/activity/activityList.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -38,7 +34,7 @@ $(document).ready(function() {
 	
 	
 	
-	for (var i=0; i<experience_view;i++ ) {
+	for (var i=0; i<experience_view;i++ )	{
 		$(".experience-list .row").eq(i).css('display', 'inline-block');
 	}
 
@@ -91,12 +87,13 @@ $(document).ready(function() {
 })
 </script>
 
-</head>
-<body>
+<div style="margin-top:170px"></div>
 
 <div class="activity-top">
-	<div class="top-title">${farmerInfo.farmerId }님의 체험 목록</div>
-	<div class="title-img"><img src="<%=request.getContextPath() %>/resources/image/activity/activity_title.png" width="550" alt="체험활동 타이틀" ></div>
+	<div class="title-content">
+		<div class="top-title">${farmerInfo.farmerId }님의 체험 목록</div>
+		<div class="title-img"><img src="<%=request.getContextPath() %>/resources/image/activity/activity_title.png" width="550" alt="체험활동 타이틀" ></div>
+	</div>
 </div>
 
 <div class="activity-content">
@@ -196,11 +193,11 @@ $(document).ready(function() {
 		
 		<div class="help_load load" >더보기</div>
 
-	
-	<button class="btnForm" type="button" onclick="javascript:location.href='activityForm.do'">체험 등록</button>
+	<div class="btn-div">
+		<button class="btnForm" type="button" onclick="javascript:location.href='activityForm.do'">체험 등록</button>
+	</div>
 
 </div>
 
 
-</body>
-</html>
+<%@include file="../include/footer.jsp" %>
