@@ -1,0 +1,111 @@
+@charset "UTF-8";/* main tag css */
+.main__oneonone-detail {
+	margin: 70px auto;
+}
+/* table css */
+.oneonone-detail__question-table-wrap .oneonone-detail__question-table {
+    width: 100%;
+	padding: 0;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+}
+/* td css */
+.oneonone-detail__question-table td {
+	padding: 16px 8px;
+}
+/* tr css */
+.oneonone-detail__question-table .question-table__tr {
+    border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+}
+/* content td css */
+.question-table__tr .td-content {
+	height: 300px;
+}
+/* td css */
+.question-table__tr .question-table__th {
+	background: #D1E9CA;
+	text-align: center;
+}
+/* user-info-wrap css */
+.td-user .question-table__user-info-wrap {
+	display: flex;
+	align-items: center;
+}
+.question-table__user-info-wrap .user-info-wrap__img-wrap {
+	margin-right: 10px;
+}
+.user-info-wrap__img-wrap img {
+	border-radius: 10px;
+}
+/* btn-wrap div */
+.main__oneonone-detail .oneonone-detail__btn-wrap {
+	margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+/* button css */
+.oneonone-detail__btn-wrap .btn
+, .write-form-wrap__btn-wrap .btn {
+	padding: 16px;
+    border-radius: 3px;
+    font-weight: 700;
+    cursor: pointer;
+}
+/* 답변하기, 작성, 답변수정 버튼 */
+.oneonone-detail__btn-wrap .write-btn
+, .write-form-wrap__btn-wrap .write-question
+, .oneonone-detail__btn-wrap .update-btn 
+, .write-form-wrap__btn-wrap .update-question {
+	background: #789F6F;
+	margin-right: 10px;
+}
+/* 목록으로, 취소 버튼 */
+.oneonone-detail__btn-wrap .list-btn
+, .write-form-wrap__btn-wrap .cancel-question  {
+	background: #EAE891;
+}
+/* 답변 삭제 버튼 */
+.oneonone-detail__btn-wrap .delete-btn {
+	background: #952F2F;
+	margin-right: 10px;
+}
+/* 작성 폼 css */
+.main__oneonone-detail .oneonone-detail__write-form-wrap {
+	margin-top: 30px;
+}
+/* input, textarea width */
+.oneonone-detail__write-form-wrap input
+, .oneonone-detail__write-form-wrap textarea {
+	width: 100%;
+}
+/* input css */
+.oneonone-detail__write-form-wrap input {
+	appearance: none;
+}
+.oneonone-detail__write-form-wrap input[type="text"] {
+	height: 50px;
+    border: 2px solid #789F6F;
+    padding: 7px 14px;
+    margin-bottom: 30px;
+}
+.oneonone-detail__write-form-wrap input[type="text"]:focus {
+	outline: none;
+	border: 2px solid #605759;
+}
+/* 작성폼 숨겨놓기 */
+.main__oneonone-detail .oneonone-detail__write-form-wrap {
+ 	display: none;
+}
+/* 작성폼 버튼 div */
+.oneonone-detail__write-form-wrap .write-form-wrap__btn-wrap {
+	display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+/* answer wrap css */
+.main__oneonone-detail .answer-wrap {
+	margin-top: 30px;
+}

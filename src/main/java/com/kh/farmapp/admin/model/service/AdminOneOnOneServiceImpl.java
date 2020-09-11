@@ -66,16 +66,6 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 		return adminOneOnOneDao.updateAnswerToFarmer(a);
 	}
 
-	@Override
-	public int deleteAnswerToUserByNo(AnsweredOneonone aNo) {
-		return adminOneOnOneDao.deleteAnswerToUserByNo(aNo);
-	}
-
-	@Override
-	public int deleteAnswerToFarmerByNo(AnsweredOneonone aNo) {
-		return adminOneOnOneDao.deleteAnswerToFarmerByNo(aNo);
-	}
-	
 	// 페이징 설정
 	@Override
 	public AdminPaging getPaging(Map<String, Object> pagingConfig) {
@@ -113,6 +103,24 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 	@Override
 	public Map<String, Object> selectAnswerOneOnOneByQuestionNo(QuestionOneonone q) {
 		return adminOneOnOneDao.selectAnswerOneOnOneByQuestionNo(q);
+	}
+	
+	// 답변 삭제
+	@Override
+	public int deleteAnswer(AnsweredOneonone deleteAnswer) {
+		return adminOneOnOneDao.deleteAnswer(deleteAnswer);
+	}
+	
+	// 답변 상태 업데이트
+	@Override
+	public int updateAnswerStateByQuestionNo(AnsweredOneonone answer) {
+		return adminOneOnOneDao.updateAnswerStateByQuestionNo(answer);
+	}
+	
+	// 답변 상태 업데이트 - 답변 대기로 변경
+	@Override
+	public int updateWaitAnswerByQuestionNo(AnsweredOneonone deleteAnswer) {
+		return adminOneOnOneDao.updateWaitAnswerByQuestionNo(deleteAnswer);
 	}
 
 }

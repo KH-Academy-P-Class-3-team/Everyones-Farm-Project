@@ -162,6 +162,7 @@ public class AdminOneOnOneController {
 		Admin adminLogin = (Admin) session.getAttribute("adminInfo");
 		if( adminLogin == null ) {
 
+			// 관리자 로그인 화면으로 리다이렉트
 			return "redirect:/admin/login";
 			
 		} else { // admin login이 되어있을 경우 adminInfo 가 not null 인 경우
@@ -181,8 +182,19 @@ public class AdminOneOnOneController {
 		// insert 결과 성공
 		if( insertRes >= 1 ) {
 			
-			// alert msg
-			model.addAttribute("alertMsg", "답변 작성에 성공하였습니다.");
+			// 문의 글의 답변 상태 업데이트
+			int updateRes = adminOneOnOneService.updateAnswerStateByQuestionNo(answer);
+			logger.debug("updateRes: " + updateRes);
+			
+			// update 성공시
+			if( updateRes >= 1 ) {
+				// alert msg
+				model.addAttribute("alertMsg", "답변 작성에 성공하였습니다.");
+			} else {
+				// alert msg
+				model.addAttribute("alertMsg", "답변 작성에 성공하였습니다.");
+			}
+			
 		} else { // insert 결과 실패
 			
 			// alert msg
@@ -279,11 +291,46 @@ public class AdminOneOnOneController {
 		// 넘겨받은 queryString 값 확인
 		logger.debug("deleteAnswer: " + deleteAnswer.toString());
 		
-		// Gson 객체
-		Gson res = new Gson();
+		// delete 수행
+		int delRes = adminOneOnOneService.deleteAnswer(deleteAnswer);
+		logger.debug("delRes: " + delRes);
+		
+		// ajax 에 응답할 데이터를 저장하는 Map
+		Map<String, Object> resultMap = new HashMap<>();
+		int isDeleted = 0; // 연산이 수행했는지 안했는지에 대한 값을 저장하는 변수
+		
+		// delete 연산 성공
+		if( delRes >= 1 ) {
+			
+			// 답변 상태 업데이트 - 답변 대기로
+			int updateRes = adminOneOnOneService.updateWaitAnswerByQuestionNo(deleteAnswer);
+			logger.debug("updateRes: " + updateRes);
+			
+			// 업데이트가 성공적으로 이루어짐
+			if( updateRes >= 1 ) {
+				
+				isDeleted = 1;
+				resultMap.put("isDeleted", isDeleted);
+				resultMap.put("questionNo", deleteAnswer.getQuestionNo());
+			} else {
+				resultMap.put("isDeleted", isDeleted);
+			}
+			
+			
+			
+		} else { // delete 연산 실패
+			
+			resultMap.put("isDeleted", isDeleted);
+			
+		}
+		
+		// Gson 객체 - ajax에 응답할 객체
+		Gson gson = new Gson();
+		String resJson = gson.toJson(resultMap);
+		logger.debug("resJson: " + resJson);
 		
 		
-		return "";
+		return resJson;
 	}
 	
 	// 농업인 회원 1대1 답변 삭제

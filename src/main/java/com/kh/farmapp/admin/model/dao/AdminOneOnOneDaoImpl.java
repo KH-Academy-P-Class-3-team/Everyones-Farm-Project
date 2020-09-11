@@ -77,16 +77,6 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 		return 0;
 	}
 
-	@Override
-	public int deleteAnswerToUserByNo(AnsweredOneonone aNo) {
-		return 0;
-	}
-
-	@Override
-	public int deleteAnswerToFarmerByNo(AnsweredOneonone aNo) {
-		return 0;
-	}
-	
 	// 일반 회원 문의 글 총 갯수 조회
 	@Override
 	public int selectCntAllUserOneOnOne(String search) {
@@ -97,6 +87,24 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	@Override
 	public Map<String, Object> selectAnswerOneOnOneByQuestionNo(QuestionOneonone q) {
 		return session.selectOne("ADMINONEONONE.selectAnswerOneOnOneByQuestionNo", q);
+	}
+
+	// 답변 삭제
+	@Override
+	public int deleteAnswer(AnsweredOneonone deleteAnswer) {
+		return session.delete("ADMINONEONONE.deleteAnswer", deleteAnswer);
+	}
+	
+	// 답변 상태 업데이트
+	@Override
+	public int updateAnswerStateByQuestionNo(AnsweredOneonone answer) {
+		return session.update("ADMINONEONONE.updateAnswerStateByQuestionNo", answer);
+	}
+
+	// 답변 상태 업데이트 - 답변 대기로
+	@Override
+	public int updateWaitAnswerByQuestionNo(AnsweredOneonone deleteAnswer) {
+		return session.update("ADMINONEONONE.updateWaitAnswerByQuestionNo", deleteAnswer);
 	}
 	
 }

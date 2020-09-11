@@ -92,4 +92,20 @@ public interface AdminOneOnOneService {
 	 */
 	public int deleteAnswer(AnsweredOneonone deleteAnswer);
 
+	/**
+	 * 답변 상태 업데이트
+	 * 
+	 * @param answer - 문의글 번호 정보를 갖는 AnsweredOneonone 객체
+	 * @return int - update 결과 반환
+	 */
+	public int updateAnswerStateByQuestionNo(AnsweredOneonone answer);
+
+	/**
+	 * 답변 삭제시 답변 상태 업데이트
+	 * 
+	 * @param deleteAnswer - 문의글 번호 정보를 갖는 AnsweredOneonone 객체
+	 * @return int - update 결과 반환
+	 */
+	public int updateWaitAnswerByQuestionNo(AnsweredOneonone deleteAnswer);
+
 }

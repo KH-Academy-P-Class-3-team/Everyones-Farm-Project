@@ -126,6 +126,16 @@
 		    (answer_oneonone_seq.nextval, #{title}, #{content}, #{adminNo}, sysdate, #{questionNo})
 	</insert>
 	
+	<!-- 문의글의 답변 상태 update -->
+	<update id="updateAnswerStateByQuestionNo" parameterType="common.dto.AnsweredOneonone">
+		update
+		    question_oneonone
+		set
+		    is_answered = 1
+		where
+		    question_no = #{questionNo}
+	</update>
+	
 	<!-- 답변 조회 -->
 	<resultMap type="hashmap" id="answerMap">
 		<result property="answeredNo" column="answered_no" />
@@ -159,6 +169,24 @@
 		    , content = #{content}
 		where
 		    answered_no = #{answeredNo}
+	</update>
+	
+	<!-- 답변 삭제 -->
+	<delete id="deleteAnswer" parameterType="common.dto.AnsweredOneonone">
+		delete
+		    answered_oneonone
+		WHERE
+		    answered_no = #{answeredNo}
+	</delete>
+	
+	<!-- 답변 상태 답변 대기로 update -->
+	<update id="updateWaitAnswerByQuestionNo" parameterType="common.dto.AnsweredOneonone">
+		update
+		    question_oneonone
+		set
+		    is_answered = 0
+		where
+		    question_no = #{questionNo}
 	</update>
 
 </mapper>
