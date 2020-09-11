@@ -33,31 +33,39 @@ public class MyPageDaoImpl implements MyPageDao{
 	
 	@Override
 	public int modifyUser(UserTB user) {
+		System.out.println("2");
 		return sqlSession.update("Mypage.updateUser", user);
 	}
 
 	@Override
-	public int modifyprofile(UserTB user) {
-		
-		// 클래스 다이어그램 용 DTO 객체 선언
-		UserProfile up = new UserProfile();
-		
-		return 0;
+	public UserProfile selectUserProfile(int userNo) {
+		return sqlSession.selectOne("Mypage.selectProfile", userNo);
 	}
 
+	@Override
+	public int modifyprofile(Map<String, Object> fileMap) {
+		
+		return sqlSession.update("Mypage.modifyprofile", fileMap);
+	}
+	
+	@Override
+	public int insertprofile(Map<String, Object> fileMap) {
+		return sqlSession.insert("Mypage.insertprofile", fileMap);
+	}
+	
 	@Override
 	public int leave(UserTB user) {
 		return sqlSession.update("Mypage.deleteUser", user);
 	}
 
 	@Override
-	public List<Map<String, Object>> o3List(Paging page) {
-		return sqlSession.selectList("Mypage.selectO3", page);
+	public List<Map<String, Object>> o3List(Map<String, Object> forOne) {
+		return sqlSession.selectList("Mypage.selectO3", forOne);
 	}
 	
 	@Override
-	public int cntO3() {
-		return sqlSession.selectOne("Mypage.cntO3");
+	public int cntO3(UserTB user) {
+		return sqlSession.selectOne("Mypage.cntO3", user);
 	}
 	
 
@@ -80,8 +88,7 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 	public int o3Delete(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("Mypage.deleteOneonone", qNo);
 	}
 
 	@Override
@@ -142,6 +149,20 @@ public class MyPageDaoImpl implements MyPageDao{
 	public int cntBasket(int userNo) {
 		return sqlSession.selectOne("Mypage.cntBasket", userNo);
 	}
+
+
+	@Override
+	public int deleteBasket(int[] arr) {
+		return sqlSession.delete("Mypage.deleteBasket", arr);
+	}
+
+
+	@Override
+	public Map<String, Object> getTotla(UserTB user) {
+		return sqlSession.selectOne("Mypage.minmax",user);
+	}
+
+
 
 
 

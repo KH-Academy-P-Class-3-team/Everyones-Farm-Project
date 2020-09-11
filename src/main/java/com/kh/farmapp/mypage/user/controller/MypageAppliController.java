@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
+import common.dto.Farmer;
 import common.dto.UserTB;
 
 @Controller
@@ -35,6 +36,7 @@ public class MypageAppliController {
 		for(Map<String, Object> p : activeList) {
 			System.out.println(p);
 		}
+		
 		
 		mav.addObject("activeList1", activeList);
 		mav.addObject("res", res);
