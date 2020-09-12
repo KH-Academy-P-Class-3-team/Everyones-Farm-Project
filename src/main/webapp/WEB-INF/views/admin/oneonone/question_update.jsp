@@ -22,7 +22,7 @@
 			</td>
 			<td class="question-table__th">작성일</td>
 			<td class="question-table__td td-user"><fmt:formatDate
-					value="${question.regDate }" pattern="yyyy-MM-dd" /></td>
+					value="${answer.regDate }" pattern="yyyy-MM-dd" /></td>
 		</tr>
 		<tr class="question-table__tr">
 			<td colspan="4" class="question-table__th">내용</td>
@@ -42,7 +42,15 @@
 <%-- 수정 폼 보여주기 --%>
 <!-- 작성 폼 div 영역 숨겨놓기 -->
 <div class="oneonone-detail__write-form-wrap update-form-wrap">
-	<form action="<%=request.getContextPath() %>/admin/oneonone/user/update?answeredNo=${answer.answeredNo }&questionNo=${answer.questionNo }" method="post" id="question-update-form">
+	<c:choose>
+		<c:when test="${not empty question.userId }">
+		<form action="<%=request.getContextPath() %>/admin/oneonone/update?updateCode=1&answeredNo=${answer.answeredNo }&questionNo=${answer.questionNo }" method="post" id="question-update-form">
+		</c:when>
+		<c:when test="${not empty question.farmerId }">
+		<form action="<%=request.getContextPath() %>/admin/oneonone/update?updateCode=2&answeredNo=${answer.answeredNo }&questionNo=${answer.questionNo }" method="post" id="question-update-form">
+		</c:when>
+	</c:choose>
+<%-- 	<form action="<%=request.getContextPath() %>/admin/oneonone/user/update?answeredNo=${answer.answeredNo }&questionNo=${answer.questionNo }" method="post" id="question-update-form"> --%>
 		<ul>
 			<li>
 				<input type="text" name="title" id="title" value="${answer.title }" />

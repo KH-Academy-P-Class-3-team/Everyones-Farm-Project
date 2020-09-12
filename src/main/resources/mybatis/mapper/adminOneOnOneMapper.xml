@@ -62,7 +62,7 @@
 		            <if test="search != null and search != ''">
 		            and (
 		                q.title like '%' || #{search} || '%'
-		                or u.user_name like '%' || #{search} || '%'
+		                or u.user_id like '%' || #{search} || '%'
 		            )
 		            </if>
 		        order by
@@ -188,5 +188,115 @@
 		where
 		    question_no = #{questionNo}
 	</update>
+	
+	<!-- 농업인 회원의 문의 글 총 갯수 -->
+	<select id="" resultType="int" parameterType="java.lang.String" >
+		select
+		    count(*)    
+		from
+		    question_oneonone q
+		    JOIN
+		        farmer f
+		    ON
+		        q.farmer_no = f.farmer_no
+		where
+		    q.farmer_no is not null
+		<if test="value != null and value != ''">
+		    and (
+		        q.title like '%' || #{value} || '%'
+		        or f.name like '%' || #{value} || '%'
+		    )
+		</if>
+	</select>
+	
+	<!-- 농업인 회원의 문의글 목록 조회 -->
+	<resultMap type="hashmap" id="farmerOneononeMap">
+		<result column="q_order" property="qOrder" />	
+		<result column="question_no" property="questionNo" />	
+		<result column="title" property="title" />	
+		<result column="farmer_no" property="farmerNo" />	
+		<result column="reg_date" property="regDate" />	
+		<result column="is_answered" property="isAnswered" />	
+		<result column="farmer_id" property="farmerId" />	
+	</resultMap>
+	<select id="selectAllFarmerOneOnOneList" parameterType="common.util.AdminPaging" resultMap="farmerOneononeMap" >
+		select
+		    q_paging.*
+		from (
+		    select
+		        rownum q_order
+		        , qlist.*
+		    from (
+		        select
+		            q.question_no
+		            , q.title
+		            , q.farmer_no
+		            , q.reg_date
+		            , q.is_answered
+		            , f.farmer_id
+		        from
+		            question_oneonone q
+		            JOIN
+		                farmer f
+		            ON
+		                q.farmer_no = f.farmer_no
+		        where
+		            q.farmer_no is not null
+		            and (
+		                q.title like '%' || #{search} || '%'
+		                or f.farmer_id like '%' || #{search} || '%'
+		            )
+		        order by
+		            q.question_no desc
+		    ) qlist
+		)q_paging
+		where
+		    q_order between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 농업인 회원 문의 글 상세 조회 -->
+	<resultMap type="hashmap" id="farmerDetailMap">
+		<result property="questionNo" column="question_no" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="regDate" column="reg_date" />
+		<result property="isAnswered" column="is_answered" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="profileNo" column="profile_no" />
+		<result property="originName" column="origin_name" />
+		<result property="fileRename" column="file_rename" />
+		<result property="savePath" column="save_path" />
+	</resultMap>
+	<select id="selectFarmerOneOnOneByNo" parameterType="common.dto.QuestionOneonone" resultMap="farmerDetailMap">
+		select
+		    q_detail.*
+		    , up.profile_no
+		    , up.origin_name
+		    , up.file_rename
+		    , up.save_path
+		from (
+		    select
+		        q.question_no
+		        , q.title
+		        , q.content
+		        , q.reg_date
+		        , q.is_answered
+		        , f.farmer_no
+		        , f.farmer_id
+		    from
+		        question_oneonone q
+		        JOIN
+		            farmer f
+		        ON
+		            q.farmer_no = f.farmer_no
+		    where
+		        q.question_no = #{questionNo}
+		) q_detail
+		    LEFT OUTER JOIN
+		        user_profile up
+		    ON
+		        q_detail.farmer_no = up.farmer_no
+	</select>
 
 </mapper>

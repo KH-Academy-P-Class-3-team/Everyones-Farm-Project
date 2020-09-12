@@ -26,10 +26,11 @@
 						<input type="text" placeholder="제목" name="title" class="list__input-title" />
 					</li>
 					<li>
-						<textarea name="content" class="list__textarea" id="noticeContent">글씨를 지우고 내용을 입력해주세요.</textarea>
+						<textarea name="content" class="list__textarea" id="noticeContent"></textarea>
 						<script type="text/javascript">
 							CKEDITOR.replace( 'noticeContent'
 											, { filebrowserUploadUrl: '/farmapp/common/imageupload?boardNo=7&postNo=' + ${postNo}
+											, placeholder: '내용을 입력해주세요.'
 								});
 						</script>
 					</li>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -38,7 +38,7 @@
 								</c:when>
 							</c:choose>
 							<div class="user-info-wrap__user-id">
-								<span>${question.userId }</span>
+								<span>${question.farmerId }</span>
 							</div>
 						</div>
 					</td>
@@ -71,18 +71,18 @@
 			<%@include file="./question_update.jsp" %>
 			</c:when>		
 		</c:choose>
-		
 	
 	</main>
 </div>
+
 <!-- form 태그 submit -->
  <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_oneonone_form_submit_event.js"></script>
 <!-- button event javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_oneonone_detail_btn_event.js"></script>
-<!-- delete button click event -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_user_oneonone_delete.js" ></script>
+<!-- delete button click evenet -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_farmer_oneonone_delete.js" ></script>
 <!-- toList button click event -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_user_oneonone_to_list.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_farmer_oneonone_to_list.js"></script>
 
 <!-- footer include -->
 <%@include file="../include/admin_footer.jsp" %>
