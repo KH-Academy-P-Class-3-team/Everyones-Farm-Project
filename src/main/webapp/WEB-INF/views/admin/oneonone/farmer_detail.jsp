@@ -79,6 +79,8 @@
  <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_oneonone_form_submit_event.js"></script>
 <!-- button event javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_oneonone_detail_btn_event.js"></script>
+<!-- delete button click evenet -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_farmer_oneonone_delete.js" ></script>
 
 <!-- footer include -->
 <%@include file="../include/admin_footer.jsp" %>

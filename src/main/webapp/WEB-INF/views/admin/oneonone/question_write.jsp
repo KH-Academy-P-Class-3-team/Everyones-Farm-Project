@@ -10,7 +10,7 @@
 <!-- 작성 폼 div 영역 숨겨놓기 -->
 <div class="oneonone-detail__write-form-wrap">
 	<c:choose>
-		<c:when test="${question.userId }">
+		<c:when test="${not empty question.userId }">
 			<form action="<%=request.getContextPath() %>/admin/oneonone/write?writeCode=1&questionNo=${question.questionNo }" method="post" id="question-write-form">
 		</c:when>
 		<c:when test="${not empty question.farmerId }">

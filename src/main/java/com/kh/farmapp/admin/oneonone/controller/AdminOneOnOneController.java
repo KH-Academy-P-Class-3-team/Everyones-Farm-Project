@@ -219,9 +219,9 @@ public class AdminOneOnOneController {
 		
 		// adminInfo null 일 때
 		Admin adminLogin = (Admin) session.getAttribute("adminInfo");
-//		if( adminLogin == null ) {
-//			return "redirect:/admin/main";
-//		}
+		if( adminLogin == null ) {
+			return "redirect:/admin/main";
+		}
 		
 		// 현재 url 찍기
 		logger.info("/admin/oneonone/farmer/detail - [GET] 요청");
@@ -335,11 +335,12 @@ public class AdminOneOnOneController {
 //	}
 	
 	// 일반 회원 1대1 답변 수정
-	@RequestMapping(value = "/admin/oneonone/user/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/oneonone/update", method = RequestMethod.POST)
 	public String modifyAnswerToUserProc(
 				AnsweredOneonone modifyAnswer
 				, HttpSession session
 				, Model model
+				, String updateCode
 				) {
 		
 		// adminLogin null 일 때
@@ -373,28 +374,34 @@ public class AdminOneOnOneController {
 			// alert msg
 			model.addAttribute("alertMsg", "답변 수정에 실패하였습니다.");
 		}
+		
+		// writeCode 저장
+		int isFarmer = 0;
+		if( updateCode != null && !"".equals(updateCode) ) {
+			isFarmer = Integer.parseInt(updateCode);
+		}
+		
 		// 문의 상세 페이지로 리다이렉트
-		model.addAttribute("url", "detail?questionNo=" + modifyAnswer.getQuestionNo());
+		if( isFarmer != 0 ) {
+			switch (isFarmer) {
+			case USER_CODE:
+				model.addAttribute("url", "user/detail?questionNo=" + modifyAnswer.getQuestionNo());
+				break;
+			case FARMER_CODE:
+				model.addAttribute("url", "farmer/detail?questionNo=" + modifyAnswer.getQuestionNo());
+				break;
+			}
+		} 
 		
 		return "common/result";
 	}
 	
-	// 농업인 회원 1대1 답변 수정 폼 페이지
-	@RequestMapping(value = "/admin/oneonone/farmer/update", method = RequestMethod.GET)
-	public void modifyAnswerToFarmer() {
-	}
-	
-	// 농업인 회원 1대1 답변 수정
-	@RequestMapping(value = "/admin/oneonone/farmer/update", method = RequestMethod.POST)
-	public String modifyAnswerToFarmerProc(AnsweredOneonone modifyAnswer) {
-		return "";
-	}
-	
 	// 일반인 회원 1대1 답변 삭제
-	@RequestMapping(value = "/admin/oneonone/user/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/oneonone/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteAnswerToUser(
 			AnsweredOneonone deleteAnswer
+			, String deleteCode
 			) {
 		
 		// url 찍기
