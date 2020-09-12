@@ -36,7 +36,14 @@
 <%-- 수정 버튼, 삭제 버튼, 목록으로 버튼 보여주기 --%>
 <!-- 버튼 div 영역 -->
 <div class="oneonone-detail__btn-wrap">
-	<span class="btn update-btn" id="toUpdate">답변 수정</span><span class="btn delete-btn" id="delete-answer" data-questionNo="${answer.questionNo }" data-answeredNo="${answer.answeredNo }">답변 삭제</span><span class="btn list-btn" id="toList">목록으로</span>
+	<c:choose>
+		<c:when test="${answer.adminId eq adminInfo.adminId }">
+			<span class="btn update-btn" id="toUpdate">답변 수정</span><span class="btn delete-btn" id="delete-answer" data-questionNo="${answer.questionNo }" data-answeredNo="${answer.answeredNo }">답변 삭제</span><span class="btn list-btn" id="toList">목록으로</span>
+		</c:when>
+		<c:when test="${answer.adminId ne adminInfo.adminId }">
+			<span class="btn list-btn" id="toList">목록으로</span>
+		</c:when>
+	</c:choose>
 </div>
 
 <%-- 수정 폼 보여주기 --%>
