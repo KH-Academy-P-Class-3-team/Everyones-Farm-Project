@@ -3,6 +3,8 @@ package com.kh.farmapp.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import common.util.AdminPaging;
+
 /**
  * 관리자 페이지 중 메인 페이지의 Service interface
  */
@@ -20,4 +22,5 @@ public interface AdminMainService {
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
 	public List<Map<String, Object>> selectLatestQuestionList();
+	
 }

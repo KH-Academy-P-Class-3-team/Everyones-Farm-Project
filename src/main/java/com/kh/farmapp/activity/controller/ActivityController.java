@@ -1,6 +1,9 @@
 package com.kh.farmapp.activity.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +25,7 @@ import common.dto.Farm;
 import common.dto.FarmActivity;
 import common.dto.FarmActivitySchedule;
 import common.dto.Farmer;
+import common.dto.UserTB;
 
 @Controller
 public class ActivityController {
@@ -119,11 +123,11 @@ public class ActivityController {
 		}
 		
 		
-//		Farmer farmer = (Farmer)session.getAttribute("FarmerInfo");
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
 		//테스트용 Farm 객체
-		Farmer farmer = new Farmer();
-		farmer.setFarmerNo(1);
+//		Farmer farmer = new Farmer();
+//		farmer.setFarmerNo(1);
 
 		Farm farm = activityService.selectFarmByFarmerNo(farmer);
 		
@@ -155,7 +159,7 @@ public class ActivityController {
 
 		ModelAndView mav = new ModelAndView();
 		
-//		Farmer farmer = (Farmer)session.getAttribute("FarmerInfo");
+//		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 
 		//테스트용 Farmer 객체
 		Farmer farmer = new Farmer();
@@ -165,8 +169,6 @@ public class ActivityController {
 		Farm farm = activityService.selectFarmByFarmerNo(farmer);
 		
 		Map<String, Object> commandMap = activityService.selectActivityListByFarmNo(farm); 
-		
-		System.out.println(commandMap);
 		
 		//테스트용 Farmer
 		mav.addObject("farmerInfo", farmer);
@@ -187,7 +189,7 @@ public class ActivityController {
 	@RequestMapping("/activity/activityDetail.do")
 	public ModelAndView activityDetail(HttpSession session, int activityNo) {
 		
-		Farmer farmer = (Farmer)session.getAttribute("FarmerInfo");
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -276,7 +278,10 @@ public class ActivityController {
 	 * @return ModelAndView - Activity, View
 	 */
 	@RequestMapping(value = "/activity/activityApplication.do", method = RequestMethod.GET)
-	public ModelAndView activityApplicationForm(int activityNo, int isHelp) {
+	public ModelAndView activityApplicationForm(HttpSession session, int activityNo, int isHelp) {
+		
+		UserTB user = (UserTB)session.getAttribute("userInfo");
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
 		FarmActivity activity = activityService.selectActivityByActivityNo(activityNo);
 		
@@ -284,10 +289,18 @@ public class ActivityController {
 		
 		mav.addObject("activity", activity);
 		
-		if(isHelp == 0) {
-			mav.setViewName("activity/experienceApplication");
+		if(user == null && farmer == null) {
+			mav.addObject("msg", "로그인 후 신청 가능합니다");
+			mav.addObject("url", "experienceList.do");
+			mav.setViewName("activity/result");
 		} else {
-			mav.setViewName("activity/helpApplication");
+			
+			if(isHelp == 0) {
+				mav.setViewName("activity/experienceApplication");
+			} else {
+				mav.setViewName("activity/helpApplication");
+			}
+			
 		}
 		
 		return mav;
@@ -301,7 +314,30 @@ public class ActivityController {
 	 * @return ModelAndView - View
 	 */
 	@RequestMapping(value = "/activity/activityApplication.do", method = RequestMethod.POST)
-	public ModelAndView activityApplicationSubmit(Application application) {
+	public ModelAndView activityApplicationSubmit(HttpSession session, Application application, String date) {
+		
+		UserTB user = (UserTB)session.getAttribute("userInfo");
+		
+		//테스트용 user 객체
+//		UserTB user = new UserTB();
+//		user.setUserNo(1);
+
+		application.setUserNo(user.getUserNo());
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			
+			// String 타입 날짜를 java.util.Date 타입으로 변환
+			Date activityDate = sdf.parse(date);
+
+			application.setActivityDate(activityDate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		
 		int res = activityService.insertApplication(application);
 		

@@ -103,6 +103,52 @@ $(document).ready(function(){
 		})
 	
 	
+	$("#btnDelete").click(function(){
+		
+		var $checkboxes = $("input:checkbox[name='checkRow']:checked");
+		
+		var map = $checkboxes.map(function(){
+			return $(this).val();
+		})
+		
+		var names= map.get().join(",");
+		
+		console.log($checkboxes);
+		console.log("map : "+ map);
+		console.log("map -> array : "+map.get());
+		console.log("array tostring : " + map.get().join(","));
+		
+		var $form = $("<form>")
+						.attr("action", "<%=request.getContextPath()%>/basket/delete")
+						.attr("method", "post")
+						.append(
+								$("<input>")
+									.attr("type", "hidden")
+									.attr("name", "names")
+									.attr("value", names)
+						)
+		$(document.body).append($form);
+		$form.submit();
+		
+	})
+// 	$('.naviBtn').click(function(){
+		
+// 		var 
+// 		$.ajax({
+// 		    type : "GET", //전송방식을 지정한다 (POST,GET)
+<%-- 		    url : "<%= request.getContextPath() %>/mypage/user/basket?cPage=${page.blockStart-1}"//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다. --%>
+// 		    dataType : "html",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
+// 		    error : function(){
+// 		        alert("통신실패!!!!");
+// 		    },
+// 		    success : function(Parse_data){
+// 		        $("#practice").html(Parse_data); //div에 받아온 값을 넣는다.
+// 		        alert("통신 데이터 값 : " + Parse_data);
+// 		    }
+		     
+// 			});
+// 		});
+	
 })
 	function checkAll() {
 		var $checkboxes = $("input:checkbox[name='checkRow']")
@@ -335,7 +381,6 @@ a:hover {
 					</tr>
 				</c:forEach>
 			</table>
-
 
 			<div class="paging">
 				<!-- section pagination -->

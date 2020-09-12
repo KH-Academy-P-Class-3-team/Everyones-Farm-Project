@@ -4,8 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="../../include/header.jsp"%>
-
-
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -112,6 +110,27 @@ a:hover {
 						목록</a>
 				</div>
 			</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+						</a>
+					</div>
+					<div class="panel-body">
+						<a href="#">내 정보</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/selllist">판매 목록</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+							신청내역</a>
+					</div>
+
+				</div>
+			</c:if>
 		</div>
 		<div class="col-lg-1">
 			<hr>
@@ -125,8 +144,6 @@ a:hover {
 			<div class="content">${one.content }</div>
 			<div class="nearcontent">
 				<table class="table">
-
-
 					<tr>
 						<td>페이지 이동</td>
 						<td>문의 번호</td>

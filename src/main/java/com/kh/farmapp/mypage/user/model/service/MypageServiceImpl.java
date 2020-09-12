@@ -68,7 +68,33 @@ public class MypageServiceImpl implements MyPageService{
 		System.out.println("result"+result);
 		}
 		
-		return res;
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		UserProfile check = new UserProfile();
+		
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		
+		UserProfile fileData = fileUtil.fileUpload(upload, root);
+		
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", fileData);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println(result);
+		
+//		return 0;
+		return res; // 그리고 return 값을 보내서 쓰이는 곳이 없으면 지우는게 맞는거 같네요
+	}
+
+	
+	@Override
+	public UserProfile selectUserProfile(UserTB user) {
+		return mypageDao.selectUserProfile(user.getUserNo());
 	}
 
 	

@@ -49,6 +49,7 @@ public class MypageBasketController {
 		Map<String, Object> purchase = mypageService.basketListPur(userNo);
 		
 		
+		
 		mav.addObject("page", basket.get("page"));
 		mav.addObject("basket", basket);
 		mav.addObject("purchase", purchase);
