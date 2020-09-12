@@ -123,6 +123,69 @@ public interface MyPageDao {
 		 */
 		public Map<String, Object> getOrderTotal(int orderNo);
 
+		/**
+		 * o3작성하기
+		 * @param o3
+		 * @return
+		 */
+		public int writeO3(QuestionOneonone o3);
+	
+		/**
+		 * 수정시 DB에서 EMAIL중복 확인
+		 * @param email
+		 * @return
+		 */
+		public UserTB selectEmailCheck(String email);
+		
+		/**
+		 * 수정 시 DB에서 PHONE 중복 확인
+		 * @param phone
+		 * @return
+		 */
+		public UserTB selectPhoneCheck(String phone);
+
+		/**
+		 * purchase 삽입을 위한 
+		 * basket조회
+		 * @param arr
+		 * @return
+		 */
+		public List<Map<String, Object>> selectBasket(int[] arr);
+
+		/**
+		 * option테이블 에서 amount를 줄이는 메서드
+		 * @param optionNo
+		 * @return
+		 */
+		public int subAmount(int optionNo);
+
+		/**
+		 * 장바구니 구매 컬럼 수정
+		 * @param basketNo
+		 * @return
+		 */
+		public int insertPurchase(int basketNo);
+
+		/**
+		 * 구매목록 조회
+		 * @param userNo
+		 * @return
+		 */
+		public List<Map<String, Object>> purchaseList(int userNo);
+
+		/**
+		 * amount 다시 돌려놓는 메서드
+		 * @param i 
+		 */
+		public void addAmount(int optionNo);
+		/**
+		 * purchase를 0으로 다시 만드는 메서드
+		 * @param arr
+		 * @return 
+		 */
+		public int subPurchase(int basketNo);
+
+
 
 
 }

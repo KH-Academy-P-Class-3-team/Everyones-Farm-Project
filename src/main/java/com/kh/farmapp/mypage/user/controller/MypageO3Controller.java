@@ -1,8 +1,6 @@
 package com.kh.farmapp.mypage.user.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,14 +8,17 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,14 +28,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
+import com.kh.farmapp.admin.notice.controller.AdminNoticeController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
-import common.dto.Farmer;
+import common.dto.Admin;
+import common.dto.Notice;
 import common.dto.QuestionOneonone;
 import common.dto.UserTB;
 
 @Controller
 public class MypageO3Controller {
+
+	// log 를 남기기 위한 Logger 객체
+	private static final Logger logger = LoggerFactory.getLogger(AdminNoticeController.class);
 
 	@Autowired
 	private MyPageService mypageService;
@@ -45,6 +51,15 @@ public class MypageO3Controller {
 
 		UserTB user = (UserTB) session.getAttribute("userInfo");
 		ModelAndView mav = new ModelAndView();
+		
+
+		if( user == null) {
+			mav.addObject("alertMsg", "로그인이 필요합니다.");
+			mav.addObject("url", "../../user/login.do");
+			mav.setViewName("common/result");
+			return mav;
+		}
+		
 		int cntPerPage = 10;
 		Map<String, Object> o3pList = mypageService.o3List(cPage, cntPerPage, user);
 
@@ -93,8 +108,6 @@ public class MypageO3Controller {
 			if(up != null)
 			break;
 		}
-		System.out.println("up :"+up);
-		System.out.println("down : "+down);
 		mav.addObject("up", up);
 		mav.addObject("down", down);
 		mav.addObject("total", total);
@@ -104,100 +117,153 @@ public class MypageO3Controller {
 		return mav;
 
 	}
-
-	//일대일 문의 작성하기
 	@RequestMapping("mypage/user/mypageO3Write")
-	public void o3Upload(QuestionOneonone qO3, HttpSession session) {
+	public ModelAndView o3Write(HttpSession session) {
+
+		UserTB user = (UserTB) session.getAttribute("userInfo");
+		ModelAndView mav = new ModelAndView();
+		
+
+		if( user == null) {
+			mav.addObject("alertMsg", "로그인이 필요합니다.");
+			mav.addObject("url", "../../user/login.do");
+			mav.setViewName("common/result");
+			return mav;
+		}
+		
+		mav.setViewName("mypage/user/mypageO3Write");
+		return mav;
+		
+		
+	}
+
+	
+	//일대일 문의 작성
+	@RequestMapping(value = "/mypage/user/write", method = RequestMethod.POST)
+	public String adminNoticeWriteProc(
+				@ModelAttribute QuestionOneonone question
+				, HttpSession session
+				, Model model
+			) {
+		// 로그인이 안되어 있을 경우, 바로 로그인 페이지로 이동
+		UserTB user = (UserTB) session.getAttribute("userInfo");
+		
+		// logger 찍기 - 현재 어디 method 인지
+		logger.info("/adminnotice/write - [POST] 요청");
+		
+		// RequestParam question_oneonone 객체 테스트 출력
+		logger.debug("notice: " + question.toString());
+		
+		// quesion_oneonone 객체의 userNo set 하기
+		question.setUserNo(user.getUserNo());
+		
+		int res = mypageService.wirteO3(question);
+		
+		if(res > 0) {
+			logger.info("공지사항 작성 성공~");
+			
+			// 리스트 화면으로 이동
+			model.addAttribute("alertMsg", "공지사항이 성공적으로 작성됐습니다.");
+			model.addAttribute("url", "mypageO3List");
+		} else {
+			logger.info("공지사항 작성 실패...");
+			model.addAttribute("alertMsg", "공지사항 작성이 실패했습니다...");
+			model.addAttribute("url", "mypageO3List");
+		}
+		
+		return "common/result";
 	}
 	
-	//일대일 작성 이미지 업로드
-//	@RequestMapping("/user/oneonone/fileupload")
-//	@ResponseBody
-//	public String adminNoticeImgUpload(
-//			HttpServletRequest req
-//			, HttpServletResponse resp
-//			, MultipartHttpServletRequest multiFile
-//			){
-//		
-//		JsonObject json = new JsonObject();
-//		PrintWriter pw = null;
-//		OutputStream out = null;
-//		MultipartFile file = multiFile.getFile("upload");
-//		
-//		if( file != null ) {
-//			
-//			if( file.getSize() > 0 && StringUtil.isNotBlank(file.getName()) ) {
-//				
-//				if( file.getContentType().toLowerCase().startsWith("image/") ) {
-//					
-//					try {
-//						
-//						String fileName = file.getName();
-//						byte[] bytes = file.getBytes();
-//						String uploadPath = req.getServletContext().getRealPath("/resources") + "/ckimg";
-////						logger.debug(uploadPath);
-//						File uploadFile = new File(uploadPath);
-//						
-//						if(!uploadFile.exists()) {
-//							
-//							uploadFile.mkdirs();
-//							
-//						}
-//						
-//						fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-//						uploadPath = uploadPath + "/" + fileName;
-////						logger.debug(uploadPath);
-//						out = new FileOutputStream(new File(uploadPath));
-//						out.write(bytes);
-//						out.flush();
-//						
-//						pw = resp.getWriter();
-//						resp.setContentType("text/html");
-//						String fileUrl = req.getContextPath() + "/resources/ckimg/" + fileName;
-////						logger.debug(fileUrl);
-//						
-//						//json 데이터로 등록
-//						json.addProperty("uploaded", 1);
-//						json.addProperty("fileName", fileName);
-//						json.addProperty("url", fileUrl);
-//						
-//						pw.println(json);
-//						pw.flush();
-//						
-//					} catch (IOException e) {
-//					
-//						e.printStackTrace();
-//						
-//					} finally {
-//						
-//						try {
-//							if(out != null) {
-//								out.close();
-//							}
-//							if(pw != null) {
-//								pw.close();
-//							}
-//						} catch (IOException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//						
-//					}
-//					
-//					
-//				}
-//				
-//			}
-//			
-//		}
-//		
-//		return null;
-//	}
-	//일대일 문의 수정
-	public String o3Modify(int qNo , String userId
-			, HttpSession session) {
-		return"";
+	// 일대일 문의 이미지 업로드
+	@RequestMapping(value = "/mypage/user/fileupload", method = RequestMethod.POST)
+	@ResponseBody
+	public String adminNoticeImgUpload(
+			HttpServletRequest req
+			, HttpServletResponse resp
+			, MultipartHttpServletRequest multiFile
+			){
+		
+		JsonObject json = new JsonObject();
+		PrintWriter pw = null;
+		OutputStream out = null;
+		MultipartFile file = multiFile.getFile("upload");
+		
+		if( file != null ) {
+			
+			if( file.getSize() > 0 && StringUtils.isNotBlank(file.getName()) ) {
+				
+				if( file.getContentType().toLowerCase().startsWith("image/") ) {
+					
+					try {
+						
+						String fileName = file.getName();
+						byte[] bytes = file.getBytes();
+						String uploadPath = req.getServletContext().getRealPath("/resources") + "/ckimg";
+//						logger.debug(uploadPath);
+						File uploadFile = new File(uploadPath);
+						
+						if(!uploadFile.exists()) {
+							
+							uploadFile.mkdirs();
+							
+						}
+						
+						fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+						uploadPath = uploadPath + "/" + fileName;
+//						logger.debug(uploadPath);
+						out = new FileOutputStream(new File(uploadPath));
+						out.write(bytes);
+						out.flush();
+						
+						pw = resp.getWriter();
+						resp.setContentType("text/html");
+						String fileUrl = req.getContextPath() + "/resources/ckimg/" + fileName;
+//						logger.debug(fileUrl);
+						
+						//json 데이터로 등록
+						json.addProperty("uploaded", 1);
+						json.addProperty("fileName", fileName);
+						json.addProperty("url", fileUrl);
+						
+						pw.println(json);
+						pw.flush();
+						
+					} catch (IOException e) {
+					
+						e.printStackTrace();
+						
+					} finally {
+						
+						try {
+							if(out != null) {
+								out.close();
+							}
+							if(pw != null) {
+								pw.close();
+							}
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					
+					
+				}
+				
+			}
+			
+		}
+		
+		return null;
 	}
+
+	
+	
+	
+	
+	
+	
 
 	//일대일 문의 삭제
 	@RequestMapping("mypage/user/deleteO3")
@@ -220,17 +286,6 @@ public class MypageO3Controller {
 	}
 
 
-	/**
-	 * @param multiFile
-	 * @param request
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value="/mine/imageUpload.do", method = RequestMethod.POST)
-	public void imageUpload(HttpServletRequest request,
-			HttpServletResponse response, MultipartHttpServletRequest multiFile
-			, @RequestParam MultipartFile upload) throws Exception{
-	}
 }
 
 

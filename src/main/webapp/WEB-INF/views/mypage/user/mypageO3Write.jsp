@@ -13,9 +13,6 @@
 	margin-top: 30px;
 }
 
-div {
-	text-align: center;
-}
 
 .col-lg-1 {
 	width: 50%;
@@ -38,8 +35,6 @@ label {
 .btn-warning {
 	width: 90px;
 	height: 50px;
-	margin-top: 30px;
-	margin-right: 150px;
 }
 
 .media-object {
@@ -71,19 +66,45 @@ a:hover {
 	height: 400px;
 }
 
-#p_content {
-	width: 100%;
+#o3space {
+	width: 100%;;
 	height: 100%;
+}
+#ckEditsub{
+	width: 90px;
+	height: 50px;
+	margin-right: 5px;
 }
 </style>
 
-<!-- ckeditor 4 -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath() %>/resources/ckeditor/contents.css">
-<!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
+<!-- ckeditor js 파일 삽입 -->
+<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
 <script type="text/javascript"
-	src="<%=request.getContextPath() %>/resources/ckeditor/ckeditor.js"></script>
-﻿
+	src="/farmapp/resources/js/ckeditor/ckeditor.js"></script>
+	
+﻿<script type="text/javascript">
+$(document).ready(function(){
+	$("#ckEditsub").on("click", function(){
+		/* 제목 비어 있으면 제목에 입력하기 */
+		if($("input[name='title']").val() == ''){
+			
+			alert("제목을 입력해주세요")
+			$("input[name='title']").focus()
+			
+		} else if ( CKEDITOR.instances.O3Write.getData() == '' ) {
+			
+			alert("내용을 입력해주세요")
+			$(CKEDITOR.instances.O3Write).focus()
+			
+		} else {
+			
+			/* form submit 이벤트 동작 */
+			$("#write-form").submit()
+			
+		}
+	})
+})
+</script>
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top: 200px"></div>
@@ -159,45 +180,45 @@ a:hover {
 			<div class="container">
 				<div class="content" style="width: 70%">
 
-					<div class="row justify-content-md-center">
-						<div class="col-sm-9">
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<label class="input-group-text">제목</label>
+
+
+					<!-- 공지사항 작성 폼 -->
+					<div class="oneonone-write__form-wrap">
+						<form action="<%=request.getContextPath()%>/mypage/user/write"
+							method="post" class="form-wrap__form" id="write-form">
+							<ul class="form-wrap__list">
+								<li>
+								<div>
+								<label class="control-label" for="inputSuccess4">제목 :</label>
+								<input type="text" placeholder="제목" name="title"id="title"aria-describedby="inputSuccess4Status"
+									class="form-control" style="margin-bottom: 10px;" />
 								</div>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-					</div>
+									</li>
+								<li id="o3space"><textarea name="content" class="list__textarea"
+										id="O3Write">글씨를 지우고 내용을 입력해주세요.</textarea> <script
+										type="text/javascript">
+											CKEDITOR
+													.replace(
+															'O3Write',
+															{
+																filebrowserUploadUrl : '/farmapp/mypage/user/fileupload'
+															});
+										</script></li>
+							</ul>
 
-					<hr>
-
-					<div class="row justify-content-md-center">
-						<div class="col_c" style="margin-bottom: 30px">
-							<div class="input-group ckck">
-								<textarea class="form-control" id="p_content"></textarea>
-								<script type="text/javascript">
-							CKEDITOR.replace( 'noticeContent'
-											, { filebrowserUploadUrl: '/farmapp/user/oneonone/fileupload'
-								});
-						</script>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="row justify-content-md-center">
-						<button type="submit" class="btn btn-outline-secondary"
-							style="width: 20%; font-weight: bold">등 록</button>
+						</form>
+								<button type="button" class="btn btn-success pull-right" id="ckEditsub">등 록</button>
+								<button class="btn btn-warning pull-right"onclick='javascript:history.back();'id="ckEditsub" >뒤로 가기</button>
 					</div>
 				</div>
+
+
 			</div>
-
-
 		</div>
+
+
 	</div>
 </div>
-
 
 
 

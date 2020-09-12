@@ -31,13 +31,6 @@ label {
 	text-align: left;
 }
 
-.btn-warning {
-	width: 90px;
-	height: 50px;
-	margin-top: 30px;
-	margin-right: 150px;
-}
-
 .media-object {
 	margin-left: 70px;
 }
@@ -82,7 +75,7 @@ a:hover {
 	text-align: center;
 }
 
-.productInfo {
+.productInfo{
 	border: 1px solid #ccc;
 	margin: 30px;
 	width: 100%;
@@ -116,21 +109,22 @@ a:hover {
 	background-color: #ccc;
 }
 
-#tekbeCompnayList{
-	width: 500px;
+#tekbeCompnayList {
+	width: 480px;
 	height: 30px;
 	padding-left: 10px;
 	font-size: 18px;
 	border-radius: 3px;
 }
- #invoiceNumberText {
-	width: 380px;
+
+#invoiceNumberText {
+	width: 480px;
 	height: 30px;
 	padding-left: 10px;
 	font-size: 18px;
 	border-radius: 3px;
 	margin-right: 20px;
- }
+}
 
 #tekbeCompnayName, #invoiceNumber {
 	color: black;
@@ -142,6 +136,16 @@ a:hover {
 td, th {
 	text-align: left;
 	padding: 8px;
+	border-bottom: 1px solid #ccc;
+}
+
+.bottom {
+	width: 90px;
+	height: 50px;
+	margin-right: 5px;
+}
+.nearcontent{
+	margin-top: 30px;
 }
 </style>
 
@@ -394,19 +398,26 @@ td, th {
 
 			<span>배송정보</span>
 			<div class="forShip">
-				<table>
-					<tr>
-						<td><span id="tekbeCompnayName">택배회사명: </span></td>
-						<td><select id="tekbeCompnayList" name="tekbeCompnayList"></select></td>
-					</tr>
-					<tr>
-						<td><span id="invoiceNumber">운송장번호: </span></td>
-						<td><input type="text" id="invoiceNumberText"
-							name="invoiceNumberText">
-							<button id="myButton1" class="btn btn-info pull-right">택배
-								조회하기</button></td>
-					</tr>
-				</table>
+				<div class="row">
+					<div class="col-lg-11">
+						<table>
+							<tr>
+								<td><span id="tekbeCompnayName">택배회사명: </span></td>
+								<td><select id="tekbeCompnayList" name="tekbeCompnayList"></select></td>
+							</tr>
+							<tr>
+								<td><span id="invoiceNumber">운송장번호: </span></td>
+								<td><input type="text" id="invoiceNumberText"
+									name="invoiceNumberText">
+							</tr>
+						</table>
+					</div>
+					<div class="col-lg-11">
+					<button id="myButton1" class="btn btn-info">택배
+						조회하기</button>
+					</div>
+				</div>
+
 
 
 
@@ -482,9 +493,11 @@ td, th {
 					</c:if>
 				</table>
 			</div>
-			<button class="btn btn-warning pull-right" type="button"
+			<c:if test="${orderDetail.PRODUCT_NAME}">
+			<button class="btn btn-warning pull-right bottom" type="button"
 				onclick="javascript:location.href='deleteOrder?orderNo=${orderDetail.ORDER_NO}'">삭제</button>
-			<button class="btn pull-right" type="button"
+			</c:if>
+			<button class="btn btn-success pull-right bottom" type="button"
 				onclick="javascript:location.href='mypageO3List'">뒤로가기</button>
 		</div>
 	</div>

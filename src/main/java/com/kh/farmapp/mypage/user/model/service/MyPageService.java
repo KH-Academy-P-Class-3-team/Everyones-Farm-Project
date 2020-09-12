@@ -118,6 +118,48 @@ public  interface MyPageService {
 	 * @return
 	 */
 	public Map<String, Object> getOrderTotal(int orderNo);
+	
+	/**
+	 * o3 페이지 작성하기
+	 * @param o3
+	 * @return
+	 */
+	public int wirteO3(QuestionOneonone o3);
+	
+	/**
+	 * 수정시 DB에서 EMAIL중복 확인
+	 * @param email
+	 * @param user 
+	 * @return
+	 */
+	public int selectEmailCheck(String email, UserTB user);
+	
+	/**
+	 * 수정 시 DB에서 PHONE 중복 확인
+	 * @param phone
+	 * @param user 
+	 * @return
+	 */
+	public int selectPhoneCheck(String phone, UserTB user);
+	
+	/**
+	 * select basketLiser forPurchase
+	 * @param arr
+	 * @return
+	 */
+	public int insertPurchase(int[] arr);
+	
+	/**
+	 * 구매대기 목록 
+	 * @param userNo
+	 * @return
+	 */
+	public Map<String, Object> basketListPur(int userNo);
+	/**
+	 * option의 AMOUNT 수량을 다시 더하고 장바구니 에서 purchase컬럼 다시 0으로 바꾸는 메서드
+	 * @param arr
+	 */
+	public int canclePurchase(int[] arr);
 
 
 
