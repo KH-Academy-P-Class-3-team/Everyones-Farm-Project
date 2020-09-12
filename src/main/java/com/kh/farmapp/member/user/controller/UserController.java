@@ -140,7 +140,6 @@ public class UserController {
 		if(res!=null) {
 			session.setAttribute("userInfo", res);
 			model.addAttribute("alertMsg", "로그인 성공");
-
 			// main 페이지로 가게 만들어 놓을게요!
 //			model.addAttribute("url", "login.do");
 			model.addAttribute("url", req.getContextPath());

@@ -25,9 +25,11 @@
 	
 	<insert id="insertprofile">
 	INSERT INTO
-		 user_profile 
+		 user_profile (profile_no, user_no, origin_name, file_rename, save_path, farmer_no)
 	VALUES(
     user_profile_seq.nextval, #{userNo} ,#{fileData.originName}, #{fileData.fileRename}, #{fileData.savePath}
+    <!-- 임시로 null 값을 넣어줌 -->
+    , null
 	)
 	</insert>
 	
@@ -42,16 +44,17 @@
 	</update>
 	
 	<update id="updateUser">
-		UPDATE user_tb
+		UPDATE 
+			user_tb
 		SET
-		user_pw=#{userPw},
-		email=#{email},
-		phone=#{phone},
-		zonecode=#{zoneCode},
-		first_address=#{firstAddress},
-		second_address=#{secondAddress}
+			user_pw=#{userPw},
+			email=#{email},
+			phone=#{phone},
+			zonecode=#{zoneCode},
+			first_address=#{firstAddress},
+			second_address=#{secondAddress}
 		WHERE
-		user_no=#{userNo}
+			user_no=#{userNo}
 	</update>
 	
 	

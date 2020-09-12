@@ -35,6 +35,7 @@ public class MypageServiceImpl implements MyPageService{
 	@Override
 	public int modifyUser(UserTB user, String root, MultipartFile upload) {
 		
+		// 프로필만 변경하고 싶을 때는요? 이런 경우에는 에러가 안나도록 수정해야 할 것 같아요
 		int res = mypageDao.modifyUser(user);
 		System.out.println(res);
 		
@@ -57,7 +58,8 @@ public class MypageServiceImpl implements MyPageService{
 		}
 		System.out.println(result);
 		
-		return res;
+//		return 0;
+		return res; // 그리고 return 값을 보내서 쓰이는 곳이 없으면 지우는게 맞는거 같네요
 	}
 
 	

@@ -16,6 +16,14 @@
 		<c:if test="${url != null}">
 			location.href="<c:out value='${url}'/>";
 		</c:if>
+		<c:if test="${confirmMsg != null}">
+			confirmMsg = confirm("${confirmMsg}");
+			if(confirmMsg == true){
+				location.href ="<c:out value='${confirmUrl}'/>";
+			} else{
+				location.href ="<c:out value='${confirmBackUrl}'/>";
+			}
+		</c:if>
 	}
 	
 	init();

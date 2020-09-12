@@ -6,7 +6,7 @@
 CKEDITOR.editorConfig = function( config ) {
 	
 	// plugin 추가
-	config.extraPlugins = 'uploadimage,wordcount,notification,youtube';
+	config.extraPlugins = 'uploadimage,wordcount,notification,youtube,confighelper';
 	
 	config.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.farmapp.admin.oneonone.controller.AdminOneOnOneController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
 import common.dto.Farmer;
@@ -27,6 +30,9 @@ public class MypageUserController {
 
 	@Autowired
 	private MyPageService mypageService;
+	
+	// log 를 남기기 위한 Logger 객체
+	private static final Logger logger = LoggerFactory.getLogger(MypageUserController.class);
 
 	//마이 페이지 메인으로 보내는 메서드
 	@RequestMapping("mypage/user/modify")
@@ -40,6 +46,7 @@ public class MypageUserController {
 		user = mypageService.selectUser(user);
 		
 		profile = mypageService.selectUserProfile(user);
+		logger.debug("profile: " + profile.toString());
 		
 		mav.addObject("userData", user);
 		mav.addObject("profile", profile);
