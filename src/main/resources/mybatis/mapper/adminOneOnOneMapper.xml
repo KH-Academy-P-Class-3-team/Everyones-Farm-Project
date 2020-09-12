@@ -253,5 +253,50 @@
 		where
 		    q_order between #{startNo} and #{endNo}
 	</select>
+	
+	<!-- 농업인 회원 문의 글 상세 조회 -->
+	<resultMap type="hashmap" id="farmerDetailMap">
+		<result property="questionNo" column="question_no" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="regDate" column="reg_date" />
+		<result property="isAnswered" column="is_answered" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="profileNo" column="profile_no" />
+		<result property="originName" column="origin_name" />
+		<result property="fileRename" column="file_rename" />
+		<result property="savePath" column="save_path" />
+	</resultMap>
+	<select id="selectFarmerOneOnOneByNo" parameterType="common.dto.QuestionOneonone" resultMap="farmerDetailMap">
+		select
+		    q_detail.*
+		    , up.profile_no
+		    , up.origin_name
+		    , up.file_rename
+		    , up.save_path
+		from (
+		    select
+		        q.question_no
+		        , q.title
+		        , q.content
+		        , q.reg_date
+		        , q.is_answered
+		        , f.farmer_no
+		        , f.farmer_id
+		    from
+		        question_oneonone q
+		        JOIN
+		            farmer f
+		        ON
+		            q.farmer_no = f.farmer_no
+		    where
+		        q.question_no = #{questionNo}
+		) q_detail
+		    LEFT OUTER JOIN
+		        user_profile up
+		    ON
+		        q_detail.farmer_no = up.farmer_no
+	</select>
 
 </mapper>

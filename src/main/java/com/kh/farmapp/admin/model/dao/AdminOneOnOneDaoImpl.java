@@ -41,17 +41,12 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 		return session.selectOne("ADMINONEONONE.selectUserOneOnOneByNo", qNo);
 	}
 
+	// 농업인 회원의 문의 글 상세 조회
 	@Override
-	public List<Map<String, Object>> selectFarmerOneOnOneByNo(QuestionOneonone qNo) {
-		
-		// 클래스 다이어그램 용 객체
-		QuestionOneonone q = new QuestionOneonone();
-		AnsweredOneonone a = new AnsweredOneonone();
-		Farmer farmer = new Farmer();
-		
-		return null;
+	public Map<String, Object> selectFarmerOneOnOneByNo(QuestionOneonone qNo) {
+		return session.selectOne("ADMINONEONONE.selectFarmerOneOnOneByNo", qNo);
 	}
-
+	
 	// 답변 작성
 	@Override
 	public int insertAnswerToUser(AnsweredOneonone a) {

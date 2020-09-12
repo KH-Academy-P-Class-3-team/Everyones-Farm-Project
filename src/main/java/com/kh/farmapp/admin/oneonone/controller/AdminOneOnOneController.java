@@ -119,6 +119,13 @@ public class AdminOneOnOneController {
 			, HttpSession sessioin
 			) {
 		
+		// admin login 안되어 있을 시
+		Admin adminLogin = (Admin) sessioin.getAttribute("adminInfo");
+		if( adminLogin == null ) {
+			// admin login 페이지로 redirect
+			return "redirect:/admin/login";
+		}
+		
 		// url 요청 logger 찍기
 		logger.info("/admin/oneonone/farmer - [GET] 요청");
 		
@@ -168,7 +175,7 @@ public class AdminOneOnOneController {
 		// adminInfo null 일 때
 		Admin adminLogin = (Admin) session.getAttribute("adminInfo");
 		if( adminLogin == null ) {
-			return "redirect:../../main";
+			return "redirect:/admin/main";
 		}
 		
 		// 현재 url 찍기
@@ -204,23 +211,58 @@ public class AdminOneOnOneController {
 	
 	// 농업인 회원 1대1 문의 상세 페이지
 	@RequestMapping(value = "/admin/oneonone/farmer/detail", method = RequestMethod.GET)
-	public String adminFarmerOneOnOneDetail(QuestionOneonone q) {
-		return null;
+	public String adminFarmerOneOnOneDetail(
+			QuestionOneonone q
+			, Model model
+			, HttpSession session
+			) {
+		
+		// adminInfo null 일 때
+		Admin adminLogin = (Admin) session.getAttribute("adminInfo");
+//		if( adminLogin == null ) {
+//			return "redirect:/admin/main";
+//		}
+		
+		// 현재 url 찍기
+		logger.info("/admin/oneonone/farmer/detail - [GET] 요청");
+		
+		// questionNo 찍어보기
+		logger.debug("questionNo: " + q.getQuestionNo());
+		
+		// questionNo 로 해당 문의글 조회
+		Map<String, Object> question = adminOneOnOneService.selectFarmerOneOnOneByNo(q);
+		logger.debug("question: " + question.toString());
+		
+		// questionNo 로 해당 답글 조회
+		Map<String, Object> answer = adminOneOnOneService.selectAnswerOneOnOneByQuestionNo(q);
+		if( answer != null ) {
+			logger.debug("answer: " + answer.toString());
+		}
+		
+		// 조회된 문의글이 null 값이 아닐 때
+		if( question != null ) {
+			// model 값 넘겨주기
+			model.addAttribute("question", question);
+		}
+		
+		// 조회된 답글이 null 값이 아닐 때
+		if( answer != null ) {
+			// model 값 넘겨주기
+			model.addAttribute("answer", answer);
+		}
+		
+		return "admin/oneonone/farmer_detail";
 	}
 	
-	// 일반 회원 1대1 답변 작성 폼 페이지
-//	@RequestMapping(value = "/admin/oneonone/user/write", method = RequestMethod.GET)
-//	public void writeAnswerToUser() {
-//	}
-	
-	// 일반 회원 1대1 답변 작성
-	@RequestMapping(value = "/admin/oneonone/user/write", method = RequestMethod.POST)
+	// 1대1 답변 작성
+	@RequestMapping(value = "/admin/oneonone/write", method = RequestMethod.POST)
 	public String writeAnswerToUserProc(
 			// 답변 저장
 			AnsweredOneonone answer
 			// session
 			, HttpSession session
 			, Model model
+			, String writeCode
 			) {
 		
 		// adminInfo 가 null 인 경우
@@ -265,21 +307,26 @@ public class AdminOneOnOneController {
 			// alert msg
 			model.addAttribute("alertMsg", "답변 작성에 성공하였습니다.");
 		}
+
+		// writeCode 저장
+		int isFarmer = 0;
+		if( writeCode != null && !"".equals(writeCode) ) {
+			isFarmer = Integer.parseInt(writeCode);
+		}
+		
 		// 문의 상세 페이지로 리다이렉트
-		model.addAttribute("url", "detail?questionNo=" + answer.getQuestionNo());
+		if( isFarmer != 0 ) {
+			switch (isFarmer) {
+			case USER_CODE:
+				model.addAttribute("url", "user/detail?questionNo=" + answer.getQuestionNo());
+				break;
+			case FARMER_CODE:
+				model.addAttribute("url", "farmer/detail?questionNo=" + answer.getQuestionNo());
+				break;
+			}
+		} 
 		
 		return "common/result";
-	}
-	
-	// 농업인 회원 1대1 답변 작성 폼 페이지
-	@RequestMapping(value = "/admin/oneonone/farmer/write", method = RequestMethod.GET)
-	public void writeAnswerToFarmer() {
-	}
-	
-	// 농업인 회원 1대1 답변 작성
-	@RequestMapping(value = "/admin/oneonone/farmer/write", method = RequestMethod.POST)
-	public String writeAnswerToFarmerProc(AnsweredOneonone answer) {
-		return "";
 	}
 	
 	// 일반 회원 1대1 답변 수정 폼 페이지

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 버튼 div 영역 -->
 <div class="oneonone-detail__btn-wrap">
 	<span class="btn write-btn" id="toWrite">답변하기</span><span class="btn list-btn" id="toList">목록으로</span>
@@ -7,7 +9,15 @@
 
 <!-- 작성 폼 div 영역 숨겨놓기 -->
 <div class="oneonone-detail__write-form-wrap">
-	<form action="<%=request.getContextPath() %>/admin/oneonone/user/write?questionNo=${question.questionNo }" method="post" id="question-write-form">
+	<c:choose>
+		<c:when test="${question.userId }">
+			<form action="<%=request.getContextPath() %>/admin/oneonone/write?writeCode=1&questionNo=${question.questionNo }" method="post" id="question-write-form">
+		</c:when>
+		<c:when test="${not empty question.farmerId }">
+			<form action="<%=request.getContextPath() %>/admin/oneonone/write?writeCode=2&questionNo=${question.questionNo }" method="post" id="question-write-form">
+		</c:when>
+	</c:choose>
+<%-- 	<form action="<%=request.getContextPath() %>/admin/oneonone/write?questionNo=${question.questionNo }" method="post" id="question-write-form"> --%>
 		<ul>
 			<li>
 				<input type="text" placeholder="답변 제목" name="title" id="title" />
