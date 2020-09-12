@@ -20,6 +20,7 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 
 	// member field
 	private static final int USER_CODE = 1;
+	private static final int FARMER_CODE = 2;
 	
 	@Autowired
 	private AdminOneOnOneDao adminOneOnOneDao;
@@ -31,8 +32,8 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectAllFarmerOneOnOneList() {
-		return adminOneOnOneDao.selectAllFarmerOneOnOneList();
+	public List<Map<String, Object>> selectAllFarmerOneOnOneList(AdminPaging apaging) {
+		return adminOneOnOneDao.selectAllFarmerOneOnOneList(apaging);
 	}
 
 	@Override
@@ -88,6 +89,9 @@ public class AdminOneOnOneServiceImpl implements AdminOneOnOneService{
 		switch (listCode) {
 		case USER_CODE:
 			totalCount = adminOneOnOneDao.selectCntAllUserOneOnOne(search);
+			break;
+		case FARMER_CODE:
+			totalCount = adminOneOnOneDao.selectCntAllFarmerOneOnOne(search);
 			break;
 		}
 		

@@ -21,9 +21,10 @@ public interface AdminOneOnOneDao {
 
 	/**
 	 * 농업인 회원 1대1 문의 목록 조회
+	 * @param apaging - 페이징 정보를 갖는 AdminPaging 객체
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> selectAllFarmerOneOnOneList();
+	public List<Map<String, Object>> selectAllFarmerOneOnOneList(AdminPaging apaging);
 
 	/**
 	 * 일반 회원 1대1 문의 상세 조회
@@ -105,5 +106,13 @@ public interface AdminOneOnOneDao {
 	 * @return int - update 결과 반환
 	 */
 	public int updateWaitAnswerByQuestionNo(AnsweredOneonone deleteAnswer);
+
+	/**
+	 * farmer 회원이 작성한 문의글만 조회하기
+	 * 
+	 * @param search - 검색어
+	 * @return int - 조회 결과 반환(count)
+	 */
+	public int selectCntAllFarmerOneOnOne(String search);
 
 }

@@ -22,9 +22,10 @@ public interface AdminOneOnOneService {
 	
 	/**
 	 * 농업인 회원 1대1 문의 목록 조회
+	 * @param apaging - 페이징 정보를 갖는 AdminPaging 객체
 	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public List<Map<String, Object>> selectAllFarmerOneOnOneList();
+	public List<Map<String, Object>> selectAllFarmerOneOnOneList(AdminPaging apaging);
 	
 	/**
 	 * 일반 회원 1대1 문의 상세 조회

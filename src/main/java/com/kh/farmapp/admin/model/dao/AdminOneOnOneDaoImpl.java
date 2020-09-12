@@ -29,16 +29,13 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 		return session.selectList("ADMINONEONONE.selectAllUserOneOnOneList", apaging);
 	}
 
+	// 농업인 회원 일대일 문의 목록 조회
 	@Override
-	public List<Map<String, Object>> selectAllFarmerOneOnOneList() {
-
-		// 클래스 다이어그램 용 객체
-		QuestionOneonone q = new QuestionOneonone();
-		Farmer farmer = new Farmer();
-		
-		return null;
+	public List<Map<String, Object>> selectAllFarmerOneOnOneList(AdminPaging apaging) {
+		return session.selectList("ADMINONEONONE.selectAllFarmerOneOnOneList", apaging);
 	}
 
+	// 일반 회원의 문의 글 상세 조회
 	@Override
 	public Map<String, Object> selectUserOneOnOneByNo(QuestionOneonone qNo) {
 		return session.selectOne("ADMINONEONONE.selectUserOneOnOneByNo", qNo);
@@ -55,6 +52,7 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 		return null;
 	}
 
+	// 답변 작성
 	@Override
 	public int insertAnswerToUser(AnsweredOneonone a) {
 		return session.insert("ADMINONEONONE.insertAnswerToUser", a);
@@ -105,6 +103,12 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	@Override
 	public int updateWaitAnswerByQuestionNo(AnsweredOneonone deleteAnswer) {
 		return session.update("ADMINONEONONE.updateWaitAnswerByQuestionNo", deleteAnswer);
+	}
+
+	// 농업인 회원의 문의글 갯수 조회
+	@Override
+	public int selectCntAllFarmerOneOnOne(String search) {
+		return session.selectOne("ADMINONEONONE.", search);
 	}
 	
 }

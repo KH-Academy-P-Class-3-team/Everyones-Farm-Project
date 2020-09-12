@@ -33,7 +33,9 @@ import common.util.upload.img.model.service.CkImageUploadService;
 public class AdminOneOnOneController {
 
 	// member field
+	// paging 설정 시 user의 문의, farmer의 문의 중 고르기 위한 코드를 저장하는 변수
 	private static final int USER_CODE = 1;
+	private static final int FARMER_CODE = 2;
 	
 	private static final int ANSWERD_ONEONONE_BOARD_NO = 6; 
 	
@@ -60,7 +62,14 @@ public class AdminOneOnOneController {
 				, @RequestParam(defaultValue = "0") String curPage
 				// 검색 처리시 필요한 변수
 				, @RequestParam(defaultValue = "") String search
+				, HttpSession session
 			) {
+		
+		// admin login 안되어 있을 시 로그인 화면으로 redirect
+		Admin adminLogin = (Admin) session.getAttribute("adminInfo");
+		if( adminLogin == null ) {
+			return "redirect:/admin/login";
+		}
 		
 		// logger 찍기
 		logger.info("/admin/oneonone/user - [GET] 요청");
@@ -101,8 +110,50 @@ public class AdminOneOnOneController {
 	
 	// 농업인 회원 1대1 문의 목록 페이지
 	@RequestMapping(value = "/admin/oneonone/farmer", method = RequestMethod.GET)
-	public String adminFarmerOneOnOneList() {
-		return "";
+	public String adminFarmerOneOnOneList(
+			Model model
+			// 페이징 처리시 필요한 변수
+			, @RequestParam(defaultValue = "0") String curPage
+			// 검색 처리시 필요한 변수
+			, @RequestParam(defaultValue = "") String search
+			, HttpSession sessioin
+			) {
+		
+		// url 요청 logger 찍기
+		logger.info("/admin/oneonone/farmer - [GET] 요청");
+		
+		// 페이징 설정에 대한 정보를 갖는 Map 객체
+		Map<String, Object> pagingConfig = new HashMap<>();
+		pagingConfig.put("curPage", curPage);
+		pagingConfig.put("search", search);
+		pagingConfig.put("listCode", FARMER_CODE);
+		logger.debug("pagingConfig: " + pagingConfig);
+		
+		// 페이징 설정
+		AdminPaging apaging = adminOneOnOneService.getPaging(pagingConfig);
+		logger.debug("apaging: " + apaging.toString());
+		
+		// list 불러오기
+		List<Map<String, Object>> farmerOneOnOneList = adminOneOnOneService.selectAllFarmerOneOnOneList(apaging);
+		for(Map<String, Object> q: farmerOneOnOneList) {
+			logger.debug("q: " + q.toString());
+		}
+		
+		// model 값 넘겨주기
+		// 페이징 객체 넘기기
+		if( apaging != null ) {
+			
+			model.addAttribute("apaging", apaging);
+			
+		}
+		// 페이징 처리된 목록 넘기기
+		if( farmerOneOnOneList != null ) {
+			
+			model.addAttribute("farmerOneOnOneList", farmerOneOnOneList);
+			
+		}
+		
+		return "admin/oneonone/farmerlist";
 	}
 	
 	// 일반 회원 1대1 문의 상세 페이지
