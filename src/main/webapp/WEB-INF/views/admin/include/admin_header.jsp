@@ -68,9 +68,9 @@
 				</ul>
 			</li>
 			<li><a href="#">상품관리</a></li>
-			<li><a href="#">고객센터</a>
+			<li><a href="<%=request.getContextPath() %>/admin/oneonone/user">고객센터</a>
 				<ul class="menu__sub-qna">
-					<li><a href="#">일반 회원 문의</a></li>
+					<li><a href="<%=request.getContextPath() %>/admin/oneonone/user">일반 회원 문의</a></li>
 					<li><a href="#">농업인 회원 문의</a></li>
 				</ul>
 			</li>

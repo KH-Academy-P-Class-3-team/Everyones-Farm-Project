@@ -11,6 +11,7 @@ import common.dto.AnsweredOneonone;
 import common.dto.Farmer;
 import common.dto.QuestionOneonone;
 import common.dto.UserTB;
+import common.util.AdminPaging;
 
 /**
  * AdminOneOnOneDao 를 상속 받는 클래스
@@ -22,14 +23,10 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	@Autowired
 	SqlSessionTemplate session;
 	
+	// 일반 회원 일대일 문의 목록 조회
 	@Override
-	public List<Map<String, Object>> selectAllUserOneOnOneList() {
-		
-		// 클래스 다이어그램 용 객체
-		QuestionOneonone q = new QuestionOneonone();
-		UserTB user = new UserTB();
-		
-		return null;
+	public List<Map<String, Object>> selectAllUserOneOnOneList(AdminPaging apaging) {
+		return session.selectList("ADMINONEONONE.selectAllUserOneOnOneList", apaging);
 	}
 
 	@Override
@@ -43,14 +40,8 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectUserOneOnOneByNo(QuestionOneonone qNo) {
-		
-		// 클래스 다이어그램 용 객체
-		QuestionOneonone q = new QuestionOneonone();
-		AnsweredOneonone a = new AnsweredOneonone();
-		UserTB user = new UserTB();
-		
-		return null;
+	public Map<String, Object> selectUserOneOnOneByNo(QuestionOneonone qNo) {
+		return session.selectOne("ADMINONEONONE.selectUserOneOnOneByNo", qNo);
 	}
 
 	@Override
@@ -66,8 +57,7 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 
 	@Override
 	public int insertAnswerToUser(AnsweredOneonone a) {
-		
-		return 0;
+		return session.insert("ADMINONEONONE.insertAnswerToUser", a);
 	}
 
 	@Override
@@ -76,9 +66,10 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 		return 0;
 	}
 
+	// 답변 수정
 	@Override
-	public int updateAnswertToUser(AnsweredOneonone a) {
-		return 0;
+	public int updateAnswer(AnsweredOneonone a) {
+		return session.update("ADMINONEONONE.updateAnswertToUser", a);
 	}
 
 	@Override
@@ -86,14 +77,34 @@ public class AdminOneOnOneDaoImpl implements AdminOneOnOneDao{
 		return 0;
 	}
 
+	// 일반 회원 문의 글 총 갯수 조회
 	@Override
-	public int deleteAnswerToUserByNo(AnsweredOneonone aNo) {
-		return 0;
+	public int selectCntAllUserOneOnOne(String search) {
+		return session.selectOne("ADMINONEONONE.selectCntAllUserOneOnOne", search);
+	}
+	
+	// 답변 조회
+	@Override
+	public Map<String, Object> selectAnswerOneOnOneByQuestionNo(QuestionOneonone q) {
+		return session.selectOne("ADMINONEONONE.selectAnswerOneOnOneByQuestionNo", q);
 	}
 
+	// 답변 삭제
 	@Override
-	public int deleteAnswerToFarmerByNo(AnsweredOneonone aNo) {
-		return 0;
+	public int deleteAnswer(AnsweredOneonone deleteAnswer) {
+		return session.delete("ADMINONEONONE.deleteAnswer", deleteAnswer);
+	}
+	
+	// 답변 상태 업데이트
+	@Override
+	public int updateAnswerStateByQuestionNo(AnsweredOneonone answer) {
+		return session.update("ADMINONEONONE.updateAnswerStateByQuestionNo", answer);
+	}
+
+	// 답변 상태 업데이트 - 답변 대기로
+	@Override
+	public int updateWaitAnswerByQuestionNo(AnsweredOneonone deleteAnswer) {
+		return session.update("ADMINONEONONE.updateWaitAnswerByQuestionNo", deleteAnswer);
 	}
 	
 }

@@ -7,3 +7,8 @@ $("#toFarmerApplication").on("click", function(){
 	$(location).attr("href", "/farmapp/adminmember/fapplicationlist")
 	
 })
+$("#toAdminServiceCenter").on("click", function(){
+	
+	$(location).attr("href", "/farmapp/admin/oneonone/user")
+	
+})

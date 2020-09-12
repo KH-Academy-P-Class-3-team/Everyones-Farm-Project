@@ -119,7 +119,7 @@
 		</div>
 	</main>
 </div>
-<!-- 농업인 회원 신청 관리하러 가기 버튼 클릭 이벤트 -->
+<!-- 버튼 클릭 이벤트 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/admin_main_btn_event.js"></script>
 <!-- footer include -->
 <%@include file="./include/admin_footer.jsp" %>

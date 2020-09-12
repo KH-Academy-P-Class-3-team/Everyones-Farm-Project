@@ -64,7 +64,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 			curPageNo = Integer.parseInt(curPage);
 		}
 		
-		// NOTICE 테이블의 총 게시글 수를 조회한다.
+		// 회원 테이블의 총 게시글 수를 조회한다.
 		int totalCount = 0;
 		// 검색어가 없을 경우, null일 경우
 		if( search == null || "".equals(search) ) {

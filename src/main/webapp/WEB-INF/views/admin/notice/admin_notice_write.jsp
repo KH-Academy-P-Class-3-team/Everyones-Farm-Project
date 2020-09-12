@@ -19,7 +19,7 @@
 		</div>
 		<!-- 공지사항 작성 폼 -->
 		<div class="notice-write__form-wrap">
-			<form action="<%=request.getContextPath() %>/adminnotice/write" method="post"
+			<form action="<%=request.getContextPath() %>/adminnotice/write?noticeNo=${postNo}" method="post"
 			class="form-wrap__form" id="notice-form">
 				<ul class="form-wrap__list">
 					<li>
@@ -29,7 +29,7 @@
 						<textarea name="content" class="list__textarea" id="noticeContent">글씨를 지우고 내용을 입력해주세요.</textarea>
 						<script type="text/javascript">
 							CKEDITOR.replace( 'noticeContent'
-											, { filebrowserUploadUrl: '/farmapp/adminnotice/fileupload'
+											, { filebrowserUploadUrl: '/farmapp/common/imageupload?boardNo=7&postNo=' + ${postNo}
 								});
 						</script>
 					</li>

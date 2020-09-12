@@ -76,6 +76,7 @@
 <!-- 	</interceptors> -->
 	
 	<context:component-scan base-package="com.kh.farmapp" />
+	<context:component-scan base-package="common.util" />
 		<!-- ck 에디터 -->
 	<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"></resources>
 	

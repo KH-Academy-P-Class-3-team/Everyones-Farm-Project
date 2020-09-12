@@ -26,6 +26,7 @@ import common.dto.Admin;
 import common.dto.Farmer;
 import common.dto.UserTB;
 import common.util.AdminPaging;
+import common.util.Paging;
 
 @Controller
 public class AdminUserController {
