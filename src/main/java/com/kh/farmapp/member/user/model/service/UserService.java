@@ -80,8 +80,18 @@ public interface UserService {
 	 */
 	public int selectPhoneCheck(String phone);
 
+	/**
+	 * 카카오로그인 코드받기
+	 * @param code
+	 * @return String
+	 */
 	public String getAccessToken(String code);
 
+	/**
+	 * 카카오로그인
+	 * @param accessToken
+	 * @return HashMap
+	 */
 	public HashMap<String, Object> getUserInfo(String accessToken);
 	
 }

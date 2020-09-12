@@ -16,11 +16,21 @@
 		<typeAlias type="common.dto.EveryonesFarmFile" alias="FILE"/>
 		<typeAlias type="common.dto.FarmActivitySchedule" alias="ACTIVITY_SCHEDULE"/>
 		<typeAlias type="common.dto.Farmer" alias="FARMER"/>
+		
+		<!-- 마이페이지 User -->
+		<typeAlias type="common.dto.UserTB" alias="USERTB"/>
+		<typeAlias type="common.dto.QuestionOneonone" alias="O3"/>
+		<typeAlias type="common.dto.TBOrder" alias="TBORDER"/>
+		<typeAlias type="common.dto.UserProfile" alias="USERFILE"/>
+		
 	</typeAliases>
 	
 	<mappers>
     
 		<!-- mapper 파일 만들면 넣기 -->
+		<mapper resource="/mybatis/mapper/mypagedailyMapper.xml" />
+		<mapper resource="/mybatis/mapper/mypageactivityMapper.xml" />
+		<mapper resource="/mybatis/mapper/mypagesellMapper.xml" />
 		<mapper resource="/mybatis/mapper/mainMapper.xml" />
 		<mapper resource="/mybatis/mapper/noticeMapper.xml" />
 		<mapper resource="/mybatis/mapper/testMapper.xml" />
@@ -31,13 +41,20 @@
 		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml" />
 		<mapper resource="/mybatis/mapper/review.xml" />
 		
+
 		<!-- ActivityController에서 사용하는 mapper -->
 <!-- 		<mapper resource="/mybatis/mapper/activityMapper.xml" /> -->
     <!-- <mapper resource="/mybatis/mapper/mypageUser.xml" /> -->
+    	<mapper resource="/mybatis/mapper/mypageUser.xml" />
     
     	<!-- admin login mapper 파일 -->
     	<mapper resource="/mybatis/mapper/adminLoginMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminMainMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminNoticeMapper.xml" />
+    	<mapper resource="/mybatis/mapper/adminMemberMapper.xml" />
+    	<mapper resource="/mybatis/mapper/adminOneOnOneMapper.xml" />
+    	
+    	<!-- file upload mapper 파일 -->
+    	<mapper resource="mybatis/mapper/commonCkImageUploadMapper.xml" />
 	</mappers>
 </configuration>

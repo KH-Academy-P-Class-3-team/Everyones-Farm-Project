@@ -16,7 +16,7 @@
 <!-- 	</select> -->
 	
 	<select id="selectUser" resultType="common.dto.UserTB">
-		select user_id, user_pw, user_name, email, phone
+		select user_no, user_id, user_pw, user_name, email, phone
 		from user_tb
 		where user_id = #{userId} and is_leave = 0 and is_pause = 0
 	</select>

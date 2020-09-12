@@ -155,6 +155,7 @@
     }
 
 
+
 </script>
 <html>
 <head>
@@ -189,6 +190,7 @@
             <div style="text-align: right">
                 <%--구매평 작성 버튼--%>
                 <input id="btnWrite" style="background: #389c38;
+
             border: 0px solid #ada59b !important;
             border-radius: 30px;
             font-size: 12px;
@@ -265,5 +267,8 @@
 
     </form>
 </div>
+           
+
+
 </body>
 </html>

@@ -6,31 +6,285 @@
 
 <mapper namespace="Mypage">
 
-	<select id="selectUser" resultType="Map">
-		SELECT u.user_no,
-		u.user_id,
-		u.user_pw,
-		u.user_name,
-		u.email,
-		u.phone,
-		a.first_address
-		FROM user_tb u,
-		user_address a
-		WHERE u.user_no = a.user_no
-		AND u.user_no =#{userNo}
-	</select>
-
-	<select id="selectO3" resultType="O3">
+	<select id="selectUser" resultType="USERTB">
 		SELECT
-			question_no,
-			title,
-			content,
-			user_no,
-			reg_date
-		FROM QUESTION_ONEONONE
-		ORDER BY question_no
+		*
+		FROM user_tb
+		WHERE
+		user_no=#{userNo}
+	</select>
+	
+	<select id="selectProfile" resultType="USERFILE">
+	SELECT 
+	* 
+	FROM 
+		user_profile
+	where
+		user_no=#{userNo}
+	</select>
+	
+	<insert id="insertprofile">
+	INSERT INTO
+		 user_profile (profile_no, user_no, origin_name, file_rename, save_path, farmer_no)
+	VALUES(
+    user_profile_seq.nextval, #{userNo} ,#{fileData.originName}, #{fileData.fileRename}, #{fileData.savePath}
+    <!-- 임시로 null 값을 넣어줌 -->
+    , null
+	)
+	</insert>
+	
+	<update id="modifyprofile">
+	UPDATE
+		user_profile
+	SET
+        origin_name = #{fileData.originName},
+        file_rename = #{fileData.fileRename},
+        save_path = #{fileData.savePath}
+        where user_no = #{userNo}
+	</update>
+	
+	<update id="updateUser">
+		UPDATE 
+			user_tb
+		SET
+			user_pw=#{userPw},
+			email=#{email},
+			phone=#{phone},
+			zonecode=#{zoneCode},
+			first_address=#{firstAddress},
+			second_address=#{secondAddress}
+		WHERE
+			user_no=#{userNo}
+	</update>
+	
+	
+	
+	<update id="deleteUser">
+		UPDATE user_tb
+		SET
+		is_leave = 1
+		WHERE
+		user_no = #{userNo}
+	</update>
+	
+	
+
+	<select id="selectO3" resultType="map">
+		select
+		question_no, user_no,
+		reg_date,rnum,
+		title, content, user_name, is_answered
+		from(
+		select rownum
+		rnum, n1.*
+		from(
+		select q.question_no, u.user_no, q.reg_date,
+		q.title,
+		q.content, u.user_name, q.is_answered
+		from QUESTION_ONEONONE q, user_tb
+		u
+		WHERE u.user_no = q.user_no
+		AND q.user_no = #{userNo}
+		order by question_no desc
+		) n1
+		)where rnum
+		between #{page.start} and #{page.end}
+		
 
 	</select>
+
+	<select id="selectO3one" resultType="O3">
+		SELECT
+		question_no,
+		title,
+		reg_date,
+		content,
+		user_no
+		FROM QUESTION_ONEONONE
+		WHERE question_no =
+		#{qNo}
+	</select>
+
+
+
+
+	<select id="cntO3" resultType="int">
+		select count(*) from
+		Question_oneonone
+		WHERE user_no=#{userNo}
+	</select>
+
+	<delete id="deleteOneonone">
+	DELETE
+		question_oneonone
+	WHERE
+		question_no = #{qNo}
+	</delete>
+
+	<select id="cntApli" resultType="int">
+		select count(*) from APPLICATION
+		where user_no=#{userNo}
+	</select>
+
+
+	<select id="selectActList" resultType="map">
+		select apl.APPLICATION_NO,
+		apl.ACTIVITY_NO,
+		apl.USER_NO,
+		apl.user_NAME,
+		apl.user_id,
+		apl.APPLICANT_PHONE,
+		apl.APPLICANT_EMAIL,
+		apl.PEOPLE,
+		apl.ACTIVITY_DATE,
+		apl.IS_GROUP,
+		apl.IS_APPROVAL,
+		fat.title,
+		fat.is_Help,
+		fat.farm_name,
+		fat.phone
+		from (select
+		a.APPLICATION_NO,
+		a.ACTIVITY_NO,
+		a.USER_NO,
+		a.APPLICANT_NAME,
+		a.APPLICANT_PHONE,
+		a.APPLICANT_EMAIL,
+		a.PEOPLE,
+		a.ACTIVITY_DATE,
+		a.IS_GROUP,
+		a.IS_APPROVAL,
+		utb.user_name,
+		utb.user_id
+		from user_Tb utb, application a where a.user_no=utb.user_no) apl, (
+		select
+		fa.ACTIVITY_NO,
+		fa.FARM_NO,
+		fa.IS_HELP,
+		fa.title,
+		f.farm_name,
+		f.PHONE
+		from farm f, farm_activity fa
+		WHERE f.farm_no = fa.farm_no)fat
+		WHERE apl.activity_no = fat.activity_no
+		AND apl.USER_NO = #{userNo}
+	</select>
+
+	<select id="selectOrderList" resultType="map">
+		select
+		ORDER_NO,
+		OPTION_NO, USER_NO,
+		FARMER_NO, ORDER_DATE, PAYMENT_STATUS,
+		PAYMENT_PRICE, ORDER_AMOUNT, seller,
+		NAME, AMOUNT
+		from(
+		select rownum
+		rnum, n1.*
+		from(
+		select
+		om.ORDER_NO, om.OPTION_NO, om.USER_NO,
+		om.FARMER_NO, om.ORDER_DATE,
+		om.PAYMENT_STATUS,
+		om.PAYMENT_PRICE,
+		om.ORDER_AMOUNT, om.name seller,
+		p.NAME, p.AMOUNT
+		from (
+		select
+		f.name,
+		t.ORDER_NO, t.OPTION_NO,
+		t.USER_NO, t.FARMER_NO, t.ORDER_DATE,
+		t.PAYMENT_STATUS, t.PAYMENT_PRICE, t.ORDER_AMOUNT
+		from
+		farmer f,
+		tb_order t where f.farmer_no=t.farmer_no) om , product_option p
+		WHERE
+		om.option_no = p.option_no
+		AND
+		om.user_no=#{userNo}
+		ORDER BY
+		om.ORDER_DATE desc) n1
+		) WHERE rnum between #{page.start} and
+		#{page.end}
+		ORDER BY ORDER_NO
+	</select>
+
+	<select id="cntOrder" resultType="int">
+		select count(*) from TB_ORDER
+		where user_no=#{userNo}
+	</select>
+	
+	<select id="minmax" resultType="map">
+	select Min(question_no) MIN, MAX(question_no) MAX
+     from question_oneonone
+     WHERE user_no = #{userNo}
+	</select>
+
+	<select id="cntBasket" resultType="int">
+		select count(*) from basket WHERE user_no=#{userNo}
+	</select>
+
+	<select id="selectBasketList" resultType="map">
+		select
+		basket_no, farmer_name, product_no, name, price, amount,
+		option_name, delivery
+		from(
+		select rownum rnum, n1.*
+		from(select
+		b.basket_no, b.farmer_name, p.product_no,
+		p.name, p.price, p.amount, p.option_name, p.delivery
+		from (
+		select
+		pro.name, op.option_no, op.product_no,
+		op.name option_name, op.price, op.amount, pro.DELIVERY
+		from product pro, product_option op
+		WHERE pro.PRODUCT_NO = op.PRODUCT_NO
+		) p,
+		(
+		select
+		name farmer_name, bas.basket_no, bas.user_no, bas.option_no
+		from farmer f, basket bas
+		where f.farmer_no = bas.farmer_no) b
+		where b.option_no = p.option_no AND b.user_no = #{userNo}
+		order by b.basket_no) n1 )
+		WHERE rnum between #{page.start} and #{page.end}
+	</select>
+
+	<select id="selectOrderDetail" resultType="map">
+		select
+		odr.ORDER_NO,
+		odr.OPTION_NO,
+		odr.USER_NO,
+		odr.FARMER_NO,
+		odr.ORDER_DATE,
+		odr.PAYMENT_STATUS,
+		odr.PAYMENT_PRICE,
+		odr.ZONECODE,
+		odr.FIRST_ADDRESS,
+		odr.SECOND_ADDRESS,
+		odr.ORDER_AMOUNT,
+		pro.OPTION_NAME,
+		pro.OPTION_NO,
+		pro.PRODUCT_NAME,
+		pro.PRODUCT_NO
+		from tb_order odr,
+		(SELECT o.name option_name, o.option_no, p.name product_name, p.product_no
+		from product_option o,product p
+		WHERE p.product_no=o.product_no) pro
+		WHERE odr.OPTION_NO = pro.OPTION_NO
+		AND ORDER_NO = #{orderNo}
+		ORDER BY odr.ORDER_NO
+	</select>
+
+
+	<delete id="deleteBasket">
+		DELETE BASKET WHERE basket_no IN
+		<foreach collection="array" item="arr" open="(" close=")"
+			separator=",">
+			#{arr}
+		</foreach>
+
+
+	</delete>
 
 </mapper>
     

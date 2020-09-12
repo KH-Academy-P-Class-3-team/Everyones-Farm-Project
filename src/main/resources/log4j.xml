@@ -27,6 +27,27 @@
 	<logger name="com.kh.farmapp">
 		<level value="info" />
 	</logger>
+
+	<!-- setting AdminNoticeController debug level log -->
+	<logger name="com.kh.farmapp.admin.notice.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting AdminUserController debug level log -->
+	<logger name="com.kh.farmapp.admin.user.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting AdminOneOnOneController debug level log -->
+	<logger name="com.kh.farmapp.admin.oneonone.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting MyPageUserController debug level log -->
+	<logger name="com.kh.farmapp.mypage.user.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting CkImgUpload debug level log -->
+	<logger name="common.util">
+		<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
@@ -45,10 +66,12 @@
 		<level value="info" />
 	</logger>
 
+
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
 	</root>
+	
 	
 </log4j:configuration>

@@ -1,29 +1,35 @@
 package com.kh.farmapp.farmpersonalpage.personalproduce.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import common.dto.Product;
 import common.dto.ProductFile;
 import common.dto.ProductOption;
+import common.util.Paging;
 
 @Repository
 public class PersonalProduceDaoImpl implements PersonalProduceDao {
-
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
-	public int insertProduct() {
-		return 0;
+	public int insertProduct(Product product) {
+		return sqlSession.insert("Product.insertProduct", product);
+
+	}
+	
+	public int insertProductOption(ProductOption productoption) {
+		return sqlSession.insert("Product.insertProductOption", productoption);
 	}
 
 	@Override
-	public List<Product> selectProductList() {
-		
-		// 클래스 다이어그램 용 DTO 객체 선언
-		Product product = new Product();
-		ProductFile productFile = new ProductFile();
-		ProductOption pOption = new ProductOption();
-		
+	public List<Product> selectProductList(Paging paging) {		
 		return null;
 	}
 

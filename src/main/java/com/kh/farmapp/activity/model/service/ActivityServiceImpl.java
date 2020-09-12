@@ -96,7 +96,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public int insertApplication(Application application) {
-		return 0;
+		return activityDao.insertApplication(application);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.kh.farmapp.admin.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,23 +29,23 @@ public class AdminNoticeDaoImpl implements AdminNoticeDao{
 
 	// 공지사항 번호를 통해 특정 공지사항 조회
 	@Override
-	public Notice selectNoticeByNoticeNo(Notice noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> selectNoticeByNoticeNo(Notice noticeNo) {
+		return session.selectOne("ADMINNOTICE.selectNoticeByNoticeNo", noticeNo);
 	}
 
+	// 공지사항 insert
 	@Override
 	public int insertNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert("ADMINNOTICE.insertNotice", notice);
 	}
 
+	// 공지사항 삭제
 	@Override
-	public int deleteNoticeByNoticeNo(Notice noticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteNoticeByNoticeNo(List<Object> noticeNoList) {
+		return session.delete("ADMINNOTICE.deleteNoticeByNoticeNo", noticeNoList);
 	}
-
+	
+	
 	// NOTICE 테이블의 모든 행 count 조회
 	@Override
 	public int selectCntAllNotice() {
@@ -55,5 +56,11 @@ public class AdminNoticeDaoImpl implements AdminNoticeDao{
 	@Override
 	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging) {
 		return session.selectList("ADMINNOTICE.selectNoticeByAPaging", apaging);
+	}
+
+	// 작성될 글의 번호를 미리 조회
+	@Override
+	public String selectPostNo() {
+		return session.selectOne("ADMINNOTICE.selectPostNo");
 	}
 }

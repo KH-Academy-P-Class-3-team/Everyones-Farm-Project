@@ -50,20 +50,28 @@ public class UserController {
 		return "member/userlogin";
 	}
 	
-	//일반 회원 로그인 창
+	//일반 회원 카카오 로그인 창
 	@RequestMapping(value="/kakaologin.do")
 	public String kakaologin(
 			@RequestParam(value="code", required = false) String code
 			, HttpSession session
+			, HttpServletRequest req
+			, Model model
 			) throws Exception{
 		System.out.println("#########" + code);
 		String accessToken = userService.getAccessToken(code);
 		System.out.println(accessToken);
 		HashMap<String, Object> userIn = userService.getUserInfo(accessToken);
-		
-		session.setAttribute("userInfo", userIn);
+		if(userIn != null) {
+			session.setAttribute("kakaoInfo", userIn);
+			model.addAttribute("alertMsg", "로그인 되었습니다");
+			model.addAttribute("url", req.getContextPath());
+		} else {
+			model.addAttribute("alertMsg", "회원가입에 실패했습니다");
+			model.addAttribute("url", req.getContextPath()+"/user/userjoin.do");
+		}
 		System.out.println(userIn.get("email"));
-		return "member/userlogin";
+		return "common/result";
 	}
 	
 	//회원 정보 찾기 메인
@@ -211,7 +219,7 @@ public class UserController {
 			, HttpServletRequest req) {
 		UserTB res = userService.findId(commandMap);
 		if(res!=null) {
-			req.setAttribute("userInfo", res);
+			req.setAttribute("userId", res);
 			return "member/findIdResult";
 		} else {
 			return "member/findError";
@@ -231,7 +239,7 @@ public class UserController {
 		
 		if(res!=null) {
 			userService.findPwMailSend(user, urlPath);
-			req.setAttribute("userInfo", res);
+			req.setAttribute("userPw", res);
 			return "member/findPwResult";
 		} else {
 			return "member/findError";
@@ -247,7 +255,7 @@ public class UserController {
 			, UserTB user) {
 		UserTB res = userService.findPw(commandMap);
 		if(res!=null) {
-			req.setAttribute("userInfo", res);
+			req.setAttribute("userPw", res);
 			return "member/changePw";
 		} else {
 			return "member/findError";
@@ -291,13 +299,18 @@ public class UserController {
 			session.removeAttribute("userInfo");
 		}
 		
-		return "main/index"; 
+		return "redirect:/"; 
 	}
 	
 	//카카오 로그아웃
 	@RequestMapping("kakaologout")
 	public String kakaologout(HttpSession session) {
-		session.removeAttribute("accessToken");
-		return "member/login";
+
+		if( session.getAttribute("kakaoInfo") != null) {
+			session.removeAttribute("kakaoInfo");
+			session.removeAttribute("accessToken");
+		}
+    
+		return "redirect:/";
 	}
 }
