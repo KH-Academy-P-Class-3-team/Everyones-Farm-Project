@@ -1,13 +1,6 @@
 /**
  * 답변 작성, 목록으로, 작성, 수정, 취소, 답변 삭제 등의 버튼 이벤트
  */
-/* 목록으로 가기 버튼 클릭 */
-$("#toList").on("click", function(){
-	
-	// 뒤로가기
-	$(location).attr("href", "/farmapp/admin/oneonone/user")
-	
-})
 /* 답변하기 버튼 클릭 이벤트 - 답변하기 클릭시  작성 폼 보여주기 */
 $("#toWrite").on("click", function(){
 	

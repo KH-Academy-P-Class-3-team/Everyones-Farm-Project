@@ -81,5 +81,8 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_oneonone_detail_btn_event.js"></script>
 <!-- delete button click event -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_user_oneonone_delete.js" ></script>
+<!-- toList button click event -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_user_oneonone_to_list.js"></script>
+
 <!-- footer include -->
 <%@include file="../include/admin_footer.jsp" %>
