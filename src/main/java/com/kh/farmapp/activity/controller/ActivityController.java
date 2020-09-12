@@ -32,59 +32,70 @@ public class ActivityController {
 
 	@Autowired
 	private ActivityService activityService;
-	
-	/**
-	 * 체험활동 목록 조회
-	 * @param cPage - 현재 페이지
-	 * @return ModelAndView - farm, paging, activityList, fileList
-	 */
-	@RequestMapping("/activity/experienceList.do")
-	public ModelAndView experienceList(@RequestParam(required=false, defaultValue="1") int cPage) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		int cntPerPage = 9;
-		
-		Map<String, Object> commandMap = activityService.selectActivityList(cPage, cntPerPage, 0);
-		
-		mav.addObject("farm", activityService.selectFarmList());
-		mav.addObject("paging", commandMap.get("paging"));
-		mav.addObject("activityList", commandMap.get("activityList"));
-		mav.addObject("fileList", commandMap.get("fileList"));
-		
-		return mav;
-	}
-	
-	
-	/**
-	 * 일손돕기 목록 조회
-	 * @param cPage - 현재 페이지
-	 * @return ModelAndView - farm, paging, activityList, fileList
-	 */
-	@RequestMapping("/activity/helpList.do")
-	public ModelAndView helpList(@RequestParam(required=false, defaultValue="1") int cPage) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		int cntPerPage = 9;
 
-		Map<String, Object> commandMap = activityService.selectActivityList(cPage, cntPerPage, 1);
+	/**
+	 * 체험 활동 목록 조회 및 검색
+	 * @param isHelp, filter, title - 검색 조건
+	 * @param cPage - 현재 페이지
+	 * @return ModelAndView - isHelp에 따른 View, 조회된 활동 목록, 페이징 객체, 검색 조건
+	 */
+	@RequestMapping("/activity/activityList")
+	public ModelAndView activityList(int isHelp, String title, String filter
+			, @RequestParam(required=false, defaultValue="1") int cPage) {
 		
-		mav.addObject("farm", activityService.selectFarmList());
-		mav.addObject("paging", commandMap.get("paging"));
-		mav.addObject("activityList", commandMap.get("activityList"));
-		mav.addObject("fileList", commandMap.get("fileList"));
+		int cntPerPage = 9;
+		
+		Map<String, Object> commandMap = activityService.selectActivityList(cPage, cntPerPage, isHelp, filter, title);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(((List<Map<String, Object>>)commandMap.get("activityList")).isEmpty()) {
+			mav.addObject("msg", "조회된 결과가 없습니다.");
+			
+			mav.addObject("url", "activityList?isHelp=" + isHelp);
+			mav.setViewName("activity/result");
+			
+		} else {
+			mav.addObject("paging", commandMap.get("paging"));
+			mav.addObject("activityList", commandMap.get("activityList"));
+			mav.addObject("fileList", commandMap.get("fileList"));
+			
+			//검색조건
+			mav.addObject("filter", filter);
+			mav.addObject("title", title);
+			
+			if(isHelp == 0) {
+				mav.setViewName("activity/experienceList");
+			} else {
+				mav.setViewName("activity/helpList");
+			}
+			
+		}
 		
 		return mav;
+		
 	}
-	
 	
 	
 	/**
 	 * 체험활동 등록 폼 이동 [GET]
 	 */
 	@RequestMapping(value = "activity/activityForm.do", method = RequestMethod.GET)
-	public void activityForm() { }
+	public ModelAndView activityForm(HttpSession session, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		
+		if(farmer == null) {
+			mav.addObject("msg", "접근 권한이 없습니다.");
+			mav.addObject("url", request.getContextPath());
+			mav.setViewName("activity/result");
+		} else {
+			mav.setViewName("activity/activityForm");
+		}
+		
+		return mav;
+	}
 	
 	
 	/**
@@ -108,9 +119,10 @@ public class ActivityController {
 			) {
 		
 		ModelAndView mav = new ModelAndView();
-		
+
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+
 		String root  = session.getServletContext().getRealPath("/");
-		
 		
 		List<FarmActivitySchedule> scheduleList = new ArrayList<FarmActivitySchedule>();
 		
@@ -122,13 +134,6 @@ public class ActivityController {
 			scheduleList.add(schedule);
 		}
 		
-		
-		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-		
-		//테스트용 Farm 객체
-//		Farmer farmer = new Farmer();
-//		farmer.setFarmerNo(1);
-
 		Farm farm = activityService.selectFarmByFarmerNo(farmer);
 		
 		farmActivity.setFarmNo(farm.getFarmNo());
@@ -141,7 +146,8 @@ public class ActivityController {
 			mav.addObject("msg", "체험 활동 등록에 실패하였습니다.");
 		}
 
-		mav.addObject("url", "activityList.do");
+		mav.addObject("url", "farmActivityList?farmNo=" + farm.getFarmerNo());
+
 		mav.setViewName("activity/result");
 		
 		return mav;
@@ -152,26 +158,28 @@ public class ActivityController {
 	/**
 	 * 농장 내 활동 목록 조회
 	 * @param session - farmer 정보를 저장하고있는 session 객체
+	 * @param farmNo - 현재 농장 번호
 	 * @return ModelAndView - commandMap(activity, activityFile), farmerInfo, View(activityList.jsp)
 	 */
-	@RequestMapping("activity/activityList.do")
-	public ModelAndView activityList(HttpSession session) {
+	@RequestMapping("activity/farmActivityList")
+	public ModelAndView farmActivityList(HttpSession session, int farmNo) {
 
 		ModelAndView mav = new ModelAndView();
 		
-//		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-
-		//테스트용 Farmer 객체
-		Farmer farmer = new Farmer();
-		farmer.setFarmerNo(1);
-		farmer.setFarmerId("suzzung");
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
-		Farm farm = activityService.selectFarmByFarmerNo(farmer);
+		Farm farm = activityService.selectFarmByFarmNo(farmNo);
+		
+		boolean isFarmer = false;
+		if(farmer != null) {
+			isFarmer = farmer.getFarmerNo() == farm.getFarmerNo();
+		}
+		
 		
 		Map<String, Object> commandMap = activityService.selectActivityListByFarmNo(farm); 
 		
-		//테스트용 Farmer
-		mav.addObject("farmerInfo", farmer);
+		mav.addObject("isFarmer", isFarmer);
+		mav.addObject("farmNo", farmNo);
 		mav.addObject("paging", commandMap.get("paging"));
 		mav.addObject("data", commandMap);
 		mav.setViewName("/activity/activityList");
@@ -206,8 +214,17 @@ public class ActivityController {
 	}
 	
 	
+	/**
+	 * 체험 활동 삭제
+	 * @param activityNo - 삭제할 활동 번호
+	 * @return ModelAndView - 메세지 출력 후 목록으로 이동
+	 */
 	@RequestMapping("/activity/activityDelete.do")
-	public ModelAndView activityDelete(HttpServletRequest request, int activityNo) {
+	public ModelAndView activityDelete(HttpSession session, int activityNo) {
+		
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		
+		Farm farm = activityService.selectFarmByFarmerNo(farmer);
 		
 		int res = activityService.activityDelete(activityNo);
 		
@@ -219,58 +236,13 @@ public class ActivityController {
 			mav.addObject("msg", "체험 활동 삭제 실패");
 		}
 
-		mav.addObject("url", "activityList.do");
+		mav.addObject("url", "farmActivityList?farmNo=" + farm.getFarmNo()); //농부가 체험 삭제 후 어디로 이동할지 url...
 		mav.setViewName("activity/result");
 		
 		return mav;
 		
 	}
 	
-	
-	/**
-	 * 활동 검색
-	 * @param isHelp - 일손돕기인지 여부
-	 * @param title - 활동명
-	 * @param filter - 활동명 또는 농장명
-	 * @return ModelAndView - List, View
-	 */
-	@RequestMapping("/activity/searchActivity.do")
-	public ModelAndView searchActivity(int isHelp, String title, String filter
-			, @RequestParam(required=false, defaultValue="1") int cPage) {
-		
-		int cntPerPage = 9;
-		
-		Map<String, Object> commandMap = activityService.selectActivitySearch(cPage, cntPerPage, isHelp, title, filter);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		if(((List<FarmActivity>)commandMap.get("activityList")).isEmpty()) {
-			mav.addObject("msg", "조회된 결과가 없습니다.");
-			
-			if(isHelp == 0) {
-				mav.addObject("url", "experienceList.do");
-			} else {
-				mav.addObject("url", "helpList.do");
-			}
-			mav.setViewName("activity/result");
-			
-		} else {
-			mav.addObject("farm", activityService.selectFarmList());
-			mav.addObject("paging", commandMap.get("paging"));
-			mav.addObject("activity", commandMap.get("activityList"));
-			mav.addObject("file", commandMap.get("fileList"));
-
-			if(isHelp == 0) {
-				mav.setViewName("activity/experienceResult");
-			} else {
-				mav.setViewName("activity/helpResult");
-			}
-			
-		}
-		
-		return mav;
-		
-	}
 	
 	/**
 	 * 체험활동 신청 폼 이동 [GET]
@@ -291,7 +263,7 @@ public class ActivityController {
 		
 		if(user == null && farmer == null) {
 			mav.addObject("msg", "로그인 후 신청 가능합니다");
-			mav.addObject("url", "experienceList.do");
+			mav.addObject("url", "activityList.do?isHelp=" + isHelp);
 			mav.setViewName("activity/result");
 		} else {
 			
@@ -318,12 +290,7 @@ public class ActivityController {
 		
 		UserTB user = (UserTB)session.getAttribute("userInfo");
 		
-		//테스트용 user 객체
-//		UserTB user = new UserTB();
-//		user.setUserNo(1);
-
 		application.setUserNo(user.getUserNo());
-		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -338,7 +305,6 @@ public class ActivityController {
 			e.printStackTrace();
 		}
 		
-		
 		int res = activityService.insertApplication(application);
 		
 		ModelAndView mav = new ModelAndView();
@@ -349,7 +315,7 @@ public class ActivityController {
 			mav.addObject("msg", "체험 활동 신청에 실패하였습니다.");
 		}
 
-		mav.addObject("url", "experienceList.do");
+		mav.addObject("url", "activityList?isHelp=0");
 		mav.setViewName("activity/result");
 		
 		return mav;

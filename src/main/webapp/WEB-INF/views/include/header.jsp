@@ -78,11 +78,11 @@
 					<li><a href="#">일반 먹거리</a></li>
 				</ul>
 			</li>
-			<li><a href="#">농장구경</a></li>
-			<li><a href="<%=request.getContextPath() %>/activity/experienceList.do">체험</a>
+			<li><a href="<%=request.getContextPath() %>/findfarm/farmList">농장구경</a></li>
+			<li><a href="<%=request.getContextPath() %>/activity/activityList?isHelp=0">체험</a>
 				<ul class="menu__sub-activity">
-					<li><a href="<%=request.getContextPath() %>/activity/experienceList.do">농장 체험</a></li>
-					<li><a href="<%=request.getContextPath() %>/activity/helpList.do">일손 돕기</a></li>
+					<li><a href="<%=request.getContextPath() %>/activity/activityList?isHelp=0">농장 체험</a></li>
+					<li><a href="<%=request.getContextPath() %>/activity/activityList?isHelp=1">일손 돕기</a></li>
 				</ul>
 			</li>
 			<li><a href="#">농업소식</a></li>

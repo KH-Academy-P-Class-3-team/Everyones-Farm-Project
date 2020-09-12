@@ -39,6 +39,7 @@
 		<mapper resource="/mybatis/mapper/dailyMapper.xml" />
 		<mapper resource="/mybatis/mapper/activityMapper.xml" />
 		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml" />
+		<mapper resource="/mybatis/mapper/findfarmMapper.xml" />
 
 		<mapper resource="/mybatis/mapper/review.xml" />
     
