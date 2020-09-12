@@ -140,12 +140,20 @@ public class FarmDiaryController {
 
 	//게시글 삭제
 	@RequestMapping(value = "/farmdiary/farmdiarydelete.do", method = RequestMethod.GET )
-	public String deleteFarmdiary(@RequestParam(value="farmDiaryNo") int farmDiaryNo
+	public String deleteFarmdiary(
+			@RequestParam(value="farmDiaryNo") int farmDiaryNo
+			// farmerNo 쿼리 스트링 가져오기
+			, String farmerNo
 			//			, String farmerId, HttpSession session
 			){
 
 		//		ModelAndView mav = new ModelAndView();
-		farmdiaryService.deleteFarmDiary(farmDiaryNo);
+		int delRes = farmdiaryService.deleteFarmDiary(farmDiaryNo);
+		if( delRes >= 1 ) {
+			System.out.println("delete 성공");
+		} else {
+			System.out.println("delete 실패");
+		}
 
 		//		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		//		int res = 0;
@@ -166,7 +174,7 @@ public class FarmDiaryController {
 		//		
 		//		return mav;
 
-		return "redirect:/farmdiary/farmdiarylist.do";
+		return "redirect:/farmdiary/farmdiarylist.do?farmerNo=" + farmerNo;
 	}
 
 	//농장일기 이미지 업로드
