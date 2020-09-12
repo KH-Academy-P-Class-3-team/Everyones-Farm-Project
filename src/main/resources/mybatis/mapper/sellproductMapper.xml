@@ -133,10 +133,20 @@
 			and post_no = #{productNo}
 	</select>
 	
-	<select id="selectProductByProductNo" resultMap="ProductJoinOption">
-		select * from product p, product_option o
+	<select id="selectProductByProductNo" resultMap="ProductJoinOption" parameterType="int">
+		<!-- select * from product p, product_option o
 		where p.product_no = o.product_no
-			and p.product_no = #{productNo}
+			and p.product_no = #{productNo} -->
+		select
+		    * 
+		from 
+		    product p
+		    JOIN
+		        product_option o
+		    ON
+		        p.product_no = o.product_no  
+		where
+		    p.product_no = #{productNo}
 	</select>
 	
 	<select id="selectProductFile" resultType="FILE">

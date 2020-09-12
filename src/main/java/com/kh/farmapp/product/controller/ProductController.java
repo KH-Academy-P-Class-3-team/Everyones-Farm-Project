@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.product.model.service.ProductService;
 
+import common.dto.Admin;
 import common.dto.Basket;
 import common.dto.Farmer;
 import common.dto.Product;
@@ -83,8 +85,12 @@ public class ProductController {
 		session.getAttribute("userInfo");
 		
 		Map<String, Object> commandMap = productService.selectProductDetail(productNo);
+		System.out.println(commandMap.toString());
 		
-		mav.addObject("fileList", commandMap.get("fileList"));
+		// file 이 null 값이 아닐 때 추가하기
+		if( commandMap.get("fileList") != null ) {
+			mav.addObject("fileList", commandMap.get("fileList"));
+		}
 		mav.addObject("data", commandMap);
 		mav.setViewName("product/productDetail");
 		return mav;

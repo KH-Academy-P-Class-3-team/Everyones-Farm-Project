@@ -112,8 +112,12 @@ public class ProductServiceImpl implements ProductService{
 	public Map<String, Object> selectProductDetail(int productNo) {
 		Map<String, Object> map = productDao.selectProductDetail(productNo);
 		List<EveryonesFarmFile> file = productDao.selectProductFile(productNo);
+		System.out.println(file.toString());
 		
-		map.put("fileList", file);
+		// file 이 null값이 아닐 때
+		if( file != null ) {
+			map.put("fileList", file);
+		}
 		
 		return map;
 	}
