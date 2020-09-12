@@ -128,6 +128,7 @@ public class AdminNoticeController {
 	@RequestMapping(value = "/adminnotice/write", method = RequestMethod.GET)
 	public String adminNoticeWrite(
 				HttpSession session
+				, Model model
 			){
 		// 로그인이 안되어 있을 경우, 바로 로그인 페이지로 이동
 		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
@@ -136,6 +137,14 @@ public class AdminNoticeController {
 			return "redirect:/admin/login";
 			
 		}
+		
+		// 현재 작성될 글의 번호를 미리 조회한다.
+		String postNo = adminNoticeService.selectPostNo();
+		if( postNo != null ) { // 조회된 결과가 null 값이 아닐 경우
+			logger.debug("postNo: " + postNo);
+			model.addAttribute("postNo", postNo);
+		}
+		
 		return "admin/notice/admin_notice_write";
 	}
 	

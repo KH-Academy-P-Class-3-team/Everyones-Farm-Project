@@ -59,5 +59,13 @@ public interface AdminNoticeService {
 	 * @return List<Map<String, Object>> - 조회된 결과 반환 객체
 	 */
 	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging);
+
+
+	/**
+	 * 작성될 글의 번호를 미리 조회한다.
+	 * 
+	 * @return String - 조회 결과 반환
+	 */
+	public String selectPostNo();
 	
 }

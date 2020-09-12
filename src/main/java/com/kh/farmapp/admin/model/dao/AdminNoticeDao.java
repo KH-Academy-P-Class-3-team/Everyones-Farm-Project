@@ -54,4 +54,11 @@ public interface AdminNoticeDao {
 	 */
 	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging);
 
+	/**
+	 * 글의 번호를 미리 조회
+	 * 
+	 * @return - String 조회 결과 반환
+	 */
+	public String selectPostNo();
+
 }
