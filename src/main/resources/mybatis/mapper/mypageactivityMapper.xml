@@ -49,7 +49,9 @@
             f.farmer_no = farm.farmer_no
             and farm.farm_no = fa.farm_no
             and fa.activity_no = a.activity_no
-            and f.farmer_no = #{farmerNo} and f.farmer_no = #{farmerNo} and is_help=0 
+            and f.farmer_no = #{farmerNo} 
+<!--             and f.farmer_no = #{farmerNo}  -->
+            and is_help=0 
         )r
         )p
         where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO

@@ -30,15 +30,40 @@
 		    r.*
 		    from 
 		    (
-		    select o.order_no,o.order_amount,o.order_date,o.payment_status,us.user_name , pro.name, o.farmer_no
-		    from 
-		    tb_order o , user_tb us , PRODUCT_OPTION pro  , farmer f
-		    where 
-		    1=1 and o.user_no = us.user_no 
-		    and 
-		    o.OPTION_NO = pro.OPTION_NO
-		    and f.farmer_no=o.farmer_no)
-		    r
+<!-- 		    select o.order_no,o.order_amount,o.order_date,o.payment_status,us.user_name , pro.name, o.farmer_no -->
+<!-- 		    from  -->
+<!-- 		    tb_order o , user_tb us , PRODUCT_OPTION pro  , farmer f -->
+<!-- 		    where  -->
+<!-- 		    1=1 and o.user_no = us.user_no  -->
+<!-- 		    and  -->
+<!-- 		    o.OPTION_NO = pro.OPTION_NO -->
+<!-- 		    and f.farmer_no=o.farmer_no -->
+				select
+				    o.order_no
+				    , o.order_amount
+				    , o.order_date
+				    , o.payment_status
+				    , u.user_name
+				    , p.name
+				    , p.farmer_no
+				from
+				    tb_order o
+				    JOIN
+				        product_option op
+				    ON
+				        o.option_no = op.option_no
+				    JOIN
+				        product p
+				    ON
+				        op.product_no = p.product_no
+				    JOIN
+				        user_tb u
+				    ON
+				        u.user_no = o.user_no
+				where
+					<!-- 이 부분을 어떻게 수정을 해야할 것 같아요 -->
+				    p.farmer_no = 63
+		    )r
 		    )p
       		where rnum BETWEEN  #{cri.rowStart} and #{cri.rowEnd}
 		   
