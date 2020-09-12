@@ -35,7 +35,7 @@
 		 </c:forEach>
 		 </table>
 		 <br>
-		<span id="more1" style="float: right;">더보기<img alt="arrow" src="<%=request.getContextPath()%>/resources/image/product/arrow.png" style="height: 1.5em; vertical-align: middle;"/></span>
+		<span id="more1" style="float: right;cursor: pointer;">더보기<img alt="arrow" src="<%=request.getContextPath()%>/resources/image/product/arrow.png" style="height: 1.5em; vertical-align: middle;"/></span>
 		<br>
 	</div>
 	<br>
@@ -63,7 +63,7 @@
 		 </c:forEach>
 		 </table>
 		 <br>
-		 <span id="more2" style="float: right;">더보기<img alt="arrow" src="<%=request.getContextPath()%>/resources/image/product/arrow.png" style="height: 1.5em; vertical-align: middle;"/></span>
+		 <span id="more2" style="float: right;cursor: pointer;">더보기<img alt="arrow" src="<%=request.getContextPath()%>/resources/image/product/arrow.png" style="height: 1.5em; vertical-align: middle;"/></span>
 		 <br>
 	</div>
 </div>
