@@ -31,6 +31,9 @@
 <div id="d1">
     <h3>QnA</h3>
     <hr>
+    
+<input type="hidden" name="farmQnaQuestionNo" value="${detail.farmQnaQuestionNo}" />
+    
  <table class="table">
         <colgroup>
             <col width="10%">
@@ -74,15 +77,40 @@
  		 
  		 <hr>
  		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmQnAdelete.do?farmQnaQuestionNo=${detail.farmQnaQuestionNo}'">삭제</button>
-	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarymodify.do?farmDiaryNo=${detail.farmDiaryNo}'">수정</button>
+	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmQnAmodify.do?farmQnaQuestionNo=${detail.farmQnaQuestionNo}'">수정</button>
       	</div>
 
 
 <br>
-	  
-      
-</div>   
+</div> 
+
 </form>
-      
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <a class="link-black text-lg"><i class="fa fa-pencil margin-r-5"></i> 답변 쓰기</a>
+    </div>
+    <div class="box-body">
+        <c:if test="${not empty farmerInfo}">
+            <form action="<%= request.getContextPath() %>/QnA/QnAanswerwrite.do" method="post">
+                <div class="form-group">
+                    <textarea class="form-control" id="newReplyText" name="content" rows="3" placeholder="댓글내용..."style="resize: none"></textarea>
+                </div>
+                <div class="col-sm-2" hidden>
+                    <input class="form-control" id="newReplyWriter" type="text" value="${farmerInfo.farmerNo}" readonly>
+                </div>
+                <button type="button" class="btn btn-default btn-block replyAddBtn">
+                    <i class="fa fa-save"></i> 답변 저장
+                </button>
+            </form>
+        </c:if>
+        <c:if test="${empty farmerInfo}">
+            <a href="/farmapp/user/login.do" class="btn btn-default btn-block" role="button">
+                <i class="fa fa-edit"></i> 로그인을 해야만 답변 등록이 가능합니다.
+            </a>
+        </c:if>
+    </div>
+</div>
+     
 
 <%@include file="../include/footer.jsp" %>
