@@ -21,8 +21,11 @@ import com.kh.farmapp.admin.model.service.AdminOneOnOneService;
 
 import common.dto.Admin;
 import common.dto.AnsweredOneonone;
+import common.dto.EveryonesFarmFile;
 import common.dto.QuestionOneonone;
 import common.util.AdminPaging;
+import common.util.upload.img.CkImageUpload;
+import common.util.upload.img.model.service.CkImageUploadService;
 
 
 @Controller
@@ -31,12 +34,22 @@ public class AdminOneOnOneController {
 	// member field
 	private static final int USER_CODE = 1;
 	
+	private static final int ANSWERD_ONEONONE_BOARD_NO = 6; 
+	
 	// log 를 남기기 위한 Logger 객체
 	private static final Logger logger = LoggerFactory.getLogger(AdminOneOnOneController.class);
 
 	// service 객체
 	@Autowired
 	private AdminOneOnOneService adminOneOnOneService;
+	
+	// file delete 와 연관된 service 객체
+	@Autowired
+	private CkImageUploadService ckImageUploadService;
+	
+	// 로컬저장소에 저장된 file delete 와 연관된 controller 객체
+	@Autowired
+	private CkImageUpload ckImageUpload;
 
 	// 일반 회원 1대1 문의 목록 페이지
 	@RequestMapping(value = "/admin/oneonone/user", method = RequestMethod.GET)
@@ -291,16 +304,38 @@ public class AdminOneOnOneController {
 		// 넘겨받은 queryString 값 확인
 		logger.debug("deleteAnswer: " + deleteAnswer.toString());
 		
-		// delete 수행
+		// file dto 먼저 삭제
+		// file 테이블에서 delete 할 정보를 갖는 Map
+		Map<String, Object> deleteConfig = new HashMap<>();
+		deleteConfig.put("boardNo", ANSWERD_ONEONONE_BOARD_NO);
+		deleteConfig.put("postNo", deleteAnswer.getQuestionNo());
+		
+		// 서버에서 먼저 삭제
+		// delete 할 파일들을 모두 조회
+		List<EveryonesFarmFile> deleteFiles = ckImageUploadService.selectFilesByBoardNoAndPostNo(deleteConfig);
+		// deleteFiles test 출력
+		for(EveryonesFarmFile e : deleteFiles) {
+			logger.debug("삭제할 file 정보: " + e.toString());
+			// deleteFile 함수 호출
+			ckImageUpload.deleteFile(e.getSavePath());
+		}
+		
+		
+		// 테이블에서 삭제
+		int fileDelRes = ckImageUploadService.deleteFile(deleteConfig);
+		logger.debug("fileDelRes: " + fileDelRes);
+		
+		// 글 삭제
 		int delRes = adminOneOnOneService.deleteAnswer(deleteAnswer);
 		logger.debug("delRes: " + delRes);
+//		int delRes = 0;
 		
 		// ajax 에 응답할 데이터를 저장하는 Map
 		Map<String, Object> resultMap = new HashMap<>();
 		int isDeleted = 0; // 연산이 수행했는지 안했는지에 대한 값을 저장하는 변수
 		
 		// delete 연산 성공
-		if( delRes >= 1 ) {
+		if( delRes >= 1 && fileDelRes >= 1 ) {
 			
 			// 답변 상태 업데이트 - 답변 대기로
 			int updateRes = adminOneOnOneService.updateWaitAnswerByQuestionNo(deleteAnswer);

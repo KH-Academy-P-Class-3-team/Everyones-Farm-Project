@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="COMMONIMAGEUPLOAD">
+
+	<!-- 업로드 된 이미지 정보 테이블에 저장 -->
+	<insert id="insertFile" parameterType="common.dto.EveryonesFarmFile">
+		insert into
+		    everyones_farm_file (file_no, origin_name, file_rename, save_path, is_thumbnail, board_no, post_no)
+		values
+		    (EF_FILE_SEQ.nextval, #{originName}, #{fileRename}, #{savePath}, 0, #{boardNo}, #{postNo})
+	</insert>
+
+	<!-- 업로드 된 이미지 테이블 에서 삭제 -->
+	<delete id="deleteFile" parameterType="hashmap">
+		delete everyones_farm_file
+		where
+		    board_no = #{boardNo}
+		    and post_no = #{postNo}
+	</delete>
+	
+	<!-- 삭제할 이미지 정보들을 조회 -->
+	<select id="selectFilesByBoardNoAdnPostNo" parameterType="hashmap" resultType="common.dto.EveryonesFarmFile">
+		select
+		    *
+		from
+		    everyones_farm_file
+		where
+		    board_no = #{boardNo}
+		    and post_no = #{postNo}
+	</select>
+
+</mapper>

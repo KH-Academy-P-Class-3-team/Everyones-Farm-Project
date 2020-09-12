@@ -44,6 +44,10 @@
 	<logger name="com.kh.farmapp.mypage.user.controller">
 		<level value="debug" />
 	</logger>
+	<!-- setting CkImgUpload debug level log -->
+	<logger name="common.util">
+		<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

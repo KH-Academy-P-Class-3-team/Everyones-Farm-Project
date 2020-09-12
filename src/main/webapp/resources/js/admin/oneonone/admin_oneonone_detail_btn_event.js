@@ -82,6 +82,9 @@ $("#toUpdate").on("click", function(){
 // 	console.dir($updateFormDiv)
 	const $btnDiv = $(".oneonone-detail__btn-wrap")
 // 	console.dir($btnDiv)
+	const $answerDiv = $(".answer-wrap")
+//	console.dir($answerDiv)
+//	console.dir($answerDiv.css("display"))
 	
 	// 수정 폼이 보인다
 	// 수정 폼 영역이 none 일 때
@@ -99,6 +102,13 @@ $("#toUpdate").on("click", function(){
 		// 숨기기
 		$btnDiv.css("display", "none")
 		
+	}
+	
+	// answer-form 숨기기
+	if( $answerDiv.css("display") == "block" ){
+		
+		// 숨기기
+		$answerDiv.css("display", "none") 
 	}
 	
 })

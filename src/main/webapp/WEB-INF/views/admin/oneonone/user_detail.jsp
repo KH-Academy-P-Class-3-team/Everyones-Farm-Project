@@ -62,9 +62,11 @@
 		
 		<!-- 답변이 있을 때, 없을 때 -->
 		<c:choose>
+			<%-- 답변이 없을 때 - 답변 작성 버튼과 목록으로 버튼 보여줌 --%>
 			<c:when test="${empty answer }">
 			<%@include file="./question_write.jsp" %>
 			</c:when>
+			<%-- 답변이 있을 때 - 답변 수정 버튼, 답변 삭제, 목록으로 버튼 보여줌 --%>
 			<c:when test="${not empty answer }">
 			<%@include file="./question_update.jsp" %>
 			</c:when>		

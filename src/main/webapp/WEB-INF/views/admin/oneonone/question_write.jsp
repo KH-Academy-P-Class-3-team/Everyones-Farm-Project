@@ -16,7 +16,7 @@
 				<textarea name="content" id="oneononeContent"></textarea>
 				<script type="text/javascript">
 					CKEDITOR.replace( 'oneononeContent'
-									, { filebrowserUploadUrl: '/farmapp/adminnotice/fileupload'
+									, { filebrowserUploadUrl: '/farmapp/common/imageupload?boardNo=6&postNo=' + ${question.questionNo}
 									, placeholder: '답변 내용'
 									, wordcount: {
 										// Whether or not you want to show the Paragraphs Count
