@@ -1,5 +1,6 @@
 package com.kh.farmapp.admin.oneonone.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -307,8 +308,11 @@ public class AdminOneOnOneController {
 		// file dto 먼저 삭제
 		// file 테이블에서 delete 할 정보를 갖는 Map
 		Map<String, Object> deleteConfig = new HashMap<>();
+		List<Object> postNo = new ArrayList<>();
+		postNo.add(deleteAnswer.getQuestionNo());
+		
 		deleteConfig.put("boardNo", ANSWERD_ONEONONE_BOARD_NO);
-		deleteConfig.put("postNo", deleteAnswer.getQuestionNo());
+		deleteConfig.put("postNo", postNo);
 		
 		// 서버에서 먼저 삭제
 		// delete 할 파일들을 모두 조회
