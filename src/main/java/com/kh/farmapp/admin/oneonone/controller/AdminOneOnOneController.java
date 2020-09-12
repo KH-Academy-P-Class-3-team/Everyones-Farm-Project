@@ -335,7 +335,7 @@ public class AdminOneOnOneController {
 		int isDeleted = 0; // 연산이 수행했는지 안했는지에 대한 값을 저장하는 변수
 		
 		// delete 연산 성공
-		if( delRes >= 1 && fileDelRes >= 1 ) {
+		if( delRes >= 1) {
 			
 			// 답변 상태 업데이트 - 답변 대기로
 			int updateRes = adminOneOnOneService.updateWaitAnswerByQuestionNo(deleteAnswer);

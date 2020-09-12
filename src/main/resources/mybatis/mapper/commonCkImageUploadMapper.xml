@@ -18,7 +18,11 @@
 		delete everyones_farm_file
 		where
 		    board_no = #{boardNo}
-		    and post_no = #{postNo}
+		    and post_no IN
+		    <foreach collection="postNo" item="nums" index="index" 
+		    separator="," open="(" close=")">
+		    #{nums}
+		    </foreach>
 	</delete>
 	
 	<!-- 삭제할 이미지 정보들을 조회 -->
@@ -29,7 +33,11 @@
 		    everyones_farm_file
 		where
 		    board_no = #{boardNo}
-		    and post_no = #{postNo}
+		    and post_no IN
+		    <foreach collection="postNo" item="type" index="index" 
+		    separator="," open="(" close=")">
+		    #{type,jdbcType=VARCHAR}
+		    </foreach>
 	</select>
 
 </mapper>
