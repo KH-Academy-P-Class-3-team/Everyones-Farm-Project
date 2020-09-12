@@ -75,7 +75,8 @@
 	
 	</main>
 </div>
-
+<!-- form 태그 submit -->
+ <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_oneonone_form_submit_event.js"></script>
 <!-- button event javascript -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/oneonone/admin_oneonone_detail_btn_event.js"></script>
 <!-- footer include -->
