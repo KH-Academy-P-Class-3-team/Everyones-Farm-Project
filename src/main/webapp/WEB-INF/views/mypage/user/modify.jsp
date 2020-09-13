@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -241,9 +241,9 @@ a:hover {
 		</div>
 		<div class="col-lg-1">
 
-			<form action="<%=request.getContextPath()%>/modify/userInfo"
-				method="post" onsubmit="return validate();"
-				enctype="multipart/form-data">
+			<form method="post"
+				action="<%=request.getContextPath()%>/modify/userInfo"
+				onsubmit="return validate();" enctype="multipart/form-data">
 				<div class="media">
 					<div class="preview" id="preview">
 						<c:if test="${profile eq null }">
@@ -251,10 +251,10 @@ a:hover {
 								src="<%=request.getContextPath()%>/resources/image/mypage/no_one.jpg"
 								class="img-circle" id="oldone">
 						</c:if>
-						<c:if  test="${profile.userNo eq userInfo.userNo }">
+						<c:if test="${profile.userNo eq userInfo.userNo }">
 							<img
-								src="<%=request.getContextPath() %>/resources/image/mypage/${profile.fileRename }"
-								class="img-circle" id="oldone">
+								src="<%=request.getContextPath() %>/resources/image/mypage/${profile.fileRename}"
+								class="img-circle" id="oldone" name="upload">
 						</c:if>
 					</div>
 					<input type="file" id="upload" name="upload" multiple /> <label
@@ -284,7 +284,8 @@ a:hover {
 						</div>
 					</div>
 					<div class="input-group">
-						<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
+						<label for="inputName" class="col-lg-3 control-label">비밀번호
+							확인</label>
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon glyphicon glyphicon-lock"
 								id="sizing-addon1"></span> <input type="password"
@@ -312,8 +313,12 @@ a:hover {
 								id="sizing-addon1"></span> <input type="email"
 								class="form-control" placeholder="E-Mail" name="email"
 								id="email" aria-describedby="sizing-addon1"
-								value="${userData.email}">
+								value="${userData.email}"> <span
+								class="input-group-addon" id="sizing-addon1"><input
+								type="button" onclick="xmlEmailCheck()" value="이메일 확인"
+								class="half-size back-pink float-right focus form-inlines"></span>
 						</div>
+						<div id="email-check-msg"></div>
 					</div>
 					<!-- 			전화번호 -->
 					<div class="input-group">
@@ -321,9 +326,13 @@ a:hover {
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon glyphicon glyphicon-earphone"
 								id="sizing-addon1"></span> <input type="text"
-								class="form-control" placeholder="전화번호" name="phone"
-								aria-describedby="sizing-addon1" value="${userData.phone}">
+								class="form-control" id="phone" placeholder="전화번호" name="phone"
+								aria-describedby="sizing-addon1" value="${userData.phone}"> <span
+								class="input-group-addon" id="sizing-addon1"><input
+								type="button" onclick="xmlPhoneCheck()" value="번호 중복 검사"
+								class="half-size back-pink float-right focus form-inlines"></span>
 						</div>
+						<div id="phone-check-msg"></div>
 					</div>
 
 
@@ -406,44 +415,172 @@ a:hover {
 </script>
 
 <script type="text/javascript">
+	var ajaxFlag = false;
+	
 	function validate() {
-		var passc = document.getElementById('userPw').value;
-		var passch = document.getElementById('pwcheck').value;
-		var phone = document.getElementById('phone').value;
-		var email = document.getElementById('email').value;
-		var regExpPw = /(?=.*\d)(?=.*[~`!@#$%\^&*()-+=])(?=.*[a-zA-Z]).{8,15}$/;
+        var pass = document.getElementById('userPw');
+        var passc = document.getElementById('userPw').value;
+        var passch = document.getElementById('pwcheck').value;
+        var phone = document.getElementById('phone').value;
+        var email = document.getElementById('email').value;
+        
+        var regExpPw = /(?=.*\d)(?=.*[~`!@#$%\^&*()-+=])(?=.*[a-zA-Z]).{8,15}$/;
 
-		function chk(re, e, msg) {
-			if (re.test(e.value)) {
-				return true;
-			} else {
-				alert(msg);
-				e.value = "";
-				e.focus();
-				//기본 이벤트 취소
-				return false;
+        function chk(re, e, msg) {
+            if(re.test(e.value)) {                 
+                return true;          
+          }else{
+                alert(msg);
+              e.value = "";
+              e.focus();
+              //기본 이벤트 취소
+              return false;
+            }
+        }
+
+        if(!ajaxFlag){
+           alert("중복검사를 모두 해주세요!");
+           return false;
+        }
+        
+        // 비밀번호 검사
+         // 암호는 영문자와 숫자로 8글자이상  기호문자 한개이상 8글자 이상
+        if(!chk(regExpPw, pass,'비밀번호 영어,숫자,특수문자가 하나 이상 포함, 8글자 이상 15글자 이하')){
+        	pass.focus();
+           return false;
+        }
+        
+        if(passc != passch){
+        	alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
+        	pass.focus();
+        	return false;
+        }
+        
+        
+        if(email==""){
+        	alert("이메일을 입력해주세요!")
+        	return false;
+        }
+
+        if(phone==""){
+        	alert("전화번호를 입력해주세요!")
+        	return false;
+        }
+
+        return true;
+    }
+	
+	
+	function xmlEmailCheck(){
+		//사용자가 입력한 id값을 가져온다
+		var email = document.querySelector('#email').value;
+		var emailc = document.getElementById('email');
+		var regExpEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+        function chk(re, e, msg) {
+            if(re.test(e.value)) {                 
+                return true;          
+          }else{
+                alert(msg);
+              e.value = "";
+              e.focus();
+              //기본 이벤트 취소
+              return false;
+            }
+        }
+		
+		if(email ==""){
+			alert("이메일을 입력해주세요!")
+			return false;
+		}
+		
+        //id 검사
+        if(!chk(regExpEmail, emailc, '이메일 형식이 아닙니다')){
+        	emailc.focus();
+        	return false;
+        }
+		
+		//XMLHttpRequest 객체 생성
+		var xhr = new XMLHttpRequest();
+		//http request message의 시작줄 작성
+		xhr.open('POST', '<%=request.getContextPath()%>/modify/emailcheck');
+		//http request message의 header 작성
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		//body에 데이터 작성하고 전송
+		xhr.send('email=' +email);
+		//ajax통신이 끝나고 (load) 실행할 콜백함수 등록
+		xhr.addEventListener('load', function(){
+			//response body 있는 데이터를 받아옴
+			var data = xhr.response;
+			console.dir(data);
+			if(data == ''){  
+				ajaxFlag = true;
+				document.querySelector("#email-check-msg").textContent = '사용가능한 이메일입니다';
+				document.querySelector("#email-check-msg").style.color='black';
+			} else{
+				ajaxFlag = false;
+				document.querySelector("#email-check-msg").textContent = '이미 존재하는 이메일입니다';
+				document.querySelector("#email-check-msg").style.color='red';
 			}
-		}
+		})
+	}
+	
+	function xmlPhoneCheck(){
+		//사용자가 입력한 id값을 가져온다
+		var phone = document.querySelector('#phone').value;
+		var phonec = document.getElementById('phone');
+		var regExpPhone =  /^[0-9]*$/;
 
-		// 비밀번호 검사
-		// 암호는 영문자와 숫자로 8글자이상  기호문자 한개이상 8글자 이상
-		if (!chk(regExpPw, pass, '비밀번호 영어,숫자,특수문자가 하나 이상 포함, 8글자 이상 15글자 이하')) {
-			pass.focus();
+        function chk(re, e, msg) {
+            if(re.test(e.value)) {                 
+                return true;          
+          }else{
+                alert(msg);
+              e.value = "";
+              e.focus();
+              //기본 이벤트 취소
+              return false;
+            }
+        }
+		
+		if(phone ==""){
+			alert("전화번호를 입력해주세요!")
 			return false;
 		}
-
-		if (passc != passch) {
-			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
-			pass.focus();
-			return false;
-		}
-
-		if (passc == "") {
-			alert("비밀번호를 입력해주세요!")
-			return false;
-		}
-
-		return true;
+		
+        //id 검사
+        if(!chk(regExpPhone, phonec, '전화번호 형식이 아닙니다')){
+        	phonec.focus();
+        	return false;
+        }
+		
+		//XMLHttpRequest 객체 생성
+		var xhr = new XMLHttpRequest();
+		//http request message의 시작줄 작성
+		xhr.open('POST', '<%=request.getContextPath()%>/modify/phonecheck');
+		//http request message의 header 작성
+		xhr.setRequestHeader('Content-Type',
+				'application/x-www-form-urlencoded');
+		//body에 데이터 작성하고 전송
+		xhr.send('phone=' + phone);
+		//ajax통신이 끝나고 (load) 실행할 콜백함수 등록
+		xhr
+				.addEventListener(
+						'load',
+						function() {
+							//response body 있는 데이터를 받아옴
+							var data = xhr.response;
+							console.dir(data);
+							if (data == '') {
+								ajaxFlag = true;
+								document.querySelector("#phone-check-msg").textContent = '사용가능한 전화번호입니다';
+								document.querySelector("#phone-check-msg").style.color='black';
+							} else {
+								ajaxFlag = false;
+								document.querySelector("#phone-check-msg").textContent = '이미 존재하는 전화번호입니다';
+								document.querySelector("#phone-check-msg").style.color='red';
+							}
+						})
 	}
 </script>
 
