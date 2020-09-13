@@ -19,7 +19,9 @@
 			 ,RAIN
 			 ,MAX_TEMP
 			 ,MIN_TEMP
-			 ,WRITE_DATE)
+			 ,WRITE_DATE
+			 ,farmer_no
+			 )
 			 values
 			 (
 			 	farming_dailylog_seq.nextval
@@ -32,16 +34,33 @@
 			 	,#{rain}
 			 	,#{maxTemp}
 			 	,#{minTemp}
-			 	,sysdate
-			  )
+			 	,to_char(sysdate, 'yyyy-mm-dd')
+			 	<!-- 테스트를 위해 임의로 작성 -->
+			 	,63
+				)
 	</insert>
 
-	<!-- 영농일지 리스트 순차적으로 나오게하기 -->
-	<select id="list" resultType="common.dto.FarmingDailylog">
 	
-	select dailyLog_no ,CONTENT,WORKING_AMOUNT,WORKING_TIME,WORKING_MEMBER
-		FROM FARMING_DAILYLOG ORDER BY dailyLog_no
-
+	<resultMap type="hashmap" id="date">
+		<id property="farmerNo" column="farmer_no" />
+		<result property="dailylogNo" column="dailyLog_no" />
+		<result property="content" column="CONTENT" />
+		<result property="workingAmount" column="WORKING_AMOUNT" />
+		<result property="workingTime" column="WORKING_TIME" />
+		<result property="workingMember" column="WORKING_MEMBER" />
+		<result property="writeDate" column="write_date" />
+	</resultMap>
+	
+	<!-- 영농일지 리스트 순차적으로 나오게하기 -->
+	<select id="list" resultMap="date">
+	select f.farmer_no
+	,fd.dailyLog_no,
+	fd.content,
+	fd.WORKING_AMOUNT,
+	fd.WORKING_TIME,
+	fd.WORKING_MEMBER,
+	fd.write_date
+	from farm f , FARMING_DAILYLOG fd  where f.farmer_no = fd.farmer_no and to_char(write_date,'yyyymmdd') = #{date} ORDER BY dailyLog_no
 	</select>
 	
 	<!-- 내일할일 체험명, 신청자이름, 인원 , 체험날짜 승인,체크 -->
@@ -69,14 +88,21 @@
 	
 	<!-- 목록보여지게 하기 -->
 	<select id="read" parameterType="int" resultType="common.dto.FarmingDailylog">
-	select dailyLog_no
+		select dailyLog_no
 		   ,CONTENT
 		   ,WORKING_AMOUNT
 		   ,WORKING_TIME
 		   ,WORKING_MEMBER
+		   ,WEATHER
+		    ,WORKING_DATE
+		   ,RAIN
+		   ,MAX_TEMP
+		   ,MIN_TEMP
+		   ,WRITE_DATE
+		   ,farmer_no
 		   from FARMING_DAILYLOG
-		   where dailyLog_no = #{dailyLogNo}
-	
+
+		   where dailyLog_no = #{dailylogNo}
 	</select>
 	
 	<!-- 영농일지 리스트 총 페이지 수 -->
@@ -87,4 +113,24 @@
 		 WHERE dailyLog_no > 0
 	]]>
 	</select>
+	
+	
+	<update id="update" parameterType="common.dto.FarmingDailylog">
+	update FARMING_DAILYLOG set 
+			 	content = #{content}
+			 	, WORKING_AMOUNT = #{workingAmount}
+			 	,WORKING_TIME = #{workingTime}
+			 	,WORKING_MEMBER = #{workingMember}
+			 	,WORKING_DATE = #{workingDate}
+			 	,WEATHER = #{weather}
+			 	,RAIN = #{rain}
+			 	,MAX_TEMP = #{maxTemp}
+			 	,MIN_TEMP = #{minTemp}
+			 	,WRITE_DATE = to_char(sysdate, 'yyyy-mm-dd')
+			 	where dailylog_no=#{dailylogNo}
+	</update>
+	<delete id="delete" parameterType ="int">
+	  delete from FARMING_DAILYLOG where dailylog_no = #{dailylogNo}
+	
+	</delete>
 </mapper>

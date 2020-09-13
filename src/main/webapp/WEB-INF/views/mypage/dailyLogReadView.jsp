@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>게시판</title>
 <style>
 table {
@@ -105,17 +106,6 @@ table {
 
 
 <script>
-
-	$(function() {
-		$('#searchBtn').click(
-				function() {
-					self.location = "list" + '${pageMaker.makeQuery(1)}'
-							+ "&searchType="
-							+ $("select option:selected").val() + "&keyword="
-							+ encodeURIComponent($('#keywordInput').val());
-				});
-	});
-	
 	// 달력 날짜 버튼 ㅠㅠ
 
 	function testfunction(i){
@@ -134,7 +124,7 @@ table {
 				     if(border == 'none'){
 						$('#border').show();				    	 
 				     }else if(border == 'block'){
-						$('#border').hide();				    	 
+						$('#border').show();				    	 
 				     }
 				     
 				});
@@ -202,12 +192,13 @@ margin-left:-90px;
 			<div class="list-group mb-4">
 				<a href="#"
 					class="list-group-item list-group-item-action text-center font-weight-bold">내
-					정보</a> <a href="/farmapp/mypage/selllist"
+					정보</a> <a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold">판매
-					목록</a> <a href="/farmapp/mypage/dailyLoglist"
+					목록</a> 
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold"
 					style="background-color: #D1E9CA;">영농 일지</a> <a
-					href="/farmapp/mypage/activitylist"
+					href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold">활동
 					내역</a>
 			</div>
@@ -237,45 +228,36 @@ margin-left:-90px;
 
 				</body>
 			</div>
-			<a href="/farmapp/mypage/dailyLogWrite"
-				class="list-group-item list-group-item-action text-center font-weight-bold">영농
-				일지 작성하기</a>
+			<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}"
+				class="list-group-item list-group-item-action text-center font-weight-bold" style="background-color : yellow;">영농
+				일지 리스트 돌아가기</a>
 
-			<div id="border" style="display : none;">
-				<form role="form" method="post" action="/farmapp/mypage/dailyLoglist">
-					<table class="table table-condensed">
-						<thead>
-							<tr class="success">
-								<th scope="col" class="text-center">글 갯수</th>
-								<th scope="col" class="text-center">작업 내용</th>
-								<th scope="col" class="text-center">작업량</th>
-								<th scope="col" class="text-center">작업 시간</th>
-								<th scope="col" class="text-center">작업 인원</th>
-								<th scope="col" class="text-center"></th>
-							</tr>
-						</thead>
-
-							<tr>
-								<td scope="col" class="text-center"><c:out
-										value="${read.dailyLogNo}" /></td>
-								<td scope="col" class="text-center">
-								<a href="/farmapp/mypage/dailyLogReadView?dailyLogNo=${read.dailylogNo}"><c:out
-										value="${read.content}" /></a></td>
-								<td scope="col" class="text-center"><c:out
-										value="${read.workingAmount}" /></td>
-								<td scope="col" class="text-center"><c:out
-										value="${read.workingTime}" /></td>
-								<td scope="col" class="text-center"><fmt:formatDate
-								value="${read.writeDate}" pattern="yyyy-MM-dd" /></td>
-							</tr>
-					</table>
+			<div id="border" >
+				<form role="form" name="readForm" method="post" action="/farmapp/mypage/dailyLoglist">
+				<div id="root">
+					<div>
+						<label for="content">내용</label><textarea id="content" name="content"><c:out value="${read.content}"/></textarea><br> 
+						<label for="title">작업량</label> <input type="text" id="workingAmount" name="workingAmount" value="${read.workingAmount}"/><br>
+						<label	for="title">작업 시간</label> <input type="text" id="workingTime" name="workingTime" value="${read.workingTime}"/><br> 
+						<label for="title">작업 인원</label><input type="text" id="workingMember" name="workingMember" value="${read.workingMember}"/><br>
+						<label for="title">작업 날짜</label> <input type="text" 	id="workingDate" name="workingDate" value="${read.workingDate}"/><br>
+						<label for="title">날씨</label> <input type="text" id="weather" name="weather" value="${read.weather}"/><br> 
+						<label for="title">강수량</label><input type="text" id="rain" name="rain" value="${read.rain}"/><br> 
+						<label for="title">최고 온도</label> <input type="text" id="maxTemp" name="maxTemp" value="${read.maxTemp}"/><br> 
+						<label for="title">최저 온도</label> <input type="text" id="minTemp" name="minTemp" value="${read.minTemp}"/><br>
+					</div>
+				</div>
+					
 					
 					<hr>
 				</form>
+				
 			</div>
 
 		</div>
 	</div>
 
 </div>
+
+
 <%@include file="../include/footer.jsp" %>

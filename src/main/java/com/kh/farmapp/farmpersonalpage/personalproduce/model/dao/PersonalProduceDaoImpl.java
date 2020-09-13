@@ -19,18 +19,29 @@ public class PersonalProduceDaoImpl implements PersonalProduceDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int insertProduct(Product product) {
-		return sqlSession.insert("Product.insertProduct", product);
+	public int insertProduct(Map<String, Object> commandMap) {
+		return sqlSession.insert("Product.insertProduct", commandMap);
 
 	}
 	
-	public int insertProductOption(ProductOption productoption) {
-		return sqlSession.insert("Product.insertProductOption", productoption);
+	public int insertProductOption(Map<String, Object> commandMap) {
+		return sqlSession.insert("Product.insertProductOption", commandMap);
 	}
 
 	@Override
-	public List<Product> selectProductList(Paging paging) {		
-		return null;
+	public List<Product> selectProductList(Map<String, Object> map) {		
+		return sqlSession.selectList("Product.selectProductList", map);
+	}
+
+	@Override
+	public int contentCnt() {
+		int cnt = sqlSession.selectOne("Product.selectContentCnt");
+		return cnt;
+	}
+
+	@Override
+	public Map<String, Object> selectProductDetail(int productNo) {
+		return sqlSession.selectOne("Product.selectProductDetail", productNo);
 	}
 
 }

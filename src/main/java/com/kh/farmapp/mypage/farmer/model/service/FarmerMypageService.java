@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.dto.Application;
 import common.dto.FarmActivity;
 import common.dto.FarmDiary;
+import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
 import common.dto.page.Criteria;
@@ -26,9 +27,10 @@ public interface FarmerMypageService {
 	public void writeDailylog(FarmingDailylog farmingDailylog);
 	/**
 	 * 영농일지 목록 조회
+	 * @param farmer 
 	 * @return List<FarmingDailylog> - 조회 결과 반환
 	 */
-	public List<FarmingDailylog> dailyLoglist(Criteria cri);
+	public List<Map<String, Object>>  dailyLoglist(Criteria cri, Farmer farmer);
 	
 
 	/**
@@ -40,35 +42,41 @@ public interface FarmerMypageService {
 	
 	
 	//영농일지 상세페이지
-	public FarmingDailylog read(int dailylogNo);
+	public FarmingDailylog read(int dailyLogNo);
 	
 	/**
 	 * 농장 체험 신청내역 리스트 조회
 	 * @param cri
+	 * @param farmer 
+	 * @return 
 	 * @return
 	 */
-	public List<Map<String, Object>> activitylist(Criteria cri);
-
-	/**
-	 * 일손 체험 신청내역 리스트 조회
-	 * @param cri
-	 * @return 
-	 */
-	public List<Map<String, Object>> activitylist3(Criteria cri);
 	
+	
+	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer);
+
 	/**
 	 * 농장체험내역 총 갯수
 	 * @param cri 페이지 수 
 	 * @return listCount2(SearchCriteria scri) - 총 갯수
 	 */
-	public int listCount2();
+	public int listCount2(Farmer farmer);
+
+	/**
+	 * 일손 체험 신청내역 리스트 조회
+	 * @param cri
+	 * @param farmer 
+	 * @return 
+	 */
+	public List<Map<String, Object>> activitylist3(Criteria cri, Farmer farmer);
 	
 	/**
 	 * 일손 체험 내역 총 갯수
 	 * @param cri 페이지 수
 	 * @return listCount3(SearchCriteria scri) -총 갯수
 	 */ 
-	public int listCount3();
+	public int listCount3(Farmer farmer);
+	
 	
 	
 	/**
@@ -82,9 +90,10 @@ public interface FarmerMypageService {
    /**
     * 판매 내역 리스트 user테이블과 order테이블 엮기
     * @param  cri 페이지 수
+ * @param farmer 
     * @return 
     */
-   public List<Map<String, Object>> selllist(Criteria cri);
+   public List<Map<String, Object>> selllist(Criteria cri, Farmer farmer);
    
    /**
     * 결제 처리 
@@ -93,9 +102,12 @@ public interface FarmerMypageService {
     */
    public int updatePayment(TBOrder order);
 
+   // 영농일지 데이트눌렀을때 리스트
+   public List<Map<String, Object>> datelist(String date);
+
    
-   
-   
+   //판매 내역 페이징 총 갯수
+   public int listCount4(Farmer farmer);
    
    
  

@@ -16,16 +16,92 @@
 $(document).ready(function(){
 	
 		
+	
+	$("#btnDelete").click(function(){
+		
+		var $checkboxes = $("input:checkbox[name='checkRow']:checked");
+		
+		var map = $checkboxes.map(function(){
+			return $(this).val();
+		})
+		
+		var names= map.get().join(",");
+		
+		console.log($checkboxes);
+		console.log("map : "+ map);
+		console.log("map -> array : "+map.get());
+		console.log("array tostring : " + map.get().join(","));
+		
+		var $form = $("<form>")
+						.attr("action", "<%=request.getContextPath()%>/basket/delete")
+						.attr("method", "post")
+						.append(
+								$("<input>")
+									.attr("type", "hidden")
+									.attr("name", "names")
+									.attr("value", names)
+						)
+		$(document.body).append($form);
+		$form.submit();
+		
+		})
 	$("#btnChecking").click(function(){
-	var $checkboxes = $("input:checkbox[name='checkRow']:checked");
+		
+		var $checkboxes = $("input:checkbox[name='checkRow']:checked");
+		
+		var map = $checkboxes.map(function(){
+			return $(this).val();
+		})
+		
+		var names= map.get().join(",");
+		
+		console.log($checkboxes);
+		console.log("map : "+ map);
+		console.log("map -> array : "+map.get());
+		console.log("array tostring : " + map.get().join(","));
+		
+		var $form = $("<form>")
+						.attr("action", "<%=request.getContextPath()%>/basket/add")
+						.attr("method", "post")
+						.append(
+								$("<input>")
+									.attr("type", "hidden")
+									.attr("name", "names")
+									.attr("value", names)
+						)
+		$(document.body).append($form);
+		$form.submit();
+		
+		})
+	$("#btnSubPur").click(function(){
+		
+		var $checkboxes = $("input:checkbox[name='checkPur']:checked");
+		
+		var map = $checkboxes.map(function(){
+			return $(this).val();
+		})
+		
+		var names= map.get().join(",");
+		
+		console.log($checkboxes);
+		console.log("map : "+ map);
+		console.log("map -> array : "+map.get());
+		console.log("array tostring : " + map.get().join(","));
+		
+		var $form = $("<form>")
+						.attr("action", "<%=request.getContextPath()%>/basket/subPurchase")
+						.attr("method", "post")
+						.append(
+								$("<input>")
+									.attr("type", "hidden")
+									.attr("name", "names")
+									.attr("value", names)
+						)
+		$(document.body).append($form);
+		$form.submit();
+		
+		})
 	
-	var num=0; 
-	var map = $checkboxes.map(function(){
-		return num += Number($(this).val());
-	})
-	
-	$("#cost").text(num);
-	})
 	
 	$("#btnDelete").click(function(){
 		
@@ -87,17 +163,24 @@ $(document).ready(function(){
 			})
 		}
 	}
+	function checkAllPur() {
+		var $checkboxes = $("input:checkbox[name='checkPur']")
+		var check_status = $("#checkAllPur").is(":checked")
+		if (check_status) {
+			$checkboxes.each(function() {
+				this.checked = true;
+			})
+		} else {
+			$checkboxes.each(function() {
+				this.checked = false;
+			})
+		}
+	}
 	
 	
 	
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	
-
-})
-</script>
 
 <style type="text/css">
 .input-group {
@@ -159,7 +242,14 @@ a:hover {
 	width: 700px;
 }
 
-#btnDelete {
+#btnDelete{
+	margin-right: 10px;
+	background-color: red;
+	font-weight: bold;
+	color: white;
+}
+
+#btnSubPur{
 	margin-right: 10px;
 	background-color: red;
 	font-weight: bold;
@@ -174,12 +264,21 @@ a {
 a:hover {
 	text-decoration: none;
 }
+
 .col-lg-1 {
-    margin-top: 100px;
-    margin-left: 100px;
-    width: 700px;
+	margin-top: 100px;
+	margin-left: 100px;
+	width: 700px;
 }
-	
+.boxName{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.pagination{
+	display : block;
+	margin-left: 100px;
+}
 </style>
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
@@ -255,7 +354,8 @@ a:hover {
 			<!-- 리스트 시작-->
 
 			<!-- Table -->
-
+			<hr>
+			<div class="boxName">장바구니</div>
 			<table class="table table-hover table-bordered">
 				<tr class="active">
 					<th><input type="checkbox" id="checkAll" onclick="checkAll();">
@@ -267,7 +367,7 @@ a:hover {
 				</tr>
 				<c:forEach items="${basket.baskets}" var="basket">
 					<tr id="realBasket">
-						<td><input type="checkbox" name="checkRow"
+						<td><input type="checkbox" name="checkRow" id="checkone"
 							value="${basket.BASKET_NO }"></td>
 						<td><a
 							href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${basket.PRODUCT_NO }">${basket.NAME }
@@ -281,10 +381,6 @@ a:hover {
 					</tr>
 				</c:forEach>
 			</table>
-			<div style="height: 50px;">
-				<span><button id="btnChecking" class="btn pull-right">추가하기</button></span>
-				<span><button id="btnDelete" class="btn pull-right">삭제하기</button></span>
-			</div>
 
 			<div class="paging">
 				<!-- section pagination -->
@@ -330,27 +426,51 @@ a:hover {
 
 					</ul>
 				</nav>
+				<div style="height: 50px;">
+				<span><button id="btnChecking" class="btn pull-right btn-primary">추가하기</button></span>
+				<span><button id="btnDelete" class="btn pull-right">삭제하기</button></span>
 			</div>
-
-			<table class="table table-hover table-bordered">
-				<tr class="active">
-					<th><input type="checkbox" id="checkAll" onclick="checkAll();">
-					</th>
-					<th>상품정보</th>
-					<th>옵션</th>
-					<th>금액</th>
-					<th>전문 배송</th>
-				</tr>
-				<tr id="space">
-				</tr>
-			</table>
-			<div class="costArea" style="margin-top: 50px;">
-				<h3>
-					<span>총 결제 금액 : </span> <span id="cost"></span>
-				</h3>
 			</div>
-
-
+			<hr>
+			<div class="boxName"> 결제 대기 목록 </div>
+			<div>
+				<table class="table table-hover table-bordered">
+					<tr class="active">
+						<th><input type="checkbox" id="checkAllPur"
+							onclick="checkAllPur();"></th>
+						<th>상품정보</th>
+						<th>옵션</th>
+						<th>금액</th>
+						<th>전문 배송</th>
+					</tr>
+					<c:forEach items="${purchase.baskets}" var="purchase">
+						<tr id="realBasket">
+							<td><input type="checkbox" name="checkPur" id="checkone"
+								value="${purchase.BASKET_NO }"></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.NAME }
+							</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.OPTION_NAME }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.PRICE }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.DELIVERY }</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+				<div style="height: 50px;">
+					<span><button id="btnSubPur" class="btn pull-right">취소하기</button></span>
+				</div>
+				<div class="costArea" style="margin-top: 50px;">
+					<h3>
+						<span>총 결제 금액 : </span> <span id="cost">${purchase.cost} </span>
+						<button class="btn btn-primary btn-lg pull-right">결제하기</button>
+					</h3>
+				</div>
+				<div>
+				</div>
+			</div>
 
 		</div>
 	</div>
@@ -361,5 +481,5 @@ a:hover {
 
 
 
-<%@include file="../../include/footer.jsp" %>
+<%@include file="../../include/footer.jsp"%>
 

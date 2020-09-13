@@ -9,15 +9,23 @@
 	<insert id="insertFarmQnA">
 		insert into farm_qna_question
 		(farm_qna_question_no,
-		farmer_no, farm_no,title, content, reg_date, hits)
-		values(farm_qna_question_seq.nextval, 3, 1, #{title}, #{content},
-		sysdate, 1)
+		farm_no, farmer_no, user_no, title, content, reg_date, hits)
+		values(farm_qna_question_seq.nextval, 1, #{farmerNo}, #{userNo},
+		#{title}, #{content}, sysdate, 1)
 	</insert>
 
-	<select id="selectFarmQnAList"
-		resultType="common.dto.FarmQnAQuestion">
+	<resultMap type="hashMap" id="qnalistMap">
+		<result column="farm_qna_question_no" property="farmQnaQuestionNo" />
+		<result column="title" property="title" />
+		<result column="farmer_no" property="farmerNo" />
+		<result column="user_no" property="userNo" />
+		<result column="reg_date" property="regDate" />
+		<result column="content" property="content" />
+	</resultMap>
+
+	<select id="selectFarmQnAList" resultMap="qnalistMap">
 		select
-		farm_qna_question_no, title, farmer_no, reg_date
+		farm_qna_question_no, title, farmer_no, user_no, reg_date, content
 		from(
 		select rownum rnum, n1.*
 		from(
@@ -29,6 +37,7 @@
 		)n1
 		)where rnum
 		between #{start} and #{end}
+		and farmer_no = #{farmerNo} or user_no = #{userNo}
 	</select>
 
 	<select id="selectContentCnt" resultType="int">
@@ -55,7 +64,8 @@
 		FROM farm_qna_question fq, farmer f
 		WHERE
 		fq.farmer_no = f.farmer_no
-		AND fq.farm_qna_question_no = #{farmQnaQuestionNo}
+		AND fq.farm_qna_question_no =
+		#{farmQnaQuestionNo}
 	</select>
 
 	<delete id="deleteQnA" parameterType="int">
@@ -63,5 +73,35 @@
 		farm_qna_question
 		WHERE farm_qna_question_no = #{farmQnaQuestionNo}
 	</delete>
+
+	<update id="modifyQnA" parameterType="hashMap">
+		UPDATE
+		farm_qna_question
+		SET
+		farm_qna_question_no = #{farmQnaQuestionNo},
+		title = #{title},
+		content =
+		#{content}
+		WHERE
+		farm_qna_question_no =
+		#{farmQnaQuestionNo}
+	</update>
+
+	<insert id="insertFarmQnAanswer">
+		insert into farm_qna_answer(farm_qna_answer_no,
+		title, content, reg_date, farmer_no, farm_qna_question_no)
+		values(farm_qna_answer_seq.nextval, #{title}, #{content}, sysdate,
+		#{farmerNo}, #{farmQnaQuestionNo})
+	</insert>
+
+	<select id="selectFarmNoByFarmerNo" resultType="int" parameterType="java.lang.String">
+		select
+		farm_no
+		from
+		farm
+		where
+		farmer_no = #{value}
+	</select>
+
 
 </mapper>
