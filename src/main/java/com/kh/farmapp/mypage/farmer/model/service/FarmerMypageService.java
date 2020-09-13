@@ -52,6 +52,8 @@ public interface FarmerMypageService {
 	 * @return
 	 */
 	
+	public void delete(int dailyLogNo);
+	
 	
 	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer);
 

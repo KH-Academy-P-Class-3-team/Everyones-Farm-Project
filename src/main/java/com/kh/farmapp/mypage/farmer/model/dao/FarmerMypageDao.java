@@ -37,7 +37,7 @@ public interface FarmerMypageDao {
 
 	public FarmingDailylog read(int dailyLogNo);
 
-
+	public void delete(int dailylogNo);
 	
 	/**
 	 * 농장 체험 리스트

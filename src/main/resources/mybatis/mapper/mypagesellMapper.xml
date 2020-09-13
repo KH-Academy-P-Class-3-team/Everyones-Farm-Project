@@ -9,7 +9,7 @@
     
     
     
-    	<resultMap type="hashmap" id="testmap">
+    	<resultMap type="hashmap" id="TBOrderAndProduct">
 			<id property="farmerNo" column="farmer_no" />
 			<result property="orderNo" column="order_no" />
 			<result property="orderAmount" column="order_amount" />
@@ -22,7 +22,7 @@
 			
 			
     <!-- user와 order를 엮은 쿼리 -->
-   	<select id="listPage" resultMap="testmap">
+   	<select id="listPage" resultMap="TBOrderAndProduct">
    	
  		    select p.*
 		    from (
