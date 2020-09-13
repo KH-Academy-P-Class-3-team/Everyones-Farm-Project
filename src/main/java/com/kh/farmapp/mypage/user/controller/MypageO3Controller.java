@@ -32,6 +32,7 @@ import com.kh.farmapp.admin.notice.controller.AdminNoticeController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
 import common.dto.Admin;
+import common.dto.Farmer;
 import common.dto.Notice;
 import common.dto.QuestionOneonone;
 import common.dto.UserTB;
@@ -147,6 +148,10 @@ public class MypageO3Controller {
 			) {
 		// 로그인이 안되어 있을 경우, 바로 로그인 페이지로 이동
 		UserTB user = (UserTB) session.getAttribute("userInfo");
+		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
+//		if( user == null && farmer == null ) {
+//			return "redirect:/user/login.do";
+//		}
 		
 		// logger 찍기 - 현재 어디 method 인지
 		logger.info("/adminnotice/write - [POST] 요청");

@@ -104,8 +104,21 @@
 	<insert id="insertO3">
 	INSERT INTO
 		question_oneonone 
+		(question_no
+		, title
+		, content
+		, user_no
+		, farmer_no
+		, reg_date
+		, is_answered)
 	VALUES
-	(question_oneonone_seq.nextval, #{title}, #{content},  #{userNo} ,sysdate, 0)
+		(question_oneonone_seq.nextval
+		, #{title}
+		, #{content}
+		, #{userNo}
+		, null 
+		, sysdate
+		, 0)
 	</insert>
 
 
