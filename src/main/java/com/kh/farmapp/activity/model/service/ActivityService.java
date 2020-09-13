@@ -15,12 +15,11 @@ public interface ActivityService {
 
 	/**
 	 * 활동 목록 조회
-	 * @param currentPage - 현재 페이지
-	 * @param cntPerPage - 페이지당 개수
-	 * @param isHelp - 일손돕기인지 여부
-	 * @return Map<String, Object> - 조회한 목록, 파일, 페이징 객체를 담은 Map
+	 * @param currentPage, cntPerPage - 페이징 변수
+	 * @param isHelp, filter, title - 검색 조건
+	 * @return Map<String, Object> - 조회된 목록, 파일, 페이징 객체를 담은 Map
 	 */
-	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, int isHelp);
+	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, int isHelp, String filter, String title);
 	
 	/**
 	 * 활동 상세보기
@@ -28,14 +27,6 @@ public interface ActivityService {
 	 * @return Map<String, Object> - 활동, 파일을 담은 Map
 	 */
 	public Map<String, Object> selectActivityDetail(int activityNo);
-	
-	/**
-	 * 활동명으로 활동 검색
-	 * @param isHelp - 일손돕기인지 여부
-	 * @param title - 활동명
-	 * @return Map<String, Object> - 조회한 목록, 파일, 페이징 객체를 담은 Map
-	 */
-	public Map<String, Object> selectActivitySearch(int currentPage, int cntPerPage, int isHelp, String title, String filter);
 	
 	/**
 	 * 활동 신청 제출
@@ -87,5 +78,13 @@ public interface ActivityService {
 	 * @return int - 삭제 결과
 	 */
 	public int activityDelete(int activityNo);
+
+	
+	/**
+	 * 농장 번호로 농장 조회
+	 * @param farmNo
+	 * @return
+	 */
+	public Farm selectFarmByFarmNo(int farmNo);
 	
 }

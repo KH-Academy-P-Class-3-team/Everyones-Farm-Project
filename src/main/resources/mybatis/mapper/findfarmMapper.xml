@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FINDFARM">
+
+	<!-- 농장 이미지 조회 -->
+	<select id="selectFarmFile" resultType="FILE">
+		select * from everyones_farm_file
+		where board_no = 2
+	</select>
+
+	<!-- Farm 과 Farmer 조인 결과를 담는 resultMap -->
+	<resultMap type="hashMap" id="FarmWithFarmer">
+		<id column="farm_no" property="farmNo" />
+		<result column="farm_name" property="farmName"/>
+		<result column="phone" property="phone"/>
+		<result column="zonecode" property="zonecode"/>
+		<result column="first_address" property="firstAddress"/>
+		<result column="second_address" property="secondAddress"/>
+		<result column="visit" property="visit"/>
+		<result column="fa_farmer_no" property="farmerNo"/>
+		<result column="fa_name" property="farmerName"/>
+		<result column="fa_farmer_id" property="farmerId"/>
+	</resultMap>
+	
+	<!-- 조회된 농장 수 -->
+	<select id="selectFarmCnt" resultType="int">
+		select count(*) from farm f, 
+               (select * from farmer where is_confirm = 1 and is_leave = 0) fa
+		where f.farmer_no = fa.farmer_no
+			<if test="address != null and address != ''">
+               	and f.first_address LIKE '%' || #{address} || '%'
+            </if>
+            
+            <if test="filter != null and filter != ''">
+	            <choose>
+	            	<when test="filter == 'farmerName'">
+	            		and fa.name LIKE '%' || #{item} || '%'
+	            	</when>
+	            	<when test="filter == 'farmName'">
+	              		and f.farm_name LIKE '%' || #{item} || '%'
+	            	</when>
+	            </choose>
+            </if>
+	</select>
+
+	<!-- 농장 조회(검색) - Farm&Farmer 조인, 페이징 -->
+	<select id="selectFarmList" resultMap="FarmWithFarmer">
+		select farm_no, farm_name, phone, zonecode, first_address, second_address, visit, fa_farmer_no, fa_name, fa_farmer_id  from (
+			select rownum rnum, f1.*
+		    	from (
+		            select f.*, fa.name fa_name, fa.farmer_id fa_farmer_id, fa.farmer_no fa_farmer_no from farm f, 
+		                (select * from farmer where is_confirm = 1 and is_leave = 0) fa
+					where f.farmer_no = fa.farmer_no
+						<if test="address != null and address != ''">
+                        	and f.first_address LIKE '%' || #{address} || '%'
+                        </if>
+                        
+                        <if test="filter != null and filter != ''">
+	                        <choose>
+	                        	<when test="filter == 'farmerName'">
+	                        		and fa.name LIKE '%' || #{item} || '%'
+	                        	</when>
+	                        	<when test="filter == 'farmName'">
+			                        and f.farm_name LIKE '%' || #{item} || '%'
+	                        	</when>
+	                        </choose>
+                        </if>
+		        	order by farm_no desc
+		        ) f1
+	    ) where rnum between #{start} and #{end}
+	</select>
+
+
+</mapper>
+
+

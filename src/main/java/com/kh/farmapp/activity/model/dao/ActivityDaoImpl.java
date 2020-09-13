@@ -19,9 +19,9 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	@Override
-	public List<FarmActivity> selectActivityList(Map<String, Object> map) {
+	public List<Map<String, Object>> selectActivityList(Map<String, Object> map) {
 		return sqlSession.selectList("ACTIVITY.selectActivityList", map);
 	}
 
@@ -38,16 +38,6 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<EveryonesFarmFile> selectActivityFileWithActivity(int activityNo) {
 		return sqlSession.selectList("ACTIVITY.selectActivityFileByActivityNo", activityNo);
-	}
-
-	@Override
-	public List<FarmActivity> selectActivityByTitle(Map<String, Object> map) {
-		return sqlSession.selectList("ACTIVITY.selectActivityByTitle", map);
-	}
-	
-	@Override
-	public int selectActivityByTitleCnt(Map<String, Object> map) {
-		return sqlSession.selectOne("ACTIVITY.selectActivityByTitleCnt", map);
 	}
 
 	@Override
@@ -81,23 +71,13 @@ public class ActivityDaoImpl implements ActivityDao {
 	}
 
 	@Override
-	public int selectActivityCnt(int isHelp) {
-		return sqlSession.selectOne("ACTIVITY.selectActivityCnt", isHelp);
+	public int selectActivityCnt(Map<String, Object> map) {
+		return sqlSession.selectOne("ACTIVITY.selectActivityCnt", map);
 	}
 
 	@Override
 	public List<Farm> selectFarmList() {
 		return sqlSession.selectList("ACTIVITY.selectFarmList");
-	}
-
-	@Override
-	public List<FarmActivity> selectActivityByFarmName(Map<String, Object> map) {
-		return sqlSession.selectList("ACTIVITY.selectActivityByFarmName", map);
-	}
-
-	@Override
-	public int selectActivityByFarmNameCnt(Map<String, Object> map) {
-		return sqlSession.selectOne("ACTIVITY.selectActivityByFarmNameCnt", map);
 	}
 
 	@Override
@@ -119,6 +99,11 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public int deleteActivityFile(int activityNo) {
 		return sqlSession.delete("ACTIVITY.deleteActivityFile", activityNo);
+	}
+	
+	@Override
+	public Farm selectFarmByFarmNo(int farmNo) {
+		return sqlSession.selectOne("ACTIVITY.selectFarmByFarmNo", farmNo);
 	}
 	
 }
