@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@include file="../../include/header.jsp" %>
+<%@include file="../../include/header.jsp"%>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
@@ -49,7 +49,7 @@ a:hover {
 	background-color: white;
 	text-align: center;
 	margin-left: 100px;
-	margin-bottom : 50px;
+	margin-bottom: 50px;
 }
 
 .appliActList {
@@ -58,7 +58,7 @@ a:hover {
 	height: 350px;
 	background-color: white;
 	overflow: scroll;
-	overflow-x : hidden;
+	overflow-x: hidden;
 }
 
 
@@ -67,7 +67,7 @@ a:hover {
 	height: 350px;
 	background-color: white;
 	overflow: scroll;
-	overflow-x : hidden;
+	overflow-x: hidden;
 }
 
 .userInform {
@@ -108,12 +108,12 @@ a:hover {
 }
 </style>
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-<div style="margin-top:200px"></div>
+<div style="margin-top: 200px"></div>
 
-	<!-- Page Content -->
-	<div class="container">
-		<div class="row">
-			<!-- 사이드 네비게이션 -->
+<!-- Page Content -->
+<div class="container">
+	<div class="row">
+		<!-- 사이드 네비게이션 -->
 		<div class="col-lg-3">
 			<h3 class="my-4 text-left">영농 일지</h3>
 			<hr>
@@ -176,102 +176,113 @@ a:hover {
 			</c:if>
 		</div>
 
-			<div class="col-lg-1">
+		<div class="col-lg-1">
 
-				<!-- 페이지 요약 -->
-				<div class="sumarry">
-					<table class="userInform">
-						<tr>
-							<td class="userImg">사진</td>
-							<td class="userName">
-								<!-- 농부세션 확인해서 c:if 추가 -->
-								<div>
-									<span class="selfIcon">소비자</span>
-								</div> <span class="sessionName">${userInfo.userName } </span> 님 안녕하세요
-							</td>
-							<td class="userActive"><h5>주문현황</h5> <br> ${res }</td>
-						</tr>
-					</table>
+			<!-- 페이지 요약 -->
+			<div class="sumarry">
+				<table class="userInform">
+					<tr>
+						<td class="userImg"></td>
+						<td class="userName">
+							<!-- 농부세션 확인해서 c:if 추가 -->
+							<div>
+								<span class="selfIcon">소비자</span>
+							</div> <span class="sessionName">${userInfo.userName } </span> 님 안녕하세요
+						</td>
+						<td class="userActive"><h5>주문현황</h5> <br> ${res }</td>
+					</tr>
+				</table>
 
-				</div>
+			</div>
 
-				<!-- 페이지 첫 AJAX 체험 농장 리스트 -->
-					<span class="worrd">체험 농장</span> 신청 현황
-				<div class="appliActList">
-					<table class="table bux table-hover">
-						<tr class="active">
-							<td>체험명</td>
-							<td>고객명(아이디)</td>
-							<td>인원</td>
-							<td>문의</td>
-							<td>현황</td>
-							<td>체험일자</td>
-						</tr>
-						<c:forEach items="${activeList1 }" var="list1">
-							<c:if test="${list1.IS_HELP eq 0 }">
-								<tr>
-									<td>${list1.TITLE }</td>
-									<td>${list1.USER_NAME}(${list1.USER_ID })</td>
-									<td>${list1.PEOPLE }</td>
-									<td>${list1.PHONE }</td>
-									<td>
-						<c:if test="${list1.IS_APPROVAL eq 0 }">
+			<!-- 페이지 첫 AJAX 체험 농장 리스트 -->
+			<span class="worrd">체험 농장</span> 신청 현황
+			<div class="appliActList">
+				<table class="table bux table-hover">
+					<tr class="active">
+						<td>체험명</td>
+						<td>고객명(아이디)</td>
+						<td>인원</td>
+						<td>문의</td>
+						<td>현황</td>
+						<td>체험일자</td>
+					</tr>
+					<c:forEach items="${activeList1 }" var="list1">
+						<c:if test="${list1.IS_HELP eq 0 }">
+							<tr>
+								<td><a
+									href="<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${list1.ACTIVITY_NO}">
+										${list1.TITLE }</a></td>
+								<td><a
+									href="<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${list1.ACTIVITY_NO}">
+										${list1.USER_NAME}(${list1.USER_ID })</a></td>
+								<td><a
+									href="<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${list1.ACTIVITY_NO}">
+										${list1.PEOPLE }</a></td>
+								<td><a
+									href="<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${list1.ACTIVITY_NO}">
+										${list1.PHONE }</a></td>
+								<td><a
+									href="<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${list1.ACTIVITY_NO}">
+										<c:if test="${list1.IS_APPROVAL eq 0 }">
 						미승인
 						</c:if>
 						 <c:if test="${list1.IS_APPROVAL eq 1 }">
 						승인
 						</c:if>
-						</td>
-						<td>${list1.ACTIVITY_DATE }</td>
-								</tr>
-							</c:if>
-						</c:forEach>
+								</a></td>
+								<td><a
+									href="<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${list1.ACTIVITY_NO}">
+										${list1.ACTIVITY_DATE }</a></td>
+							</tr>
+						</c:if>
+					</c:forEach>
 
-					</table>
-				</div>
+				</table>
+			</div>
 
-				<!-- 페이지 두번째 AJAX 일손돕기 리스트 -->
-				<span class="worrd">일손돕기</span>신청 현황
-				<div class="appliHelpList">
-					<table class="table bux">
-						<tr class="active">
-							<td>체험명</td>
-							<td>고객명(아이디)</td>
-							<td>인원</td>
-							<td>문의</td>
-							<td>현황</td>
-						</tr>
-						<c:forEach items="${activeList2}" var="list2">
-							<c:if test="${list2.IS_HELP eq 1 }">
-								<tr class="table-hover">
-									<td>${list2.TITLE }</td>
-									<td>${list2.USER_NAME}(${list2.USER_ID })</td>
-									<td>${list2.PEOPLE }</td>
-									<td>${list2.PHONE }</td>
-									<td><c:if test="${list2.IS_APPROVAL eq 0 }">
+			<!-- 페이지 두번째 AJAX 일손돕기 리스트 -->
+			<span class="worrd">일손돕기</span>신청 현황
+			<div class="appliHelpList">
+				<table class="table bux">
+					<tr class="active">
+						<td>체험명</td>
+						<td>고객명(아이디)</td>
+						<td>인원</td>
+						<td>문의</td>
+						<td>현황</td>
+					</tr>
+					<c:forEach items="${activeList2}" var="list2">
+						<c:if test="${list2.IS_HELP eq 1 }">
+							<tr class="table-hover">
+								<td>${list2.TITLE }</td>
+								<td>${list2.USER_NAME}(${list2.USER_ID })</td>
+								<td>${list2.PEOPLE }</td>
+								<td>${list2.PHONE }</td>
+								<td><c:if test="${list2.IS_APPROVAL eq 0 }">
 						미승인
 						</c:if> <c:if test="${list2.IS_APPROVAL eq 1 }">
 						승인
 						</c:if></td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</table>
-
-				</div>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</table>
 
 			</div>
 
-
-
 		</div>
+
+
+
 	</div>
-	<div style="margin-bottom:200px"></div>
+</div>
+<div style="margin-bottom: 200px"></div>
 
 
 
 
-<%@include file="../../include/footer.jsp" %>
+<%@include file="../../include/footer.jsp"%>
 
 
 

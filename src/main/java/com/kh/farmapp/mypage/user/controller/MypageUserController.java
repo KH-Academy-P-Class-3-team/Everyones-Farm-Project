@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,23 +32,30 @@ public class MypageUserController {
 
 	@Autowired
 	private MyPageService mypageService;
-	
-	// log 를 남기기 위한 Logger 객체
-	private static final Logger logger = LoggerFactory.getLogger(MypageUserController.class);
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	//마이 페이지 메인으로 보내는 메서드
 	@RequestMapping("mypage/user/modify")
 	public ModelAndView mypage(HttpSession session) {
 		
 		UserTB user = (UserTB) session.getAttribute("userInfo");
-		UserProfile profile = new UserProfile();
 		
 		ModelAndView mav = new ModelAndView();
+
+		if( user == null) {
+			mav.addObject("alertMsg", "로그인이 필요합니다.");
+			mav.addObject("url", "../../user/login.do");
+			mav.setViewName("common/result");
+			return mav;
+		}
+		
+		UserProfile profile = new UserProfile();
+		
 		
 		user = mypageService.selectUser(user);
 		
 		profile = mypageService.selectUserProfile(user);
-		logger.debug("profile: " + profile.toString());
 		
 		mav.addObject("userData", user);
 		mav.addObject("profile", profile);
@@ -65,45 +74,50 @@ public class MypageUserController {
 		
 		String root  = session.getServletContext().getRealPath("/");
 		
-		System.out.println(upload);
 		user.setUserNo(userno);
-		System.out.println(user);
 		mypageService.modifyUser(user, root, upload);
 			
 		return "redirect:/mypage/user/modify";
 			
 		
 	}
-//	//회원 사진을 수정한다.
-//	@RequestMapping("mypage/user/modifyImg")
-//	public ModelAndView modifyprofile(MultipartFile upload, HttpSession session) {
-//		
-//		UserTB user = (UserTB) session.getAttribute("userInfo");
-//		
-//		
-//		
-//		int res = mypageService.modifyprofile(user, upload, root);
-//		
-//		ModelAndView mav = new ModelAndView();
-//		System.out.println("active");
-//		
-//		return mav;
-//	}
-
 	
-	@RequestMapping("mypage/user/deleteId")
-	public void deleteID(HttpSession session, Model model) {
-		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
-		if(farmer==null) {
-			model.addAttribute("farmer", 0);
-		}else {
-			model.addAttribute("farmer", 1);
-		}
+	@RequestMapping("/modify/emailcheck")
+	@ResponseBody
+	public String emailCheck(String email, HttpSession session) {
+		UserTB user = (UserTB) session.getAttribute("userInfo");
+		int res = mypageService.selectEmailCheck(email, user);
 		
+		if(res>0) {
+			return email;
+		} else {
+			return "";
+		}
+	}
+	
+	//전화번호 중복 체크
+	@RequestMapping("/modify/phonecheck")
+	@ResponseBody
+	public String phoneCheck(String phone, HttpSession session) {
+		UserTB user = (UserTB) session.getAttribute("userInfo");
+		int res = mypageService.selectPhoneCheck(phone, user);
+		
+		if(res>0) {
+			return phone;
+		} else {
+			return "";
+		}
 	}
 	
 	
 
+	
+	@RequestMapping("mypage/user/deleteId")
+	public void deleteID(HttpSession session, Model model) {
+		
+	}
+	
+	
 
 	//회원 탈퇴 하는 메서드
 	@RequestMapping("leave")
@@ -114,11 +128,8 @@ public class MypageUserController {
 		
 		ckUser = mypageService.selectUser(ckUser);
 		
-		System.out.println(ckUser.getUserPw());
-		System.out.println(userPW);
-		
-		if(ckUser.getUserPw().equals(userPW)) {
-			ckUser.setUserPw(userPW);
+		if(passwordEncoder.matches(userPW, ckUser.getUserPw())) {
+
 			int res = mypageService.leave(ckUser);
 			
 			if(res > 0) {

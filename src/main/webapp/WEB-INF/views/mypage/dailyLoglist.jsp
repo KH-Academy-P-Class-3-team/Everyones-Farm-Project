@@ -4,7 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>게시판</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<%@page import = "common.dto.Farmer"%>
 <style>
 table {
 	border: 1px solid #BDBDBD;
@@ -16,7 +21,6 @@ table {
 }
 
 </style>
-
 <script type="text/javascript">
     var today = new Date(); // 오늘 날짜
     var date = new Date();
@@ -79,7 +83,6 @@ table {
         // 달력 출력
         for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
         { 
-        	
             cell = row.insertCell();
             cell.innerHTML = 
             	'<div id="s" class="day">' + i+'<button id ="bu" type="button" onclick="javascript:testfunction('+i+')">일</button>'        	 + '</div> '
@@ -105,50 +108,93 @@ table {
 
 
 <script>
-
-	$(function() {
-		$('#searchBtn').click(
-				function() {
-					self.location = "list" + '${pageMaker.makeQuery(1)}'
-							+ "&searchType="
-							+ $("select option:selected").val() + "&keyword="
-							+ encodeURIComponent($('#keywordInput').val());
-				});
-	});
-	
 	// 달력 날짜 버튼 ㅠㅠ
-
 	function testfunction(i){
 		console.log(i);
 		
 	}
 	
+	//달력 날짜눌렀을때 스크립트
 	$(function() {
 		$('.day').click(
 				function() {
 					 console.log($(this));
 				     console.dir($(this));
-				     var d = $(this).eq(0).text();
-				     console.log(d);
-				     var border = $('#border').css("display");
-				     if(border == 'none'){
-						$('#border').show();				    	 
-				     }else if(border == 'block'){
-						$('#border').hide();				    	 
+				     var yearmonth = document.getElementById('yearmonth').innerHTML;
+				     var res = yearmonth.split("년 ")
+				     res[1] = parseInt(res[1].slice(0,-1));
+				     if(res[1]<10){
+				    	 res[1] = '0' + res[1];
 				     }
-				});
+				     
+				     var d = parseInt($(this).eq(0).text());
+				     
+				     if( d<10){
+				    	 d = '0'+d 
+				     }
+				     
+				     var date = res[0]+res[1]+d
+				     console.log(date)
+				     $.ajax({
+			             type: "get",
+			             url: "/farmapp/mypage/cal?date="+date,
+			             dataType : "json",
+			             async: false,     //값을 리턴시 해당코드를 추가하여 동기로 변경
+			             success: function (data) {
+			            	 console.log(data);
+			           		 var inner ="";
+			           		 if(data.length <= 0){
+			           			$('#writeday').html(" ");
+			           		 $( '#resview > tbody').empty();
+			           		 }
+			           		 else{
+			           		$('#writeday').html(" ");
+			           		$('#writeday').html(getFormatDate(data[0].writeDate));
+			           		
+			            	 for (i=0; i<data.length; i++){
+			            		 console.log(data[i].farmerNo)
+				           		 console.log("bbb"+${farmerInfo.farmerNo})
+			            		 if(data[i].farmerNo == ${farmerInfo.farmerNo}){
+			            		 	inner+="<tr><td scope='col' class='text-center'>"+data[i].dailylogNo+"</td>";
+									inner+="<td scope='col' class='text-center'><a href='/farmapp/mypage/dailyLogReadView?dailylogNo="+data[i].dailylogNo+"'>"+data[i].content + "</a></td>";
+									inner+="<td scope='col' class='text-center'>"+ data[i].workingAmount + "</td>";
+									inner+="<td scope='col' class='text-center'>"+data[i].workingTime+"</td>";
+									inner+="<td scope='col' class='text-center'>"+data[i].workingMember+"</td></tr>";
+			            		 }
+			           		}
+			            		 $( '#resview > tbody').empty();
+			            		 $('#resview').append(inner);
+			           		 }	
+			             }, error:function(request,status,error){
+			                 console.log(error);
+			             }
+			             
+				     
+		         });	
+			});
 	});
 	
+	//날짜를 가져오기 위한 함수ㅠㅠ
+	function getFormatDate(dt) {
+		var date = new Date(dt);
+		var month = (1 + date.getMonth()); //M
+		month = month >= 10 ? month : '0' + month; //month 두자리로 저장
+		var day = date.getDate(); //d
+		day = day >= 10 ? day : '0' + day; //day 두자리로 저장
+		var year = date.getFullYear(); //yyyy
+		return year + '년' + month + '월' + day+'일'; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+	}
 </script>
-
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style type="text/css">
 #bu{
 padding: 0;
 border: none;
 background: none;
-}
-.pagenate {
-	margin-left: 100px;
 }
 /* 마이페이지  */
 .col-lg-3 {
@@ -157,17 +203,6 @@ background: none;
 /*경계선*/
 #border {
 	border: groove;
-}
-/* 페이지 1~10 까지의 수 */
-li {
-	list-style: none;
-	float: left;
-	padding: 6px;
-}
-
-/* 페이지 사이즈 */
-#psize {
-	margin-left: 223px;
 }
 
 /* 내정보 나타내기 */
@@ -184,34 +219,72 @@ margin-left:-90px;
 }
 </style>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <%@include file="../include/header.jsp" %>
-<!-- menu 의 float 속성 때문에 생성한 div -->
 <div style="clear: both; margin-top: 170px;"></div>
 <!-- Page Content -->
 <div class="container">
 	<div class="row" style="width: 1200px">
-		<div class="col-lg-3">
-			<h3 class="my-4 text-center">농업인 마이페이지</h3>
-			<div class="list-group mb-4">
-				<a href="#"
-					class="list-group-item list-group-item-action text-center font-weight-bold">내
-					정보</a> <a href="/farmapp/mypage/selllist"
-					class="list-group-item list-group-item-action text-center font-weight-bold">판매
-					목록</a> <a href="/farmapp/mypage/dailyLoglist"
-					class="list-group-item list-group-item-action text-center font-weight-bold"
-					style="background-color: #D1E9CA;">영농 일지</a> <a
-					href="/farmapp/mypage/activitylist"
-					class="list-group-item list-group-item-action text-center font-weight-bold">활동
-					내역</a>
+		<div class="col-lg-3" style="margin-left:56px;">
+			<h3 class="my-4 text-left">영농 일지</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+				</div>
+			</div>
+
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+					</a>
+				</div>
+				<div class="panel-body">
+					<a href="#">내 정보</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}" >판매 목록</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}"  style="font-weight: bold;">영농 일지</a>
+				</div>
+				<div class="panel-body">
+					<a href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}">체험
+						신청내역</a>
+				</div>
+
 			</div>
 		</div>
-
 
 		<div id="root" style="width: 800px">
 			<div id="mypagesize">
@@ -236,16 +309,15 @@ margin-left:-90px;
 
 				</body>
 			</div>
-			<a href="/farmapp/mypage/dailyLogWrite"
-				class="list-group-item list-group-item-action text-center font-weight-bold">영농
-				일지 작성하기</a>
-
-			<div id="border" style="display : none;">
+			<a href="/farmapp/mypage/dailyLogWrite?farmerno=${farmerInfo.farmerNo}"
+				class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지 작성하기</a>
+			<div id = "writeday"></div>
+			<div id="border">
 				<form role="form" method="get" action="/farmapp/mypage/dailyLoglist">
-					<table class="table table-condensed">
+					<table id="resview" class="table table-condensed">
 						<thead>
 							<tr class="success">
-								<th scope="col" class="text-center">글 갯수</th>
+								<th scope="col" class="text-center">글 번호</th>
 								<th scope="col" class="text-center">작업 내용</th>
 								<th scope="col" class="text-center">작업량</th>
 								<th scope="col" class="text-center">작업 시간</th>
@@ -254,40 +326,11 @@ margin-left:-90px;
 							</tr>
 						</thead>
 
-						<c:forEach items="${list}" var="list">
-							<tr>
-								<td scope="col" class="text-center"><c:out
-										value="${list.dailylogNo}" /></td>
-								<td scope="col" class="text-center">
-								<a href="/farmapp/mypage/dailyLogReadView?dailyLogNo=${list.dailylogNo}"><c:out
-										value="${list.content}" /></a></td>
-								<td scope="col" class="text-center"><c:out
-										value="${list.workingAmount}" /></td>
-								<td scope="col" class="text-center"><c:out
-										value="${list.workingTime}" /></td>
-								<td scope="col" class="text-center"><fmt:formatDate
-								value="${list.writeDate}" pattern="yyyy-MM-dd" /></td>
+						
+							<tr id = result_set>
 							</tr>
-						</c:forEach>
 					</table>
-					<div id="psize">
-						<ul>
-							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="dailyLoglist${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage}"
-								end="${pageMaker.endPage}" var="idx">
-								<li><a href="dailyLoglist${pageMaker.makeQuery(idx)}">${idx}</a></li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="dailyLoglist${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-							</c:if>
-						</ul>
-					</div>
+					
 					<hr>
 				</form>
 			</div>
@@ -296,4 +339,5 @@ margin-left:-90px;
 	</div>
 
 </div>
+
 <%@include file="../include/footer.jsp" %>

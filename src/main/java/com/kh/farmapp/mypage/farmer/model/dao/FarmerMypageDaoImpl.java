@@ -8,27 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import common.dto.Application;
-import common.dto.FarmActivity;
+import common.dto.Farmer;
 import common.dto.FarmingDailylog;
 import common.dto.TBOrder;
-import common.dto.page.Criteria;
 
 @Repository
 public class FarmerMypageDaoImpl implements FarmerMypageDao {
-
 	@Autowired
 	SqlSessionTemplate session;
 	
 	// 농장 체험  리스트
 	@Override
-	public List<Map<String, Object>> activitylist(Criteria cri) {
+	public List<Map<String, Object>> activitylist(Map<String, Object> map) {
 //			System.out.println(session.selectList("ACTIVITY.listPage",cri));
-		return session.selectList("MYPAGEACTIVITY.listPage",cri);
+		return session.selectList("MYPAGEACTIVITY.listPage",map);
 	}
 	// 농장체험 총 갯수
 	@Override
-	public int listCount2() {
-		return session.selectOne("MYPAGEACTIVITY.listCount");
+	public int listCount2(Farmer farmer) {
+		return session.selectOne("MYPAGEACTIVITY.listCount",farmer);
 	}
 	
 	// 체험신청 내역 승인 처리
@@ -44,28 +42,31 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 		return session.selectOne("MYPAGEACTIVITY.selectOne",application);
 	}
 	
+
 	//일손 체험 리스트
 	@Override
-	public List<Map<String, Object>> activitylist3(Criteria cri) {
-		return session.selectList("MYPAGEACTIVITY.listPage2",cri);
+	public List<Map<String, Object>> activitylist3(Map<String, Object> map) {
+		System.out.println("다오"+map);
+		return session.selectList("MYPAGEACTIVITY.listPage2",map);
 	}
 	//일손 체험 페이징
 	@Override
-	public int listCount3() {
-		return session.selectOne("MYPAGEACTIVITY.listCount2");
+	public int listCount3(Farmer farmer) {
+		return session.selectOne("MYPAGEACTIVITY.listCount2",farmer);
 	}
+	
 	
 	
 	// 영농일지 작성
 	@Override
-	public void writeDailylog(FarmingDailylog farmingDailylog) {
+	public void writeDailylog(FarmingDailylog farmingDailylog) {		
 		session.insert("MYPAGEDAILY.insertFarmdaily", farmingDailylog);
 	}
 	
 	// 영농일지 목록조회
 	@Override
-	public List<FarmingDailylog> dailyLoglist(Criteria cri) {
-		return session.selectList("MYPAGEDAILY.listPage",cri);
+	public List<Map<String, Object>> dailyLoglist(Map<String, Object> map) {
+		return session.selectList("MYPAGEDAILY.listPage",map);
 	}
 
 	// 영농일지 총 갯수
@@ -76,15 +77,9 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	
 	//영농일지 상세
 	@Override
-	public FarmingDailylog read(int dailylogNo) {
-		System.out.println(dailylogNo+"다오");
-		return session.selectOne("MYPAGEDAILY.read",dailylogNo);
-	}
-	
-	// 판매 내역 리스트 조회하기
-	@Override
-	public List<Map<String, Object>> selllist(Criteria cri) {
-		return session.selectList("MYPAGESELL.listPage",cri);
+	public FarmingDailylog read(int dailyLogNo) {
+		System.out.println(dailyLogNo+"다오");
+		return session.selectOne("MYPAGEDAILY.read",dailyLogNo);
 	}
 	
 	// 체험신청 내역 order에 대한 한줄 조회 (결제 신청 조인한 것 한줄을 가져와서 비교해서 처리하기 위해)
@@ -99,5 +94,22 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 		return session.update("MYPAGESELL.update",order);
 	}
 	
+	//영농일지 리스트
+	@Override
+	public List<Map<String, Object>> datelist(String date) {
+		return session.selectList("MYPAGEDAILY.list",date);
+	}
 
+	// 판매 내역 리스트 조회하기
+	@Override
+	public List<Map<String, Object>> selllist(Map<String, Object> map) {
+		System.out.println("다오"+map);
+		return session.selectList("MYPAGESELL.listPage",map);
+	}
+	
+	//판매내역 총 갯수
+	@Override
+	public int listCount4(Farmer farmer) {
+		return session.selectOne("MYPAGESELL.listCount",farmer);
+	}
 }

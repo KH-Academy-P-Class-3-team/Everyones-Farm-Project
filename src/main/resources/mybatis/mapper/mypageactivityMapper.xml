@@ -4,48 +4,73 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace = "MYPAGEACTIVITY">
-
-	
 	<!-- application과 activity 테이블 조인위한 맵 -->
-	<resultMap type="hashmap" id="testmap">
-		<id property="activityNo" column="ACTIVITY_NO" />
+	<resultMap type="hashmap" id="applicationAndactivityandfarm" >
+
+		<id property="farmerNo" column="FARMER_NO" />
+		<result property="farmNo" column="FARM_NO" />
+		<result property="activityNo" column="ACTIVITY_NO" />
 		<result property="title" column="TITLE" />
-		<result property="applicantName" column="APPLICATANT_NAME" />
-		<result property="people" column="PEOPLE" />
+		<result property="applicayionNo" column="APPLICTION_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="applicantName" column="APPLICANT_NAME" />
 		<result property="activityDate" column="ACTIVITY_DATE" />
 		<result property="isApproval" column="IS_APPROVAL" />
+		<result property="people" column="PEOPLE" />
 	</resultMap>
 	
-	
-	
-	
-	
+
 										<!-- 농장체험 -->
 	
 	<!-- 농장체험 리스트 1부터 10까지 페이징 -->
-	<select id ="listPage" parameterType="common.dto.page.Criteria" resultMap="testmap">
+	<select id ="listPage" resultMap="applicationAndactivityandfarm">
 		select p.*
 		from (
 		SELECT ROWNUM RNUM, r.* 
-		FROM
-		(select a.APPLICATION_NO,a.APPLICANT_NAME ,a.PEOPLE,a.ACTIVITY_DATE,a.IS_APPROVAL,fa.TITLE,fa.is_help
-		        from farm_activity fa
-             ,application a
-        where 1=1 and fa.activity_no = a.activity_no and is_help=0 
+		FROM(
+        select
+            f.farmer_no
+            , farm.farm_no
+            , fa.activity_no
+            , fa.title
+            , a.application_no
+            , a.user_no
+            , a.applicant_name
+            , a.activity_date
+            , a.is_approval
+            , a.people
+            
+        from
+            farmer f
+            , farm
+            , farm_activity fa
+            , application a
+        where
+            f.farmer_no = farm.farmer_no
+            and farm.farm_no = fa.farm_no
+            and fa.activity_no = a.activity_no
+            and f.farmer_no = #{farmerNo} 
+<!--             and f.farmer_no = #{farmerNo}  -->
+            and is_help=0 
         )r
         )p
-        where RNUM BETWEEN #{rowStart} and #{rowEnd} order by APPLICATION_NO
-		
+        where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO
 	</select>   
-	
-	
 	
 	<!-- 농장체험 내역 리스트 총 페이지 수 -->
 	<select id="listCount" resultType="int">
 	<![CDATA[
-		SELECT COUNT(ACTIVITY_NO)
-		  FROM Farm_Activity
-		 WHERE ACTIVITY_NO > 0
+		select
+            COUNT(*)
+        from
+            farmer f
+            , farm
+            , farm_activity fa
+        where
+        	is_help = 0 and
+            f.farmer_no = farm.farmer_no
+            and farm.farm_no = fa.farm_no
+            and f.farmer_no = #{farmerNo} and fa.ACTIVITY_NO > 0
 	]]>
 	</select>
 	
@@ -63,34 +88,53 @@
 	
 	
 									<!-- 일손체험 -->
-									
-									
-									<!-- 농장체험 리스트 1부터 10까지 페이징 -->
-	<select id ="listPage2" parameterType="common.dto.page.Criteria" resultMap="testmap">
-		select p.*
+	<select id ="listPage2" resultMap="applicationAndactivityandfarm">
+	 select p.*
 		from (
 		SELECT ROWNUM RNUM, r.* 
-		FROM
-		(select a.APPLICATION_NO,a.APPLICANT_NAME ,a.PEOPLE,a.ACTIVITY_DATE,a.IS_APPROVAL,fa.TITLE,fa.is_help
-		        from farm_activity fa
-             ,application a
-        where 1=1 and fa.activity_no = a.activity_no and is_help=1
+		FROM(
+        select
+            f.farmer_no
+            , farm.farm_no
+            , fa.activity_no
+            , fa.title
+            , a.application_no
+            , a.user_no
+            , a.applicant_name
+            , a.activity_date
+            , a.is_approval
+            , a.people
+            
+        from
+            farmer f
+            , farm
+            , farm_activity fa
+            , application a
+        where
+            f.farmer_no = farm.farmer_no
+            and farm.farm_no = fa.farm_no
+            and fa.activity_no = a.activity_no
+            and f.farmer_no = #{farmerNo} and f.farmer_no = #{farmerNo} and is_help=1 
         )r
         )p
-        where RNUM BETWEEN #{rowStart} and #{rowEnd} order by APPLICATION_NO
-		
-	</select>   
+        where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO
+		</select>
 	
 	<!-- 농장체험 내역 리스트 총 페이지 수 -->
 	<select id="listCount2" resultType="int">
 	<![CDATA[
-		SELECT COUNT(ACTIVITY_NO)
-		  FROM Farm_Activity
-		 WHERE ACTIVITY_NO > 0
+		select
+            COUNT(*)
+        from
+            farmer f
+            , farm
+            , farm_activity fa
+        where
+        	is_help =1 and 
+            f.farmer_no = farm.farmer_no
+            and farm.farm_no = fa.farm_no
+            and f.farmer_no = #{farmerNo} and fa.ACTIVITY_NO > 0
 	]]>
 	</select>
-	
-	
-	
 	
 </mapper>

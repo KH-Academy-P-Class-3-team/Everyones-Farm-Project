@@ -31,6 +31,9 @@
 <div id="d1">
     <h3>개인 농산물</h3>
     <hr>
+    
+<input type="hidden" name="farmQnaQuestionNo" value="${detail.productNo}" />
+
  <table class="table">
         <colgroup>
             <col width="10%">
