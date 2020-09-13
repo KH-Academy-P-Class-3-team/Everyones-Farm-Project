@@ -130,7 +130,6 @@ a:hover {
 					</div>
 
 				</div>
-			</c:if>
 		</div>
 		<div class="col-lg-1">
 			<hr>

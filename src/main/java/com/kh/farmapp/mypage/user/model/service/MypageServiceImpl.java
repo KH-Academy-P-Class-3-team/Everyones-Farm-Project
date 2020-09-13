@@ -99,13 +99,6 @@ public class MypageServiceImpl implements MyPageService{
 
 	
 	@Override
-	public UserProfile selectUserProfile(UserTB user) {
-		return mypageDao.selectUserProfile(user.getUserNo());
-	}
-
-
-	
-	@Override
 	public int modifyprofile(UserTB user, MultipartFile file, String root) {
 		
 		ActivityFileUtil fileUtil = new ActivityFileUtil();
