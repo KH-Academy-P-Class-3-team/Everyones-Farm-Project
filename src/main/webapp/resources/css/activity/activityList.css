@@ -24,7 +24,6 @@
 	display: inline-block;
 	position: relative;
 	top: 100px;
-/* 	left: 50px; */
 }
 
 .title-img {
@@ -32,16 +31,19 @@
 	position: relative;
 	float: right;
 	bottom: 35px;
-/* 	right: 80px; */
 }
 
 .experience-title, .help-title {
 	margin-top: 70px;
 }
 
+.no-activity {
+	color: #777777;
+	margin: 20px 0 0 15px;
+}
+
 .row {
 	padding: 7px;
-/* 	width: 270px; */
 	width: 284px;
 	height: 360px;
 	display: inline-block;
@@ -90,7 +92,7 @@
 
 .btnForm {
     border: none;
-/*     background-color: #68BB59; */
+    outline: none;
     background-color: #fec576;
     width: 95px;
     height: 40px;
@@ -100,17 +102,11 @@
 	font-size: 14px;
     cursor: pointer;
     float: right;
-/*     margin: 30px 40px 70px 0; */
 	margin-right: 40px;
 }
 
 .btnForm:hover {
 	background-color: #ffd399;
 }
-
-.btnForm: {
-	border: none;
-}
-
 
 
