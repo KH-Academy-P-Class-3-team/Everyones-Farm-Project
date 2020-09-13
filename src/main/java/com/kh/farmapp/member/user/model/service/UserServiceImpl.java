@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 		String password = (String) commandMap.get("userPw");
 		UserTB user = userDao.selectUser(commandMap);
 		
-		if(passwordEncoder.matches(password, user.getUserPw())) {
+		if(user != null  && passwordEncoder.matches(password, user.getUserPw())) {
 			user.setUserPw(password);
 			return user;
 		} else {

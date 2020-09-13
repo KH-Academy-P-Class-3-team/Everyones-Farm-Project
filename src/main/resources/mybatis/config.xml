@@ -44,11 +44,11 @@
 		<mapper resource="/mybatis/mapper/productMapper.xml" />
 		
 		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml" />
-
-		<mapper resource="/mybatis/mapper/findfarmMapper.xml" />
-
 		<mapper resource="/mybatis/mapper/farmqnaMapper.xml" />
+
+
 		
+		<mapper resource="/mybatis/mapper/findfarmMapper.xml" />
 
 		<mapper resource="/mybatis/mapper/review.xml" />
     
