@@ -97,6 +97,16 @@ public class ReviewController {
         try {
 
             Iterator<String> files = request.getFileNames();
+
+            //수정 필
+//                    paramMap.put("reviewNo", "2");
+            paramMap.put("productNo", "1");
+            paramMap.put("content", content);
+
+            paramMap.put("farmerNo", null);
+            paramMap.put("userNo", null);
+            paramMap.put("reviewScore", score);
+
             while (files.hasNext()) {
                 String uploadFile = files.next();
                 MultipartFile multipartFile = request.getFile(uploadFile);
@@ -112,30 +122,20 @@ public class ReviewController {
                     file = new File(filePath + storedFileName);
                     multipartFile.transferTo(file);
 
-//                    INSERT INTO REVIEW_FILE(REVIEW_FILE_NO , REVIEW_NO, ORIGIN_NAME , FILE_RENAME , SAVE_PATH, IS_THUMBNAIL )
-
-
-                    //수정 필요?
-//                    paramMap.put("reviewNo", "2");
-                    paramMap.put("productNo", "1");
-                    paramMap.put("content", content);
-
-                    paramMap.put("farmerNo", null);
-                    paramMap.put("userNo", null);
-                    paramMap.put("reviewScore", score);
-
-
                     // review file
                     paramMap.put("originName", originalFileName);
                     paramMap.put("fileReName", storedFileName);
                     paramMap.put("savePath", filePath);
                     paramMap.put("isThumbnail", null);
 
-                    nRes = reviewService.writeReview(paramMap);
+                    //  board no
+                    paramMap.put("boardNo", 5);
+
 
                 }
 
             }
+            nRes = reviewService.writeReview(paramMap);
 
 
             if (nRes > -1) {
@@ -164,6 +164,7 @@ public class ReviewController {
             List<Map<String, Object>> resultList = reviewService.selectReview(paramMap);
 
             mav.addObject("reviews", resultList);
+            mav.addObject("reviewsCnt", resultList.size());
         } catch (Exception e) {
             logger.error(e.toString(), e);
         }
