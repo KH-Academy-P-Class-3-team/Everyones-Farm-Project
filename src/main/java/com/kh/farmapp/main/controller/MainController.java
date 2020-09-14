@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,9 +46,9 @@ public class MainController {
 		// outer join 을 했는데 null 값인 아이들은 불러오지 조차 못한다. 어째서인지 질문!!!
 		List<Map<String, Object>> farmTop3 = mainService.selectTop3Farm();
 		// farmTop3 test output
-//		for(Map<String, Object> m : farmTop3) {
-//			System.out.println(m);
-//		}
+		for(Map<String, Object> m : farmTop3) {
+			logger.debug("farm: " + m);
+		}
 		
 		// 제철 먹거리 top3 불러오기
 		List<Map<String, Object>> seasonalFoodTop3 = mainService.selectTop3SeasonalFood();
@@ -84,6 +85,15 @@ public class MainController {
 		}
 
 		return "main/info";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search() {
+		
+		logger.info("/search - [GET] 요청");
+		
+		return "";
+		
 	}
 	
 	

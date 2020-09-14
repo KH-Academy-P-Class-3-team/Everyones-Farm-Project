@@ -12,13 +12,12 @@
 		<result column="farm_name" property="farmName" />
 		<result column="farmer_no" property="farmerNo" />
 		<result column="visit" property="visit" />
-<!-- 		<result column="farm_file_no" property="farmFileNo" /> -->
-<!-- 		<result column="save_path" property="savePath" /> -->
-<!-- 		<result column="is_thumbnail" property="isThumbnail" /> -->
+		<result column="file_rename" property="fileRename"/>
 	</resultMap>
 	<select id="selectFarmTop3" resultMap="farmmap">
 		select
-		    *
+		    farm_list.*
+		    , farm_img.file_rename
 		from (
 		    select
 		        rownum farm_rank
@@ -33,7 +32,20 @@
 		            farm f
 		        order by f.visit desc, f.farm_name
 		    ) all_farm
-		) rank
+		) farm_list
+		    LEFT OUTER JOIN
+		        (
+		        select 
+		            efile.file_rename
+		            , efile.post_no
+		        from 
+		            everyones_farm_file efile
+		        where 
+		            efile.board_no = 2
+		            and efile.is_thumbnail = 1        
+		        ) farm_img
+		    ON
+		        farm_list.farm_no = farm_img.post_no
 		where farm_rank between 1 and 3
 	</select>
 	
