@@ -40,4 +40,36 @@ public interface MainDao {
 	 */
 	public List<Map<String, Object>> selectTest();
 
+	/**
+	 * 검색어로 제철 먹거리 검색
+	 * 
+	 * @param search - 검색어
+	 * @return List<Map<String, Object>> - 조회 결과
+	 */
+	public List<Map<String, Object>> selectSeasonalFoodBySearch(String search);
+
+	/**
+	 * 검색어로 일반 먹거리 검색
+	 * 
+	 * @param search - 검색어
+	 * @return List<Map<String, Object>> - 검색 결과 반환
+	 */
+	public List<Map<String, Object>> selectGeneralFoodBySearch(String search);
+
+	/**
+	 * 검색어로 농장 검색
+	 * 
+	 * @param search - 검색어
+	 * @return List<Map<String, Object>> - 검색 결과 반환
+	 */
+	public List<Map<String, Object>> selectFarmBySearch(String search);
+
+	/**
+	 * 검색어로 체험 검색
+	 * 
+	 * @param search - 검색어
+	 * @return List<Map<String, Object>> - 검색 결과 반환
+	 */
+	public List<Map<String, Object>> selectActivityBySearch(String search);
+
 }

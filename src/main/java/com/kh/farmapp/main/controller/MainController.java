@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.farmapp.main.model.service.MainService;
 
@@ -88,11 +89,28 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search() {
+	public String search(
+				//검색어 쿼리스트링
+				@RequestParam(defaultValue = "") String search
+			) {
 		
 		logger.info("/search - [GET] 요청");
 		
-		return "";
+		logger.debug("search: " + search);
+		
+		// 제철 먹거리 검색 결과
+		List<Map<String, Object>> seasonalFood = mainService.selectSeasonalFoodBySearch(search);
+		
+		// 일반 먹거리 검색 결과
+		List<Map<String, Object>> generalFood = mainService.selectGeneralFoodBySearch(search);
+		
+		// 농장 검색 결과
+		List<Map<String, Object>> farmList = mainService.selectFarmBySearch(search);
+		
+		// 체험 검색 결과
+		List<Map<String, Object>> activityList = mainService.selectActivityBySearch(search);
+		
+		return "main/search";
 		
 	}
 	

@@ -43,4 +43,28 @@ public class MainServiceImpl implements MainService{
 		return mainDao.selectTest();
 	}
 	
+	// 검색어로 제철 먹거리 검색
+	@Override
+	public List<Map<String, Object>> selectSeasonalFoodBySearch(String search) {
+		return mainDao.selectSeasonalFoodBySearch(search);
+	}
+	
+	// 검색어로 일반 먹거리 검색
+	@Override
+	public List<Map<String, Object>> selectGeneralFoodBySearch(String search) {
+		return mainDao.selectGeneralFoodBySearch(search);
+	}
+	
+
+	// 검색어로 농장 검색
+	@Override
+	public List<Map<String, Object>> selectFarmBySearch(String search) {
+		return mainDao.selectFarmBySearch(search);
+	}
+
+	// 검색어로 체험 검색
+	@Override
+	public List<Map<String, Object>> selectActivityBySearch(String search) {
+		return mainDao.selectActivityBySearch(search);
+	}
 }
