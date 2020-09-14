@@ -5,25 +5,12 @@ import java.util.Map;
 
 import common.dto.Farmer;
 import common.dto.UserTB;
+import common.util.AdminPaging;
 
 /**
  * 관리자 페이지 중 회원 관리 페이지의 Service interface
  */
 public interface AdminUserService {
-	
-	/**
-	 * 관리자 페이지의 농업인 회원 관리 페이지에 사용된다
-	 * 사이트의 모든 농업인 회원 목록을 조회 요청한다.
-	 * @return List<Map<String, Object>> - 조회 결과 반환
-	 */
-	public List<Map<String, Object>> selectAllFarmerList();
-
-	/**
-	 * 관리자 페이지의 일반 회원 관리 페이지에 사용된다
-	 * 사이트의 모든 일반 회원 목록을 조회 요청한다.
-	 * @return List<User> - 조회 결과 반환
-	 */
-	public List<UserTB> selectAllUserList();
 	
 	/**
 	 * 관리자 페이지의 농업인 회원 신청 관리 페이지에 사용된다.
@@ -42,14 +29,6 @@ public interface AdminUserService {
 	
 	/**
 	 * 관리자 페이지의 농업인 회원 신청 상세 페이지에서 사용된다.
-	 * 관리자는 신청서를 보고 승인을 한다.
-	 * @param farmer - 승인할 농업인 회원 객체
-	 * @return int - is_confirm 컬럼 업데이트 결과 반환
-	 */
-	public int approveFarmerApplication(Farmer farmer);
-	
-	/**
-	 * 관리자 페이지의 농업인 회원 신청 상세 페이지에서 사용된다.
 	 * 관리자는 신청서를 보고 보류한다.
 	 * @param farmer - 보류할 농업인 회원 객체
 	 * @return int - is_confirm 컬럼 업데이트 결과 반환
@@ -57,30 +36,114 @@ public interface AdminUserService {
 	public int putFarmerApplicationOnHold(Farmer farmer);
 	
 	/**
-	 * 회원 활동 정지, pause 컬럼 업데이트
-	 * @param user - 활동 정지 시킬 User 객체
-	 * @return int - 업데이트 결과
+	 * 회원 목록 페이징 처리를 위한 페이징 설정
+	 * 
+	 * @param pagingConfig - paging 설정에 대한 값들을 가지고 있는 Map
+	 * @return AdminPaging - list 페이징 객체
 	 */
-	public int updatePause(UserTB user);
-	
+	public AdminPaging getPaging(Map<String, Object> pagingConfig);
+
 	/**
-	 * 회원 탈퇴, is_leave 컬럼 업데이트
-	 * @param user - 탈퇴 시킬 User 객체
-	 * @return int - 업데이트 결과
+	 * 일반 회원 페이징 처리한 목록 조회
+	 * 
+	 * @param apaging - 페이징 정보를 가진 AdminPaging 객체
+	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public int deleteUser(UserTB user);
-	
+	public List<Map<String, Object>> selectAllUserByPaging(AdminPaging apaging);
+
 	/**
-	 * 농업인 회원 활동 정지, pause 컬럼 업데이트
-	 * @param farmer - 활동 정지 시킬 Farmer 객체
-	 * @return int - 업데이트 결과
+	 * is_leave 컬럼 업데이트 (회원 탈퇴) 
+	 * @param userNoList - 탈퇴할 회원 번호가 저장된 List<String>
+	 * @return int - 회원 탈퇴 결과 반환
 	 */
-	public int updatePause(Farmer farmer);
-	
+	public int deleteUserByUserNo(List<String> userNoList);
+
 	/**
-	 * 농업인 회원 탈퇴, is_leave 컬럼 업데이트
-	 * @param farmer - 탈퇴 시킬 Farmer 객체
-	 * @return int - 업데이트 결과
+	 * is_leave 컬럼 업데이트 (회원 탈퇴 취소)
+	 * 
+	 * @param userNoList - 탈퇴 취소할 회원 번호가 저장된 List
+	 * @return int - 회원 탈퇴 취소 결과 반환
 	 */
-	public int deleteFarmer(Farmer farmer);
+	public int delCancelUserByUserNo(List<String> userNoList);
+
+	/**
+	 * 농업인 회원 페이징 처리한 목록 조회
+	 * 
+	 * @param apaging
+	 * @return
+	 */
+	public List<Map<String, Object>> selectFarmerByPaging(AdminPaging apaging);
+
+	/**
+	 * 농업인 회원 탈퇴 처리 요청
+	 * 
+	 * @param farmerNoList - 농업인 회원 번호를 갖는 List
+	 * @return int - 탈퇴 처리 결과
+	 */
+	public int deleteFarmerByFaremrNo(List<String> farmerNoList);
+
+	/**
+	 * 농업인 회원 탈퇴 취소 처리 요청
+	 * 
+	 * @param farmerNoList - farmerNo 갖는 List
+	 * @return int - 탈퇴 취소 처리 결과
+	 */
+	public int delCancelFarmerByFarmerNo(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 신청 목록 조회
+	 * 
+	 * @param apaging - 페이징 정보를 갖는 AdminPaging 객체
+	 * @return List<Map<String, Object>> - 조회 결과 반환
+	 */
+	public List<Map<String, Object>> selectFarmApplicationByPaging(AdminPaging apaging);
+
+	/**
+	 * 농장 입점 신청 승인 요청
+	 * 
+	 * @param farmerNoList - farmerNo 정보를 갖는 List
+	 * @return int - 승인 요청 결과
+	 */
+	public int approveFarmerApplication(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 신청 목록에서 선택된 회원들의 메일 조회 요청
+	 * 
+	 * @param farmerNoList - farmerNo 정보를 갖는 List
+	 * @return List<Farmer> - 조회 결과
+	 */
+	public List<Farmer> selectFarmerMailByFarmerNo(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 신청 승인 메일 보내기
+	 * 
+	 * @param mailRecipient - 메일 받는 사람
+	 * @param urlPath - 홈페이지 서버
+	 */
+	public void approveMailSend(Farmer mailRecipient, String urlPath);
+
+	/**
+	 * 농장 입점 신청 보류 요청
+	 * 
+	 * @param farmerNoList - 보류할 farmerNo 정보를 갖는 List 
+	 * @return int - 보류 결과
+	 */
+	public int holdFarmerApplication(List<String> farmerNoList);
+
+	/**
+	 * 농장 입점 보류 메일 보내기
+	 * 
+	 * @param mailRecipient - 메일 정보를 갖는 Farmer 객체
+	 * @param urlPath - 서버 주소
+	 */
+	public void holdMailSend(Farmer mailRecipient, String urlPath);
+
+	/**
+	 * farmerNo 로 농장 입점 신청서(회원가입시 입력한 정보) 조회하기
+	 * 
+	 * @param farmerNo - 조회할 농장의 주인 번호
+	 * @return Map<String, Object> - 조회 결과 반환
+	 */
+	public Map<String, Object> selectFarmerApplicationDetailByFarmerNo(int farmerNo);
+
 }

@@ -80,10 +80,12 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	public FarmingDailylog read(int dailyLogNo) {
 		System.out.println(dailyLogNo+"다오");
 		return session.selectOne("MYPAGEDAILY.read",dailyLogNo);
+
 	}
 	//영농일지 삭제
 	public void delete(int dailyLogNo){
 		session.delete("MYPAGEDAILY.delete",dailyLogNo);
+
 	}
 	
 	// 체험신청 내역 order에 대한 한줄 조회 (결제 신청 조인한 것 한줄을 가져와서 비교해서 처리하기 위해)
@@ -116,4 +118,8 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	public int listCount4(Farmer farmer) {
 		return session.selectOne("MYPAGESELL.listCount",farmer);
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
 }

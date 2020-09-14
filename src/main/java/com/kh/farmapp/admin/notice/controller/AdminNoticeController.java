@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -33,8 +34,11 @@ import com.google.gson.JsonObject;
 import com.kh.farmapp.admin.model.service.AdminNoticeService;
 
 import common.dto.Admin;
+import common.dto.EveryonesFarmFile;
 import common.dto.Notice;
 import common.util.AdminPaging;
+import common.util.upload.img.CkImageUpload;
+import common.util.upload.img.model.service.CkImageUploadService;
 
 /**
  * 공지사항 & 자주 묻는 질문 관리 페이지
@@ -42,12 +46,23 @@ import common.util.AdminPaging;
 @Controller
 public class AdminNoticeController {
 
+	// member field
+	private static final int NOTICE_BOARD_NO = 7;
+	
 	// log 를 남기기 위한 Logger 객체
 	private static final Logger logger = LoggerFactory.getLogger(AdminNoticeController.class);
 
 	// service 객체
 	@Autowired
 	private AdminNoticeService adminNoticeService;
+	
+	// 이미지 삭제와 관련된 service
+	@Autowired
+	private CkImageUploadService ckImageUploadService;
+	
+	// 이미지 파일 삭제와 관련된 class
+	@Autowired
+	private CkImageUpload ckImageUpload;
 	
 	// 공지사항 관리 목록 페이지
 	@RequestMapping(value = "/adminnotice/list", method = RequestMethod.GET)
@@ -128,6 +143,7 @@ public class AdminNoticeController {
 	@RequestMapping(value = "/adminnotice/write", method = RequestMethod.GET)
 	public String adminNoticeWrite(
 				HttpSession session
+				, Model model
 			){
 		// 로그인이 안되어 있을 경우, 바로 로그인 페이지로 이동
 		Admin loginAdmin = (Admin) session.getAttribute("adminInfo");
@@ -136,6 +152,14 @@ public class AdminNoticeController {
 			return "redirect:/admin/login";
 			
 		}
+		
+		// 현재 작성될 글의 번호를 미리 조회한다.
+		String postNo = adminNoticeService.selectPostNo();
+		if( postNo != null ) { // 조회된 결과가 null 값이 아닐 경우
+			logger.debug("postNo: " + postNo);
+			model.addAttribute("postNo", postNo);
+		}
+		
 		return "admin/notice/admin_notice_write";
 	}
 	
@@ -283,11 +307,38 @@ public class AdminNoticeController {
 		// noticeNo -> ArrayList 로 변환
 		String[] nums = deleteNums.get("noticeNo").toString().split(",");
 		List<Object> noticeNoList =  new ArrayList<>(Arrays.asList(nums));
-//		logger.info("noticeNoList: " + noticeNoList.toString());
+		logger.info("noticeNoList: " + noticeNoList.toString());
 //		logger.info("noticeNoList: " + noticeNoList.getClass().getName());
+		
+		// file dto 먼저 삭제
+		// file 테이블에서 delete 할 정보를 갖는 Map
+		Map<String, Object> deleteConfig = new HashMap<>();
+		deleteConfig.put("boardNo", NOTICE_BOARD_NO);
+		deleteConfig.put("postNo", noticeNoList);
+		logger.debug("deleteNums: " + deleteConfig.get("postNo"));
+		logger.debug("deleteConfig: " + deleteConfig.toString());
+		
+		// 서버에서 먼저 삭제
+		// delete 할 파일들을 모두 조회
+		List<EveryonesFarmFile> deleteFiles = ckImageUploadService.selectFilesByBoardNoAndPostNo(deleteConfig);
+		// deleteFiles test 출력
+		int fileDelRes = 0;
+		if(deleteFiles.size() > 0) {
+			for( EveryonesFarmFile e : deleteFiles ) {
+				logger.debug("삭제할 file 정보: " + e.toString());
+				// deleteFile 함수 호출
+				ckImageUpload.deleteFile(e.getSavePath());
+			}
+			
+			// 테이블에서 삭제
+			fileDelRes = ckImageUploadService.deleteFile(deleteConfig);
+			logger.debug("fileDelRes: " + fileDelRes);
+		}
+		
 		
 		// 삭제 처리
 		int delRes = adminNoticeService.deleteNoticeByNoticeNo(noticeNoList);
+//		int delRes = 0;
 		
 		if(delRes >= 1) { // 삭제 결과 성공
 			

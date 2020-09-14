@@ -8,6 +8,8 @@ public class Basket {
 	private int farmerNo;
 	private int productNo; // 꼭 필요한 컬럼일까요?
 	private int optionNo;
+	private int count;
+	
 	
 	// getter(), setter()
 	public int getBasketNo() {
@@ -40,12 +42,18 @@ public class Basket {
 	public void setOptionNo(int optionNo) {
 		this.optionNo = optionNo;
 	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	// toString()
 	@Override
 	public String toString() {
 		return "Basket [basketNo=" + basketNo + ", userNo=" + userNo + ", farmerNo=" + farmerNo + ", productNo="
-				+ productNo + ", optionNo=" + optionNo + "]";
+				+ productNo + ", optionNo=" + optionNo + ", count=" + count +"]";
 	}
 
 }

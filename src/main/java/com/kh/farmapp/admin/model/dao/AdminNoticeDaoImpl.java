@@ -57,4 +57,10 @@ public class AdminNoticeDaoImpl implements AdminNoticeDao{
 	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging) {
 		return session.selectList("ADMINNOTICE.selectNoticeByAPaging", apaging);
 	}
+
+	// 작성될 글의 번호를 미리 조회
+	@Override
+	public String selectPostNo() {
+		return session.selectOne("ADMINNOTICE.selectPostNo");
+	}
 }

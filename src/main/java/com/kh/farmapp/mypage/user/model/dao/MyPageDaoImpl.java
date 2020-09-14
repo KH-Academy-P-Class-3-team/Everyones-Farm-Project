@@ -74,17 +74,7 @@ public class MyPageDaoImpl implements MyPageDao{
 		return sqlSession.selectOne("Mypage.selectO3one", qNo);
 	}
 
-	@Override
-	public int o3Upload(QuestionOneonone qO3) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int o3Modify(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int o3Delete(int qNo) {
@@ -97,11 +87,6 @@ public class MyPageDaoImpl implements MyPageDao{
 		return sqlSession.selectList("Mypage.selectActList", user);
 	}
 
-	@Override
-	public Application appliHelpList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Map<String, Object>> basketList(Map<String, Object> sub) {
@@ -124,12 +109,6 @@ public class MyPageDaoImpl implements MyPageDao{
 	@Override
 	public Map<String, Object> orderDetail(int orderNo) {
 		return sqlSession.selectOne("Mypage.selectOrderDetail", orderNo);
-	}
-
-	@Override
-	public UserAddress getAddress(UserTB user) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
@@ -160,6 +139,93 @@ public class MyPageDaoImpl implements MyPageDao{
 	@Override
 	public Map<String, Object> getTotla(UserTB user) {
 		return sqlSession.selectOne("Mypage.minmax",user);
+	}
+
+
+	@Override
+	public Map<String, Object> getOrderTotal(int orderNo) {
+		return sqlSession.selectOne("Mypage.orderminMax", orderNo);
+	}
+
+
+	@Override
+	public int writeO3(QuestionOneonone o3) {
+		return sqlSession.insert("Mypage.insertO3", o3);
+	}
+
+
+	@Override
+	public UserTB selectEmailCheck(String email) {
+		return sqlSession.selectOne("Mypage.emailCheck", email);
+	}
+
+
+	@Override
+	public UserTB selectPhoneCheck(String phone) {
+		return sqlSession.selectOne("Mypage.phoneCheck", phone);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectBasket(int[] arr) {
+		return sqlSession.selectList("Mypage.selectBasket", arr);
+	}
+	
+	@Override
+	public int subAmount(int optionNo) {
+		return sqlSession.update("Mypage.subAmount", optionNo);
+	}
+	
+	
+	@Override
+	public int insertPurchase(int basketNo) {
+		return sqlSession.update("Mypage.updatePurchase", basketNo);
+	}
+
+
+	@Override
+	public int o3Upload(QuestionOneonone qO3) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int o3Modify(int qNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public Application appliHelpList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public UserAddress getAddress(UserTB user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Map<String, Object>> purchaseList(int userNo) {
+		return sqlSession.selectList("Mypage.selectBasketPurchase", userNo);
+	}
+
+
+	@Override
+	public void addAmount(int optionNo) {
+		sqlSession.update("Mypage.addAmount", optionNo);
+	}
+
+
+	@Override
+	public int subPurchase(int basketNo) {
+		return sqlSession.update("Mypage.backPurchase", basketNo);
 	}
 
 

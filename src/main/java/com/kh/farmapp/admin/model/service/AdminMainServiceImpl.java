@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.admin.model.dao.AdminMainDao;
 
+import common.util.AdminPaging;
+
 /**
  * AdminMainService 를 상속 받는 클래스
  * AdminMainServiceImpl 구현 클래스

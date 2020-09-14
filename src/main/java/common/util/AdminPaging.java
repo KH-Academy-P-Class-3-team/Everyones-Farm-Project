@@ -18,7 +18,8 @@ public class AdminPaging {
 	private int startNo;	//화면에 보이는 페이지의 시작 게시글 번호
 	private int endNo;		//화면에 보이는 페이지의 끝 게시글 번호
 	
-	private String search;
+	private String search;	// 검색어
+	
 	
 	//총 게시글 수만 입력하는 생성자
 	public AdminPaging(int totalCount) {

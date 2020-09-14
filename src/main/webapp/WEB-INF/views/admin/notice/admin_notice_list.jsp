@@ -28,7 +28,11 @@
 			</tr>
 			<c:choose>
 				<%-- nList null 일 때 --%>
-				<c:when test="${empty pagingNList }"></c:when>
+				<c:when test="${empty pagingNList }">
+					<tr>
+						<td colspan="5">등록된 공지사항이 없습니다...</td>
+					</tr>
+				</c:when>
 				<%-- nList null 이 아닐 때 --%>
 				<c:when test="${not empty pagingNList }">
 					<c:forEach items="${pagingNList }" var="n">

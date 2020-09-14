@@ -85,6 +85,7 @@ public class FarmerMypageController {
 		return "mypage/dailyLogReadView";
 	}
 	
+
 	@RequestMapping(value ="/mypage/delete", method= RequestMethod.POST)
 	public String delete(FarmingDailylog farmingDailylog) {
 		farmerMypageService.delete(farmingDailylog.getDailylogNo());
@@ -94,7 +95,12 @@ public class FarmerMypageController {
 	
 	
 	@RequestMapping(value = "/mypage/activityFarm", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public String activityone(Model model, Criteria cri , HttpSession session) {
+=======
+	public String activityFarm(Model model, Criteria cri , HttpSession session) {
+    
+>>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
 		System.out.println("농장체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -116,7 +122,12 @@ public class FarmerMypageController {
 		return "mypage/activityFarm";
 	}
 	@RequestMapping(value = "/mypage/activityWork", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public String activitytwo(Model model, Criteria cri , HttpSession session) {
+=======
+	public String activityWork(Model model, Criteria cri , HttpSession session) {
+	
+>>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
 		System.out.println("일손체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		//일손체험
@@ -132,12 +143,20 @@ public class FarmerMypageController {
 		//일손체험
 		model.addAttribute("list3",workActive);
 		model.addAttribute("pageMaker3",pageMaker3);
+
 		return "mypage/activityWork";
+
+		
 	}
 	
 	// 농장 체험 리스트 목록 조회
 	@RequestMapping(value = "/mypage/activitylist", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public ModelAndView activitylist(Model model, Criteria cri,HttpSession session,HttpServletRequest request) {
+=======
+
+	public ModelAndView activitylist(Model model,HttpSession session,HttpServletRequest request) {
+>>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
 
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -152,9 +171,13 @@ public class FarmerMypageController {
 		} else {
 			mav.setViewName("/mypage/activitylist");
 		}
+<<<<<<< HEAD
 		return mav;
 
 		
+=======
+		return mav;	
+>>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
 	}
 	
 

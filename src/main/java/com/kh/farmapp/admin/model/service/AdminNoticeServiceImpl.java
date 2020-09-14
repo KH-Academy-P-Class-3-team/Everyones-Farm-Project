@@ -36,8 +36,6 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 	public Map<String, Object> selectNoticeByNoticNo(Notice noticeNo) {
 		return adminNoticeDao.selectNoticeByNoticeNo(noticeNo);
 	}
-	
-	
 
 	// 공지사항 작성
 	@Override
@@ -74,6 +72,12 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 	@Override
 	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging) {
 		return adminNoticeDao.selectNoticeByAPaging(apaging);
+	}
+
+	// 글의 번호를 미리 조회
+	@Override
+	public String selectPostNo() {
+		return adminNoticeDao.selectPostNo();
 	}
 
 }

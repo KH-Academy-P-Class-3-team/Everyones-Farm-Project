@@ -6,7 +6,7 @@
 CKEDITOR.editorConfig = function( config ) {
 	
 	// plugin 추가
-	config.extraPlugins = 'uploadimage,wordcount,notification';
+	config.extraPlugins = 'uploadimage,wordcount,notification,youtube,confighelper';
 	
 	config.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
@@ -69,6 +69,23 @@ CKEDITOR.editorConfig = function( config ) {
 		        }
 		    })
 		};
+	
+	// ckeditor youtube video
+	// video frame
+	config.youtube_width = '640';
+	config.youtube_height = '480';
+	//video frame 반응형
+	config.youtube_responsive = true;
+	// 관련 동영상 보기
+	config.youtube_related = true;
+	config.youtube_older = false;
+	config.youtube_privacy = false;
+	// 동영상 자동 재생
+	config.youtube_autoplay = false;
+	// 동영상 컨트롤 qhduwnrl
+	config.youtube_controls = true;
+	
+//	config.youtube_disabled_fields = ['txtEmbed', 'chkAutoplay'];
 	
 
 	config.removePlugins = 'easyimage, cloudservices';

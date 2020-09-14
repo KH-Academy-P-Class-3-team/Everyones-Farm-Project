@@ -101,8 +101,25 @@
 		WHERE question_no =
 		#{qNo}
 	</select>
-
-
+	<insert id="insertO3">
+	INSERT INTO
+		question_oneonone 
+		(question_no
+		, title
+		, content
+		, user_no
+		, farmer_no
+		, reg_date
+		, is_answered)
+	VALUES
+		(question_oneonone_seq.nextval
+		, #{title}
+		, #{content}
+		, #{userNo}
+		, null 
+		, sysdate
+		, 0)
+	</insert>
 
 
 	<select id="cntO3" resultType="int">
@@ -202,7 +219,7 @@
 		om.ORDER_DATE desc) n1
 		) WHERE rnum between #{page.start} and
 		#{page.end}
-		ORDER BY ORDER_NO
+		ORDER BY ORDER_NO desc
 	</select>
 
 	<select id="cntOrder" resultType="int">
@@ -210,24 +227,31 @@
 		where user_no=#{userNo}
 	</select>
 	
+	<select id="orderminMax" resultType="map">
+     select MIN(order_no) MIN, MAX(order_no) MAX
+     from tb_order
+     WHERE user_no = #{userNo}
+	</select>
+
 	<select id="minmax" resultType="map">
-	select Min(question_no) MIN, MAX(question_no) MAX
+	 select Min(question_no) MIN, MAX(question_no) MAX
      from question_oneonone
      WHERE user_no = #{userNo}
 	</select>
 
 	<select id="cntBasket" resultType="int">
 		select count(*) from basket WHERE user_no=#{userNo}
+		AND purchase=0
 	</select>
 
 	<select id="selectBasketList" resultType="map">
 		select
-		basket_no, farmer_name, product_no, name, price, amount,
+		basket_no, farmer_name, purchase, product_no, name, price, amount,
 		option_name, delivery
 		from(
 		select rownum rnum, n1.*
 		from(select
-		b.basket_no, b.farmer_name, p.product_no,
+		b.basket_no, b.farmer_name, p.product_no, b.purchase,
 		p.name, p.price, p.amount, p.option_name, p.delivery
 		from (
 		select
@@ -238,10 +262,11 @@
 		) p,
 		(
 		select
-		name farmer_name, bas.basket_no, bas.user_no, bas.option_no
+		name farmer_name, bas.basket_no, bas.user_no, bas.option_no, bas.purchase
 		from farmer f, basket bas
 		where f.farmer_no = bas.farmer_no) b
 		where b.option_no = p.option_no AND b.user_no = #{userNo}
+        AND purchase=0
 		order by b.basket_no) n1 )
 		WHERE rnum between #{page.start} and #{page.end}
 	</select>
@@ -279,10 +304,85 @@
 			separator=",">
 			#{arr}
 		</foreach>
-
-
 	</delete>
+	
+	<select id="emailCheck" resultType="USERTB">
+	select * from user_tb where email = #{email}
+	</select>
 
+	<select id="phoneCheck" resultType="USERTB">
+	select * from user_tb where phone = #{phone}
+	</select>
+	
+	<select id="selectBasket" resultType="map">
+	 SELECT 
+	 	B.*, p.amount 
+	 FROM
+	 	BASKET B, PRODUCT_OPTION P 
+	 WHERE
+	 	B.option_no = p.option_no
+     AND Basket_no IN
+		<foreach collection="array" item="arr" open="(" close=")"
+			separator=",">
+			#{arr}
+		</foreach>
+	</select>
+	
+	<update id="subAmount">
+	UPDATE 
+		product_option
+	SET
+		amount=amount-1
+	WHERE
+		option_no=#{optionNo}
+	</update>
+	<update id="addAmount">
+	UPDATE 
+		product_option
+	SET
+		amount=amount+1
+	WHERE
+		option_no=#{optionNo}
+	</update>
+	<update id="updatePurchase">
+	UPDATE
+		basket
+	SET
+		purchase = 1
+	WHERE
+		basket_no = #{basketNo}
+	</update>
+
+	<update id="backPurchase">
+	UPDATE
+		basket
+	SET
+		purchase = 0
+	WHERE
+		basket_no = #{basketNo}
+	</update>
+	
+	<select id="selectBasketPurchase" resultType="map">
+	select
+		b.basket_no, b.farmer_name, p.product_no, b.purchase,
+		p.name, p.price, p.amount, p.option_name, p.delivery
+		from (
+		select
+		pro.name, op.option_no, op.product_no,
+		op.name option_name, op.price, op.amount, pro.DELIVERY
+		from product pro, product_option op
+		WHERE pro.PRODUCT_NO = op.PRODUCT_NO
+		) p,
+		(
+		select
+		name farmer_name, bas.basket_no, bas.user_no, bas.option_no, bas.purchase
+		from farmer f, basket bas
+		where f.farmer_no = bas.farmer_no) b
+		where b.option_no = p.option_no AND b.user_no = #{userNo}
+        AND purchase = 1
+		order by b.basket_no
+	</select>
+	
 </mapper>
     
     

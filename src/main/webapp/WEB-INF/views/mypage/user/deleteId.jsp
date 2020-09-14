@@ -35,7 +35,7 @@ label{
     margin-right: 150px;
 }
 .emptyArea{
-	height : 200px;
+	height : 150px;
 }
 .glyphicon-alert{
 	color : red;

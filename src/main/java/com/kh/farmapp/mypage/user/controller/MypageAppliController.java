@@ -28,6 +28,13 @@ public class MypageAppliController {
 		
 		UserTB user = (UserTB) session.getAttribute("userInfo");
 		ModelAndView mav = new ModelAndView();
+
+		if( user == null) {
+			mav.addObject("alertMsg", "로그인이 필요합니다.");
+			mav.addObject("url", "../../user/login.do");
+			mav.setViewName("common/result");
+			return mav;
+		}
 		
 		List<Map<String, Object>> activeList = mypageService.appliActList(user);
 		
@@ -45,15 +52,5 @@ public class MypageAppliController {
 		return mav;
 	}
 	
-	//활동현황 신청보기 (체험농장)-ajax
-	public ModelAndView appliActList(@RequestParam(required=false, defaultValue="1") int cPage) {
-		return null;
-	}	
-
-
-	//활동현황 신청보기 (일손 돕기)-ajax
-	public ModelAndView appliHelpList(@RequestParam(required=false, defaultValue="1") int cPage) {
-		return null;
-	}
 
 }
