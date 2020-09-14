@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.farmapp.admin.model.service.AdminProductService;
 
+import common.dto.Admin;
 import common.dto.Product;
 import common.util.AdminPaging;
 
@@ -47,6 +48,12 @@ public class AdminProductController {
 			, @RequestParam(defaultValue = "") String search
 			, HttpSession session
 			) {
+		
+		// 관리자 로그인 안할 시 로그인 페이지로 이동
+		Admin adminLogin = (Admin) session.getAttribute("adminInfo");
+		if( adminLogin == null ) {
+			return "redirect:/admin/main";
+		}
 		
 		// url 요청 찍기
 		logger.info("/admin/product/list - [GET] 요청");

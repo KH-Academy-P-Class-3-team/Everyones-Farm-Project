@@ -33,9 +33,6 @@
 	background: #789F6F;
 	color: white;
 }
-.product__p-table .p-table__tr-body {
-	cursor: pointer;
-}
 .product__p-table .p-table__tr-body:hover {
 	background: #D1E9CA;
 }
@@ -75,6 +72,7 @@
     background: lightblue;
     border-radius: 3px;
     font-weight: 700;
+    cursor: pointer;
 }
 .product__btns-wrap .approveBtn {
 	background: #D1E9CA;
