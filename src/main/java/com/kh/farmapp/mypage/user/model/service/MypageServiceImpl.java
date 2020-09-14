@@ -18,7 +18,6 @@ import common.dto.Application;
 import common.dto.Basket;
 import common.dto.EveryonesFarmFile;
 import common.dto.Product;
-import common.dto.Purchase;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;

@@ -118,8 +118,4 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	public int listCount4(Farmer farmer) {
 		return session.selectOne("MYPAGESELL.listCount",farmer);
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
 }

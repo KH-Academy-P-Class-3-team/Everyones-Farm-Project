@@ -111,18 +111,6 @@ public interface FarmerMypageService {
    
    //판매 내역 페이징 총 갯수
    public int listCount4(Farmer farmer);
-<<<<<<< HEAD
-   
-=======
-
->>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
-   
- 
-
-   
-   
-   
-   
 	
    
 	//게시물 조회

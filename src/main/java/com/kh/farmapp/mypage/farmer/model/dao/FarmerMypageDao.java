@@ -117,16 +117,9 @@ public interface FarmerMypageDao {
 
 	public List<Map<String, Object>> datelist(String date);
 
-<<<<<<< HEAD
-
-
-
-
 	
 
 
 	
-=======
->>>>>>> 38c6c55153f274e94c769c8bee8ad7d18afdc7f0
 	
 }
