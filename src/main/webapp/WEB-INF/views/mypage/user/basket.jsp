@@ -10,6 +10,136 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<<<<<<< HEAD
+=======
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+		
+	
+	$("#btnDelete").click(function(){
+		
+		var $checkboxes = $("input:checkbox[name='checkRow']:checked");
+		
+		var map = $checkboxes.map(function(){
+			return $(this).val();
+		})
+		
+		var names= map.get().join(",");
+		
+		console.log($checkboxes);
+		console.log("map : "+ map);
+		console.log("map -> array : "+map.get());
+		console.log("array tostring : " + map.get().join(","));
+		
+		var $form = $("<form>")
+						.attr("action", "<%=request.getContextPath()%>/basket/delete")
+						.attr("method", "post")
+						.append(
+								$("<input>")
+									.attr("type", "hidden")
+									.attr("name", "names")
+									.attr("value", names)
+						)
+		$(document.body).append($form);
+		$form.submit();
+		
+		})
+	$("#btnChecking").click(function(){
+		
+		var $checkboxes = $("input:checkbox[name='checkRow']:checked");
+		
+		var map = $checkboxes.map(function(){
+			return $(this).val();
+		})
+		
+		var names= map.get().join(",");
+		
+		console.log($checkboxes);
+		console.log("map : "+ map);
+		console.log("map -> array : "+map.get());
+		console.log("array tostring : " + map.get().join(","));
+		
+		var $form = $("<form>")
+						.attr("action", "<%=request.getContextPath()%>/basket/add")
+						.attr("method", "post")
+						.append(
+								$("<input>")
+									.attr("type", "hidden")
+									.attr("name", "names")
+									.attr("value", names)
+						)
+		$(document.body).append($form);
+		$form.submit();
+		
+		})
+	$("#btnSubPur").click(function(){
+		
+		var $checkboxes = $("input:checkbox[name='checkPur']:checked");
+		
+		var map = $checkboxes.map(function(){
+			return $(this).val();
+		})
+		
+		var names= map.get().join(",");
+		
+		console.log($checkboxes);
+		console.log("map : "+ map);
+		console.log("map -> array : "+map.get());
+		console.log("array tostring : " + map.get().join(","));
+		
+		var $form = $("<form>")
+						.attr("action", "<%=request.getContextPath()%>/basket/subPurchase")
+						.attr("method", "post")
+						.append(
+								$("<input>")
+									.attr("type", "hidden")
+									.attr("name", "names")
+									.attr("value", names)
+						)
+		$(document.body).append($form);
+		$form.submit();
+		
+		})
+	
+	
+})
+	function checkAll() {
+		var $checkboxes = $("input:checkbox[name='checkRow']")
+		var check_status = $("#checkAll").is(":checked")
+		if (check_status) {
+			$checkboxes.each(function() {
+				this.checked = true;
+			})
+		} else {
+			$checkboxes.each(function() {
+				this.checked = false;
+			})
+		}
+	}
+	function checkAllPur() {
+		var $checkboxes = $("input:checkbox[name='checkPur']")
+		var check_status = $("#checkAllPur").is(":checked")
+		if (check_status) {
+			$checkboxes.each(function() {
+				this.checked = true;
+			})
+		} else {
+			$checkboxes.each(function() {
+				this.checked = false;
+			})
+		}
+	}
+	
+	
+	
+</script>
+
+
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 <style type="text/css">
 .input-group {
 	margin-top: 30px;
@@ -58,6 +188,7 @@ label {
 </style>
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
+<<<<<<< HEAD
 <body class="pt-5">
 	<!-- Page Content -->
 	<div class="container">
@@ -71,6 +202,48 @@ label {
 					<div class="panel-body">회원 탈퇴</div>
 					<div class="panel-body">1대 1 문의</div>
 					<div class="panel-body">활동 신청 현황</div>
+=======
+<div style="margin-top: 200px"></div>
+
+<!-- Page Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+			<h3 class="my-4 text-left">영농 일지</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 				</div>
 
 				<div class="panel panel-default">
@@ -145,6 +318,7 @@ label {
 >>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 
 			</div>
+<<<<<<< HEAD
 			<div class="col-lg-1">
 				<form action="modfy/userImg" method="post">
 					<div class="media">
@@ -231,6 +405,47 @@ label {
 							onclick="selectUrl('/modify/confirm')">등록</button>
 
 					</form>
+=======
+			</div>
+			<hr>
+			<div class="boxName"> 결제 대기 목록 </div>
+			<div>
+				<table class="table table-hover table-bordered">
+					<tr class="active">
+						<th><input type="checkbox" id="checkAllPur"
+							onclick="checkAllPur();"></th>
+						<th>상품정보</th>
+						<th>옵션</th>
+						<th>금액</th>
+						<th>전문 배송</th>
+					</tr>
+					<c:forEach items="${purchase.baskets}" var="purchase">
+						<tr id="realBasket">
+							<td><input type="checkbox" name="checkPur" id="checkone"
+								value="${purchase.BASKET_NO }"></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.NAME }
+							</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.OPTION_NAME }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.PRICE }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${purchase.PRODUCT_NO }">${purchase.DELIVERY }</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+				<div style="height: 50px;">
+					<span><button id="btnSubPur" class="btn pull-right">취소하기</button></span>
+				</div>
+				<div class="costArea" style="margin-top: 50px;">
+					<h3>
+						<span>총 결제 금액 : </span> <span id="cost">${purchase.cost} </span>
+						<button class="btn btn-primary btn-lg pull-right">결제하기</button>
+					</h3>
+				</div>
+				<div>
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 				</div>
 			</div>
 		</div>

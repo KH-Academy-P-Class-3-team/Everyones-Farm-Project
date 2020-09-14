@@ -62,6 +62,7 @@ label {
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
+<<<<<<< HEAD
 			<div class="col-lg-3">
 				<h3 class="my-4 text-left">회원 정보 수정</h3>
 				<hr>
@@ -71,12 +72,70 @@ label {
 					<div class="panel-body">회원 탈퇴</div>
 					<div class="panel-body">1대 1 문의</div>
 					<div class="panel-body">활동 신청 현황</div>
+=======
+		<div class="col-lg-3">
+			<h3 class="my-4 text-left">영농 일지</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 				</div>
 
 				<div class="panel panel-default">
+<<<<<<< HEAD
 					<div class="panel-heading">주문</div>
 					<div class="panel-body">구매 목록</div>
 					<div class="panel-body">장바구니</div>
+=======
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+						</a>
+					</div>
+					<div class="panel-body">
+						<a href="#">내 정보</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/selllist">판매 목록</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+							신청내역</a>
+					</div>
+
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 				</div>
 
 			</div>

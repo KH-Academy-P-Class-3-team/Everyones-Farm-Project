@@ -11,13 +11,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
+=======
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.admin.oneonone.controller.AdminOneOnOneController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
+<<<<<<< HEAD
+=======
+
+import common.dto.Farmer;
+import common.dto.UserProfile;
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import common.dto.UserTB;
 
 @Controller
@@ -47,6 +60,7 @@ public class MypageUserController {
 	}
 	
 	//회원 정보를 수정한다
+<<<<<<< HEAD
 	@RequestMapping("modify/userinfo")
 	public void modifyPirvate(UserTB user, HttpSession session, Model model) {
 	}
@@ -59,6 +73,22 @@ public class MypageUserController {
 		String root = session.getServletContext().getRealPath("farmapp/");
 		
 		mypageService.insertFile(user, file, root);
+=======
+	@RequestMapping("/modify/userInfo")
+	public String modifyPirvate(UserTB user, HttpSession session, MultipartFile upload) {
+		
+		UserTB user2 = (UserTB) session.getAttribute("userInfo");
+		int userno = user2.getUserNo();
+		
+		String root  = session.getServletContext().getRealPath("/");
+		
+		user.setUserNo(userno);
+		System.out.println("테스트"+upload.getName()+"테스트2"+upload.getOriginalFilename() );
+		mypageService.modifyUser(user, root, upload);
+			
+		return "redirect:/mypage/user/modify";
+			
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 		
 		return null;
 	}

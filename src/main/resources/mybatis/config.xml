@@ -16,6 +16,17 @@
 		<typeAlias type="common.dto.EveryonesFarmFile" alias="FILE"/>
 		<typeAlias type="common.dto.FarmActivitySchedule" alias="ACTIVITY_SCHEDULE"/>
 		<typeAlias type="common.dto.Farmer" alias="FARMER"/>
+<<<<<<< HEAD
+=======
+		
+		<!-- 마이페이지 User -->
+		<typeAlias type="common.dto.UserTB" alias="USERTB"/>
+		<typeAlias type="common.dto.QuestionOneonone" alias="O3"/>
+		<typeAlias type="common.dto.TBOrder" alias="TBORDER"/>
+		<typeAlias type="common.dto.UserProfile" alias="USERFILE"/>
+		<typeAlias type="common.dto.Basket" alias="BASKET"/>
+		
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	</typeAliases>
 	
 	<mappers>

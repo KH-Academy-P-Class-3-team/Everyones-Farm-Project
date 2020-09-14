@@ -58,6 +58,7 @@ label {
 </style>
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
+<<<<<<< HEAD
 <body class="pt-5">
 	<!-- Page Content -->
 	<div class="container">
@@ -71,6 +72,48 @@ label {
 					<div class="panel-body">회원 탈퇴</div>
 					<div class="panel-body">1대 1 문의</div>
 					<div class="panel-body">활동 신청 현황</div>
+=======
+<div style="margin-top: 200px"></div>
+
+<!-- Page Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+			<h3 class="my-4 text-left">영농 일지</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 				</div>
 
 				<div class="panel panel-default">
