@@ -73,5 +73,11 @@ public class FarmDiaryDaoImpl implements FarmDiaryDao {
 	public int selectFarmNoByFarmerNo(String farmerNo) {
 		return sqlSession.selectOne("Diary.selectFarmNoByFarmerNo", farmerNo);
 	}
+	
+	//farmNo로 farmerNo 조회
+	@Override
+	public int selectFarmerNoByFarmNo(String farmNo) {
+		return sqlSession.selectOne("Diary.selectFarmerNoByFarmNo", farmNo);
+	}
 
 }

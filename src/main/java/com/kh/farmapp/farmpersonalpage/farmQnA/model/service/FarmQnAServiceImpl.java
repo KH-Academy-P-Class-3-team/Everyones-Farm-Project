@@ -11,6 +11,7 @@ import com.kh.farmapp.farmpersonalpage.farmQnA.model.dao.FarmQnADao;
 
 import common.dto.FarmDiary;
 import common.dto.FarmQnAQuestion;
+import common.dto.FarmQnaAnswer;
 import common.util.Paging;
 
 @Service
@@ -67,14 +68,18 @@ public class FarmQnAServiceImpl implements FarmQnAService {
 	}
 
 	@Override
-	public void writeFarmQnAanswer(Map<String, Object> commandMap) {
-		farmqnaDao.insertFarmQnAanswer(commandMap);
-		
+	public int selectFarmNoByFarmerNo2(String farmerNo) {
+		return farmqnaDao.selectFarmNoByFarmerNo2(farmerNo);
 	}
 
 	@Override
-	public int selectFarmNoByFarmerNo(String farmerNo) {
-		return farmqnaDao.selectFarmNoByFarmerNo(farmerNo);
+	public void writeAnswer(FarmQnaAnswer farmqnaAnswer) {
+		farmqnaDao.answerInsert(farmqnaAnswer);
+	}
+
+	@Override
+	public List<FarmQnaAnswer> selectAnswerList(int farmQnaQuestionNo) {
+		return farmqnaDao.selectAnserList(farmQnaQuestionNo);
 	}
 
 }

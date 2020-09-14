@@ -15,7 +15,8 @@
 	</insert>
 
 	<resultMap type="hashMap" id="qnalistMap">
-		<result column="farm_qna_question_no" property="farmQnaQuestionNo" />
+		<result column="farm_qna_question_no"
+			property="farmQnaQuestionNo" />
 		<result column="title" property="title" />
 		<result column="farmer_no" property="farmerNo" />
 		<result column="user_no" property="userNo" />
@@ -87,14 +88,7 @@
 		#{farmQnaQuestionNo}
 	</update>
 
-	<insert id="insertFarmQnAanswer">
-		insert into farm_qna_answer(farm_qna_answer_no,
-		title, content, reg_date, farmer_no, farm_qna_question_no)
-		values(farm_qna_answer_seq.nextval, #{title}, #{content}, sysdate,
-		#{farmerNo}, #{farmQnaQuestionNo})
-	</insert>
-
-	<select id="selectFarmNoByFarmerNo" resultType="int" parameterType="java.lang.String">
+	<select id="selectFarmNoByFarmerNo2" resultType="int" parameterType="java.lang.String">
 		select
 		farm_no
 		from
@@ -102,6 +96,18 @@
 		where
 		farmer_no = #{value}
 	</select>
+
+	<select id="selectAnswerList" resultType="common.dto.FarmQnaAnswer">
+		select farm_qna_question_no, content, farmer_no, reg_date
+		from FARM_QNA_ANSWER
+		where farm_qna_question_no = #{farmQnaQuestionNo}
+	</select>
+
+	<insert id="answerInsert" parameterType="common.dto.FarmQnaAnswer">
+		insert into farm_qna_answer(farm_qna_answer_no, content, reg_date, farmer_no, farm_qna_question_no)
+		values(farm_qna_answer_seq.nextval, #{content}, sysdate, #{farmerNo}, #{farmQnaQuestionNo})
+	</insert>
+
 
 
 </mapper>

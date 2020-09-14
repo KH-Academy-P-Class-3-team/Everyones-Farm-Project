@@ -120,6 +120,15 @@
 		where
 			farmer_no = #{value}
 	</select>
+	
+	<select id="selectFarmerNoByFarmNo" resultType="int" parameterType="java.lang.String">
+	    select
+			farmer_no
+		from
+			farm
+		where
+			farm_no = #{value}
+	</select>
 
 
 </mapper>
