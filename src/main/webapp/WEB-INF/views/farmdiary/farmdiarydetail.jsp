@@ -58,12 +58,7 @@
       	  <th class="success">작성일</th>
       	  <td><fmt:formatDate value="${detail.enrollDate}" pattern="yyyy-MM-dd"/></td>
       	</tr>
-      	<tr>
-      	  <th class="success">유튜브 링크</th>
-      	  <td>${detail.youtubeLink}</td>
-      	  <th></th>
-      	  <td></td>
-      	</tr>
+
       	<tr>
       	  <th></th>
       	  <td></td>
@@ -78,7 +73,7 @@
  		 
  		 <hr>
  		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarylist.do?farmerNo=${detail.farmerNo}'">목록</button>
- 		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarydelete.do?farmDiaryNo=${detail.farmDiaryNo}'">삭제</button>
+ 		<button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarydelete.do?farmDiaryNo=${detail.farmDiaryNo}&farmerNo=${detail.farmerNo }'">삭제</button>
 	    <button class="btn btn-success pull-right" style="margin-left:1%;" type="button" onclick="location.href='farmdiarymodify.do?farmDiaryNo=${detail.farmDiaryNo}'">수정</button>
       	</div>
 

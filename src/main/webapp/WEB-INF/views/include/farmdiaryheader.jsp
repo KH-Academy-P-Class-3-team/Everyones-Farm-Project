@@ -72,7 +72,7 @@
 <!-- 				</ul> -->
 			</li>
 			<li><a href="#">농장 체험</a></li>
-			<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a>
+			<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&${farmNo}">QnA</a>
 <!-- 				<ul class="menu__sub-activity"> -->
 <!-- 					<li><a href="#">농장 체험</a></li> -->
 <!-- 					<li><a href="#">일손 돕기</a></li> -->

@@ -1,5 +1,6 @@
 package com.kh.farmapp.farmpersonalpage.farmQnA.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.farmapp.farmpersonalpage.farmQnA.model.service.FarmQnAService;
 
-import common.dto.Farm;
+import common.dto.FarmQnaAnswer;
+import common.dto.test.SearchCriteria;
 
 @Controller
 public class FarmQnAController {
 
 	@Autowired
 	private FarmQnAService farmqnaService;
-
+	
 	//QnA 작성 화면
 	@RequestMapping(value = "/farmQnA/farmQnAwrite.do", method = RequestMethod.GET)
 	public void farmqnaWrite() {
@@ -43,8 +46,8 @@ public class FarmQnAController {
 
 		ModelAndView mav = new ModelAndView();
 		
-		int farmNo = farmqnaService.selectFarmNoByFarmerNo(farmerNo);
-		System.out.println("FarmDiaryController farmNo: " + farmNo);
+		int farmNo = farmqnaService.selectFarmNoByFarmerNo2(farmerNo);
+//		System.out.println("FarmDiaryController farmNo: " + farmNo);
 		
 		int cntPerPage = 10;
 		
@@ -60,7 +63,10 @@ public class FarmQnAController {
 //		System.out.println("컨트롤러값"+res);
 //		System.out.println(mav);
 		//		System.out.println(res);
-
+		if( farmNo != 0) {
+			mav.addObject("farmNo", farmNo);
+		}
+		
 		return mav;
 	}
 
@@ -73,18 +79,20 @@ public class FarmQnAController {
 		Map<String, Object> res = farmqnaService.selectQnADetail(farmQnaQuestionNo);
 		mav.addObject("detail", res);
 		mav.setViewName("farmQnA/farmQnAdetail");
-
+		
+		List<FarmQnaAnswer> al = farmqnaService.selectAnswerList(farmQnaQuestionNo);
+		mav.addObject("answerlist",al);
 		return mav;
 
 	}
 
 	//게시글 삭제
 	@RequestMapping(value = "/farmQnA/farmQnAdelete.do", method = RequestMethod.GET )
-	public String deleteQnA(@RequestParam(value="farmQnaQuestionNo") int farmQnaQuestionNo) {
+	public String deleteQnA(@RequestParam(value="farmQnaQuestionNo") int farmQnaQuestionNo, String farmerNo) {
 
 		farmqnaService.deleteQnA(farmQnaQuestionNo);
 
-		return "redirect:/farmQnA/farmQnAlist.do";
+		return "redirect:/farmQnA/farmQnAlist.do?farmQnaQuestionNo="+farmQnaQuestionNo+"&farmerNo="+farmerNo;
 	}
 
 	//게시글 수정 화면
@@ -111,16 +119,19 @@ public class FarmQnAController {
 
 		return mav;
 	}
-	
-	//QnA 답변 작성
+		
+	//QnA 답글 작성
 	@RequestMapping(value = "/QnA/QnAanswerwrite.do", method = RequestMethod.POST)
-	public String qnaAnswer(@RequestParam Map<String, Object> commandMap) {
-
-		farmqnaService.writeFarmQnAanswer(commandMap);
-
-		System.out.println(commandMap);
-
-		return "redirect:/farmQnA/farmQnAdetail.do";
+	public String answerInsert(FarmQnaAnswer farmqnaAnswer, SearchCriteria scri, RedirectAttributes rttr, String farmerNo) {
+		
+		farmqnaService.writeAnswer(farmqnaAnswer);
+		
+		rttr.addAttribute("farmQnaQuestionNo", farmqnaAnswer.getFarmQnaQuestionNo());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		
+		return "redirect:/farmQnA/farmQnAdetail.do?farmerNo="+farmerNo;
 	}
-
 }

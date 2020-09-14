@@ -3,62 +3,46 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<!-- <script src="//code.jquery.com/jquery-2.2.4.min.js"></script> -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<style type="text/css">
-        .img_wrap {
-            width: 300px;
-            margin-top: 50px;
-        }
-        .img_wrap img {
-            max-width: 100%;
-        }
- 
-</style>
 
 <!-- ckeditor 사용을 위해 js 파일 연결 -->
 <script type="text/javascript" src="/farmapp/resources/js/ckeditor/ckeditor.js"></script>
 
 
 
-
-<!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> -->
 <script type="text/javascript">
 
-// var sel_file;
+$(document).ready(function() {
 
-// $(document).ready(function() {
-//     $("#input_img").on("change", handleImgFileSelect);
-// }); 
+	$("#btnmodify").on("click", function() {
 
-// function handleImgFileSelect(e) {
-//     var files = e.target.files;
-//     var filesArr = Array.prototype.slice.call(files);
+		var thetitle = $("#title").val()
+		var ckeditor = CKEDITOR.instances['content']; 
 
-//     filesArr.forEach(function(f) {
-//         if(!f.type.match("image.*")) {
-//             alert("확장자는 이미지 확장자만 가능합니다.");
-//             return;
-//         }
+		if (thetitle == "") {
+			alert("제목을 작성해 주세요.");
+			form2.title.focus();
+		}else if (ckeditor.getData() == "") {
+			alert("내용을 작성해 주세요.");
+			form2.ckeditor.focus();
+		}else {
+			$("#form2").submit();
+		}
 
-//         sel_file = f;
+	})
 
-//         var reader = new FileReader();
-//         reader.onload = function(e) {
-//             $("#img").attr("src", e.target.result);
-//         }
-//         reader.readAsDataURL(f);
-//     });
-// }
+})
 	
 </script>
 
-<form action="<%= request.getContextPath() %>/diary/diarymodify.do" method="post" enctype="multipart/form-data">
+<form id="form2" action="<%= request.getContextPath() %>/diary/diarymodify.do" method="post" enctype="multipart/form-data">
 
 <%@include file="../include/farmdiaryheader.jsp" %>
 
@@ -90,7 +74,7 @@ ${detail.content}
 <hr>
 
 <div style="text-align: center;">
-<button class="btn btn-success">수정하기</button>
+<button id="btnmodify" type="button" class="btn btn-success">수정하기</button>
 </div>
 </div>
 

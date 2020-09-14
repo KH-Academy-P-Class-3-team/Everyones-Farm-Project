@@ -1,6 +1,9 @@
 package com.kh.farmapp.farmpersonalpage.farmQnA.model.service;
 
+import java.util.List;
 import java.util.Map;
+
+import common.dto.FarmQnaAnswer;
 
 public interface FarmQnAService {
 
@@ -19,10 +22,13 @@ public interface FarmQnAService {
 	//수정
 	public int modifyQnA(Map<String, Object> commandMap);
 	
-	//QnA 답변 글쓰기
-	public void writeFarmQnAanswer(Map<String, Object> commandMap);
-	
 	//farmerNo를 통한 farmNo 조회
-	public int selectFarmNoByFarmerNo(String farmerNo);
+	public int selectFarmNoByFarmerNo2(String farmerNo);
+	
+	//QnA 답변 작성
+	public void writeAnswer(FarmQnaAnswer farmqnaAnswer);
+	
+	//farmQnaQuestionNo번호로 Qna 답변 리스트 조회
+	public List<FarmQnaAnswer> selectAnswerList(int farmQnaQuestionNo);
 
 }

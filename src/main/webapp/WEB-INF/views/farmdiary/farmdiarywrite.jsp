@@ -26,13 +26,17 @@ $(document).ready(function() {
 
 	$("#btnWrite").on("click", function() {
 
-		const thetitle = $("#title").val()
+		var thetitle = $("#title").val()
+		var ckeditor = CKEDITOR.instances['content']; 
 
 		if (thetitle == "") {
 			alert("제목을 작성해 주세요.");
-		} else {
-			$("#form1").submit();   
-		
+			form1.title.focus();
+		}else if (ckeditor.getData() == "") {
+			alert("내용을 작성해 주세요.");
+			form1.ckeditor.focus();
+		}else {
+			$("#form1").submit();
 		}
 
 	})

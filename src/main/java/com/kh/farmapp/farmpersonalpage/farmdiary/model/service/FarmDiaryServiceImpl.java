@@ -37,7 +37,7 @@ public class FarmDiaryServiceImpl implements FarmDiaryService{
 		pagingConfig.put("farmerNo", farmerNo);
 		
 		List<FarmDiary> fdlist = farmdiaryDao.selectFarmDiaryList(pagingConfig);
-		System.out.println("FarmDiaryService - fdlist: " + fdlist.toString());
+//		System.out.println("FarmDiaryService - fdlist: " + fdlist.toString());
 
 		Map<String,Object> res = new HashMap<String, Object>();	
 		
@@ -45,8 +45,8 @@ public class FarmDiaryServiceImpl implements FarmDiaryService{
 		res.put("paging", p);
 		
 		
-		System.out.println("서비스값" + res.toString());
-		System.out.println("fd사이즈:"+fdlist.size());
+//		System.out.println("서비스값" + res.toString());
+//		System.out.println("fd사이즈:"+fdlist.size());
 
 		return res;
 	}
@@ -95,6 +95,11 @@ public class FarmDiaryServiceImpl implements FarmDiaryService{
 	@Override
 	public int selectFarmNoByFarmerNo(String farmerNo) {
 		return farmdiaryDao.selectFarmNoByFarmerNo(farmerNo);
+	}
+
+	@Override
+	public int selectFarmerNoByFarmNo(String farmNo) {
+		return farmdiaryDao.selectFarmerNoByFarmNo(farmNo);
 	}
 
 }

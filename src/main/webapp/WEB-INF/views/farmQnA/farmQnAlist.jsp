@@ -114,7 +114,7 @@ li.admin__p-active > a {
        	<c:forEach items="${list}" var="list">
            <tr> 
                <td>${list.farmQnaQuestionNo}</td>
-               <td><a href="<%= request.getContextPath() %>/farmQnA/farmQnAdetail.do?farmQnaQuestionNo=${list.farmQnaQuestionNo}">${list.title}</a></td>
+               <td><a href="<%= request.getContextPath() %>/farmQnA/farmQnAdetail.do?farmQnaQuestionNo=${list.farmQnaQuestionNo}&farmNo=${farmNo}">${list.title}</a></td>
                <td>${list.farmerNo}</td>
                <td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
            </tr>
