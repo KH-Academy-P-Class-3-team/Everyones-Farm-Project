@@ -25,7 +25,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.kh.farmapp">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<!-- setting AdminNoticeController debug level log -->

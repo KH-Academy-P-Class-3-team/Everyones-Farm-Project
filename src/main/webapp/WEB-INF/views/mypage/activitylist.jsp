@@ -186,12 +186,12 @@ a:hover {
 
 			</div>
 			<div id="color" >
-				<a id="showActive" href="/farmapp/mypage/activityone?farmerno=${farmerInfo.farmerNo}"
+				<a id="showActive" href="/farmapp/mypage/activityFarm?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold" style="background-color : yellow;">농장
 					체험 신청 목록 이동 하기</a>
 			</div>
 			<div id="color2">
-				<a id="showActive2" href="/farmapp/mypage/activitytwo?farmerno=${farmerInfo.farmerNo}" class="list-group-item list-group-item-action text-center font-weight-bold">일손 체험 신청 목록 이동 하기</a>
+				<a id="showActive2" href="/farmapp/mypage/activityWork?farmerno=${farmerInfo.farmerNo}" class="list-group-item list-group-item-action text-center font-weight-bold">일손 체험 신청 목록 이동 하기</a>
 			</div>
 
 			
