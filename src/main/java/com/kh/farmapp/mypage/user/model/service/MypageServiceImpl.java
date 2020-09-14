@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ import common.dto.Application;
 import common.dto.Basket;
 import common.dto.EveryonesFarmFile;
 import common.dto.Product;
+import common.dto.Purchase;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
@@ -32,11 +34,39 @@ public class MypageServiceImpl implements MyPageService{
 	@Autowired
 	private MyPageDao mypageDao;
 	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@Override
 	public int modifyUser(UserTB user, String root, MultipartFile upload) {
 		
+		String password = user.getUserPw();
+		password = passwordEncoder.encode(password);
+		
+		user.setUserPw(password);
 		int res = mypageDao.modifyUser(user);
-		System.out.println(res);
+		
+		if(upload.getOriginalFilename() != "") {
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		
+		
+		UserProfile check = new UserProfile();
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		check = fileUtil.fileUpload(upload, root);
+		
+
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", check);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println("result"+result);
+		}
 		
 		ActivityFileUtil fileUtil = new ActivityFileUtil();
 		
@@ -57,7 +87,8 @@ public class MypageServiceImpl implements MyPageService{
 		}
 		System.out.println(result);
 		
-		return res;
+//		return 0;
+		return res; // 그리고 return 값을 보내서 쓰이는 곳이 없으면 지우는게 맞는거 같네요
 	}
 
 	
@@ -65,7 +96,6 @@ public class MypageServiceImpl implements MyPageService{
 	public UserProfile selectUserProfile(UserTB user) {
 		return mypageDao.selectUserProfile(user.getUserNo());
 	}
-
 
 	
 	@Override
@@ -103,7 +133,10 @@ public class MypageServiceImpl implements MyPageService{
 	
 	@Override
 	public int leave(UserTB user) {
+
 		return mypageDao.leave(user);
+		
+		
 	}
 
 	@Override
@@ -252,6 +285,109 @@ public class MypageServiceImpl implements MyPageService{
 	@Override
 	public Map<String, Object> getTotal(UserTB user) {
 		return mypageDao.getTotla(user);
+	}
+
+
+	@Override
+	public Map<String, Object> getOrderTotal(int orderNo) {
+		return mypageDao.getOrderTotal(orderNo);
+	}
+
+	
+
+	@Override
+	public int wirteO3(QuestionOneonone o3) {
+		return mypageDao.writeO3(o3);
+	}
+
+
+	@Override
+	public int selectEmailCheck(String email, UserTB user) {
+		
+		UserTB userchk = mypageDao.selectEmailCheck(email); 
+		int res = 0;
+		if(userchk.getUserNo()==user.getUserNo() || user.getPhone()==null) {
+			return res;
+		}else {
+			res = 1;
+			return res;
+		}
+	}
+
+
+	@Override
+	public int selectPhoneCheck(String phone, UserTB user) {
+		UserTB userchk = mypageDao.selectPhoneCheck(phone); 
+		int res = 0;
+		if(userchk.getUserNo()==user.getUserNo() || user.getPhone()==null) {
+			return res;
+		}else {
+			res = 1;
+			return res;
+		}
+		
+	}
+
+
+	@Override
+	public int insertPurchase(int[] arr) {
+		
+		List<Map<String, Object>> basketList = mypageDao.selectBasket(arr);
+		
+		int res = 0;
+		for(Map<String, Object> b : basketList) {
+			System.out.println(b);
+			String amount = String.valueOf(b.get("AMOUNT"));
+			if(Integer.parseInt(amount)== 0) {
+				return res;
+			}else {
+				String optionNo = String.valueOf(b.get("OPTION_NO"));
+				String basketNo = String.valueOf(b.get("BASKET_NO"));
+				res = mypageDao.subAmount(Integer.parseInt(optionNo));
+				mypageDao.insertPurchase(Integer.parseInt(basketNo));
+			}
+		}
+		
+		return res;
+	}
+
+
+	@Override
+	public Map<String, Object> basketListPur(int userNo) {
+		
+		List<Map<String, Object>> baskets = mypageDao.purchaseList(userNo);
+		
+		int cost = 0;
+		for(Map<String, Object> c : baskets) {
+			String costs = String.valueOf(c.get("PRICE"));
+			cost += Integer.parseInt(costs);
+		}
+		
+		Map<String, Object> basketList = new HashMap<String, Object>();
+		
+		basketList.put("baskets", baskets);
+		basketList.put("cost", cost);
+		
+		return basketList;
+	}
+
+
+	@Override
+	public int canclePurchase(int[] arr) {
+		List<Map<String, Object>> basketList = mypageDao.selectBasket(arr);
+
+		int res = 0;
+		for(Map<String, Object> b : basketList) {
+			String optionNo = String.valueOf(b.get("OPTION_NO"));
+			String basketNo = String.valueOf(b.get("BASKET_NO"));
+			//purchase를 0으로 다시 만드는 메서드
+			res = mypageDao.subPurchase(Integer.parseInt(basketNo));
+			//amount +1
+			mypageDao.addAmount(Integer.parseInt(optionNo));
+		}
+		return res;
+		
+		
 	}
 
 

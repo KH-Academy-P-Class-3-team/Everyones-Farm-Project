@@ -87,13 +87,13 @@
 		INSERT INTO 
 		    notice (notice_no, title, content, admin_no)
 		VALUES 
-		    (notice_seq.nextval, #{title}, #{content}, #{adminNo})
+		    (#{noticeNo}, #{title}, #{content}, #{adminNo})
 	</insert>
 	
 	<resultMap type="hashmap" id="noticeDetailMap">
 		<result property="noticeNo" column="notice_no" />
 		<result property="title" column="title" />
-		<result property="content" column="content" />
+		<result property="content" column="content" javaType="java.lang.String" jdbcType="CLOB" />
 		<result property="adminNo" column="admin_no" />
 		<result property="regDate" column="reg_date" />
 		<result property="isShowed" column="is_showed" />
@@ -112,6 +112,14 @@
 		        n.admin_no = a.admin_no
 		where
 		    notice_no = #{noticeNo}
+	</select>
+	
+	<!-- 작성될 글의 번호 미리 조회 -->
+	<select id="selectPostNo" resultType="java.lang.String">
+		select
+			notice_seq.nextval
+		from
+			dual
 	</select>
 	
 </mapper>

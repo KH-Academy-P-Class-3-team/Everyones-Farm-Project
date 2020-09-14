@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ADMINMEMBER">
+	
+	<!-- 총 회원 수 -->
+	<select id="selectCntAllUserList" resultType="int">
+		select
+		    count(*)
+		from
+		    user_tb
+	</select>
+	
+	<resultMap type="hashmap" id="userlistmap">
+		<result property="userOrder" column="user_order" />
+		<result property="userNo" column="user_no" />
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<result property="isLeave" column="is_leave" />
+	</resultMap>
+	<!-- 일반회원목록 -->
+	<select id="selectAllUserByPaging" parameterType="common.util.AdminPaging" resultMap="userlistmap">
+		select
+		    users.*
+		from (
+		    select
+		        rownum user_order
+		        , ulist.*
+		    from (
+		        select
+		            u.user_no
+		            , u.user_id
+		            , u.user_name
+		            , u.phone
+		            , u.email
+                    , u.is_leave
+		        from
+		            user_tb u
+		        where
+		        	1=1
+				    <if test="search != null and search != ''">
+			    	and (
+				    	user_id LIKE  '%' || #{search} || '%'
+		    			or user_name LIKE '%' || #{search} || '%'
+		    			or phone LIKE '%' || #{search} || '%'
+			    	)
+				    </if>
+		        order by
+		           u.user_no desc
+		    ) ulist
+		) users 
+		where
+		    user_order between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 검색된 회원 갯수 -->
+	<select id="selectCntUserBySearch" parameterType="java.lang.String" resultType="int">
+		select
+		    count(*)
+		from
+		    user_tb
+		where
+		    user_id LIKE  '%' || #{search} || '%'
+		    or user_name LIKE '%' || #{search} || '%'
+	</select>
+	
+	<!-- 선택된 회원 탈퇴 -->
+	<update id="deleteUserByUserNo" parameterType="list">
+	update
+	    user_tb
+	set
+		is_leave = 1
+	where
+	    user_no in
+	<foreach collection="list" 
+		item="nums" index="index" separator="," open="(" close=")" >
+		#{nums}
+	</foreach>
+	</update>
+	
+	<update id="delCancelUserByUserNo">
+	update
+	    user_tb
+	set
+		is_leave = 0
+	where
+	    user_no in
+	<foreach collection="list" 
+		item="nums" index="index" separator="," open="(" close=")" >
+		#{nums}
+	</foreach>
+	</update>
+	
+	<select id="selectCntAllFarmerList" resultType="int">
+	select
+    	count(*)
+	from
+	    farmer f
+    JOIN
+        farm
+    ON
+        f.farmer_no = farm.farmer_no
+    where
+    	f.is_confirm = 1
+	</select>
+	
+	<!-- 검색된 농업인 회원 COUNT -->
+	<select id="selectCntFarmerBySearch" parameterType="java.lang.String" resultType="int">
+		select
+		    count(*)
+		from
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+		where
+    		f.is_confirm = 1
+		    and (
+		    	farmer_id LIKE  '%' || #{search} || '%'
+		    	or name LIKE '%' || #{search} || '%'
+		    )
+	</select>
+	
+	<resultMap type="hashmap" id="flistmap">
+		<result property="fOrder" column="f_order" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<result property="isLeave" column="is_leave" />
+		<result property="farmNo" column="farm_no" />
+	</resultMap>
+	<!-- 검색된 농업인 회원 목록 -->
+	<select id="selectFarmerByPaging" parameterType="common.util.AdminPaging" resultMap="flistmap">
+		select
+		    flist.*
+		from (
+		    select
+		       rownum f_order
+		       , fs.* 
+		    from (
+		        select
+		            f.farmer_no
+		            , f.farmer_id
+		            , f.name
+		            , f.phone
+		            , f.email
+		            , f.is_leave
+		            , farm.farm_no
+		        from
+		            farmer f
+		            JOIN
+		                farm
+		            ON
+		                f.farmer_no = farm.farmer_no
+		        where
+            		f.is_confirm = 1
+				    <if test="search != null and search != ''">
+				    and (
+				    	f.farmer_id LIKE  '%' || #{search} || '%'
+				    	or f.name LIKE '%' || #{search} || '%'
+				    )
+				    </if>
+		        order by
+		            f.farmer_no desc
+		    )fs
+		)flist
+		where
+		    flist.f_order between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 농업인 회원 탈퇴 처리 -->
+	<update id="deleteFarmerByFarmerNo" parameterType="list">
+		update
+			farmer
+		set
+			is_leave = 1
+		where
+			farmer_no in
+		<foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+			#{nums}
+		</foreach>
+	</update>
+	
+	<!-- 농업인 회원 탈퇴 취소 처리 -->
+	<update id="delCancelFarmerByFarmerNo" parameterType="list">
+		update
+			farmer
+		set
+			is_leave = 0
+		where
+			farmer_no in
+		<foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+			#{nums}
+		</foreach>
+	</update>
+	
+	<!-- 농장 입점 신청 갯수 조회 -->
+	<select id="selectCntAllFarmApplicationList" resultType="int">
+		select 
+		    count(*)
+		from 
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+<!-- 		where  -->
+<!-- 		    is_confirm = 0	 -->
+	</select>
+	
+	<!-- 검색된 농장 입점 갯수 조회 -->
+	<select id="selectCntFarmApplicationBySearch" resultType="int" parameterType="java.lang.String">
+		select 
+		    count(*)
+		from 
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+		where 
+<!-- 		    is_confirm = 0 -->
+			1=1
+		    and (
+		        farm.farm_name LIKE '%' || #{search} || '%'
+		        or f.farmer_id LIKE '%' || #{search} || '%'
+		        or f.name LIKE '%' || #{search} || '%'
+		    )
+	</select>
+	
+	<resultMap type="hashmap" id="farmApplicationMap">
+		<result property="farmOrder" column="farm_order" />
+		<result property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="name" column="name" />
+		<result property="applicationDate" column="application_date" />
+		<result property="isConfirm" column="is_confirm" />
+		<result property="farmNo" column="farm_no" />
+		<result property="farmName" column="farm_name" />
+	</resultMap>
+	<!-- 검색된 농자 입점 신청 목록 조회 -->
+	<select id="selectFarmApplicationByPaging" resultMap="farmApplicationMap" parameterType="common.util.AdminPaging">
+		select
+		    falist.*
+		from(
+		    select
+		        rownum farm_order
+		        , fa.*
+		    from (
+		        select 
+		            f.farmer_no
+		            , f.farmer_id
+		            , f.name
+		            , f.application_date
+		            , f.is_confirm
+		            , farm.farm_no
+		            , farm.farm_name
+		        from 
+		            farmer f
+		            JOIN
+		                farm
+		            ON
+		                f.farmer_no = farm.farmer_no
+		        where 
+<!-- 		            is_confirm = 0  -->
+					1=1
+		            <if test="search != null and search != ''">
+		            and (
+		                farm.farm_name LIKE '%' || #{search} || '%'
+		                or f.farmer_id LIKE '%' || #{search} || '%'
+		                or f.name LIKE '%' || #{search} || '%'
+		            )
+		            </if>
+		        order by
+		        	f.is_confirm
+		            , f.application_date
+		            , f.farmer_no
+		    )fa
+		)falist
+		where
+		    farm_order between #{startNo} and #{endNo}
+	</select>
+
+	<!-- 농장 입점 신청 승인 처리 -->
+	<update id="approveFarmerApplication" parameterType="list">
+		update
+		    farmer
+		set 
+		    is_confirm = 1
+		where
+		    farmer_no in
+		    <foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+				#{nums}
+			</foreach>
+	</update>	
+	
+	<!-- 입점 승인, 입점 보류의 메일을 보내기 위한 회원들의 이메일 조회 -->
+	<select id="selectFarmerMailByFarmerNo" parameterType="list" resultType="common.dto.Farmer">
+		select
+		    f.farmer_no
+		    , f.farmer_id
+		    , f.name
+		    , f.email
+		from
+		    farmer f
+		where
+		    f.farmer_no in 
+		    <foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+				#{nums}
+			</foreach>
+	</select>
+	
+	<!-- 농장 입점 신청 보류 -->
+	<update id="holdFarmerApplication" parameterType="list">
+		update
+		    farmer
+		set 
+		    is_confirm = 0
+		where
+		    farmer_no in
+		    <foreach collection="list"
+			item="nums" index="index" separator="," open="(" close=")">
+				#{nums}
+			</foreach>
+	</update>
+	
+	<resultMap type="hashmap" id="fApplicationMap">
+		<id property="farmerNo" column="farmer_no" />
+		<result property="farmerId" column="farmer_id" />
+		<result property="farmerName" column="name" />
+		<result property="farmerEmail" column="email" />
+		<result property="farmerPhone" column="phone" />
+		<result property="farmerIsConfirm" column="is_confirm" />
+		<result property="farmNo" column="farm_no" />
+		<result property="farmName" column="farm_name" />
+		<result property="farmPhone" column="phone" />
+		<result property="farmZoneCode" column="zonecode" />
+		<result property="farmFirstAddress" column="first_address" />
+		<result property="farmSecondAddress" column="second_address" />
+		<result property="farmReason" column="farm_reason" />
+		<result property="farmSell" column="farm_sell" />
+		<result property="farmMind" column="farm_mind" />
+		<result property="farmIntroduce" column="introduce" />
+	</resultMap>
+	<!-- 농장 입점 신청서 조회 -->
+	<select id="selectFarmerApplicationDetailByFarmerNo" parameterType="int" resultMap="fApplicationMap">
+		select
+		    f.farmer_no
+		    , f.farmer_id
+		    , f.name
+		    , f.email
+		    , f.phone
+		    , f.is_confirm
+		    , farm.farm_no
+		    , farm.farm_name
+		    , farm.phone
+		    , farm.zonecode
+		    , farm.first_address
+		    , farm.second_address
+		    , farm.farm_reason      <!-- 가입 이유 -->
+		    , farm.farm_sell        <!-- 농작물과 규모 -->
+		    , farm.farm_mind        <!-- 농업에 대한 마음 가짐 -->
+		    , farm.introduce        <!-- 농장 소개 -->
+		from
+		    farmer f
+		    JOIN
+		        farm
+		    ON
+		        f.farmer_no = farm.farmer_no
+		where
+		    f.farmer_no = #{farmerNo}
+	</select>
+	
+</mapper>

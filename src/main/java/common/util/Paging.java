@@ -29,6 +29,7 @@ public class Paging {
 	private int start;
 	//sql에서 사용할 끝 값
 	private int end;
+
 	
 	public Paging() {
 		

@@ -12,17 +12,23 @@ import common.dto.Farmer;
 
 public interface ActivityDao {
 
-	/**전체 활동 리스트 조회
+	/**전체 체험활동 조회 및 검색
 	 * 
-	 * @param map - 페이징 객체, 활동 구분을 담은 Map
-	 * @return List<FarmActivity> - 체험활동/일손돕기 전체 리스트 
+	 * @param map - 페이징 객체, 활동 구분, 검색 조건을 담은 Map
+	 * @return List<Map<String, Object> - 조회된 체험 리스트 
 	 */
-	public List<FarmActivity> selectActivityList(Map<String, Object> map);
+	public List<Map<String, Object>> selectActivityList(Map<String, Object> map);
 	
-	
-	/**전체 활동 파일 리스트 조회
+	/**페이징을 위해 전체 FarmActivity Count
 	 * 
-	 * @return List<EveryonesFarmFile> - 활동 파일 전체 리스트 
+	 * @return int - count 결과 값
+	 */
+	public int selectActivityCnt(Map<String, Object> map);
+	
+	
+	/**전체 활동 파일 썸네일 조회
+	 * 
+	 * @return List<EveryonesFarmFile> - 활동 파일 썸네일 리스트 
 	 */
 	public List<EveryonesFarmFile> selectActivityFileThumbnail();
 	
@@ -41,21 +47,6 @@ public interface ActivityDao {
 	 * @return List<EveryonesFarmFile> - 조회한 파일 정보를 담은 객체
 	 */
 	public List<EveryonesFarmFile> selectActivityFileWithActivity(int activityNo);
-	
-	
-	/**체험 활동 검색
-	 * 
-	 * @param map - 페이징 변수, 검색어(활동명)를 담은 매개변수
-	 * @return FarmActivity - 검색 결과(활동) 정보 반환
-	 */
-	public List<FarmActivity> selectActivityByTitle(Map<String, Object> map);
-	
-	
-	/**체험 활동 검색 결과 수 조회
-	 * 
-	 * @return int - 검색 결과 개수
-	 */
-	public int selectActivityByTitleCnt(Map<String, Object> map);
 	
 	
 	/**입력한 신청서 저장
@@ -104,34 +95,11 @@ public interface ActivityDao {
 	public int insertActivitySchedule(FarmActivitySchedule schedule);
 
 
-	/**페이징을 위해 전체 FarmActivity Count
-	 * 
-	 * @return int - count 결과 값
-	 */
-	public int selectActivityCnt(int isHelp);
-
-
 	/**농장 전체 목록 조회
 	 * 
 	 * @return List<Farm> - 조회된 농장 목록
 	 */
 	public List<Farm> selectFarmList();
-
-
-	/**농장명으로 활동 검색
-	 * 
-	 * @param map - 페이징 객체, 검색어(농장명)를 담은 Map
-	 * @return List<FarmActivity> - 검색 결과 리스트
-	 */
-	public List<FarmActivity> selectActivityByFarmName(Map<String, Object> map);
-
-
-	/**농장명으로 검색한 활동 목록 수
-	 * 
-	 * @param map - 검색어
-	 * @return int - 검색 결과 개수
-	 */
-	public int selectActivityByFarmNameCnt(Map<String, Object> map);
 
 
 	/**체험 번호로 일정 조회
@@ -164,6 +132,14 @@ public interface ActivityDao {
 	 * @return int - 삭제 결과
 	 */
 	public int deleteActivityFile(int activityNo);
+
+	
+	/**
+	 * 농장 번호로 농장 조회
+	 * @param farmNo - 조회할 농장 번호
+	 * @return Farm - 조회된 농장 정보
+	 */
+	public Farm selectFarmByFarmNo(int farmNo);
 
 
 	

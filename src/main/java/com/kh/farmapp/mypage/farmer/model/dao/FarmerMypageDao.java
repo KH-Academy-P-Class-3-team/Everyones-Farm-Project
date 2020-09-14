@@ -37,8 +37,9 @@ public interface FarmerMypageDao {
 
 	public FarmingDailylog read(int dailyLogNo);
 
+
 	public void delete(int dailylogNo);
-	
+
 	/**
 	 * 농장 체험 리스트
 	 * 최근 일반 고객들의 활동 신청 내역 리스트 조회(전체목록)
@@ -116,9 +117,5 @@ public interface FarmerMypageDao {
 
 	public List<Map<String, Object>> datelist(String date);
 
-
-
-
-	
 	
 }

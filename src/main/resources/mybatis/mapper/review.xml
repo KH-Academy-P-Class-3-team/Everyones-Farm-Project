@@ -15,7 +15,7 @@
         , A.USER_NO AS USER_NO
         , C.NAME AS FARMER_NAME
         , B.USER_NAME AS USER_NAME
-        , REG_DATE AS REG_DATE
+        , TO_CHAR(REG_DATE, 'YYYY-DD-MM HH24:MI') AS REG_DATE
         , REVIEW_SCORE AS REVIEW_SCORE
         , D.SAVE_PATH AS FILE_PATH
         , D.FILE_RENAME AS FILE_NAME
@@ -24,11 +24,15 @@
         ON A.USER_NO = B.USER_NO
         LEFT JOIN FARMER C
         ON A.FARMER_NO = C.FARMER_NO
-        LEFT JOIN REVIEW_FILE D
-        ON A.REVIEW_NO = D.REVIEW_NO
+        LEFT JOIN (
+        SELECT X.POST_NO, X.FILE_RENAME, X.SAVE_PATH FROM EVERYONES_FARM_FILE X
+        WHERE X.BOARD_NO = 5
+        ) D
+        ON A.REVIEW_NO = D.POST_NO
         <if test="reviewNo neq null and reviewNo neq ''">
             WHERE A.REVIEW_NO = #{reviewNo}
         </if>
+        ORDER BY REG_DATE DESC
     </select>
 
     <insert id="writeReview" parameterType="HashMap">
@@ -63,9 +67,10 @@
         )
     </insert>
     <insert id="insertReviewFile" parameterType="HashMap" keyProperty="id">
-        INSERT INTO REVIEW_FILE (
-        REVIEW_FILE_NO
-        , REVIEW_NO
+        INSERT INTO EVERYONES_FARM_FILE (
+        FILE_NO
+        , BOARD_NO
+        , POST_NO
         , ORIGIN_NAME
         , FILE_RENAME
         , SAVE_PATH
@@ -74,7 +79,8 @@
         </if>
         )
         VALUES(
-        review_file_seq.nextval
+        EF_FILE_SEQ.nextval
+        , 5
         ,#{reviewNo}
         ,#{originName}
         ,#{fileReName}
@@ -90,8 +96,9 @@
 		WHERE REVIEW_NO IN (${reviewNos})
 	</delete>
     <delete id="deleteReview_file" parameterType="HashMap">
-		DELETE FROM REVIEW_FILE
-		WHERE REVIEW_NO IN (${reviewNos})
+		DELETE FROM EVERYONES_FARM_FILE
+		WHERE POST_NO IN (${reviewNos})
+		AND BOARD_NO = 5
 	</delete>
 
 </mapper>
