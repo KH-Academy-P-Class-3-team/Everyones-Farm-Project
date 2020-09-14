@@ -186,7 +186,7 @@ a:hover {
 			</div>
 				</div>
 				<div id="root" style="width: 800px">
-				<a href="/farmapp/mypage/selllist" class="list-group-item list-group-item-action text-center font-weight-bold">판매 현황</a>
+				<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}" class="list-group-item list-group-item-action text-center font-weight-bold">판매 현황</a>
 					
 					<div id ="border" style =" border : 2px solid black; height:305px;">
 					<form role="form" method="get"	action="/farmapp/mypage/selllist">
@@ -231,17 +231,17 @@ a:hover {
 						<ul>
 							<c:if test="${pageMaker.prev}">
 								<li><a class="page-link"
-									href="selllist${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+									href="selllist?farmerno=${farmerInfo.farmerNo}${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 							</c:if>
 
 							<c:forEach begin="${pageMaker.startPage}"
 								end="${pageMaker.endPage}" var="idx">
-								<li><a class="page-link" href="selllist${pageMaker.makeQuery(idx)}">${idx}</a></li>
+								<li><a class="page-link" href="selllist?farmerno=${farmerInfo.farmerNo}${pageMaker.makeQuery(idx)}">${idx}</a></li>
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li><a class="page-link"
-									href="selllist${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+									href="selllist?farmerno=${farmerInfo.farmerNo}${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 							</c:if>
 						</ul>
 					</div>

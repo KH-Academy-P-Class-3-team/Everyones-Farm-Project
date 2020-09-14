@@ -128,12 +128,14 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	@Override
 	public List<Map<String, Object>> selllist(Criteria cri ,Farmer farmer) {
 		Map<String, Object> data = new HashMap<String, Object>();
+		
 		data.put("farmerNo", farmer.getFarmerNo());
 		data.put("cri", cri);
 		
 		List<Map<String,Object>> res = farmerMypageDao.selllist(data);
-		System.out.println("서비스"+res);
+		System.out.println(res);
 		return res;
+		
 	}
 	//판매내역 총 갯수
 	@Override

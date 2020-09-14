@@ -183,26 +183,27 @@ public class FarmerMypageController {
 	// 판매 페이지 리스트
 	@RequestMapping(value = "/mypage/selllist", method = RequestMethod.GET)
 	public String selllist(Model model, Criteria cri, HttpSession session, HttpServletRequest request) {
-	Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-	System.out.println("판매 페이지 접속완료");
-	List<Map<String, Object>> sellMap = farmerMypageService.selllist(cri,farmer);
-	System.out.println(sellMap);
-//	잘 나오는지 테스트하기
-	for (int i = 0; i < sellMap.size(); i++) {
-		System.out.println("컨트롤러"+sellMap.get(i).toString());
-	}
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		System.out.println("판매 페이지 접속완료");
+		List<Map<String, Object>> sellMap = farmerMypageService.selllist(cri,farmer);
+		System.out.println(sellMap);
+//		잘 나오는지 테스트하기
+		for (int i = 0; i < sellMap.size(); i++) {
+			System.out.println("컨트롤러"+sellMap.get(i).toString());
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(farmerMypageService.listCount4(farmer));
+		
+		//농부 객체
+		model.addAttribute("farmerInfo",farmer);
+				
+		model.addAttribute("list", sellMap);
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "/mypage/selllist";
 	
-	PageMaker pageMaker = new PageMaker();
-	pageMaker.setCri(cri);
-	pageMaker.setTotalCount(farmerMypageService.listCount4(farmer));
-	
-	//농부 객체
-	model.addAttribute("farmerInfo",farmer);
-			
-	model.addAttribute("list", sellMap);
-	model.addAttribute("pageMaker", pageMaker);
-	
-	return "/mypage/selllist";
 	}
 	
 	

@@ -109,7 +109,7 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	// 판매 내역 리스트 조회하기
 	@Override
 	public List<Map<String, Object>> selllist(Map<String, Object> map) {
-		System.out.println("다오"+map);
+		System.out.println("다오"+map.toString());
 		return session.selectList("MYPAGESELL.listPage",map);
 	}
 	
