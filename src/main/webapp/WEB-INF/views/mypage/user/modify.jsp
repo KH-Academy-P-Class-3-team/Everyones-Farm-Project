@@ -179,14 +179,14 @@ a:hover {
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">회원 정보 수정</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+					<a href="<%=request.getContextPath()%>/mypage/user/modify" style="font-weight: bold;">회원정보
 						수정</a>
 				</div>
 				<div class="panel-body">
@@ -232,7 +232,7 @@ a:hover {
 						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 					</div>
 					<div class="panel-body">
-						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						<a href="/farmapp/mypage/activitylist">체험
 							신청내역</a>
 					</div>
 
@@ -240,10 +240,8 @@ a:hover {
 			</c:if>
 		</div>
 		<div class="col-lg-1">
-
-			<form method="post"
-				action="<%=request.getContextPath()%>/modify/userInfo"
-				onsubmit="return validate();" enctype="multipart/form-data">
+		<form method="post"
+				action="<%=request.getContextPath()%>/modify/profile" enctype="multipart/form-data">
 				<div class="media">
 					<div class="preview" id="preview">
 						<c:if test="${profile eq null }">
@@ -261,6 +259,29 @@ a:hover {
 						class="files" for="files">사진 선택</label> <span class="file-text">이미지
 						크기는 980 x 600 픽셀을 권장합니다</span>
 				</div>
+				<button type="submit" class="btn btn-warning center-block">사진변경</button>
+				</form>
+
+			<form method="post"
+				action="<%=request.getContextPath()%>/modify/userInfo"
+				onsubmit="return validate();" enctype="multipart/form-data">
+<!-- 				<div class="media"> -->
+<!-- 					<div class="preview" id="preview"> -->
+<%-- 						<c:if test="${profile eq null }"> --%>
+<!-- 							<img -->
+<%-- 								src="<%=request.getContextPath()%>/resources/image/mypage/no_one.jpg" --%>
+<!-- 								class="img-circle" id="oldone"> -->
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${profile.userNo eq userInfo.userNo }"> --%>
+<!-- 							<img -->
+<%-- 								src="<%=request.getContextPath() %>/resources/image/mypage/${profile.fileRename}" --%>
+<!-- 								class="img-circle" id="oldone" name="upload"> -->
+<%-- 						</c:if> --%>
+<!-- 					</div> -->
+<!-- 					<input type="file" id="upload" name="upload" multiple /> <label -->
+<!-- 						class="files" for="files">사진 선택</label> <span class="file-text">이미지 -->
+<!-- 						크기는 980 x 600 픽셀을 권장합니다</span> -->
+<!-- 				</div> -->
 				<div class="ModifyUserInfo">
 					<!-- 			아이디 -->
 					<div class="input-group">

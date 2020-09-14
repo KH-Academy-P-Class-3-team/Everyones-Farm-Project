@@ -31,8 +31,7 @@ import com.google.gson.JsonObject;
 import com.kh.farmapp.admin.notice.controller.AdminNoticeController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
-import common.dto.Admin;
-import common.dto.Notice;
+import common.dto.AnsweredOneonone;
 import common.dto.QuestionOneonone;
 import common.dto.UserTB;
 
@@ -78,10 +77,13 @@ public class MypageO3Controller {
 
 		UserTB user = (UserTB) session.getAttribute("userInfo");
 		ModelAndView mav = new ModelAndView();
+		
 
 		//디테일 페이지 정보
-		QuestionOneonone o3 = mypageService.o3Detail(QUESTION_NO);
+		QuestionOneonone o3 = mypageService.o3Detail(QUESTION_NO, user.getUserNo());
 		System.out.println(o3);
+		//답변 정보 
+		AnsweredOneonone answer = mypageService.answerDetail(QUESTION_NO);
 
 		//게시물 수 구하기
 		Map<String, Object> total = mypageService.getTotal(user);
@@ -93,7 +95,7 @@ public class MypageO3Controller {
 		int forDown = QUESTION_NO;
 		while( min <= forDown) {
 			--forDown;
-			down = mypageService.o3Detail(forDown);
+			down = mypageService.o3Detail(forDown, user.getUserNo());
 			
 			if(down != null)
 			break;
@@ -103,7 +105,7 @@ public class MypageO3Controller {
 		int forUp = QUESTION_NO;
 		while( max >= forUp) {
 			++forUp;
-			up = mypageService.o3Detail(forUp);
+			up = mypageService.o3Detail(forUp, user.getUserNo());
 			
 			if(up != null)
 			break;
@@ -112,6 +114,7 @@ public class MypageO3Controller {
 		mav.addObject("down", down);
 		mav.addObject("total", total);
 		mav.addObject("one", o3);
+		mav.addObject("answer", answer);
 		mav.setViewName("mypage/user/mypageO3Detail");
 
 		return mav;

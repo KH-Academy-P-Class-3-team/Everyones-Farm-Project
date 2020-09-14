@@ -67,7 +67,7 @@ a:hover {
 	<div class="container">
 		<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">회원 탈퇴</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -87,7 +87,7 @@ a:hover {
 				</div>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
-						style="color: #ccc;">회원 탈퇴</a>
+						style="color: #ccc;" style="font-weight: bold;">회원 탈퇴</a>
 				</div>
 			</div>
 
@@ -120,7 +120,7 @@ a:hover {
 						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 					</div>
 					<div class="panel-body">
-						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						<a href="/farmapp/mypage/activitylist">체험
 							신청내역</a>
 					</div>
 

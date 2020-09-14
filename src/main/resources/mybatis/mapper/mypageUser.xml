@@ -100,6 +100,8 @@
 		FROM QUESTION_ONEONONE
 		WHERE question_no =
 		#{qNo}
+		AND
+		user_no= #{userNo}
 	</select>
 	<insert id="insertO3">
 	INSERT INTO
@@ -272,7 +274,6 @@
 		odr.SECOND_ADDRESS,
 		odr.ORDER_AMOUNT,
 		pro.OPTION_NAME,
-		pro.OPTION_NO,
 		pro.PRODUCT_NAME,
 		pro.PRODUCT_NO
 		from tb_order odr,
@@ -281,7 +282,8 @@
 		WHERE p.product_no=o.product_no) pro
 		WHERE odr.OPTION_NO = pro.OPTION_NO
 		AND ORDER_NO = #{orderNo}
-		ORDER BY odr.ORDER_NO
+		AND USER_NO = #{userNo}
+		ORDER BY ORDER_NO
 	</select>
 
 
@@ -368,6 +370,10 @@
 		where b.option_no = p.option_no AND b.user_no = #{userNo}
         AND purchase = 1
 		order by b.basket_no
+	</select>
+	
+	<select id="selectAnswer" resultType="ANSWER">
+	select * from answered_oneonone where question_no = #{questionNo}
 	</select>
 	
 </mapper>

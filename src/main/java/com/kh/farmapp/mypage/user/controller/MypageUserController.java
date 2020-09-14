@@ -1,8 +1,5 @@
 package com.kh.farmapp.mypage.user.controller;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,17 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
-import common.dto.Farmer;
 import common.dto.UserProfile;
 import common.dto.UserTB;
 
@@ -69,14 +62,25 @@ public class MypageUserController {
 		UserTB user2 = (UserTB) session.getAttribute("userInfo");
 		int userno = user2.getUserNo();
 		
+		user.setUserNo(userno);
+		mypageService.modifyUser(user);
+			
+		return "redirect:/mypage/user/modify";
+		
+	}
+	//회원 정보를 수정한다
+	@RequestMapping("/modify/profile")
+	public String modifyProfile(UserTB user, HttpSession session, MultipartFile upload) {
+		
+		UserTB user2 = (UserTB) session.getAttribute("userInfo");
+		int userno = user2.getUserNo();
+		
 		String root  = session.getServletContext().getRealPath("/");
 		
 		user.setUserNo(userno);
-		System.out.println("테스트"+upload.getName()+"테스트2"+upload.getOriginalFilename() );
-		mypageService.modifyUser(user, root, upload);
-			
+		mypageService.modifyUserProfile(user, root, upload);
+		
 		return "redirect:/mypage/user/modify";
-			
 		
 	}
 	

@@ -76,7 +76,7 @@ a:hover {
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">1대 1문의</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -87,7 +87,7 @@ a:hover {
 						수정</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List" style="font-weight: bold;">1대
 						1 문의</a>
 				</div>
 				<div class="panel-body">
@@ -123,6 +123,13 @@ a:hover {
 			</div>
 			<hr>
 			<div class="content">${one.content }</div>
+			<c:if test="${answer.answeredNo ne null }">
+			<div>
+			<hr>
+			<div>${answer.title }</div>
+			<div class="content">${answer.content }</div>
+			</div>
+			</c:if>
 			<div class="nearcontent">
 				<table class="table">
 
@@ -170,6 +177,7 @@ a:hover {
 					</c:if>
 				</table>
 			</div>
+			
 			<div>
 				<button class="btn btn btn-success pull-right" type="button"
 					onclick="javascript:location.href='mypageO3List'">뒤로가기</button>

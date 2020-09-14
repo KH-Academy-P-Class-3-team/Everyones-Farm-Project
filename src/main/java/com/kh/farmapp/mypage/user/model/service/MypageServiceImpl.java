@@ -1,31 +1,21 @@
 package com.kh.farmapp.mypage.user.model.service;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
 
-import common.dto.Application;
-import common.dto.Basket;
-import common.dto.EveryonesFarmFile;
-import common.dto.Product;
-import common.dto.Purchase;
+import common.dto.AnsweredOneonone;
 import common.dto.QuestionOneonone;
-import common.dto.TBOrder;
-import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
 import common.util.ActivityFileUtil;
-import common.util.FileUtil;
 import common.util.Paging;
 
 @Service
@@ -38,7 +28,7 @@ public class MypageServiceImpl implements MyPageService{
 	BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
-	public int modifyUser(UserTB user, String root, MultipartFile upload) {
+	public int modifyUser(UserTB user) {
 		
 		String password = user.getUserPw();
 		password = passwordEncoder.encode(password);
@@ -46,30 +36,36 @@ public class MypageServiceImpl implements MyPageService{
 		user.setUserPw(password);
 		int res = mypageDao.modifyUser(user);
 		
-		if(upload.getOriginalFilename() != "") {
-		ActivityFileUtil fileUtil = new ActivityFileUtil();
-		
-		
-		
-		UserProfile check = new UserProfile();
-		check = mypageDao.selectUserProfile(user.getUserNo());
-		check = fileUtil.fileUpload(upload, root);
-		
-
-		Map<String, Object> fileMap = new HashMap<String, Object>();
-		fileMap.put("userNo", user.getUserNo());
-		fileMap.put("fileData", check);
-		int result=0;
-		if(check == null) {
-			result = mypageDao.insertprofile(fileMap);
-		}else {
-			result = mypageDao.modifyprofile(fileMap);
-		}
-		System.out.println("result"+result);
-		}
 		
 		return res;
 	}
+
+	@Override
+	public void modifyUserProfile(UserTB user, String root, MultipartFile upload) {
+			if(upload.getOriginalFilename() != "") {
+			ActivityFileUtil fileUtil = new ActivityFileUtil();
+			
+			
+			
+			UserProfile check = new UserProfile();
+			check = mypageDao.selectUserProfile(user.getUserNo());
+			check = fileUtil.fileUpload(upload, root);
+			
+
+			Map<String, Object> fileMap = new HashMap<String, Object>();
+			fileMap.put("userNo", user.getUserNo());
+			fileMap.put("fileData", check);
+			int result=0;
+			if(check == null) {
+				result = mypageDao.insertprofile(fileMap);
+			}else {
+				result = mypageDao.modifyprofile(fileMap);
+			}
+			System.out.println("result"+result);
+			}
+		
+	}
+
 
 	
 	@Override
@@ -103,14 +99,6 @@ public class MypageServiceImpl implements MyPageService{
 		return res;
 	}
 
-	@Override
-	public void insertFile(UserTB user, File file, String root) {
-		
-		FileUtil fileUtil = new FileUtil();
-		
-//		List<Map<String, String>> filedata = fileUtil.fileUpload(file, root);
-		
-	}
 	
 	@Override
 	public int leave(UserTB user) {
@@ -138,21 +126,10 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public QuestionOneonone o3Detail(int qNo) {
-		return mypageDao.o3Detail(qNo);
+	public QuestionOneonone o3Detail(int qNo, int userNo) {
+		return mypageDao.o3Detail(qNo, userNo);
 	}
 
-	@Override
-	public int o3Upload(QuestionOneonone qO3) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int o3Modify(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int o3Delete(int qNo) {
@@ -164,11 +141,6 @@ public class MypageServiceImpl implements MyPageService{
 		return mypageDao.appliActList(user);
 	}
 
-	@Override
-	public Application appliHelpList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Map<String, Object> basketList(int userNo, int cPage, int cntPerPage) {
@@ -191,11 +163,6 @@ public class MypageServiceImpl implements MyPageService{
 		return basketList;
 	}
 
-	@Override
-	public int addProduct(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public Map<String, Object> orderList(int userNo, int cPage, int cntPerPage) {
@@ -221,15 +188,10 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public Map<String, Object> orderDetail(int orderNo) {
-		return mypageDao.orderDetail(orderNo);
+	public Map<String, Object> orderDetail(int orderNo, int userNo) {
+		return mypageDao.orderDetail(orderNo, userNo);
 	}
 
-	@Override
-	public UserAddress getAddress(UserTB user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 
@@ -287,7 +249,7 @@ public class MypageServiceImpl implements MyPageService{
 		
 		UserTB userchk = mypageDao.selectEmailCheck(email); 
 		int res = 0;
-		if(userchk.getUserNo()==user.getUserNo() || user.getPhone()==null) {
+		if( userchk==null ||userchk.getEmail().equals(user.getEmail())) {
 			return res;
 		}else {
 			res = 1;
@@ -300,7 +262,7 @@ public class MypageServiceImpl implements MyPageService{
 	public int selectPhoneCheck(String phone, UserTB user) {
 		UserTB userchk = mypageDao.selectPhoneCheck(phone); 
 		int res = 0;
-		if(userchk.getUserNo()==user.getUserNo() || user.getPhone()==null) {
+		if(userchk==null || userchk.getPhone().equals(user.getPhone())) {
 			return res;
 		}else {
 			res = 1;
@@ -370,6 +332,13 @@ public class MypageServiceImpl implements MyPageService{
 		
 		
 	}
+
+
+	@Override
+	public AnsweredOneonone answerDetail(int questionNo) {
+		return mypageDao.selectAnswer(questionNo);
+	}
+
 
 
 

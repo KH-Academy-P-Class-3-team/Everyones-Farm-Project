@@ -54,7 +54,7 @@ a:hover {
 	<div class="container">
 		<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">1대 1문의</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -65,7 +65,7 @@ a:hover {
 						수정</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List" style="font-weight: bold;">1대
 						1 문의</a>
 				</div>
 				<div class="panel-body">
@@ -107,7 +107,7 @@ a:hover {
 						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 					</div>
 					<div class="panel-body">
-						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						<a href="/farmapp/mypage/activitylist">체험
 							신청내역</a>
 					</div>
 

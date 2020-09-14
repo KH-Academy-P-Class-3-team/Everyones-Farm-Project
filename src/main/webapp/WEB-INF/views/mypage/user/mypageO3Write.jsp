@@ -113,7 +113,7 @@ $(document).ready(function(){
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">1대1 문의</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -124,7 +124,7 @@ $(document).ready(function(){
 						수정</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List" style="font-weight: bold;">1대
 						1 문의</a>
 				</div>
 				<div class="panel-body">

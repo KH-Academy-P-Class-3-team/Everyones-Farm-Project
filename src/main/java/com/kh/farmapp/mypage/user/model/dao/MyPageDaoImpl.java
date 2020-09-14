@@ -1,5 +1,6 @@
 package com.kh.farmapp.mypage.user.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,15 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import common.dto.AnsweredOneonone;
-import common.dto.Application;
-import common.dto.Basket;
-import common.dto.Product;
 import common.dto.QuestionOneonone;
-import common.dto.TBOrder;
-import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
-import common.util.Paging;
 
 @Repository
 public class MyPageDaoImpl implements MyPageDao{
@@ -70,8 +65,11 @@ public class MyPageDaoImpl implements MyPageDao{
 	
 
 	@Override
-	public QuestionOneonone o3Detail(int qNo) {
-		return sqlSession.selectOne("Mypage.selectO3one", qNo);
+	public QuestionOneonone o3Detail(int qNo, int userNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("qNo", qNo);
+		map.put("userNo", userNo);
+		return sqlSession.selectOne("Mypage.selectO3one", map);
 	}
 
 
@@ -93,11 +91,6 @@ public class MyPageDaoImpl implements MyPageDao{
 		return sqlSession.selectList("Mypage.selectBasketList", sub);
 	}
 
-	@Override
-	public int addProduct(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<Map<String, Object>> orderList(Map<String, Object> sub) {
@@ -107,8 +100,11 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
-	public Map<String, Object> orderDetail(int orderNo) {
-		return sqlSession.selectOne("Mypage.selectOrderDetail", orderNo);
+	public Map<String, Object> orderDetail(int orderNo, int userNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("orderNo", orderNo);
+		map.put("userNo", userNo);
+		return sqlSession.selectOne("Mypage.selectOrderDetail", map);
 	}
 
 
@@ -183,32 +179,6 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 
-	@Override
-	public int o3Upload(QuestionOneonone qO3) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public int o3Modify(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public Application appliHelpList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public UserAddress getAddress(UserTB user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	@Override
@@ -226,6 +196,12 @@ public class MyPageDaoImpl implements MyPageDao{
 	@Override
 	public int subPurchase(int basketNo) {
 		return sqlSession.update("Mypage.backPurchase", basketNo);
+	}
+
+
+	@Override
+	public AnsweredOneonone selectAnswer(int questionNo) {
+		return sqlSession.selectOne("Mypage.selectAnswer", questionNo);
 	}
 
 

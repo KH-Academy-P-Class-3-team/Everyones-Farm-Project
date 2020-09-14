@@ -1,24 +1,19 @@
 package com.kh.farmapp.mypage.user.model.service;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import common.dto.Application;
-import common.dto.Basket;
-import common.dto.Product;
+import common.dto.AnsweredOneonone;
 import common.dto.QuestionOneonone;
-import common.dto.TBOrder;
-import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
 
 public  interface MyPageService {
 
 	//개인정보 수정 
-	public int modifyUser(UserTB user, String root, MultipartFile upload);
+	public int modifyUser(UserTB user);
 	/**
 	 * 수정페이지에 개인사진 불러오기
 	 * @param user
@@ -36,13 +31,8 @@ public  interface MyPageService {
 	public Map<String, Object> o3List(int cPage, int cntPerPage, UserTB user);
 	
 	//일대일 문의 상세보기
-	public QuestionOneonone o3Detail(int qNo);
+	public QuestionOneonone o3Detail(int qNo, int userNo);
 	
-	//일대일 문의 등록
-	public int o3Upload(QuestionOneonone qO3);
-	
-	//일대일 문의 수정
-	public int o3Modify(int qNo);
 
 	//일대일 문의 삭제
 	public int o3Delete(int qNo);
@@ -51,36 +41,20 @@ public  interface MyPageService {
 	//리스트 안에서 페이징 호출
 	public List<Map<String, Object>> appliActList(UserTB user);
 	
-	//개인 등록 일손돕기 리스트
-	//리스트 안에서 페이징 호출
-	public Application appliHelpList();
 	
 	//장바구니 목록 리스트
 	//리스트 안에서 페이징 호출
 	public Map<String, Object> basketList(int userNo, int cPage, int cntPerPage);
 
-	//체크된 상품들의 가격을 더해서 나타내주는 메서드
-	public int addProduct(Map<String , Object> map);
 	
 	//구매목록 리스트
 	//리스트 안에서 페이징 호출
 	public Map<String, Object> orderList(int userNo, int cPage, int cntPerPage);
 	
 	//구매목록 상세 페이지
-	public Map<String, Object> orderDetail(int orderNo);
+	public Map<String, Object> orderDetail(int orderNo, int userNo);
 	
-	//구매 상세 페이지 안에서 고객의 주소를 불러와준다.
-	public UserAddress getAddress(UserTB user);
 
-	/**
-	 * 
-	 * 파일을 전송하고 바꿔주는 메서드
-	 * 
-	 * @param user
-	 * @param file
-	 * @param root
-	 */
-	public void insertFile(UserTB user, File file, String root);
 
 	/*
 	 * 개인정보 불러오기
@@ -160,6 +134,21 @@ public  interface MyPageService {
 	 * @param arr
 	 */
 	public int canclePurchase(int[] arr);
+	
+	/**
+	 * 일대일 문의 답변 정보를 얻어오는 메서드
+	 * @param qUESTION_NO
+	 * @return
+	 */
+	public AnsweredOneonone answerDetail(int questionNo);
+	
+	/**
+	 * 유저 사진만 변경하는 메서드
+	 * @param user
+	 * @param root
+	 * @param upload
+	 */
+	public void modifyUserProfile(UserTB user, String root, MultipartFile upload);
 
 
 

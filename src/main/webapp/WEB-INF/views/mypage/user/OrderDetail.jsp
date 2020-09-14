@@ -110,20 +110,19 @@ a:hover {
 }
 
 #tekbeCompnayList {
-	width: 480px;
+	width: 550px;
 	height: 30px;
-	padding-left: 10px;
 	font-size: 18px;
 	border-radius: 3px;
 }
 
 #invoiceNumberText {
-	width: 480px;
+	width: 550px;
 	height: 30px;
 	padding-left: 10px;
 	font-size: 18px;
 	border-radius: 3px;
-	margin-right: 20px;
+	margin-bottom: 20px;
 }
 
 #tekbeCompnayName, #invoiceNumber {
@@ -147,11 +146,22 @@ td, th {
 .nearcontent{
 	margin-top: 30px;
 }
+.col-lg-11{
+	margin-top: 10px;
+}
+.forShip div{
+	margin : 0;
+	width : 100%;
+}
+#myPtag2, #myPtag{
+	width : 100%;
+}
 </style>
 
 <!-- jquery -->
 ﻿
 <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 	$(document)
 			.ready(
@@ -286,7 +296,7 @@ td, th {
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">주문</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -312,7 +322,7 @@ td, th {
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+					<a href="<%=request.getContextPath()%>/mypage/user/basket" style="font-weight: bold;">주문</a>
 				</div>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
@@ -339,7 +349,7 @@ td, th {
 						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 					</div>
 					<div class="panel-body">
-						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						<a href="/farmapp/mypage/activitylist" >체험
 							신청내역</a>
 					</div>
 
@@ -498,7 +508,7 @@ td, th {
 				onclick="javascript:location.href='deleteOrder?orderNo=${orderDetail.ORDER_NO}'">삭제</button>
 			</c:if>
 			<button class="btn btn-success pull-right bottom" type="button"
-				onclick="javascript:location.href='mypageO3List'">뒤로가기</button>
+				onclick="javascript:location.href='orderList'">뒤로가기</button>
 		</div>
 	</div>
 </div>

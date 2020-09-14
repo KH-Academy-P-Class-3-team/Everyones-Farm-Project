@@ -1,7 +1,6 @@
 package com.kh.farmapp.mypage.user.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +46,9 @@ public class MypageBasketController {
 		//구매대기 목록
 		Map<String, Object> purchase = mypageService.basketListPur(userNo);
 		
-		
+		user = mypageService.selectUser(user);
+		user.setFirstAddress(user.getFirstAddress()+user.getSecondAddress());
+		mav.addObject("user", user);
 		mav.addObject("page", basket.get("page"));
 		mav.addObject("basket", basket);
 		mav.addObject("purchase", purchase);
@@ -188,12 +188,12 @@ public class MypageBasketController {
 	}
 
 	//구매 목록 리스트 상세 정보
-	@RequestMapping("mypage/user/OrderDetail")
+	@RequestMapping("/mypage/user/OrderDetail")
 	public ModelAndView orderDetail(int orderNo, HttpSession session) {
 		
 		UserTB user = (UserTB) session.getAttribute("userInfo");
-		
-		Map<String, Object> orderDetail = mypageService.orderDetail(orderNo);
+		System.out.println(orderNo);
+		Map<String, Object> orderDetail = mypageService.orderDetail(orderNo, user.getUserNo());
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -210,7 +210,7 @@ public class MypageBasketController {
 		int forDown = orderNo;
 		while( min <= forDown) {
 			--forDown;
-			down = mypageService.orderDetail(forDown);
+			down = mypageService.orderDetail(forDown, user.getUserNo());
 			
 			if(down != null)
 			break;
@@ -220,11 +220,12 @@ public class MypageBasketController {
 		int forUp = orderNo;
 		while( max >= forUp) {
 			++forUp;
-			up = mypageService.orderDetail(forUp);
+			up = mypageService.orderDetail(forUp, user.getUserNo());
 			
 			if(up != null)
 			break;
 		}
+		System.out.println("orderDetail :"+orderDetail);
 		System.out.println("up :"+up);
 		System.out.println("down : "+down);
 		mav.addObject("up", up);
@@ -236,7 +237,10 @@ public class MypageBasketController {
 		return mav;
 		
 	}
-	
+	@RequestMapping("/basket/done")
+	public String payDone() {
+		return "redirect:/mypage/user/basket";
+	}
 	
 
 }

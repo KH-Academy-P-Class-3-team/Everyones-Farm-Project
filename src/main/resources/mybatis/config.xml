@@ -23,6 +23,7 @@
 		<typeAlias type="common.dto.TBOrder" alias="TBORDER"/>
 		<typeAlias type="common.dto.UserProfile" alias="USERFILE"/>
 		<typeAlias type="common.dto.Basket" alias="BASKET"/>
+		<typeAlias type="common.dto.AnsweredOneonone" alias="ANSWER"/>
 		
 	</typeAliases>
 	

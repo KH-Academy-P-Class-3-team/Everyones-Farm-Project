@@ -114,7 +114,7 @@ a:hover {
 	<div class="row">
 		<!-- 사이드 네비게이션 -->
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">활동 신청 현황</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -129,7 +129,7 @@ a:hover {
 						1 문의</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive" style="font-weight: bold;">활동
 						신청 현황</a>
 				</div>
 				<div class="panel-body">
