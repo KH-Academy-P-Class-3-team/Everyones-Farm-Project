@@ -37,14 +37,24 @@
 		<div class="main__food">
 			<div class="food__top">
 				<div class="food__top-title">제철 먹거리</div>
-				<div class="food__top-more"><span>더보기</span><a href="#"><i class="fas fa-chevron-right"></i></a></div>
+				<div class="food__top-more"><a href="<%=request.getContextPath() %>/product/seasonlist.do" style="text-decoration: none; color: black;"><span>더보기</span><i class="fas fa-chevron-right"></i></a></div>
 			</div>
 			<div class="food__bottom">
-				<c:forEach var="i" begin="1" end="3">
+<%-- 				<c:forEach var="i" begin="1" end="3"> --%>
+					<c:forEach items="${seasonalfoodlist }" var="seasonal">
 					<div class="food__bottom-wrap">
 						<a href="#">
-							<img class="bottom-wrap__food-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_cherry1.jpg" 
-							width="300" height="250" /><div class="bottom-wrap__food-desc">먹거리 이름</div>
+							<c:choose>
+								<c:when test="${empty seasonal.fileRename }">
+								<img class="bottom-wrap__food-img" alt="food" src="<%=request.getContextPath() %>/resources/img/main_cherry1.jpg" 
+									width="300" height="250" />	
+								</c:when>
+								<c:when test="${not empty seasonal.fileRename }">
+								<img class="bottom-wrap__food-img" alt="food" src="<%=request.getContextPath() %>/resources/img/${seasonal.fileRename}" 
+									width="300" height="250" />	
+								</c:when>
+							</c:choose>
+							<div class="bottom-wrap__food-desc">${seasonal.productName }</div>
 						</a>
 					</div>
 				</c:forEach>

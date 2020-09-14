@@ -22,8 +22,9 @@ public class MainServiceImpl implements MainService{
 	@Autowired
 	private MainDao mainDao;
 
+	// 제철 먹거리 top3 조회
 	@Override
-	public List<Product> selectTop3SeasonalFood() {
+	public List<Map<String, Object>> selectTop3SeasonalFood() {
 		return mainDao.selectTop3SeasonalFood();
 	}
 

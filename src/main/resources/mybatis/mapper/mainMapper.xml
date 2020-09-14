@@ -36,5 +36,48 @@
 		) rank
 		where farm_rank between 1 and 3
 	</select>
+	
+	<!-- 제철 먹거리 top3 조회 -->
+	<resultMap type="hashmap" id="seasonalFoodMap">
+		<result property="productNo" column="product_no"/>
+		<result property="productName" column="product_name"/>
+		<result property="fileRename" column="file_rename"/>
+	</resultMap>
+	<select id="selectTop3SeasonalFood" resultMap="seasonalFoodMap">
+		select
+		    p_rank.product_no
+		    , p_rank.name product_name
+		    , product_img.file_rename
+		from (
+		    select
+		        rownum product_rank
+		        , product_list.*
+		    from (
+		        select 
+		            * 
+		        from 
+		            product 
+		        where 
+		            is_seasonal_food = 1
+		        order by
+		            sales desc, product_no
+		    ) product_list
+		) p_rank
+		    LEFT OUTER JOIN
+		        (
+		        select 
+		            efile.file_rename
+		            , efile.post_no
+		        from 
+		            everyones_farm_file efile
+		        where 
+		            efile.board_no = 4
+		            and efile.is_thumbnail = 1
+		        ) product_img
+		    ON
+		        p_rank.product_no = product_img.post_no
+		where
+		    p_rank.product_rank between 1 and 3
+	</select>
 
 </mapper>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.farmapp.main.model.service.MainService;
 
+import common.dto.Product;
 import common.dto.UserTB;
 
 @Controller
@@ -48,7 +49,18 @@ public class MainController {
 //			System.out.println(m);
 //		}
 		
-		model.addAttribute("farmlist", farmTop3);
+		// 제철 먹거리 top3 불러오기
+		List<Map<String, Object>> seasonalFoodTop3 = mainService.selectTop3SeasonalFood();
+		for(Map<String, Object> p : seasonalFoodTop3) {
+			logger.debug("product: " + p);
+		}
+		
+		if( farmTop3 != null ) {
+			model.addAttribute("farmlist", farmTop3);
+		}
+		if(seasonalFoodTop3 != null) {
+			model.addAttribute("seasonalfoodlist", seasonalFoodTop3);
+		}
   
 		return "/main/index";
 	}

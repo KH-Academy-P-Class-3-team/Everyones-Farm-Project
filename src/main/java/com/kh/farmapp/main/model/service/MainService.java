@@ -16,9 +16,9 @@ public interface MainService {
 	/**
 	 * 메인 화면에 보여줄 제철 먹거리 상품 조회 요청
 	 * 제철 먹거리 인기 판매순으로 3가지만 조회한다.
-	 * @return List<Product> - 조회 결과 반환
+	 * @return List<Map<String, Object>> - 조회 결과 반환
 	 */
-	public List<Product> selectTop3SeasonalFood();
+	public List<Map<String, Object>> selectTop3SeasonalFood();
 	
 	/**
 	 * 메인 화면에 보여줄 이달의 농장 Top3를 조회 요청

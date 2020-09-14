@@ -22,11 +22,12 @@ public class MainDaoImpl implements MainDao {
 	@Autowired
 	private SqlSessionTemplate session;
 
+	// 제철 먹거리 top3 조회
 	@Override
-	public List<Product> selectTop3SeasonalFood() {
-		return null;
+	public List<Map<String, Object>> selectTop3SeasonalFood() {
+		return session.selectList("MAIN.selectTop3SeasonalFood");
 	}
-
+	
 	@Override
 	public List<Map<String, Object>> selectTop3Farm() {
 		return session.selectList("MAIN.selectFarmTop3");
