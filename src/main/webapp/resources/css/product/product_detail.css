@@ -230,3 +230,9 @@ input[type=number]::-webkit-outer-spin-button {
 .cartbtn{
 	float: right;
 }
+
+select{
+	height: 30px;
+	width: 330px;
+    margin-bottom: 10px;
+}

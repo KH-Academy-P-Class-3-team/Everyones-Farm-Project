@@ -30,11 +30,17 @@ public class ReviewDaoImpl implements ReviewDao {
 
 
 //        sqlSession.selectList()
-        int seq =  sqlSession.insert("Review.writeReview", map);
+        int nRes =  sqlSession.insert("Review.writeReview", map);
 
-        if(seq > 0){
-            return sqlSession.insert("Review.insertReviewFile", map);
+        if(nRes > 0){
+            if(map.get("originName") != null && !map.get("originName").equals("")) {
+                return sqlSession.insert("Review.insertReviewFile", map);
+            }else {
+                return nRes;
+            }
         }
+
+
         return -1;
     }
 

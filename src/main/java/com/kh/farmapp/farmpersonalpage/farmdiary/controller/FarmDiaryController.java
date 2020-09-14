@@ -142,50 +142,12 @@ public class FarmDiaryController {
 
 	//게시글 삭제
 	@RequestMapping(value = "/farmdiary/farmdiarydelete.do", method = RequestMethod.GET )
-<<<<<<< HEAD
 	public String deleteFarmdiary(@RequestParam(value="farmDiaryNo") int farmDiaryNo, String farmerNo){
 		
 		
 		farmdiaryService.deleteFarmDiary(farmDiaryNo);		
 		
 		return "redirect:/farmdiary/farmdiarylist.do?farmDiaryNo="+farmDiaryNo+"&farmerNo="+farmerNo;
-=======
-	public String deleteFarmdiary(
-			@RequestParam(value="farmDiaryNo") int farmDiaryNo
-			// farmerNo 쿼리 스트링 가져오기
-			, String farmerNo
-			//			, String farmerId, HttpSession session
-			){
-
-		//		ModelAndView mav = new ModelAndView();
-		int delRes = farmdiaryService.deleteFarmDiary(farmDiaryNo);
-		if( delRes >= 1 ) {
-			System.out.println("delete 성공");
-		} else {
-			System.out.println("delete 실패");
-		}
-
-		//		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-		//		int res = 0;
-		//		//게시글 작성자가 수정요청을 한 것이 맞는 지 확인
-		//		if(farmer.getFarmerId().equals(farmerId)) {
-		//			res = farmdiaryService.deleteFarmDiary(farmDiaryNo);
-		//		}
-		//		
-		//		if(res > 0) {
-		//			mav.addObject("alertMsg", "게시물 삭제에 성공했습니다.");
-		//			mav.addObject("url", "farmdiarylist.do");
-		//			mav.setViewName("common/result");
-		//		}else {
-		//			mav.addObject("alertMsg", "게시물에 접근할 권한이 없습니다.");
-		//			mav.addObject("url", "farmdiarylist.do");
-		//			mav.setViewName("common/result");
-		//		}
-		//		
-		//		return mav;
-
-		return "redirect:/farmdiary/farmdiarylist.do?farmerNo=" + farmerNo;
->>>>>>> 82ea22ae0c11b226a02a15ec9bec8093a802e6b0
 	}
 
 	//농장일기 이미지 업로드

@@ -47,7 +47,7 @@
 				<!-- 로그인 시 에는 추후에 추가 예정 -->
 				<c:choose>
 					<c:when test="${not empty userInfo }">
-						<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a><a href="<%=request.getContextPath()%>/mypage/user/modify">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
+						<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
 					</c:when>
 					<c:when test="${not empty kakaoInfo }">
             
@@ -56,9 +56,7 @@
 						<a href="<%=request.getContextPath() %>/user/kakaologout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
 					</c:when>
 					<c:when test="${not empty farmerInfo }">
-
 						<a href="<%=request.getContextPath() %>/farmer/logout">로그아웃</a><a href="#">마이페이지</a><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">나의농장</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
-
 					</c:when>
 					<c:when test="${empty userInfo and empty kakaoInfo and empty farmerInfo }">
 						<a href="<%=request.getContextPath() %>/user/login.do">로그인</a><a href="<%=request.getContextPath() %>/user/join.do">회원가입</a><a href="#"><i class="fas fa-search"></i></a>
@@ -70,10 +68,10 @@
 	<nav class="header__menu">
 		<ul id="menu__main">
 			<li><a href="<%=request.getContextPath() %>/info">소개</a></li>
-			<li><a href="<%=request.getContextPath() %>/product/main.do">먹거리</a>
+			<li><a href="#">먹거리</a>
 				<ul class="menu__sub-food">
-					<li><a href="<%=request.getContextPath() %>/product/seasonlist.do">제철 먹거리</a></li>
-					<li><a href="<%=request.getContextPath() %>/product/generallist.do">일반 먹거리</a></li>
+					<li><a href="#">제철 먹거리</a></li>
+					<li><a href="#">일반 먹거리</a></li>
 				</ul>
 			</li>
 			<li><a href="#">농장구경</a></li>

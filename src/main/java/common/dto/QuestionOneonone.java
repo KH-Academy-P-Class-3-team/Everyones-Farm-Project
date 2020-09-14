@@ -12,7 +12,6 @@ public class QuestionOneonone {
 	private String title;
 	private String content;
 	private int userNo;
-	private int farmerNo;
 	private Date regDate;
 	private int isAnswered;
 	
@@ -41,12 +40,6 @@ public class QuestionOneonone {
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-	public int getFarmerNo() {
-		return farmerNo;
-	}
-	public void setFarmerNo(int farmerNo) {
-		this.farmerNo = farmerNo;
-	}
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -64,7 +57,7 @@ public class QuestionOneonone {
 	@Override
 	public String toString() {
 		return "QuestionOneonone [questionNo=" + questionNo + ", title=" + title + ", content=" + content + ", userNo="
-				+ userNo + ", farmerNo=" + farmerNo + ", regDate=" + regDate + ", isAnswered=" + isAnswered + "]";
+				+ userNo +", regDate=" + regDate + ", isAnswered=" + isAnswered + "]";
 	}
 
 }

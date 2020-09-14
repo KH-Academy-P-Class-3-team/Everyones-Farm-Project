@@ -1,16 +1,7 @@
 package com.kh.farmapp.farmpersonalpage.farmdiary.model.service;
 
 
-import java.util.List;
 import java.util.Map;
-
-import javax.activation.CommandMap;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import common.dto.FarmDiary;
-import common.dto.Farmer;
 
 public interface FarmDiaryService  {
 	

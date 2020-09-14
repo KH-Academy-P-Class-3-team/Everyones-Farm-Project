@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import common.dto.Farmer;
 import common.dto.Product;
+import common.util.AdminPaging;
 
 /**
  * AdminProductDao 을 상속 받는 클래스
@@ -20,26 +21,28 @@ public class AdminProductDaoImpl implements AdminProductDao{
 	@Autowired
 	private SqlSessionTemplate session;
 	
+	// 판매 상품 관리 리스트 조회
 	@Override
-	public List<Map<String, Object>> selectAllProduct() {
-		
-		// 클래스 다이어그램을 위한 객체
-		Product product = new Product();
-		Farmer farmer = new Farmer();
-		
-		return null;
+	public List<Map<String, Object>> selectAllProduct(AdminPaging apaging) {
+		return session.selectList("ADMINPRODUCT.selectAllProduct", apaging);
 	}
 
+	// 판매 상품 승인
 	@Override
-	public int updateProductSas(Product approve) {
-		
-		return 0;
+	public int approveProduct(List<String> productNoList) {
+		return session.update("ADMINPRODUCT.approveProduct", productNoList);
 	}
-
+	
+	// 판매 상품 보류
 	@Override
-	public int updateProductSasIsCancel(Product cancel) {
-		
-		return 0;
+	public int putProductOnHold(List<String> productNoList) {
+		return session.update("ADMINPRODUCT.putProductOnHold", productNoList);
+	}
+	
+	// 판매 상품 총 갯수 조회
+	@Override
+	public int selectCntAllProduct(String search) {
+		return session.selectOne("ADMINPRODUCT.selectCntAllProduct", search);
 	}
 
 }

@@ -64,5 +64,12 @@ public interface ProductService {
 	 */
 	public int insertBasket(Map<String, Object> commandMap);
 
+	/**
+	 * 옵션 리스트 찾기
+	 * @param productNo
+	 * @return
+	 */
+	public List<Map<String, Object>> selectProductOption(int productNo);
+
 
 }

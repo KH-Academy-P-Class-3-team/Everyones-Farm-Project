@@ -48,6 +48,14 @@
 	<logger name="common.util">
 		<level value="debug" />
 	</logger>
+	<!-- setting AdminProductController debug level log -->
+	<logger name="com.kh.farmapp.admin.product.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting MainController debug level log -->
+	<logger name="com.kh.farmapp.main.controller">
+		<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

@@ -50,6 +50,28 @@ public class UserController {
 		return "member/userlogin";
 	}
 	
+	//페이스북 로그인
+	@RequestMapping(value="/facebooklogin.do")
+	public String facebooklogin(
+			HttpSession session
+			, Model model
+			, HttpServletRequest req) {
+//		String facebookname = req.getParameter("facebookname");
+//		String access_token = req.getParameter("access_token");
+		String id = req.getParameter("id");
+		if(id != null) {
+//			session.setAttribute("facebookname", facebookname);
+//			session.setAttribute("access_token", access_token);
+			session.setAttribute("facebookInfo", id);
+			model.addAttribute("alertMsg", "로그인 되었습니다");
+			model.addAttribute("url", req.getContextPath());
+		} else {
+			model.addAttribute("alertMsg", "로그인에 실패했습니다");
+			model.addAttribute("url", req.getContextPath()+"/user/userjoin.do");
+		}
+		return "common/result";
+	}
+	
 	//일반 회원 카카오 로그인 창
 	@RequestMapping(value="/kakaologin.do")
 	public String kakaologin(
@@ -67,7 +89,7 @@ public class UserController {
 			model.addAttribute("alertMsg", "로그인 되었습니다");
 			model.addAttribute("url", req.getContextPath());
 		} else {
-			model.addAttribute("alertMsg", "회원가입에 실패했습니다");
+			model.addAttribute("alertMsg", "로그인에 실패했습니다");
 			model.addAttribute("url", req.getContextPath()+"/user/userjoin.do");
 		}
 		System.out.println(userIn.get("email"));
@@ -270,11 +292,6 @@ public class UserController {
 			, Model model) {
 		
 		int isupdate = userService.updatePw(user);
-//		if(isupdate>0) {
-//			return "member/login";
-//		} else {
-//			return "member/findmember";
-//		}
 		
 		if(isupdate>0) {
 			model.addAttribute("alertMsg", "비밀번호가 변경되었습니다");
@@ -308,6 +325,17 @@ public class UserController {
 		if( session.getAttribute("kakaoInfo") != null) {
 			session.removeAttribute("kakaoInfo");
 			session.removeAttribute("accessToken");
+		}
+    
+		return "redirect:/";
+	}
+	
+	//페이스북 로그아웃
+	@RequestMapping("facebooklogout")
+	public String facebooklogout(HttpSession session) {
+
+		if( session.getAttribute("facebookInfo") != null) {
+			session.removeAttribute("facebookInfo");
 		}
     
 		return "redirect:/";

@@ -3,11 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <meta charset="UTF-8">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>영농 일지</title>
 
+<script>
 
+</script>
 <style type="text/css">
 #mypagesize {
 	height: 300px; webkit-fill-available;
@@ -35,12 +38,12 @@
 				<div class="list-group mb-4">
 					<a href="#"
 					class="list-group-item list-group-item-action text-center font-weight-bold">내
-					정보</a> <a href="/farmapp/mypage/selllist"
+					정보</a> <a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold">판매
-					목록</a> <a href="/farmapp/mypage/dailyLoglist"
+					목록</a> <a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold"
 					style="background-color: #D1E9CA;">영농 일지</a> <a
-					href="/farmapp/mypage/activitylist"
+					href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold">활동
 					내역</a>
 				</div>
@@ -49,6 +52,7 @@
 			<form role="form" method="post"	action="/farmapp/mypage/dailyLogwrite">
 				<div id="root">
 					<div>
+					<input type="hidden" name="farmerNo" value="${param.farmerno }">
 						<label for="content">내용</label>
 						<textarea id="content" name="content"></textarea>
 						<br> <label for="title">작업량</label> <input type="text"

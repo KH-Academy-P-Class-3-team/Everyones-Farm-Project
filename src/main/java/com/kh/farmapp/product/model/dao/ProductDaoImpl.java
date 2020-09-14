@@ -102,5 +102,10 @@ public class ProductDaoImpl implements ProductDao{
 		return session.insert("sellPRODUCT.insertBasket", commandMap);
 	}
 	
+	@Override
+	public List<Map<String, Object>> selectProductOption(int productNo) {
+		return session.selectList("sellPRODUCT.selectProductOption", productNo);
+	}
+	
 	
 }
