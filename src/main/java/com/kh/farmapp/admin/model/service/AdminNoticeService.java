@@ -21,10 +21,10 @@ public interface AdminNoticeService {
 	
 	/**
 	 * 공지사항 번호를 통해 특정 공지사항 조회
-	 * @param noticeNo - 조회할 공지사항 번호를 갖는 Notice 객체
+	 * @param noticeNo - 조회할 공지사항 번호를 갖는 Map
 	 * @return Notice - 조회 결과 반환
 	 */
-	public Notice selectNoticeByNoticNo(Notice noticeNo);
+	public Map<String, Object> selectNoticeByNoticNo(Notice noticeNo);
 	
 	
 	/**
@@ -58,5 +58,13 @@ public interface AdminNoticeService {
 	 * @return List<Map<String, Object>> - 조회된 결과 반환 객체
 	 */
 	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging);
+
+
+	/**
+	 * 작성될 글의 번호를 미리 조회한다.
+	 * 
+	 * @return String - 조회 결과 반환
+	 */
+	public String selectPostNo();
 	
 }

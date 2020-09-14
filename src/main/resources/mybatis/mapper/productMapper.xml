@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product">
+
+	<insert id="insertProduct">
+
+		insert into product
+		(product_no, name, explain, effect, food, kind, product_country, farmer_no,
+		delivery, is_seasonal_food)
+		values
+		(product_seq.nextval, #{name}, #{explain}, #{effect}, #{food}, #{kind},
+		#{productCountry}, #{farmerNo}, #{delivery}, #{isSeasonalFood})
+
+	</insert>
+
+	<insert id="insertProductOption">
+
+		insert into
+		product_option(option_no, product_no, name, price, amount, quality, expiration_date)
+		values
+		(product_option_seq.nextval, product_seq.currval, #{name}, #{price}, #{amount}, #{quality},
+		#{expirationDate})
+
+	</insert>
+
+	<resultMap type="hashMap" id="producklist">
+		<result column="product_no" property="productNo" />
+		<!-- <result column="kind" property="kind" /> -->
+		<!-- <result column="price" property="price" /> -->
+		<!-- <result column="effect" property="effect" /> -->
+		<!-- <result column="amount" property="amount" /> -->
+		<!-- <result column="food" property="food" /> -->
+		<!-- <result column="product_country" property="productCountry" /> -->
+		<!-- <result column="delivery" property="delivery" /> -->
+		<!-- <result column="is_seasonal_food" property="isSeasonalFood" /> -->
+		<!-- <result column="quality" property="quality" /> -->
+		<!-- <result column="expiration_date" property="expirationDate" /> -->
+		<!-- <result column="explain" property="explain" jdbcType="CLOB" javaType="java.lang.String" /> -->
+		<result column="name" property="name" />
+		<result column="farmer_no" property="farmerNo" />
+	</resultMap>
+
+	<select id="selectProductList" resultMap="producklist">
+
+		select
+		product_no, name, farmer_no
+		from(
+		select rownum rnum, n1.*
+		from(
+		select *
+		from product
+		order by product_no desc
+		)n1
+		)where rnum between #{start}
+		and #{end}
+		and farmer_no = #{farmerNo}
+
+
+	</select>
+
+	<select id="selectContentCnt" resultType="int">
+
+		SELECT count(*) FROM
+		product
+
+	</select>
+
+	<resultMap type="hashMap" id="detail">
+		<id column="product_no" property="productNo" />
+		<result column="name" property="name" />
+		<result column="explain" property="explain" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="price" property="price" />
+		<result column="quality" property="quality" />
+		<result column="expiration_date" property="expirationDate" />
+	</resultMap>
+
+	<select id="selectProductDetail" resultMap="detail">
+		select p.product_no,
+		p.name, p.explain, pp.price, pp.quality, pp.expiration_date
+		from
+		product p, product_option pp
+		where p.product_no = pp.product_no
+		and
+		pp.product_no = #{productNo}
+	</select>
+
+
+</mapper>

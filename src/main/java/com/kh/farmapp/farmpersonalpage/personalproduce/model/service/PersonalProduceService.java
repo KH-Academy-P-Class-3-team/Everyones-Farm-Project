@@ -8,14 +8,20 @@ import org.springframework.stereotype.Service;
 public interface PersonalProduceService {
 	
 	//게시글 목록
-	public List<Map<String, Object>> selectAllProductList(//현재 페이지
-															int currentPage,
-															//페이지당 노출할 게시굴 수
-															int cntPerPag); 
+	public Map<String, Object> selectProductList(int currentPage, int cntPerPage, String farmerNo); 
 	
+<<<<<<< HEAD
 	//상품추가
 	public int addProduct();
-	
+=======
 	//상품등록
-	public int registrationProduct();
+	public void writeProduct(Map<String, Object> commandMap);
+	
+	//상품옵션 등록
+	public void writeProductOption(Map<String, Object> commandMap);
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
+	
+	//게시글 상세 조회 메소드
+	public Map<String, Object> selectProductDetail(int productNo);
+
 }

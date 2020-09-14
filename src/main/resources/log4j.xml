@@ -27,6 +27,38 @@
 	<logger name="com.kh.farmapp">
 		<level value="info" />
 	</logger>
+<<<<<<< HEAD
+=======
+
+	<!-- setting AdminNoticeController debug level log -->
+	<logger name="com.kh.farmapp.admin.notice.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting AdminUserController debug level log -->
+	<logger name="com.kh.farmapp.admin.user.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting AdminOneOnOneController debug level log -->
+	<logger name="com.kh.farmapp.admin.oneonone.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting MyPageUserController debug level log -->
+	<logger name="com.kh.farmapp.mypage.user.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting CkImgUpload debug level log -->
+	<logger name="common.util">
+		<level value="debug" />
+	</logger>
+	<!-- setting AdminProductController debug level log -->
+	<logger name="com.kh.farmapp.admin.product.controller">
+		<level value="debug" />
+	</logger>
+	<!-- setting MainController debug level log -->
+	<logger name="com.kh.farmapp.main.controller">
+		<level value="debug" />
+	</logger>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

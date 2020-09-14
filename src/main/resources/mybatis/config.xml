@@ -28,14 +28,41 @@
 		<mapper resource="/mybatis/mapper/farmerMapper.xml" />
 		<mapper resource="/mybatis/mapper/dailyMapper.xml" />
 		<mapper resource="/mybatis/mapper/activityMapper.xml" />
+		
+		<mapper resource="/mybatis/mapper/sellproductMapper.xml" />
+		<mapper resource="/mybatis/mapper/productMapper.xml" />
+		
 		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml" />
+<<<<<<< HEAD
+=======
+
+		<mapper resource="/mybatis/mapper/farmqnaMapper.xml" />
+
+
+		
+		<mapper resource="/mybatis/mapper/findfarmMapper.xml" />
+
+		<mapper resource="/mybatis/mapper/review.xml" />
+		
+
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 		<!-- ActivityController에서 사용하는 mapper -->
 <!-- 		<mapper resource="/mybatis/mapper/activityMapper.xml" /> -->
     <!-- <mapper resource="/mybatis/mapper/mypageUser.xml" /> -->
+    	<mapper resource="/mybatis/mapper/mypageUser.xml" />
     
     	<!-- admin login mapper 파일 -->
     	<mapper resource="/mybatis/mapper/adminLoginMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminMainMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminNoticeMapper.xml" />
+<<<<<<< HEAD
+=======
+    	<mapper resource="/mybatis/mapper/adminMemberMapper.xml" />
+    	<mapper resource="/mybatis/mapper/adminOneOnOneMapper.xml" />
+    	<mapper resource="/mybatis/mapper/adminProductMapper.xml" />
+    	
+    	<!-- file upload mapper 파일 -->
+    	<mapper resource="mybatis/mapper/commonCkImageUploadMapper.xml" />
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	</mappers>
 </configuration>

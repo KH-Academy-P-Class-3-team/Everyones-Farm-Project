@@ -5,6 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Diary">
+<<<<<<< HEAD
   
   <insert id="insertFarmDiary">
   	insert into farm_diary
@@ -39,7 +40,123 @@
   		from farm_diary
   		where farm_diary_no = #{farmDiaryNo}
   </select>
+=======
+
+	<insert id="insertFarmDiary">
+		INSERT INTO farm_diary
+		(farm_diary_no, title, enroll_date, content, farmer_no, hits)
+		VALUES
+		(farm_diary_seq.nextval, #{title}, sysdate, #{content}, #{farmerNo}, 0)
+	</insert>
+	
+<!-- 	<insert id="insertFile"> -->
+<!-- 		insert into farm_diary_file -->
+<!-- 		(farm_diary_file_no, origin_name ,file_rename -->
+<!-- 		,save_path ,farm_diary_no, is_thumbnail) -->
+<!-- 		values( -->
+<!-- 			farm_diary_file_seq.nextval -->
+<!-- 			,#{originName}	 -->
+<!-- 			,#{fileRename} -->
+<!-- 			,#{savePath} -->
+<!-- 			,#{farmDiaryNo} -->
+<!-- 			,#{isThumbnail} -->
+<!-- 		) -->
+<!-- 	</insert> -->
 	
 	
+<!-- 	<insert id="insertFileWithSC_N"> -->
+<!-- 		insert into farm_diary_file  -->
+<!-- 		(farm_diary_file_no, origin_name ,file_rename -->
+<!-- 		,save_path ,farm_diary_no, is_thumbnail) -->
+<!-- 		values( -->
+<!-- 			farm_diary_file_seq.nextval -->
+<!-- 			,farm_diary_no.currval	 -->
+<!-- 			,#{originName} -->
+<!-- 			,#{fileRename} -->
+<!-- 			,#{savePath} -->
+<!-- 			,#{isThumbnail} -->
+<!-- 		) -->
+<!-- 	</insert> -->
+
+
+	<resultMap type="hashMap" id="farmdiarylistMap">
+		<result column="farm_diary_no" property="farmDiaryNo" />
+		<result column="title" property="title" />
+		<result column="hits" property="hits" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="farmer_no" property="farmerNo" />
+	</resultMap>
+	
+	<select id="selectFarmDiaryList" resultMap="farmdiarylistMap">
+		select
+		farm_diary_no, title, hits, enroll_date,
+		youtube_link, content, farmer_no
+		from(
+		select rownum rnum, n1.*
+		from(
+		select *
+		from farm_diary
+		order by farm_diary_no desc
+		)n1
+		)where rnum between #{start} and #{end}
+		and farmer_no = #{farmerNo}
+	</select>
+
+	<select id="selectContentCnt" resultType="int">
+		SELECT count(*) FROM
+		farm_diary
+	</select>
+	
+	
+	<resultMap type="hashMap" id="detail">
+		<id column="farmer_no" property="farmerNo" />
+		<result column="farm_diary_no" property="farmDiaryNo" />
+		<result column="title" property="title" />
+		<result column="hits" property="hits" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<select id="selectFarmDiaryDetail" resultMap="detail">
+		SELECT fd.farm_diary_no, fd.title, fd.hits, fd.enroll_date, fd.youtube_link,
+		fd.content, fd.farmer_no, f.name
+		FROM farm_diary fd, farmer f
+		WHERE fd.farmer_no = f.farmer_no
+		AND fd.farm_diary_no = #{farmDiaryNo}
+	</select>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
+	
+	
+<<<<<<< HEAD
   
+=======
+	<update id="modifyFarmDiary" parameterType="hashMap">
+		    UPDATE
+                farm_diary
+            SET
+            	farm_diary_no = #{farmDiaryNo},
+                title = #{title},
+                youtube_link = #{youtubeLink},
+                content = #{content}
+            WHERE
+                farm_diary_no = #{farmDiaryNo}
+	</update>
+	
+	<update id="updateFarmDiaryHits" parameterType="int">
+	 UPDATE farm_diary SET hits = hits + 1 WHERE farm_diary_no = #{farmDiaryNo}
+	</update>
+
+	<select id="selectFarmNoByFarmerNo" resultType="int" parameterType="java.lang.String">
+		select
+			farm_no
+		from
+			farm
+		where
+			farmer_no = #{value}
+	</select>
+
+
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 </mapper>

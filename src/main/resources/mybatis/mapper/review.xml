@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Review">
+
+    <select id="selectReviews" resultType="HashMap" parameterType="HashMap">
+        SELECT
+        A.REVIEW_NO AS REVIEW_NO
+        , PRODUCT_NO AS PRODUCT_NO
+        , CONTENT AS CONTENT
+        , A.FARMER_NO AS FARMER_NO
+        , A.USER_NO AS USER_NO
+        , C.NAME AS FARMER_NAME
+        , B.USER_NAME AS USER_NAME
+        , TO_CHAR(REG_DATE, 'YYYY-DD-MM HH24:MI') AS REG_DATE
+        , REVIEW_SCORE AS REVIEW_SCORE
+        , D.SAVE_PATH AS FILE_PATH
+        , D.FILE_RENAME AS FILE_NAME
+        FROM REVIEW A
+        LEFT JOIN USER_TB B
+        ON A.USER_NO = B.USER_NO
+        LEFT JOIN FARMER C
+        ON A.FARMER_NO = C.FARMER_NO
+        LEFT JOIN (
+        SELECT X.POST_NO, X.FILE_RENAME, X.SAVE_PATH FROM EVERYONES_FARM_FILE X
+        WHERE X.BOARD_NO = 5
+        ) D
+        ON A.REVIEW_NO = D.POST_NO
+        <if test="reviewNo neq null and reviewNo neq ''">
+            WHERE A.REVIEW_NO = #{reviewNo}
+        </if>
+        ORDER BY REG_DATE DESC
+    </select>
+
+    <insert id="writeReview" parameterType="HashMap">
+        <selectKey keyProperty="reviewNo" resultType="_int" order="BEFORE">
+            SELECT review_seq.nextval AS reviewNo FROM DUAL
+        </selectKey>
+
+        INSERT INTO REVIEW(
+        REVIEW_NO,
+        PRODUCT_NO,
+        CONTENT,
+        <if test="farmerNo neq null and farmerNo neq ''">
+        FARMER_NO,
+        </if>
+        <if test="userNo neq null and userNo neq ''">
+        USER_NO,
+        </if>
+        REG_DATE,
+        REVIEW_SCORE)
+        VALUES (
+        #{reviewNo}
+        , #{productNo}
+        , #{content}
+        <if test="farmerNo neq null and farmerNo neq ''">
+        , ${farmerNo}
+        </if>
+        <if test="userNo neq null and userNo neq ''">
+        , ${userNo}
+        </if>
+        , SYSDATE
+        , #{reviewScore}
+        )
+    </insert>
+    <insert id="insertReviewFile" parameterType="HashMap" keyProperty="id">
+        INSERT INTO EVERYONES_FARM_FILE (
+        FILE_NO
+        , BOARD_NO
+        , POST_NO
+        , ORIGIN_NAME
+        , FILE_RENAME
+        , SAVE_PATH
+        <if test="isThumbnail neq null and isThumbnail neq ''">
+        , IS_THUMBNAIL
+        </if>
+        )
+        VALUES(
+        EF_FILE_SEQ.nextval
+        , 5
+        ,#{reviewNo}
+        ,#{originName}
+        ,#{fileReName}
+        ,#{savePath}
+        <if test="isThumbnail neq null and isThumbnail neq ''">
+        ,#{isThumbnail}
+        </if>
+        )
+    </insert>
+
+    <delete id="deleteReview" parameterType="HashMap">
+		DELETE FROM REVIEW
+		WHERE REVIEW_NO IN (${reviewNos})
+	</delete>
+    <delete id="deleteReview_file" parameterType="HashMap">
+		DELETE FROM EVERYONES_FARM_FILE
+		WHERE POST_NO IN (${reviewNos})
+		AND BOARD_NO = 5
+	</delete>
+
+</mapper>
+

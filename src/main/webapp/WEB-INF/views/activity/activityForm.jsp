@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/activity/activityForm.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<<<<<<< HEAD
 </head>
 <body>
 
@@ -16,6 +17,15 @@
 	<h1>체험 등록 신청</h1>
 	<p>농장에서 체험할 수 있는 다양한 활동을 다른 사람들과 나누어 보세요.</p>
 	<p>부족한 일손을 채우는 일이 누군가에게는 경험이 됩니다.</p>
+=======
+
+<div style="margin-top:220px"></div>
+
+<div class="form-top">
+	<div class="top-title">체험 등록 신청</div>
+	<div class="top-sub">농장에서 체험할 수 있는 다양한 활동을 다른 사람들과 나누어 보세요.</div>
+	<div class="top-sub">부족한 일손을 채우는 일이 누군가에게는 경험이 됩니다.</div>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 </div>
 
 
@@ -33,7 +43,7 @@
 		</div>	
 		
 		<div class="form-group">
-			<div class="control-label"><label for="title">활동명</label></div>
+			<div class="control-label"><label for="title">체험명</label></div>
 			<input type="text" name="title" id="title">
 		</div>
 
@@ -50,7 +60,7 @@
 		</div>
 	
 		<div class="form-group">
-			<div class="control-label"><label for=content">체험 내용</label></div>
+			<div class="control-label"><label for="content">체험 내용</label></div>
 			<textarea name="content" id="content" placeholder="체험 활동에 대해 간단히 소개해주세요."></textarea>
 		</div>
 
@@ -60,7 +70,6 @@
 			<label class="files" for="files">사진 선택</label>
 			<span class="file-text">이미지 크기는 980 x 600 픽셀을 권장합니다</span>
 			<div class="file-name"></div>
-<!-- 			<div id="preview"></div> -->
 		</div>
 		
 		<div class="form-group">
@@ -123,7 +132,9 @@ $("#frm").on("submit", function( e ) {
 		$("input[name='availNumber']").focus();
 		return false
 		
-	}	
+	} else if($("input[type=radio]:checked").val() == "1") {
+		$("input[name=price]").val(0)
+	}
 	
 // 		e.preventDefault();
 	return true
@@ -144,45 +155,25 @@ $("input[type=radio]").click(function() {
 	}
 })
 
-	/*
-	 * 이미지 선택 시 선택한 이미지 미리보기
-	 */
-// 	$("#files").change(function(e) {
-		
-// 		var files = e.target.files; 
-// 		var reader = new FileReader();
-		
-// 		reader.onload  = function(ev) {			
-			
-// 			var p = $("#preview").html();
-			
-// 			p += "<div class='pre'><img src='"+ev.target.result+"' width='500' class='preview-img'/></div>"
-// 			$("#preview").html(p);
-			
-// 		}
-		
-// 		reader.readAsDataURL(files[0]) 
-		
-// 	})
 
-	$("#files").change(function(e) {
+$("#files").change(function(e) {
 		
-		var files = $("#files")[0].files;
-		var div = $(".file-name").html();
-		
-		div = "";
-		
-		if(files.length > 1) {
-			for(var i=0; i<files.length-1; i++) {
-				div += "<div>" + files[i].name + "</div>";
-			}
+	var files = $("#files")[0].files;
+	var div = $(".file-name").html();
+	
+	div = "";
+	
+	if(files.length > 1) {
+		for(var i=0; i<files.length-1; i++) {
+			div += "<div>" + files[i].name + "</div>";
 		}
+	}
+	
+	div += files[files.length-1].name;
+	
+	$(".file-name").html(div);
 		
-		div += files[files.length-1].name;
-		
-		$(".file-name").html(div);
-		
-	})
+})
 	
 	
 	

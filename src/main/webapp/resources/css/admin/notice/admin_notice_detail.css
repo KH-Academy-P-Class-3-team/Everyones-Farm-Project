@@ -1,0 +1,55 @@
+@charset "UTF-8";
+.wrapper .notice-detail__main {
+	margin: 70px auto;
+}
+/* 테이블 초기화 및 css */
+.notice-detail__table-wrap .notice-detail__table {
+	padding: 0;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	width: 100%;
+}
+/* 테이블 tr */
+.notice-detail__table-wrap .notice-detail__table
+, .notice-detail__table tr {
+	border-top: 1px solid #789F6F;
+	border-bottom: 1px solid #789F6F;
+}
+/* 테이블 td */
+.notice-detail__table td {
+	padding: 14px 10px;
+	text-align: center;
+}
+/* 테이블 내용 부분 */
+.notice-detail__table .table-td__content {
+	text-align: left;
+    height: 350px;
+}
+/* 테이블 제목 부분 */
+.notice-detail__table .table-td__head {
+	background: #D1E9CA;
+}
+/* 테이블 아래 button 들 */
+.notice-detail__main .notice-detail__btn-wrap {
+	display: flex;
+	justify-content: center;
+    margin-top: 20px;
+}
+.notice-detail__btn-wrap .btn {
+    background: green;
+    padding: 10px 18px;
+    border-radius: 3px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.notice-detail__btn-wrap span:not(.btn-delete) {
+	margin-right: 7px;
+}
+/* 목록 버튼 */
+.notice-detail__btn-wrap .btn-tolist {
+	background: #789F6F;
+}
+/* 삭제 버튼 */
+.notice-detail__btn-wrap .btn-delete {
+	background: #B65656;
+}

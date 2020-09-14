@@ -168,6 +168,11 @@ label {
 					</form>
 				</div>
 			</div>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 		</div>
 	</div>
 
@@ -185,5 +190,9 @@ label {
 
 
 
+<<<<<<< HEAD
 </body>
 </html>
+=======
+<%@include file="../../include/footer.jsp"%>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05

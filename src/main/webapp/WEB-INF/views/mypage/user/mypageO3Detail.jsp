@@ -2,11 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지</title>
+=======
+
+<%@include file="../../include/header.jsp"%>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -80,6 +85,7 @@ label {
 				</div>
 
 			</div>
+<<<<<<< HEAD
 			<div class="col-lg-1">
 				<form action="modfy/userImg" method="post">
 					<div class="media">
@@ -167,6 +173,80 @@ label {
 
 					</form>
 				</div>
+=======
+		</div>
+		<div class="col-lg-1">
+			<hr>
+			<h2>${one.title}</h2>
+			<hr>
+			<div class="info">
+				<span>게시글번호 : ${one.questionNo} <br></span> <span>등록일 :
+					${one.regDate} |</span> <span>작성자 : ${one.userNo}</span>
+			</div>
+			<hr>
+			<div class="content">${one.content }</div>
+			<c:if test="${answer.answeredNo ne null }">
+			<div>
+			<hr>
+			<div>${answer.title }</div>
+			<div class="content">${answer.content }</div>
+			</div>
+			</c:if>
+			<div class="nearcontent">
+				<table class="table">
+
+
+					<tr>
+						<td>페이지 이동</td>
+						<td>문의 번호</td>
+						<td>제목</td>
+						<td>작성자 번호</td>
+						<td>답변 확인</td>
+					</tr>
+					<c:if test="${total.MAX ne one.questionNo }">
+						<tr>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${up.questionNo}">
+									<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+									이전 페이지
+							</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${up.questionNo}">${up.questionNo }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${up.questionNo}">${up.title }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${up.questionNo}">${up.userNo }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${up.questionNo}">${up.isAnswered }</a></td>
+						</tr>
+					</c:if>
+					<c:if test="${total.MIN ne one.questionNo }">
+						<tr>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${down.questionNo}">
+									<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+									다음 페이지
+							</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${down.questionNo}">${down.questionNo }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${down.questionNo}">${down.title }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${down.questionNo}">${down.userNo }</a></td>
+							<td><a
+								href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${down.questionNo}">${down.isAnswered }</a></td>
+						</tr>
+					</c:if>
+				</table>
+			</div>
+			<div>
+				<button class="btn btn btn-success pull-right" type="button"
+					onclick="javascript:location.href='mypageO3List'">뒤로가기</button>
+				<c:if test="${userInfo.userNo eq one.userNo }">
+					<button class="btn btn-warning pull-right" type="button"
+						onclick="javascript:location.href='deleteO3?QUESTION_NO=${one.questionNo}'">삭제</button>
+				</c:if>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 			</div>
 		</div>
 	</div>
@@ -185,5 +265,9 @@ label {
 
 
 
+<<<<<<< HEAD
 </body>
 </html>
+=======
+<%@include file="../../include/footer.jsp"%>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05

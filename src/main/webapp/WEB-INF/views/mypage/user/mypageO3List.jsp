@@ -64,6 +64,7 @@
 							<th>작성일</th>
 							<th>답변상태</th>
 						</tr>
+<<<<<<< HEAD
 						<c:forEach items="${O3List}" var="O3">
 						<tr>
 							<td>${O3.questionNo }</td>
@@ -72,6 +73,31 @@
 							<td>${O3.userNo }</td>
 							<td>${O3.regDate }</td>
 						</tr>
+=======
+						<c:forEach items="${list.o3List}" var="O3">
+							<tr>
+								<td><a
+									href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}&&row=${O3.RNUM}">${O3.QUESTION_NO }</a></td>
+								<td><a
+									href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}">${O3.TITLE }</a></td>
+								<td><a
+									href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}">${O3.USER_NAME }</a></td>
+								<td><a
+									href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}">${O3.REG_DATE }</a></td>
+								<c:choose>
+									<c:when test="${O3.IS_ANSWERED eq 1 }">
+										<td><a
+											href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}">답변
+												된 질문</a></td>
+									</c:when>
+									<c:otherwise>
+										<td><a
+											href="<%= request.getContextPath() %>/mypage/user/mypageO3Detail?QUESTION_NO=${O3.QUESTION_NO}">미답변
+												질문</a></td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 						</c:forEach>
 					</table>
 				</div>

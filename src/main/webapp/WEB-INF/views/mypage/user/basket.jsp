@@ -78,6 +78,71 @@ label {
 					<div class="panel-body">구매 목록</div>
 					<div class="panel-body">장바구니</div>
 				</div>
+<<<<<<< HEAD
+=======
+			</c:if>
+		</div>
+
+		<div id="practice"></div>
+		<div class="col-lg-1">
+			<!-- 리스트 시작-->
+
+			<!-- Table -->
+			<hr>
+			<div class="boxName">장바구니</div>
+			<table class="table table-hover table-bordered">
+				<tr class="active">
+					<th><input type="checkbox" id="checkAll" onclick="checkAll();">
+					</th>
+					<th>상품정보</th>
+					<th>옵션</th>
+					<th>금액</th>
+					<th>전문 배송</th>
+				</tr>
+				<c:forEach items="${basket.baskets}" var="basket">
+					<tr id="realBasket">
+						<td><input type="checkbox" name="checkRow" id="checkone"
+							value="${basket.BASKET_NO }"></td>
+						<td><a
+							href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${basket.PRODUCT_NO }">${basket.NAME }
+						</a></td>
+						<td><a
+							href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${basket.PRODUCT_NO }">${basket.OPTION_NAME }</a></td>
+						<td><a
+							href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${basket.PRODUCT_NO }">${basket.PRICE }</a></td>
+						<td><a
+							href="<%= request.getContextPath() %>/mypage/user/OrderDetail?PRODUCT_NO=${basket.PRODUCT_NO }">${basket.DELIVERY }</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+
+			<div class="paging">
+				<!-- section pagination -->
+				<nav>
+					<ul class="pagination">
+						<c:choose>
+							<c:when test="${page.blockStart > 1 }">
+								<li><a
+									<%-- 									href="<%= request.getContextPath() %>/mypage/user/basket?cPage=${page.blockStart-1}" --%>
+									aria-label="Previous"
+									class="naviBtn"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a
+									href="<%= request.getContextPath() %>/mypage/user/basket?cPage=${page.blockStart}"
+									aria-label="Previous" class="naviBtn"> <span
+										aria-hidden="true">&laquo;</span>
+								</a></li>
+							</c:otherwise>
+						</c:choose>
+						<c:forEach begin="${page.blockStart}" end="${page.blockEnd}"
+							var="page">
+							<li><a
+								href="<%= request.getContextPath() %>/mypage/user/basket?cPage=${page}"
+								class="naviBtn">${page}</a></li>
+						</c:forEach>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 
 			</div>
 			<div class="col-lg-1">

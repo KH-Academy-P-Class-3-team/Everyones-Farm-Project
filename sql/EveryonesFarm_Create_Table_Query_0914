@@ -1,7 +1,7 @@
 -- 2020.09.02 (수) 테이블 수정
 -- 테이블 수정 내용
---  FARMER 테이블에 APPLICATION_DATE(신청날짜) 컬럼 추가
---  관리자 페이지에서 신청 날짜를 보여주는 기능이 있어 추가
+--  user_profile 테이블에 farmer_no 추가
+--  user_profile 테이블에 user_no, farmer_no null 값 허용
 
 -- 이미 테이블이 생성되어 있는 사람들을 위한 테이블 삭제 명령문
 
@@ -258,6 +258,19 @@ COMMENT ON COLUMN USER_PROFILE.SAVE_PATH IS '프로필 사진  저장 경로';
 ALTER TABLE USER_PROFILE                                                -- USER_NO 외래키 제약 조건
     ADD CONSTRAINT FK_USER_PROFILE_USER_NO_USER_T FOREIGN KEY (USER_NO)
         REFERENCES USER_TB (USER_NO) ON DELETE CASCADE;
+
+-- **************************************************************************************** --
+-- 추가 된 부분
+-- user_no NULL 값 허용으로 변경
+ALTER TABLE user_profile MODIFY (user_no NULL);
+-- farmer_no 추가
+ALTER TABLE user_profile ADD farmer_no NUMBER;
+COMMENT ON COLUMN USER_PROFILE.FARMER_NO IS '사용자 번호(농업인 회원)';
+ALTER TABLE USER_PROFILE
+    ADD CONSTRAINT FK_USER_PROFILE_FARMER_NO_FARM FOREIGN KEY (FARMER_NO)
+        REFERENCES FARMER (FARMER_NO) ON DELETE CASCADE;
+-- commit; , 오류 없을 시 진행
+-- **************************************************************************************** --
 
 -- USER_TB 테이블 시퀀스 생성
 --DROP SEQUENCE user_profile_seq;
@@ -722,6 +735,22 @@ COMMENT ON COLUMN NOTICE.IS_SHOWED IS '공지사항 페이지에 보이게 하�
 ALTER TABLE NOTICE                                                          -- 공지사항 작성자 ADMIN_NO 외래키 제약 조건
     ADD CONSTRAINT FK_NOTICE_ADMIN_NO_ADMIN_ADMIN FOREIGN KEY (ADMIN_NO)
         REFERENCES ADMIN (ADMIN_NO) ON DELETE SET NULL;
+        
+-- notice 컬럼 데이터 타입 변경
+ALTER TABLE notice MODIFY content CLOB;
+-- notice 테이블의 content 컬럼을 CLOB으로 변경하기 위해
+--  1. 새 CLOB 컬럼을 추가한다.
+ALTER TABLE notice ADD TMP_CONTENT CLOB;
+--  2. 데이터를 복사합니다.
+UPDATE notice set TMP_CONTENT = CONTENT;
+UPDATE notice set CONTENT = null; -- not null 때문에 지금 null로 대체할 수가 없네요
+--commit;
+--  3. 기존 컬럼을 삭제합니다.
+ALTER TABLE notice DROP COLUMN content;
+--  4. 새로 추가한 임시 컬럼의 이름을 변경합니다.
+ALTER TABLE notice RENAME COLUMN TMP_CONTENT TO CONTENT;
+-- commit; 커밋은 무조건 에러가 안날시에만 진행
+-- 추후에 완벽하게 테스트할 때는 테이블에 컬럼을 CLOB으로 변경하기
 
 -- 공지사항과 자주 묻는 질문 정보 테이블 시퀀스 생성
 --DROP SEQUENCE notice_seq;
@@ -794,6 +823,16 @@ ALTER TABLE QUESTION_ONEONONE                                               -- �
 ALTER TABLE QUESTION_ONEONONE                                               -- 작성자: 농업인 회원 FARMER_NO - FK
     ADD CONSTRAINT FK_QUESTION_ONEONONE_FARMER_NO FOREIGN KEY (FARMER_NO)
         REFERENCES FARMER (FARMER_NO) ON DELETE SET NULL;
+
+-- ************************************************************************** --
+-- 수정
+-- content VARCHAR2(2000) -> VARCHAR2(2000 char)
+ALTER TABLE
+    QUESTION_ONEONONE
+MODIFY
+    (content VARCHAR2(2000 char));
+-- commit;
+-- ************************************************************************** --
         
 -- 1대1문의 질문 정보 테이블 --FK 작성자(회원 번호)(IS_ANSWERED, IS_FARMER default 값은 '0') 시퀀스 생성
 --DROP SEQUENCE question_oneonone_seq;
@@ -833,6 +872,16 @@ ALTER TABLE ANSWERED_ONEONONE                                               -- �
 ALTER TABLE ANSWERED_ONEONONE                                               -- 질문 번호 QUESTION_NO 외래키 제약조건
     ADD CONSTRAINT FK_ANSWERED_ONEONONE_QUESTION_ FOREIGN KEY (QUESTION_NO)
         REFERENCES QUESTION_ONEONONE (QUESTION_NO) ON DELETE SET NULL;
+        
+-- ************************************************************************** --
+-- 수정
+-- content VARCHAR2(2000) -> VARCHAR2(2000 char)
+ALTER TABLE
+    ANSWERED_ONEONONE
+MODIFY
+    (content VARCHAR2(3000 char));
+-- commit;
+-- ************************************************************************** --
 
 --1대1문의 답변 정보 테이블 --FK 작성자(관리자번호), 질문 번호(IS_FARMER default 값은 'N') 시퀀스 생성
 --DROP SEQUENCE answer_oneonone_seq;
@@ -1032,6 +1081,16 @@ ALTER TABLE BASKET                                                          -- �
 ALTER TABLE BASKET                                                          -- 장바구니 사용자 FARMER_NO 외래키 제약조건
     ADD CONSTRAINT FK_BASKET_FARMER_NO_FARMER_FAR FOREIGN KEY (FARMER_NO)
         REFERENCES FARMER (FARMER_NO) ON DELETE CASCADE;
+--장바구니 상품 개수 추가
+ALTER TABLE
+    basket
+ADD
+    count NUMBER DEFAULT 0 NOT NULL;
+
+Alter table BASKET add PURCHASE NUMBER;
+COMMENT ON COLUMN BASKET.PURCHASE IS '결제창으로 이동';
+ALTER TABLE BASKET MODIFY (PURCHASE DEFAULT 0);
+-- commit;
 
 --장바구니(회원이 판매 상품을 담아놓는 곳) 정보를 저장하는 테이블 -- FK 상품 번호, 옵션 번호 시퀀스 생성
 --DROP SEQUENCE basket_seq;

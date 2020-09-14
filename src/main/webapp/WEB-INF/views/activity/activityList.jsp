@@ -28,6 +28,15 @@ $(document).ready(function() {
 	var experience_view = 6;
 	var help_view = 6;
 	
+	if(experience_total < 7) {
+		$(".experience_load").css('display', 'none');
+	}
+	
+	if(help_total < 7) {
+		$(".help_load").css('display', 'none');
+	}
+
+	
 	if($(".experience-list .row:visible").size() > experience_total) {
 		$(".experience_load").css('display', 'none');
 	}
@@ -37,8 +46,12 @@ $(document).ready(function() {
 	}
 	
 	
+<<<<<<< HEAD
 	
 	for (var i=0; i<experience_view;i++ ) {
+=======
+	for (var i=0; i<experience_view;i++ )	{
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 		$(".experience-list .row").eq(i).css('display', 'inline-block');
 	}
 
@@ -95,8 +108,15 @@ $(document).ready(function() {
 <body>
 
 <div class="activity-top">
+<<<<<<< HEAD
 	<div class="top-title">${farmerInfo.farmerId }님의 체험 목록</div>
 	<div class="title-img"><img src="<%=request.getContextPath() %>/resources/image/activity/activity_title.png" width="550" alt="체험활동 타이틀" ></div>
+=======
+	<div class="title-content">
+		<div class="top-title">체험 목록</div>
+		<div class="title-img"><img src="<%=request.getContextPath() %>/resources/image/activity/activity_title.png" width="550" alt="체험활동 타이틀" ></div>
+	</div>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 </div>
 
 <div class="activity-content">
@@ -108,6 +128,10 @@ $(document).ready(function() {
 		
 	<div class="experience-list">
 	
+	<c:if test="${empty data.activityList }">
+		<div class="no-activity">등록된 체험 활동이 없습니다.</div>
+	</c:if>
+
 	<c:forEach items="${data.activityList }" var="activity">
 	
 	<c:if test="${activity.isHelp eq 0 }">
@@ -132,12 +156,6 @@ $(document).ready(function() {
 				
 			</div>
 			
-<%-- 			<c:if test="${status.count%3 eq 0 }"> --%>
-<%-- 				<c:if test="${not status.last }"> --%>
-<!-- 					<hr> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:if> --%>
-	
 	</c:if>
 	
 	</c:forEach>
@@ -154,6 +172,11 @@ $(document).ready(function() {
 	</div>
 
 	<div class="help-list">
+
+	<c:if test="${empty data.activityList }">
+		<div class="no-activity">등록된 체험 활동이 없습니다.</div>
+	</c:if>
+
 	<c:forEach items="${data.activityList }" var="activity">
 
 	<c:if test="${activity.isHelp eq 1 }">
@@ -173,21 +196,12 @@ $(document).ready(function() {
 				<div class="caption">
 		        	<div class="caption-title">${activity.title }</div>
 		        	
-<!-- 	        		<div class="sort">일손 돕기</div> -->
 	        		<div class="caption-content">최대 인원 : ${activity.availNumber }</div>
 		        	
 				</div>
 				
 			</div>
 			
-<%-- 			<c:if test="${status.count%3 eq 0 }"> --%>
-<%-- 				<c:if test="${not status.last }"> --%>
-<!-- 					<hr> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:if> --%>
-			
-			
-
 	</c:if>
 	
 	</c:forEach>
@@ -196,8 +210,16 @@ $(document).ready(function() {
 		
 		<div class="help_load load" >더보기</div>
 
+<<<<<<< HEAD
 	
 	<button class="btnForm" type="button" onclick="javascript:location.href='activityForm.do'">체험 등록</button>
+=======
+	<c:if test="${isFarmer eq true }">
+		<div class="btn-div">
+			<button class="btnForm" type="button" onclick="javascript:location.href='activityForm.do'">체험 등록</button>
+		</div>
+	</c:if>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 
 </div>
 

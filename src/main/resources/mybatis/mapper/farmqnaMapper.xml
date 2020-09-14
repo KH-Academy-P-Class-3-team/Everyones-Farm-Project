@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnA">
+
+	<insert id="insertFarmQnA">
+		insert into farm_qna_question
+		(farm_qna_question_no,
+		farm_no, farmer_no, user_no, title, content, reg_date, hits)
+		values(farm_qna_question_seq.nextval, 1, #{farmerNo}, #{userNo},
+		#{title}, #{content}, sysdate, 1)
+	</insert>
+
+	<resultMap type="hashMap" id="qnalistMap">
+		<result column="farm_qna_question_no" property="farmQnaQuestionNo" />
+		<result column="title" property="title" />
+		<result column="farmer_no" property="farmerNo" />
+		<result column="user_no" property="userNo" />
+		<result column="reg_date" property="regDate" />
+		<result column="content" property="content" />
+	</resultMap>
+
+	<select id="selectFarmQnAList" resultMap="qnalistMap">
+		select
+		farm_qna_question_no, title, farmer_no, user_no, reg_date, content
+		from(
+		select rownum rnum, n1.*
+		from(
+		select *
+		from farm_qna_question
+		order
+		by
+		farm_qna_question_no desc
+		)n1
+		)where rnum
+		between #{start} and #{end}
+		and farmer_no = #{farmerNo} or user_no = #{userNo}
+	</select>
+
+	<select id="selectContentCnt" resultType="int">
+		SELECT count(*) FROM
+		farm_qna_question
+	</select>
+
+	<resultMap type="hashMap" id="detail">
+		<id column="farmer_no" property="farmerNo" />
+		<result column="farm_qna_question_no"
+			property="farmQnaQuestionNo" />
+		<result column="title" property="title" />
+		<result column="hits" property="hits" />
+		<result column="reg_date" property="regDate" />
+		<result column="content" property="content" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<select id="selectFarmQnADetail" resultMap="detail">
+		SELECT
+		fq.farm_qna_question_no, fq.title, fq.hits, fq.reg_date,
+		fq.content,
+		fq.farmer_no, f.name
+		FROM farm_qna_question fq, farmer f
+		WHERE
+		fq.farmer_no = f.farmer_no
+		AND fq.farm_qna_question_no =
+		#{farmQnaQuestionNo}
+	</select>
+
+	<delete id="deleteQnA" parameterType="int">
+		DELETE FROM
+		farm_qna_question
+		WHERE farm_qna_question_no = #{farmQnaQuestionNo}
+	</delete>
+
+	<update id="modifyQnA" parameterType="hashMap">
+		UPDATE
+		farm_qna_question
+		SET
+		farm_qna_question_no = #{farmQnaQuestionNo},
+		title = #{title},
+		content =
+		#{content}
+		WHERE
+		farm_qna_question_no =
+		#{farmQnaQuestionNo}
+	</update>
+
+	<insert id="insertFarmQnAanswer">
+		insert into farm_qna_answer(farm_qna_answer_no,
+		title, content, reg_date, farmer_no, farm_qna_question_no)
+		values(farm_qna_answer_seq.nextval, #{title}, #{content}, sysdate,
+		#{farmerNo}, #{farmQnaQuestionNo})
+	</insert>
+
+	<select id="selectFarmNoByFarmerNo" resultType="int" parameterType="java.lang.String">
+		select
+		farm_no
+		from
+		farm
+		where
+		farmer_no = #{value}
+	</select>
+
+
+</mapper>

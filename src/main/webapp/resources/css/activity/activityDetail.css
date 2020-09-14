@@ -69,6 +69,7 @@ img {
   top: 0;
 }
 
+<<<<<<< HEAD
 .slide-dot {
 	display: inline-block;
 }
@@ -93,6 +94,8 @@ img {
   background-color: #9dd971;
 }
 
+=======
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
@@ -123,18 +126,23 @@ img {
 
 .caption {
 	margin: 20px 0;
+	text-align: center;
 }
 
 .caption-title {
 	display: inline-block;
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: bold;
-	margin: 20px 0 10px 15px;
+	margin: 20px 0 15px 15px;
 }
 
 .caption-content {
 	font-size: 18px;
+<<<<<<< HEAD
 	margin: 0 0 20px 15px;
+=======
+	margin: 0 0 50px 15px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 }
 
 .price-span {
@@ -149,6 +157,10 @@ img {
 .schedule-empty {
 	margin-left: 12px;
 	color: #969696;
+<<<<<<< HEAD
+=======
+	margin-bottom: 50px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 }
 
 table {

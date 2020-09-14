@@ -22,11 +22,12 @@ public class MainDaoImpl implements MainDao {
 	@Autowired
 	private SqlSessionTemplate session;
 
+	// 제철 먹거리 top3 조회
 	@Override
-	public List<Product> selectTop3SeasonalFood() {
-		return null;
+	public List<Map<String, Object>> selectTop3SeasonalFood() {
+		return session.selectList("MAIN.selectTop3SeasonalFood");
 	}
-
+	
 	@Override
 	public List<Map<String, Object>> selectTop3Farm() {
 		return session.selectList("MAIN.selectFarmTop3");
@@ -40,6 +41,30 @@ public class MainDaoImpl implements MainDao {
 	@Override
 	public List<Map<String, Object>> selectTest() {
 		return session.selectList("TEST.testSelect");
+	}
+	
+	// 검색어로 제철 먹거리 검색
+	@Override
+	public List<Map<String, Object>> selectSeasonalFoodBySearch(String search) {
+		return null;
+	}
+	
+	// 검색어로 일반 먹거리 검색
+	@Override
+	public List<Map<String, Object>> selectGeneralFoodBySearch(String search) {
+		return null;
+	}
+
+	// 검색어로 농장 검색
+	@Override
+	public List<Map<String, Object>> selectFarmBySearch(String search) {
+		return null;
+	}
+
+	// 검색어로 체험 검색
+	@Override
+	public List<Map<String, Object>> selectActivityBySearch(String search) {
+		return null;
 	}
 
 }

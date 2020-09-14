@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farmapp.admin.model.dao.AdminNoticeDao;
 
+import common.dto.Admin;
 import common.dto.Notice;
 import common.util.AdminPaging;
 
@@ -23,6 +24,7 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 	@Autowired
 	private AdminNoticeDao adminNoticeDao;
 
+	// 공지사항 목록 조회
 	@Override
 	public List<Map<String, Object>> selectAllNoticeList() {
 		return adminNoticeDao.selectAllNoticeList();
@@ -30,7 +32,7 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 
 	// 공지사항 번호를 통해 특정 공지사항 조회
 	@Override
-	public Notice selectNoticeByNoticNo(Notice noticeNo) {
+	public Map<String, Object> selectNoticeByNoticNo(Notice noticeNo) {
 		return adminNoticeDao.selectNoticeByNoticeNo(noticeNo);
 	}
 
@@ -69,6 +71,12 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 	@Override
 	public List<Map<String, Object>> selectNoticeByAPaging(AdminPaging apaging) {
 		return adminNoticeDao.selectNoticeByAPaging(apaging);
+	}
+
+	// 글의 번호를 미리 조회
+	@Override
+	public String selectPostNo() {
+		return adminNoticeDao.selectPostNo();
 	}
 
 }

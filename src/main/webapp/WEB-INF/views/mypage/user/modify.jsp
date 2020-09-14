@@ -79,6 +79,7 @@ label {
 					<div class="panel-body">장바구니</div>
 				</div>
 
+<<<<<<< HEAD
 			</div>
 			<div class="col-lg-1">
 				<form action="modfy/userImg" method="post">
@@ -88,6 +89,52 @@ label {
 								src="<%=request.getContextPath()%>/resources/img/basic.jpg"
 								alt="...">
 							</a>
+=======
+			<form method="post"
+				action="<%=request.getContextPath()%>/modify/userInfo"
+				onsubmit="return validate();" enctype="multipart/form-data">
+				<div class="ModifyUserInfo">
+					<!-- 			아이디 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">아이디</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-user"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" placeholder="아이디" name="userId"
+								aria-describedby="sizing-addon1" value="${userData.userId}"
+								readonly>
+						</div>
+					</div>
+					<!-- 			비밀번호 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-lock"
+								id="sizing-addon1"></span> <input type="password"
+								class="form-control" placeholder="비밀번호" name="userPw"
+								id="userPw" aria-describedby="sizing-addon1">
+						</div>
+					</div>
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">비밀번호
+							확인</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-lock"
+								id="sizing-addon1"></span> <input type="password"
+								class="form-control" placeholder="비밀번호" name="pwcheck"
+								id="pwcheck" aria-describedby="sizing-addon1">
+						</div>
+					</div>
+					<!-- 			이름 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">이름</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-user"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" placeholder="이름" name="userName"
+								aria-describedby="sizing-addon1" value="${userData.userName}"
+								readonly>
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 						</div>
 						<button type="submit" class="btn btn-warning"
 							onclick="selectUrl('/modify/confirm')">사진 등록</button>

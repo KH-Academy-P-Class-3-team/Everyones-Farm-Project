@@ -119,6 +119,7 @@
 		</div>
 	</main>
 </div>
-
+<!-- 버튼 클릭 이벤트 -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/admin_main_btn_event.js"></script>
 <!-- footer include -->
 <%@include file="./include/admin_footer.jsp" %>

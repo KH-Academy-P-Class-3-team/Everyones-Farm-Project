@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,92 @@ public class MypageServiceImpl implements MyPageService{
 	private MyPageDao mypageDao;
 	
 	@Override
+<<<<<<< HEAD
 	public Map<String, Object> modifyUser(UserTB user) {
+=======
+	public int modifyUser(UserTB user, String root, MultipartFile upload) {
+		
+		String password = user.getUserPw();
+		password = passwordEncoder.encode(password);
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 		
 		Map<String, Object> userInfo = mypageDao.selectUser(user);
 		
+<<<<<<< HEAD
+=======
+		user.setUserPw(password);
+		int res = mypageDao.modifyUser(user);
+		
+		
+		if(upload.getOriginalFilename() != "") {
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		
+		
+		UserProfile check = new UserProfile();
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		check = fileUtil.fileUpload(upload, root);
+		
+
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", check);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println("result"+result);
+		}
+		
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		UserProfile check = new UserProfile();
+		
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		
+		UserProfile fileData = fileUtil.fileUpload(upload, root);
+		
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", fileData);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println(result);
+		
+//		return 0;
+		return res; // 그리고 return 값을 보내서 쓰이는 곳이 없으면 지우는게 맞는거 같네요
+	}
+
+	@Override
+	public void modifyUserProfile(UserTB user, String root, MultipartFile upload) {
+			if(upload.getOriginalFilename() != "") {
+			ActivityFileUtil fileUtil = new ActivityFileUtil();
+			
+			
+			
+			UserProfile check = new UserProfile();
+			check = mypageDao.selectUserProfile(user.getUserNo());
+			check = fileUtil.fileUpload(upload, root);
+			
+
+			Map<String, Object> fileMap = new HashMap<String, Object>();
+			fileMap.put("userNo", user.getUserNo());
+			fileMap.put("fileData", check);
+			int result=0;
+			if(check == null) {
+				result = mypageDao.insertprofile(fileMap);
+			}else {
+				result = mypageDao.modifyprofile(fileMap);
+			}
+			System.out.println("result"+result);
+			}
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 		
 		return userInfo;
 	}
@@ -127,5 +210,58 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 
+<<<<<<< HEAD
+=======
+	@Override
+	public Map<String, Object> basketListPur(int userNo) {
+		
+		List<Map<String, Object>> baskets = mypageDao.purchaseList(userNo);
+		
+		int cost = 0;
+		for(Map<String, Object> c : baskets) {
+			String costs = String.valueOf(c.get("PRICE"));
+			cost += Integer.parseInt(costs);
+		}
+		
+		Map<String, Object> basketList = new HashMap<String, Object>();
+		
+		basketList.put("baskets", baskets);
+		basketList.put("cost", cost);
+		
+		return basketList;
+	}
+
+
+	@Override
+	public int canclePurchase(int[] arr) {
+		List<Map<String, Object>> basketList = mypageDao.selectBasket(arr);
+
+		int res = 0;
+		for(Map<String, Object> b : basketList) {
+			String optionNo = String.valueOf(b.get("OPTION_NO"));
+			String basketNo = String.valueOf(b.get("BASKET_NO"));
+			//purchase를 0으로 다시 만드는 메서드
+			res = mypageDao.subPurchase(Integer.parseInt(basketNo));
+			//amount +1
+			mypageDao.addAmount(Integer.parseInt(optionNo));
+		}
+		return res;
+		
+		
+	}
+
+
+	@Override
+	public AnsweredOneonone answerDetail(int questionNo) {
+		return mypageDao.selectAnswer(questionNo);
+	}
+
+
+
+
+
+
+
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 
 }

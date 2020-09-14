@@ -19,24 +19,40 @@
 	display: inline-block;
 	position: relative;
 	top: 100px;
+<<<<<<< HEAD
 	left: 50px;
+=======
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 }
 
 .title-img {
 	display: inline-block;
 	position: relative;
 	float: right;
+<<<<<<< HEAD
 	bottom: -15px;
 	right: 80px;
+=======
+	bottom: 35px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 }
 
 .experience-title, .help-title {
 	margin-top: 70px;
 }
 
+.no-activity {
+	color: #777777;
+	margin: 20px 0 0 15px;
+}
+
 .row {
 	padding: 7px;
+<<<<<<< HEAD
 	width: 270px;
+=======
+	width: 284px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	height: 360px;
 	display: inline-block;
 	margin: 40px 19px 40px;
@@ -80,7 +96,7 @@
 
 .btnForm {
     border: none;
-/*     background-color: #68BB59; */
+    outline: none;
     background-color: #fec576;
     width: 95px;
     height: 40px;
@@ -90,16 +106,15 @@
 	font-size: 14px;
     cursor: pointer;
     float: right;
+<<<<<<< HEAD
     margin: 30px 40px 70px 0;
+=======
+	margin-right: 40px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 }
 
 .btnForm:hover {
 	background-color: #ffd399;
 }
-
-.btnForm: {
-	border: none;
-}
-
 
 

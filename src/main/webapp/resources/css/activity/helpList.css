@@ -36,7 +36,11 @@
 
 .row {
 	padding: 7px;
+<<<<<<< HEAD
 	width: 270px;
+=======
+	width: 284px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	height: 400px;
 	display: inline-block;
 	margin: 40px 19px 40px;
@@ -45,10 +49,6 @@
 .row:hover {
 	cursor: pointer;
 	box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
-}
-
-.list-content {
-	text-align: center;
 }
 
 .list-image {
@@ -61,8 +61,6 @@
 }
 
 .activity-search {
-/* 	display: inline-block; */
-/* 	float: right; */
 	text-align: right;
 	margin: 50px 23px 0;
 	vertical-align: middle;
@@ -72,28 +70,28 @@
 	font-weight: bold;
 	font-size: 1.2em;
 	margin: 12px 0 5px;
-/* 	color: #68bb59; */
 }
 
 .caption-content {
 	font-size: 0.9em;
+	margin-bottom: 3px;
 }
 
 .filter {
-    width:120px;
-    height:35px;
-    padding:0 15px;
-    font-size:14px;
-    border:1px solid #ccc;
-    background-image: url('../../image/activity/drop_down.png');/* background로 배경 깔아줌 */
+    width: 120px;
+    height: 41px;
+    padding: 0 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    background-image: url('../../image/activity/drop_down.png');
     background-position: 88% 50%; 
     background-repeat: no-repeat;
-    background-size: 17px;
-    background-color:#fff;
-    appearance:none;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    -o-appearance:none;
+    background-size: 14px 16px;
+    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
     vertical-align: middle;
 }
 
@@ -103,9 +101,15 @@
 }
 
 .title {
+<<<<<<< HEAD
 	height: 31px;
+=======
+	height: 41px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	border: 1px solid #ccc;
     vertical-align: middle;
+    width: 200px;
+    padding-left: 10px;
 }
 
 .title:focus {
@@ -114,26 +118,30 @@
 }
 
 .btnSearch {
-	background-color: #68bb59;
-	color: white;
+	background-color: #fff;
 	border: none;
 	width: 50px;
 	height: 35px;
     vertical-align: middle;
-}
-
-.btnSearch:focus {
 	outline: none;
+	margin-left: -57px;
 }
 
 .btnSearch:hover {
 	cursor: pointer;
 }
 
-.btnSearch:active {
-	background-color: #82c776;
+input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+	 transition: background-color 5000s ease-in-out 0s;
+	 -webkit-transition: background-color 9999s ease-out;
+     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
+
+/* 페이지네이션 */
 .paging {
 	height:10%;
 	font-size:1.5vw;
@@ -142,27 +150,24 @@
 	margin: 30px 0;
 }
 
-.paging a {
-	display:inline-block;
-	float:left;
-	background-color:#fff;
-	width:28px;
-	height:28px;
-	line-height:28px;
-	text-align:center;
-	font-size:13px;
-	color:#585858;
-	text-decoration:none;
+.paging-in a {
+	display: inline-block;
+	float: left;
+	width: 28px;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	font-size: 13px;
+	text-decoration: none;
 }
 
-.paging a:active {
+a:link, a:visited {
+	color: #000000;
+}
+
+.paging-in .num:active, .paging-in .num:hover {
 	background-color: #68bb59;
-	color:#fff;
-	border:1px solid #68bb59;
-}
-
-.paging nav {
-	border: 1px solid #ccc;
+	color: #fff;
 }
 
 .paging .first {
@@ -187,9 +192,9 @@
 
 .paging-in {
 	display: inline-block;
-	border:1px solid #e6e6e6;
-	width:28px;
-	height:28px;
+	border: 1px solid #e6e6e6;
+	width: 30px;
+	height: 30px;
 }
 
 .pre {
@@ -200,5 +205,7 @@
 	margin-left: 7px;
 }
 
-
-
+.paging-in .green {
+	background-color: #68bb59;
+	color: #fff;
+}

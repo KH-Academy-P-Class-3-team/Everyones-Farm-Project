@@ -10,6 +10,7 @@ import common.dto.ProductOption;
 
 @Repository
 public class PersonalProduceDaoImpl implements PersonalProduceDao {
+<<<<<<< HEAD
 
 	@Override
 	public int insertProduct() {
@@ -25,6 +26,36 @@ public class PersonalProduceDaoImpl implements PersonalProduceDao {
 		ProductOption pOption = new ProductOption();
 		
 		return null;
+=======
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Override
+	public int insertProduct(Map<String, Object> commandMap) {
+		return sqlSession.insert("Product.insertProduct", commandMap);
+
+	}
+	
+	public int insertProductOption(Map<String, Object> commandMap) {
+		return sqlSession.insert("Product.insertProductOption", commandMap);
+	}
+
+	@Override
+	public List<Product> selectProductList(Map<String, Object> map) {		
+		return sqlSession.selectList("Product.selectProductList", map);
+	}
+
+	@Override
+	public int contentCnt() {
+		int cnt = sqlSession.selectOne("Product.selectContentCnt");
+		return cnt;
+	}
+
+	@Override
+	public Map<String, Object> selectProductDetail(int productNo) {
+		return sqlSession.selectOne("Product.selectProductDetail", productNo);
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	}
 
 }

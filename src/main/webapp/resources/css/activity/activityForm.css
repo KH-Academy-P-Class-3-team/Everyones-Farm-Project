@@ -10,11 +10,24 @@
 }
 
 .form-top {
+<<<<<<< HEAD
 	margin: 50px 20px 80px;
+=======
+	margin: 50px auto;
+    width: 740px;
 }
 
-p {
-	font-size: 1.2em;
+.top-title {
+	font-size: 1.8em;
+	color: #68bb59;
+	margin-bottom: 20px;
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
+}
+
+.top-sub {
+	font-size: 1.1em;
+	color: #585858;
+	margin-bottom: 10px;
 }
 
 .activity-form {
@@ -136,6 +149,15 @@ td {
 
 .th3 {
 	width: 25%
+}
+
+input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+	 transition: background-color 5000s ease-in-out 0s;
+	 -webkit-transition: background-color 9999s ease-out;
+     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
 .btnAdd {

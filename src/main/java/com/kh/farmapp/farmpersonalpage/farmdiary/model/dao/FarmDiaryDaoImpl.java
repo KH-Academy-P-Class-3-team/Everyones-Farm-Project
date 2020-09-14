@@ -23,6 +23,7 @@ public class FarmDiaryDaoImpl implements FarmDiaryDao {
 		return sqlSession.insert("Diary.insertFarmDiary", commandMap);
 		
 	}
+<<<<<<< HEAD
 	
 //	@Override
 //	public void updateHit(FarmDiary hit) {
@@ -39,6 +40,17 @@ public class FarmDiaryDaoImpl implements FarmDiaryDao {
 		
 		System.out.println(sqlSession.selectList("Diary.selectFarmDiaryList", paging));
 		return sqlSession.selectList("Diary.selectFarmDiaryList", paging);
+=======
+
+	@Override
+	public int updateFarmDiaryHits(int hits) {
+		return sqlSession.update("Diary.updateFarmDiaryHits", hits);
+	}
+
+	@Override
+	public List<FarmDiary> selectFarmDiaryList(Map<String, Object> map) {
+		return sqlSession.selectList("Diary.selectFarmDiaryList", map);
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	}
 	
 	@Override
@@ -63,5 +75,10 @@ public class FarmDiaryDaoImpl implements FarmDiaryDao {
 	}
 
 
+	// farmerNo 로 farmNo 조회
+	@Override
+	public int selectFarmNoByFarmerNo(String farmerNo) {
+		return sqlSession.selectOne("Diary.selectFarmNoByFarmerNo", farmerNo);
+	}
 
 }

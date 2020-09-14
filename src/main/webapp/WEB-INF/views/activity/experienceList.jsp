@@ -23,36 +23,6 @@ $(document).ready(function() {
 	})
 	
 	
-	/* 활동 검색 버튼 클릭 시 Ajax 함수 */
-	$(".btnSearch").click(function() {
-		var filter = $('.filter').val();
-		var title = $('.title').val();
-		
-		var url = '<%=request.getContextPath()%>/activity/searchActivity.do';
-		var xhr = new XMLHttpRequest();
-		
-		xhr.open('POST', url);
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		
-		xhr.send('filter=' + filter + '&title=' + title + '&isHelp=0');
-		xhr.addEventListener('load', function(){
-			var data = xhr.response;
-			
-			if(data == '') {
-				alert('검색 실패!');
-			} else {
-				$('.activity-list').html(data);
-				
-				/* 이미지 파일이 없는 체험 활동에 기본 이미지 출력 */
-				$(".list-image").each(function() {
-					if($(this).find("img").length == 0) {
-						$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/activity/no-image.png' width='270' height='270'>"))
-					} 
-				})
-			}
-		})
-	})
-	
 })
 </script>
 
@@ -68,12 +38,15 @@ $(document).ready(function() {
 	
 
 	<div class="activity-search">
-		<select name="filter" class="filter">
-			<option value="activityTitle">체험명</option>
-			<option value="farmTitle">농장명</option>
-		</select>
-		<input type="text" name="title" class="title">
-		<button class="btnSearch">검색</button>
+		<form action="<%=request.getContextPath()%>/activity/activityList" method="post">
+			<input type="hidden" name="isHelp" value="0">
+			<select name="filter" class="filter">
+				<option value="activityTitle">체험명</option>
+				<option value="farmName">농장명</option>
+			</select>
+			<input type="text" name="title" class="title">
+			<button class="btnSearch"><img alt="검색" src="<%=request.getContextPath() %>/resources/image/findfarm/search_icon.png" width="25"></button>
+		</form>
 	</div>
 
 	
@@ -95,15 +68,9 @@ $(document).ready(function() {
 			
 			
 			<div class="caption">
-				<div class="caption-title"><b>${activity.title }</b></div>
-				
-			<c:forEach items="${farm }" var="farm">
-				<c:if test="${farm.farmNo eq activity.farmNo}">
-					<div class="caption-content">농장명 : ${farm.farmName }</div>
-					<div class="caption-content">주소 : ${farm.zonecode } ${farm.firstAddress } ${farm.secondAddress }</div>
-				</c:if>
-			</c:forEach>
-
+				<div class="caption-title">${activity.title }</div>
+				<div class="caption-content">${activity.farmName }</div>
+				<div class="caption-content">${activity.firstAddress } ${activity.secondAddress } (${activity.zonecode })</div>
 			</div>
 			
 		
@@ -113,45 +80,106 @@ $(document).ready(function() {
 		
 		
 		<!-- section pagination -->
-		<div class="paging">
-			<div class="paging-in">
-				<a href="<%=request.getContextPath()%>/activity/experienceList.do" class="nav first"></a>
-			</div>
-			<c:choose>
-				<c:when test="${paging.blockStart > 1 }">
-					<div class="paging-in pre">
-						<a href="<%= request.getContextPath() %>/activity/experienceList.do?cPage=${paging.blockStart-1}" class="nav prev"></a>
+		<c:choose>
+			<c:when test="${filter eq null && title eq null}">
+				<div class="paging">
+					<div class="paging-in">
+						<a href="<%=request.getContextPath()%>/activity/activityList?isHelp=0" class="nav first"></a>
 					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="paging-in pre">
-						<a href="<%= request.getContextPath() %>/activity/experienceList.do?cPage=${paging.blockStart}" class="nav prev"></a>
+					<c:choose>
+						<c:when test="${paging.currentPage eq 1 }">
+							<div class="paging-in pre">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage}&isHelp=0" class="nav prev"></a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="paging-in pre">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage-1}&isHelp=0" class="nav prev"></a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+						<div class="paging-in">
+							<c:choose>
+								<c:when test="${page eq paging.currentPage }">
+									<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${page}&isHelp=0" class="num active green">${page}</a>
+								</c:when>
+								<c:otherwise>
+									<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${page}&isHelp=0" class="num active">${page}</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:forEach>
+			
+					<c:choose>
+						<c:when test="${paging.currentPage eq paging.lastPage }">
+							<div class="paging-in nex">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage}&isHelp=0" class="nav next"></a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="paging-in nex">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage+1}&isHelp=0" class="nav next"></a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+			
+					<div class="paging-in">
+						<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.lastPage}&isHelp=0" class="nav last"></a>
 					</div>
-				</c:otherwise>
-			</c:choose>
-			<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-				<div class="paging-in">
-					<a href="<%= request.getContextPath() %>/activity/experienceList.do?cPage=${page}" class="num active">${page}</a>
 				</div>
-			</c:forEach>
-
-			<c:choose>
-				<c:when test="${paging.blockEnd+1 > paging.lastPage }">
-					<div class="paging-in nex">
-						<a href="<%= request.getContextPath() %>/activity/experienceList.do?cPage=${paging.blockEnd}" class="nav next"></a>
+			</c:when>
+	
+	
+			<c:otherwise>
+				<div class="paging">
+					<div class="paging-in">
+						<a href="<%=request.getContextPath()%>/activity/activityList?isHelp=0&filter=${filter}&title=${title}" class="nav first"></a>
 					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="paging-in nex">
-						<a href="<%= request.getContextPath() %>/activity/experienceList.do?cPage=${paging.blockEnd+1}" class="nav next"></a>
+					<c:choose>
+						<c:when test="${paging.currentPage eq 1 }">
+							<div class="paging-in pre">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage}&isHelp=0&filter=${filter}&title=${title}" class="nav prev"></a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="paging-in pre">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage-1}&isHelp=0&filter=${filter}&title=${title}" class="nav prev"></a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+						<div class="paging-in">
+							<c:choose>
+								<c:when test="${page eq paging.currentPage }">
+									<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${page}&isHelp=0&filter=${filter}&title=${title}" class="num active green">${page}</a>
+								</c:when>
+								<c:otherwise>
+									<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${page}&isHelp=0&filter=${filter}&title=${title}" class="num active">${page}</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:forEach>
+			
+					<c:choose>
+						<c:when test="${paging.currentPage eq paging.lastPage }">
+							<div class="paging-in nex">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage}&isHelp=0&filter=${filter}&title=${title}" class="nav next"></a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="paging-in nex">
+								<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.currentPage+1}&isHelp=0&filter=${filter}&title=${title}" class="nav next"></a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+			
+					<div class="paging-in">
+						<a href="<%= request.getContextPath() %>/activity/activityList?cPage=${paging.lastPage}&isHelp=0&filter=${filter}&title=${title}" class="nav last"></a>
 					</div>
-				</c:otherwise>
-			</c:choose>
-
-			<div class="paging-in">
-				<a href="<%= request.getContextPath() %>/activity/experienceList.do?cPage=${paging.lastPage}" class="nav last"></a>
-			</div>
-		</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
 		<!-- // section pagination -->
 		
 		

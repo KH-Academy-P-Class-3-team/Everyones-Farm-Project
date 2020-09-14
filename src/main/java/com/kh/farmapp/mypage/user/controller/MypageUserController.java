@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.farmapp.admin.oneonone.controller.AdminOneOnOneController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 import common.dto.UserTB;
 
@@ -59,17 +62,32 @@ public class MypageUserController {
 		
 		return null;
 	}
+	
+	
 
 	
 	@RequestMapping("mypage/user/deleteId")
 	public void mypage1() {
 	}
 
+<<<<<<< HEAD
 
 	//회원 사진을 수정한다.
 	public String modifyprofile(UserTB user, HttpSession session, Model model) {
 		return "";
 	}
+=======
+	//회원 탈퇴 하는 메서드
+	@RequestMapping("leave")
+	public ModelAndView leave(HttpSession session,
+			String userPW) {
+		ModelAndView mav = new ModelAndView();
+		UserTB ckUser = (UserTB) session.getAttribute("userInfo");
+		
+		ckUser = mypageService.selectUser(ckUser);
+		
+		if(passwordEncoder.matches(userPW, ckUser.getUserPw())) {
+>>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 
 	//회원 탈퇴 하는 메서드
 	public String leave(HttpSession session,
