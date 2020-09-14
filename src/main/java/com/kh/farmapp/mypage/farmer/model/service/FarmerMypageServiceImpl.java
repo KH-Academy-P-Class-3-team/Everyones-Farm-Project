@@ -49,7 +49,12 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	public void writeDailylog(FarmingDailylog farmingDailylog) {
 		farmerMypageDao.writeDailylog(farmingDailylog);
 	}
-
+	
+	@Override
+	// 영농일지 삭제
+	public void delete(int dailyLogNo) {
+		farmerMypageDao.delete(dailyLogNo);
+	}
 	
 	//농장 체험 활동내역 리스트
 	@Override

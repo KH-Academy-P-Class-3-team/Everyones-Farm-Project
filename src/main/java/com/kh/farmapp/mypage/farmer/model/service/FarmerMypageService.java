@@ -52,6 +52,9 @@ public interface FarmerMypageService {
 	 * @return
 	 */
 	
+
+	public void delete(int dailyLogNo);
+
 	
 	public List<Map<String, Object>> activitylist(Criteria cri, Farmer farmer);
 
@@ -108,14 +111,6 @@ public interface FarmerMypageService {
    
    //판매 내역 페이징 총 갯수
    public int listCount4(Farmer farmer);
-   
-   
- 
-
-   
-   
-   
-   
 	
    
 	//게시물 조회

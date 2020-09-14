@@ -131,6 +131,26 @@ table {
 	});
 	
 </script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+			var formObj = $("form[name='readForm']");
+			// 삭제
+			$(".delete_btn").on("click", function(){
+				
+				var deleteYN = confirm("정말 삭제하시겠습니까?");
+				if(deleteYN == true){
+				
+				formObj.attr("action", "/farmapp/mypage/delete");
+				formObj.attr("method", "post");
+				formObj.submit();
+			}else if(deleteYN == false){
+				return false;
+			}
+			})
+			
+		})
+	</script>
 
 <style type="text/css">
 #bu{
@@ -236,15 +256,19 @@ margin-left:-90px;
 				<form role="form" name="readForm" method="post" action="/farmapp/mypage/dailyLoglist">
 				<div id="root">
 					<div>
+					<input type="hidden" id="dailylogNo" name="dailylogNo" value="${read.dailylogNo}" />
 						<label for="content">내용</label><textarea id="content" name="content"><c:out value="${read.content}"/></textarea><br> 
 						<label for="title">작업량</label> <input type="text" id="workingAmount" name="workingAmount" value="${read.workingAmount}"/><br>
 						<label	for="title">작업 시간</label> <input type="text" id="workingTime" name="workingTime" value="${read.workingTime}"/><br> 
 						<label for="title">작업 인원</label><input type="text" id="workingMember" name="workingMember" value="${read.workingMember}"/><br>
-						<label for="title">작업 날짜</label> <input type="text" 	id="workingDate" name="workingDate" value="${read.workingDate}"/><br>
+						<label for="title">작업 날짜</label> <input type="date" 	id="workingDate" name="workingDate" value="${read.workingDate}"/><br>
 						<label for="title">날씨</label> <input type="text" id="weather" name="weather" value="${read.weather}"/><br> 
 						<label for="title">강수량</label><input type="text" id="rain" name="rain" value="${read.rain}"/><br> 
 						<label for="title">최고 온도</label> <input type="text" id="maxTemp" name="maxTemp" value="${read.maxTemp}"/><br> 
 						<label for="title">최저 온도</label> <input type="text" id="minTemp" name="minTemp" value="${read.minTemp}"/><br>
+						<div>
+							<button type="submit" class="delete_btn">삭제</button>
+				</div>
 					</div>
 				</div>
 					

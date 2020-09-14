@@ -85,9 +85,18 @@ public class FarmerMypageController {
 		return "mypage/dailyLogReadView";
 	}
 	
+
+	@RequestMapping(value ="/mypage/delete", method= RequestMethod.POST)
+	public String delete(FarmingDailylog farmingDailylog) {
+		farmerMypageService.delete(farmingDailylog.getDailylogNo());
+		System.out.println("삭제요청");
+		return "redirect:/mypage/dailyLoglist";
+	}
 	
-	@RequestMapping(value = "/mypage/activityone", method = RequestMethod.GET)
-	public String activityone(Model model, Criteria cri , HttpSession session) {
+	
+	@RequestMapping(value = "/mypage/activityFarm", method = RequestMethod.GET)
+	public String activityFarm(Model model, Criteria cri , HttpSession session) {
+    
 		System.out.println("농장체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -106,10 +115,11 @@ public class FarmerMypageController {
 		model.addAttribute("list", farmActive);
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "mypage/activityone";
+		return "mypage/activityFarm";
 	}
-	@RequestMapping(value = "/mypage/activitytwo", method = RequestMethod.GET)
-	public String activitytwo(Model model, Criteria cri , HttpSession session) {
+	@RequestMapping(value = "/mypage/activityWork", method = RequestMethod.GET)
+	public String activityWork(Model model, Criteria cri , HttpSession session) {
+	
 		System.out.println("일손체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		//일손체험
@@ -125,12 +135,16 @@ public class FarmerMypageController {
 		//일손체험
 		model.addAttribute("list3",workActive);
 		model.addAttribute("pageMaker3",pageMaker3);
-		return "mypage/activitytwo";
+
+		return "mypage/activityWork";
+
+		
 	}
 	
 	// 농장 체험 리스트 목록 조회
 	@RequestMapping(value = "/mypage/activitylist", method = RequestMethod.GET)
 	public ModelAndView activitylist(Model model, Criteria cri,HttpSession session,HttpServletRequest request) {
+
 
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -146,8 +160,6 @@ public class FarmerMypageController {
 			mav.setViewName("/mypage/activitylist");
 		}
 		return mav;
-
-		
 	}
 	
 
