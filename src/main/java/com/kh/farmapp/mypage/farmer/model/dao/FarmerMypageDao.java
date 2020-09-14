@@ -119,10 +119,6 @@ public interface FarmerMypageDao {
 
 
 
-
-	
-
-
 	
 	
 }

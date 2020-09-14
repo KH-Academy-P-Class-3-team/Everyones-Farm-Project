@@ -112,6 +112,9 @@ public interface FarmerMypageService {
    public int listCount4(Farmer farmer);
    
    
+
+   
+   
  
 
    

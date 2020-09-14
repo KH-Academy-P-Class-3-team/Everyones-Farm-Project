@@ -94,7 +94,7 @@ public class FarmerMypageController {
 	
 	
 	@RequestMapping(value = "/mypage/activityFarm", method = RequestMethod.GET)
-	public String activityone(Model model, Criteria cri , HttpSession session) {
+	public String activityFarm(Model model, Criteria cri , HttpSession session) {
 		System.out.println("농장체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -116,7 +116,7 @@ public class FarmerMypageController {
 		return "mypage/activityFarm";
 	}
 	@RequestMapping(value = "/mypage/activityWork", method = RequestMethod.GET)
-	public String activitytwo(Model model, Criteria cri , HttpSession session) {
+	public String activityWork(Model model, Criteria cri , HttpSession session) {
 		System.out.println("일손체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		//일손체험
@@ -137,14 +137,15 @@ public class FarmerMypageController {
 	
 	// 농장 체험 리스트 목록 조회
 	@RequestMapping(value = "/mypage/activitylist", method = RequestMethod.GET)
-	public ModelAndView activitylist(Model model, Criteria cri,HttpSession session,HttpServletRequest request) {
+	public ModelAndView activitylist(Model model,HttpSession session,HttpServletRequest request) {
 
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		
 		
 //		List <Map<String,Object>> testMap = (List<Map<String, Object>>)model.addAttribute("list", farmerMypageService.activitylist(cri));
 
 		ModelAndView mav = new ModelAndView();
-		 
+		
 		if(farmer == null) {
 			mav.addObject("alertMsg", "로그인 후 이용 가능합니다");
 			mav.addObject("url", request.getContextPath() + "/farmer/login.do");
@@ -153,6 +154,7 @@ public class FarmerMypageController {
 			mav.setViewName("/mypage/activitylist");
 		}
 		return mav;
+		
 
 		
 	}

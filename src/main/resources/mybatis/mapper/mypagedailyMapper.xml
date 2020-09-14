@@ -116,6 +116,6 @@
 	
 	<delete id="delete" parameterType ="int">
 	  delete from FARMING_DAILYLOG where dailylog_no = #{dailyLogNo}
-	
 	</delete>
+	
 </mapper>

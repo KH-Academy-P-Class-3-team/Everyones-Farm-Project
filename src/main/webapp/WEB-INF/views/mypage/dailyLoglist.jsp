@@ -273,13 +273,13 @@ margin-left:-90px;
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}" >판매 목록</a>
+					<a href="/farmapp/mypage/selllist" >판매 목록</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}"  style="font-weight: bold;">영농 일지</a>
+					<a href="/farmapp/mypage/dailyLoglist"  style="font-weight: bold;">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}">체험
+					<a href="/farmapp/mypage/activitylist">체험
 						신청내역</a>
 				</div>
 
@@ -309,7 +309,7 @@ margin-left:-90px;
 
 				</body>
 			</div>
-			<a href="/farmapp/mypage/dailyLogWrite?farmerno=${farmerInfo.farmerNo}"
+			<a href="/farmapp/mypage/dailyLogWrite"
 				class="list-group-item list-group-item-action text-center font-weight-bold">영농 일지 작성하기</a>
 			<div id = "writeday"></div>
 			<div id="border">
