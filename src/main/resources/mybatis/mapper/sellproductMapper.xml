@@ -116,6 +116,19 @@
 		<result column="expiration_date" property="expirationDate" />
 	</resultMap>
 	
+	<!-- product DETAIL -->
+	<resultMap type="hashMap" id="ProductDetail">
+		<id column="product_no" property="productNo" />
+		<result column="name" property="name" />
+		<result column="explain" property="explain" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="effect" property="effect" />
+		<result column="food" property="food" />
+		<result column="kind" property="kind" />
+		<result column="product_country" property="productCountry" />
+		<result column="farmer_no" property="farmerNo" />
+		<result column="delivery" property="delivery" />
+	</resultMap>
+	
 	
 <!-- 	<select id="selectSeasonByProductNo" resultType="common.dto.Product"> -->
 <!-- 		select * from product where product_no = #{productNo} -->
@@ -133,20 +146,22 @@
 			and post_no = #{productNo}
 	</select>
 	
-	<select id="selectProductByProductNo" resultMap="ProductJoinOption" parameterType="int">
-		<!-- select * from product p, product_option o
-		where p.product_no = o.product_no
-			and p.product_no = #{productNo} -->
-		select
-		    * 
-		from 
-		    product p
-		    JOIN
-		        product_option o
-		    ON
-		        p.product_no = o.product_no  
-		where
-		    p.product_no = #{productNo}
+<!-- 	<select id="selectProductByProductNo" resultMap="ProductJoinOption" parameterType="int"> -->
+<!-- 		select -->
+<!-- 		    *  -->
+<!-- 		from  -->
+<!-- 		    product p -->
+<!-- 		    JOIN -->
+<!-- 		        product_option o -->
+<!-- 		    ON -->
+<!-- 		        p.product_no = o.product_no   -->
+<!-- 		where -->
+<!-- 		    p.product_no = #{productNo} -->
+<!-- 	</select> -->
+	
+	<select id="selectProductByProductNo" resultMap="ProductDetail">
+		select * from product
+		where product_no = #{productNo}
 	</select>
 	
 	<select id="selectProductFile" resultType="FILE">
@@ -159,5 +174,10 @@
 		insert into basket(basket_no, user_no, farmer_no, product_no, option_no, count)
 		values (basket_seq.nextval, #{userNo}, #{farmerNo}, #{productNo}, #{optionNo}, #{count})
 	</insert>
+	
+	<select id="selectProductOption" resultType="common.dto.ProductOption">
+		select * from product_option 
+		where product_no = #{productNo}
+	</select>
 	
 </mapper>

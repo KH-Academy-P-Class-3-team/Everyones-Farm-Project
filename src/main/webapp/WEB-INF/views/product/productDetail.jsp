@@ -49,16 +49,6 @@ $(document).ready(function() {
 		}
 	})
 	
-	// 장바구니 버튼 클릭
-// 	$("#cart").click(function() {
-// 		var cart_confirm = confirm("장바구니에 담으시겠습니까?");
-		
-// 		if(cart_confirm == true){
-<%-- 			location.href = '<%=request.getContextPath() %>/product/cart.do'; --%>
-// 		} else{
-// 			alert("취소하였습니다");
-// 		}
-// 	})
 
 // 	$(".plus").click(function(){
 // 		this.querySelector('input[type=number]').stepUp();
@@ -98,6 +88,16 @@ $(document).ready(function() {
 	
 	function currentSlide(n) {
 		showSlides(slideIndex = n);
+	}
+	
+	
+	/* option 선택 없을 때 */
+	function checkop(){
+		if($("#optionNo").val() == "옵션 선택하기"){
+			alert("옵션을 선택해주세요"); 
+			return false;
+		}
+		return true;
 	}
 
 	
@@ -156,23 +156,27 @@ $(document).ready(function() {
 	
 		<div class="caption-title">상품명</div>
 		<div class="caption-content">${data.name }</div>
-		<div class="caption-title">가격</div>
-		<div class="caption-content">${data.price }</div>
-		<form name="tobuy" method="post" action="<%=request.getContextPath()%>/product/cartimpl.do" >
+		<div class="caption-title">종류</div>
+		<div class="caption-content">${data.kind }</div>
+		<form name="tobuy" method="post" action="<%=request.getContextPath()%>/product/cartimpl.do" 
+			onsubmit="return checkop();">
 		<input type="hidden" value="${data.productNo }" name="productNo"/>
-		<input type="hidden" value="${data.optionNo }" name="optionNo"/>
+<%-- 		<input type="hidden" value="${data.optionNo }" name="optionNo"/> --%>
 		<div style="margin-top: 100px;">
 		<div class="caption-title">상품 구매하기</div>
+<%-- 		<fmt:formatDate value="${expirationDate }" pattern="yyyy-MM-dd"/> --%>
 		<div class="caption-content">
-<!-- 		<input type="number" min="0" max="200" class="count" />개 -->
+		<div class="selectOption">
+			<select id="optionNo" name="optionNo">
+				<option>옵션 선택하기</option>
+				<c:forEach items="${option }" var="option">
+					<c:set var="expirationDate" value="<%=new java.util.Date()%>"/>
+					<option value="${option.optionNo }"> ${option.price }원, ${option.quality }, <fmt:formatDate value="${option.expirationDate }" pattern="yyyy-MM-dd"/>까지 - [${option.amount }개 남음]</option>
+				</c:forEach> 
+			</select>
+		</div>
 		
-<!-- 		<div class="number-input"> -->
-<!-- 	  		<button type="button" onclick="this.querySelector('input[type=number]').stepDown()" ></button> -->
-<!-- 	 		 <input min="0" name="count" value="1" type="number" class="quantity"/>개 -->
-<!-- 	  		<button type="button" onclick="this.querySelector('input[type=number]').stepUp()" class="plus"></button> -->
-<!-- 		</div> -->
-		
-		<div class="number-input">
+		<div class="number-input" style="float: right; margin-top: 5px;">
 		  <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
 		  <input class="quantity" min="0" name="count" value="1" type="number">
 		  <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>

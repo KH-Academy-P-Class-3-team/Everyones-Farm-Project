@@ -123,5 +123,12 @@ public interface ProductDao {
 	 */
 	public int insertBasket(Map<String, Object> commandMap);
 
+	/**
+	 *  productNo로 옵션 찾기
+	 * @param productNo
+	 * @return List<Map<String, Object>>
+	 */
+	public List<Map<String, Object>> selectProductOption(int productNo);
+
 
 }
