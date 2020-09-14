@@ -49,6 +49,9 @@
 					<c:when test="${not empty userInfo }">
 						<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a><a href="<%=request.getContextPath()%>/mypage/user/modify">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
 					</c:when>
+					<c:when test="${not empty facebookInfo }">
+						<a href="<%=request.getContextPath() %>/user/facebooklogout">로그아웃</a><a href="<%=request.getContextPath()%>/mypage/user/modify">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
+					</c:when>
 					<c:when test="${not empty kakaoInfo }">
             
 						<img src="${kakaoInfo.profile_image }" alt="프로필" style= "height: 40px; width: 40px; border-radius: 50%;"/>

@@ -25,7 +25,7 @@
 		 <c:if test="${i%j == 0 }"> 
 		 <tr> 
 		 </c:if> 
-		 <td><img alt="peach" src="<%=request.getContextPath()%>/resources/image/product/peach.jpg" class="productimage"/><br>
+		 <td onclick="javascript:location.href='<%=request.getContextPath()%>/product/productDetail.do?productNo=${list.productNo}'"><img alt="peach" src="<%=request.getContextPath()%>/resources/image/product/peach.jpg" class="productimage"/><br>
 				 ${list.name }<br>
 				 ${list.kind }</td> 
 		 <c:if test="${i%j == j-1 }">
@@ -53,7 +53,7 @@
 		 <c:if test="${i%j == 0 }"> 
 		 <tr> 
 		 </c:if> 
-		 <td><img alt="peach" src="<%=request.getContextPath()%>/resources/image/product/kimchi.jpg" class="productimage"/><br>
+		 <td onclick="javascript:location.href='<%=request.getContextPath()%>/product/productDetail.do?productNo=${glist.productNo}'"><img alt="peach" src="<%=request.getContextPath()%>/resources/image/product/kimchi.jpg" class="productimage"/><br>
 				 ${glist.name }<br>
 				 ${glist.kind }</td> 
 		 <c:if test="${i%j == j-1 }">

@@ -123,6 +123,11 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
+	public List<Map<String, Object>> selectProductOption(int productNo) {
+		return productDao.selectProductOption(productNo);
+	}
+	
+	@Override
 	public int insertBasket(Map<String, Object> commandMap) {
 		
 		return productDao.insertBasket(commandMap);

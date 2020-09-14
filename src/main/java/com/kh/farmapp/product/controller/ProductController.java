@@ -82,16 +82,16 @@ public class ProductController {
 			, HttpSession session ) {
 		ModelAndView mav = new ModelAndView();
 		
-		session.getAttribute("userInfo");
-		
 		Map<String, Object> commandMap = productService.selectProductDetail(productNo);
-		System.out.println(commandMap.toString());
+		List<Map<String, Object>> option = productService.selectProductOption(productNo);
+		
 		
 		// file 이 null 값이 아닐 때 추가하기
 		if( commandMap.get("fileList") != null ) {
 			mav.addObject("fileList", commandMap.get("fileList"));
 		}
 		mav.addObject("data", commandMap);
+		mav.addObject("option", option);
 		mav.setViewName("product/productDetail");
 		return mav;
 	}
@@ -122,7 +122,6 @@ public class ProductController {
 	}
 	
 	//장바구니 담기
-	@SuppressWarnings("null")
 	@RequestMapping("cartimpl.do")
 	public String cartImpl(
 			@ModelAttribute Basket basket
@@ -144,11 +143,11 @@ public class ProductController {
 		else if(userInfo != null) {
 			commandMap.put("userNo", userInfo.getUserNo());
 			commandMap.put("farmerNo", null);
-			int res = productService.insertBasket(commandMap); // map 에다가 설정했으니까 map을 넘겨줘야 겠쥬?
+			int res = productService.insertBasket(commandMap); 
 			if(res>0) {
 				model.addAttribute("confirmMsg", "장바구니를 확인하시겠습니까?");
 				model.addAttribute("confirmUrl", root+"/product/main.do"); //장바구니 링크
-				model.addAttribute("confirmBackUrl", "javascript:history.go(-1);"); //장바구니 링크
+				model.addAttribute("confirmBackUrl", "javascript:history.go(-1);"); 
 			} else {
 				model.addAttribute("alertMsg", "장바구니에 담지 못했습니다.");
 				model.addAttribute("url", root+"/product/main.do");
@@ -157,11 +156,11 @@ public class ProductController {
 		} else if ( farmerInfo != null) {
 			commandMap.put("userNo", null);
 			commandMap.put("farmerNo", farmerInfo.getFarmerNo());
-			int res = productService.insertBasket(commandMap); // map 에다가 설정했으니까 map을 넘겨줘야 겠쥬?
+			int res = productService.insertBasket(commandMap); 
 			if(res>0) {
 				model.addAttribute("confirmMsg", "장바구니를 확인하시겠습니까?");
 				model.addAttribute("confirmUrl", root+"/product/main.do"); //장바구니 링크
-				model.addAttribute("confirmBackUrl", "javascript:history.go(-1);"); //장바구니 링크
+				model.addAttribute("confirmBackUrl", "javascript:history.go(-1);"); 
 			} else {
 				model.addAttribute("alertMsg", "장바구니에 담지 못했습니다.");
 				model.addAttribute("url", root+"/product/main.do");
