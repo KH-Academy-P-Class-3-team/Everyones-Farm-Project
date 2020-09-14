@@ -56,7 +56,7 @@
 						<a href="<%=request.getContextPath() %>/user/kakaologout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
 					</c:when>
 					<c:when test="${not empty farmerInfo }">
-						<a href="<%=request.getContextPath() %>/farmer/logout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
+						<a href="<%=request.getContextPath() %>/farmer/logout">로그아웃</a><a href="#">마이페이지</a><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">나의농장</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
 					</c:when>
 					<c:when test="${empty userInfo and empty kakaoInfo and empty farmerInfo }">
 						<a href="<%=request.getContextPath() %>/user/login.do">로그인</a><a href="<%=request.getContextPath() %>/user/join.do">회원가입</a><a href="#"><i class="fas fa-search"></i></a>

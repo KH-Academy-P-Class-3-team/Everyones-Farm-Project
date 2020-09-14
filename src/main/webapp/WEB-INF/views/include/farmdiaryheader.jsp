@@ -42,27 +42,43 @@
 			</div>
 			<div class="top__member-desc">
 				<!-- 로그인 시 에는 추후에 추가 예정 -->
-				<a href="#">로그인</a><a href="#">회원가입</a>
+					<c:choose>
+					<c:when test="${not empty userInfo }">
+						<a href="<%=request.getContextPath() %>/user/logout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
+					</c:when>
+					<c:when test="${not empty kakaoInfo }">
+            
+						<img src="${kakaoInfo.profile_image }" alt="프로필" style= "height: 40px; width: 40px; border-radius: 50%;"/>
+            
+						<a href="<%=request.getContextPath() %>/user/kakaologout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
+					</c:when>
+					<c:when test="${not empty farmerInfo }">
+						<a href="<%=request.getContextPath() %>/farmer/logout">로그아웃</a><a href="#">마이페이지</a><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">나의농장</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="#"><i class="fas fa-search"></i></a>
+					</c:when>
+					<c:when test="${empty userInfo and empty kakaoInfo and empty farmerInfo }">
+						<a href="<%=request.getContextPath() %>/user/login.do">로그인</a><a href="<%=request.getContextPath() %>/user/join.do">회원가입</a><a href="#"><i class="fas fa-search"></i></a>
+					</c:when>
+					</c:choose>
 			</div>
 		</div>
 	</div>
 	<nav class="header__menu">
 		<ul id="menu__main">
-			<li><a href="/farmapp/farmintroduce/farmintroduceForm.do">농장 소개</a></li>
-			<li><a href="/farmapp/farmdiary/farmdiarylist.do">농장 일기</a>
+			<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a></li>
+			<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a>
 <!-- 				<ul class="menu__sub-food"> -->
 <!-- 					<li><a href="#">제철 먹거리</a></li> -->
 <!-- 					<li><a href="#">일반 먹거리</a></li> -->
 <!-- 				</ul> -->
 			</li>
 			<li><a href="#">농장 체험</a></li>
-			<li><a href="/farmapp/farmQnA/farmQnAlist.do">QnA</a>
+			<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a>
 <!-- 				<ul class="menu__sub-activity"> -->
 <!-- 					<li><a href="#">농장 체험</a></li> -->
 <!-- 					<li><a href="#">일손 돕기</a></li> -->
 <!-- 				</ul> -->
 			</li>
-			<li><a href="/farmapp/personalproduce/personalproducelist.do">개인 농산물</a></li>
+			<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a></li>
 		</ul>
 	</nav>
 </header>

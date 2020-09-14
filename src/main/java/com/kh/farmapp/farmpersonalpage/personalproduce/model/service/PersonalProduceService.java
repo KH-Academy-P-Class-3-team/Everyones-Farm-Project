@@ -11,17 +11,15 @@ import common.dto.ProductOption;
 public interface PersonalProduceService {
 	
 	//게시글 목록
-	public List<Map<String, Object>> selectAllProductList(//현재 페이지
-															int currentPage,
-															//페이지당 노출할 게시굴 수
-															int cntPerPag); 
+	public Map<String, Object> selectProductList(int currentPage, int cntPerPage, String farmerNo); 
 	
 	//상품등록
-	public void writeProduct(Product product);
+	public void writeProduct(Map<String, Object> commandMap);
 	
 	//상품옵션 등록
-	public void writeProductOption(ProductOption productoption);
+	public void writeProductOption(Map<String, Object> commandMap);
 	
-	//상품등록
-	public int registrationProduct();
+	//게시글 상세 조회 메소드
+	public Map<String, Object> selectProductDetail(int productNo);
+
 }

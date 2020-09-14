@@ -17,6 +17,7 @@
 		<typeAlias type="common.dto.FarmActivitySchedule" alias="ACTIVITY_SCHEDULE"/>
 		<typeAlias type="common.dto.Farmer" alias="FARMER"/>
 		
+		
 		<!-- 마이페이지 User -->
 		<typeAlias type="common.dto.UserTB" alias="USERTB"/>
 		<typeAlias type="common.dto.QuestionOneonone" alias="O3"/>
@@ -37,7 +38,9 @@
 		<mapper resource="/mybatis/mapper/farmerMapper.xml" />
 		<mapper resource="/mybatis/mapper/dailyMapper.xml" />
 		<mapper resource="/mybatis/mapper/activityMapper.xml" />
-		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml" />
+		<mapper resource="/mybatis/mapper/farmdiaryMapper.xml"/>
+		<mapper resource="/mybatis/mapper/productMapper.xml"/>
+		<mapper resource="/mybatis/mapper/farmqnaMapper.xml"/>
 
 		<mapper resource="/mybatis/mapper/review.xml" />
     

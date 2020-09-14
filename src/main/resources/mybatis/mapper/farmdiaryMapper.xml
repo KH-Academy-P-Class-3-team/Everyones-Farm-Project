@@ -8,11 +8,9 @@
 
 	<insert id="insertFarmDiary">
 		INSERT INTO farm_diary
-		(farm_diary_no, title, enroll_date, youtube_link,
-		content, farmer_no, hits)
+		(farm_diary_no, title, enroll_date, content, farmer_no, hits)
 		VALUES
-		(farm_diary_seq.nextval, #{title},
-		sysdate, #{youtubeLink}, #{content}, 1, 0)
+		(farm_diary_seq.nextval, #{title}, sysdate, #{content}, #{farmerNo}, 0)
 	</insert>
 	
 <!-- 	<insert id="insertFile"> -->
@@ -45,8 +43,16 @@
 <!-- 	</insert> -->
 
 
-
-	<select id="selectFarmDiaryList" resultType="common.dto.FarmDiary">
+	<resultMap type="hashMap" id="farmdiarylistMap">
+		<result column="farm_diary_no" property="farmDiaryNo" />
+		<result column="title" property="title" />
+		<result column="hits" property="hits" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="farmer_no" property="farmerNo" />
+	</resultMap>
+	
+	<select id="selectFarmDiaryList" resultMap="farmdiarylistMap">
 		select
 		farm_diary_no, title, hits, enroll_date,
 		youtube_link, content, farmer_no
@@ -58,6 +64,7 @@
 		order by farm_diary_no desc
 		)n1
 		)where rnum between #{start} and #{end}
+		and farmer_no = #{farmerNo}
 	</select>
 
 	<select id="selectContentCnt" resultType="int">
@@ -72,27 +79,16 @@
 		<result column="title" property="title" />
 		<result column="hits" property="hits" />
 		<result column="enroll_date" property="enrollDate" />
-		<result column="youtube_link" property="youtubeLink" />
 		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String" />
 		<result column="name" property="name" />
 	</resultMap>
 
 	<select id="selectFarmDiaryDetail" resultMap="detail">
-		SELECT 
-			fd.farm_diary_no
-			, fd.title
-			, fd.hits
-			, fd.enroll_date
-			, fd.youtube_link
-			, fd.content
-			, fd.farmer_no
-			, f.name
-		FROM 
-			farm_diary fd
-			, farmer f
-		WHERE 
-			fd.farmer_no = f.farmer_no
-			AND fd.farm_diary_no = #{farmDiaryNo}
+		SELECT fd.farm_diary_no, fd.title, fd.hits, fd.enroll_date, fd.youtube_link,
+		fd.content, fd.farmer_no, f.name
+		FROM farm_diary fd, farmer f
+		WHERE fd.farmer_no = f.farmer_no
+		AND fd.farm_diary_no = #{farmDiaryNo}
 	</select>
 	
 	<delete id="deleteFarmDiary" parameterType="int">
@@ -104,13 +100,35 @@
 		    UPDATE
                 farm_diary
             SET
+            	farm_diary_no = #{farmDiaryNo},
                 title = #{title},
                 youtube_link = #{youtubeLink},
                 content = #{content}
             WHERE
                 farm_diary_no = #{farmDiaryNo}
 	</update>
+	
+	<update id="updateFarmDiaryHits" parameterType="int">
+	 UPDATE farm_diary SET hits = hits + 1 WHERE farm_diary_no = #{farmDiaryNo}
+	</update>
 
+	<select id="selectFarmNoByFarmerNo" resultType="int" parameterType="java.lang.String">
+		select
+			farm_no
+		from
+			farm
+		where
+			farmer_no = #{value}
+	</select>
+	
+	<select id="selectFarmerNoByFarmNo" resultType="int" parameterType="java.lang.String">
+	    select
+			farmer_no
+		from
+			farm
+		where
+			farm_no = #{value}
+	</select>
 
 
 </mapper>
