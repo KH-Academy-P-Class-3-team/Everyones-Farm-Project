@@ -61,6 +61,7 @@ a:hover {
 	overflow-x: hidden;
 }
 
+
 .appliHelpList {
 	width: 100%;
 	height: 350px;
@@ -225,7 +226,8 @@ a:hover {
 									href="<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${list1.ACTIVITY_NO}">
 										<c:if test="${list1.IS_APPROVAL eq 0 }">
 						미승인
-						</c:if> <c:if test="${list1.IS_APPROVAL eq 1 }">
+						</c:if>
+						 <c:if test="${list1.IS_APPROVAL eq 1 }">
 						승인
 						</c:if>
 								</a></td>

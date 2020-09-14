@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,10 @@ public class MypageServiceImpl implements MyPageService{
 	BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
-	public int modifyUser(UserTB user) {
+	public int modifyUser(UserTB user, String root, MultipartFile upload) {
+		
+		String password = user.getUserPw();
+		password = passwordEncoder.encode(password);
 		
 		String password = user.getUserPw();
 		password = passwordEncoder.encode(password);
@@ -37,7 +41,49 @@ public class MypageServiceImpl implements MyPageService{
 		int res = mypageDao.modifyUser(user);
 		
 		
-		return res;
+		if(upload.getOriginalFilename() != "") {
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		
+		
+		UserProfile check = new UserProfile();
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		check = fileUtil.fileUpload(upload, root);
+		
+
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", check);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println("result"+result);
+		}
+		
+		ActivityFileUtil fileUtil = new ActivityFileUtil();
+		
+		UserProfile check = new UserProfile();
+		
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		
+		UserProfile fileData = fileUtil.fileUpload(upload, root);
+		
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", fileData);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println(result);
+		
+//		return 0;
+		return res; // 그리고 return 값을 보내서 쓰이는 곳이 없으면 지우는게 맞는거 같네요
 	}
 
 	@Override
@@ -338,7 +384,6 @@ public class MypageServiceImpl implements MyPageService{
 	public AnsweredOneonone answerDetail(int questionNo) {
 		return mypageDao.selectAnswer(questionNo);
 	}
-
 
 
 

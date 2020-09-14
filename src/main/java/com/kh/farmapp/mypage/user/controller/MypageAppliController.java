@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
+import common.dto.Farmer;
 import common.dto.UserTB;
 
 @Controller

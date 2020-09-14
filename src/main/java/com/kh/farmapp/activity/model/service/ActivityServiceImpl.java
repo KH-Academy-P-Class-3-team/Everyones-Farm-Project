@@ -26,23 +26,26 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityDao activityDao;
 
 	@Override
-	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, int isHelp) {
-
+	public Map<String, Object> selectActivityList(int currentPage, int cntPerPage, int isHelp, String filter, String title) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Paging p = new Paging(activityDao.selectActivityCnt(isHelp), currentPage, cntPerPage);
-		
 		map.put("isHelp",isHelp);
+		map.put("filter", filter);
+		map.put("title", title);
+		
+		Paging p = new Paging(activityDao.selectActivityCnt(map), currentPage, cntPerPage);
+		
 		map.put("start", p.getStart());
 		map.put("end", p.getEnd());
 		
-		List<FarmActivity> activityList = activityDao.selectActivityList(map);
+		List<Map<String, Object>> activityList = activityDao.selectActivityList(map);
 		List<EveryonesFarmFile> fileList = activityDao.selectActivityFileThumbnail();
 		
 		map.put("paging", p);
 		map.put("activityList", activityList);
 		map.put("fileList", fileList);
-
+		
 		return map;
 	}
 
@@ -60,43 +63,8 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public Map<String, Object> selectActivitySearch(int currentPage, int cntPerPage, int isHelp, String title, String filter) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("isHelp", isHelp);
-		map.put("title", title);
-
-		Paging p = null;
-		List<FarmActivity> activityList;
-		
-		if(filter.equals("activityTitle")) {
-			p = new Paging(activityDao.selectActivityByTitleCnt(map), currentPage, cntPerPage);
-			
-			map.put("start", p.getStart());
-			map.put("end", p.getEnd());
-
-			activityList = activityDao.selectActivityByTitle(map);
-		} else {
-			p = new Paging(activityDao.selectActivityByFarmNameCnt(map), currentPage, cntPerPage);
-			
-			map.put("start", p.getStart());
-			map.put("end", p.getEnd());
-
-			activityList = activityDao.selectActivityByFarmName(map);
-		} 
-		
-		List<EveryonesFarmFile> fileList = activityDao.selectActivityFileThumbnail();
-		
-		map.put("paging", p);
-		map.put("activityList", activityList);
-		map.put("fileList", fileList);
-		
-		return map;
-	}
-
-	@Override
 	public int insertApplication(Application application) {
-		return 0;
+		return activityDao.insertApplication(application);
 	}
 
 	@Override
@@ -160,4 +128,8 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityDao.deleteActivity(activityNo);
 	}
 	
+	@Override
+	public Farm selectFarmByFarmNo(int farmNo) {
+		return activityDao.selectFarmByFarmNo(farmNo);
+	}
 }

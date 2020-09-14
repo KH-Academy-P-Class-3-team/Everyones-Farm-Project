@@ -389,7 +389,6 @@ a:hover {
 				</c:forEach>
 			</table>
 
-
 			<div class="paging">
 				<!-- section pagination -->
 				<nav>

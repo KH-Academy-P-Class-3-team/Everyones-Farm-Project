@@ -4,8 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="../../include/header.jsp"%>
-
-
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -177,7 +175,6 @@ a:hover {
 					</c:if>
 				</table>
 			</div>
-			
 			<div>
 				<button class="btn btn btn-success pull-right" type="button"
 					onclick="javascript:location.href='mypageO3List'">뒤로가기</button>

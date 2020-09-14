@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sellPRODUCT">
+	<select id="selectSeasonTop" resultType="common.dto.Product">
+		select rownum, product.* from product
+		where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = 1 <![CDATA[ AND ROWNUM < 5 ]]>
+		order by SALES desc 
+	</select>
+	
+	<select id="selectGeneralTop" resultType="common.dto.Product">
+		select rownum, product.* from product
+		where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = 0 <![CDATA[ AND ROWNUM < 5 ]]>
+		order by SALES desc 
+	</select>
+	
+<!-- 	selectSeasonCnt, selectSeasonList -->
+	<select id="selectSeasonCnt" resultType="int">
+		select count(*) from product where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = 1
+	</select>
+	
+	<select id="selectSeasonList" resultType="common.dto.Product">
+		select *
+		from (
+			select rownum rnum, n1.*
+			from(
+				select * from product where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = 1 order by product_no desc
+			)n1
+		)where rnum between #{start} and #{end}
+
+	</select>
+	
+	<select id="selectSeasonFileThumbnail" resultType="FILE">
+		select * from everyones_farm_file
+		where board_no = 4
+			and is_thumbnail = 1 
+	</select>
+	
+<!-- 	selectGeneralCnt, selectGeneralList -->
+	<select id="selectGeneralCnt" resultType="int">
+		select count(*) from product where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = 0
+	</select>
+	
+	<select id="selectGeneralList" resultType="common.dto.Product">
+		select *
+		from (
+			select rownum rnum, n1.*
+			from(
+				select * from product where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = 0 order by product_no desc
+			)n1
+		)where rnum between #{start} and #{end}
+
+	</select>
+	
+	<select id="selectGeneralFileThumbnail" resultType="FILE">
+		select * from everyones_farm_file
+		where board_no = 4
+			and is_thumbnail = 1 
+	</select>
+	
+	<select id="selectSeasonByTitleCnt" parameterType="hashMap" resultType="int">
+		select count(*) from (
+			select * from product
+			where PRODUCT_SAS = 1 AND is_seasonal_food = #{isSeasonalFood}
+			and name LIKE '%' || #{name} || '%'
+		)
+	</select>
+	
+	<select id="selectSeasonSearchByTitle" parameterType="hashMap" resultType="common.dto.Product">
+		select * from (
+			select rownum rnum, n1.*
+			from(
+				select * from product where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = #{isSeasonalFood}
+				and name LIKE '%' || #{name} || '%'
+				order by product_no desc
+			)n1
+		)where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectSeasonByKindCnt" parameterType="hashMap" resultType="int">
+		select count(*) from (
+			select * from product
+			where PRODUCT_SAS = 1 AND is_seasonal_food = #{isSeasonalFood}
+			and name LIKE '%' || #{kind} || '%'
+		)
+	</select>
+	
+	<select id="selectSeasonSearchByKind" parameterType="hashMap" resultType="common.dto.Product">
+		select * from (
+			select rownum rnum, n1.*
+			from(
+				select * from product where PRODUCT_SAS = 1 AND IS_SEASONAL_FOOD = #{isSeasonalFood}
+				and kind LIKE '%' || #{kind} || '%'
+				order by product_no desc
+			)n1
+		)where rnum between #{start} and #{end}
+	</select>
+	
+	<!-- product, product_option 조인 -->
+	<resultMap type="hashMap" id="ProductJoinOption">
+		<id column="product_no" property="productNo" />
+		<result column="name" property="name" />
+		<result column="option_no" property="optionNo"/>
+		<result column="explain" property="explain" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="effect" property="effect" />
+		<result column="food" property="food" />
+		<result column="kind" property="kind" />
+		<result column="product_country" property="productCountry" />
+		<result column="farmer_no" property="farmerNo" />
+		<result column="delivery" property="delivery" />
+		<result column="price" property="price" />
+		<result column="amount" property="amount" />
+		<result column="quality" property="quality" />
+		<result column="expiration_date" property="expirationDate" />
+	</resultMap>
+	
+	<!-- product DETAIL -->
+	<resultMap type="hashMap" id="ProductDetail">
+		<id column="product_no" property="productNo" />
+		<result column="name" property="name" />
+		<result column="explain" property="explain" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="effect" property="effect" />
+		<result column="food" property="food" />
+		<result column="kind" property="kind" />
+		<result column="product_country" property="productCountry" />
+		<result column="farmer_no" property="farmerNo" />
+		<result column="delivery" property="delivery" />
+	</resultMap>
+	
+	
+<!-- 	<select id="selectSeasonByProductNo" resultType="common.dto.Product"> -->
+<!-- 		select * from product where product_no = #{productNo} -->
+<!-- 	</select> -->
+	
+	<select id="selectSeasonByProductNo" resultMap="ProductJoinOption">
+		select * from product p, product_option o
+		where p.product_no = o.product_no
+			and p.product_no = #{productNo}
+	</select>
+	
+	<select id="selectProductFileWithSeason" resultType="FILE">
+		select * from everyones_farm_file
+		where board_no = 4
+			and post_no = #{productNo}
+	</select>
+	
+<!-- 	<select id="selectProductByProductNo" resultMap="ProductJoinOption" parameterType="int"> -->
+<!-- 		select -->
+<!-- 		    *  -->
+<!-- 		from  -->
+<!-- 		    product p -->
+<!-- 		    JOIN -->
+<!-- 		        product_option o -->
+<!-- 		    ON -->
+<!-- 		        p.product_no = o.product_no   -->
+<!-- 		where -->
+<!-- 		    p.product_no = #{productNo} -->
+<!-- 	</select> -->
+	
+	<select id="selectProductByProductNo" resultMap="ProductDetail">
+		select * from product
+		where product_no = #{productNo}
+	</select>
+	
+	<select id="selectProductFile" resultType="FILE">
+		select * from everyones_farm_file
+		where board_no = 4
+			and post_no = #{productNo}
+	</select>
+	
+	<insert id="insertBasket" parameterType="hashmap">
+		insert into basket(basket_no, user_no, farmer_no, product_no, option_no, count)
+		values (basket_seq.nextval, #{userNo}, #{farmerNo}, #{productNo}, #{optionNo}, #{count})
+	</insert>
+	
+	<select id="selectProductOption" resultType="common.dto.ProductOption">
+		select * from product_option 
+		where product_no = #{productNo}
+	</select>
+	
+</mapper>

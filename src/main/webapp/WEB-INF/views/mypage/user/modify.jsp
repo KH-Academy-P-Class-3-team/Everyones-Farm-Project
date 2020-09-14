@@ -265,23 +265,6 @@ a:hover {
 			<form method="post"
 				action="<%=request.getContextPath()%>/modify/userInfo"
 				onsubmit="return validate();" enctype="multipart/form-data">
-<!-- 				<div class="media"> -->
-<!-- 					<div class="preview" id="preview"> -->
-<%-- 						<c:if test="${profile eq null }"> --%>
-<!-- 							<img -->
-<%-- 								src="<%=request.getContextPath()%>/resources/image/mypage/no_one.jpg" --%>
-<!-- 								class="img-circle" id="oldone"> -->
-<%-- 						</c:if> --%>
-<%-- 						<c:if test="${profile.userNo eq userInfo.userNo }"> --%>
-<!-- 							<img -->
-<%-- 								src="<%=request.getContextPath() %>/resources/image/mypage/${profile.fileRename}" --%>
-<!-- 								class="img-circle" id="oldone" name="upload"> -->
-<%-- 						</c:if> --%>
-<!-- 					</div> -->
-<!-- 					<input type="file" id="upload" name="upload" multiple /> <label -->
-<!-- 						class="files" for="files">사진 선택</label> <span class="file-text">이미지 -->
-<!-- 						크기는 980 x 600 픽셀을 권장합니다</span> -->
-<!-- 				</div> -->
 				<div class="ModifyUserInfo">
 					<!-- 			아이디 -->
 					<div class="input-group">

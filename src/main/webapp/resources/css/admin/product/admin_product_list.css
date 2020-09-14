@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+.product__main {
+	margin: 70px auto;
+}
+/* product 관리 제목 */
+.product__main .product__title {
+	margin-bottom: 20px;
+}
+.product__title .product__title-text {
+	font-size: 20px;
+    font-weight: 700;
+    opacity: 0.7;
+    padding-left: 7px;
+    border-left: 3px solid #789F6F;
+}
+/* 상품 관리 목록 테이블 */
+.product__table > .product__p-table {
+	width: 100%;
+}
+.product__table .product__p-table {
+	border-top: 1px solid #605759;
+    border-bottom: 1px solid #605759;
+    border-collapse: collapse;
+    text-align: center;
+}
+/* 테이블 row, 행  */
+.product__p-table .p-table__tr-head
+, .product__p-table .p-table__tr-body {
+	border-bottom: 1px solid #605759;
+}
+.product__p-table .p-table__tr-head {
+	background: #789F6F;
+	color: white;
+}
+.product__p-table .p-table__tr-body:hover {
+	background: #D1E9CA;
+}
+/* 테이블 th, td */
+.product__p-table .p-table__th
+, .product__p-table .p-table__td {
+	padding: 16px 8px;
+}
+/* checkbox size */
+.product__p-table input[type="checkbox"]{
+	width: 20px;
+	height: 20px;
+}
+/* 상품 이름, 판매자 아이디, 상품 종류 글자 수 제한 */
+.p-table__td .p-table__name-hidden
+, .p-table__td .p-table__kind-hidden
+, .p-table__td .p-table__id-hidden {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.p-table__td .p-table__name-hidden {
+	width: 295px;
+}
+.p-table__td .p-table__kind-hidden
+, .p-table__td .p-table__id-hidden {
+	width: 145px;
+}
+/* button css */
+.product__btns-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+.product__btns-wrap .btn {
+	padding: 16px;
+    background: lightblue;
+    border-radius: 3px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.product__btns-wrap .approveBtn {
+	background: #D1E9CA;
+	margin-right: 15px;
+}
+.product__btns-wrap .holdBtn {
+	background: #E2CC6C
+}
+/* 검색창 버튼 css */
+.product-list__search-wrap {
+	display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+/* input[type='text'] css 초기화 */
+input[type="text"] {
+	appearance:none;
+	outline: none;
+}
+input[type="text"]:focus {
+	outline: none;
+}
+/* button css 초기화 */
+.product-list__search-wrap button {
+	border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: visible;
+    cursor: pointer;
+    outline: none;
+}
+.product-list__search-wrap button:focus {
+	outline: none;
+}
+/* 검색어 입력 창 css */
+.product-list__search-wrap input[type="text"] {
+	width: 300px;
+    height: 45px;
+    padding: 5px;
+    border: 1px solid #789F6F;
+   	vertical-align: bottom;
+}
+/* 검색 버튼 css */
+.product-list__search-wrap button {
+	height: 45px;
+    width: 50px;
+    background: #789F6F;
+    font-weight: 700;
+    color: white;
+}

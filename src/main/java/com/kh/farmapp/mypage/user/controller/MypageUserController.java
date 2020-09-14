@@ -3,6 +3,8 @@ package com.kh.farmapp.mypage.user.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.farmapp.admin.oneonone.controller.AdminOneOnOneController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
 import common.dto.UserProfile;
@@ -110,6 +113,8 @@ public class MypageUserController {
 			return "";
 		}
 	}
+	
+	
 
 	
 	@RequestMapping("mypage/user/deleteId")
@@ -118,7 +123,6 @@ public class MypageUserController {
 	}
 	
 	
-
 
 	//회원 탈퇴 하는 메서드
 	@RequestMapping("leave")

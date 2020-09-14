@@ -10,11 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.farmapp.main.model.service.MainService;
 
+import common.dto.Product;
 import common.dto.UserTB;
 
 @Controller
@@ -44,11 +47,22 @@ public class MainController {
 		// outer join 을 했는데 null 값인 아이들은 불러오지 조차 못한다. 어째서인지 질문!!!
 		List<Map<String, Object>> farmTop3 = mainService.selectTop3Farm();
 		// farmTop3 test output
-//		for(Map<String, Object> m : farmTop3) {
-//			System.out.println(m);
-//		}
+		for(Map<String, Object> m : farmTop3) {
+			logger.debug("farm: " + m);
+		}
 		
-		model.addAttribute("farmlist", farmTop3);
+		// 제철 먹거리 top3 불러오기
+		List<Map<String, Object>> seasonalFoodTop3 = mainService.selectTop3SeasonalFood();
+		for(Map<String, Object> p : seasonalFoodTop3) {
+			logger.debug("product: " + p);
+		}
+		
+		if( farmTop3 != null ) {
+			model.addAttribute("farmlist", farmTop3);
+		}
+		if(seasonalFoodTop3 != null) {
+			model.addAttribute("seasonalfoodlist", seasonalFoodTop3);
+		}
   
 		return "/main/index";
 	}
@@ -72,6 +86,32 @@ public class MainController {
 		}
 
 		return "main/info";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(
+				//검색어 쿼리스트링
+				@RequestParam(defaultValue = "") String search
+			) {
+		
+		logger.info("/search - [GET] 요청");
+		
+		logger.debug("search: " + search);
+		
+		// 제철 먹거리 검색 결과
+		List<Map<String, Object>> seasonalFood = mainService.selectSeasonalFoodBySearch(search);
+		
+		// 일반 먹거리 검색 결과
+		List<Map<String, Object>> generalFood = mainService.selectGeneralFoodBySearch(search);
+		
+		// 농장 검색 결과
+		List<Map<String, Object>> farmList = mainService.selectFarmBySearch(search);
+		
+		// 체험 검색 결과
+		List<Map<String, Object>> activityList = mainService.selectActivityBySearch(search);
+		
+		return "main/search";
+		
 	}
 	
 	

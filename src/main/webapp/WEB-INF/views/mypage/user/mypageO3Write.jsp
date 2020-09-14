@@ -211,9 +211,9 @@ $(document).ready(function(){
 								<button class="btn btn-warning pull-right"onclick='javascript:history.back();'id="ckEditsub" >뒤로 가기</button>
 					</div>
 				</div>
-
-
 			</div>
+
+
 		</div>
 
 
