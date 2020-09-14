@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import common.dto.Farmer;
 import common.dto.Product;
+import common.util.AdminPaging;
 
 /**
  * AdminProductDao 을 상속 받는 클래스
@@ -21,13 +22,8 @@ public class AdminProductDaoImpl implements AdminProductDao{
 	private SqlSessionTemplate session;
 	
 	@Override
-	public List<Map<String, Object>> selectAllProduct() {
-		
-		// 클래스 다이어그램을 위한 객체
-		Product product = new Product();
-		Farmer farmer = new Farmer();
-		
-		return null;
+	public List<Map<String, Object>> selectAllProduct(AdminPaging apaging) {
+		return session.selectList("ADMINPRODUCT.selectAllProduct", apaging);
 	}
 
 	@Override
@@ -40,6 +36,11 @@ public class AdminProductDaoImpl implements AdminProductDao{
 	public int updateProductSasIsCancel(Product cancel) {
 		
 		return 0;
+	}
+	
+	@Override
+	public int selectCntAllProduct(String search) {
+		return session.selectOne("ADMINPRODUCT.selectCntAllProduct", search);
 	}
 
 }

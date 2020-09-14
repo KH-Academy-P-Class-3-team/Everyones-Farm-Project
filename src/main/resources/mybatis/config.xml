@@ -53,6 +53,7 @@
     	<mapper resource="/mybatis/mapper/adminNoticeMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminMemberMapper.xml" />
     	<mapper resource="/mybatis/mapper/adminOneOnOneMapper.xml" />
+    	<mapper resource="/mybatis/mapper/adminProductMapper.xml" />
     	
     	<!-- file upload mapper 파일 -->
     	<mapper resource="mybatis/mapper/commonCkImageUploadMapper.xml" />
