@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.farmapp.admin.oneonone.controller.AdminOneOnOneController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
+import common.dto.Farmer;
+import common.dto.UserProfile;
 import common.dto.UserTB;
 
 @Controller
@@ -25,23 +30,27 @@ public class MypageUserController {
 
 	@Autowired
 	private MyPageService mypageService;
+	
+	// log 를 남기기 위한 Logger 객체
+	private static final Logger logger = LoggerFactory.getLogger(MypageUserController.class);
 
 	//마이 페이지 메인으로 보내는 메서드
 	@RequestMapping("mypage/user/modify")
 	public ModelAndView mypage(HttpSession session) {
 		
-		//테스트 데이터
-		UserTB user = new UserTB();
-		user.setUserNo(2);
+		UserTB user = (UserTB) session.getAttribute("userInfo");
+		UserProfile profile = new UserProfile();
 		
 		ModelAndView mav = new ModelAndView();
 		
 		user = mypageService.selectUser(user);
-		user.setUserName("아무개");
-		System.out.println(user);
+		
+		profile = mypageService.selectUserProfile(user);
+		logger.debug("profile: " + profile.toString());
+		
 		mav.addObject("userData", user);
+		mav.addObject("profile", profile);
 		mav.setViewName("mypage/user/modify");
-		session.setAttribute("userInfo", user);
 		
 		return mav;
 		
@@ -49,76 +58,52 @@ public class MypageUserController {
 	
 	//회원 정보를 수정한다
 	@RequestMapping("/modify/userInfo")
-	public String modifyPirvate(UserTB user, HttpSession session) {
+	public String modifyPirvate(UserTB user, HttpSession session, MultipartFile upload) {
 		
 		UserTB user2 = (UserTB) session.getAttribute("userInfo");
 		int userno = user2.getUserNo();
 		
-		user.setUserNo(userno);
+		String root  = session.getServletContext().getRealPath("/");
 		
+		System.out.println(upload);
+		user.setUserNo(userno);
 		System.out.println(user);
-		mypageService.modifyUser(user);
-		System.out.println("4");
+		mypageService.modifyUser(user, root, upload);
 			
 		return "redirect:/mypage/user/modify";
 			
 		
 	}
-	//회원 사진을를 수정한다
-	@RequestMapping("modify/userImg")
-	public ModelAndView modifyImg(UserTB user, HttpSession session, @RequestParam File file){
-		
-		
-		ModelAndView mav = new ModelAndView();
-		String root = session.getServletContext().getRealPath("farmapp/");
-
-		mypageService.insertFile(user, file, root);
-		
-		return null;
-	}
+//	//회원 사진을 수정한다.
+//	@RequestMapping("mypage/user/modifyImg")
+//	public ModelAndView modifyprofile(MultipartFile upload, HttpSession session) {
+//		
+//		UserTB user = (UserTB) session.getAttribute("userInfo");
+//		
+//		
+//		
+//		int res = mypageService.modifyprofile(user, upload, root);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		System.out.println("active");
+//		
+//		return mav;
+//	}
 
 	
 	@RequestMapping("mypage/user/deleteId")
-	public void deleteID() {
-	}
-	
-	
-	
-	@RequestMapping(value = "/confirm", method=RequestMethod.POST)
-	public String deleteID(
-			String password,
-			HttpSession session,
-			Model model
-			) {
-		System.out.println("접속");
-		UserTB user = (UserTB) session.getAttribute("userInfo");
-		user.setUserPw(password);
-		
-		int res = mypageService.leave(user);
-		
-		if(res > 0) {
-			//Model.addAttribute(K,V) 
-			//: view에 전달할 데이터를 추가하는 메서드
-			model.addAttribute("alertMsg","회원정보 수정에 성공했습니다.");
-			model.addAttribute("url", "mypage.do");
+	public void deleteID(HttpSession session, Model model) {
+		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
+		if(farmer==null) {
+			model.addAttribute("farmer", 0);
 		}else {
-			model.addAttribute("alertMsg", "회원정보 수정에 실패했습니다.");
-			model.addAttribute("url", "mypage.do");
+			model.addAttribute("farmer", 1);
 		}
 		
-		return "common/result";
-		
 	}
+	
+	
 
-
-	//회원 사진을 수정한다.
-	@RequestMapping("mypage/user/modifyImg")
-	public String modifyprofile(UserTB user, HttpSession session, Model model) {
-		
-		System.out.println("active");
-		
-		return "redirect:modify";
-	}
 
 	//회원 탈퇴 하는 메서드
 	@RequestMapping("leave")

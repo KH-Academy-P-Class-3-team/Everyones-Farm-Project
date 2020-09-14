@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.dto.EveryonesFarmFile;
+import common.dto.UserProfile;
 
 public class ActivityFileUtil {
 	
@@ -78,6 +79,47 @@ public class ActivityFileUtil {
 		//해당 파일 삭제
 		file.delete();
 	}
+
+	public UserProfile fileUpload(MultipartFile file, String root) {
+		
+			
+				UserProfile aFile = new UserProfile();
+				
+				
+				//빈 파일을 생성할 경로
+				String savePath = root + "resources/image/mypage";
+				
+				//tb_file 에 넣을 데이터 추출
+				String originName = file.getOriginalFilename();
+				aFile.setOriginName(originName);
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				//저장할 파일 이름 생성
+				String fileRename = sdf.format(
+						new Date(System.currentTimeMillis())) + "."
+						+ originName.substring(originName.lastIndexOf(".")+1);
+				aFile.setFileRename(fileRename);
+				
+				
+				//파일 저장 위치 
+				savePath += "/" + fileRename;
+
+				aFile.setSavePath(savePath);
+				
+				//사용자가 등록한 파일의 이름으로 빈 파일을 생성
+				File fileData = new File(savePath);
+				try {
+					
+					//생성된 빈파일을 사용해 사용자가 업로드한 파일을 저장
+					file.transferTo(fileData);
+					
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+		
+		return aFile;
+	}
+
 	
 	
 	

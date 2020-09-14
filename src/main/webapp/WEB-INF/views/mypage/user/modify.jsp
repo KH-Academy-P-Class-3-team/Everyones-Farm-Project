@@ -5,17 +5,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@include file="../../include/header.jsp" %>
+<%@include file="../../include/header.jsp"%>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <style type="text/css">
 .input-group {
 	margin-top: 30px;
 }
-
 
 .col-lg-1 {
 	width: 50%;
@@ -39,7 +38,7 @@ label {
 	width: 90px;
 	height: 50px;
 	margin-top: 30px;
-	margin-right: 150px;
+	margin-right: 300px;
 }
 
 .media-object {
@@ -77,18 +76,24 @@ a:hover {
 #modify-fileuplod {
 	text-align: left;
 }
-img{
-	height : 200px;
-	width : 200px;
+
+#second_addr {
+	height: 80px;
 }
-#second_addr{
-	height : 80px;
+
+.form-inlines {
+	border: none;
 }
-.form-inlines{
-	border : none;
+
+.input-group .form-control {
+	z-index: 0;
 }
-.input-group{
-	z-index: -1;
+
+.img-circle {
+	margin-left: 100px;
+	margin-bottom: 20px;
+	width: 200px;
+	height: 200px;
 }
 </style>
 
@@ -142,7 +147,7 @@ img{
 						document.getElementById('sample6_postcode').value = data.zonecode;
 						document.getElementById("first_addr").value = addr;
 						// 커서를 상세주소 필드로 이동한다.
-						
+
 						onclose('COMPLETE_CLOSE');
 
 					}
@@ -169,170 +174,202 @@ img{
 
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
-<div class="headSpace" style="margin-top:200px;"></div>
-	<!-- Page Content -->
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-3">
-				<h3 class="my-4 text-left">회원 정보 수정</h3>
-				<hr>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/modify" style="font-weight: bold;">회원정보
-							수정</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/deleteId">회원
-							탈퇴</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
-							1 문의</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
-							신청 현황</a>
-					</div>
+<div style="margin-top: 200px"></div>
+<!-- Page Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+			<h3 class="my-4 text-left">영농 일지</h3>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
 				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<a href="<%=request.getContextPath()%>/mypage/user/orderList">주문</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
-					</div>
-					<div class="panel-body">
-						<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
-							목록</a>
-					</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
+						수정</a>
 				</div>
-
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
+						1 문의</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
+						신청 현황</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
+						style="color: #ccc;">회원 탈퇴</a>
+				</div>
 			</div>
-			<div class="col-lg-1">
-				<form action="modifyImg" method="post">
-					<div class="media">
-						<div class="preview" id="test">
-						<img alt="" src="">
-						</div>
-						<input type="file" id="upload" name="upload" />
 
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">주문</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
+				</div>
+				<div class="panel-body">
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+						목록</a>
+				</div>
+			</div>
 
-						<button type="submit" class="btn btn-warning">사진 등록</button>
+			<c:if test="${farmerInfo.name eq null} ">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
+						</a>
 					</div>
-				</form>
+					<div class="panel-body">
+						<a href="#">내 정보</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/selllist">판매 목록</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					</div>
+					<div class="panel-body">
+						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+							신청내역</a>
+					</div>
+
+				</div>
+			</c:if>
+		</div>
+		<div class="col-lg-1">
+
+			<form action="<%=request.getContextPath()%>/modify/userInfo"
+				method="post" onsubmit="return validate();"
+				enctype="multipart/form-data">
+				<div class="media">
+					<div class="preview" id="preview">
+						<c:if test="${profile eq null }">
+							<img
+								src="<%=request.getContextPath()%>/resources/image/mypage/no_one.jpg"
+								class="img-circle" id="oldone">
+						</c:if>
+						<c:if  test="${profile.userNo eq userInfo.userNo }">
+							<img
+								src="<%=request.getContextPath() %>/resources/image/mypage/${profile.fileRename }"
+								class="img-circle" id="oldone">
+						</c:if>
+					</div>
+					<input type="file" id="upload" name="upload" multiple /> <label
+						class="files" for="files">사진 선택</label> <span class="file-text">이미지
+						크기는 980 x 600 픽셀을 권장합니다</span>
+				</div>
 				<div class="ModifyUserInfo">
+					<!-- 			아이디 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">아이디</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-user"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" placeholder="아이디" name="userId"
+								aria-describedby="sizing-addon1" value="${userData.userId}"
+								readonly>
+						</div>
+					</div>
+					<!-- 			비밀번호 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-lock"
+								id="sizing-addon1"></span> <input type="password"
+								class="form-control" placeholder="비밀번호" name="userPw"
+								id="userPw" aria-describedby="sizing-addon1">
+						</div>
+					</div>
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-lock"
+								id="sizing-addon1"></span> <input type="password"
+								class="form-control" placeholder="비밀번호" name="pwcheck"
+								id="pwcheck" aria-describedby="sizing-addon1">
+						</div>
+					</div>
+					<!-- 			이름 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">이름</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-user"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" placeholder="이름" name="userName"
+								aria-describedby="sizing-addon1" value="${userData.userName}"
+								readonly>
+						</div>
+					</div>
 
-					<form action="<%=request.getContextPath()%>/modify/userInfo" method="post"
-					onsubmit="return validate();">
-						<!-- 			아이디 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">아이디</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-user"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="아이디" name="userId"
-									aria-describedby="sizing-addon1" value="${userData.userId}" readonly>
-							</div>
+					<!-- 			이메일 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">E-Mail</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-envelope"
+								id="sizing-addon1"></span> <input type="email"
+								class="form-control" placeholder="E-Mail" name="email"
+								id="email" aria-describedby="sizing-addon1"
+								value="${userData.email}">
 						</div>
-						<!-- 			비밀번호 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-lock"
-									id="sizing-addon1"></span> <input type="password"
-									class="form-control" placeholder="비밀번호" name="userPw" id="userPw"
-									aria-describedby="sizing-addon1">
-							</div>
+					</div>
+					<!-- 			전화번호 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">전화번호</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-earphone"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" placeholder="전화번호" name="phone"
+								aria-describedby="sizing-addon1" value="${userData.phone}">
 						</div>
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-lock"
-									id="sizing-addon1"></span> <input type="password"
-									class="form-control" placeholder="비밀번호" name="pwcheck" id="pwcheck"
-									aria-describedby="sizing-addon1">
-							</div>
-						</div>
-						<!-- 			이름 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">이름</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-user"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="이름" name="userName"
-									aria-describedby="sizing-addon1" value="${userData.userName}"
-									readonly>
-							</div>
-						</div>
-
-						<!-- 			이메일 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">E-Mail</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-envelope"
-									id="sizing-addon1"></span> <input type="email"
-									class="form-control" placeholder="E-Mail" name="email"id="email"
-									aria-describedby="sizing-addon1" value="${userData.email}">
-							</div>
-						</div>
-						<!-- 			전화번호 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">전화번호</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-earphone"
-									id="sizing-addon1"></span> <input type="text"
-									class="form-control" placeholder="전화번호" name="phone"
-									aria-describedby="sizing-addon1" value="${userData.phone}">
-							</div>
-						</div>
-
-
-						<!-- 주소 -->
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">우편번호</label>
-							<div class=" input-group-lg col-xs-2 input-group">
-								<span class="input-group-addon glyphicon glyphicon-home"
-									id="sizing-addon1"></span> <input type="text" name="zoneCode"
-									id="sample6_postcode"  class="form-control" value="${userData.zoneCode }">
-								<span class="input-group-addon" id="sizing-addon1"><input
-									type="button" onclick="sample6_execDaumPostcode()"value="우편번호"
-									class="half-size back-pink float-right focus form-inlines"></span>
-							</div>
-						</div>
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">주소</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-home"
-									id="sizing-addon1"></span> <input type="text" id="first_addr"
-									name="firstAddress"
-									class="half-size float-left focus form-control"
-									value="${userData.firstAddress}">
-							</div>
-						</div>
-						<div class="input-group">
-							<label for="inputName" class="col-lg-3 control-label">상세주소</label>
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon glyphicon glyphicon-home"
-									id="sizing-addon1"></span> <input type="text" id="secondAddress"
-									name="secondAddress"
-									class="half-size float-left focus form-control"
-									value="${userData.secondAddress}">
-							</div>
-						</div>
+					</div>
 
 
+					<!-- 주소 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">우편번호</label>
+						<div class=" input-group-lg col-xs-2 input-group">
+							<span class="input-group-addon glyphicon glyphicon-home"
+								id="sizing-addon1"></span> <input type="text" name="zoneCode"
+								id="sample6_postcode" class="form-control"
+								value="${userData.zoneCode }"> <span
+								class="input-group-addon" id="sizing-addon1"><input
+								type="button" onclick="sample6_execDaumPostcode()" value="우편번호"
+								class="half-size back-pink float-right focus form-inlines"></span>
+						</div>
+					</div>
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">주소</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-home"
+								id="sizing-addon1"></span> <input type="text" id="first_addr"
+								name="firstAddress"
+								class="half-size float-left focus form-control"
+								value="${userData.firstAddress}">
+						</div>
+					</div>
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">상세주소</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-home"
+								id="sizing-addon1"></span> <input type="text" id="secondAddress"
+								name="secondAddress"
+								class="half-size float-left focus form-control"
+								value="${userData.secondAddress}">
+						</div>
+					</div>
 
-						<button type="submit" class="btn btn-warning" id="duple" onclick="return validate();">등록</button>
 
-					</form>
+
+					<button type="submit" class="btn btn-warning center-block"
+						id="duple" onclick="return validate();">등록</button>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
+</div>
 
 
 
@@ -340,86 +377,75 @@ img{
 
 
 
-</body>
-	<script>
 
-	 var upload = document.querySelector('#upload');
-	 var preview = document.querySelector('#preview');
-	 /* fileReader 객체 생성 */
-	 var reader = new FileReader();
-
-	 /* reader 시작시 함수 구현 */
-	 reader.onload = (function(){
-		 
-		 
-		 this.image = document.createElement('img');
-		 var vm = this;
-			 
-		 return function(e){
-			 vm.image.src = e.target.result
-		 }
-			 
-		 })();
-	 
-	 upload.addEventListener('change',function(e){
-	 var get_file = e.target.files;
-	 
-	if(get_file){
-		 reader.readAsDataURL(get_file[0]);
-	}	 
-	 
-	preview.appendChild(image);
-	 
-	
-	 
- })
-</script>
 <script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
 
-function validate() {
-    var passc = document.getElementById('userPw').value;
-    var passch = document.getElementById('pwcheck').value;
-    var phone = document.getElementById('phone').value;
-    var email = document.getElementById('email').value;
-    var regExpPw = /(?=.*\d)(?=.*[~`!@#$%\^&*()-+=])(?=.*[a-zA-Z]).{8,15}$/;
+						$("#upload")
+								.change(
+										function(e) {
 
-    function chk(re, e, msg) {
-        if(re.test(e.value)) {                 
-            return true;          
-      }else{
-            alert(msg);
-          e.value = "";
-          e.focus();
-          //기본 이벤트 취소
-          return false;
-        }
-    }
+											var files = e.target.files;
+											var reader = new FileReader();
 
-    
-    // 비밀번호 검사
-     // 암호는 영문자와 숫자로 8글자이상  기호문자 한개이상 8글자 이상
-    if(!chk(regExpPw, pass,'비밀번호 영어,숫자,특수문자가 하나 이상 포함, 8글자 이상 15글자 이하')){
-    	pass.focus();
-       return false;
-    }
-    
-    if(passc != passch){
-    	alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
-    	pass.focus();
-    	return false;
-    }
-    
-    
-    if(passc==""){
-    	alert("비밀번호를 입력해주세요!")
-    	return false;
-    }
+											reader.onload = function(ev) {
+												$("#oldone").css('display', 'none');
+												var p = $("#preview").html();
 
-    return true;
-}
+												p += "<div class='pre'><img src='"+ev.target.result+"' width='200px' height='200px' class='img-circle'/></div>"
+												$("#preview").html(p);
 
-	
+											}
+
+											reader.readAsDataURL(files[0])
+
+										})
+					})
+</script>
+
+<script type="text/javascript">
+	function validate() {
+		var passc = document.getElementById('userPw').value;
+		var passch = document.getElementById('pwcheck').value;
+		var phone = document.getElementById('phone').value;
+		var email = document.getElementById('email').value;
+		var regExpPw = /(?=.*\d)(?=.*[~`!@#$%\^&*()-+=])(?=.*[a-zA-Z]).{8,15}$/;
+
+		function chk(re, e, msg) {
+			if (re.test(e.value)) {
+				return true;
+			} else {
+				alert(msg);
+				e.value = "";
+				e.focus();
+				//기본 이벤트 취소
+				return false;
+			}
+		}
+
+		// 비밀번호 검사
+		// 암호는 영문자와 숫자로 8글자이상  기호문자 한개이상 8글자 이상
+		if (!chk(regExpPw, pass, '비밀번호 영어,숫자,특수문자가 하나 이상 포함, 8글자 이상 15글자 이하')) {
+			pass.focus();
+			return false;
+		}
+
+		if (passc != passch) {
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
+			pass.focus();
+			return false;
+		}
+
+		if (passc == "") {
+			alert("비밀번호를 입력해주세요!")
+			return false;
+		}
+
+		return true;
+	}
 </script>
 
 
-<%@include file="../../include/footer.jsp" %>
+<%@include file="../../include/footer.jsp"%>
