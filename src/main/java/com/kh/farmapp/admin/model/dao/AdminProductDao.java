@@ -20,25 +20,27 @@ public interface AdminProductDao {
 	public List<Map<String, Object>> selectAllProduct(AdminPaging apaging);
 
 	/**
-	 * 판매 상품의 productSas 컬럼을 update 한다.
-	 * @param approve - 승인될 Product 객체
-	 * @return int - update 결과
-	 */
-	public int updateProductSas(Product approve);
-
-	/**
-	 * 판매 상품의 productSas 컬럼을 update 한다.
-	 * @param cancel - 보류(반려)될 Product 객체
-	 * @return int - update 결과
-	 */
-	public int updateProductSasIsCancel(Product cancel);
-
-	/**
 	 * 조회된 판매상품의 갯수
 	 * 
 	 * @param search - 검색어
 	 * @return int - 조회 결과
 	 */
 	public int selectCntAllProduct(String search);
+
+	/**
+	 * 판매상품 승인
+	 * 
+	 * @param productNoList  - productNo 정보를 갖는 List
+	 * @return int - update 결과
+	 */
+	public int approveProduct(List<String> productNoList);
+
+	/**
+	 * 판매 상품 보류
+	 * 
+	 * @param productNoList - productNo 정보를 갖는 List
+	 * @return int - update 결과
+	 */
+	public int putProductOnHold(List<String> productNoList);
 
 }

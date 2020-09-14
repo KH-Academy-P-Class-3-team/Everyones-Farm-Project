@@ -75,6 +75,7 @@
     background: lightblue;
     border-radius: 3px;
     font-weight: 700;
+    cursor: pointer;
 }
 .product__btns-wrap .approveBtn {
 	background: #D1E9CA;

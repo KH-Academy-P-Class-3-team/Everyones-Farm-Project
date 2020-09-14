@@ -21,19 +21,22 @@ public class AdminProductServiceImpl implements AdminProductService{
 	@Autowired
 	private AdminProductDao adminProductDao;
 	
+	// 판매 상품 목록 조회
 	@Override
 	public List<Map<String, Object>> selectAllProduct(AdminPaging apaging) {
 		return adminProductDao.selectAllProduct(apaging);
 	}
-
+	
+	// 판매 상품 승인
 	@Override
-	public int approveProduct(Product approve) {
-		return adminProductDao.updateProductSas(approve);
+	public int approveProduct(List<String> productNoList) {
+		return adminProductDao.approveProduct(productNoList);
 	}
 
+	// 판매 상품 보류
 	@Override
-	public int putProductOnHold(Product cancel) {
-		return adminProductDao.updateProductSasIsCancel(cancel);
+	public int putProductOnHold(List<String> productNoList) {
+		return adminProductDao.putProductOnHold(productNoList);
 	}
 	
 	// 페이징 설정

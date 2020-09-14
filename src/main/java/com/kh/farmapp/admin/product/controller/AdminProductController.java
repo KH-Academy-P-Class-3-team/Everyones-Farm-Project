@@ -1,9 +1,12 @@
 package com.kh.farmapp.admin.product.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.farmapp.admin.model.service.AdminProductService;
 
@@ -78,13 +82,71 @@ public class AdminProductController {
 	}
 	
 	// 판매 상품 승인
-	@RequestMapping(value = "/productadmin/approveproduct", method = RequestMethod.POST)
-	public void approveProduct(Product p) {
+	@RequestMapping(value = "/admin/product/approve", method = RequestMethod.POST)
+	@ResponseBody
+	public int approveProduct(
+			// 입점 수락할 번호들
+			@RequestParam Map<String, Object> approveNums
+			// 서버 url 을 알기 위한 request 객체
+			, HttpServletRequest req
+			) {
+		
+		// url 요청 찍기
+		logger.info("/admin/product/approve - [POST] 요청");
+		
+		// ajax 반환 값
+		int result = 0;
+		
+		// approveNums -> ArrayList 로 변환
+		String[] productNums = approveNums.get("productNo").toString().split(",");
+		List<String> productNoList = new ArrayList<>(Arrays.asList(productNums));
+		logger.debug("productNoList: " + productNoList.toString());
+		
+		// 판매 상품 승인
+		int approveRes = adminProductService.approveProduct(productNoList);
+		logger.debug("approveRes: " + approveRes);
+		
+		// 판매 승인 성공/실패
+		// 판매 승인 성공
+		if(approveRes >= 1) {
+			
+			result = 1;
+		}
+		
+		return result;
 	}
 	
 	// 판매 상품 보류
-	@RequestMapping(value = "/productadmin/putproductonhold", method = RequestMethod.POST)
-	public void putProductOnHold(Product p) {
+	@RequestMapping(value = "/admin/product/hold", method = RequestMethod.POST)
+	@ResponseBody
+	public int putProductOnHold(
+			// 판매 보류 번호들
+			@RequestParam Map<String, Object> holdNums
+			// 서버 url 을 알기 위한 request 객체
+			, HttpServletRequest req
+			) {
+		
+		// url 요청 찍기
+		logger.info("/admin/product/hold - [POST] 요청");
+		
+		// ajax 반환 값
+		int result = 0;
+		
+		// approveNums -> ArrayList 로 변환
+		String[] productNums = holdNums.get("productNo").toString().split(",");
+		List<String> productNoList = new ArrayList<>(Arrays.asList(productNums));
+		logger.debug("productNoList: " + productNoList.toString());
+		
+		// 판매 상품 승인
+		int holdRes = adminProductService.putProductOnHold(productNoList);
+		logger.debug("holdRes: " + holdRes);
+		
+		if(holdRes >= 1) {
+			
+			result = 1;
+		}
+		
+		return result;
 	}
 	
 }

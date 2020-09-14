@@ -76,4 +76,32 @@
 		    p_paging.p_order between #{startNo} and #{endNo}
 	</select>
 	
+	<!-- 판매상품 승인 -->
+	<update id="approveProduct" parameterType="list">
+		update
+		    product
+		set
+		    product_sas = 1
+		where
+		    product_no in
+		    <foreach collection="list"
+		    	item="nums" index="index" separator="," open="(" close=")">
+		    	#{nums}
+		    </foreach>
+	</update>
+	
+	<!-- 판매상품 보류 -->
+	<update id="putProductOnHold" parameterType="list">
+		update
+		    product
+		set
+		    product_sas = 0
+		where
+		    product_no in
+		    <foreach collection="list"
+		    	item="nums" index="index" separator="," open="(" close=")">
+		    	#{nums}
+		    </foreach>
+	</update>
+	
 </mapper>

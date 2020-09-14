@@ -61,10 +61,10 @@
 						</td>
 						<td class="p-table__td">
 							<c:choose>
-								<c:when test="${p.productSas eq 0 }">
+								<c:when test="${p.productSas eq 1 }">
 									<c:out value="승인 완료"></c:out>
 								</c:when>
-								<c:when test="${p.productSas eq 1 }">
+								<c:when test="${p.productSas eq 0 }">
 									<c:out value="승인 대기"></c:out>
 								</c:when>
 							</c:choose>
@@ -97,6 +97,95 @@
 	</main>
 </div>
 
+<!-- button click event -->
+<script type="text/javascript">
+//입점 보류 버튼 클릭 이벤트
+$("#product-hold").on("click", function(){
+	
+	const checkCnt = $("input[name='checkNormal']:checked").length
+	const chkArr = new Array();
+	$("input[name='checkNormal']:checked").each(function() {
+		/* 체크박스가 체크된 행의 value 값 */
+		chkArr.push($(this).val())
+	})
+	
+	/* 체크된 체크박스가 없을 때! */
+	if( checkCnt == 0 ){
+		alert("선택된 회원이 없습니다.")
+	} else { /* 체크된 체크박스가 있을 때! */
+		
+		/* AJAX 통신 */
+		$.ajax({
+			type: "POST" /* method type */
+			, url: "/farmapp/admin/product/hold" /* ajax url */
+			, data: "productNo=" + chkArr + "&checkCnt=" + checkCnt /* ajax 통신 데이터 */
+			, dataType: "json" /* 통신하는 데이터 type */
+// 			, contentType:"application/json;charset=UTF-8"
+			, success: function( res ){ /* ajax 통신 성공시 */
+				/* res 값이 1이 아닐 때 */
+				if(res != 1){
+				
+					alert("입점 보류가 오류로 인해 진행되지 않았습니다.")
+					
+				} else { /* res 값이 1일 때 */
+					
+					alert("입점 보류가 정상적으로 진행됐습니다.")
+					// redirect 진행
+// 					$(location).attr("href", "/farmapp/adminmember/fapplicationlist")
+					//reoload
+					location.reload()
+				}
+			}
+			, error: function(){
+				alert("서버통신 오류입니다.")
+			}
+		})
+	}
+})
+// 입점 수락 버튼 클릭 이벤트
+$("#product-approve").on("click", function(){
+	
+	const checkCnt = $("input[name='checkNormal']:checked").length
+	const chkArr = new Array();
+	$("input[name='checkNormal']:checked").each(function() {
+		/* 체크박스가 체크된 행의 value 값 */
+		chkArr.push($(this).val())
+	})
+	
+	/* 체크된 체크박스가 없을 때! */
+	if( checkCnt == 0 ){
+		alert("선택된 회원이 없습니다.")
+	} else { /* 체크된 체크박스가 있을 때! */
+		
+		/* AJAX 통신 */
+		$.ajax({
+			type: "POST" /* method type */
+			, url: "/farmapp/admin/product/approve" /* ajax url */
+			, data: "productNo=" + chkArr + "&checkCnt=" + checkCnt /* ajax 통신 데이터 */
+			, dataType: "json" /* 통신하는 데이터 type */
+// 			, contentType:"application/json;charset=UTF-8"
+			, success: function( res ){ /* ajax 통신 성공시 */
+				/* res 값이 1이 아닐 때 */
+				if(res != 1){
+				
+					alert("입점 수락이 오류로 인해 진행되지 않았습니다.")
+					
+				} else { /* res 값이 1일 때 */
+					
+					alert("입점 수락이 정상적으로 진행됐습니다.")
+					// redirect 진행
+// 					$(location).attr("href", "/farmapp/adminmember/fapplicationlist")
+					// reload 진행
+					location.reload()
+				}
+			}
+			, error: function(){
+				alert("서버통신 오류입니다.")
+			}
+		})
+	}
+})
+</script>
 <!-- 검색 이벤트 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/admin/product/admin_product_search.js"></script>
 <!-- checkbox 에 대한 javascript -->

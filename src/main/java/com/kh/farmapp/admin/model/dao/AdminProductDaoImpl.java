@@ -21,23 +21,25 @@ public class AdminProductDaoImpl implements AdminProductDao{
 	@Autowired
 	private SqlSessionTemplate session;
 	
+	// 판매 상품 관리 리스트 조회
 	@Override
 	public List<Map<String, Object>> selectAllProduct(AdminPaging apaging) {
 		return session.selectList("ADMINPRODUCT.selectAllProduct", apaging);
 	}
 
+	// 판매 상품 승인
 	@Override
-	public int updateProductSas(Product approve) {
-		
-		return 0;
-	}
-
-	@Override
-	public int updateProductSasIsCancel(Product cancel) {
-		
-		return 0;
+	public int approveProduct(List<String> productNoList) {
+		return session.update("ADMINPRODUCT.approveProduct", productNoList);
 	}
 	
+	// 판매 상품 보류
+	@Override
+	public int putProductOnHold(List<String> productNoList) {
+		return session.update("ADMINPRODUCT.putProductOnHold", productNoList);
+	}
+	
+	// 판매 상품 총 갯수 조회
 	@Override
 	public int selectCntAllProduct(String search) {
 		return session.selectOne("ADMINPRODUCT.selectCntAllProduct", search);
