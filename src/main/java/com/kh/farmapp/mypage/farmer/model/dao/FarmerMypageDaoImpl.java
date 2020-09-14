@@ -116,5 +116,4 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	public int listCount4(Farmer farmer) {
 		return session.selectOne("MYPAGESELL.listCount",farmer);
 	}
-	
 }

@@ -156,13 +156,13 @@ a:hover {
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist">판매 목록</a>
+					<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}">판매 목록</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist"   style="font-weight: bold;">체험
+					<a href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}"   style="font-weight: bold;">체험
 						신청내역</a>
 				</div>
 
@@ -186,12 +186,12 @@ a:hover {
 
 			</div>
 			<div id="color" >
-				<a id="showActive" href="/farmapp/mypage/activityFarm"
+				<a id="showActive" href="/farmapp/mypage/activityone?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold" style="background-color : yellow;">농장
 					체험 신청 목록 이동 하기</a>
 			</div>
 			<div id="color2">
-				<a id="showActive2" href="/farmapp/mypage/activityWork?farmerno=${farmerInfo.farmerNo}" class="list-group-item list-group-item-action text-center font-weight-bold">일손 체험 신청 목록 이동 하기</a>
+				<a id="showActive2" href="/farmapp/mypage/activitytwo?farmerno=${farmerInfo.farmerNo}" class="list-group-item list-group-item-action text-center font-weight-bold">일손 체험 신청 목록 이동 하기</a>
 			</div>
 
 			

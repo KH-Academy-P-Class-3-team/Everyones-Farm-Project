@@ -155,13 +155,13 @@ a:hover {
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist"  style="font-weight: bold;">판매 목록</a>
+					<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}"  style="font-weight: bold;">판매 목록</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist">체험
+					<a href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}">체험
 						신청내역</a>
 				</div>
 

@@ -212,13 +212,13 @@ margin-left:-90px;
 			<div class="list-group mb-4">
 				<a href="#"
 					class="list-group-item list-group-item-action text-center font-weight-bold">내
-					정보</a> <a href="/farmapp/mypage/selllist"
+					정보</a> <a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold">판매
 					목록</a> 
-					<a href="/farmapp/mypage/dailyLoglist"
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold"
 					style="background-color: #D1E9CA;">영농 일지</a> <a
-					href="/farmapp/mypage/activitylist"
+					href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold">활동
 					내역</a>
 			</div>

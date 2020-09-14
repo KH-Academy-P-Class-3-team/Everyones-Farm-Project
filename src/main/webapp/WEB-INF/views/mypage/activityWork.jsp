@@ -156,13 +156,13 @@ a:hover {
 					<a href="#">내 정보</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/selllist">판매 목록</a>
+					<a href="/farmapp/mypage/selllist?farmerno=${farmerInfo.farmerNo}">판매 목록</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
+					<a href="/farmapp/mypage/dailyLoglist?farmerno=${farmerInfo.farmerNo}">영농 일지</a>
 				</div>
 				<div class="panel-body">
-					<a href="/farmapp/mypage/activitylist"   style="font-weight: bold;">체험
+					<a href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}"   style="font-weight: bold;">체험
 						신청내역</a>
 				</div>
 
@@ -186,13 +186,13 @@ a:hover {
 
 			</div>
 			<div id="color" >
-				<a id="showActive" href="/farmapp/mypage/activitylist"
+				<a id="showActive" href="/farmapp/mypage/activitylist?farmerno=${farmerInfo.farmerNo}"
 					class="list-group-item list-group-item-action text-center font-weight-bold" style="background-color : yellow;">목록으로 돌아가기</a>
 			</div>
 			
 			<!-- 일손 체험 리스트 -->
 			<div id="border2" style =" border : 2px solid black; height:305px;">
-				<form role="form" method="get" action="/farmapp/mypage/activityWork">
+				<form role="form" method="get" action="/farmapp/mypage/activitytwo">
 					<table class="table table-condensed">
 						<thead>
 							
@@ -237,17 +237,17 @@ a:hover {
 						<ul>
 							<c:if test="${pageMaker3.prev}">
 								<li><a class="page-link"
-									href="activityWork${pageMaker3.makeQuery(pageMaker3.startPage - 1)}">이전</a></li>
+									href="activitytwo${pageMaker3.makeQuery(pageMaker3.startPage - 1)}">이전</a></li>
 							</c:if>
 
 							<c:forEach begin="${pageMaker3.startPage}"
 								end="${pageMaker3.endPage}" var="idx">
-								<li><a class="page-link" href="activityWork${pageMaker3.makeQuery(idx)}">${idx}</a></li>
+								<li><a class="page-link" href="activitytwo${pageMaker3.makeQuery(idx)}">${idx}</a></li>
 							</c:forEach>
 
 							<c:if test="${pageMaker3.next && pageMaker3.endPage > 0}">
 								<li><a class="page-link"
-									href="activityWork${pageMaker3.makeQuery(pageMaker3.endPage + 1)}">다음</a></li>
+									href="activitytwo${pageMaker3.makeQuery(pageMaker3.endPage + 1)}">다음</a></li>
 							</c:if>
 						</ul>
 					</div>

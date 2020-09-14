@@ -108,6 +108,7 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 	
 	
 	
+	
 	//승인 미승인 업데이트
 	@Override
 	public int updateIsApproval(Application application) {
