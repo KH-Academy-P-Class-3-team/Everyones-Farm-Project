@@ -17,7 +17,7 @@ header {
     background: white;
 	border-bottom: 1px solid #789F6F;
 	box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-	z-index: 999;
+	z-index: 1;
 }
 
 /* 메인메뉴 윗 부분 */

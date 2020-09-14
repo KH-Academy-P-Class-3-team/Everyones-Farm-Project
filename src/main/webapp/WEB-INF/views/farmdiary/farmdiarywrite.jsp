@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
 
-<%@include file="../include/farmdiaryheader.jsp" %>
-
-<!-- <script src="//code.jquery.com/jquery-2.2.4.min.js"></script> -->
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <style type="text/css">
         .img_wrap {
             width: 300px;
@@ -21,14 +23,13 @@
         }
  
 </style>
+    
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
-<!-- ckeditor 사용을 위해 js 파일 연결 -->
-<script src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
-
-
-
-
-<!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
 var sel_file;
@@ -56,13 +57,12 @@ function handleImgFileSelect(e) {
         reader.readAsDataURL(f);
     });
 }
-	
 </script>
 
-<form action="<%= request.getContextPath() %>/diary/diarywrite.do" method="post" enctype="multipart/form-data">
+<form action="<%= request.getContextPath() %>/diary/diarywrite.do" method="post">
 <h3>농장 일기 작성</h3>
 <hr>
-<div style="padding: 50px;">
+
     <div>
         <div class="img_wrap">
             <img id="img" />
@@ -71,37 +71,18 @@ function handleImgFileSelect(e) {
     
 	<div>
         <p class="title"></p>
-        <input type="file" name="files" id="input_img" multiple />
+        <input type="file" id="input_img" />
     </div>
-<br>    
 
-제목<br>
-<input class="form-control" style="width: 200px;" type="text" id="title" name="title"/><br>
-<hr>
- <textarea name="content" id="content" rows="100" cols="50">
+제목 : <input type="text" id="title" name="title"/><br>
 
- </textarea>
-            <script>
-                // Replace the <textarea id="editor1"> with a CKEditor 4
-                // instance, using default configuration.
-                CKEDITOR.replace( 'content' );
-              //  CKEDITOR.instances.content.getData();
-            </script><br>
-<hr>
-유튜브 링크 <br>
-<input class="form-control" style="width: 250px;" type="text" id="youtubeLink" name="youtubeLink"/><br>
+내용 : <textarea id="content" name="content"></textarea><br>
 
+유튜브 링크 : <input type="text" id="youtubeLink" name="youtubeLink"/><br>
 
-<iframe width="980" height="500" src="https://youtu.be/sOKTJ4RHjUo" frameborder="0" allow="autoplay; encrtpted-media"></iframe><br><br>
-
-<div style="text-align: center;">
 <button class="btn btn-warning">등록</button>
-</div>
-
-</div>
 
 </form>
 <hr>
-
-
-<%@include file="../include/footer.jsp" %>
+</body>
+</html>

@@ -4,7 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
-
+<!DOCTYPE html>
+<html>
+<head>
 
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -15,71 +17,68 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 150px;
+}
+
+li a {
+	display: block;
+	color: black;
+	background-color: #81c147;
+
+}
+
+li a:hover {
+	background-color: #CD853F;
+	color: white;
+}
+
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;}
+
+
 
 
 
 </style>
 
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
-<div id="wrap" style="height: 800px;">
-
-<%@include file="../include/farmdiaryheader.jsp" %>
-
-
-<div style= "clear: both; margin-top: 200px;" ></div>
-
-
-<div id="container" style="width: 980px; margin: auto;" >
-
-<div id="aside" style="float: left; text-align: center;">    
-
-    <h4>~~님의 농장일기</h4>
-    <hr>
-    
-
-
-	<p>Welcome to my Farm</p>
-	
-	<br>
-	
-
-	<a href="/farmapp/farmintroduce/farmintroduceForm.do">농장 소개</a><br><br>
-	<a href="/farmapp/farmdiary/farmdiarylist.do" >농장 일기</a><br><br>
-	<a href="#">농장 체험</a><br><br>
-	<a href="/farmapp/farmQnA/farmQnAlist.do">QnA</a><br><br>
-	<a href="/farmapp/personalproduce/personalproducelist.do">개인 농산물</a>
-
-
+<h3>~~님의 농장일기</h3>
 <hr>
-</div>
 
-<div id="contents" style="float: right; width: 600px; margin:auto 0;">
-  	   <table class="table table-hover">
+
+  	   <table class="list_notice">
+       <caption></caption>
        <thead>
-           <tr class="success">
-               <th style="width: 5%; height:20%;"><span>번호</span></th>
-               <th style="width: 30%;"><span>제목</span></th>
+           <tr>
+               <th style="width: 10%; height:20%;"><span>번호</span></th>
+               <th style="width: 50%;"><span>제목</span></th>
                <th style="width: 10%;"><span>등록일</span></th>
-               <th style="width: 10%;"><span>조회수</span></th>
            </tr>
        </thead>
        <tbody>
        	<c:forEach items="${list.fdlist}" var="list">
-           <tr> 
-               <td>${list.farmDiaryNo}</td>
-               <td><a href="<%= request.getContextPath() %>/farmdiary/farmdiarydetail.do?farmDiaryNo=${list.farmDiaryNo}">${list.title}</a></td>
-               <td><fmt:formatDate value="${list.enrollDate}" pattern="yyyy-MM-dd"/></td>
-               <td>${list.hits}</td>
+           <tr>
+           	   
+               <td class="num">${list.farmDiaryNo}</td>
+               <td class="subject"><a href="<%= request.getContextPath() %>/farmdiary/farmdiarydetail.do?farmDiaryNo=${list.farmDiaryNo}">${list.title}</a></td>
+               <td class="date">
+               	<fmt:formatDate value="${list.enrollDate}" pattern="yyyy-MM-dd"/>
+               </td>
            </tr>
         </c:forEach>
        </tbody>
        </table>
-
-<button class="btn btn-warning" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
-
-		
-<div style="display: flex;"><!-- section pagination -->
-
+       
+              <div class="paging"><!-- section pagination -->
          <a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do" class="nav first"><i class="fas fa-angle-double-left"></i></a>
         <c:choose>
         	<c:when test="${paging.blockStart > 1 }">
@@ -102,21 +101,28 @@
         	</c:otherwise>
    	   	</c:choose>
  	   	 
- 	   	 <a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.lastPage}" class="nav last" ><i class="fas fa-angle-double-right"></i></a>
- 
-</div><!-- // section pagination -->
-  	   
-</div> 
+ 	   	 <a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?cPage=${paging.lastPage}" class="nav last"><i class="fas fa-angle-double-right"></i></a>
+   	   </div><!-- // section pagination -->
+       
+<div>
+	<p>~~님의 농장</p>
 </div>
-</div>
+
+<ul>
+
+	<li><a href="#">농장 소개</a></li>
+	<li><a href="#">농장 일기</a></li>
+	<li><a href="#">농장 체험</a></li>
+	<li><a href="#">QnA</a></li>
+	<li><a href="#">개인 농산물</a></li>
+
+</ul>
+
+<hr>
+
+<button class="btn btn-warning" type="button" onclick="location.href='farmdiarywrite.do'">글쓰기</button>
+<button class="btn btn-warning" type="button" onclick="location.href='#">관리하기</button>
 
 
-
-<%@include file="../include/footer.jsp" %>
-
-
-
-
-
-
-
+</body>
+</html>

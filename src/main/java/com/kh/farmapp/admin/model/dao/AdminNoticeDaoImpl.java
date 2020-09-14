@@ -1,6 +1,5 @@
 package com.kh.farmapp.admin.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,13 +39,12 @@ public class AdminNoticeDaoImpl implements AdminNoticeDao{
 		return 0;
 	}
 
-	// 공지사항 삭제
 	@Override
-	public int deleteNoticeByNoticeNo(List<Object> noticeNoList) {
-		return session.delete("ADMINNOTICE.deleteNoticeByNoticeNo", noticeNoList);
+	public int deleteNoticeByNoticeNo(Notice noticeNo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	
+
 	// NOTICE 테이블의 모든 행 count 조회
 	@Override
 	public int selectCntAllNotice() {

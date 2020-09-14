@@ -67,19 +67,4 @@
 		    nrnum between #{startNo} and #{endNo}
 	</select>
 	
-	<delete id="deleteNoticeByNoticeNo" parameterType="java.util.List">
-		delete from
-		    notice
-		where
-		    notice_no in
-		<foreach collection="list" 
-			item="nums" 
-			index="index" 
-			separator="," 
-			open="(" 
-			close=")" >
-			#{nums}
-		</foreach>    
-	</delete>
-	
 </mapper>

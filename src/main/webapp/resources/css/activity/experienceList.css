@@ -9,19 +9,13 @@
 	background-size: 100%;
 }
 
-.top-div {
-	width: 980px;
-	height: 300px;
-	margin: 0 auto;
-}
-
 .top-title {
 	font-size: 1.8em;
 	font-weight: bold;
 	color: #fff;
 	display: inline-block;
 	position: relative;
-	left: 20px;
+	left: 100px;
 	top: 45%;
 }
 
@@ -31,7 +25,7 @@
 	font-size: 1.9em;
 	color: #c5c5c5;
 	font-style: italic;
-	left: -80px;
+	left: 10px;
     top: 36%;
 }
 
@@ -42,7 +36,7 @@
 
 .row {
 	padding: 7px;
-	width: 284px;
+	width: 270px;
 	height: 400px;
 	display: inline-block;
 	margin: 40px 19px 40px;
@@ -109,7 +103,7 @@
 }
 
 .title {
-	height: 35px;
+	height: 31px;
 	border: 1px solid #ccc;
     vertical-align: middle;
 }

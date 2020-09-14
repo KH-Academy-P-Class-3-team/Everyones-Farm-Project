@@ -6,7 +6,7 @@
 
 <c:forEach items="${activity }" var="activity">
 
-	<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}'">
+	<div class="row">
 	
 		<div class="list-image">
 		
@@ -17,6 +17,7 @@
 			</c:forEach>
 			
 		</div>
+		
 		
 		<div class="caption">
 			<div class="caption-title"><b>${activity.title }</b></div>

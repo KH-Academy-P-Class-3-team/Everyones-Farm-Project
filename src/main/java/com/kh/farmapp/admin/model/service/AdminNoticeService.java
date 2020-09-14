@@ -1,6 +1,5 @@
 package com.kh.farmapp.admin.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,10 +36,10 @@ public interface AdminNoticeService {
 	
 	/**
 	 * 공지사항 삭제
-	 * @param noticeNoList - 공지사항 번호 정보를 갖는 List<String>
+	 * @param noticeNo - 공지사항 번호 정보를 갖는 Notice 객체
 	 * @return int - 삭제 결과
 	 */
-	public int deleteNoticeByNoticeNo(List<Object> noticeNoList);
+	public int deleteNoticeByNoticeNo(Notice noticeNo);
 
 
 	/**

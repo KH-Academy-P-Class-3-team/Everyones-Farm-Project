@@ -1,10 +1,12 @@
 package com.kh.farmapp.foodsales.model.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import common.dto.Product;
 import common.dto.Review;
+import common.dto.ReviewFile;
+import common.dto.UserTB;
 
 public interface ReviewDao {
 
@@ -13,11 +15,11 @@ public interface ReviewDao {
 	/**
 	 * 리뷰 작성
 	 * 
-	 * @param map - 작성할 리뷰
+	 * @param wirteReview - 작성할 리뷰
 	 * @return int
 	 */
 	
-	public int writeReview(HashMap<String, Object> map);
+	public int writeReview(Review review, Product product);
 	
 	
 	/**
@@ -26,7 +28,8 @@ public interface ReviewDao {
 	 * @param DeleteReview - 삭제할 리뷰
 	 * @return int
 	 */
-	public int deleteReview(Map map);
+	public int deleteReview(Review review);
+//	public List<Map<String,Object>> deleteReview(Review review);
 	
 	/**
 	 * 리뷰 업데이트
@@ -34,15 +37,15 @@ public interface ReviewDao {
 	 * @param updateReview - 업데이트할 리뷰
 	 * @return String
 	 */
-	public String updateReview(Review review);
+	public int updateReview(UserTB user, Review review);
 	
 	/**
 	 * 리뷰 조회
 	 * 
-	 * @param map - 리뷰 객체
-	 * @return List
+	 * @param review - 리뷰 객체
+	 * @return String
 	 */
-	public List selectReview(Map<String,Object> map);
+//	public List<Map<String,Object>> selectReview(Review review, User user, Product product);
 	
 	/**
 	 * 리뷰 더 보기
@@ -50,6 +53,7 @@ public interface ReviewDao {
 	 * @param review - 리뷰 객체
 	 * @return String
 	 */
-	public List reviewMore(Map<String,Object> map);
-
+	public List<Map<String,Object>> reviewMore(Review review, ReviewFile reviewFile,  UserTB user, Product product);
+	
+	
 }

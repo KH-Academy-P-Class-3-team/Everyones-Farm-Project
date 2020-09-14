@@ -1,6 +1,5 @@
 package com.kh.farmapp.admin.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,8 +42,8 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 
 	// 공지사항 삭제
 	@Override
-	public int deleteNoticeByNoticeNo(List<Object> noticeNoList) {
-		return adminNoticeDao.deleteNoticeByNoticeNo(noticeNoList);
+	public int deleteNoticeByNoticeNo(Notice noticeNo) {
+		return adminNoticeDao.deleteNoticeByNoticeNo(noticeNo);
 	}
 	
 	// 페이징 설정

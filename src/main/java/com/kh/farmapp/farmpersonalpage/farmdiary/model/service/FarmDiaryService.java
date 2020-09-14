@@ -1,13 +1,7 @@
 package com.kh.farmapp.farmpersonalpage.farmdiary.model.service;
 
 
-import java.util.List;
 import java.util.Map;
-
-import javax.activation.CommandMap;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import common.dto.FarmDiary;
 
@@ -20,18 +14,14 @@ public interface FarmDiaryService  {
 													int cntPerPage);
 
 	//게시물 상세 조회
-	public Map<String, Object> selectFarmDiaryDetail(int farmDiaryNo);
+	public FarmDiary selectFarmDiaryDetail(int dailyNo);
 	
 	//글쓰기
 	public void writeFarmDiary(Map<String, Object> commandMap);
 	
-	//파일업로드
-//	public int insertFarmdiaryFile(FarmDiary farmdiary, List<MultipartFile> files, String root) throws Exception;
-
 	//삭제
-	public int deleteFarmDiary(int farmDiaryNo);
+	public int deleteFarmDiary();
 	
 	//수정
-	public int modifyFarmDiary(Map<String, Object> commandMap);
-
+	public int modifyFarmDiary();
 }

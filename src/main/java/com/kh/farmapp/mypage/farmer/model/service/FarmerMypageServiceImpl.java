@@ -11,7 +11,6 @@ import common.dto.Application;
 import common.dto.FarmActivity;
 import common.dto.FarmDiary;
 import common.dto.FarmingDailylog;
-import common.dto.TBOrder;
 import common.dto.page.Criteria;
 
 @Service
@@ -39,85 +38,29 @@ public class FarmerMypageServiceImpl implements FarmerMypageService {
 		farmerMypageDao.writeDailylog(farmingDailylog);
 	}
 
-	@Override
-	public FarmingDailylog read(int dailylogNo) {
-		System.out.println(dailylogNo+"서비스");
-		return farmerMypageDao.read(dailylogNo);
-	}
-	
-	//농장 체험 활동내역 리스트
+	//활동내역 리스트
 	@Override
 	public List<Map<String, Object>> activitylist(Criteria cri) {
-		List<Map<String, Object>> res = farmerMypageDao.activitylist(cri);
-		System.out.println(res);
 		return farmerMypageDao.activitylist(cri);
-		
-	}
-	// 일손 체험 활동내역 리스트
-	@Override
-	public List<Map<String, Object>> activitylist3(Criteria cri) {
-		List<Map<String,Object>> res = farmerMypageDao.activitylist3(cri);
-		System.out.println(res);
-		return farmerMypageDao.activitylist3(cri);
 	}
 	
-	//농장체험 페이지 총 갯수
+	//영농일지 페이지 총 갯수
 	@Override
 	public int listCount2() {
 		return farmerMypageDao.listCount2();
 	}
-	
-	//일손체험 페이지 총 갯수
-	@Override
-	public int listCount3() {
-		return farmerMypageDao.listCount3();
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//승인 미승인 업데이트
 	@Override
 	public int updateIsApproval(Application application) {
 		Application res = farmerMypageDao.selectOne(application);
+		System.out.println(res);
 		if (res.getIsApproval()==1) {
 			res.setIsApproval(0);
 		}else if(res.getIsApproval()==0){
 			res.setIsApproval(1);
-			System.out.println(res);
 		}
-		return farmerMypageDao.updateIsApproval(res);
+		return farmerMypageDao.updateIsApproval(application);
 	}
-	
-
-	// 판매 리스트 
-	@Override
-	public List<Map<String, Object>> selllist(Criteria cri) {
-		return farmerMypageDao.selllist(cri); 
-	}
-	
-	
-	// 결제 처리 업데이트
-	@Override
-	public int updatePayment(TBOrder order) {
-		TBOrder res = farmerMypageDao.selectOne(order);
-		if( res.getPaymentStatus()==1) {
-			res.setPaymentStatus(0);
-		}else if(res.getPaymentStatus()==0) {
-			res.setPaymentStatus(1);
-		}
-		return farmerMypageDao.updatePayment(res);
-	
-	}
-
-	
-
-	
-
-	
 }
