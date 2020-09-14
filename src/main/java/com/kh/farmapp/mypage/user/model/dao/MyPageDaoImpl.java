@@ -49,9 +49,14 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public int leave(String userId) {
 		// TODO Auto-generated method stub
 		return 0;
+=======
+	public QuestionOneonone o3Detail(int qNo) {
+		return sqlSession.selectOne("Mypage.selectO3one", qNo);
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 	public QuestionOneonone o3Detail(int qNo) {
 		return sqlSession.selectOne("Mypage.selectO3one", qNo);
@@ -96,9 +101,14 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public int o3Upload(QuestionOneonone qO3) {
 		// TODO Auto-generated method stub
 		return 0;
+=======
+	public Map<String, Object> orderDetail(int orderNo) {
+		return sqlSession.selectOne("Mypage.selectOrderDetail", orderNo);
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 	public Map<String, Object> orderDetail(int orderNo) {
 		return sqlSession.selectOne("Mypage.selectOrderDetail", orderNo);
@@ -172,6 +182,37 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
+	@Override
+	public int o3Upload(QuestionOneonone qO3) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int o3Modify(int qNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public Application appliHelpList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public UserAddress getAddress(UserTB user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	@Override
 	public int addProduct(Map<String, Object> map) {
@@ -198,6 +239,7 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@Override
 	public UserAddress getAddress(UserTB user) {
 		// TODO Auto-generated method stub
@@ -205,6 +247,8 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 =======
 
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 
 
 

@@ -156,6 +156,7 @@ td, th {
 	margin-right: 150px;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 .media-object{
 	margin-left : 70px;
 }
@@ -168,6 +169,8 @@ td, th {
     font-weight: bold;
     font-size : 17px;
 }
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 </style>
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
@@ -485,6 +488,9 @@ td, th {
 			</c:if>
 			<button class="btn btn-success pull-right bottom" type="button"
 				onclick="javascript:location.href='mypageO3List'">뒤로가기</button>
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 		</div>
 	</div>

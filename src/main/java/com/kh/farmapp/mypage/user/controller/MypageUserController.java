@@ -14,8 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,6 +72,7 @@ public class MypageUserController {
 	public ModelAndView modifyImg(UserTB user, HttpSession session, @RequestParam File file){
 		
 		
+<<<<<<< HEAD
 		ModelAndView mav = new ModelAndView();
 		String root = session.getServletContext().getRealPath("farmapp/");
 		
@@ -80,6 +84,8 @@ public class MypageUserController {
 		UserTB user2 = (UserTB) session.getAttribute("userInfo");
 		int userno = user2.getUserNo();
 		
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 		String root  = session.getServletContext().getRealPath("/");
 		
 		user.setUserNo(userno);
@@ -88,6 +94,9 @@ public class MypageUserController {
 			
 		return "redirect:/mypage/user/modify";
 			
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 		
 		return null;

@@ -6,6 +6,10 @@ import java.util.Map;
 import common.dto.Application;
 import common.dto.Basket;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import common.dto.EveryonesFarmFile;
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 import common.dto.EveryonesFarmFile;
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
@@ -14,7 +18,10 @@ import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import common.dto.UserProfile;
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import common.dto.UserTB;
@@ -38,15 +45,21 @@ public interface MyPageDao {
 		//일대일 문의 상세보기
 		public QuestionOneonone o3Detail(int qNo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		//일대일 문의 등록
 		public int o3Upload(QuestionOneonone qO3);
 		
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 		
 		//일대일 문의 등록
 		public int o3Upload(QuestionOneonone qO3);
 		
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 		//일대일 문의 수정
 		public int o3Modify(int qNo);
@@ -75,7 +88,11 @@ public interface MyPageDao {
 		
 		//구매목록 상세 페이지
 <<<<<<< HEAD
+<<<<<<< HEAD
 		public Product orderDetail(int orderNo);
+=======
+		public Map<String, Object> orderDetail(int orderNo);
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 		public Map<String, Object> orderDetail(int orderNo);
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added

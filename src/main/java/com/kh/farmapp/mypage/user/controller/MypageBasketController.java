@@ -4,6 +4,9 @@ package com.kh.farmapp.mypage.user.controller;
 =======
 import java.util.HashMap;
 import java.util.List;
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import java.util.Map;
 
@@ -32,6 +35,10 @@ public class MypageBasketController {
 <<<<<<< HEAD
 =======
 		
+<<<<<<< HEAD
+=======
+		
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 		mav.addObject("page", basket.get("page"));
 		mav.addObject("basket", basket);
 		mav.addObject("purchase", purchase);
@@ -136,11 +143,15 @@ public class MypageBasketController {
 	//구매 목록 리스트 상세 정보
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping("mypage/user/OrderDetail")
 	public void orderDetail() {
 		mypageService.appliActList();
 =======
 	@RequestMapping("/mypage/user/OrderDetail")
+=======
+	@RequestMapping("mypage/user/OrderDetail")
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 	@RequestMapping("mypage/user/OrderDetail")
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
@@ -192,12 +203,15 @@ public class MypageBasketController {
 		
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@RequestMapping("/basket/done")
 	public String payDone() {
 		return "redirect:/mypage/user/basket";
 >>>>>>> 4f609ed6ae2026061686ed652541ba063ad3fa05
 	}
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	
 	
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added

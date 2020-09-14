@@ -2,7 +2,10 @@ package com.kh.farmapp.mypage.user.model.service;
 
 import java.io.File;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import java.util.HashMap;
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import java.util.List;
@@ -11,7 +14,10 @@ import java.util.Map;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
@@ -21,6 +27,7 @@ import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
 
 import common.dto.Application;
 import common.dto.Basket;
+<<<<<<< HEAD
 <<<<<<< HEAD
 import common.dto.Product;
 import common.dto.QuestionOneonone;
@@ -35,6 +42,14 @@ import common.dto.Purchase;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
+=======
+import common.dto.EveryonesFarmFile;
+import common.dto.Product;
+import common.dto.Purchase;
+import common.dto.QuestionOneonone;
+import common.dto.TBOrder;
+import common.dto.UserAddress;
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import common.dto.UserProfile;
 import common.dto.UserTB;
 import common.util.ActivityFileUtil;
@@ -51,8 +66,11 @@ public class MypageServiceImpl implements MyPageService{
 	@Override
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public Map<String, Object> modifyUser(UserTB user) {
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	public int modifyUser(UserTB user, String root, MultipartFile upload) {
@@ -70,6 +88,7 @@ public class MypageServiceImpl implements MyPageService{
 		
 		if(upload.getOriginalFilename() != "") {
 		ActivityFileUtil fileUtil = new ActivityFileUtil();
+<<<<<<< HEAD
 		
 		
 		
@@ -167,6 +186,31 @@ public class MypageServiceImpl implements MyPageService{
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	}
 
+=======
+		
+		
+		
+		UserProfile check = new UserProfile();
+		check = mypageDao.selectUserProfile(user.getUserNo());
+		check = fileUtil.fileUpload(upload, root);
+		
+
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("userNo", user.getUserNo());
+		fileMap.put("fileData", check);
+		int result=0;
+		if(check == null) {
+			result = mypageDao.insertprofile(fileMap);
+		}else {
+			result = mypageDao.modifyprofile(fileMap);
+		}
+		System.out.println("result"+result);
+		}
+		
+		return res;
+	}
+
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	
 	@Override
 	public int modifyprofile(UserTB user) {
@@ -182,6 +226,18 @@ public class MypageServiceImpl implements MyPageService{
 		
 	}
 <<<<<<< HEAD
+=======
+
+	@Override
+	public void insertFile(UserTB user, File file, String root) {
+		
+		FileUtil fileUtil = new FileUtil();
+		
+//		List<Map<String, String>> filedata = fileUtil.fileUpload(file, root);
+		
+	}
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 
 	@Override
@@ -217,6 +273,14 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public QuestionOneonone o3Detail(int qNo) {
+		return mypageDao.o3Detail(qNo);
+	}
+
+	@Override
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	public int o3Upload(QuestionOneonone qO3) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -242,11 +306,14 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@Override
 	public int o3Delete(int qNo) {
 		// TODO Auto-generated method stub
 		return 0;
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	@Override
 	public Application appliHelpList() {
 		// TODO Auto-generated method stub
@@ -447,6 +514,10 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 
 
 

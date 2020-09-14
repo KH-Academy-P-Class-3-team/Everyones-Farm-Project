@@ -306,6 +306,9 @@
 		order by b.basket_no
 	</select>
 	
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 </mapper>
     

@@ -8,6 +8,9 @@ import java.util.Map;
 =======
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import common.dto.Application;
 import common.dto.Basket;
@@ -16,7 +19,10 @@ import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
 import common.dto.UserAddress;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import common.dto.UserProfile;
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 import common.dto.UserTB;
@@ -25,9 +31,12 @@ public  interface MyPageService {
 
 	//개인정보 수정 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public Map<String, Object> modifyUser(UserTB user);
 	
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	public int modifyUser(UserTB user, String root, MultipartFile upload);
 	/**
 	 * 수정페이지에 개인사진 불러오기
@@ -49,10 +58,17 @@ public  interface MyPageService {
 	//일대일 문의 상세보기
 	public QuestionOneonone o3Detail(int qNo);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	//일대일 문의 등록
 	public int o3Upload(QuestionOneonone qO3);
 	
+=======
+	
+	//일대일 문의 등록
+	public int o3Upload(QuestionOneonone qO3);
+	
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 	
 	//일대일 문의 등록
@@ -86,7 +102,11 @@ public  interface MyPageService {
 	
 	//구매목록 상세 페이지
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public Product orderDetail(int orderNo);
+=======
+	public Map<String, Object> orderDetail(int orderNo);
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 =======
 	public Map<String, Object> orderDetail(int orderNo);
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
@@ -94,6 +114,7 @@ public  interface MyPageService {
 	//구매 상세 페이지 안에서 고객의 주소를 불러와준다.
 	public UserAddress getAddress(UserTB user);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/**
 	 * 
@@ -106,6 +127,8 @@ public  interface MyPageService {
 	public void insertFile(UserTB user, File file, String root);
 	
 =======
+=======
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 	/**
 	 * 
 	 * 파일을 전송하고 바꿔주는 메서드

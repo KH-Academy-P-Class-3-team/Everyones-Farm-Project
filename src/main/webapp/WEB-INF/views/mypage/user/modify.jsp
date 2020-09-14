@@ -180,6 +180,9 @@ label {
 						class="files" for="files">사진 선택</label> <span class="file-text">이미지
 						크기는 980 x 600 픽셀을 권장합니다</span>
 				</div>
+<<<<<<< HEAD
+>>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
+=======
 >>>>>>> parent of 99d9b7a... mypageUser Without FarmerSession added
 				<div class="ModifyUserInfo">
 					<!-- 			아이디 -->
