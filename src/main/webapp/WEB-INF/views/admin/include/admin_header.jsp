@@ -67,7 +67,7 @@
 					<li><a href="<%=request.getContextPath() %>/adminmember/fapplicationlist">농업인 회원 신청 관리</a></li>
 				</ul>
 			</li>
-			<li><a href="#">상품관리</a></li>
+			<li><a href="<%=request.getContextPath() %>/admin/product/list">상품관리</a></li>
 			<li><a href="<%=request.getContextPath() %>/admin/oneonone/user">고객센터</a>
 				<ul class="menu__sub-qna">
 					<li><a href="<%=request.getContextPath() %>/admin/oneonone/user">일반 회원 문의</a></li>
