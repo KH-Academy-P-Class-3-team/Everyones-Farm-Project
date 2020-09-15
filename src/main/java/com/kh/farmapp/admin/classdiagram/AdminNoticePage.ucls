@@ -1,102 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <interface id="1" language="java" name="com.kh.farmapp.admin.model.dao.AdminNoticeDao" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/dao/AdminNoticeDao.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="907" y="388"/>    
+  <class id="1" language="java" name="com.kh.farmapp.admin.notice.controller.AdminNoticeController" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/notice/controller/AdminNoticeController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="338" y="204"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="com.kh.farmapp.admin.model.service.AdminNoticeService" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/service/AdminNoticeService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="938" y="199"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="com.kh.farmapp.admin.notice.controller.AdminNoticeController" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/notice/controller/AdminNoticeController.java" binary="false" 
+  <class id="3" language="java" name="com.kh.farmapp.admin.model.dao.AdminNoticeDaoImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/dao/AdminNoticeDaoImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="193" y="429"/>    
+    <position height="-1" width="-1" x="1453" y="459"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="com.kh.farmapp.admin.model.service.AdminNoticeService" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/service/AdminNoticeService.java" binary="false" 
+  <interface id="4" language="java" name="com.kh.farmapp.admin.model.dao.AdminNoticeDao" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/dao/AdminNoticeDao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="602" y="389"/>    
+    <position height="-1" width="-1" x="1453" y="192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="4" language="java" name="com.kh.farmapp.admin.model.service.AdminNoticeServiceImpl" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/service/AdminNoticeServiceImpl.java" binary="false" 
+  <class id="5" language="java" name="com.kh.farmapp.admin.model.service.AdminNoticeServiceImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/service/AdminNoticeServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="940" y="458"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="common.util.upload.img.model.dao.CkImageUploadDaoImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/dao/CkImageUploadDaoImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1497" y="915"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="common.util.upload.img.CkImageUpload" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/CkImageUpload.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="602" y="682"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="142" width="566" x="10" y="491"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.kh.farmapp.admin.model.dao.AdminNoticeDaoImpl" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/dao/AdminNoticeDaoImpl.java" binary="false" 
+  <interface id="8" language="java" name="common.util.upload.img.model.dao.CkImageUploadDao" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/dao/CkImageUploadDao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="908" y="737"/>    
+    <position height="-1" width="-1" x="1497" y="727"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="common.util.upload.img.model.service.CkImageUploadServiceImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/service/CkImageUploadServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="879" y="901"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="common.dto.Notice" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/Notice.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="214" width="117" x="1121" y="431"/>    
+  <interface id="10" language="java" name="common.util.upload.img.model.service.CkImageUploadService" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/service/CkImageUploadService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="879" y="729"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="common.dto.EveryonesFarmFile" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/EveryonesFarmFile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1859" y="767"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="7">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="8" name="adminNoticeDao">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="9" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="10">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
+  <class id="12" language="java" name="common.dto.Notice" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/Notice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1814" y="332"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="13">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="12"/>  
   </dependency>  
-  <realization id="11">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="1"/>  
+  <realization id="14">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
   </realization>  
-  <association id="12">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="13" name="adminNoticeService">        
-        <position height="20" width="122" x="333" y="383"/>      
-      </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <dependency id="15">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <realization id="16">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="17">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="18" name="adminNoticeService"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="15">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
+  <association id="20">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="21" name="ckImageUpload"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="24" name="ckImageUploadService">        
+        <position height="20" width="139" x="426" y="647"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="26">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
   </realization>  
+  <association id="27">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="28" name="ckImageUploadDao">        
+        <position height="20" width="120" x="1086" y="800"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="31" name="ckImageUploadService"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="33">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="34">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="35" name="adminNoticeDao">        
+        <position height="20" width="103" x="1110" y="310"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

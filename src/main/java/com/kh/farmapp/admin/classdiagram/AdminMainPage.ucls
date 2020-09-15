@@ -1,140 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.kh.farmapp.admin.model.service.AdminMainServiceImpl" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/service/AdminMainServiceImpl.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="648" y="351"/>    
+  <class id="1" language="java" name="com.kh.farmapp.admin.main.controller.AdminMainController" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/main/controller/AdminMainController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="174" y="199"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="2" language="java" name="com.kh.farmapp.admin.model.dao.AdminMainDao" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/dao/AdminMainDao.java" binary="false" 
+  <interface id="2" language="java" name="com.kh.farmapp.admin.model.service.AdminMainService" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/service/AdminMainService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1111" y="150"/>    
+    <position height="-1" width="-1" x="636" y="197"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="3" language="java" name="com.kh.farmapp.admin.model.service.AdminMainService" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/service/AdminMainService.java" binary="false" 
+  <class id="3" language="java" name="com.kh.farmapp.admin.model.dao.AdminMainDaoImpl" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/dao/AdminMainDaoImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="648" y="150"/>    
+    <position height="-1" width="-1" x="1097" y="400"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="com.kh.farmapp.admin.model.dao.AdminMainDao" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/dao/AdminMainDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1097" y="195"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="4" language="java" name="com.kh.farmapp.admin.main.controller.AdminMainController" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/main/controller/AdminMainController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="124" width="222" x="157" y="86"/>    
+  <class id="5" language="java" name="com.kh.farmapp.admin.model.service.AdminMainServiceImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/service/AdminMainServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="637" y="389"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.kh.farmapp.admin.model.dao.AdminMainDaoImpl" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/dao/AdminMainDaoImpl.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1112" y="355"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="common.dto.Farm" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/Farm.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1478" y="174"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="common.dto.User" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1644" y="352"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="common.dto.QuestionOneonone" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/QuestionOneonone.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1302" y="692"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="common.dto.Farmer" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/Farmer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1573" y="666"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <dependency id="10">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <realization id="11">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="2"/>  
+  <realization id="6">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
-  <association id="12">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="13" name="adminMainService">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="15">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <association id="16">    
+  <association id="7">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="17" name="adminMainDao">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="18" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <attribute id="8" name="adminMainService"/>      
+      <multiplicity id="9" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="19">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
+  <realization id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
   </realization>  
-  <dependency id="20">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <dependency id="21">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
+  <association id="11">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="12" name="adminMainDao">        
+        <position height="20" width="94" x="784" y="273"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
