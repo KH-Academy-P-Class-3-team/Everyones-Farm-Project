@@ -23,7 +23,7 @@ public class FarmDiaryDaoImpl implements FarmDiaryDao {
 	@Override
 	public int insertFarmDiary(Map<String, Object> commandMap) {
 		return sqlSession.insert("Diary.insertFarmDiary", commandMap);
-
+		
 	}
 
 	@Override

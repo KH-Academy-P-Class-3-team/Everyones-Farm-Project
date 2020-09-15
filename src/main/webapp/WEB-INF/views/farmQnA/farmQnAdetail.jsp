@@ -96,42 +96,42 @@ $(document).ready(function() {
       	</div>
 <br>
 
-		<div id="answer">
-  <ol class="answerlist">
-    <c:forEach items="${answerlist}" var="answerlist">
-      <li>
-        <p>
-       	 	작성자 : ${answerlist.farmerNo}<br />
-        	작성 날짜 :  <fmt:formatDate value="${answerlist.regDate}" pattern="yyyy-MM-dd" />
-        </p>
+<!-- 		<div id="answer"> -->
+<!--   <ol class="answerlist"> -->
+<%--     <c:forEach items="${answerlist}" var="answerlist"> --%>
+<!--       <li> -->
+<!--         <p> -->
+<%--        	 	작성자 : ${answerlist.farmerNo}<br /> --%>
+<%--         	작성 날짜 :  <fmt:formatDate value="${answerlist.regDate}" pattern="yyyy-MM-dd" /> --%>
+<!--         </p> -->
 
-        <p>${answerlist.content}</p>
-      </li>
-    </c:forEach>   
-  </ol>
-</div>
+<%--         <p>${answerlist.content}</p> --%>
+<!--       </li> -->
+<%--     </c:forEach>    --%>
+<!--   </ol> -->
+<!-- </div> -->
 
 
 </div> 
 
 </form>
 
-<form id="answerForm" name="answerForm" method="post" action="/farmapp/QnA/QnAanswerwrite.do">
-  <input type="hidden" id="farmQnaQuestionNo" name="farmQnaQuestionNo" value="${detail.farmQnaQuestionNo}" />
-  <input type="hidden" id="page" name="page" value="${scri.page}"> 
-  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
-  <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
-  <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+<!-- <form id="answerForm" name="answerForm" method="post" action="/farmapp/QnA/QnAanswerwrite.do"> -->
+<%--   <input type="hidden" id="farmQnaQuestionNo" name="farmQnaQuestionNo" value="${detail.farmQnaQuestionNo}" /> --%>
+<%--   <input type="hidden" id="page" name="page" value="${scri.page}">  --%>
+<%--   <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">  --%>
+<%--   <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">  --%>
+<%--   <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">  --%>
 
-  <div>
-    댓글 작성자 : <input type="text" id="farmerNo" name="farmerNo" />
-    <br>
-    댓글 내용 : <input type="text" id="content" name="content" />
-  </div>
-  <div>
- 	 <button type="button" id="answertWriteBtn">작성</button>
-  </div>
-</form>
+<!--   <div> -->
+<!--     댓글 작성자 : <input type="text" id="farmerNo" name="farmerNo" /> -->
+<!--     <br> -->
+<!--     댓글 내용 : <input type="text" id="content" name="content" /> -->
+<!--   </div> -->
+<!--   <div> -->
+<!--  	 <button type="button" id="answertWriteBtn">작성</button> -->
+<!--   </div> -->
+<!-- </form> -->
 
 
 

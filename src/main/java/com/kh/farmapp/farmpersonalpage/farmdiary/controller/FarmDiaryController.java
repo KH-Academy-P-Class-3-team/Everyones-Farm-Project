@@ -153,7 +153,7 @@ public class FarmDiaryController {
 	//농장일기 이미지 업로드
 	@RequestMapping(value = "/farmdiary/fileupload", method = RequestMethod.POST)
 	@ResponseBody
-	public String adminNoticeImgUpload(
+	public String farmDiaryImgUpload(
 			HttpServletRequest req
 			, HttpServletResponse resp
 			, MultipartHttpServletRequest multiFile

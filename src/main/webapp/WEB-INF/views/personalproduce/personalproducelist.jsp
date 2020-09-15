@@ -67,13 +67,11 @@ li.admin__p-active > a {
 }
 </style>
 
+<%@include file="../include/farmdiaryheader.jsp" %>
 
 <div id="wrap" style="height: 800px;">
 
-<%@include file="../include/farmdiaryheader.jsp" %>
-
 <div style= "clear: both; margin-top: 200px;" ></div>
-
 
 <div id="container" style="width: 980px; margin: auto;" >
 
@@ -116,7 +114,7 @@ li.admin__p-active > a {
        </tbody>
        </table>
 
-
+<button class="btn btn-success" type="button" onclick="location.href='personalproducewrite.do'" style="float: right;">추가하기</button>
 		
 <div class="pagination-wrap"><!--section pagination -->
 <ul class="admin__pagination">
@@ -150,9 +148,6 @@ li.admin__p-active > a {
 </div><!-- section pagination -->
 
   	   
-
-
-<button class="btn btn-success" type="button" onclick="location.href='personalproducewrite.do'" style="float: right;">추가하기</button>
 </div> 
 </div>
 </div>

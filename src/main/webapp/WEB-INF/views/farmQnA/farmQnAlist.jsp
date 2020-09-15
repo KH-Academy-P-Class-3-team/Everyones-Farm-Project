@@ -69,15 +69,13 @@ li.admin__p-active > a {
 }
 </style>
 
-
 <form action="/farmapp/farmQnA/farmQnAlist.do" method="post">
-
-<div id="wrap" style="height: 800px;">
 
 <%@include file="../include/farmdiaryheader.jsp" %>
 
-<div style= "clear: both; margin-top: 200px;" ></div>
+<div id="wrap" style="height: 800px;">
 
+<div style= "clear: both; margin-top: 200px;" ></div>
 
 <div id="container" style="width: 980px; margin: auto;" >
 
@@ -115,7 +113,7 @@ li.admin__p-active > a {
            <tr> 
                <td>${list.farmQnaQuestionNo}</td>
                <td><a href="<%= request.getContextPath() %>/farmQnA/farmQnAdetail.do?farmQnaQuestionNo=${list.farmQnaQuestionNo}&farmNo=${farmNo}">${list.title}</a></td>
-               <td>${list.farmerNo}</td>
+               <td>${list.farmerNo}번 농업인</td>
                <td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
            </tr>
         </c:forEach>

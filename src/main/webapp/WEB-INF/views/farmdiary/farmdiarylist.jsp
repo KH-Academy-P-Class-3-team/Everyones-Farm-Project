@@ -14,7 +14,6 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
 <style type="text/css">
 
 .pagination-wrap {
@@ -71,21 +70,18 @@ li.admin__p-active > a {
 
 </style>
 
+<%@include file="../include/farmdiaryheader.jsp" %>
 
 <div id="wrap" style="height: 800px;">
 
-<%@include file="../include/farmdiaryheader.jsp" %>
-
-
 <div style= "clear: both; margin-top: 200px;" ></div>
-
 
 <div id="container" style="width: 980px; margin: auto;" >
 
 <div id="aside" style="float: left; text-align: center;">   
 
 
-    <h3>${farmerInfo.farmerId }님의 농장일기</h3>
+    <h4>${farmerInfo.farmerId }님의 농장일기</h4>
 
     <hr>
    
@@ -110,7 +106,7 @@ li.admin__p-active > a {
            <tr class="success">
                <th style="width: 5%; height:20%;"><span>번호</span></th>
                <th style="width: 30%;"><span>제목</span></th>
-               <th style="width: 10%;"><span>등록일</span></th>
+               <th style="width: 10%;"><span>작성일</span></th>
                <th style="width: 10%;"><span>조회수</span></th>
            </tr>
        </thead>
