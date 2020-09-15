@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import common.dto.AnsweredOneonone;
 import common.dto.Application;
 import common.dto.Basket;
+import common.dto.Farmer;
 import common.dto.Product;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
@@ -38,8 +39,8 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
-	public UserProfile selectUserProfile(int userNo) {
-		return sqlSession.selectOne("Mypage.selectProfile", userNo);
+	public UserProfile selectUserProfile(UserTB user) {
+		return sqlSession.selectOne("Mypage.selectProfile", user);
 	}
 
 	@Override
@@ -57,6 +58,11 @@ public class MyPageDaoImpl implements MyPageDao{
 	public int leave(UserTB user) {
 		return sqlSession.update("Mypage.deleteUser", user);
 	}
+	@Override
+	public int farmerLeave(Farmer ckFarmer) {
+		return sqlSession.update("Mypage.deleteFarmer", ckFarmer);
+	}
+
 
 	@Override
 	public List<Map<String, Object>> o3List(Map<String, Object> forOne) {
@@ -70,10 +76,14 @@ public class MyPageDaoImpl implements MyPageDao{
 	
 
 	@Override
-	public QuestionOneonone o3Detail(int qNo) {
-		return sqlSession.selectOne("Mypage.selectO3one", qNo);
+	public QuestionOneonone o3Detail(Map<String, Object> map) {
+		return sqlSession.selectOne("Mypage.selectO3one", map);
 	}
-
+	
+	@Override
+	public QuestionOneonone o3DetailFarmer(Map<String, Object> map) {
+		return sqlSession.selectOne("Mypage.selectO3FarmerOne", map);
+	}
 
 
 	@Override
@@ -86,11 +96,22 @@ public class MyPageDaoImpl implements MyPageDao{
 		
 		return sqlSession.selectList("Mypage.selectActList", user);
 	}
+	@Override
+	public List<Map<String, Object>> appliActList(Farmer farmer) {
+		return sqlSession.selectList("Mypage.selectFarmerActList", farmer);
+	}
+
+
 
 
 	@Override
 	public List<Map<String, Object>> basketList(Map<String, Object> sub) {
 		return sqlSession.selectList("Mypage.selectBasketList", sub);
+	}
+	
+	@Override
+	public List<Map<String, Object>> basketFarmerList(Map<String, Object> sub) {
+		return sqlSession.selectList("Mypage.selectFarmerBasketList", sub);
 	}
 
 	@Override
@@ -102,13 +123,21 @@ public class MyPageDaoImpl implements MyPageDao{
 	@Override
 	public List<Map<String, Object>> orderList(Map<String, Object> sub) {
 		
-		// 클래스다이어그램 용 DTO 객체 선언
 		return sqlSession.selectList("Mypage.selectOrderList", sub);
 	}
 
 	@Override
-	public Map<String, Object> orderDetail(int orderNo) {
-		return sqlSession.selectOne("Mypage.selectOrderDetail", orderNo);
+	public List<Map<String, Object>> orderFarmerList(Map<String, Object> sub) {
+		return sqlSession.selectList("Mypage.selectFarmerOrderList", sub);
+	}
+	
+	@Override
+	public Map<String, Object> orderDetail(Map<String, Object> map) {
+		return sqlSession.selectOne("Mypage.selectOrderDetail", map);
+	}
+	@Override
+	public Map<String, Object> orderFarmerDetail(Map<String, Object> map) {
+		return sqlSession.selectOne("Mypage.selectFarmerOrderDetail", map);
 	}
 
 
@@ -116,17 +145,31 @@ public class MyPageDaoImpl implements MyPageDao{
 	public int cntApli(UserTB user) {
 		return sqlSession.selectOne("Mypage.cntApli", user);
 	}
+	
+	@Override
+	public int cntApli(Farmer farmer) {
+		return sqlSession.selectOne("Mypage.cntFarmerApli", farmer);
+	}
 
 
 	@Override
 	public int cntOrder(int userNo) {
 		return sqlSession.selectOne("Mypage.cntOrder", userNo);
 	}
+	@Override
+	public int cntFarmerOrder(int farmerNo) {
+		return sqlSession.selectOne("Mypage.cntFarmerOrder", farmerNo);
+	}
 
 
 	@Override
 	public int cntBasket(int userNo) {
 		return sqlSession.selectOne("Mypage.cntBasket", userNo);
+	}
+	
+	@Override
+	public int cntFarmerBasket(Farmer farmer) {
+		return sqlSession.selectOne("Mypage.cntFarmerBasket", farmer);
 	}
 
 
@@ -141,16 +184,30 @@ public class MyPageDaoImpl implements MyPageDao{
 		return sqlSession.selectOne("Mypage.minmax",user);
 	}
 
+	@Override
+	public Map<String, Object> getO3FarmerTotal(Farmer farmer) {
+		return sqlSession.selectOne("Mypage.O3FarmerMinMax", farmer);
+	}
+
 
 	@Override
 	public Map<String, Object> getOrderTotal(int orderNo) {
 		return sqlSession.selectOne("Mypage.orderminMax", orderNo);
 	}
 
+	@Override
+	public Map<String, Object> getOrderTotal(Farmer farmer) {
+		return sqlSession.selectOne("Mypage.orderFarmerminMax", farmer);
+	}
+
 
 	@Override
 	public int writeO3(QuestionOneonone o3) {
 		return sqlSession.insert("Mypage.insertO3", o3);
+	}
+	@Override
+	public int writeO3Farmer(QuestionOneonone o3) {
+		return sqlSession.insert("Mypage.insertFarmerO3", o3);
 	}
 
 
@@ -165,11 +222,24 @@ public class MyPageDaoImpl implements MyPageDao{
 		return sqlSession.selectOne("Mypage.phoneCheck", phone);
 	}
 
+	@Override
+	public Farmer selectFarmerEmailCheck(String email) {
+		return sqlSession.selectOne("Mypage.farmerEmailChk", email);
+	}
+
+
+	@Override
+	public Farmer selectFarmerPhoneCheck(String phone) {
+		return sqlSession.selectOne("Mypage.farmerPhoneChk", phone);
+	}
 
 	@Override
 	public List<Map<String, Object>> selectBasket(int[] arr) {
 		return sqlSession.selectList("Mypage.selectBasket", arr);
 	}
+	
+
+
 	
 	@Override
 	public int subAmount(int optionNo) {
@@ -216,6 +286,12 @@ public class MyPageDaoImpl implements MyPageDao{
 		return sqlSession.selectList("Mypage.selectBasketPurchase", userNo);
 	}
 
+	@Override
+	public List<Map<String, Object>> purchaseList(Farmer farmer) {
+		return sqlSession.selectList("Mypage.selectFarmerBasketPurchase", farmer);
+	}
+
+
 
 	@Override
 	public void addAmount(int optionNo) {
@@ -227,6 +303,86 @@ public class MyPageDaoImpl implements MyPageDao{
 	public int subPurchase(int basketNo) {
 		return sqlSession.update("Mypage.backPurchase", basketNo);
 	}
+
+
+	@Override
+	public Map<String, Object> getAnswer(int QUESTION_NO) {
+		return sqlSession.selectOne("Mypage.getAnswer",QUESTION_NO);
+	}
+
+
+	@Override
+	public Farmer selectFarmer(int farmerNo) {
+		return sqlSession.selectOne("Mypage.selectFarmer", farmerNo);
+	}
+
+
+	@Override
+	public UserProfile selectFarmerProfile(Farmer farmer) {
+		return sqlSession.selectOne("Mypage.selectFarmerProfile", farmer);
+	}
+
+
+	@Override
+	public int modifyFarmer(Farmer farmer) {
+		return sqlSession.update("Mypage.updateFarmer", farmer);
+	}
+
+
+	@Override
+	public void insertFarmerprofile(UserProfile userProf) {
+			sqlSession.insert("Mypage.insertFarmerProfile", userProf);
+	}
+
+
+	@Override
+	public void modifFarmeryprofile(UserProfile userProf) {
+		sqlSession.update("Mypage.updateFarmerProfile", userProf);
+		
+	}
+
+
+	@Override
+	public int cntO3Farmer(Farmer farmer) {
+		return sqlSession.selectOne("MypageCntO3farmer", farmer);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> o3ListFarmer(Map<String, Object> forOne) {
+		return sqlSession.selectList("MypageO3FarmerList", forOne);
+	}
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+	
+
+
+
+
+
+
+
+	
+
+
+
+
+	
+
+
+
 
 
 

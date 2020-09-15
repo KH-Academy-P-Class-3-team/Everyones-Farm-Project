@@ -32,6 +32,7 @@ import com.kh.farmapp.admin.notice.controller.AdminNoticeController;
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
 
 import common.dto.Admin;
+import common.dto.AnsweredOneonone;
 import common.dto.Farmer;
 import common.dto.Notice;
 import common.dto.QuestionOneonone;
@@ -51,16 +52,19 @@ public class MypageO3Controller {
 	public ModelAndView o3List(@RequestParam(required=false, defaultValue="1")int cPage, HttpSession session) {
 
 		UserTB user = (UserTB) session.getAttribute("userInfo");
+		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
 		ModelAndView mav = new ModelAndView();
 		
 
-		if( user == null) {
+		if( user == null && farmer == null) {
 			mav.addObject("alertMsg", "로그인이 필요합니다.");
 			mav.addObject("url", "../../user/login.do");
 			mav.setViewName("common/result");
 			return mav;
 		}
 		
+		if(user != null) {
+			
 		int cntPerPage = 10;
 		Map<String, Object> o3pList = mypageService.o3List(cPage, cntPerPage, user);
 
@@ -69,6 +73,17 @@ public class MypageO3Controller {
 		mav.addObject("page", o3pList.get("page"));
 		mav.addObject("list", o3pList);
 		mav.setViewName("mypage/user/mypageO3List");
+		}
+		if(farmer != null) {
+			int cntPerPage = 10;
+			Map<String, Object> o3pList = mypageService.o3ListFarmer(cPage, cntPerPage, farmer);
+
+			System.out.println(o3pList.toString());
+
+			mav.addObject("page", o3pList.get("page"));
+			mav.addObject("list", o3pList);
+			mav.setViewName("mypage/user/mypageO3List");	
+		}
 
 		return mav;
 	}
@@ -78,11 +93,17 @@ public class MypageO3Controller {
 	public ModelAndView o3Detail(int QUESTION_NO, HttpSession session) {
 
 		UserTB user = (UserTB) session.getAttribute("userInfo");
+		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
+		
+		
 		ModelAndView mav = new ModelAndView();
-
+		if(user != null) {
+			
 		//디테일 페이지 정보
-		QuestionOneonone o3 = mypageService.o3Detail(QUESTION_NO);
-		System.out.println(o3);
+		int userNo = user.getUserNo();
+		QuestionOneonone o3 = mypageService.o3Detail(QUESTION_NO, userNo);
+		System.out.println(QUESTION_NO);
+		Map<String, Object> answer = mypageService.getAnswer(QUESTION_NO);
 
 		//게시물 수 구하기
 		Map<String, Object> total = mypageService.getTotal(user);
@@ -94,7 +115,7 @@ public class MypageO3Controller {
 		int forDown = QUESTION_NO;
 		while( min <= forDown) {
 			--forDown;
-			down = mypageService.o3Detail(forDown);
+			down = mypageService.o3Detail(forDown,userNo);
 			
 			if(down != null)
 			break;
@@ -104,16 +125,61 @@ public class MypageO3Controller {
 		int forUp = QUESTION_NO;
 		while( max >= forUp) {
 			++forUp;
-			up = mypageService.o3Detail(forUp);
+			up = mypageService.o3Detail(forUp,userNo);
 			
 			if(up != null)
 			break;
 		}
+		System.out.println(answer);
 		mav.addObject("up", up);
 		mav.addObject("down", down);
 		mav.addObject("total", total);
 		mav.addObject("one", o3);
+		mav.addObject("answer", answer);
 		mav.setViewName("mypage/user/mypageO3Detail");
+		}
+		
+		if(farmer != null) {
+			//디테일 페이지 정보
+			int farmerNo = farmer.getFarmerNo();
+			QuestionOneonone o3 = mypageService.o3DetailFarmer(QUESTION_NO, farmerNo);
+			System.out.println(QUESTION_NO);
+			Map<String, Object> answer = mypageService.getAnswer(QUESTION_NO);
+
+			//게시물 수 구하기
+			Map<String, Object> total = mypageService.getTotalFarmer(farmer);
+
+			int max = Integer.parseInt(String.valueOf(total.get("MAX")));
+			int min = Integer.parseInt(String.valueOf(total.get("MIN")));
+			//위아래 페이지로 넘어가기
+			QuestionOneonone down = new QuestionOneonone();
+			int forDown = QUESTION_NO;
+			while( min <= forDown) {
+				--forDown;
+				down = mypageService.o3DetailFarmer(forDown,farmerNo);
+				
+				if(down != null)
+				break;
+			}
+
+			QuestionOneonone up = new QuestionOneonone();
+			int forUp = QUESTION_NO;
+			while( max >= forUp) {
+				++forUp;
+				up = mypageService.o3DetailFarmer(forUp,farmerNo);
+				
+				if(up != null)
+				break;
+			}
+			System.out.println(answer);
+			mav.addObject("up", up);
+			mav.addObject("down", down);
+			mav.addObject("total", total);
+			mav.addObject("one", o3);
+			mav.addObject("answer", answer);
+			mav.setViewName("mypage/user/mypageO3Detail");
+		}
+		
 
 		return mav;
 
@@ -122,10 +188,11 @@ public class MypageO3Controller {
 	public ModelAndView o3Write(HttpSession session) {
 
 		UserTB user = (UserTB) session.getAttribute("userInfo");
+		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
 		ModelAndView mav = new ModelAndView();
 		
 
-		if( user == null) {
+		if( user == null && farmer == null) {
 			mav.addObject("alertMsg", "로그인이 필요합니다.");
 			mav.addObject("url", "../../user/login.do");
 			mav.setViewName("common/result");
@@ -146,23 +213,25 @@ public class MypageO3Controller {
 				, HttpSession session
 				, Model model
 			) {
-		// 로그인이 안되어 있을 경우, 바로 로그인 페이지로 이동
 		UserTB user = (UserTB) session.getAttribute("userInfo");
 		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
-//		if( user == null && farmer == null ) {
-//			return "redirect:/user/login.do";
-//		}
 		
 		// logger 찍기 - 현재 어디 method 인지
 		logger.info("/adminnotice/write - [POST] 요청");
 		
 		// RequestParam question_oneonone 객체 테스트 출력
 		logger.debug("notice: " + question.toString());
-		
+		int res =0;
+		if(farmer == null) {
+			
 		// quesion_oneonone 객체의 userNo set 하기
 		question.setUserNo(user.getUserNo());
-		
-		int res = mypageService.wirteO3(question);
+		res = mypageService.wirteO3(question);
+		}
+		if(user == null) {
+			question.setFarmerNo(farmer.getFarmerNo());
+			res = mypageService.wirteO3(question);
+		}
 		
 		if(res > 0) {
 			logger.info("공지사항 작성 성공~");

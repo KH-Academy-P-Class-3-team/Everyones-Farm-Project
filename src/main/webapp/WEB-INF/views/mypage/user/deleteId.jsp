@@ -67,7 +67,7 @@ a:hover {
 	<div class="container">
 		<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">회원 탈퇴</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -104,7 +104,7 @@ a:hover {
 				</div>
 			</div>
 
-			<c:if test="${farmerInfo.name eq null} ">
+			<c:if test="${farmerInfo ne null }">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인

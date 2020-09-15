@@ -3,9 +3,11 @@ package com.kh.farmapp.mypage.user.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import common.dto.AnsweredOneonone;
 import common.dto.Application;
 import common.dto.Basket;
 import common.dto.EveryonesFarmFile;
+import common.dto.Farmer;
 import common.dto.Product;
 import common.dto.QuestionOneonone;
 import common.dto.TBOrder;
@@ -23,10 +25,10 @@ public interface MyPageDao {
 		public int modifyprofile(Map<String, Object> fileMap);
 		/**
 		 * 사진이 존재하는지 조회하기 
-		 * @param userNo
+		 * @param user
 		 * @return
 		 */
-		public UserProfile selectUserProfile(int userNo);
+		public UserProfile selectUserProfile(UserTB user);
 		/**
 		 * 사진이 없을 시 사진 삽입
 		 * @param fileMap
@@ -47,7 +49,10 @@ public interface MyPageDao {
 		public int cntO3(UserTB user);
 		
 		//일대일 문의 상세보기
-		public QuestionOneonone o3Detail(int qNo);
+		public QuestionOneonone o3Detail(Map<String, Object> map);
+		
+		//일대일 문의 상세보기 농부
+		public QuestionOneonone o3DetailFarmer(Map<String, Object> map);
 		
 		//일대일 문의 등록
 		public int o3Upload(QuestionOneonone qO3);
@@ -78,7 +83,10 @@ public interface MyPageDao {
 		public List<Map<String, Object>> orderList(Map<String, Object> sub);
 		
 		//구매목록 상세 페이지
-		public Map<String, Object> orderDetail(int orderNo);
+		public Map<String, Object> orderDetail(Map<String, Object> map);
+		
+		//framer 구매목록 상세 페이지
+		public Map<String, Object> orderFarmerDetail(Map<String, Object> map);
 		
 		//구매 상세 페이지 안에서 고객의 주소를 불러와준다.
 		public UserAddress getAddress(UserTB user);
@@ -90,6 +98,13 @@ public interface MyPageDao {
 		 */
 		public UserTB selectUser(UserTB user);
 
+		/**
+		 * 파머 정보 조회
+		 * @param farmerNo
+		 * @return
+		 */
+		public Farmer selectFarmer(int farmerNo);
+		
 		/*
 		 * 내 농촌활동 지원 개수
 		 */
@@ -117,12 +132,25 @@ public interface MyPageDao {
 		public Map<String, Object> getTotla(UserTB user);
 
 		/**
+		 * farmer O3 min max
+		 * @param farmer
+		 * @return
+		 */
+		public Map<String, Object> getO3FarmerTotal(Farmer farmer);
+		
+		/**
 		 * 최대최소값 구해 계산 하기
 		 * @param user
 		 * @return
 		 */
 		public Map<String, Object> getOrderTotal(int orderNo);
 
+		/**
+		 * 최대최소값 구해 계산 하기
+		 * @param user
+		 * @return
+		 */
+		public Map<String, Object> getOrderTotal(Farmer farmer);
 		/**
 		 * o3작성하기
 		 * @param o3
@@ -174,6 +202,12 @@ public interface MyPageDao {
 		public List<Map<String, Object>> purchaseList(int userNo);
 
 		/**
+		 * 구매목록 조회
+		 * @param farmer
+		 * @return
+		 */
+		public List<Map<String, Object>> purchaseList(Farmer farmer);
+		/**
 		 * amount 다시 돌려놓는 메서드
 		 * @param i 
 		 */
@@ -184,6 +218,127 @@ public interface MyPageDao {
 		 * @return 
 		 */
 		public int subPurchase(int basketNo);
+		
+		/**
+		 * 1대1문의 답변 정보
+		 * @param qUESTION_NO
+		 * @return
+		 */
+		public Map<String, Object> getAnswer(int questionNo);
+
+		/**
+		 * 농부 사진 조회
+		 * @param farmer
+		 * @return
+		 */
+		public UserProfile selectFarmerProfile(Farmer farmer);
+
+		/**
+		 * farmer modift info
+		 * @param farmer
+		 * @return
+		 */
+		public int modifyFarmer(Farmer farmer);
+
+		public void insertFarmerprofile(UserProfile userProf);
+
+		public void modifFarmeryprofile(UserProfile userProf);
+
+		/**
+		 * 이메일 체크
+		 * @param email
+		 * @return
+		 */
+		public Farmer selectFarmerEmailCheck(String email);
+
+		/**
+		 * 전화번호 체크
+		 * @param phone
+		 * @return
+		 */
+		public Farmer selectFarmerPhoneCheck(String phone);
+
+		/**
+		 * 페이징 처리 위한 파머 일대일 문의 총 개수 구하기 
+		 * @param farmer
+		 * @return
+		 */
+		public int cntO3Farmer(Farmer farmer);
+
+		/**
+		 * 일대일 문의 조회
+		 * @param forOne
+		 * @return
+		 */
+		public List<Map<String, Object>> o3ListFarmer(Map<String, Object> forOne);
+
+		/**
+		 * 농부 글 작성
+		 * @param o3
+		 * @return
+		 */
+		public int writeO3Farmer(QuestionOneonone o3);
+
+		/**
+		 * 파머 activeList
+		 * @param farmer
+		 * @return
+		 */
+		public List<Map<String, Object>> appliActList(Farmer farmer);
+
+		/**
+		 * farmer activeList cnt
+		 * @param farmer
+		 * @return
+		 */
+		public int cntApli(Farmer farmer);
+
+		/**
+		 * farmer leave
+		 * @param ckFarmer
+		 * @return
+		 */
+		public int farmerLeave(Farmer ckFarmer);
+
+		/**
+		 * 장바구니 개수 세는 함수
+		 * @param farmer
+		 * @return
+		 */
+		public int cntFarmerBasket(Farmer farmer);
+
+		/**
+		 * farmer paging basketList
+		 * @param sub
+		 * @return
+		 */
+		public List<Map<String, Object>> basketFarmerList(Map<String, Object> sub);
+
+		/**
+		 * For List get total sum of order by farmer
+		 * @param farmerNo
+		 * @return
+		 */
+		public int cntFarmerOrder(int farmerNo);
+
+		/**
+		 * get List with paging
+		 * @param sub
+		 * @return
+		 */
+		public List<Map<String, Object>> orderFarmerList(Map<String, Object> sub);
+
+
+		
+		
+
+		
+
+		
+
+		
+
+		
 
 
 

@@ -286,7 +286,7 @@ td, th {
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">구매 상세 조회</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -318,12 +318,12 @@ td, th {
 					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList" style="font-weight: bold;">구매
 						목록</a>
 				</div>
 			</div>
 
-			<c:if test="${farmerInfo.name eq null} ">
+			<c:if test="${farmerInfo ne null }">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
@@ -339,7 +339,7 @@ td, th {
 						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 					</div>
 					<div class="panel-body">
-						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						<a href="/farmapp/mypage/activitylist">체험
 							신청내역</a>
 					</div>
 
@@ -498,7 +498,7 @@ td, th {
 				onclick="javascript:location.href='deleteOrder?orderNo=${orderDetail.ORDER_NO}'">삭제</button>
 			</c:if>
 			<button class="btn btn-success pull-right bottom" type="button"
-				onclick="javascript:location.href='mypageO3List'">뒤로가기</button>
+				onclick="javascript:location.href='orderList'">뒤로가기</button>
 		</div>
 	</div>
 </div>
