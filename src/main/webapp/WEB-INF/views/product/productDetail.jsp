@@ -37,6 +37,10 @@ $(document).ready(function() {
 	$("#main").click(function() {
 		location.href = "<%=request.getContextPath() %>/";
 	})
+	// 리뷰화면 이동
+	$("#review").click(function() {
+		location.href = "<%=request.getContextPath() %>/review";
+	})
 
 	// 구매 버튼 클릭
 	$("#buy").click(function() {
@@ -215,6 +219,7 @@ $(document).ready(function() {
 	<div style="text-align: center; margin: 20px;">
 		<input type="button" style="margin: 0 30px;" id="back" class="cart" value="뒤로가기"/>
 		<input type="button" style="margin: 0 30px;" id="main" class="cart" value="메인화면"/>
+		<input type="button" style="margin: 0 30px;" id="review" class="cart" value="리뷰이동"/>
 	</div>
 
 </div>
