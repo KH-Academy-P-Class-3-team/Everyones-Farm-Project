@@ -80,6 +80,12 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	public FarmingDailylog read(int dailyLogNo) {
 		System.out.println(dailyLogNo+"다오");
 		return session.selectOne("MYPAGEDAILY.read",dailyLogNo);
+
+	}
+	//영농일지 삭제
+	public void delete(int dailyLogNo){
+		session.delete("MYPAGEDAILY.delete",dailyLogNo);
+
 	}
 	
 	// 체험신청 내역 order에 대한 한줄 조회 (결제 신청 조인한 것 한줄을 가져와서 비교해서 처리하기 위해)
@@ -103,7 +109,7 @@ public class FarmerMypageDaoImpl implements FarmerMypageDao {
 	// 판매 내역 리스트 조회하기
 	@Override
 	public List<Map<String, Object>> selllist(Map<String, Object> map) {
-		System.out.println("다오"+map);
+		System.out.println("다오"+map.toString());
 		return session.selectList("MYPAGESELL.listPage",map);
 	}
 	

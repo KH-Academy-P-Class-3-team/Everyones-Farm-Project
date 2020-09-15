@@ -60,7 +60,7 @@
 							for="title">작업 시간</label> <input type="text" id="workingTime"
 							name="workingTime" /><br> <label for="title">작업 인원</label>
 						<input type="text" id="workingMember" name="workingMember" /><br>
-						<label for="title">작업 날짜</label> <input type="text"
+						<label for="title">작업 날짜</label> <input type="date"
 							id="workingDate" name="workingDate" /><br> <label
 							for="title">날씨</label> <input type="text" id="weather"
 							name="weather" /><br> <label for="title">강수량</label><input
