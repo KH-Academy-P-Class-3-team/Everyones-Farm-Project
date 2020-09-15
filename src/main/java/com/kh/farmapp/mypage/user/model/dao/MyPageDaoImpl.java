@@ -7,17 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import common.dto.AnsweredOneonone;
-import common.dto.Application;
-import common.dto.Basket;
 import common.dto.Farmer;
-import common.dto.Product;
 import common.dto.QuestionOneonone;
-import common.dto.TBOrder;
-import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
-import common.util.Paging;
 
 @Repository
 public class MyPageDaoImpl implements MyPageDao{
@@ -114,11 +107,6 @@ public class MyPageDaoImpl implements MyPageDao{
 		return sqlSession.selectList("Mypage.selectFarmerBasketList", sub);
 	}
 
-	@Override
-	public int addProduct(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<Map<String, Object>> orderList(Map<String, Object> sub) {
@@ -253,32 +241,7 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 
-	@Override
-	public int o3Upload(QuestionOneonone qO3) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-
-	@Override
-	public int o3Modify(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public Application appliHelpList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public UserAddress getAddress(UserTB user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	@Override

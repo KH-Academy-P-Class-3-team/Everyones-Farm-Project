@@ -88,10 +88,12 @@ a:hover {
 					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List"style="font-weight: bold;">1대
 						1 문의</a>
 				</div>
+				<c:if test="${farmerInfo eq null }">
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
 						신청 현황</a>
 				</div>
+				</c:if>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
 						style="color: #ccc;">회원 탈퇴</a>

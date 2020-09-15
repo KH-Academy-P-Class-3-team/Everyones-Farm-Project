@@ -3,18 +3,10 @@ package com.kh.farmapp.mypage.user.model.dao;
 import java.util.List;
 import java.util.Map;
 
-import common.dto.AnsweredOneonone;
-import common.dto.Application;
-import common.dto.Basket;
-import common.dto.EveryonesFarmFile;
 import common.dto.Farmer;
-import common.dto.Product;
 import common.dto.QuestionOneonone;
-import common.dto.TBOrder;
-import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
-import common.util.Paging;
 
 public interface MyPageDao {
 
@@ -54,12 +46,7 @@ public interface MyPageDao {
 		//일대일 문의 상세보기 농부
 		public QuestionOneonone o3DetailFarmer(Map<String, Object> map);
 		
-		//일대일 문의 등록
-		public int o3Upload(QuestionOneonone qO3);
 		
-		//일대일 문의 수정
-		public int o3Modify(int qNo);
-
 		//일대일 문의 삭제
 		public int o3Delete(int qNo);
 		
@@ -67,16 +54,11 @@ public interface MyPageDao {
 		//리스트 안에서 페이징 호출
 		public List<Map<String, Object>> appliActList(UserTB user);
 		
-		//개인 등록 일손돕기 리스트
-		//리스트 안에서 페이징 호출
-		public Application appliHelpList();
 		
 		//장바구니 목록 리스트
 		//리스트 안에서 페이징 호출
 		public List<Map<String, Object>> basketList(Map<String, Object> sub);
 
-		//체크된 상품들의 가격을 더해서 나타내주는 메서드
-		public int addProduct(Map<String , Object> map);
 		
 		//구매목록 리스트
 		//리스트 안에서 페이징 호출
@@ -88,8 +70,6 @@ public interface MyPageDao {
 		//framer 구매목록 상세 페이지
 		public Map<String, Object> orderFarmerDetail(Map<String, Object> map);
 		
-		//구매 상세 페이지 안에서 고객의 주소를 불러와준다.
-		public UserAddress getAddress(UserTB user);
 
 		/**
 		 *  유저 정보를 조회한다.

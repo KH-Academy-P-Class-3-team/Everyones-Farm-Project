@@ -1,33 +1,21 @@
 package com.kh.farmapp.mypage.user.model.service;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
 
-import common.dto.AnsweredOneonone;
-import common.dto.Application;
-import common.dto.Basket;
-import common.dto.EveryonesFarmFile;
 import common.dto.Farmer;
-import common.dto.Product;
-import common.dto.Purchase;
 import common.dto.QuestionOneonone;
-import common.dto.TBOrder;
-import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
 import common.util.ActivityFileUtil;
-import common.util.FileUtil;
 import common.util.Paging;
 
 @Service
@@ -58,7 +46,7 @@ public class MypageServiceImpl implements MyPageService{
 		password = passwordEncoder.encode(password);
 
 		farmer.setFarmerPw(password);
-		int res = mypageDao.modifyFarmer(farmer);
+		 mypageDao.modifyFarmer(farmer);
 
 
 	}
@@ -136,14 +124,6 @@ public class MypageServiceImpl implements MyPageService{
 
 	}
 
-	@Override
-	public void insertFile(UserTB user, File file, String root) {
-
-		FileUtil fileUtil = new FileUtil();
-
-		//		List<Map<String, String>> filedata = fileUtil.fileUpload(file, root);
-
-	}
 
 	@Override
 	public int leave(UserTB user) {
@@ -204,17 +184,6 @@ public class MypageServiceImpl implements MyPageService{
 		return mypageDao.o3DetailFarmer(map);
 	}
 
-	@Override
-	public int o3Upload(QuestionOneonone qO3) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int o3Modify(int qNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int o3Delete(int qNo) {
@@ -230,12 +199,6 @@ public class MypageServiceImpl implements MyPageService{
 		return mypageDao.appliActList(farmer);
 	}
 
-
-	@Override
-	public Application appliHelpList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Map<String, Object> basketList(int userNo, int cPage, int cntPerPage) {
@@ -279,11 +242,6 @@ public class MypageServiceImpl implements MyPageService{
 	}
 
 
-	@Override
-	public int addProduct(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public Map<String, Object> orderList(int userNo, int cPage, int cntPerPage) {
@@ -348,11 +306,6 @@ public class MypageServiceImpl implements MyPageService{
 
 
 
-	@Override
-	public UserAddress getAddress(UserTB user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 
