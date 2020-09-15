@@ -237,17 +237,17 @@ a:hover {
 						<ul>
 							<c:if test="${pageMaker3.prev}">
 								<li><a class="page-link"
-									href="activitytwo${pageMaker3.makeQuery(pageMaker3.startPage - 1)}">이전</a></li>
+									href="activityWork${pageMaker3.makeQuery(pageMaker3.startPage - 1)}">이전</a></li>
 							</c:if>
 
 							<c:forEach begin="${pageMaker3.startPage}"
 								end="${pageMaker3.endPage}" var="idx">
-								<li><a class="page-link" href="activitytwo${pageMaker3.makeQuery(idx)}">${idx}</a></li>
+								<li><a class="page-link" href="activityWork${pageMaker3.makeQuery(idx)}">${idx}</a></li>
 							</c:forEach>
 
 							<c:if test="${pageMaker3.next && pageMaker3.endPage > 0}">
 								<li><a class="page-link"
-									href="activitytwo${pageMaker3.makeQuery(pageMaker3.endPage + 1)}">다음</a></li>
+									href="activityWork${pageMaker3.makeQuery(pageMaker3.endPage + 1)}">다음</a></li>
 							</c:if>
 						</ul>
 					</div>
