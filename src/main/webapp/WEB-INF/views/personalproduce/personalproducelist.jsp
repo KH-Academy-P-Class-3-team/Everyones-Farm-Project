@@ -86,7 +86,7 @@ li.admin__p-active > a {
 
 	<a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a><br><br>
 	<a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a><br><br>
-	<a href="#">농장 체험</a><br><br>
+	<a href="/farmapp/activity/activityList?isHelp=0&farmerNo=${farmerInfo.farmerNo}">농장 체험</a><br><br>
 	<a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a><br><br>
 	<a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a>
 
@@ -107,7 +107,20 @@ li.admin__p-active > a {
            <tr>
            	   
                <td class="num">${list.productNo}</td>
-               <td class="subject"><a href="<%= request.getContextPath() %>/personalproduce/personalproducedetail.do?productNo=${list.productNo}">${list.name}</a></td>
+               <td class="subject">
+               	<c:choose>
+               		<c:when test="${list.IS_SEASONAL_FOOD eq 0 }">
+		               	<a href="<%= request.getContextPath() %>/product/productDetail.do?productNo=${list.productNo}">
+		               		${list.name}
+		               	</a>
+               		</c:when>
+               		<c:when test="${list.IS_SEASONAL_FOOD eq 1 }">
+		               	<a href="<%= request.getContextPath() %>/product/productDetail.do?productNo=${list.productNo}">
+		               		${list.name}
+		               	</a>
+               		</c:when>
+               	</c:choose>
+               	</td>
                
            </tr>
         </c:forEach>

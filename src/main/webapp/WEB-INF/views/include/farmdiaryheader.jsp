@@ -71,7 +71,7 @@
 <!-- 					<li><a href="#">일반 먹거리</a></li> -->
 <!-- 				</ul> -->
 			</li>
-			<li><a href="#">농장 체험</a></li>
+			<li><a href="/farmapp/activity/activityList?isHelp=0&farmerNo=${farmerInfo.farmerNo}">농장 체험</a></li>
 			<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a>
 <!-- 				<ul class="menu__sub-activity"> -->
 <!-- 					<li><a href="#">농장 체험</a></li> -->

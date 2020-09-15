@@ -82,7 +82,7 @@ $(document).ready(function() {
 	<c:forEach items="${farmList }" var="farm">
 	
 <%-- 		${farm.farmNo } --%>
-		<div class="row" onclick="javascript:location.href=''">
+		<div class="row" onclick="javascript:location.href='/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}'">
 		
 			<div class="list-image">
 			

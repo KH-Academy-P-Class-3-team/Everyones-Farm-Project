@@ -90,7 +90,7 @@ li.admin__p-active > a {
 
 	<a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a><br><br>
 	<a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a><br><br>
-	<a href="#">농장 체험</a><br><br>
+	<a href="/farmapp/activity/activityList?isHelp=0&farmerNo=${farmerInfo.farmerNo}">농장 체험</a><br><br>
 	<a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a><br><br>
 	<a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a>
 
