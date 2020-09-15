@@ -233,9 +233,9 @@ public class FarmerMypageController {
 
 	}
 	
-	@RequestMapping(value = "/mypage/cal23", method = RequestMethod.GET)
-	public String cal2() {
-		System.out.println("접속");
-		return "mypage/cal23";
-	}
+//	@RequestMapping(value = "/mypage/cal23", method = RequestMethod.GET)
+//	public String cal2() {
+//		System.out.println("접속");
+//		return "mypage/cal23";
+//	}
 }

@@ -172,14 +172,12 @@ a:hover {
 				<div class="sumarry" style="width : 800px; margin-left:-55px;">
 				<table class="userInform">
 					<tr>
-						<td class="userImg">사진</td>
 						<td class="userName">
 							<!-- 농부세션 확인해서 c:if 추가 -->
 							<div>
-								<span class="selfIcon">농업인</span>
+								<span class="selfIcon" style="font-size: 30px; margin-left: 100px;">농업인</span>
 							</div> <span class="sessionName">${farmerInfo.name } </span> 님 안녕하세요
 						</td>
-						<td class="userActive"><h5>주문현황</h5> <br> ${res }</td>
 					</tr>
 				</table>
 
