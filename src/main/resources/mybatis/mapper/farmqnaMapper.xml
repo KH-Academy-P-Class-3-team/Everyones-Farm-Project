@@ -67,14 +67,10 @@
 
 	<select id="selectFarmQnADetail" resultMap="detail">
 		SELECT
-		fq.farm_qna_question_no, fq.title, fq.hits, fq.reg_date,
-		fq.content,
-		fq.farmer_no, f.name
-		FROM farm_qna_question fq, farmer f
-		WHERE
-		fq.farmer_no = f.farmer_no
-		AND fq.farm_qna_question_no =
-		#{farmQnaQuestionNo}
+		farm_qna_question_no, title, hits, reg_date,
+		content,farmer_no
+        FROM farm_qna_question
+		WHERE farm_qna_question_no =#{farmQnaQuestionNo}
 	</select>
 
 	<delete id="deleteQnA" parameterType="int">
@@ -106,9 +102,12 @@
 	</select>
 
 	<select id="selectAnswerList" resultType="common.dto.FarmQnaAnswer">
-		select farm_qna_question_no, content, farmer_no, reg_date
-		from FARM_QNA_ANSWER
-		where farm_qna_question_no = #{farmQnaQuestionNo}
+		SELECT
+		farm_qna_question_no, title, hits, reg_date,
+		content, farmer_no
+		FROM farm_qna_question 
+		WHERE
+		farm_qna_question_no =#{farmQnaQuestionNo}
 	</select>
 
 	<insert id="answerInsert" parameterType="common.dto.FarmQnaAnswer">

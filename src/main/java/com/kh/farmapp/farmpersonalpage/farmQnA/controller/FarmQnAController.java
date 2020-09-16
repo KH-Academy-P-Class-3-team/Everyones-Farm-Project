@@ -111,6 +111,7 @@ public class FarmQnAController {
 	@RequestMapping(value = "/farmQnA/farmQnAdetail.do", method = RequestMethod.GET)
 	public ModelAndView farmdiaryDetail(int farmQnaQuestionNo) {
 
+		System.out.println("상세조회 : "+ farmQnaQuestionNo);
 		ModelAndView mav = new ModelAndView();
 
 		Map<String, Object> res = farmqnaService.selectQnADetail(farmQnaQuestionNo);

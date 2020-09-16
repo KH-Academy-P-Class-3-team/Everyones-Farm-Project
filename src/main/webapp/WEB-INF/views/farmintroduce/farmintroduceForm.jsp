@@ -48,9 +48,7 @@
 
 <hr>
 
-<div style="text-align: center;">
-<button class="btn btn-success" type="button" onclick="location.href='farmdiarywrite.do'">농장정보 수정</button>
-</div>
+
 
 </div>
 </div>
