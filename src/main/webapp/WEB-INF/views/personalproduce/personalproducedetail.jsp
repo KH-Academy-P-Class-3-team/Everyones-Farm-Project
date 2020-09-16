@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<%@include file="../include/farmdiaryheader.jsp" %>
+
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -24,8 +26,6 @@
 
 </style>
 
-
-<%@include file="../include/farmdiaryheader.jsp" %>
 
 <form action="<%= request.getContextPath() %>/personalproduce/personalproducedetail.do" method="post">
 <div id="d1">
