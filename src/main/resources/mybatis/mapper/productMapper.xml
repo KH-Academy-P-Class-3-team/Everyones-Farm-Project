@@ -90,5 +90,10 @@
 		pp.product_no = #{productNo}
 	</select>
 
+	<!-- 농부 번호로 농장 번호 조회 (파라미터용) -->
+	<select id="selectFarmNoByFarmerNo" resultType="int">
+		select farm_no from farm
+		where farmer_no = #{farmerNo}
+	</select>
 
 </mapper>

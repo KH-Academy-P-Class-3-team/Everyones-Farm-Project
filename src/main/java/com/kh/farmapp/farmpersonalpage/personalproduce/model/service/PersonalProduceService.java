@@ -22,4 +22,7 @@ public interface PersonalProduceService {
 	//게시글 상세 조회 메소드
 	public Map<String, Object> selectProductDetail(int productNo);
 
+	//농장번호 조회
+	public int selectFarmNoByFarmerNo(String farmerNo);
+
 }

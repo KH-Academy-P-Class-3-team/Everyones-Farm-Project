@@ -27,4 +27,7 @@ public interface PersonalProduceDao {
 	
     //클래스다이어 그램용
     public void answerClass(ProductOption productOption);
+
+    //농장번호 조회
+	public int selectFarmNoByFarmerNo(String farmerNo);
 }

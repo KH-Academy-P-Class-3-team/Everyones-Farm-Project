@@ -49,4 +49,9 @@ public class PersonalProduceDaoImpl implements PersonalProduceDao {
 		
 	}
 
+	@Override
+	public int selectFarmNoByFarmerNo(String farmerNo) {
+		return sqlSession.selectOne("Product.selectFarmNoByFarmerNo", farmerNo);
+	}
+
 }
