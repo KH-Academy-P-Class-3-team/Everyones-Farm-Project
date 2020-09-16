@@ -1,32 +1,35 @@
 package com.kh.farmapp.mypage.user.model.service;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import common.dto.Application;
-import common.dto.Basket;
-import common.dto.Product;
+import common.dto.Farmer;
 import common.dto.QuestionOneonone;
-import common.dto.TBOrder;
-import common.dto.UserAddress;
 import common.dto.UserProfile;
 import common.dto.UserTB;
 
 public  interface MyPageService {
 
 	//개인정보 수정 
-	public int modifyUser(UserTB user, String root, MultipartFile upload);
+	public int modifyUser(UserTB user);
 	/**
 	 * 수정페이지에 개인사진 불러오기
 	 * @param user
 	 * @return
 	 */
 	public UserProfile selectUserProfile(UserTB user);
+	
+	/**
+	 * 수정페이지에 개인사진 불러오기
+	 * @param user
+	 * @return
+	 */
+	public UserProfile selectFarmerProfile(Farmer farmer);
+	
 	//개인 사진 수정
-	public int modifyprofile(UserTB user, MultipartFile file, String root);
+	public int modifyprofile(UserTB user, MultipartFile upload, String root);
 	
 	//회원 탈퇴
 	public int leave(UserTB user);
@@ -36,57 +39,45 @@ public  interface MyPageService {
 	public Map<String, Object> o3List(int cPage, int cntPerPage, UserTB user);
 	
 	//일대일 문의 상세보기
-	public QuestionOneonone o3Detail(int qNo);
+	public QuestionOneonone o3Detail(int qNo, int userNo);
 	
-	//일대일 문의 등록
-	public int o3Upload(QuestionOneonone qO3);
-	
-	//일대일 문의 수정
-	public int o3Modify(int qNo);
 
 	//일대일 문의 삭제
 	public int o3Delete(int qNo);
 	
 	//개인 등록 체험활동 리스트
-	//리스트 안에서 페이징 호출
 	public List<Map<String, Object>> appliActList(UserTB user);
 	
-	//개인 등록 일손돕기 리스트
-	//리스트 안에서 페이징 호출
-	public Application appliHelpList();
+	//개인 등록 체험활동 리스트
+	public List<Map<String, Object>> appliActList(Farmer farmer);
+	
+	//총 개수 세기
+	public int cntApli(Farmer farmer);
 	
 	//장바구니 목록 리스트
 	//리스트 안에서 페이징 호출
 	public Map<String, Object> basketList(int userNo, int cPage, int cntPerPage);
 
-	//체크된 상품들의 가격을 더해서 나타내주는 메서드
-	public int addProduct(Map<String , Object> map);
 	
 	//구매목록 리스트
 	//리스트 안에서 페이징 호출
 	public Map<String, Object> orderList(int userNo, int cPage, int cntPerPage);
 	
 	//구매목록 상세 페이지
-	public Map<String, Object> orderDetail(int orderNo);
+	public Map<String, Object> orderDetail(int orderNo, int userNo);
 	
-	//구매 상세 페이지 안에서 고객의 주소를 불러와준다.
-	public UserAddress getAddress(UserTB user);
 
-	/**
-	 * 
-	 * 파일을 전송하고 바꿔주는 메서드
-	 * 
-	 * @param user
-	 * @param file
-	 * @param root
-	 */
-	public void insertFile(UserTB user, File file, String root);
 
 	/*
 	 * 개인정보 불러오기
 	 * 
 	 */
 	public UserTB selectUser(UserTB user);
+	/*
+	 * 파머 불러오기
+	 * 
+	 */
+	public Farmer selectFarmer(Farmer farmer);
 
 	/**
 	 *  게시물의 총 개수를 구해온다.
@@ -160,6 +151,127 @@ public  interface MyPageService {
 	 * @param arr
 	 */
 	public int canclePurchase(int[] arr);
+	
+	/**
+	 * 1대1문의 답변 정보
+	 * @param qUESTION_NO
+	 * @return
+	 */
+	public Map<String, Object> getAnswer(int qUESTION_NO);
+	
+	/**
+	 * 농부 사진 변경
+	 * 
+	 * @param farmer2
+	 * @param upload
+	 * @param root
+	 */
+	public void modifyFarmerprofile(Farmer farmer2, MultipartFile upload, String root);
+	
+	/**
+	 * 파머 정보 수정
+	 * @param farmer
+	 */
+	public void modifyFarmer(Farmer farmer);
+	/**
+	 * 농부 이메일
+	 * @param email
+	 * @param farmer
+	 * @return
+	 */
+	public int selectFarmerEmailCheck(String email, Farmer farmer);
+	/**
+	 * 농부 전화번호
+	 * @param phone
+	 * @param farmer
+	 * @return
+	 */
+	public int selectFarmerPhoneCheck(String phone, Farmer farmer);
+	
+	/**
+	 * question onononeList for farmer 
+	 * @param cPage
+	 * @param cntPerPage
+	 * @param farmer
+	 * @return
+	 */
+	public Map<String, Object> o3ListFarmer(int cPage, int cntPerPage, Farmer farmer);
+	
+	/**
+	 * question_oneonone farmer detail page
+	 * @param qUESTION_NO
+	 * @param farmerNo
+	 * @return
+	 */
+	public QuestionOneonone o3DetailFarmer(int qUESTION_NO, int farmerNo);
+	
+	/**
+	 * famer O3 mixmax구하기
+	 * @param farmer
+	 * @return
+	 */
+	public Map<String, Object> getTotalFarmer(Farmer farmer);
+	
+	/**
+	 * 농부 회원 탈퇴
+	 * @param ckFarmer
+	 * @return
+	 */
+	public int farmerLeave(Farmer ckFarmer);
+	/**
+	 * 농부 장바구니 조회
+	 * @param farmer
+	 * @param cPage
+	 * @param cntPerPage
+	 * @return
+	 */
+	public Map<String, Object> basketList(Farmer farmer, int cPage, int cntPerPage);
+	
+	/**
+	 * 농부 구매목록 조회
+	 * @param farmer
+	 * @return
+	 */
+	public Map<String, Object> basketListPur(Farmer farmer);
+	
+	/**
+	 * 농부 구매목록 구하기
+	 * @param farmerNo
+	 * @param cPage
+	 * @param cntPerPage
+	 * @return
+	 */
+	public Map<String, Object> orderFarmerList(int farmerNo, int cPage, int cntPerPage);
+	/**
+	 * 구매목록 민맥스 값 구하기
+	 * @param farmer
+	 * @return
+	 */
+	public Map<String, Object> getOrderTotal(Farmer farmer);
+
+	/**
+	 * 구매 디테일 페이지 정보
+	 * @param orderNo
+	 * @param farmerNo
+	 * @return
+	 */
+	public Map<String, Object> orderFarmerDetail(int orderNo, int farmerNo);
+	
+	/**
+	 * 결제 처리, 유저
+	 * @param arr
+	 * @return
+	 */
+	public int paymentProcess(int[] arr, UserTB user);
+	/**
+	 * 결제 처리 농부
+	 * @param arr
+	 * @param farmer
+	 * @return
+	 */
+	public int paymentProcess(int[] arr, Farmer farmer);
+
+	
 
 
 

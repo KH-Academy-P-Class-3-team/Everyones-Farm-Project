@@ -14,8 +14,12 @@ public class QuestionOneonone {
 	private int userNo;
 	private Date regDate;
 	private int isAnswered;
-	
-	// getter(), setter()
+	private int farmerNo;
+	@Override
+	public String toString() {
+		return "QuestionOneonone [questionNo=" + questionNo + ", title=" + title + ", content=" + content + ", userNo="
+				+ userNo + ", regDate=" + regDate + ", isAnswered=" + isAnswered + ", farmerNo=" + farmerNo + "]";
+	}
 	public int getQuestionNo() {
 		return questionNo;
 	}
@@ -52,12 +56,14 @@ public class QuestionOneonone {
 	public void setIsAnswered(int isAnswered) {
 		this.isAnswered = isAnswered;
 	}
-
-	// toString()
-	@Override
-	public String toString() {
-		return "QuestionOneonone [questionNo=" + questionNo + ", title=" + title + ", content=" + content + ", userNo="
-				+ userNo +", regDate=" + regDate + ", isAnswered=" + isAnswered + "]";
+	public int getFarmerNo() {
+		return farmerNo;
 	}
+	public void setFarmerNo(int farmerNo) {
+		this.farmerNo = farmerNo;
+	}
+	
+	
+	
 
 }

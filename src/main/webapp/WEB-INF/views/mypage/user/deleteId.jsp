@@ -9,57 +9,12 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/deleteId.css" />
 <style type="text/css">
-.input-group {
-	margin-top: 30px;
+ul {
+	margin-bottom: 0px;
 }
-.col-lg-1{
-	text-align: left;
-	width : 50%;
-	margin-left: 150px;
-}
-span{
-	padding : 0;
-}
-.input-group{
-	width : 400px;
-}
-label{
-	padding-left: 0;
-    text-align: left;
-}
-.btn-warning{
-	width : 90px;
-	height : 50px;
-	margin-top: 30px;
-    margin-right: 150px;
-}
-.emptyArea{
-	height : 150px;
-}
-.glyphicon-alert{
-	color : red;
-}
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-a {
-	text-decoration: none;
-	color: black;
-}
-a:hover {
-	text-decoration: none;
-}
-
 </style>
-
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top:200px"></div>
 	<!-- Page Content -->
@@ -67,7 +22,7 @@ a:hover {
 	<div class="container">
 		<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">회원 탈퇴</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -81,10 +36,12 @@ a:hover {
 					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
 						1 문의</a>
 				</div>
+				<c:if test="${farmerInfo eq null }">
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
 						신청 현황</a>
 				</div>
+				</c:if>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
 						style="color: #ccc;">회원 탈퇴</a>
@@ -104,7 +61,7 @@ a:hover {
 				</div>
 			</div>
 
-			<c:if test="${farmerInfo.name eq null} ">
+			<c:if test="${farmerInfo ne null }">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인

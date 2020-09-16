@@ -1,0 +1,96 @@
+@charset "UTF-8";
+.input-group {
+	margin-top: 30px;
+}
+
+.col-lg-1 {
+	width: 700px;
+	height: 1000px;
+}
+
+.row {
+	height: 1000px;
+}
+
+.panel-default {
+	border: none;
+}
+
+.panel-default>.panel-heading {
+	background-color: #D1E9CA;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.sumarry {
+	width: 500px;
+	height: 150px;
+	background-color: white;
+	text-align: center;
+	margin-left: 100px;
+	margin-bottom: 50px;
+}
+
+.appliActList {
+	margin-bottom: 50px;
+	width: 100%;
+	height: 350px;
+	background-color: white;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.appliHelpList {
+	width: 100%;
+	height: 350px;
+	background-color: white;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.userInform {
+	border: 2px solid black;
+	width: 100%;
+	height: 100%;
+}
+
+.userName {
+	border-right: 1px solid #ccc;
+}
+
+.sessionName {
+	color: green;
+	font-size: large;
+	font-weight: bold;
+}
+
+.selfIcon {
+	text-align: left;
+	border: 1px solid white;
+	border-radius: 7px;
+	color: white;
+	background-color: lime;
+	padding: 3px;
+	margin-right: 100px;
+	margin-bottom: 10px;
+}
+
+.bux {
+	width: 100%;
+}
+
+.worrd {
+	font-weight: bold;
+	color: lime;
+	font-size: large;
+}

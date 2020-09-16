@@ -26,11 +26,14 @@
 	color: white;
 	background: #68bb59;
 }
+ul, ol{
+	margin-bottom : 0;
+}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/image-slider.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/main-weather.js"></script>
+<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/main-weather.js"></script> --%>
 </head>
 <body>
 
@@ -56,11 +59,11 @@
             
 						<img src="${kakaoInfo.profile_image }" alt="프로필" style= "height: 40px; width: 40px; border-radius: 50%;"/>
             
-						<a href="<%=request.getContextPath() %>/user/kakaologout">로그아웃</a><a href="#">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="<%=request.getContextPath() %>/search"><i class="fas fa-search"></i></a>
+						<a href="<%=request.getContextPath() %>/user/kakaologout">로그아웃</a><a href="<%=request.getContextPath()%>/mypage/user/modify">마이페이지</a><a href="#"><i class="fas fa-shopping-cart"></i></a><a href="<%=request.getContextPath() %>/search"><i class="fas fa-search"></i></a>
 					</c:when>
 					<c:when test="${not empty farmerInfo }">
 
-						<a href="<%=request.getContextPath() %>/farmer/logout">로그아웃</a><a href="#">마이페이지</a><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">나의농장</a><a href="#"><i class="fas fa-shopping-cart"></i><a href="<%=request.getContextPath() %>/search"><i class="fas fa-search"></i></a>
+						<a href="<%=request.getContextPath() %>/farmer/logout">로그아웃</a><a href="<%=request.getContextPath()%>/mypage/user/modify">마이페이지</a><a href="<%= request.getContextPath() %>/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">나의농장</a><a href="#"><i class="fas fa-shopping-cart"></i><a href="<%=request.getContextPath() %>/search"><i class="fas fa-search"></i></a>
 
 					</c:when>
 					<c:when test="${empty userInfo and empty kakaoInfo and empty farmerInfo }">
