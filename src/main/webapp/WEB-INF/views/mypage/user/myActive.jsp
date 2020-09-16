@@ -10,6 +10,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/myActive.css" />
+<style type="text/css">
+ul {
+	margin-bottom: 0px;
+}
+</style>
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top: 200px"></div>
 

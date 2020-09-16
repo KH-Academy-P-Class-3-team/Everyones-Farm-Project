@@ -9,7 +9,11 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/mypageO3Write.css" />
-
+<style type="text/css">
+ul {
+	margin-bottom: 0px;
+}
+</style>
 <!-- ckeditor js 파일 삽입 -->
 <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
 <script type="text/javascript"
