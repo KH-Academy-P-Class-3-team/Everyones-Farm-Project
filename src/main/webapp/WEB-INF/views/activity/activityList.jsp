@@ -3,7 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
-<%@include file="../include/header.jsp" %>
+<%@include file="../include/farmdiaryheader.jsp" %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/activity/activityList.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -120,7 +120,7 @@ $(document).ready(function() {
 	<c:forEach items="${data.activityList }" var="activity">
 	
 	<c:if test="${activity.isHelp eq 0 }">
-			<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}'">
+			<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}&isFarmPage=1'">
 			
 				<div class="thumb-image">
 				
@@ -166,7 +166,7 @@ $(document).ready(function() {
 
 	<c:if test="${activity.isHelp eq 1 }">
 	
-			<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}'">
+			<div class="row" onclick="javascript:location.href='<%=request.getContextPath()%>/activity/activityDetail.do?activityNo=${activity.activityNo}&isFarmPage=1'">
 			
 				<div class="thumb-image">
 				

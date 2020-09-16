@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="../include/header.jsp" %>
+<%@include file="../include/farmdiaryheader.jsp" %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/activity/activityForm.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

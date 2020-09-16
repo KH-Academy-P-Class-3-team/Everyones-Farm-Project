@@ -64,13 +64,22 @@ public class PersonalProduceController {
 	public ModelAndView personalproduceList(@RequestParam(required=false, defaultValue="1") int cPage, String farmerNo) {
 //		System.out.println("개인농산물 리스트");
 		
+		// 파라미터용 farmNo 조회  * 수정이가 수정 *
+		int farmNo = personalproduceService.selectFarmNoByFarmerNo(farmerNo);
+		
 		ModelAndView mav = new ModelAndView();
-
+		
 		int cntPerPage = 10;
 		
 		System.out.println("personalproduceContorller - farmerNo: " + farmerNo);
 		
 		Map<String,Object> res = personalproduceService.selectProductList(cPage, cntPerPage, farmerNo);
+		
+		
+		// 파라미터용 farmNo View에 넘겨주기  * 수정이가 수정 *
+		if( farmNo != 0) {
+			mav.addObject("farmNo", farmNo);
+		}
 		
 		
 		mav.addObject("paging", res.get("paging"));
@@ -80,7 +89,7 @@ public class PersonalProduceController {
 		System.out.println("컨트롤러값"+res);
 		System.out.println(mav);
 		//		System.out.println(res);
-
+		
 		return mav;
 	}
 	

@@ -63,6 +63,12 @@ public class PersonalProduceServiceImpl implements PersonalProduceService {
 	}
 
 
+	@Override
+	public int selectFarmNoByFarmerNo(String farmerNo) {
+		return personalproduceDao.selectFarmNoByFarmerNo(farmerNo);
+	}
+
+
 
 
 }
