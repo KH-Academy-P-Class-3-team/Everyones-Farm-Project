@@ -98,6 +98,9 @@ public class FarmDiaryController {
 		if( farmNo != 0) {
 			mav.addObject("farmNo", farmNo);
 		}
+		if( farmerNo != null ) {
+			mav.addObject("farmerNo", farmerNo);
+		}
 		
 		return mav;
 	}
