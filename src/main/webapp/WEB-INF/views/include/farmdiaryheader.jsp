@@ -69,25 +69,15 @@
 					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerNo}">농장 소개</a></li>
 					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerNo}">농장 일기</a>
 					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerNo}&farmNo=${farmNo}">QnA</a></li>
-<<<<<<< HEAD
-					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerNo}">개인 농산물</a></li>
-					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
-=======
 					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
 					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerNo}">개인 농산물</a></li>
->>>>>>> f89b4577bce81b4319aac6243fb8e3bec89e273f
 				</c:when>
 				<c:when test="${not empty farmerInfo }">
 					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">농장 소개</a></li>
 					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a></li>
 					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a></li>
-<<<<<<< HEAD
-					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a></li>
-					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
-=======
 					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
 					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a></li>
->>>>>>> f89b4577bce81b4319aac6243fb8e3bec89e273f
 				</c:when>
 			</c:choose>
 <!-- 				<ul class="menu__sub-food"> -->

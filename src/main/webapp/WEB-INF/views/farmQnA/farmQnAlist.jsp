@@ -131,7 +131,7 @@ li.admin__p-active > a {
        </tbody>
        </table>
 
-<button class="btn btn-success" type="button" onclick="location.href='farmQnAwrite.do'" style="float: right;">작성하기</button>
+<button class="btn btn-success" type="button" onclick="location.href='farmQnAwrite.do?farmerNo=${farmerNo}'" style="float: right;">작성하기</button>
 		
 <div class="pagination-wrap"><!--section pagination -->
 <ul class="admin__pagination">

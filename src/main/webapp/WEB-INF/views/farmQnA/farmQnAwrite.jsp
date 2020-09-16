@@ -37,7 +37,7 @@ $(document).ready(function() {
 })
 </script>
 
-<form id="form3" action="<%= request.getContextPath() %>/QnA/QnAwrite.do" method="post">
+<form id="form3" action="<%= request.getContextPath() %>/QnA/QnAwrite.do?farmerNo=${farmerNo}" method="post">
 
 <%@include file="../include/farmdiaryheader.jsp" %>
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
 <h3 style="text-align: center;">QnA 작성</h3>
 <hr>
 
-<input type="hidden" name="farmerNo" value="${farmerInfo.farmerNo }"/>
+<%-- <input type="hidden" name="farmerNo" value="${farmerInfo.farmerNo }"/> --%>
 
 <input class="form-control" style="width: 980px;" type="text" id="title" name="title" placeholder="제목을 입력해 주세요."/>   
 <hr>	

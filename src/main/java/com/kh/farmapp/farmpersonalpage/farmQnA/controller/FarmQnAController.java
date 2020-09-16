@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,20 +29,32 @@ public class FarmQnAController {
 	
 	//QnA 작성 화면
 	@RequestMapping(value = "/farmQnA/farmQnAwrite.do", method = RequestMethod.GET)
-	public void farmqnaWrite() {
+	public void farmqnaWrite(
+			String farmerNo
+			, Model model
+			) {
 //		System.out.println("wrtie 페이지 접속 완료");		
-		
+		System.out.println("FarmQnAController farmerNo: " + farmerNo);
+		if( farmerNo != null ) {
+			model.addAttribute("farmerNo", farmerNo);
+		}
 
 	}
 
 	//QnA 작성
 	@RequestMapping(value = "/QnA/QnAwrite.do", method = RequestMethod.POST)
-	public String qnaWrite(@RequestParam Map<String, Object> commandMap, String farmerNo) {
+	public String qnaWrite(@RequestParam Map<String, Object> commandMap, String farmerNo, Model model) {
 
+		System.out.println("FarmQnAController farmerNo: " + farmerNo);
+		
 		farmqnaService.writeFarmQnA(commandMap);
+		
+		if( farmerNo != null ) {
+			model.addAttribute("farmerNo", farmerNo);
+		}
 	
 
-		return "redirect:/farmQnA/farmQnAlist.do?farmerNo=" + farmerNo;
+		return "redirect:/farmQnA/farmQnAlist.do";
 	}
 
 	//QnA 리스트 화면
