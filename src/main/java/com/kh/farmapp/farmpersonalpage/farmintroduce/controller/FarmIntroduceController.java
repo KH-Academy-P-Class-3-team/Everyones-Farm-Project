@@ -21,7 +21,7 @@ public class FarmIntroduceController {
 			HttpSession session
 			, String farmerNo
 			) {
-
+		System.out.println("FarmIntroduceController farmerNo: " + farmerNo);
 
 		// 파라미터용 farmNo 조회  * 수정이가 수정 *
 		int farmNo = personalproduceService.selectFarmNoByFarmerNo(farmerNo);

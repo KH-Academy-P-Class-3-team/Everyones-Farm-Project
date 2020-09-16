@@ -196,7 +196,8 @@ public class ActivityController {
 	 * @return ModelAndView - Activity, view
 	 */
 	@RequestMapping("/activity/activityDetail.do")
-	public ModelAndView activityDetail(HttpSession session, int activityNo, int isFarmPage) {
+	public ModelAndView activityDetail(HttpSession session, int activityNo, 
+			@RequestParam(defaultValue = "0")int isFarmPage) {
 		
 		System.out.println("isFarmPage : " + isFarmPage);
 		
