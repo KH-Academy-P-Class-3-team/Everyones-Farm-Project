@@ -26,7 +26,7 @@ public class FarmQnAServiceImpl implements FarmQnAService {
 	}
 
 	@Override
-	public Map<String, Object> selectFarmQnAList(int currentPage, int cntPerPage, String farmerNo) {
+	public Map<String, Object> selectFarmQnAList(int currentPage, int cntPerPage, int farmNo) {
 		Paging p = new Paging(farmqnaDao.contentCnt(), currentPage, cntPerPage);
 		
 		Map<String, Object> pagingConfig = new HashMap<>();
@@ -34,7 +34,7 @@ public class FarmQnAServiceImpl implements FarmQnAService {
 //		pagingConfig.put("farmer", farmer);
 		pagingConfig.put("start", p.getStart());
 		pagingConfig.put("end", p.getEnd());
-		pagingConfig.put("farmerNo", farmerNo);
+		pagingConfig.put("farmNo", farmNo);
 		
 		List<FarmQnAQuestion> fdlist = farmqnaDao.selectFarmQnAList(pagingConfig);
 		System.out.println("FarmDiaryService - fdlist: " + fdlist.toString());
@@ -80,6 +80,16 @@ public class FarmQnAServiceImpl implements FarmQnAService {
 	@Override
 	public List<FarmQnaAnswer> selectAnswerList(int farmQnaQuestionNo) {
 		return farmqnaDao.selectAnserList(farmQnaQuestionNo);
+	}
+
+	@Override
+	public int insertFarmQna(Map<String, Object> commandMap) {
+		return farmqnaDao.insertFarmQnA(commandMap);
+	}
+
+	@Override
+	public int insertFarmerFarmQna(Map<String, Object> commandMap) {
+		return farmqnaDao.insertFarmerFarmQnA(commandMap);
 	}
 
 }

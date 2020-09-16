@@ -3,6 +3,8 @@ package com.kh.farmapp.farmpersonalpage.farmQnA.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.farmapp.farmpersonalpage.farmQnA.model.service.FarmQnAService;
 import com.kh.farmapp.farmpersonalpage.personalproduce.model.service.PersonalProduceService;
 
+import common.dto.Farm;
 import common.dto.FarmQnaAnswer;
+import common.dto.Farmer;
+import common.dto.UserTB;
 import common.dto.test.SearchCriteria;
 
 @Controller
@@ -43,18 +48,31 @@ public class FarmQnAController {
 
 	//QnA 작성
 	@RequestMapping(value = "/QnA/QnAwrite.do", method = RequestMethod.POST)
-	public String qnaWrite(@RequestParam Map<String, Object> commandMap, String farmerNo, Model model) {
+	public String qnaWrite(@RequestParam Map<String, Object> commandMap, String farmerNo, Model model
+			, HttpSession session) {
 
-		System.out.println("FarmQnAController farmerNo: " + farmerNo);
+		UserTB insertUserData = (UserTB) session.getAttribute("userInfo");
+		Farmer inserFarmerData = (Farmer) session.getAttribute("farmerInfo");
 		
-		farmqnaService.writeFarmQnA(commandMap);
+		int farmNo = farmqnaService.selectFarmNoByFarmerNo2(farmerNo);
 		
-		if( farmerNo != null ) {
-			model.addAttribute("farmerNo", farmerNo);
+		if(insertUserData != null) {
+			commandMap.put("farmNo", farmNo);
+			commandMap.put("userNo", insertUserData.getUserNo());
+			System.out.println("/QnA/QnAwrite.do - insertUserData: " + commandMap.get("insertUserData"));
+			int res = farmqnaService.insertFarmQna(commandMap);
 		}
+		if(inserFarmerData != null) {
+			commandMap.put("farmNo", farmNo);
+			commandMap.put("farmerNo", inserFarmerData.getFarmerNo());
+			System.out.println("/QnA/QnAwrite.do - insertUserData: " + commandMap.get("insertUserData"));
+			int res = farmqnaService.insertFarmerFarmQna(commandMap);
+			
+		}
+		
 	
 
-		return "redirect:/farmQnA/farmQnAlist.do";
+		return "redirect:/farmQnA/farmQnAlist.do?farmerNo="+farmerNo;
 	}
 
 	//QnA 리스트 화면
@@ -72,7 +90,7 @@ public class FarmQnAController {
 		
 //		System.out.println("FarmQnAContorller - farmerNo: " + farmerNo);
 		
-		Map<String,Object> res = farmqnaService.selectFarmQnAList(cPage, cntPerPage, farmerNo);
+		Map<String,Object> res = farmqnaService.selectFarmQnAList(cPage, cntPerPage, farmNo);
 		
 		mav.addObject("farmerNo", farmerNo);
 		mav.addObject("paging", res.get("paging"));

@@ -8,7 +8,7 @@ import common.dto.FarmQnaAnswer;
 public interface FarmQnAService {
 
 	//게시글 목록 조회
-	public Map<String, Object> selectFarmQnAList(int currentPage, int cntPerPage, String farmerNo);
+	public Map<String, Object> selectFarmQnAList(int currentPage, int cntPerPage, int farmNo);
 
 	//게시물 상세 조회
 	public Map<String, Object> selectQnADetail(int farmQnaQuestionNo);
@@ -30,5 +30,9 @@ public interface FarmQnAService {
 	
 	//farmQnaQuestionNo번호로 Qna 답변 리스트 조회
 	public List<FarmQnaAnswer> selectAnswerList(int farmQnaQuestionNo);
+
+	public int insertFarmQna(Map<String, Object> commandMap);
+
+	public int insertFarmerFarmQna(Map<String, Object> commandMap);
 
 }

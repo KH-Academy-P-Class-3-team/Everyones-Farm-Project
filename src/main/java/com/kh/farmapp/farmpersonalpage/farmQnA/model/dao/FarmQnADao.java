@@ -39,4 +39,6 @@ public interface FarmQnADao {
     
     //farmQnaQuestionNo번호로 QnA 답글 리스트 조회
     public List<FarmQnaAnswer> selectAnserList(int farmQnaQuestionNo);
+
+	public int insertFarmerFarmQnA(Map<String, Object> commandMap);
 }

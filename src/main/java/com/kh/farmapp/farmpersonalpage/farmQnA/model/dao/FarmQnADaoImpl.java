@@ -24,6 +24,12 @@ public class FarmQnADaoImpl implements FarmQnADao {
 	public int insertFarmQnA(Map<String, Object> commandMap) {
 		return sqlSession.insert("QnA.insertFarmQnA", commandMap);
 	}
+	
+	@Override
+	public int insertFarmerFarmQnA(Map<String, Object> commandMap) {
+		return sqlSession.insert("QnA.insertFarmerFarmQnA", commandMap);
+	}
+	
 
 	@Override
 	public List<FarmQnAQuestion> selectFarmQnAList(Map<String, Object> map) {
@@ -65,6 +71,8 @@ public class FarmQnADaoImpl implements FarmQnADao {
 	public List<FarmQnaAnswer> selectAnserList(int farmQnaQuestionNo) {
 		return sqlSession.selectList("QnA.selectAnswerList", farmQnaQuestionNo);
 	}
+
+
 
 
 

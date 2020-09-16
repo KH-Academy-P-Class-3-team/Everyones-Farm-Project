@@ -8,9 +8,17 @@
 
 	<insert id="insertFarmQnA">
 		insert into farm_qna_question
-		(farm_qna_question_no,
-		farm_no, farmer_no, user_no, title, content, reg_date, hits)
-		values(farm_qna_question_seq.nextval, 1, #{farmerNo}, #{userNo},
+		(farm_qna_question_no,farm_no, farmer_no, user_no, title, content, reg_date, hits)
+		values
+		(farm_qna_question_seq.nextval, #{farmNo}, null, #{userNo} ,
+		#{title}, #{content}, sysdate, 1)
+	</insert>
+	
+	<insert id="insertFarmerFarmQnA">
+		insert into farm_qna_question
+		(farm_qna_question_no, farm_no, farmer_no, user_no, title, content, reg_date, hits)
+		values
+		(farm_qna_question_seq.nextval, #{farmNo}, #{farmerNo}, null,
 		#{title}, #{content}, sysdate, 1)
 	</insert>
 
@@ -38,7 +46,7 @@
 		)n1
 		)where rnum
 		between #{start} and #{end}
-		and farmer_no = #{farmerNo} or user_no = #{userNo}
+		and farm_no = #{farmNo}
 	</select>
 
 	<select id="selectContentCnt" resultType="int">
