@@ -238,9 +238,9 @@ public class MypageUserController {
 		ModelAndView mav = new ModelAndView();
 		UserTB ckUser = (UserTB) session.getAttribute("userInfo");
 		Farmer ckFarmer = (Farmer) session.getAttribute("farmerInfo");
-		ckUser = mypageService.selectUser(ckUser);
-		ckFarmer = mypageService.selectFarmer(ckFarmer);
+		
 		if(ckUser != null) {
+			ckUser = mypageService.selectUser(ckUser);
 
 			if(passwordEncoder.matches(userPW, ckUser.getUserPw())) {
 
@@ -263,7 +263,7 @@ public class MypageUserController {
 			}
 		}
 		if(ckFarmer != null) {
-			
+			ckFarmer = mypageService.selectFarmer(ckFarmer);
 			if(passwordEncoder.matches(userPW, ckFarmer.getFarmerPw())) {
 				
 				int res = mypageService.farmerLeave(ckFarmer);
