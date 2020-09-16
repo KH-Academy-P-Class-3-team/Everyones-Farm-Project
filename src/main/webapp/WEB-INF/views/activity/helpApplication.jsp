@@ -36,10 +36,10 @@ $(document).ready(function() {
 			$("input[name='people']").focus();
 			return false
 			
-		}  else if($("input[name='activityDate']").val() == '') {
+		}  else if($("input[name='date']").val() == '') {
 			
 			alert("신청 날짜를 선택하세요.")
-			$("input[name='activityDate']").focus();
+			$("input[name='date']").focus();
 			return false
 			
 		} 	
@@ -96,7 +96,7 @@ $(document).ready(function() {
 
 		<div class="form-group">
 			<div class="control-label">신청 날짜</div>
-			<input type="date" name="activityDate" id="activityDate">
+			<input type="date" name="date" id="activityDate">
 		</div>
 		
 		
