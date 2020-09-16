@@ -11,89 +11,10 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/modify.css" />
 <style type="text/css">
-.input-group {
-	margin-top: 30px;
-}
-
-.col-lg-1 {
-	width: 50%;
-	margin-left: 150px;
-}
-
-span {
-	padding: 0;
-}
-
-.input-group {
-	width: 400px;
-}
-
-label {
-	padding-left: 0;
-	text-align: left;
-}
-
-.btn-warning {
-	width: 90px;
-	height: 50px;
-	margin-top: 30px;
-	margin-right: 300px;
-}
-
-.media-object {
-	margin-left: 70px;
-}
-
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-#sample6_postcode {
-	height: 52px;
-}
-
-#user_profile {
-	display: none;
-}
-
-#modify-fileuplod {
-	text-align: left;
-}
-
-#second_addr {
-	height: 80px;
-}
-
-.form-inlines {
-	border: none;
-}
-
-.input-group .form-control {
-	z-index: 0;
-}
-
-.img-circle {
-	margin-left: 100px;
-	margin-bottom: 20px;
-	width: 200px;
-	height: 200px;
+ul {
+	margin-bottom: 0px;
 }
 </style>
 
@@ -178,12 +99,14 @@ a:hover {
 <!-- Page Content -->
 <div class="container">
 	<div class="row">
+	
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">회원 정보 수정</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원</a>
+					<a href="<%=request.getContextPath()%>/mypage/user/modify"
+						style="font-weight: bold;">회원</a>
 				</div>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/modify">회원정보
@@ -193,10 +116,12 @@ a:hover {
 					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
 						1 문의</a>
 				</div>
+				<c:if test="${farmerInfo eq null }">
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
 						신청 현황</a>
 				</div>
+				</c:if>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
 						style="color: #ccc;">회원 탈퇴</a>
@@ -215,8 +140,7 @@ a:hover {
 						목록</a>
 				</div>
 			</div>
-
-			<c:if test="${farmerInfo.name eq null} ">
+			<c:if test="${userInfo.userNo eq null }">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
@@ -232,18 +156,17 @@ a:hover {
 						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 					</div>
 					<div class="panel-body">
-						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
-							신청내역</a>
+						<a href="/farmapp/mypage/activitylist">체험 신청내역</a>
 					</div>
 
 				</div>
 			</c:if>
 		</div>
+		<c:if test="${userInfo.userNo ne null }">
 		<div class="col-lg-1">
-
 			<form method="post"
-				action="<%=request.getContextPath()%>/modify/userInfo"
-				onsubmit="return validate();" enctype="multipart/form-data">
+				action="<%=request.getContextPath()%>/modify/profile"
+				enctype="multipart/form-data">
 				<div class="media">
 					<div class="preview" id="preview">
 						<c:if test="${profile eq null }">
@@ -261,6 +184,11 @@ a:hover {
 						class="files" for="files">사진 선택</label> <span class="file-text">이미지
 						크기는 980 x 600 픽셀을 권장합니다</span>
 				</div>
+				<button type="submit" class="btn btn-warning center-block">사진변경</button>
+			</form>
+			<form method="post"
+				action="<%=request.getContextPath()%>/modify/userInfo"
+				onsubmit="return validate();" enctype="multipart/form-data">
 				<div class="ModifyUserInfo">
 					<!-- 			아이디 -->
 					<div class="input-group">
@@ -327,8 +255,8 @@ a:hover {
 							<span class="input-group-addon glyphicon glyphicon-earphone"
 								id="sizing-addon1"></span> <input type="text"
 								class="form-control" id="phone" placeholder="전화번호" name="phone"
-								aria-describedby="sizing-addon1" value="${userData.phone}"> <span
-								class="input-group-addon" id="sizing-addon1"><input
+								aria-describedby="sizing-addon1" value="${userData.phone}">
+							<span class="input-group-addon" id="sizing-addon1"><input
 								type="button" onclick="xmlPhoneCheck()" value="번호 중복 검사"
 								class="half-size back-pink float-right focus form-inlines"></span>
 						</div>
@@ -377,6 +305,151 @@ a:hover {
 				</div>
 			</form>
 		</div>
+		</c:if>
+		<c:if test="${userInfo.userNo eq null }">
+		<div class="col-lg-1">
+			<form method="post"
+				action="<%=request.getContextPath()%>/modify/farmerProfile"
+				enctype="multipart/form-data">
+				<div class="media">
+					<div class="preview" id="preview">
+						<c:if test="${profile eq null }">
+							<img
+								src="<%=request.getContextPath()%>/resources/image/mypage/no_one.jpg"
+								class="img-circle" id="oldone">
+						</c:if>
+						<c:if test="${profile.farmerNo eq farmerData.farmerNo }">
+							<img
+								src="<%=request.getContextPath() %>/resources/image/mypage/${profile.fileRename}"
+								class="img-circle" id="oldone" name="upload">
+						</c:if>
+					</div>
+					<input type="file" id="upload" name="upload" multiple /> <label
+						class="files" for="files">사진 선택</label> <span class="file-text">이미지
+						크기는 980 x 600 픽셀을 권장합니다</span>
+				</div>
+				<button type="submit" class="btn btn-warning center-block">사진변경</button>
+			</form>
+			<form method="post"
+				action="<%=request.getContextPath()%>/modify/farmerInfo"
+				onsubmit="return validate();" enctype="multipart/form-data">
+				<div class="ModifyUserInfo">
+					<!-- 			아이디 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">아이디</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-user"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" placeholder="아이디" name="farmerId"
+								aria-describedby="sizing-addon1" value="${farmerData.farmerId}"
+								readonly>
+						</div>
+					</div>
+					<!-- 			비밀번호 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">비밀번호</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-lock"
+								id="sizing-addon1"></span> <input type="password"
+								class="form-control" placeholder="비밀번호" name="farmerPw"
+								id="userPw" aria-describedby="sizing-addon1">
+						</div>
+					</div>
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">비밀번호
+							확인</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-lock"
+								id="sizing-addon1"></span> <input type="password"
+								class="form-control" placeholder="비밀번호" name="pwcheck"
+								id="pwcheck" aria-describedby="sizing-addon1">
+						</div>
+					</div>
+					<!-- 			이름 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">이름</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-user"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" placeholder="이름" name="name"
+								aria-describedby="sizing-addon1" value="${farmerData.name}"
+								readonly>
+						</div>
+					</div>
+
+					<!-- 			이메일 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">E-Mail</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-envelope"
+								id="sizing-addon1"></span> <input type="email"
+								class="form-control" placeholder="E-Mail" name="email"
+								id="email" aria-describedby="sizing-addon1"
+								value="${farmerData.email}"> <span
+								class="input-group-addon" id="sizing-addon1"><input
+								type="button" onclick="xmlEmailCheckFarmer()" value="이메일 확인"
+								class="half-size back-pink float-right focus form-inlines"></span>
+						</div>
+						<div id="email-check-msg"></div>
+					</div>
+					<!-- 			전화번호 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">전화번호</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-earphone"
+								id="sizing-addon1"></span> <input type="text"
+								class="form-control" id="phone" placeholder="전화번호" name="phone"
+								aria-describedby="sizing-addon1" value="${farmerData.phone}">
+							<span class="input-group-addon" id="sizing-addon1"><input
+								type="button" onclick="xmlPhoneCheckFarmer()" value="번호 중복 검사"
+								class="half-size back-pink float-right focus form-inlines"></span>
+						</div>
+						<div id="phone-check-msg"></div>
+					</div>
+
+
+					<!-- 주소 -->
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">우편번호</label>
+						<div class=" input-group-lg col-xs-2 input-group">
+							<span class="input-group-addon glyphicon glyphicon-home"
+								id="sizing-addon1"></span> <input type="text" name="zonecode"
+								id="sample6_postcode" class="form-control"
+								value="${farmerData.zonecode }"> <span
+								class="input-group-addon" id="sizing-addon1"><input
+								type="button" onclick="sample6_execDaumPostcode()" value="우편번호"
+								class="half-size back-pink float-right focus form-inlines"></span>
+						</div>
+					</div>
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">주소</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-home"
+								id="sizing-addon1"></span> <input type="text" id="first_addr"
+								name="firstAddress"
+								class="half-size float-left focus form-control"
+								value="${farmerData.firstAddress}">
+						</div>
+					</div>
+					<div class="input-group">
+						<label for="inputName" class="col-lg-3 control-label">상세주소</label>
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon glyphicon glyphicon-home"
+								id="sizing-addon1"></span> <input type="text" id="secondAddress"
+								name="secondAddress"
+								class="half-size float-left focus form-control"
+								value="${farmerData.secondAddress}">
+						</div>
+					</div>
+
+
+
+					<button type="submit" class="btn btn-warning center-block"
+						id="duple" onclick="return validate();">등록</button>
+				</div>
+			</form>
+		</div>
+		</c:if>
 	</div>
 </div>
 
@@ -574,11 +647,122 @@ a:hover {
 							if (data == '') {
 								ajaxFlag = true;
 								document.querySelector("#phone-check-msg").textContent = '사용가능한 전화번호입니다';
-								document.querySelector("#phone-check-msg").style.color='black';
+								document.querySelector("#phone-check-msg").style.color = 'black';
 							} else {
 								ajaxFlag = false;
 								document.querySelector("#phone-check-msg").textContent = '이미 존재하는 전화번호입니다';
-								document.querySelector("#phone-check-msg").style.color='red';
+								document.querySelector("#phone-check-msg").style.color = 'red';
+							}
+						})
+	}
+	function xmlEmailCheckFarmer(){
+		//사용자가 입력한 id값을 가져온다
+		var email = document.querySelector('#email').value;
+		var emailc = document.getElementById('email');
+		var regExpEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+        function chk(re, e, msg) {
+            if(re.test(e.value)) {                 
+                return true;          
+          }else{
+                alert(msg);
+              e.value = "";
+              e.focus();
+              //기본 이벤트 취소
+              return false;
+            }
+        }
+		
+		if(email ==""){
+			alert("이메일을 입력해주세요!")
+			return false;
+		}
+		
+        //id 검사
+        if(!chk(regExpEmail, emailc, '이메일 형식이 아닙니다')){
+        	emailc.focus();
+        	return false;
+        }
+		
+		//XMLHttpRequest 객체 생성
+		var xhr = new XMLHttpRequest();
+		//http request message의 시작줄 작성
+		xhr.open('POST', '<%=request.getContextPath()%>/modify/farmerEmailcheck');
+		//http request message의 header 작성
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		//body에 데이터 작성하고 전송
+		xhr.send('email=' +email);
+		//ajax통신이 끝나고 (load) 실행할 콜백함수 등록
+		xhr.addEventListener('load', function(){
+			//response body 있는 데이터를 받아옴
+			var data = xhr.response;
+			console.dir(data);
+			if(data == ''){  
+				ajaxFlag = true;
+				document.querySelector("#email-check-msg").textContent = '사용가능한 이메일입니다';
+				document.querySelector("#email-check-msg").style.color='black';
+			} else{
+				ajaxFlag = false;
+				document.querySelector("#email-check-msg").textContent = '이미 존재하는 이메일입니다';
+				document.querySelector("#email-check-msg").style.color='red';
+			}
+		})
+	}
+	
+	function xmlPhoneCheckFarmer(){
+		//사용자가 입력한 id값을 가져온다
+		var phone = document.querySelector('#phone').value;
+		var phonec = document.getElementById('phone');
+		var regExpPhone =  /^[0-9]*$/;
+
+        function chk(re, e, msg) {
+            if(re.test(e.value)) {                 
+                return true;          
+          }else{
+                alert(msg);
+              e.value = "";
+              e.focus();
+              //기본 이벤트 취소
+              return false;
+            }
+        }
+		
+		if(phone ==""){
+			alert("전화번호를 입력해주세요!")
+			return false;
+		}
+		
+        //id 검사
+        if(!chk(regExpPhone, phonec, '전화번호 형식이 아닙니다')){
+        	phonec.focus();
+        	return false;
+        }
+		
+		//XMLHttpRequest 객체 생성
+		var xhr = new XMLHttpRequest();
+		//http request message의 시작줄 작성
+		xhr.open('POST', '<%=request.getContextPath()%>/modify/farmerPhonecheck');
+		//http request message의 header 작성
+		xhr.setRequestHeader('Content-Type',
+				'application/x-www-form-urlencoded');
+		//body에 데이터 작성하고 전송
+		xhr.send('phone=' + phone);
+		//ajax통신이 끝나고 (load) 실행할 콜백함수 등록
+		xhr
+				.addEventListener(
+						'load',
+						function() {
+							//response body 있는 데이터를 받아옴
+							var data = xhr.response;
+							console.dir(data);
+							if (data == '') {
+								ajaxFlag = true;
+								document.querySelector("#phone-check-msg").textContent = '사용가능한 전화번호입니다';
+								document.querySelector("#phone-check-msg").style.color = 'black';
+							} else {
+								ajaxFlag = false;
+								document.querySelector("#phone-check-msg").textContent = '이미 존재하는 전화번호입니다';
+								document.querySelector("#phone-check-msg").style.color = 'red';
 							}
 						})
 	}

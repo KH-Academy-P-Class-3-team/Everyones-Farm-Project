@@ -258,6 +258,8 @@ public class ActivityController {
 	@RequestMapping(value = "/activity/activityApplication.do", method = RequestMethod.GET)
 	public ModelAndView activityApplicationForm(HttpSession session, int activityNo, int isHelp) {
 		
+		System.out.println("/activity/activityApplication.do - [GET] 요청");
+		
 		UserTB user = (UserTB)session.getAttribute("userInfo");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -293,6 +295,10 @@ public class ActivityController {
 	 */
 	@RequestMapping(value = "/activity/activityApplication.do", method = RequestMethod.POST)
 	public ModelAndView activityApplicationSubmit(HttpSession session, Application application, String date) {
+		
+		System.out.println("/activity/activityApplication.do [post] 요청 ");
+		System.out.println("/activity/activityApplication.do date: " + date);
+		System.out.println("/activity/activityApplication.do application: " + application.toString());
 		
 		UserTB user = (UserTB)session.getAttribute("userInfo");
 		

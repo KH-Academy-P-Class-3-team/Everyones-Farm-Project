@@ -9,143 +9,10 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/orderDetail.css" />
 <style type="text/css">
-.input-group {
-	margin-top: 30px;
-}
-
-.col-md-8 {
-	width: 100%;
-}
-
-span {
-	padding: 0;
-}
-
-.input-group {
-	width: 400px;
-}
-
-label {
-	padding-left: 0;
-	text-align: left;
-}
-
-.media-object {
-	margin-left: 70px;
-}
-
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.info {
-	text-align: left;
-}
-
-.named {
-	color: lime;
-	font-weight: bold;
-}
-
-.name {
-	font-size: 18px;
-}
-
-.tableInfo {
-	border: 1px solid #ccc;
-	margin: 30px;
-	width: 100%;
-	text-align: center;
-}
-
-.productInfo{
-	border: 1px solid #ccc;
-	margin: 30px;
-	width: 100%;
-	text-align: center;
-	height: 120px;
-}
-
-.productInfo td {
-	border-right: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	padding: 5px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.tableInfo td {
-	border-right: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	padding: 5px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.short {
-	width: 200px;
-	background-color: #ccc;
-}
-
-.thick {
-	width: 200px;
-	background-color: #ccc;
-}
-
-#tekbeCompnayList {
-	width: 480px;
-	height: 30px;
-	padding-left: 10px;
-	font-size: 18px;
-	border-radius: 3px;
-}
-
-#invoiceNumberText {
-	width: 480px;
-	height: 30px;
-	padding-left: 10px;
-	font-size: 18px;
-	border-radius: 3px;
-	margin-right: 20px;
-}
-
-#tekbeCompnayName, #invoiceNumber {
-	color: black;
-	font-weight: bold;
-	margin-right: 20px;
-	font-size: 18px;
-}
-
-td, th {
-	text-align: left;
-	padding: 8px;
-	border-bottom: 1px solid #ccc;
-}
-
-.bottom {
-	width: 90px;
-	height: 50px;
-	margin-right: 5px;
-}
-.nearcontent{
-	margin-top: 30px;
+ul {
+	margin-bottom: 0px;
 }
 </style>
 
@@ -286,7 +153,7 @@ td, th {
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-			<h3 class="my-4 text-left">영농 일지</h3>
+			<h3 class="my-4 text-left">구매 상세 조회</h3>
 			<hr>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -300,10 +167,12 @@ td, th {
 					<a href="<%=request.getContextPath()%>/mypage/user/mypageO3List">1대
 						1 문의</a>
 				</div>
+				<c:if test="${farmerInfo eq null }">
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/myActive">활동
 						신청 현황</a>
 				</div>
+				</c:if>
 				<div class="panel-body">
 					<a href="<%=request.getContextPath()%>/mypage/user/deleteId"
 						style="color: #ccc;">회원 탈퇴</a>
@@ -318,12 +187,12 @@ td, th {
 					<a href="<%=request.getContextPath()%>/mypage/user/basket">장바구니</a>
 				</div>
 				<div class="panel-body">
-					<a href="<%=request.getContextPath()%>/mypage/user/orderList">구매
+					<a href="<%=request.getContextPath()%>/mypage/user/orderList" style="font-weight: bold;">구매
 						목록</a>
 				</div>
 			</div>
 
-			<c:if test="${farmerInfo.name eq null} ">
+			<c:if test="${farmerInfo ne null }">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<a href="<%=request.getContextPath()%>/mypage/user/basket">농업인
@@ -339,7 +208,7 @@ td, th {
 						<a href="/farmapp/mypage/dailyLoglist">영농 일지</a>
 					</div>
 					<div class="panel-body">
-						<a href="/farmapp/mypage/activitylist" style="font-weight: bold;">체험
+						<a href="/farmapp/mypage/activitylist">체험
 							신청내역</a>
 					</div>
 
@@ -498,7 +367,7 @@ td, th {
 				onclick="javascript:location.href='deleteOrder?orderNo=${orderDetail.ORDER_NO}'">삭제</button>
 			</c:if>
 			<button class="btn btn-success pull-right bottom" type="button"
-				onclick="javascript:location.href='mypageO3List'">뒤로가기</button>
+				onclick="javascript:location.href='orderList'">뒤로가기</button>
 		</div>
 	</div>
 </div>

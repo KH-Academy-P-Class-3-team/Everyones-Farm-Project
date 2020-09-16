@@ -24,37 +24,14 @@
 	
 	<!-- 농장체험 리스트 1부터 10까지 페이징 -->
 	<select id ="listPage" resultMap="applicationAndactivityandfarm">
-		select p.*
-		from (
-		SELECT ROWNUM RNUM, r.* 
-		FROM(
-        select
-            f.farmer_no
-            , farm.farm_no
-            , fa.activity_no
-            , fa.title
-            , a.application_no
-            , a.user_no
-            , a.applicant_name
-            , a.activity_date
-            , a.is_approval
-            , a.people
-            
-        from
-            farmer f
-            , farm
-            , farm_activity fa
-            , application a
-        where
-            f.farmer_no = farm.farmer_no
-            and farm.farm_no = fa.farm_no
-            and fa.activity_no = a.activity_no
-            and f.farmer_no = #{farmerNo} 
-<!--             and f.farmer_no = #{farmerNo}  -->
-            and is_help=0 
-        )r
-        )p
-        where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO
+		select p.* from(
+        select rownum rnum, r.* FROM(
+        select J.farmer_no, J.farm_no, apl.activity_no, apl.is_approval,apl.people,
+        J.title, apl.application_no, apl.user_no, apl.applicant_name, apl.activity_Date from application apl, 
+        (select A.*, f.farmer_no from farm_activity A, (select farmer_no, farm_no from farm) f where A.farm_no = f.farm_no) J
+        where apl.activity_no =J.activity_no AND J.is_help = 0
+        AND J.farm_no = #{farmerNo} order by application_no desc) r) p
+       where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO desc
 	</select>   
 	
 	<!-- 농장체험 내역 리스트 총 페이지 수 -->
@@ -89,35 +66,14 @@
 	
 									<!-- 일손체험 -->
 	<select id ="listPage2" resultMap="applicationAndactivityandfarm">
-	 select p.*
-		from (
-		SELECT ROWNUM RNUM, r.* 
-		FROM(
-        select
-            f.farmer_no
-            , farm.farm_no
-            , fa.activity_no
-            , fa.title
-            , a.application_no
-            , a.user_no
-            , a.applicant_name
-            , a.activity_date
-            , a.is_approval
-            , a.people
-            
-        from
-            farmer f
-            , farm
-            , farm_activity fa
-            , application a
-        where
-            f.farmer_no = farm.farmer_no
-            and farm.farm_no = fa.farm_no
-            and fa.activity_no = a.activity_no
-            and f.farmer_no = #{farmerNo} and f.farmer_no = #{farmerNo} and is_help=1 
-        )r
-        )p
-        where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO
+		select p.* from(
+        select rownum rnum, r.* FROM(
+        select J.farmer_no, J.farm_no, apl.activity_no, apl.is_approval,apl.people,
+        J.title, apl.application_no, apl.user_no, apl.applicant_name, apl.activity_Date from application apl, 
+        (select A.*, f.farmer_no from farm_activity A, (select farmer_no, farm_no from farm) f where A.farm_no = f.farm_no) J
+        where apl.activity_no =J.activity_no AND J.is_help = 1
+        AND J.farm_no = #{farmerNo} order by application_no desc) r) p
+       where RNUM BETWEEN #{cri.rowStart} and #{cri.rowEnd} order by APPLICATION_NO desc
 		</select>
 	
 	<!-- 농장체험 내역 리스트 총 페이지 수 -->

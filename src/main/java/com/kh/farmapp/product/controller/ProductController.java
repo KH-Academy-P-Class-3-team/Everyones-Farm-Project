@@ -54,6 +54,9 @@ public class ProductController {
 		int cntPerPage = 9;
 		
 		Map<String, Object> commandMap = productService.selectSeasonList(cPage, cntPerPage, 0);
+		
+		
+		
 		mav.addObject("paging", commandMap.get("paging"));
 		mav.addObject("plist", commandMap.get("plist"));
 		mav.addObject("fileList", commandMap.get("fileList"));

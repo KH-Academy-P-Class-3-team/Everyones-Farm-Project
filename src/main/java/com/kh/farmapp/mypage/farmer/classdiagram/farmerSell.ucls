@@ -1,110 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.kh.farmapp.mypage.user.controller.MypageAppliController" 
+  <interface id="1" language="java" name="com.kh.farmapp.mypage.farmer.model.service.FarmerMypageService" 
     project="Everyones-Farm-Project" 
-    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/user/controller/MypageAppliController.java" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/farmer/model/service/FarmerMypageService.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="155" y="165"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="2" language="java" name="com.kh.farmapp.mypage.user.model.service.MyPageService" 
-    project="Everyones-Farm-Project" 
-    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/user/model/service/MyPageService.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="808" width="326" x="311" y="-354"/>    
+    <position height="-1" width="-1" x="718" y="208"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="3" language="java" name="com.kh.farmapp.mypage.user.model.service.MypageServiceImpl" 
+  <class id="2" language="java" name="com.kh.farmapp.mypage.farmer.model.service.FarmerMypageServiceImpl" 
     project="Everyones-Farm-Project" 
-    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/user/model/service/MypageServiceImpl.java" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/farmer/model/service/FarmerMypageServiceImpl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="471" y="962"/>    
+    <position height="-1" width="-1" x="719" y="627"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="4" language="java" name="com.kh.farmapp.mypage.user.model.dao.MyPageDao" 
+  <interface id="3" language="java" name="com.kh.farmapp.mypage.farmer.model.dao.FarmerMypageDao" 
     project="Everyones-Farm-Project" 
-    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/user/model/dao/MyPageDao.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1096" y="105"/>    
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/farmer/model/dao/FarmerMypageDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1182" y="193"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="com.kh.farmapp.mypage.user.model.dao.MyPageDaoImpl" 
+  <class id="4" language="java" name="com.kh.farmapp.mypage.farmer.controller.FarmerMypageController" 
     project="Everyones-Farm-Project" 
-    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/user/model/dao/MyPageDaoImpl.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1094" y="1208"/>    
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/farmer/controller/FarmerMypageController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="213" y="356"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="common.dto.Farmer" project="Everyones-Farm-Project" 
-    file="/Everyones-Farm-Project/src/main/java/common/dto/Farmer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1828" y="302"/>    
+  <class id="5" language="java" name="com.kh.farmapp.mypage.farmer.model.dao.FarmerMypageDaoImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/mypage/farmer/model/dao/FarmerMypageDaoImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1185" y="643"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="common.dto.UserTB" project="Everyones-Farm-Project" 
+  <class id="6" language="java" name="common.dto.UserTB" project="Everyones-Farm-Project" 
     file="/Everyones-Farm-Project/src/main/java/common/dto/UserTB.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1858" y="1128"/>    
+    <position height="-1" width="-1" x="1593" y="469"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="8">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="9" name="mypageDao"/>      
-      <multiplicity id="10" minimum="0" maximum="1"/>    
+  <class id="7" language="java" name="common.dto.TBOrder" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/TBOrder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1837" y="469"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="common.dto.Farmer" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/Farmer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2081" y="496"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <association id="10">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="11" name="farmerMypageService"/>      
+      <multiplicity id="12" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="11">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="mypageService"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <dependency id="13">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
   <realization id="14">    
     <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="TARGET" refId="3"/>  
   </realization>  
-  <dependency id="15">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
+  <association id="15">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="16" name="farmerMypageDao"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="18">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
   </dependency>  
-  <dependency id="16">    
+  <dependency id="19">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <realization id="17">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
+  <realization id="20">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

@@ -56,6 +56,10 @@
 	<logger name="com.kh.farmapp.main.controller">
 		<level value="debug" />
 	</logger>
+	<!-- setting MypageUserController debug level log -->
+	<logger name="com.kh.farmapp.mypage.user.controller">
+		<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

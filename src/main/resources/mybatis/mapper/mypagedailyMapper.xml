@@ -35,8 +35,7 @@
 			 	,#{maxTemp}
 			 	,#{minTemp}
 			 	,to_char(sysdate, 'yyyy-mm-dd')
-			 	<!-- 테스트를 위해 임의로 작성 -->
-			 	,63
+			 	,#{farmerNo}
 				)
 	</insert>
 
@@ -115,22 +114,8 @@
 	</select>
 	
 	
-	<update id="update" parameterType="common.dto.FarmingDailylog">
-	update FARMING_DAILYLOG set 
-			 	content = #{content}
-			 	, WORKING_AMOUNT = #{workingAmount}
-			 	,WORKING_TIME = #{workingTime}
-			 	,WORKING_MEMBER = #{workingMember}
-			 	,WORKING_DATE = #{workingDate}
-			 	,WEATHER = #{weather}
-			 	,RAIN = #{rain}
-			 	,MAX_TEMP = #{maxTemp}
-			 	,MIN_TEMP = #{minTemp}
-			 	,WRITE_DATE = to_char(sysdate, 'yyyy-mm-dd')
-			 	where dailylog_no=#{dailylogNo}
-	</update>
 	<delete id="delete" parameterType ="int">
-	  delete from FARMING_DAILYLOG where dailylog_no = #{dailylogNo}
+	  delete from FARMING_DAILYLOG where dailylog_no = #{dailyLogNo}
 	
 	</delete>
 </mapper>

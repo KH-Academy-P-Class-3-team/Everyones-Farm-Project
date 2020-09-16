@@ -1,0 +1,138 @@
+@charset "UTF-8";
+.input-group {
+	margin-top: 30px;
+}
+
+.col-md-8 {
+	width: 100%;
+}
+
+span {
+	padding: 0;
+}
+
+.input-group {
+	width: 400px;
+}
+
+label {
+	padding-left: 0;
+	text-align: left;
+}
+
+.media-object {
+	margin-left: 70px;
+}
+
+.panel-default {
+	border: none;
+}
+
+.panel-default>.panel-heading {
+	background-color: #D1E9CA;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.info {
+	text-align: left;
+}
+
+.named {
+	color: lime;
+	font-weight: bold;
+}
+
+.name {
+	font-size: 18px;
+}
+
+.tableInfo {
+	border: 1px solid #ccc;
+	margin: 30px;
+	width: 100%;
+	text-align: center;
+}
+
+.productInfo{
+	border: 1px solid #ccc;
+	margin: 30px;
+	width: 100%;
+	text-align: center;
+	height: 120px;
+}
+
+.productInfo td {
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.tableInfo td {
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.short {
+	width: 200px;
+	background-color: #ccc;
+}
+
+.thick {
+	width: 200px;
+	background-color: #ccc;
+}
+
+#tekbeCompnayList {
+	width: 480px;
+	height: 30px;
+	padding-left: 10px;
+	font-size: 18px;
+	border-radius: 3px;
+}
+
+#invoiceNumberText {
+	width: 480px;
+	height: 30px;
+	padding-left: 10px;
+	font-size: 18px;
+	border-radius: 3px;
+	margin-right: 20px;
+}
+
+#tekbeCompnayName, #invoiceNumber {
+	color: black;
+	font-weight: bold;
+	margin-right: 20px;
+	font-size: 18px;
+}
+
+td, th {
+	text-align: left;
+	padding: 8px;
+	border-bottom: 1px solid #ccc;
+}
+
+.bottom {
+	width: 90px;
+	height: 50px;
+	margin-right: 5px;
+}
+.nearcontent{
+	margin-top: 30px;
+}

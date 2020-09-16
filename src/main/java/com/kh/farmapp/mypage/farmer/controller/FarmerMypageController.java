@@ -85,9 +85,18 @@ public class FarmerMypageController {
 		return "mypage/dailyLogReadView";
 	}
 	
+
+	@RequestMapping(value ="/mypage/delete", method= RequestMethod.POST)
+	public String delete(FarmingDailylog farmingDailylog) {
+		farmerMypageService.delete(farmingDailylog.getDailylogNo());
+		System.out.println("삭제요청");
+		return "redirect:/mypage/dailyLoglist";
+	}
 	
-	@RequestMapping(value = "/mypage/activityone", method = RequestMethod.GET)
-	public String activityone(Model model, Criteria cri , HttpSession session) {
+	
+	@RequestMapping(value = "/mypage/activityFarm", method = RequestMethod.GET)
+	public String activityFarm(Model model, Criteria cri , HttpSession session) {
+    
 		System.out.println("농장체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -106,10 +115,11 @@ public class FarmerMypageController {
 		model.addAttribute("list", farmActive);
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "mypage/activityone";
+		return "mypage/activityFarm";
 	}
-	@RequestMapping(value = "/mypage/activitytwo", method = RequestMethod.GET)
-	public String activitytwo(Model model, Criteria cri , HttpSession session) {
+	@RequestMapping(value = "/mypage/activityWork", method = RequestMethod.GET)
+	public String activityWork(Model model, Criteria cri , HttpSession session) {
+	
 		System.out.println("일손체험 접속완료");
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		//일손체험
@@ -125,12 +135,16 @@ public class FarmerMypageController {
 		//일손체험
 		model.addAttribute("list3",workActive);
 		model.addAttribute("pageMaker3",pageMaker3);
-		return "mypage/activitytwo";
+
+		return "mypage/activityWork";
+
+		
 	}
 	
 	// 농장 체험 리스트 목록 조회
 	@RequestMapping(value = "/mypage/activitylist", method = RequestMethod.GET)
 	public ModelAndView activitylist(Model model, Criteria cri,HttpSession session,HttpServletRequest request) {
+
 
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -146,8 +160,6 @@ public class FarmerMypageController {
 			mav.setViewName("/mypage/activitylist");
 		}
 		return mav;
-
-		
 	}
 	
 
@@ -171,26 +183,27 @@ public class FarmerMypageController {
 	// 판매 페이지 리스트
 	@RequestMapping(value = "/mypage/selllist", method = RequestMethod.GET)
 	public String selllist(Model model, Criteria cri, HttpSession session, HttpServletRequest request) {
-	Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-	System.out.println("판매 페이지 접속완료");
-	List<Map<String, Object>> sellMap = farmerMypageService.selllist(cri,farmer);
-	System.out.println(sellMap);
-//	잘 나오는지 테스트하기
-	for (int i = 0; i < sellMap.size(); i++) {
-		System.out.println("컨트롤러"+sellMap.get(i).toString());
-	}
+		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
+		System.out.println("판매 페이지 접속완료");
+		List<Map<String, Object>> sellMap = farmerMypageService.selllist(cri,farmer);
+		System.out.println(sellMap);
+//		잘 나오는지 테스트하기
+		for (int i = 0; i < sellMap.size(); i++) {
+			System.out.println("컨트롤러"+sellMap.get(i).toString());
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(farmerMypageService.listCount4(farmer));
+		
+		//농부 객체
+		model.addAttribute("farmerInfo",farmer);
+				
+		model.addAttribute("list", sellMap);
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "/mypage/selllist";
 	
-	PageMaker pageMaker = new PageMaker();
-	pageMaker.setCri(cri);
-	pageMaker.setTotalCount(farmerMypageService.listCount4(farmer));
-	
-	//농부 객체
-	model.addAttribute("farmerInfo",farmer);
-			
-	model.addAttribute("list", sellMap);
-	model.addAttribute("pageMaker", pageMaker);
-	
-	return "/mypage/selllist";
 	}
 	
 	
@@ -220,9 +233,9 @@ public class FarmerMypageController {
 
 	}
 	
-	@RequestMapping(value = "/mypage/cal23", method = RequestMethod.GET)
-	public String cal2() {
-		System.out.println("접속");
-		return "mypage/cal23";
-	}
+//	@RequestMapping(value = "/mypage/cal23", method = RequestMethod.GET)
+//	public String cal2() {
+//		System.out.println("접속");
+//		return "mypage/cal23";
+//	}
 }
