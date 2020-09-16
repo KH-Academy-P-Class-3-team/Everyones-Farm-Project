@@ -26,6 +26,9 @@
 	color: white;
 	background: #68bb59;
 }
+ul, ol{
+	margin-bottom : 0;
+}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

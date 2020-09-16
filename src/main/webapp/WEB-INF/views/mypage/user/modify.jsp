@@ -13,7 +13,9 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/modify.css" />
 <style type="text/css">
-
+ul {
+	margin-bottom: 0px;
+}
 </style>
 
 <script

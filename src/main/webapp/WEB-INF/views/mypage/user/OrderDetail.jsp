@@ -10,6 +10,11 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/orderDetail.css" />
+<style type="text/css">
+ul {
+	margin-bottom: 0px;
+}
+</style>
 
 <!-- jquery -->
 ﻿
