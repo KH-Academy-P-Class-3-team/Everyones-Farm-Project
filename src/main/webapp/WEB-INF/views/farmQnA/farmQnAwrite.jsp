@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@include file="../include/farmdiaryheader.jsp" %>
 
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -38,8 +39,6 @@ $(document).ready(function() {
 </script>
 
 <form id="form3" action="<%= request.getContextPath() %>/QnA/QnAwrite.do?farmerNo=${farmerNo}" method="post">
-
-<%@include file="../include/farmdiaryheader.jsp" %>
 
 <div style= "clear: both; margin-top: 200px;" ></div>
 

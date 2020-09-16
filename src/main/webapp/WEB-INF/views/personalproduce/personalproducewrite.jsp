@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
+<%@include file="../include/farmdiaryheader.jsp" %>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -69,7 +69,6 @@ $(document).ready(function() {
 
 <form id="form4" action="<%= request.getContextPath() %>/personalproduce/productwrite.do" method="post">
 
-<%@include file="../include/farmdiaryheader.jsp" %>
 
 <div style= "clear: both; margin-top: 200px;" ></div>
 
