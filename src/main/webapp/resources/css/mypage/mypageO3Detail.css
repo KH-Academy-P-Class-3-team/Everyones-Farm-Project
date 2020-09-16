@@ -1,0 +1,55 @@
+@charset "UTF-8";
+.input-group {
+	margin-top: 30px;
+}
+
+.col-lg-1 {
+	width: 70%;
+}
+
+span {
+	padding: 0;
+}
+
+.input-group {
+	width: 400px;
+}
+
+label {
+	padding-left: 0;
+	text-align: left;
+}
+
+.media-object {
+	margin-left: 70px;
+}
+
+.panel-default {
+	border: none;
+}
+
+.panel-default>.panel-heading {
+	background-color: #D1E9CA;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.info {
+	text-align: left;
+}
+
+.btn {
+	width: 90px;
+	height: 50px;
+	margin-right: 5px;
+}

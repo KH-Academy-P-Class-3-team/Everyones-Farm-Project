@@ -7,62 +7,7 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<style type="text/css">
-.input-group {
-	margin-top: 30px;
-}
-
-.col-lg-1 {
-	width: 70%;
-}
-
-span {
-	padding: 0;
-}
-
-.input-group {
-	width: 400px;
-}
-
-label {
-	padding-left: 0;
-	text-align: left;
-}
-
-.media-object {
-	margin-left: 70px;
-}
-
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.info {
-	text-align: left;
-}
-
-.btn {
-	width: 90px;
-	height: 50px;
-	margin-right: 5px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/mypageO3Detail.css" />
 
 <!-- jquery -->
 ﻿

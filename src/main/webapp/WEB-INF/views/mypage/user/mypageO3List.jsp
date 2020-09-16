@@ -8,46 +8,7 @@
 <!-- 합쳐지고 최소화된 최px;SS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<style type="text/css">
-.col-lg-5 {
-	margin-top: 100px;
-	margin-left: 100px;
-	width: 700px;
-}
-
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.pagination {
-	padding-left: 190px;
-}
-
-.table {
-	border: 1px solid #ccc;
-	margin-top: 10px;
-}
-
-.write-bottom {
-	text-align: right;
-}
-</style>
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/mypageO3List.css" />
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top: 200px"></div>

@@ -308,6 +308,27 @@ public interface MyPageDao {
 		 */
 		public List<Map<String, Object>> orderFarmerList(Map<String, Object> sub);
 
+		/**
+		 * tb_order insert
+		 * @param basket
+		 * @return
+		 */
+		public int insertTbOrder(Map<String, Object> basket);
+
+		/**
+		 * tb_order에 넣을 price 구하기
+		 * @param basket
+		 * @return
+		 */
+		public int selectPrice(Map<String, Object> basket);
+
+		/**
+		 * farmer tb_order insert
+		 * @param basket
+		 * @return
+		 */
+		public int insertFarmerTbOrder(Map<String, Object> basket);
+
 
 		
 		

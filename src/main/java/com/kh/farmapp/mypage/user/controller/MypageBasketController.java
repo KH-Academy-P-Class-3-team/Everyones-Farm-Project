@@ -1,7 +1,6 @@
 package com.kh.farmapp.mypage.user.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farmapp.mypage.user.model.service.MyPageService;
@@ -218,6 +215,7 @@ public class MypageBasketController {
 		return mav;
 	}
 
+	
 	/**
 	 * 장바구니에서 삭제
 	 * @param request
@@ -433,12 +431,46 @@ public class MypageBasketController {
 			mav.addObject("down", down);
 			mav.addObject("total", total);
 			mav.addObject("orderDetail", orderDetail);
-			mav.setViewName("mypage/user/OrderDetail");
+			mav.setViewName("/mypage/user/OrderDetail");
 		}
 
 		return mav;
 
 	}
+	
+	@RequestMapping("/mypage/user/paymentCompleted")
+	public ModelAndView paymentCompleted(HttpSession session, HttpServletRequest request) {
+		
+		UserTB user= (UserTB) session.getAttribute("userInfo");
+		
+		Farmer farmer = (Farmer) session.getAttribute("farmerInfo");
+		
+		String basketNo = request.getParameter("names");
+
+		String[] array = basketNo.split(",");
+		int[] arr = new int[array.length];
+
+		for(int i=0;i<array.length;i++) {
+			arr[i] = Integer.parseInt(array[i]);
+			System.out.println(arr[i]);
+		}
+		
+		if(user != null) {
+			int res = mypageService.paymentProcess(arr,user);
+		}
+		if(farmer != null) {
+			int res = mypageService.paymentProcess(arr,farmer);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("alertMsg", " 결제가 완료되었습니다.");
+		mav.addObject("url", "/farmapp/mypage/user/orderList");
+		mav.setViewName("common/result");
+		
+		return mav;
+	}
+
+		
 
 
 

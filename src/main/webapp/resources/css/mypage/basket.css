@@ -1,0 +1,99 @@
+@charset "UTF-8";
+.input-group {
+	margin-top: 30px;
+}
+
+.col-lg-1 {
+	width: 50%;
+	margin-left: 150px;
+}
+
+span {
+	padding: 0;
+}
+
+.input-group {
+	width: 400px;
+}
+
+label {
+	padding-left: 0;
+	text-align: left;
+}
+
+.btn-warning {
+	width: 90px;
+	height: 50px;
+	margin-top: 30px;
+	margin-right: 150px;
+}
+
+.media-object {
+	margin-left: 70px;
+}
+
+.panel-default {
+	border: none;
+}
+
+.panel-default>.panel-heading {
+	background-color: #D1E9CA;
+	border: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.col-lg-1 {
+	margin-top: 100px;
+	margin-left: 100px;
+	width: 700px;
+}
+
+#btnDelete, #btnFarmerDelete {
+	margin-right: 10px;
+	background-color: red;
+	font-weight: bold;
+	color: white;
+}
+
+#btnSubPur, #btnFarmerSubPur {
+	margin-right: 10px;
+	background-color: red;
+	font-weight: bold;
+	color: white;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.col-lg-1 {
+	margin-top: 100px;
+	margin-left: 100px;
+	width: 700px;
+}
+
+.boxName {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.pagination {
+	display: block;
+	margin-left: 100px;
+}

@@ -9,56 +9,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
-<style type="text/css">
-.input-group {
-	margin-top: 30px;
-}
-.col-lg-1{
-	text-align: left;
-	width : 50%;
-	margin-left: 150px;
-}
-span{
-	padding : 0;
-}
-.input-group{
-	width : 400px;
-}
-label{
-	padding-left: 0;
-    text-align: left;
-}
-.btn-warning{
-	width : 90px;
-	height : 50px;
-	margin-top: 30px;
-    margin-right: 150px;
-}
-.emptyArea{
-	height : 150px;
-}
-.glyphicon-alert{
-	color : red;
-}
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-a {
-	text-decoration: none;
-	color: black;
-}
-a:hover {
-	text-decoration: none;
-}
-
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/deleteId.css" />
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top:200px"></div>

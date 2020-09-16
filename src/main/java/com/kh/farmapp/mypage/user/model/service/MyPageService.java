@@ -256,6 +256,20 @@ public  interface MyPageService {
 	 * @return
 	 */
 	public Map<String, Object> orderFarmerDetail(int orderNo, int farmerNo);
+	
+	/**
+	 * 결제 처리, 유저
+	 * @param arr
+	 * @return
+	 */
+	public int paymentProcess(int[] arr, UserTB user);
+	/**
+	 * 결제 처리 농부
+	 * @param arr
+	 * @param farmer
+	 * @return
+	 */
+	public int paymentProcess(int[] arr, Farmer farmer);
 
 	
 

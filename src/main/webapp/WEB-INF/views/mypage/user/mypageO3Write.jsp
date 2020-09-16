@@ -8,74 +8,7 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<style type="text/css">
-.input-group {
-	margin-top: 30px;
-}
-
-
-.col-lg-1 {
-	width: 50%;
-	margin-left: 150px;
-}
-
-span {
-	padding: 0;
-}
-
-.input-group {
-	width: 400px;
-}
-
-label {
-	padding-left: 0;
-	text-align: left;
-}
-
-.btn-warning {
-	width: 90px;
-	height: 50px;
-}
-
-.media-object {
-	margin-left: 70px;
-}
-
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.ckck {
-	width: 800px;
-	height: 400px;
-}
-
-#o3space {
-	width: 100%;;
-	height: 100%;
-}
-#ckEditsub{
-	width: 90px;
-	height: 50px;
-	margin-right: 5px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/mypageO3Write.css" />
 
 <!-- ckeditor js 파일 삽입 -->
 <script type="text/javascript" src="jquery-3.4.1.min.js"></script>

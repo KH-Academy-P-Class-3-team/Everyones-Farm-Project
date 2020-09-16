@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.farmapp.mypage.user.model.dao.MyPageDao;
 
+import common.dto.Basket;
 import common.dto.Farmer;
 import common.dto.QuestionOneonone;
 import common.dto.UserProfile;
@@ -511,6 +512,41 @@ public class MypageServiceImpl implements MyPageService{
 	@Override
 	public Map<String, Object> getAnswer(int QUESTION_NO) {
 		return mypageDao.getAnswer(QUESTION_NO);
+	}
+	@Override
+	public int paymentProcess(int[] arr, UserTB user) {
+		
+		UserTB userData = mypageDao.selectUser(user);
+		List<Map<String, Object>> basketData = mypageDao.selectBasket(arr);
+		
+		int res = 0;
+		for(Map<String, Object> basket : basketData) {
+			int price = mypageDao.selectPrice(basket);
+			basket.put("userDate", userData);
+			basket.put("price", price);
+			System.out.println("basket : "+basket);
+			res = mypageDao.insertTbOrder(basket);
+			mypageDao.deleteBasket(arr);
+		}
+		
+		return res;
+	}
+	@Override
+	public int paymentProcess(int[] arr, Farmer farmer) {
+		Farmer farmerData = mypageDao.selectFarmer(farmer.getFarmerNo());
+		List<Map<String, Object>> basketData = mypageDao.selectBasket(arr);
+		
+		int res = 0;
+		for(Map<String, Object> basket : basketData) {
+			int price = mypageDao.selectPrice(basket);
+			basket.put("userDate", farmerData);
+			basket.put("price", price);
+			System.out.println("basket : "+basket);
+			res = mypageDao.insertFarmerTbOrder(basket);
+			mypageDao.deleteBasket(arr);
+		}
+		
+		return res;
 	}
 
 

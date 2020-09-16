@@ -317,6 +317,24 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 
+	@Override
+	public int insertTbOrder(Map<String, Object> basket) {
+		return sqlSession.insert("Mypage.insertTbOrder", basket);
+	}
+
+
+	@Override
+	public int selectPrice(Map<String, Object> basket) {
+		return sqlSession.selectOne("Mypage.selectPrice", basket);
+	}
+
+
+	@Override
+	public int insertFarmerTbOrder(Map<String, Object> basket) {
+		return sqlSession.insert("Mypage.insertFarmerTbOrder", basket);
+	}
+
+
 
 
 

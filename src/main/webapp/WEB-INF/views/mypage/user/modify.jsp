@@ -11,90 +11,9 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/modify.css" />
 <style type="text/css">
-.input-group {
-	margin-top: 30px;
-}
 
-.col-lg-1 {
-	width: 50%;
-	margin-left: 150px;
-}
-
-span {
-	padding: 0;
-}
-
-.input-group {
-	width: 400px;
-}
-
-label {
-	padding-left: 0;
-	text-align: left;
-}
-
-.btn-warning {
-	width: 90px;
-	height: 50px;
-	margin-top: 30px;
-	margin-right: 300px;
-}
-
-.media-object {
-	margin-left: 70px;
-}
-
-.panel-default {
-	border: none;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-#sample6_postcode {
-	height: 52px;
-}
-
-#user_profile {
-	display: none;
-}
-
-#modify-fileuplod {
-	text-align: left;
-}
-
-#second_addr {
-	height: 80px;
-}
-
-.form-inlines {
-	border: none;
-}
-
-.input-group .form-control {
-	z-index: 0;
-}
-
-.img-circle {
-	margin-left: 100px;
-	margin-bottom: 20px;
-	width: 200px;
-	height: 200px;
-}
 </style>
 
 <script

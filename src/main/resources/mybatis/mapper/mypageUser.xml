@@ -690,6 +690,24 @@
         select rownum, n1.* from(select * from answered_oneonone where question_no = #{QUESTION_NO}
         order by answered_no desc) n1 )WHERE rownum = 1
 	</select>
+	
+	<select id="selectPrice" resultType="int">
+	 select price from product_option where option_no = #{OPTION_NO}
+	</select>
+	
+	<insert id="insertTbOrder">
+	INSERT INTO 
+		tb_order
+	values
+		(tb_order_seq.nextval, #{OPTION_NO}, #{USER_NO}, null, sysdate, 1, #{price} ,#{userDate.zonecode}, #{userDate.firstAddress}, #{userDate.secondAddress}, 1)
+	</insert> 
+
+	<insert id="insertFarmerTbOrder">
+	INSERT INTO 
+		tb_order
+	values
+		(tb_order_seq.nextval, #{OPTION_NO}, null, #{FARMER_NO}, sysdate, 1, #{price} , #{userDate.zonecode}, #{userDate.firstAddress}, #{userDate.secondAddress}, 1)
+	</insert> 
 </mapper>
     
     

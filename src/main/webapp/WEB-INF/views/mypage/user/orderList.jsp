@@ -7,71 +7,7 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<style type="text/css">
-.input-group {
-	margin-top: 30px;
-}
-
-.col-lg-1 {
-	width: 50%;
-	margin-left: 150px;
-}
-
-span {
-	padding: 0;
-}
-
-.input-group {
-	width: 400px;
-}
-
-label {
-	padding-left: 0;
-	text-align: left;
-}
-
-.btn-warning {
-	width: 90px;
-	height: 50px;
-	margin-top: 30px;
-	margin-right: 150px;
-}
-
-.media-object {
-	margin-left: 70px;
-}
-
-.panel-default {
-	border: none;
-	text-align: left;
-}
-
-.panel-default>.panel-heading {
-	background-color: #D1E9CA;
-	border: none;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.table {
-	width: 100%;
-}
-
-.col-lg-1 {
-	margin-top: 100px;
-	margin-left: 100px;
-	width: 700px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mypage/orderList.css" />
 
 <!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <div style="margin-top: 200px"></div>
@@ -150,7 +86,7 @@ a:hover {
 					<tr class="active">
 						<th>상품정보</th>
 						<th>금액</th>
-						<th>판매자/문의</th>
+						<th>옵션 명</th>
 						<th>결제 상태</th>
 						<th>배송 현황</th>
 					</tr>
@@ -161,9 +97,13 @@ a:hover {
 							<td><a
 								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?orderNo=${order.ORDER_NO}">${order.PAYMENT_PRICE }</a></td>
 							<td><a
-								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?orderNo=${order.ORDER_NO}">${order.SELLER }</a></td>
-							<td><a
-								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?orderNo=${order.ORDER_NO}">${order.PAYMENT_STATUS }</a></td>
+								href="<%= request.getContextPath() %>/mypage/user/OrderDetail?orderNo=${order.ORDER_NO}">${order.NAME }</a></td>
+								<c:if test="${order.PAYMENT_STATUS eq 0 }">
+							<td><a href="<%= request.getContextPath() %>/mypage/user/OrderDetail?orderNo=${order.ORDER_NO}"></a>미 결제</td>
+								</c:if>
+								<c:if test="${order.PAYMENT_STATUS eq 1 }">
+							<td><a href="<%= request.getContextPath() %>/mypage/user/OrderDetail?orderNo=${order.ORDER_NO}">결제 완료</a></td>
+								</c:if>
 							<td>배송현황</td>
 						</tr>
 					</c:forEach>
