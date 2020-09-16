@@ -136,8 +136,14 @@ li.admin__p-active > a {
         </c:forEach>
        </tbody>
        </table>
-
-<button class="btn btn-success" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
+<c:choose>   
+	<c:when test="${not empty farmerInfo }">
+	<button class="btn btn-success" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
+	</c:when> 
+	<c:when test="${empty farmerInfo }">
+		
+	</c:when>
+</c:choose>
 
 		
 <div class="pagination-wrap"><!--section pagination -->
