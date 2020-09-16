@@ -25,7 +25,6 @@ public class FarmIntroduceController {
 		mav.setViewName("farmintroduce/farmintroduceForm");
 		// model 값 넘기기
 		mav.addObject("farmerNo", farmerNo);
-		
 		return mav;
 	}
 	

@@ -66,12 +66,14 @@
 		<ul id="menu__main">
 			<c:choose>
 				<c:when test="${empty farmerInfo }">
-					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerNo }">농장 소개</a></li>
-					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerNo }">농장 일기</a>
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerNo}">농장 소개</a></li>
+					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerNo}">농장 일기</a>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerNo}&farmNo=${farmNo}">QnA</a></li>
 				</c:when>
 				<c:when test="${not empty farmerInfo }">
-					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a></li>
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">농장 소개</a></li>
 					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a></li>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a></li>
 				</c:when>
 			</c:choose>
 <!-- 				<ul class="menu__sub-food"> -->
@@ -79,12 +81,10 @@
 <!-- 					<li><a href="#">일반 먹거리</a></li> -->
 <!-- 				</ul> -->
 			<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
-			<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a>
 <!-- 				<ul class="menu__sub-activity"> -->
 <!-- 					<li><a href="#">농장 체험</a></li> -->
 <!-- 					<li><a href="#">일손 돕기</a></li> -->
 <!-- 				</ul> -->
-			</li>
 			<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a></li>
 		</ul>
 	</nav>
