@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<!-- <script src="//code.jquery.com/jquery-2.2.4.min.js"></script> -->
-
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -26,13 +24,17 @@ $(document).ready(function() {
 
 	$("#btnWrite").on("click", function() {
 
-		const thetitle = $("#title").val()
+		var thetitle = $("#title").val()
+		var ckeditor = CKEDITOR.instances['content']; 
 
 		if (thetitle == "") {
 			alert("제목을 작성해 주세요.");
-		} else {
-			$("#form1").submit();   
-		
+			form1.title.focus();
+		}else if (ckeditor.getData() == "") {
+			alert("내용을 작성해 주세요.");
+			form1.ckeditor.focus();
+		}else {
+			$("#form1").submit();
 		}
 
 	})

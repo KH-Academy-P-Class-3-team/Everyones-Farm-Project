@@ -42,5 +42,8 @@ public interface FarmDiaryService  {
 	 * @return int - 조회 결과 반환
 	 */
 	public int selectFarmNoByFarmerNo(String farmerNo);
+	
+	//farmNo로 farmerNo조회
+	public int selectFarmerNoByFarmNo(String farmNo);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import common.dto.FarmDiary;
 import common.dto.FarmQnAQuestion;
+import common.dto.FarmQnaAnswer;
 import common.util.Paging;
 
 
@@ -30,10 +31,14 @@ public interface FarmQnADao {
 	//게시글 수정 메소드
 	public  int modifyQnA(Map<String, Object> commandMap);
 	
-	//QnA 답변 작성
-	public int insertFarmQnAanswer(Map<String, Object> commandMap);
-	
 	//farmerNo를 통한 farmNo 조회
-    public int selectFarmNoByFarmerNo(String farmerNo);
+    public int selectFarmNoByFarmerNo2(String farmerNo);
 		
+    //QnA 답글 작성
+    public void answerInsert(FarmQnaAnswer farmqnaAnswer);
+    
+    //farmQnaQuestionNo번호로 QnA 답글 리스트 조회
+    public List<FarmQnaAnswer> selectAnserList(int farmQnaQuestionNo);
+
+	public int insertFarmerFarmQnA(Map<String, Object> commandMap);
 }

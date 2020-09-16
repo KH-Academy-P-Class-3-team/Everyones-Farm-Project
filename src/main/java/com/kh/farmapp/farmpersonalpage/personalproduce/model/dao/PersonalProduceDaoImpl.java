@@ -44,4 +44,14 @@ public class PersonalProduceDaoImpl implements PersonalProduceDao {
 		return sqlSession.selectOne("Product.selectProductDetail", productNo);
 	}
 
+	@Override
+	public void answerClass(ProductOption productOption) {
+		
+	}
+
+	@Override
+	public int selectFarmNoByFarmerNo(String farmerNo) {
+		return sqlSession.selectOne("Product.selectFarmNoByFarmerNo", farmerNo);
+	}
+
 }

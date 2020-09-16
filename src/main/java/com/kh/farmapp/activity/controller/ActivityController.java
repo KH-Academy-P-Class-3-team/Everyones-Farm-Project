@@ -180,6 +180,7 @@ public class ActivityController {
 		
 		mav.addObject("isFarmer", isFarmer);
 		mav.addObject("farmNo", farmNo);
+		mav.addObject("farmerNo", farm.getFarmerNo());
 		mav.addObject("paging", commandMap.get("paging"));
 		mav.addObject("data", commandMap);
 		mav.setViewName("/activity/activityList");
@@ -195,7 +196,10 @@ public class ActivityController {
 	 * @return ModelAndView - Activity, view
 	 */
 	@RequestMapping("/activity/activityDetail.do")
-	public ModelAndView activityDetail(HttpSession session, int activityNo) {
+	public ModelAndView activityDetail(HttpSession session, int activityNo, 
+			@RequestParam(defaultValue = "0")int isFarmPage) {
+		
+		System.out.println("isFarmPage : " + isFarmPage);
 		
 		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
 		
@@ -203,6 +207,8 @@ public class ActivityController {
 		
 		Map<String, Object> commandMap = activityService.selectActivityDetail(activityNo);
 
+		mav.addObject("isFarmPage", isFarmPage);
+		mav.addObject("farmNo", commandMap.get("farmNo"));
 		mav.addObject("farmerInfo", farmer);
 		mav.addObject("fileList", commandMap.get("fileList"));
 		mav.addObject("schedule", commandMap.get("schedule"));

@@ -69,15 +69,13 @@ li.admin__p-active > a {
 }
 </style>
 
-
 <form action="/farmapp/farmQnA/farmQnAlist.do" method="post">
-
-<div id="wrap" style="height: 800px;">
 
 <%@include file="../include/farmdiaryheader.jsp" %>
 
-<div style= "clear: both; margin-top: 200px;" ></div>
+<div id="wrap" style="height: 800px;">
 
+<div style= "clear: both; margin-top: 200px;" ></div>
 
 <div id="container" style="width: 980px; margin: auto;" >
 
@@ -90,11 +88,22 @@ li.admin__p-active > a {
 	<br>
 
 
-	<a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a><br><br>
-	<a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a><br><br>
-	<a href="#">농장 체험</a><br><br>
-	<a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a><br><br>
-	<a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a>
+			<c:choose>
+				<c:when test="${empty farmerInfo }">
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerNo}">농장 소개</a></li><br>
+					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerNo}">농장 일기</a></li><br>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerNo}&farmNo=${farmNo}">QnA</a></li><br>
+					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerNo}">개인 농산물</a></li><br>
+					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
+				</c:when>
+				<c:when test="${not empty farmerInfo }">
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">농장 소개</a></li><br>
+					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a></li><br>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a></li><br>
+					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a></li><br>
+					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
+				</c:when>
+			</c:choose>
 
 
 <hr>
@@ -114,15 +123,15 @@ li.admin__p-active > a {
        	<c:forEach items="${list}" var="list">
            <tr> 
                <td>${list.farmQnaQuestionNo}</td>
-               <td><a href="<%= request.getContextPath() %>/farmQnA/farmQnAdetail.do?farmQnaQuestionNo=${list.farmQnaQuestionNo}">${list.title}</a></td>
-               <td>${list.farmerNo}</td>
+               <td><a href="<%= request.getContextPath() %>/farmQnA/farmQnAdetail.do?farmQnaQuestionNo=${list.farmQnaQuestionNo}&farmNo=${farmNo}">${list.title}</a></td>
+               <td>${list.farmerNo}번 농업인</td>
                <td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
            </tr>
         </c:forEach>
        </tbody>
        </table>
 
-<button class="btn btn-success" type="button" onclick="location.href='farmQnAwrite.do'" style="float: right;">작성하기</button>
+<button class="btn btn-success" type="button" onclick="location.href='farmQnAwrite.do?farmerNo=${farmerNo}'" style="float: right;">작성하기</button>
 		
 <div class="pagination-wrap"><!--section pagination -->
 <ul class="admin__pagination">

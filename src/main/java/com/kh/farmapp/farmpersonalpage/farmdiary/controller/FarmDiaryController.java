@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 import com.kh.farmapp.farmpersonalpage.farmdiary.model.service.FarmDiaryService;
+import com.kh.farmapp.farmpersonalpage.personalproduce.model.service.PersonalProduceService;
 
 import common.dto.Farmer;
 
@@ -37,11 +38,14 @@ public class FarmDiaryController {
 
 	@Autowired
 	private FarmDiaryService farmdiaryService;
+	
+	@Autowired
+	private PersonalProduceService personalproduceService; 
 
 	//농장 일기 작성 화면
 	@RequestMapping(value = "/farmdiary/farmdiarywrite.do", method = RequestMethod.GET)
 	public void farmdiaryWrite() {
-		System.out.println("wrtie 페이지 접속 완료");
+//		System.out.println("wrtie 페이지 접속 완료");
 
 	}
 
@@ -55,7 +59,7 @@ public class FarmDiaryController {
 
 		farmdiaryService.writeFarmDiary(commandMap);
 
-		System.out.println(commandMap);
+//		System.out.println(commandMap);
 
 
 		return "redirect:/farmdiary/farmdiarylist.do?farmerNo="+farmerNo;
@@ -66,9 +70,11 @@ public class FarmDiaryController {
 	public ModelAndView farmdiaryList(@RequestParam(required = false, defaultValue = "1") int cPage, String farmerNo ) {
 
 		System.out.println("FarmDiaryController farmerNo: " + farmerNo);
-		// 일단 여기다가 임의로 쓸게요
-		// 처음에 farmerNo 로 farmNo를 조회를 할게요.
-		int farmNo = farmdiaryService.selectFarmNoByFarmerNo(farmerNo);
+		
+		// 파라미터용 farmNo 조회  * 수정이가 수정 *
+		int farmNo = personalproduceService.selectFarmNoByFarmerNo(farmerNo);
+		
+//		int farmNo = farmdiaryService.selectFarmNoByFarmerNo(farmerNo);
 		System.out.println("FarmDiaryController farmNo: " + farmNo);
 		
 		ModelAndView mav = new ModelAndView();
@@ -79,17 +85,21 @@ public class FarmDiaryController {
 		
 		Map<String,Object> res = farmdiaryService.selectFarmDiaryList(cPage, cntPerPage, farmerNo);
 		
+		mav.addObject("farmerNo", farmerNo);
 		mav.addObject("paging", res.get("paging"));
 		mav.addObject("list", res.get("fdlist"));
 		mav.setViewName("farmdiary/farmdiarylist");
 		
-		System.out.println("컨트롤러값"+res);
-		System.out.println(mav);
+//		System.out.println("컨트롤러값"+res);
+//		System.out.println(mav);
 		//		System.out.println(res);
 
 		// 원래는 이런 식으로 적는게 안좋은거 같긴 한데 일단 해볼게요
 		if( farmNo != 0) {
 			mav.addObject("farmNo", farmNo);
+		}
+		if( farmerNo != null ) {
+			mav.addObject("farmerNo", farmerNo);
 		}
 		
 		return mav;
@@ -133,54 +143,27 @@ public class FarmDiaryController {
 
 		mav.setViewName("redirect:/farmdiary/farmdiarydetail.do?farmDiaryNo="+farmDiaryNo);
 		
-		System.out.println(mav);
+//		System.out.println(mav);
+		
+		
 
 		return mav;
 	}
 
 	//게시글 삭제
 	@RequestMapping(value = "/farmdiary/farmdiarydelete.do", method = RequestMethod.GET )
-	public String deleteFarmdiary(
-			@RequestParam(value="farmDiaryNo") int farmDiaryNo
-			// farmerNo 쿼리 스트링 가져오기
-			, String farmerNo
-			//			, String farmerId, HttpSession session
-			){
-
-		//		ModelAndView mav = new ModelAndView();
-		int delRes = farmdiaryService.deleteFarmDiary(farmDiaryNo);
-		if( delRes >= 1 ) {
-			System.out.println("delete 성공");
-		} else {
-			System.out.println("delete 실패");
-		}
-
-		//		Farmer farmer = (Farmer)session.getAttribute("farmerInfo");
-		//		int res = 0;
-		//		//게시글 작성자가 수정요청을 한 것이 맞는 지 확인
-		//		if(farmer.getFarmerId().equals(farmerId)) {
-		//			res = farmdiaryService.deleteFarmDiary(farmDiaryNo);
-		//		}
-		//		
-		//		if(res > 0) {
-		//			mav.addObject("alertMsg", "게시물 삭제에 성공했습니다.");
-		//			mav.addObject("url", "farmdiarylist.do");
-		//			mav.setViewName("common/result");
-		//		}else {
-		//			mav.addObject("alertMsg", "게시물에 접근할 권한이 없습니다.");
-		//			mav.addObject("url", "farmdiarylist.do");
-		//			mav.setViewName("common/result");
-		//		}
-		//		
-		//		return mav;
-
-		return "redirect:/farmdiary/farmdiarylist.do?farmerNo=" + farmerNo;
+	public String deleteFarmdiary(@RequestParam(value="farmDiaryNo") int farmDiaryNo, String farmerNo){
+		
+		
+		farmdiaryService.deleteFarmDiary(farmDiaryNo);		
+		
+		return "redirect:/farmdiary/farmdiarylist.do?farmDiaryNo="+farmDiaryNo+"&farmerNo="+farmerNo;
 	}
 
 	//농장일기 이미지 업로드
 	@RequestMapping(value = "/farmdiary/fileupload", method = RequestMethod.POST)
 	@ResponseBody
-	public String adminNoticeImgUpload(
+	public String farmDiaryImgUpload(
 			HttpServletRequest req
 			, HttpServletResponse resp
 			, MultipartHttpServletRequest multiFile

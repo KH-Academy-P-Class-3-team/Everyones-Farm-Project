@@ -46,17 +46,19 @@
 
 	<select id="selectProductList" resultMap="producklist">
 
-		select
-		product_no, name, farmer_no
-		from(
-		select rownum rnum, n1.*
-		from(
-		select *
-		from product
-		order by product_no desc
-		)n1
-		)where rnum between #{start}
-		and #{end}
+	select
+        p_list.product_no
+        , p_list.name
+        , p_list.farmer_no
+        , p_list.is_seasonal_food
+	from(
+            select rownum rnum, n1.*
+            from(
+                select *
+                from product
+                order by product_no desc
+            )n1
+		)p_list where rnum between #{start} and #{end}
 		and farmer_no = #{farmerNo}
 
 
@@ -88,5 +90,10 @@
 		pp.product_no = #{productNo}
 	</select>
 
+	<!-- 농부 번호로 농장 번호 조회 (파라미터용) -->
+	<select id="selectFarmNoByFarmerNo" resultType="int">
+		select farm_no from farm
+		where farmer_no = #{farmerNo}
+	</select>
 
 </mapper>

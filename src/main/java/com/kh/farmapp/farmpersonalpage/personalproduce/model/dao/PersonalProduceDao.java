@@ -3,6 +3,7 @@ package com.kh.farmapp.farmpersonalpage.personalproduce.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import common.dto.FarmQnaAnswer;
 import common.dto.Product;
 import common.dto.ProductOption;
 import common.util.Paging;
@@ -23,4 +24,10 @@ public interface PersonalProduceDao {
 	
 	//게시글 상세 조회 메소드
 	public Map<String, Object> selectProductDetail(int productNo);
+	
+    //클래스다이어 그램용
+    public void answerClass(ProductOption productOption);
+
+    //농장번호 조회
+	public int selectFarmNoByFarmerNo(String farmerNo);
 }

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.model.dao.FarmQnADaoImpl" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/dao/FarmQnADaoImpl.java" 
+  <class id="1" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.controller.FarmQnAController" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/controller/FarmQnAController.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1006" y="444"/>    
+    <position height="-1" width="-1" x="238" y="289"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.controller.FarmQnAController" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/controller/FarmQnAController.java" 
+  <interface id="2" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.model.dao.FarmQnADao" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/dao/FarmQnADao.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="166" y="189"/>    
+    <position height="-1" width="-1" x="1193" y="143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="3" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.model.service.FarmQnAServiceImpl" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/service/FarmQnAServiceImpl.java" 
+  </interface>  
+  <class id="3" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.model.dao.FarmQnADaoImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/dao/FarmQnADaoImpl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="613" y="453"/>    
+    <position height="-1" width="-1" x="1210" y="490"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -35,105 +35,77 @@
     </display>  
   </class>  
   <interface id="4" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.model.service.FarmQnAService" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/service/FarmQnAService.java" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/service/FarmQnAService.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="614" y="189"/>    
+    <position height="-1" width="-1" x="756" y="143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="5" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.model.dao.FarmQnADao" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/dao/FarmQnADao.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1007" y="179"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="6" language="java" name="common.dto.User" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1270" y="136"/>    
+  <class id="5" language="java" name="com.kh.farmapp.farmpersonalpage.farmQnA.model.service.FarmQnAServiceImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/farmpersonalpage/farmQnA/model/service/FarmQnAServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="754" y="507"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="common.dto.Farmer" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/Farmer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1436" y="248"/>    
+  <class id="6" language="java" name="common.dto.FarmQnAQuestion" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/FarmQnAQuestion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1686" y="283"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="common.dto.FarmQnaAnswer" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/FarmQnaAnswer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1320" y="667"/>    
+  <class id="7" language="java" name="common.dto.FarmQnaAnswer" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/FarmQnaAnswer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1684" y="806"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="common.dto.FarmQnAQuestion" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/FarmQnAQuestion.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1504" y="560"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <realization id="10">    
+  <realization id="8">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="TARGET" refId="2"/>  
   </realization>  
-  <association id="11">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="12" name="farmqnaDao">        
-        <position height="20" width="77" x="763" y="281"/>      
-      </attribute>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+  <association id="9">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="10" name="farmqnaDao"/>      
+      <multiplicity id="11" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="14">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <association id="15">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="16" name="farmqnaService"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+  <association id="12">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="13" name="farmqnaService"/>      
+      <multiplicity id="14" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="18">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="9"/>  
+  <dependency id="15">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
   </dependency>  
-  <realization id="19">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <dependency id="20">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <dependency id="21">    
-    <end type="SOURCE" refId="1"/>    
+  <dependency id="16">    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
+  <realization id="17">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

@@ -23,7 +23,7 @@ public class FarmDiaryDaoImpl implements FarmDiaryDao {
 	@Override
 	public int insertFarmDiary(Map<String, Object> commandMap) {
 		return sqlSession.insert("Diary.insertFarmDiary", commandMap);
-
+		
 	}
 
 	@Override
@@ -72,6 +72,12 @@ public class FarmDiaryDaoImpl implements FarmDiaryDao {
 	@Override
 	public int selectFarmNoByFarmerNo(String farmerNo) {
 		return sqlSession.selectOne("Diary.selectFarmNoByFarmerNo", farmerNo);
+	}
+	
+	//farmNo로 farmerNo 조회
+	@Override
+	public int selectFarmerNoByFarmNo(String farmNo) {
+		return sqlSession.selectOne("Diary.selectFarmerNoByFarmNo", farmNo);
 	}
 
 }

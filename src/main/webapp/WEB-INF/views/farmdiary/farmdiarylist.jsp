@@ -14,7 +14,6 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
 <style type="text/css">
 
 .pagination-wrap {
@@ -71,22 +70,24 @@ li.admin__p-active > a {
 
 </style>
 
+<%@include file="../include/farmdiaryheader.jsp" %>
 
 <div id="wrap" style="height: 800px;">
 
-<%@include file="../include/farmdiaryheader.jsp" %>
-
-
 <div style= "clear: both; margin-top: 200px;" ></div>
-
 
 <div id="container" style="width: 980px; margin: auto;" >
 
 <div id="aside" style="float: left; text-align: center;">   
 
-
-    <h3>${farmerInfo.farmerId }님의 농장일기</h3>
-
+	<c:choose>
+		<c:when test="${not empty farmerInfo }">
+    	<h4>${farmerInfo.farmerId }님의 농장일기</h4>
+    	</c:when>
+    	<c:when test="${empty farmerInfo }">
+    	<h4>어서오세요</h4>
+    	</c:when>
+	</c:choose>
     <hr>
    
 	<p>Welcome to my Farm</p>
@@ -94,12 +95,22 @@ li.admin__p-active > a {
 	<br>
 	
 
-	<a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a><br><br>
-	<a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}" >농장 일기</a><br><br>
-	<a href="#">농장 체험</a><br><br>
-	<a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a><br><br>
-	<a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a>
-
+			<c:choose>
+				<c:when test="${empty farmerInfo }">
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerNo}">농장 소개</a></li><br>
+					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerNo}">농장 일기</a></li><br>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerNo}&farmNo=${farmNo}">QnA</a></li><br>
+					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerNo}">개인 농산물</a></li><br>
+					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
+				</c:when>
+				<c:when test="${not empty farmerInfo }">
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">농장 소개</a></li><br>
+					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a></li><br>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a></li><br>
+					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a></li><br>
+					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
+				</c:when>
+			</c:choose>
 
 <hr>
 </div>
@@ -110,7 +121,7 @@ li.admin__p-active > a {
            <tr class="success">
                <th style="width: 5%; height:20%;"><span>번호</span></th>
                <th style="width: 30%;"><span>제목</span></th>
-               <th style="width: 10%;"><span>등록일</span></th>
+               <th style="width: 10%;"><span>작성일</span></th>
                <th style="width: 10%;"><span>조회수</span></th>
            </tr>
        </thead>
@@ -125,8 +136,14 @@ li.admin__p-active > a {
         </c:forEach>
        </tbody>
        </table>
-
-<button class="btn btn-success" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
+<c:choose>   
+	<c:when test="${not empty farmerInfo }">
+	<button class="btn btn-success" type="button" onclick="location.href='farmdiarywrite.do'" style="float: right;">글쓰기</button>
+	</c:when> 
+	<c:when test="${empty farmerInfo }">
+		
+	</c:when>
+</c:choose>
 
 		
 <div class="pagination-wrap"><!--section pagination -->

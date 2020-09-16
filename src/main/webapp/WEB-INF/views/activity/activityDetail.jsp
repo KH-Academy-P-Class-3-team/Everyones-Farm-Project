@@ -5,7 +5,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%@include file="../include/header.jsp" %>
+<c:if test="${isFarmPage eq 1 }">
+	<%@include file="../include/farmdiaryheader.jsp" %>
+</c:if>
+<c:if test="${isFarmPage eq 0 }">
+	<%@include file="../include/header.jsp" %>
+</c:if>
 
 <% pageContext.setAttribute("replaceChar", "\n"); %>
 
@@ -16,14 +21,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	
-	// 이미지 파일이 없는 체험 활동에 기본 이미지 출력
-// 	$(".slideshow").each(function() {
-// 		if($(this).find("img").length == 0) {
-<%-- 			$(this).prepend($("<img src='<%=request.getContextPath() %>/resources/image/activity/no-image.png' width='270' height='270'>")) --%>
-// 		} 
-// 	})
-	
 	
 	// 모달창 인스턴트 생성
 	var myModal = new Example.Modal({
@@ -157,11 +154,6 @@ function openModal(modalname){
 			<img class="image" src="<%=request.getContextPath() %>/resources/upload/${file.fileRename }">	
 	
 		</div>
-
-		<!-- 점 표시 -->
-<%-- 		<div class="slide-dot dot-div${status.count }"> --%>
-<%-- 			<span class="dot dot${status.count }" onclick="currentSlide(${status.count})"></span>  --%>
-<!-- 		</div> -->
 
 		</c:forEach>
 

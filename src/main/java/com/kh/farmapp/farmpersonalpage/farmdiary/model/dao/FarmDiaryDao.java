@@ -49,7 +49,8 @@ public interface FarmDiaryDao {
 	 */
 	public int selectFarmNoByFarmerNo(String farmerNo);
 	
-
+	//farmNo로 farmerNo조회
+	public int selectFarmerNoByFarmNo(String farmNo);
 
 
 

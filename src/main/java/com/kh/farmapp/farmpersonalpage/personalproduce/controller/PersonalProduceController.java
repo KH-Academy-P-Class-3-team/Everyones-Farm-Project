@@ -1,31 +1,17 @@
 package com.kh.farmapp.farmpersonalpage.personalproduce.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
 import com.kh.farmapp.farmpersonalpage.personalproduce.model.service.PersonalProduceService;
 
 import common.dto.Product;
@@ -78,15 +64,18 @@ public class PersonalProduceController {
 	public ModelAndView personalproduceList(@RequestParam(required=false, defaultValue="1") int cPage, String farmerNo) {
 //		System.out.println("개인농산물 리스트");
 		
+		// 파라미터용 farmNo 조회  * 수정이가 수정 *
+		int farmNo = personalproduceService.selectFarmNoByFarmerNo(farmerNo);
+		
 		ModelAndView mav = new ModelAndView();
-
+		
 		int cntPerPage = 10;
 		
 		System.out.println("personalproduceContorller - farmerNo: " + farmerNo);
 		
 		Map<String,Object> res = personalproduceService.selectProductList(cPage, cntPerPage, farmerNo);
 		
-		
+		mav.addObject("farmerNo", farmerNo);
 		mav.addObject("paging", res.get("paging"));
 		mav.addObject("list", res.get("fdlist"));
 		mav.setViewName("personalproduce/personalproducelist");
@@ -94,7 +83,12 @@ public class PersonalProduceController {
 		System.out.println("컨트롤러값"+res);
 		System.out.println(mav);
 		//		System.out.println(res);
-
+		
+		// 파라미터용 farmNo View에 넘겨주기  * 수정이가 수정 *
+				if( farmNo != 0) {
+					mav.addObject("farmNo", farmNo);
+				}
+				
 		return mav;
 	}
 	
