@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 import com.kh.farmapp.farmpersonalpage.farmdiary.model.service.FarmDiaryService;
+import com.kh.farmapp.farmpersonalpage.personalproduce.model.service.PersonalProduceService;
 
 import common.dto.Farmer;
 
@@ -37,6 +38,9 @@ public class FarmDiaryController {
 
 	@Autowired
 	private FarmDiaryService farmdiaryService;
+	
+	@Autowired
+	private PersonalProduceService personalproduceService; 
 
 	//농장 일기 작성 화면
 	@RequestMapping(value = "/farmdiary/farmdiarywrite.do", method = RequestMethod.GET)
@@ -66,10 +70,12 @@ public class FarmDiaryController {
 	public ModelAndView farmdiaryList(@RequestParam(required = false, defaultValue = "1") int cPage, String farmerNo ) {
 
 		System.out.println("FarmDiaryController farmerNo: " + farmerNo);
-		// 일단 여기다가 임의로 쓸게요
-		// 처음에 farmerNo 로 farmNo를 조회를 할게요.
-		int farmNo = farmdiaryService.selectFarmNoByFarmerNo(farmerNo);
-//		System.out.println("FarmDiaryController farmNo: " + farmNo);
+		
+		// 파라미터용 farmNo 조회  * 수정이가 수정 *
+		int farmNo = personalproduceService.selectFarmNoByFarmerNo(farmerNo);
+		
+//		int farmNo = farmdiaryService.selectFarmNoByFarmerNo(farmerNo);
+		System.out.println("FarmDiaryController farmNo: " + farmNo);
 		
 		ModelAndView mav = new ModelAndView();
 
@@ -79,6 +85,7 @@ public class FarmDiaryController {
 		
 		Map<String,Object> res = farmdiaryService.selectFarmDiaryList(cPage, cntPerPage, farmerNo);
 		
+		mav.addObject("farmerNo", farmerNo);
 		mav.addObject("paging", res.get("paging"));
 		mav.addObject("list", res.get("fdlist"));
 		mav.setViewName("farmdiary/farmdiarylist");

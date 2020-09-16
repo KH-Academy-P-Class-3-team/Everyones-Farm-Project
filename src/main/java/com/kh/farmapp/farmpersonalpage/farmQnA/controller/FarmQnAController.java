@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.farmapp.farmpersonalpage.farmQnA.model.service.FarmQnAService;
+import com.kh.farmapp.farmpersonalpage.personalproduce.model.service.PersonalProduceService;
 
 import common.dto.FarmQnaAnswer;
 import common.dto.test.SearchCriteria;
@@ -21,6 +22,9 @@ public class FarmQnAController {
 
 	@Autowired
 	private FarmQnAService farmqnaService;
+	
+	@Autowired
+	private PersonalProduceService personalproduceService; 
 	
 	//QnA 작성 화면
 	@RequestMapping(value = "/farmQnA/farmQnAwrite.do", method = RequestMethod.GET)
@@ -46,8 +50,10 @@ public class FarmQnAController {
 
 		ModelAndView mav = new ModelAndView();
 		
-		int farmNo = farmqnaService.selectFarmNoByFarmerNo2(farmerNo);
-//		System.out.println("FarmDiaryController farmNo: " + farmNo);
+		// 파라미터용 farmNo 조회  * 수정이가 수정 *
+		int farmNo = personalproduceService.selectFarmNoByFarmerNo(farmerNo);
+//		int farmNo = farmqnaService.selectFarmNoByFarmerNo2(farmerNo);
+		System.out.println("FarmQnAController farmNo: " + farmNo);
 		
 		int cntPerPage = 10;
 		
@@ -55,7 +61,7 @@ public class FarmQnAController {
 		
 		Map<String,Object> res = farmqnaService.selectFarmQnAList(cPage, cntPerPage, farmerNo);
 		
-		
+		mav.addObject("farmerNo", farmerNo);
 		mav.addObject("paging", res.get("paging"));
 		mav.addObject("list", res.get("fdlist"));
 		mav.setViewName("farmQnA/farmQnAlist");

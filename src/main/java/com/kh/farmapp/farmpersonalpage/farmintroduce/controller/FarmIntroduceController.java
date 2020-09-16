@@ -25,9 +25,10 @@ public class FarmIntroduceController {
 
 		// 파라미터용 farmNo 조회  * 수정이가 수정 *
 		int farmNo = personalproduceService.selectFarmNoByFarmerNo(farmerNo);
-
+		
 		System.out.println("농장소개페이지 접속");
-
+		System.out.println("농장소개 farmerNo :" + farmerNo);
+ 
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("farmintroduce/farmintroduceForm");

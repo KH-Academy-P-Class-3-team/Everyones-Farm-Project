@@ -88,11 +88,22 @@ li.admin__p-active > a {
 	<br>
 
 
-	<a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}">농장 소개</a><br><br>
-	<a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a><br><br>
-	<a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a><br><br>
-	<a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a><br><br>
-	<a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a>
+			<c:choose>
+				<c:when test="${empty farmerInfo }">
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerNo}">농장 소개</a></li><br>
+					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerNo}">농장 일기</a></li><br>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerNo}&farmNo=${farmNo}">QnA</a></li><br>
+					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerNo}">개인 농산물</a></li><br>
+					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
+				</c:when>
+				<c:when test="${not empty farmerInfo }">
+					<li><a href="/farmapp/farmintroduce/farmintroduceForm.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">농장 소개</a></li><br>
+					<li><a href="/farmapp/farmdiary/farmdiarylist.do?farmerNo=${farmerInfo.farmerNo}">농장 일기</a></li><br>
+					<li><a href="/farmapp/farmQnA/farmQnAlist.do?farmerNo=${farmerInfo.farmerNo}&farmNo=${farmNo}">QnA</a></li><br>
+					<li><a href="/farmapp/personalproduce/personalproducelist.do?farmerNo=${farmerInfo.farmerNo}">개인 농산물</a></li><br>
+					<li><a href="/farmapp/activity/farmActivityList?farmNo=${farmNo}">농장 체험</a></li>
+				</c:when>
+			</c:choose>
 
 
 <hr>

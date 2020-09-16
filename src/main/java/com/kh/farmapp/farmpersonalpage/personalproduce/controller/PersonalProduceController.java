@@ -75,13 +75,7 @@ public class PersonalProduceController {
 		
 		Map<String,Object> res = personalproduceService.selectProductList(cPage, cntPerPage, farmerNo);
 		
-		
-		// 파라미터용 farmNo View에 넘겨주기  * 수정이가 수정 *
-		if( farmNo != 0) {
-			mav.addObject("farmNo", farmNo);
-		}
-		
-		
+		mav.addObject("farmerNo", farmerNo);
 		mav.addObject("paging", res.get("paging"));
 		mav.addObject("list", res.get("fdlist"));
 		mav.setViewName("personalproduce/personalproducelist");
@@ -90,6 +84,11 @@ public class PersonalProduceController {
 		System.out.println(mav);
 		//		System.out.println(res);
 		
+		// 파라미터용 farmNo View에 넘겨주기  * 수정이가 수정 *
+				if( farmNo != 0) {
+					mav.addObject("farmNo", farmNo);
+				}
+				
 		return mav;
 	}
 	
