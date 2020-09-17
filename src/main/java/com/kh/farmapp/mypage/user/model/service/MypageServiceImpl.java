@@ -80,15 +80,21 @@ public class MypageServiceImpl implements MyPageService{
 
 			UserProfile check = new UserProfile();
 			check = mypageDao.selectUserProfile(user);
-			check = fileUtil.fileUpload(upload, root);
 
 			Map<String, Object> fileMap = new HashMap<String, Object>();
 			fileMap.put("userNo", user.getUserNo());
 			fileMap.put("fileData", check);
 
-			if(check == null) {
+			if(fileMap.get("fileData") == null) {
+				check = fileUtil.fileUpload(upload, root);
+				fileMap.put("fileData", check);
+				System.out.println("MypageServiceImpl check: " + check);
+				System.out.println("insert");
 				result = mypageDao.insertprofile(fileMap);
 			}else {
+				System.out.println("modify");
+				check = fileUtil.fileUpload(upload, root);
+				fileMap.put("fileData", check);
 				result = mypageDao.modifyprofile(fileMap);
 			}
 			System.out.println("result"+result);

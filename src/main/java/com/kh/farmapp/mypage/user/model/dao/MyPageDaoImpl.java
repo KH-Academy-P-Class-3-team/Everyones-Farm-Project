@@ -38,12 +38,13 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 	public int modifyprofile(Map<String, Object> fileMap) {
-		
+		System.out.println("MyPageDaoImpl insertprofile fileMap: " + fileMap);
 		return sqlSession.update("Mypage.modifyprofile", fileMap);
 	}
 	
 	@Override
 	public int insertprofile(Map<String, Object> fileMap) {
+		System.out.println("MyPageDaoImpl insertprofile fileMap: " + fileMap);
 		return sqlSession.insert("Mypage.insertprofile", fileMap);
 	}
 	

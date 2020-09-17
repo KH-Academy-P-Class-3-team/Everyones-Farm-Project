@@ -467,28 +467,61 @@
 
 	<select id="selectBasketList" resultType="map">
 		select
-		basket_no, purchase, product_no, name, price, amount,
-		option_name, delivery
+			basket_no
+			, purchase
+			, product_no
+			, name
+			, price
+			, amount
+			, option_name
+			, delivery
 		from(
-		select rownum rnum, n1.*
-		from(select
-		b.basket_no,  p.product_no, b.purchase,
-		p.name, p.price, p.amount, p.option_name, p.delivery
-		from (
-		select
-		pro.name, op.option_no, op.product_no,
-		op.name option_name, op.price, op.amount, pro.DELIVERY
-		from product pro, product_option op
-		WHERE pro.PRODUCT_NO = op.PRODUCT_NO
-		) p,
-		(
-		select
-        basket_no, user_no, option_no, purchase
-		from basket) b
-		where b.option_no = p.option_no AND b.user_no = #{userNo}
-        AND purchase=0
-		order by b.basket_no) n1 )
-		WHERE rnum between #{page.start} and #{page.end}
+			select 
+				rownum rnum
+				, n1.*
+			from(
+				select
+					b.basket_no
+					, p.product_no
+					, b.purchase
+					, p.name
+					, p.price
+					, p.amount
+					, p.option_name
+					, p.delivery
+				from (
+					select
+						pro.name
+						, op.option_no
+						, op.product_no
+						, op.name option_name
+						, op.price
+						, op.amount
+						, pro.DELIVERY
+					from 
+						product pro
+						, product_option op
+					WHERE 
+						pro.PRODUCT_NO = op.PRODUCT_NO
+				) p,
+				(
+				select
+        			basket_no
+        			, user_no
+        			, option_no
+        			, purchase
+				from 
+					basket) b
+			where 
+				b.option_no = p.option_no 
+				AND b.user_no = #{userNo}
+        		AND purchase=0
+			order by 
+				b.basket_no
+			) 
+		n1 )
+		WHERE 
+			rnum between #{page.start} and #{page.end}
 	</select>
 
 	<select id="selectFarmerBasketList" resultType="map">

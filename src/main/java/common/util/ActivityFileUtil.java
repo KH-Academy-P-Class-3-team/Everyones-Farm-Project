@@ -117,6 +117,7 @@ public class ActivityFileUtil {
 					e.printStackTrace();
 				}
 		
+				System.out.println("FileUtil aFile: " + aFile);
 		return aFile;
 	}
 
