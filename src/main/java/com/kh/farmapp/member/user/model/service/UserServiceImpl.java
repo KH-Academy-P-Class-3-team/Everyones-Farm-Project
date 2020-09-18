@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=9e026a9e81698d2522ecd927296dfadd");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:8012/farmapp/user/kakaologin.do");     // 본인이 설정해 놓은 경로
+            sb.append("&redirect_uri=http://localhost:8039/farmapp/user/kakaologin.do");     // 본인이 설정해 놓은 경로
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
