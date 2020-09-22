@@ -85,9 +85,9 @@
 	<!-- 공지사항 파일 없이 작성 -->
 	<insert id="insertNotice" parameterType="common.dto.Notice">
 		INSERT INTO 
-		    notice (notice_no, title, content, admin_no)
+		    notice (notice_no, title, content, admin_no, reg_date, is_showed)
 		VALUES 
-		    (#{noticeNo}, #{title}, #{content}, #{adminNo})
+		    (#{noticeNo}, #{title}, #{content}, #{adminNo}, sysdate, 1)
 	</insert>
 	
 	<resultMap type="hashmap" id="noticeDetailMap">
