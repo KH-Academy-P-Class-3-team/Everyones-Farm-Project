@@ -1,99 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <interface id="1" language="java" name="com.kh.farmapp.notice.model.dao.NoticeDao" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/notice/model/dao/NoticeDao.java" binary="false" 
+  <interface id="1" language="java" name="com.kh.farmapp.notice.model.service.NoticeService" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/notice/model/service/NoticeService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="727" y="223"/>    
+    <position height="-1" width="-1" x="488" y="188"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="com.kh.farmapp.notice.model.dao.NoticeDaoImpl" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/notice/model/dao/NoticeDaoImpl.java" binary="false" 
+  <interface id="2" language="java" name="com.kh.farmapp.notice.model.dao.NoticeDao" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/notice/model/dao/NoticeDao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="727" y="393"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="com.kh.farmapp.notice.model.service.NoticeServiceImpl" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/notice/model/service/NoticeServiceImpl.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="478" y="391"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="4" language="java" name="com.kh.farmapp.notice.model.service.NoticeService" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/notice/model/service/NoticeService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="479" y="223"/>    
+    <position height="-1" width="-1" x="743" y="185"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="com.kh.farmapp.notice.controller.NoticeController" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/notice/controller/NoticeController.java" binary="false" 
+  <class id="3" language="java" name="com.kh.farmapp.notice.model.service.NoticeServiceImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/notice/model/service/NoticeServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="488" y="374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.kh.farmapp.notice.controller.NoticeController" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/notice/controller/NoticeController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="180" y="221"/>    
+    <position height="-1" width="-1" x="156" y="190"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="common.dto.Notice" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/Notice.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="957" y="309"/>    
+  <class id="5" language="java" name="com.kh.farmapp.notice.model.dao.NoticeDaoImpl" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/notice/model/dao/NoticeDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="744" y="382"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="7">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="8" name="noticeDao">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="9" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <class id="6" language="java" name="common.dto.Notice" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/Notice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="979" y="264"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="7">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="8">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="9" name="noticeService"/>      
+      <multiplicity id="10" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="10">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <realization id="11">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <association id="12">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="13" name="noticeService">        
-        <position height="0" width="0" x="0" y="0"/>      
+  <association id="11">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="12" name="noticeDao">        
+        <position height="20" width="66" x="564" y="253"/>      
       </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <multiplicity id="13" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="14">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
   <dependency id="15">    
-    <end type="SOURCE" refId="2"/>    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

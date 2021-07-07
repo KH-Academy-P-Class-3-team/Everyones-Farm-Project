@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.kh.farmapp.admin.model.dao.AdminOneOnOneDaoImpl" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/dao/AdminOneOnOneDaoImpl.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1335" y="512"/>    
+  <class id="1" language="java" name="com.kh.farmapp.admin.oneonone.controller.AdminOneOnOneController" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/oneonone/controller/AdminOneOnOneController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="256" y="216"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="2" language="java" name="com.kh.farmapp.admin.model.dao.AdminOneOnOneDao" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/dao/AdminOneOnOneDao.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1334" y="160"/>    
+  <interface id="2" language="java" name="com.kh.farmapp.admin.model.service.AdminOneOnOneService" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/service/AdminOneOnOneService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="824" y="212"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,122 +24,203 @@
     </display>  
   </interface>  
   <class id="3" language="java" name="com.kh.farmapp.admin.model.service.AdminOneOnOneServiceImpl" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/service/AdminOneOnOneServiceImpl.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="797" y="509"/>    
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/service/AdminOneOnOneServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="824" y="634"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="4" language="java" name="com.kh.farmapp.admin.model.service.AdminOneOnOneService" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/model/service/AdminOneOnOneService.java" binary="false" 
+  <interface id="4" language="java" name="com.kh.farmapp.admin.model.dao.AdminOneOnOneDao" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/dao/AdminOneOnOneDao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="797" y="192"/>    
+    <position height="-1" width="-1" x="1345" y="218"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="com.kh.farmapp.admin.oneonone.controller.AdminOneOnOneController" 
-    project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/com/kh/farmapp/admin/oneonone/controller/AdminOneOnOneController.java" 
+  <class id="5" language="java" name="com.kh.farmapp.admin.model.dao.AdminOneOnOneDaoImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/com/kh/farmapp/admin/model/dao/AdminOneOnOneDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1343" y="628"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="common.util.upload.img.model.dao.CkImageUploadDaoImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/dao/CkImageUploadDaoImpl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="358" width="357" x="123" y="68"/>    
+    <position height="-1" width="-1" x="1091" y="1143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="common.dto.User" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1740" y="132"/>    
+  <class id="7" language="java" name="common.util.upload.img.CkImageUpload" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/CkImageUpload.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="508" x="2" y="611"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="common.util.upload.img.model.dao.CkImageUploadDao" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/dao/CkImageUploadDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1089" y="940"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="common.util.upload.img.model.service.CkImageUploadServiceImpl" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/service/CkImageUploadServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="510" y="1146"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="common.dto.QuestionOneonone" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/QuestionOneonone.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1737" y="668"/>    
+  <interface id="10" language="java" name="common.util.upload.img.model.service.CkImageUploadService" 
+    project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/util/upload/img/model/service/CkImageUploadService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="512" y="947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="common.dto.EveryonesFarmFile" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/EveryonesFarmFile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1556" y="1107"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="common.dto.AnsweredOneonone" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/AnsweredOneonone.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1918" y="505"/>    
+  <class id="12" language="java" name="common.dto.AnsweredOneonone" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/AnsweredOneonone.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1804" y="469"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="common.dto.Farmer" project="EveryonesFarm" 
-    file="/EveryonesFarm/src/main/java/common/dto/Farmer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1928" y="199"/>    
+  <class id="13" language="java" name="common.dto.QuestionOneonone" project="Everyones-Farm-Project" 
+    file="/Everyones-Farm-Project/src/main/java/common/dto/QuestionOneonone.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1805" y="747"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="10">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <association id="11">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="12" name="adminOneOnOneService">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="13" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="14">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
+  <realization id="14">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
   <realization id="15">    
-    <end type="SOURCE" refId="1"/>    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
   <dependency id="16">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="12"/>  
   </dependency>  
   <association id="17">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="18" name="adminOneOnOneDao">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="18" name="ckImageUploadDao">        
+        <position height="20" width="120" x="702" y="1021"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="21" name="adminOneOnOneService"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="20">    
-    <end type="SOURCE" refId="3"/>    
+  <realization id="23">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <association id="25">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="26" name="ckImageUploadService">        
+        <position height="20" width="139" x="244" y="810"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="28">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="4"/>  
   </realization>  
-  <dependency id="21">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="9"/>  
+  <association id="29">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="30" name="ckImageUploadService">        
+        <position height="20" width="139" x="398" y="802"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="33" name="ckImageUpload"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="35">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="13"/>  
   </dependency>  
+  <association id="36">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="37" name="adminOneOnOneDao">        
+        <position height="20" width="131" x="960" y="408"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
